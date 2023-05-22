@@ -17,7 +17,10 @@ const props = defineProps({
     default: null,
   },
   small: Boolean,
-  outline: Boolean,
+  outline: {
+    type: Boolean,
+    default: true,
+  },
 });
 
 const componentClass = computed(() => [

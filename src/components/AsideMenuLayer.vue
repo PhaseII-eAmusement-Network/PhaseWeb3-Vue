@@ -18,7 +18,7 @@ const emit = defineEmits(["menu-click", "aside-lg-close-click"]);
 const styleStore = useStyleStore();
 
 const logoutItem = computed(() => ({
-  label: "Logout",
+  label: "Log out",
   icon: mdiLogout,
   color: "info",
   isLogout: true,
@@ -42,15 +42,14 @@ const asideLgCloseClick = (event) => {
       :class="styleStore.asideStyle"
       class="lg:rounded-2xl flex-1 flex flex-col overflow-hidden dark:bg-slate-900"
     >
-      <div
-        :class="styleStore.asideBrandStyle"
-        class="flex flex-row h-14 items-center justify-between dark:bg-slate-900"
-      >
-        <div
-          class="text-center flex-1 lg:text-left lg:pl-6 xl:text-center xl:pl-0"
-        >
-          <b class="font-black">One</b>
+      <div class="dark:bg-slate-900">
+        <div class="flex items-center space-x-3 my-2 mx-2">
+          <img class="rounded-full shadow-xl" src="/favicon.png" />
+          <h2 class="text-md">
+            <samp class="tracking-tighter">PhaseII</samp> eAmusement Network
+          </h2>
         </div>
+        <hr class="my-2" />
         <button
           class="hidden lg:inline-block xl:hidden p-3"
           @click.prevent="asideLgCloseClick"
@@ -69,7 +68,7 @@ const asideLgCloseClick = (event) => {
         <AsideMenuList :menu="menu" @menu-click="menuClick" />
       </div>
 
-      <ul>
+      <ul class="invisible lg:visible">
         <AsideMenuItem :item="logoutItem" @menu-click="menuClick" />
       </ul>
     </div>

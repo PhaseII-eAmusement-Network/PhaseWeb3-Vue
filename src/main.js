@@ -5,7 +5,7 @@ import App from "./App.vue";
 import router from "./router";
 import { useMainStore } from "@/stores/main.js";
 import { useStyleStore } from "@/stores/style.js";
-import { darkModeKey, styleKey } from "@/config.js";
+import { styleKey } from "@/config.js";
 
 import "./css/main.css";
 
@@ -27,16 +27,12 @@ mainStore.fetch("history");
 styleStore.setStyle(localStorage[styleKey] ?? "basic");
 
 /* Dark mode */
-if (
-  (!localStorage[darkModeKey] &&
-    window.matchMedia("(prefers-color-scheme: dark)").matches) ||
-  localStorage[darkModeKey] === "1"
-) {
-  styleStore.setDarkMode(true);
-}
+styleStore.setDarkMode(
+  window.matchMedia("(prefers-color-scheme: dark)").matches
+);
 
 /* Default title tag */
-const defaultDocumentTitle = "Admin One Vue 3 Tailwind";
+const defaultDocumentTitle = "PhaseII eAmusement Network";
 
 /* Set document title from route meta */
 router.afterEach((to) => {

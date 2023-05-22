@@ -3,26 +3,26 @@ import { computed, ref, onMounted } from "vue";
 import { useMainStore } from "@/stores/main";
 import {
   mdiAccountMultiple,
-  mdiCartOutline,
   mdiChartTimelineVariant,
-  mdiMonitorCellphone,
   mdiReload,
-  mdiGithub,
   mdiChartPie,
+  mdiGamepad,
+  mdiAccountMultipleOutline,
 } from "@mdi/js";
+import UserCard from "@/components/UserCard.vue";
 import * as chartConfig from "@/components/Charts/chart.config.js";
 import LineChart from "@/components/Charts/LineChart.vue";
 import SectionMain from "@/components/SectionMain.vue";
 import CardBoxWidget from "@/components/CardBoxWidget.vue";
 import CardBox from "@/components/CardBox.vue";
 import TableSampleClients from "@/components/TableSampleClients.vue";
-import NotificationBar from "@/components/NotificationBar.vue";
 import BaseButton from "@/components/BaseButton.vue";
-import CardBoxTransaction from "@/components/CardBoxTransaction.vue";
+import CardBoxGameStat from "@/components/CardBoxGameStat.vue";
 import CardBoxClient from "@/components/CardBoxClient.vue";
 import LayoutAuthenticated from "@/layouts/LayoutAuthenticated.vue";
 import SectionTitleLineWithButton from "@/components/SectionTitleLineWithButton.vue";
-import SectionBannerStarOnGitHub from "@/components/SectionBannerStarOnGitHub.vue";
+import SectionTitleLine from "@/components/SectionTitleLine.vue";
+import { GameConstants } from "@/constants";
 
 const chartData = ref(null);
 
@@ -37,84 +37,85 @@ onMounted(() => {
 const mainStore = useMainStore();
 
 const clientBarItems = computed(() => mainStore.clients.slice(0, 4));
-
-const transactionBarItems = computed(() => mainStore.history);
 </script>
 
 <template>
   <LayoutAuthenticated>
     <SectionMain>
-      <SectionTitleLineWithButton
+      <h2 class="pb-4 text-4xl lg:text-5xl">Welcome to <samp>PhaseII</samp></h2>
+      <UserCard class="mb-6" />
+
+      <SectionTitleLine
         :icon="mdiChartTimelineVariant"
-        title="Overview"
+        title="Quick Stats"
         main
-      >
-        <BaseButton
-          href="https://github.com/justboil/admin-one-vue-tailwind"
-          target="_blank"
-          :icon="mdiGithub"
-          label="Star on GitHub"
-          color="contrast"
-          rounded-full
-          small
-        />
-      </SectionTitleLineWithButton>
+      />
 
       <div class="grid grid-cols-1 gap-6 lg:grid-cols-3 mb-6">
         <CardBoxWidget
-          trend="12%"
+          trend="12% (from last week)"
           trend-type="up"
-          color="text-emerald-500"
-          :icon="mdiAccountMultiple"
-          :number="512"
-          label="Clients"
+          :number="37"
+          label="Scores (This week)"
         />
         <CardBoxWidget
           trend="12%"
           trend-type="down"
-          color="text-blue-500"
-          :icon="mdiCartOutline"
-          :number="7770"
-          prefix="$"
-          label="Sales"
+          :number="770"
+          :prefix="'¢'"
+          label="PhaseCoin"
         />
         <CardBoxWidget
-          trend="Overflow"
+          trend="None Completed"
           trend-type="alert"
-          color="text-red-500"
-          :icon="mdiChartTimelineVariant"
-          :number="256"
-          suffix="%"
-          label="Performance"
+          :number="2"
+          label="Active Goals"
         />
       </div>
 
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
-        <div class="flex flex-col justify-between">
-          <CardBoxTransaction
-            v-for="(transaction, index) in transactionBarItems"
-            :key="index"
-            :amount="transaction.amount"
-            :date="transaction.date"
-            :business="transaction.business"
-            :type="transaction.type"
-            :name="transaction.name"
-            :account="transaction.account"
-          />
-        </div>
-        <div class="flex flex-col justify-between">
-          <CardBoxClient
-            v-for="client in clientBarItems"
-            :key="client.id"
-            :name="client.name"
-            :login="client.login"
-            :date="client.created"
-            :progress="client.progress"
-          />
-        </div>
+      <SectionTitleLine :icon="mdiGamepad" title="Game Stats" main />
+      <div
+        class="grid grid-flow-row auto-rows-auto grid-cols-1 md:grid-cols-2 gap-5 mb-5"
+      >
+        <CardBoxGameStat
+          :game="GameConstants.GUITARFREAKS"
+          value="#10 out of 132"
+          profile-name="DJ. TRMAZI"
+          type="ranking"
+        />
+        <CardBoxGameStat
+          :game="GameConstants.DRUMMANIA"
+          :value="300"
+          profile-name="TRMAZI"
+          type="plays"
+        />
+        <CardBoxGameStat
+          :game="GameConstants.GITADORA_GF"
+          :value="392"
+          profile-name="TRMAZI"
+          type="scores"
+        />
+        <CardBoxGameStat
+          :game="GameConstants.GITADORA_DM"
+          value="#15 out of 200"
+          profile-name="TRMAZI"
+          type="ranking"
+        />
       </div>
 
-      <SectionBannerStarOnGitHub class="mt-6 mb-6" />
+      <SectionTitleLine :icon="mdiAccountMultipleOutline" title="Rivals" main />
+      <div
+        class="grid grid-flow-row auto-rows-auto grid-cols-1 md:grid-cols-2 gap-5 mb-5"
+      >
+        <CardBoxClient
+          v-for="client in clientBarItems"
+          :key="client.id"
+          :name="client.name"
+          :login="client.login"
+          :date="client.created"
+          :progress="client.progress"
+        />
+      </div>
 
       <SectionTitleLineWithButton :icon="mdiChartPie" title="Trends overview">
         <BaseButton
@@ -131,10 +132,6 @@ const transactionBarItems = computed(() => mainStore.history);
       </CardBox>
 
       <SectionTitleLineWithButton :icon="mdiAccountMultiple" title="Clients" />
-
-      <NotificationBar color="info" :icon="mdiMonitorCellphone">
-        <b>Responsive table.</b> Collapses on mobile
-      </NotificationBar>
 
       <CardBox has-table>
         <TableSampleClients />

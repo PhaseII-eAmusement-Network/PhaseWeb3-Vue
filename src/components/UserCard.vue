@@ -1,42 +1,48 @@
 <script setup>
-import { computed, ref } from "vue";
 import { useMainStore } from "@/stores/main";
-import { mdiCheckDecagram } from "@mdi/js";
+import {
+  mdiSecurity,
+  mdiTestTube,
+  mdiAccountStar,
+  mdiCodeBraces,
+} from "@mdi/js";
 import BaseLevel from "@/components/BaseLevel.vue";
 import UserAvatarCurrentUser from "@/components/UserAvatarCurrentUser.vue";
 import CardBox from "@/components/CardBox.vue";
-import FormCheckRadio from "@/components/FormCheckRadio.vue";
 import PillTag from "@/components/PillTag.vue";
+
+import { GetRandomMessage } from "@/constants";
 
 const mainStore = useMainStore();
 
-const userName = computed(() => mainStore.userName);
-
-const userSwitchVal = ref(false);
+const greeting = GetRandomMessage();
 </script>
 
 <template>
   <CardBox>
-    <BaseLevel type="justify-around lg:justify-center">
-      <UserAvatarCurrentUser class="lg:mx-12" />
+    <BaseLevel
+      type="justify-around lg:justify-center md:space-x-4 lg:space-x-0"
+    >
+      <UserAvatarCurrentUser class="w-28 md:w-32 lg:w-44 lg:mx-12" />
       <div class="space-y-3 text-center md:text-left lg:mx-12">
-        <div class="flex justify-center md:block">
-          <FormCheckRadio
-            v-model="userSwitchVal"
-            name="notifications-switch"
-            type="switch"
-            label="Notifications"
-            :input-value="true"
-          />
+        <div class="space-y-2 md:space-y-0">
+          <h1 class="text-2xl md:text-xl lg:text-2xl">
+            {{ greeting.header[0] }}
+            <b>{{ mainStore.userName }} </b>{{ greeting.header[1] }}
+          </h1>
         </div>
-        <h1 class="text-2xl">
-          Howdy, <b>{{ userName }}</b
-          >!
-        </h1>
-        <p>Last login <b>12 mins ago</b> from <b>127.0.0.1</b></p>
-        <div class="flex justify-center md:block">
-          <PillTag label="Verified" color="info" :icon="mdiCheckDecagram" />
+        <div
+          class="md:grid md:grid-flow-col md:auto-cols-max md:grid-rows-2 flex flex-wrap gap-4 md:place-content-start place-content-center"
+        >
+          <PillTag label="System Admin" color="danger" :icon="mdiSecurity" />
+          <PillTag label="Beta Tester" color="warning" :icon="mdiTestTube" />
+          <PillTag label="Veteran" color="success" :icon="mdiAccountStar" />
+          <PillTag label="Active Dev" color="info" :icon="mdiCodeBraces" />
         </div>
+      </div>
+      <div>
+        <p class="text-xl md:text-lg lg:text-2lg">{{ greeting.comment }}</p>
+        <p class="text-xs italic">Greeting by: {{ greeting.author }}</p>
       </div>
     </BaseLevel>
   </CardBox>

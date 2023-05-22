@@ -1,25 +1,31 @@
 <script setup>
 import { containerMaxW } from "@/config.js";
+import { mdiCash } from "@mdi/js";
 import BaseLevel from "@/components/BaseLevel.vue";
-import JustboilLogo from "@/components/JustboilLogo.vue";
-
-const year = new Date().getFullYear();
+import BaseButton from "@/components/BaseButton.vue";
 </script>
 
 <template>
   <footer class="py-2 px-6" :class="containerMaxW">
     <BaseLevel>
       <div class="text-center md:text-left">
-        <b
-          >&copy;{{ year }},
-          <a href="https://justboil.me/" target="_blank">JustBoil.me</a>.</b
-        >
-        <slot />
+        <p>
+          Made with ❤️ by the PhaseII Team. Based on JustBoil's
+          <a
+            class="text-blue-400 hover:text-blue-600"
+            href="https://github.com/justboil/admin-one-vue-tailwind"
+            >Admin One</a
+          >.
+        </p>
       </div>
       <div class="md:py-2">
-        <a href="https://justboil.me">
-          <JustboilLogo class="w-auto h-8 md:h-6" />
-        </a>
+        <BaseButton
+          color="info"
+          href="https://paypal.me/trmazi"
+          label="Donate"
+          :icon="mdiCash"
+          icon-size="xl"
+        />
       </div>
     </BaseLevel>
   </footer>

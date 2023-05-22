@@ -42,7 +42,10 @@ const props = defineProps({
     default: null,
   },
   small: Boolean,
-  outline: Boolean,
+  outline: {
+    type: Boolean,
+    default: true,
+  },
   active: Boolean,
   disabled: Boolean,
   roundedFull: Boolean,
