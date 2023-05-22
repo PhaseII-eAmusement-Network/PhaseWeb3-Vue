@@ -36,7 +36,7 @@ const datasetObject = (color, points) => {
   };
 };
 
-export const sampleChartData = (points = 9) => {
+export const sampleChartData = (points = 7) => {
   const labels = [];
 
   for (let i = 1; i <= points; i++) {
@@ -45,10 +45,6 @@ export const sampleChartData = (points = 9) => {
 
   return {
     labels,
-    datasets: [
-      datasetObject("primary", points),
-      datasetObject("info", points),
-      datasetObject("danger", points),
-    ],
+    datasets: [datasetObject("info", points)],
   };
 };

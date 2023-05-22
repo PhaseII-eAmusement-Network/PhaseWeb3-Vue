@@ -1,13 +1,11 @@
 <script setup>
-import { computed, ref, onMounted } from "vue";
-import { useMainStore } from "@/stores/main";
+import { ref, onMounted } from "vue";
 import {
-  mdiAccountMultiple,
+  mdiAccountMultipleOutline,
   mdiChartTimelineVariant,
   mdiReload,
-  mdiChartPie,
+  mdiChartBellCurveCumulative,
   mdiGamepad,
-  mdiAccountMultipleOutline,
 } from "@mdi/js";
 import UserCard from "@/components/UserCard.vue";
 import * as chartConfig from "@/components/Charts/chart.config.js";
@@ -15,13 +13,12 @@ import LineChart from "@/components/Charts/LineChart.vue";
 import SectionMain from "@/components/SectionMain.vue";
 import CardBoxWidget from "@/components/CardBoxWidget.vue";
 import CardBox from "@/components/CardBox.vue";
-import TableSampleClients from "@/components/TableSampleClients.vue";
 import BaseButton from "@/components/BaseButton.vue";
 import CardBoxGameStat from "@/components/CardBoxGameStat.vue";
-import CardBoxClient from "@/components/CardBoxClient.vue";
 import LayoutAuthenticated from "@/layouts/LayoutAuthenticated.vue";
-import SectionTitleLineWithButton from "@/components/SectionTitleLineWithButton.vue";
 import SectionTitleLine from "@/components/SectionTitleLine.vue";
+import PillTag from "@/components/PillTag.vue";
+import TableRivalsFull from "@/components/TableRivalsFull.vue";
 import { GameConstants } from "@/constants";
 
 const chartData = ref(null);
@@ -33,10 +30,6 @@ const fillChartData = () => {
 onMounted(() => {
   fillChartData();
 });
-
-const mainStore = useMainStore();
-
-const clientBarItems = computed(() => mainStore.clients.slice(0, 4));
 </script>
 
 <template>
@@ -78,7 +71,7 @@ const clientBarItems = computed(() => mainStore.clients.slice(0, 4));
         class="grid grid-flow-row auto-rows-auto grid-cols-1 md:grid-cols-2 gap-5 mb-5"
       >
         <CardBoxGameStat
-          :game="GameConstants.GUITARFREAKS"
+          :game="GameConstants.IIDX"
           value="#10 out of 132"
           profile-name="DJ. TRMAZI"
           type="ranking"
@@ -90,51 +83,45 @@ const clientBarItems = computed(() => mainStore.clients.slice(0, 4));
           type="plays"
         />
         <CardBoxGameStat
-          :game="GameConstants.GITADORA_GF"
+          :game="GameConstants.DDRCLASS"
           :value="392"
           profile-name="TRMAZI"
           type="scores"
         />
         <CardBoxGameStat
-          :game="GameConstants.GITADORA_DM"
+          :game="GameConstants.SDVX"
           value="#15 out of 200"
           profile-name="TRMAZI"
           type="ranking"
         />
       </div>
 
-      <SectionTitleLine :icon="mdiAccountMultipleOutline" title="Rivals" main />
-      <div
-        class="grid grid-flow-row auto-rows-auto grid-cols-1 md:grid-cols-2 gap-5 mb-5"
+      <SectionTitleLine
+        :icon="mdiChartBellCurveCumulative"
+        title="Play Trends"
+        main
       >
-        <CardBoxClient
-          v-for="client in clientBarItems"
-          :key="client.id"
-          :name="client.name"
-          :login="client.login"
-          :date="client.created"
-          :progress="client.progress"
-        />
-      </div>
-
-      <SectionTitleLineWithButton :icon="mdiChartPie" title="Trends overview">
         <BaseButton
           :icon="mdiReload"
           color="whiteDark"
           @click="fillChartData"
         />
-      </SectionTitleLineWithButton>
+      </SectionTitleLine>
 
       <CardBox class="mb-6">
+        <PillTag
+          label="Scores (7-Day Period)"
+          color="info"
+          :icon="mdiTestTube"
+        />
         <div v-if="chartData">
           <line-chart :data="chartData" class="h-96" />
         </div>
       </CardBox>
 
-      <SectionTitleLineWithButton :icon="mdiAccountMultiple" title="Clients" />
-
+      <SectionTitleLine :icon="mdiAccountMultipleOutline" title="Rivals" main />
       <CardBox has-table>
-        <TableSampleClients />
+        <TableRivalsFull />
       </CardBox>
     </SectionMain>
   </LayoutAuthenticated>

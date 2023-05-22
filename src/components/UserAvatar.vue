@@ -21,11 +21,19 @@ const username = computed(() => props.username);
 
 <template>
   <div>
-    <img
-      :src="avatar"
-      :alt="username"
-      class="rounded-full block h-auto w-40 max-h-40 bg-gray-100 dark:bg-slate-800"
-    />
+    <div class="relative inline-block">
+      <img
+        :src="avatar"
+        :alt="username"
+        class="w-full h-auto bg-gray-100 dark:bg-slate-800 rounded-full overflow-hidden"
+      />
+      <img
+        src="/assets/border/test.png"
+        alt="border"
+        class="absolute inset-0 w-full h-full overflow-hidden"
+        style="object-fit: fill; transform: scale(1.02)"
+      />
+    </div>
     <slot />
   </div>
 </template>

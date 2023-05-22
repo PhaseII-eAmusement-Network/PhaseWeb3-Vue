@@ -16,12 +16,20 @@ import { GetRandomMessage } from "@/constants";
 const mainStore = useMainStore();
 
 const greeting = GetRandomMessage();
+
+const cardStyle = `
+  background-image: linear-gradient(to left, transparent, rgba(0, 0, 0, 1)),
+    url('/assets/card/ddr.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+`;
 </script>
 
 <template>
-  <CardBox>
+  <CardBox :style="cardStyle">
     <BaseLevel
       type="justify-around lg:justify-center md:space-x-4 lg:space-x-0"
+      class="bg-white dark:bg-slate-900/90 rounded-2xl p-3"
     >
       <UserAvatarCurrentUser class="w-28 md:w-32 lg:w-44 lg:mx-12" />
       <div class="space-y-3 text-center md:text-left lg:mx-12">
