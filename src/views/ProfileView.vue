@@ -12,18 +12,18 @@ import CardBox from "@/components/CardBox.vue";
 import BaseDivider from "@/components/BaseDivider.vue";
 import FormField from "@/components/FormField.vue";
 import FormControl from "@/components/FormControl.vue";
-import FormFilePicker from "@/components/FormFilePicker.vue";
 import BaseButton from "@/components/BaseButton.vue";
-import BaseButtons from "@/components/BaseButtons.vue";
 import UserCard from "@/components/UserCard.vue";
 import LayoutAuthenticated from "@/layouts/LayoutAuthenticated.vue";
-import SectionTitleLineWithButton from "@/components/SectionTitleLineWithButton.vue";
+import SectionTitleLine from "@/components/SectionTitleLine.vue";
+import PillTag from "@/components/PillTag.vue";
 
 const mainStore = useMainStore();
 
 const profileForm = reactive({
   name: mainStore.userName,
   email: mainStore.userEmail,
+  pin: "****",
 });
 
 const passwordForm = reactive({
@@ -44,18 +44,17 @@ const submitPass = () => {
 <template>
   <LayoutAuthenticated>
     <SectionMain>
-      <SectionTitleLineWithButton :icon="mdiAccount" title="Profile" main>
-      </SectionTitleLineWithButton>
-
+      <SectionTitleLine
+        :icon="mdiAccount"
+        title="General Profile Settings"
+        main
+      />
       <UserCard class="mb-6" />
 
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <CardBox is-form @submit.prevent="submitProfile">
-          <FormField label="Avatar" help="Max 500kb">
-            <FormFilePicker label="Upload" />
-          </FormField>
-
-          <FormField label="Name" help="Required. Your name">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <CardBox is-form class="row-span-1" @submit.prevent="submitProfile">
+          <PillTag color="info" label="General" class="mb-2" />
+          <FormField label="Username">
             <FormControl
               v-model="profileForm.name"
               :icon="mdiAccount"
@@ -64,7 +63,10 @@ const submitPass = () => {
               autocomplete="username"
             />
           </FormField>
-          <FormField label="E-mail" help="Required. Your e-mail">
+          <FormField
+            label="E-mail"
+            help="Used for Gravatar and Password Resetting"
+          >
             <FormControl
               v-model="profileForm.email"
               :icon="mdiMail"
@@ -75,15 +77,24 @@ const submitPass = () => {
             />
           </FormField>
 
+          <FormField label="PIN" help="Used when logging into a game">
+            <FormControl
+              v-model="profileForm.pin"
+              :icon="mdiAsterisk"
+              type="password"
+              name="pin"
+              required
+              autocomplete="pin"
+            />
+          </FormField>
+
           <template #footer>
-            <BaseButtons>
-              <BaseButton color="info" type="submit" label="Submit" />
-              <BaseButton color="info" label="Options" outline />
-            </BaseButtons>
+            <BaseButton color="success" type="submit" label="Update" />
           </template>
         </CardBox>
 
-        <CardBox is-form @submit.prevent="submitPass">
+        <CardBox is-form class="row-span-2" @submit.prevent="submitPass">
+          <PillTag color="info" label="Change Password" class="mb-2" />
           <FormField
             label="Current password"
             help="Required. Your current password"
@@ -97,7 +108,6 @@ const submitPass = () => {
               autocomplete="current-password"
             />
           </FormField>
-
           <BaseDivider />
 
           <FormField label="New password" help="Required. New password">
@@ -126,10 +136,7 @@ const submitPass = () => {
           </FormField>
 
           <template #footer>
-            <BaseButtons>
-              <BaseButton type="submit" color="info" label="Submit" />
-              <BaseButton color="info" label="Options" outline />
-            </BaseButtons>
+            <BaseButton type="submit" color="success" label="Update" />
           </template>
         </CardBox>
       </div>
