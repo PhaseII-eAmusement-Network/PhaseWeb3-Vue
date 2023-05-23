@@ -35,11 +35,15 @@ const pagesList = computed(() => {
   return pagesList;
 });
 
-const cardStyle = `
-  background-image: url('/assets/card/dm.png');
-  background-size: cover;
-  background-repeat: no-repeat;
-`;
+function getCardStyle(game) {
+  if (game !== null) {
+    return `
+      background-image: url('/assets/card/${game}.png');
+      background-size: cover;
+      background-repeat: no-repeat;
+    `;
+  }
+}
 </script>
 
 <template>
@@ -55,7 +59,10 @@ const cardStyle = `
     </thead>
     <tbody>
       <tr v-for="client in itemsPaginated" :key="client.id">
-        <td class="border-b-0 lg:w-6 before:hidden" :style="cardStyle">
+        <td
+          class="border-b-0 lg:w-6 before:hidden"
+          :style="getCardStyle('ddr')"
+        >
           <UserAvatar
             :username="Trmazi"
             class="w-24 h-24 mx-auto lg:w-6 lg:h-6"

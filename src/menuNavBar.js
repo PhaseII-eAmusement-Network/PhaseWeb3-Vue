@@ -4,6 +4,7 @@ import {
   mdiEmail,
   mdiLogout,
   mdiServerNetwork,
+  mdiBrushOutline,
 } from "@mdi/js";
 
 export default [
@@ -14,6 +15,10 @@ export default [
         icon: mdiAccount,
         label: "Profile",
         to: "/profile",
+      },
+      {
+        icon: mdiBrushOutline,
+        label: "Customizations",
       },
       {
         icon: mdiServerNetwork,

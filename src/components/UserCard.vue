@@ -17,16 +17,19 @@ const mainStore = useMainStore();
 
 const greeting = GetRandomMessage();
 
-const cardStyle = `
-  background-image: linear-gradient(to left, transparent, rgba(0, 0, 0, 1)),
-    url('/assets/card/ddr.png');
-  background-size: cover;
-  background-repeat: no-repeat;
-`;
+function getCardStyle(game) {
+  if (game !== null) {
+    return `
+      background-image: url('/assets/card/${game}.png');
+      background-size: cover;
+      background-repeat: no-repeat;
+    `;
+  }
+}
 </script>
 
 <template>
-  <CardBox :style="cardStyle">
+  <CardBox :style="getCardStyle('sdvx')">
     <BaseLevel
       type="justify-around lg:justify-center md:space-x-4 lg:space-x-0"
       class="bg-white dark:bg-slate-900/90 rounded-2xl p-3"
