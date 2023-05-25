@@ -1,9 +1,7 @@
 import {
   mdiMonitor,
-  mdiSquareEditOutline,
-  mdiTable,
-  mdiViewList,
-  mdiTelevisionGuide,
+  mdiGamepadCircleOutline,
+  mdiNewspaperVariant,
 } from "@mdi/js";
 
 export default [
@@ -13,34 +11,17 @@ export default [
     label: "Dashboard",
   },
   {
-    to: "/tables",
-    label: "Tables",
-    icon: mdiTable,
+    to: "/news",
+    icon: mdiNewspaperVariant,
+    label: "News",
   },
   {
-    to: "/forms",
-    label: "Forms",
-    icon: mdiSquareEditOutline,
-  },
-  {
-    to: "/ui",
-    label: "UI",
-    icon: mdiTelevisionGuide,
-  },
-  {
-    label: "Dropdown",
-    icon: mdiViewList,
+    label: "Arcades",
+    icon: mdiGamepadCircleOutline,
     menu: [
       {
-        label: "Item One",
-        menu: [
-          {
-            label: "balls",
-          },
-        ],
-      },
-      {
-        label: "Item Two",
+        label: "Test Arcade",
+        to: "/arcade/0",
       },
     ],
   },

@@ -6,6 +6,7 @@ import {
   mdiReload,
   mdiChartBellCurveCumulative,
   mdiGamepad,
+  mdiTestTube,
 } from "@mdi/js";
 import UserCard from "@/components/UserCard.vue";
 import * as chartConfig from "@/components/Charts/chart.config.js";
@@ -18,7 +19,8 @@ import CardBoxGameStat from "@/components/CardBoxGameStat.vue";
 import LayoutAuthenticated from "@/layouts/LayoutAuthenticated.vue";
 import SectionTitleLine from "@/components/SectionTitleLine.vue";
 import PillTag from "@/components/PillTag.vue";
-import TableRivalsFull from "@/components/TableRivalsFull.vue";
+import TableRivalsFull from "@/components/Tables/TableRivalsFull.vue";
+import NotificationBar from "@/components/NotificationBar.vue";
 import { GameConstants } from "@/constants";
 
 const chartData = ref(null);
@@ -37,6 +39,15 @@ onMounted(() => {
     <SectionMain>
       <h2 class="pb-4 text-4xl lg:text-5xl">Welcome to <samp>PhaseII</samp></h2>
       <UserCard class="mb-6" />
+
+      <div class="my-4">
+        <NotificationBar color="info">
+          You have unread news!
+          <template #right>
+            <a href="#/news" class="text-blue-300 hover:underline">View now</a>
+          </template>
+        </NotificationBar>
+      </div>
 
       <SectionTitleLine
         :icon="mdiChartTimelineVariant"

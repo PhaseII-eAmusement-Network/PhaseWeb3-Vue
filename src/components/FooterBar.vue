@@ -24,7 +24,7 @@ import BaseButton from "@/components/BaseButton.vue";
           href="https://paypal.me/trmazi"
           label="Donate"
           :icon="mdiCash"
-          icon-size="xl"
+          icon-size="24"
         />
       </div>
     </BaseLevel>

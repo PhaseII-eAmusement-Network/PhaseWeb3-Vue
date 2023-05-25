@@ -11,7 +11,10 @@ const props = defineProps({
     type: String,
     default: null,
   },
-  outline: Boolean,
+  outline: {
+    type: Boolean,
+    default: true,
+  },
   color: {
     type: String,
     required: true,
@@ -37,7 +40,7 @@ const hasRightSlot = computed(() => slots.right);
   <div
     v-if="!isDismissed"
     :class="componentClass"
-    class="px-3 py-6 md:py-3 mb-6 last:mb-0 border rounded-lg transition-colors duration-150"
+    class="px-3 py-3 md:py-3 last:mb-0 border rounded-lg transition-colors duration-150"
   >
     <BaseLevel>
       <div class="flex flex-col md:flex-row items-center">
