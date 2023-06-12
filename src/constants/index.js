@@ -263,9 +263,21 @@ export class VersionConstants {
 }
 
 export function GetRandomMessage() {
-  const key = Math.floor(Math.random() * Greetings.length);
-  const selected = Greetings[key];
-  selected.header = selected.header.split("<username>");
+  const greetings = Greetings; // Assuming Greetings is a promise
+
+  const key = Math.floor(Math.random() * greetings.length);
+  const selected = greetings[key];
+
+  if (typeof selected.header !== "string") {
+    selected.comment = "Show me your moves.";
+    selected.author = "PhaseII server";
+  }
+
+  selected.header =
+    typeof selected.header === "string"
+      ? selected.header.split("<username>")
+      : ["Heyo, ", "!"];
+
   return selected;
 }
 

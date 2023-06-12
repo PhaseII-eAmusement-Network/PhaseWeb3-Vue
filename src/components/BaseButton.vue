@@ -41,14 +41,20 @@ const props = defineProps({
     type: String,
     default: null,
   },
-  small: Boolean,
+  small: {
+    type: Boolean,
+    default: true,
+  },
   outline: {
     type: Boolean,
     default: true,
   },
   active: Boolean,
   disabled: Boolean,
-  roundedFull: Boolean,
+  roundedFull: {
+    type: Boolean,
+    default: true,
+  },
 });
 
 const is = computed(() => {

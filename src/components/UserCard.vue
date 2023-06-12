@@ -11,6 +11,14 @@ import UserAvatarCurrentUser from "@/components/UserAvatarCurrentUser.vue";
 import CardBox from "@/components/CardBox.vue";
 import PillTag from "@/components/PillTag.vue";
 
+defineProps({
+  useSmall: {
+    type: Boolean,
+    required: false,
+    default: false,
+  },
+});
+
 import { GetRandomMessage } from "@/constants";
 
 const mainStore = useMainStore();
@@ -29,7 +37,7 @@ function getCardStyle(game) {
 </script>
 
 <template>
-  <CardBox :style="getCardStyle('sdvx')">
+  <CardBox :style="getCardStyle('iidx')">
     <BaseLevel
       type="justify-around lg:justify-center md:space-x-4 lg:space-x-0"
       class="bg-white dark:bg-slate-900/90 rounded-2xl p-3"
@@ -37,9 +45,12 @@ function getCardStyle(game) {
       <UserAvatarCurrentUser class="w-28 md:w-32 lg:w-44 lg:mx-12" />
       <div class="space-y-3 text-center md:text-left lg:mx-12">
         <div class="space-y-2 md:space-y-0">
-          <h1 class="text-2xl md:text-xl lg:text-2xl">
+          <h1 v-if="!useSmall" class="text-2xl md:text-xl lg:text-2xl">
             {{ greeting.header[0] }}
             <b>{{ mainStore.userName }} </b>{{ greeting.header[1] }}
+          </h1>
+          <h1 v-if="useSmall" class="text-3xl md:text-4xl">
+            <b>{{ mainStore.userName }}</b>
           </h1>
         </div>
         <div
@@ -51,7 +62,7 @@ function getCardStyle(game) {
           <PillTag label="Active Dev" color="info" :icon="mdiCodeBraces" />
         </div>
       </div>
-      <div>
+      <div v-if="!useSmall">
         <p class="text-xl md:text-lg lg:text-2lg">{{ greeting.comment }}</p>
         <p class="text-xs italic">Greeting by: {{ greeting.author }}</p>
       </div>

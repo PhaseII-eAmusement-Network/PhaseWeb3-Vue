@@ -82,19 +82,19 @@ onMounted(() => {
         class="grid grid-flow-row auto-rows-auto grid-cols-1 md:grid-cols-2 gap-5 mb-5"
       >
         <CardBoxGameStat
-          :game="GameConstants.IIDX"
+          :game="GameConstants.DDR"
           value="#10 out of 132"
           profile-name="DJ. TRMAZI"
           type="ranking"
         />
         <CardBoxGameStat
-          :game="GameConstants.DRUMMANIA"
+          :game="GameConstants.POPN_MUSIC"
           :value="300"
           profile-name="TRMAZI"
           type="plays"
         />
         <CardBoxGameStat
-          :game="GameConstants.DDRCLASS"
+          :game="GameConstants.JUBEAT"
           :value="392"
           profile-name="TRMAZI"
           type="scores"

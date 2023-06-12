@@ -2,13 +2,11 @@
 import { reactive } from "vue";
 import { useRouter } from "vue-router";
 import { mdiAccount, mdiAsterisk } from "@mdi/js";
-import SectionFullScreen from "@/components/SectionFullScreen.vue";
 import CardBox from "@/components/CardBox.vue";
 import FormCheckRadio from "@/components/FormCheckRadio.vue";
 import FormField from "@/components/FormField.vue";
 import FormControl from "@/components/FormControl.vue";
 import BaseButton from "@/components/BaseButton.vue";
-import BaseButtons from "@/components/BaseButtons.vue";
 import LayoutGuest from "@/layouts/LayoutGuest.vue";
 
 const form = reactive({
@@ -20,47 +18,68 @@ const form = reactive({
 const router = useRouter();
 
 const submit = () => {
-  router.push("/dashboard");
+  router.push("/");
 };
 </script>
 
 <template>
   <LayoutGuest>
-    <SectionFullScreen v-slot="{ cardClass }" bg="purplePink">
-      <CardBox :class="cardClass" is-form @submit.prevent="submit">
-        <FormField label="Login" help="Please enter your login">
-          <FormControl
-            v-model="form.login"
-            :icon="mdiAccount"
-            name="login"
-            autocomplete="username"
-          />
-        </FormField>
+    <div class="flex min-h-screen items-center justify-center">
+      <CardBox class="w-auto" has-table>
+        <div
+          class="p-4 flex flex-col md:flex-row w-full space-y-2 md:space-y-0 md:space-x-4"
+        >
+          <div class="flex flex-col items-center text-wrap h-full">
+            <img src="/favicon.png" class="rounded-full shadow-lg mb-2" />
+            <h1 class="text-xl"><samp>PhaseII</samp></h1>
+            <p class="text-sm text-white/75">Growing since 2021</p>
+            <hr class="border-t border-1 my-1 w-full" />
+            <p class="text-lg relative bottom-0">Please log in.</p>
+          </div>
+          <div class="md:border-r md:border-1"></div>
+          <div>
+            <FormField label="Username">
+              <FormControl
+                v-model="form.login"
+                :icon="mdiAccount"
+                name="login"
+                autocomplete="username"
+              />
+            </FormField>
 
-        <FormField label="Password" help="Please enter your password">
-          <FormControl
-            v-model="form.pass"
-            :icon="mdiAsterisk"
-            type="password"
-            name="password"
-            autocomplete="current-password"
-          />
-        </FormField>
+            <FormField label="Password">
+              <FormControl
+                v-model="form.pass"
+                :icon="mdiAsterisk"
+                type="password"
+                name="password"
+                autocomplete="current-password"
+              />
+            </FormField>
 
-        <FormCheckRadio
-          v-model="form.remember"
-          name="remember"
-          label="Remember"
-          :input-value="true"
-        />
+            <FormCheckRadio
+              v-model="form.remember"
+              name="remember"
+              label="Remember Me"
+              :input-value="true"
+            />
 
-        <template #footer>
-          <BaseButtons>
-            <BaseButton type="submit" color="info" label="Login" />
-            <BaseButton to="/dashboard" color="info" outline label="Back" />
-          </BaseButtons>
-        </template>
+            <div class="flex flex-col gap-2 mt-4">
+              <BaseButton label="Log In" color="success" @click="submit()" />
+            </div>
+
+            <hr class="border-t border-1 my-4 w-full" />
+
+            <div class="flex flex-col gap-2 my-4">
+              <h2>New Here?</h2>
+              <BaseButton label="Register" color="info" />
+
+              <h2>Forgot Password?</h2>
+              <BaseButton label="Password Reset" color="warning" />
+            </div>
+          </div>
+        </div>
       </CardBox>
-    </SectionFullScreen>
+    </div>
   </LayoutGuest>
 </template>

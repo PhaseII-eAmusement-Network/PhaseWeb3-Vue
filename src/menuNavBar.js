@@ -1,7 +1,6 @@
 import {
   mdiCogs,
   mdiAccount,
-  mdiEmail,
   mdiLogout,
   mdiServerNetwork,
   mdiBrushOutline,
@@ -13,20 +12,18 @@ export default [
     menu: [
       {
         icon: mdiAccount,
-        label: "Profile",
+        label: "Settings",
         to: "/profile",
       },
       {
         icon: mdiBrushOutline,
         label: "Customizations",
+        to: "/profile/customize",
       },
       {
         icon: mdiServerNetwork,
         label: "Integrations",
-      },
-      {
-        icon: mdiEmail,
-        label: "Notifications",
+        to: "/profile/integrate",
       },
     ],
   },

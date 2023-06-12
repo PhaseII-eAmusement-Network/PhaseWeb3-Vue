@@ -11,6 +11,7 @@ import SectionMain from "@/components/SectionMain.vue";
 import CardBox from "@/components/CardBox.vue";
 import BaseDivider from "@/components/BaseDivider.vue";
 import FormField from "@/components/FormField.vue";
+import FormCheckRadio from "@/components/FormCheckRadio.vue";
 import FormControl from "@/components/FormControl.vue";
 import BaseButton from "@/components/BaseButton.vue";
 import UserCard from "@/components/UserCard.vue";
@@ -44,12 +45,42 @@ const submitPass = () => {
 <template>
   <LayoutAuthenticated>
     <SectionMain>
-      <SectionTitleLine
-        :icon="mdiAccount"
-        title="General Profile Settings"
-        main
-      />
-      <UserCard class="mb-6" />
+      <UserCard class="mb-6" use-small />
+      <SectionTitleLine :icon="mdiAccount" title="Profile Settings" main />
+
+      <CardBox is-form class="mb-6" @submit.prevent="">
+        <PillTag color="info" label="Discord Notifications" class="mb-4" />
+        <div class="grid gap-4 grid-cols-2 md:grid-cols-4">
+          <FormCheckRadio
+            name="scorecards"
+            :model-value="true"
+            type="switch"
+            label="Goal Alerts"
+            class="outline outline-gray-400 rounded-xl outline-1 p-2"
+          />
+          <FormCheckRadio
+            name="scorecards"
+            :model-value="true"
+            type="switch"
+            label="Tournament Status"
+            class="outline outline-gray-400 rounded-xl outline-1 p-2"
+          />
+          <FormCheckRadio
+            name="scorecards"
+            :model-value="true"
+            type="switch"
+            label="PASELI Transactions"
+            class="outline outline-gray-400 rounded-xl outline-1 p-2"
+          />
+          <FormCheckRadio
+            name="scorecards"
+            :model-value="true"
+            type="switch"
+            label="System Alerts"
+            class="outline outline-gray-400 rounded-xl outline-1 p-2"
+          />
+        </div>
+      </CardBox>
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
         <CardBox is-form class="row-span-1" @submit.prevent="submitProfile">

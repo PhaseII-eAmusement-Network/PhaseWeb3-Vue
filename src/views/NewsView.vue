@@ -5,25 +5,9 @@ import LayoutAuthenticated from "@/layouts/LayoutAuthenticated.vue";
 import SectionTitleLine from "@/components/SectionTitleLine.vue";
 import CardBoxComponentEmpty from "@/components/CardBoxComponentEmpty.vue";
 import CardBoxNews from "@/components/Cards/CardBoxNews.vue";
+import testNews from "@/constants/news.json";
 
-const testNews = [
-  {
-    id: 0,
-    title: "GITADORA HIGH-VOLTAGE Now Supported!",
-    content:
-      "I finally bit the bullet, sat down for 14 hours straight, and completely rewrote my Gitadora backend. Gitadora High-Voltage is now FULLY supported! For the time being this has broken all Gitadora ORIGINAL profiles, but these will be migrated over soon! Expect Nex+age and older to come soon. Enjoy!",
-    cover: "https://i.imgur.com/WPRlNo6.png",
-    timestamp: "2022.11.20 5:48:10 PM",
-  },
-  {
-    id: 1,
-    title: "FutureTomTom Now Supported!",
-    content:
-      "This weird drumming game now has support on PhaseII! Ver.1 and Ver.2 are both fully working, though there aren't any events set up currently.",
-    cover: "https://i.imgur.com/UWtUAd5.png",
-    timestamp: "2022.11.20 5:48:10 PM",
-  },
-];
+const newsData = testNews;
 </script>
 
 <template>
@@ -31,17 +15,19 @@ const testNews = [
     <SectionMain>
       <SectionTitleLine :icon="mdiNewspaperVariant" title="Network News" main />
 
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div class="grid gap-4 grid-cols-1 w-full">
         <CardBoxNews
-          v-for="news of testNews"
+          v-for="news of newsData"
+          :id="news.id"
           :key="news.id"
           :title="news.title"
           :content="news.content"
           :date="news.timestamp"
           :cover="news.cover"
+          class="w-full h-full"
         />
       </div>
-      <CardBoxComponentEmpty v-if="!testNews || !testNews.length" />
+      <CardBoxComponentEmpty v-if="!newsData || !newsData.length" />
     </SectionMain>
   </LayoutAuthenticated>
 </template>

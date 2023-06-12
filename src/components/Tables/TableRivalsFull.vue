@@ -61,7 +61,7 @@ function getCardStyle(game) {
       <tr v-for="client in itemsPaginated" :key="client.id">
         <td
           class="border-b-0 lg:w-6 before:hidden"
-          :style="getCardStyle('ddr')"
+          :style="getCardStyle('pride')"
         >
           <UserAvatar username="" class="w-24 h-24 mx-auto lg:w-6 lg:h-6" />
         </td>
