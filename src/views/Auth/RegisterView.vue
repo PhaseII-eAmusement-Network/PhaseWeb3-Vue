@@ -124,13 +124,6 @@ const submit = () => {
               <div class="flex flex-col gap-2 my-4">
                 <h2>Have an Account?</h2>
                 <BaseButton label="Log In" color="info" href="/#/auth/login" />
-
-                <h2>Forgot Password?</h2>
-                <BaseButton
-                  label="Password Reset"
-                  color="warning"
-                  href="/#/auth/reset"
-                />
               </div>
             </div>
           </div>

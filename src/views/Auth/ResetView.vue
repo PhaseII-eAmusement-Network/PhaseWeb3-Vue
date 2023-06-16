@@ -59,13 +59,6 @@ const submit = () => {
             <div class="flex flex-col gap-2 my-4">
               <h2>Remember it?</h2>
               <BaseButton label="Log In" color="success" href="/#/auth/login" />
-
-              <h2>New Here?</h2>
-              <BaseButton
-                label="Register"
-                color="info"
-                href="/#/auth/register"
-              />
             </div>
           </div>
         </div>

@@ -25,6 +25,12 @@ const mainStore = useMainStore();
 
 const greeting = GetRandomMessage();
 
+var last = {
+  game: "beatmaniaIIDX",
+  version: "22 PENDUAL",
+  arcade: "Ho-House",
+};
+
 function getCardStyle(game) {
   if (game !== null) {
     return `
@@ -52,6 +58,11 @@ function getCardStyle(game) {
           <h1 v-if="useSmall" class="text-3xl md:text-4xl">
             <b>{{ mainStore.userName }}</b>
           </h1>
+          <p v-if="useSmall" class="text-md md:text-lg">
+            Last seen playing <b>{{ last.game }} {{ last.version }}</b
+            ><br />at
+            <b>{{ last.arcade }}</b>
+          </p>
         </div>
         <div
           class="md:grid md:grid-flow-col md:auto-cols-max md:grid-rows-2 flex flex-wrap gap-4 md:place-content-start place-content-center"

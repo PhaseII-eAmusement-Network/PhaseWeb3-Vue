@@ -77,7 +77,7 @@ const submit = () => {
             <hr class="border-t border-1 my-4 w-full" />
 
             <div class="flex flex-col gap-2 my-4">
-              <h2>New Here?</h2>
+              <h2>Not Registered?</h2>
               <BaseButton
                 label="Register"
                 color="info"
