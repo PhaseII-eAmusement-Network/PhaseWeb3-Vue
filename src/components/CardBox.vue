@@ -17,6 +17,10 @@ const props = defineProps({
   isForm: Boolean,
   isHoverable: Boolean,
   isModal: Boolean,
+  isAuth: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 const emit = defineEmits(["submit"]);
@@ -29,7 +33,11 @@ const componentClass = computed(() => {
   const base = [
     props.rounded,
     props.flex,
-    props.isModal ? "dark:bg-slate-900" : "dark:bg-slate-900/70",
+    props.isAuth
+      ? "dark:bg-slate-800 md:dark:bg-slate-900"
+      : props.isModal
+      ? "dark:bg-slate-900"
+      : "dark:bg-slate-900/70",
   ];
 
   if (props.isHoverable) {

@@ -1,24 +1,21 @@
 <script setup>
 import { reactive } from "vue";
 import { useRouter } from "vue-router";
-import { mdiAccount, mdiAsterisk } from "@mdi/js";
+import { mdiAccount } from "@mdi/js";
 import CardBox from "@/components/CardBox.vue";
-import FormCheckRadio from "@/components/FormCheckRadio.vue";
 import FormField from "@/components/FormField.vue";
 import FormControl from "@/components/FormControl.vue";
 import BaseButton from "@/components/BaseButton.vue";
 import LayoutGuest from "@/layouts/LayoutGuest.vue";
 
 const form = reactive({
-  login: "john.doe",
-  pass: "highly-secure-password-fYjUw-",
-  remember: true,
+  login: "test@website.com",
 });
 
 const router = useRouter();
 
 const submit = () => {
-  router.push("/");
+  router.push("/auth/login");
 };
 </script>
 
@@ -40,55 +37,34 @@ const submit = () => {
               Spinnin' since 2021
             </p>
             <hr class="border-t border-1 my-1 w-full" />
-            <p class="text-lg relative bottom-0">Please log in.</p>
+            <p class="text-lg relative bottom-0">Password Reset</p>
           </div>
           <div class="md:border-r md:border-1"></div>
           <div>
-            <FormField label="Username">
+            <FormField label="Email Address">
               <FormControl
                 v-model="form.login"
                 :icon="mdiAccount"
-                name="login"
-                autocomplete="username"
+                name="email"
+                autocomplete="email"
               />
             </FormField>
-
-            <FormField label="Password">
-              <FormControl
-                v-model="form.pass"
-                :icon="mdiAsterisk"
-                type="password"
-                name="password"
-                autocomplete="current-password"
-              />
-            </FormField>
-
-            <FormCheckRadio
-              v-model="form.remember"
-              name="remember"
-              label="Remember Me"
-              :input-value="true"
-            />
 
             <div class="flex flex-col gap-2 mt-4">
-              <BaseButton label="Log In" color="success" @click="submit()" />
+              <BaseButton label="Submit" color="info" @click="submit()" />
             </div>
 
             <hr class="border-t border-1 my-4 w-full" />
 
             <div class="flex flex-col gap-2 my-4">
+              <h2>Remember it?</h2>
+              <BaseButton label="Log In" color="success" href="/#/auth/login" />
+
               <h2>New Here?</h2>
               <BaseButton
                 label="Register"
                 color="info"
                 href="/#/auth/register"
-              />
-
-              <h2>Forgot Password?</h2>
-              <BaseButton
-                label="Password Reset"
-                color="warning"
-                href="/#/auth/reset"
               />
             </div>
           </div>

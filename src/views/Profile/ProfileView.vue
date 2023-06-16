@@ -56,28 +56,28 @@ const submitPass = () => {
             :model-value="true"
             type="switch"
             label="Goal Alerts"
-            class="outline outline-gray-400 rounded-xl outline-1 p-2"
+            class="outline outline-gray-400 rounded-xl outline-1 text-sm md:text-md p-2"
           />
           <FormCheckRadio
             name="scorecards"
             :model-value="true"
             type="switch"
             label="Tournament Status"
-            class="outline outline-gray-400 rounded-xl outline-1 p-2"
+            class="outline outline-gray-400 rounded-xl outline-1 text-sm md:text-md p-2"
           />
           <FormCheckRadio
             name="scorecards"
             :model-value="true"
             type="switch"
             label="PASELI Transactions"
-            class="outline outline-gray-400 rounded-xl outline-1 p-2"
+            class="outline outline-gray-400 rounded-xl outline-1 text-sm md:text-md p-2"
           />
           <FormCheckRadio
             name="scorecards"
             :model-value="true"
             type="switch"
             label="System Alerts"
-            class="outline outline-gray-400 rounded-xl outline-1 p-2"
+            class="outline outline-gray-400 rounded-xl outline-1 text-sm md:text-md p-2"
           />
         </div>
       </CardBox>

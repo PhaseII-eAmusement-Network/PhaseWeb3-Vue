@@ -44,6 +44,14 @@ const routes = [
   },
   {
     meta: {
+      title: "Reset Password",
+    },
+    path: "/auth/reset",
+    name: "reset_pass",
+    component: () => import("@/views/Auth/ResetView.vue"),
+  },
+  {
+    meta: {
       title: "Profile",
     },
     path: "/profile",
