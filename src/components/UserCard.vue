@@ -5,6 +5,8 @@ import {
   mdiTestTube,
   mdiAccountStar,
   mdiCodeBraces,
+  mdiAccountOff,
+  mdiAccountCheck,
 } from "@mdi/js";
 import BaseLevel from "@/components/BaseLevel.vue";
 import UserAvatarCurrentUser from "@/components/UserAvatarCurrentUser.vue";
@@ -59,8 +61,7 @@ function getCardStyle(game) {
             <b>{{ mainStore.userName }}</b>
           </h1>
           <p v-if="useSmall" class="text-md md:text-lg">
-            Last seen playing <b>{{ last.game }} {{ last.version }}</b
-            ><br />at
+            Last seen playing <b>{{ last.game }} {{ last.version }}</b> at
             <b>{{ last.arcade }}</b>
           </p>
         </div>
@@ -71,6 +72,12 @@ function getCardStyle(game) {
           <PillTag label="Beta Tester" color="warning" :icon="mdiTestTube" />
           <PillTag label="Veteran" color="success" :icon="mdiAccountStar" />
           <PillTag label="Active Dev" color="info" :icon="mdiCodeBraces" />
+          <PillTag label="Private Profile" color="info" :icon="mdiAccountOff" />
+          <PillTag
+            label="Public Profile"
+            color="success"
+            :icon="mdiAccountCheck"
+          />
         </div>
       </div>
       <div v-if="!useSmall">

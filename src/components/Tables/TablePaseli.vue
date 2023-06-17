@@ -5,7 +5,7 @@ import BaseButtons from "@/components/BaseButtons.vue";
 import BaseButton from "@/components/BaseButton.vue";
 
 const props = defineProps({
-  machines: {
+  transactions: {
     type: Object,
     required: true,
   },
@@ -16,13 +16,13 @@ const perPage = ref(8);
 const currentPage = ref(0);
 
 const itemsPaginated = computed(() =>
-  props.machines.slice(
+  props.transactions.slice(
     perPage.value * currentPage.value,
     perPage.value * (currentPage.value + 1)
   )
 );
 const numPages = computed(() =>
-  Math.ceil(props.machines.length / perPage.value)
+  Math.ceil(props.transactions.length / perPage.value)
 );
 
 const currentPageHuman = computed(() => currentPage.value + 1);
@@ -41,18 +41,18 @@ const pagesList = computed(() => {
   <table>
     <thead>
       <tr>
-        <th>Name</th>
-        <th>PCBID</th>
-        <th>Cabinet?</th>
-        <th>Updates?</th>
+        <th>User</th>
+        <th>Value</th>
+        <th>Game</th>
+        <th>Timestamp</th>
       </tr>
     </thead>
     <tbody>
-      <tr v-for="machine of itemsPaginated" :key="machine.id">
-        <td data-label="Name">{{ machine.name }}</td>
-        <td data-label="PCBID">{{ machine.pcbid }}</td>
-        <td data-label="Cabinet?">{{ machine.cabinet ? "Yes" : "No" }}</td>
-        <td data-label="Updates?">{{ machine.ota ? "Yes" : "No" }}</td>
+      <tr v-for="transaction of itemsPaginated" :key="transaction.id">
+        <td data-label="User">{{ transaction.userId }}</td>
+        <td data-label="Value">{{ transaction.value }}</td>
+        <td data-label="Game">{{ transaction.game }}</td>
+        <td data-label="Timestamp">{{ transaction.timestamp }}</td>
       </tr>
     </tbody>
   </table>

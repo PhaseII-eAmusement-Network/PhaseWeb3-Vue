@@ -81,14 +81,66 @@ const routes = [
     path: "/profiles/:id",
     name: "profile_viewer",
     component: () => import("@/views/Profile/PublicView.vue"),
+    options: {
+      hotReload: true, // disables Hot Reload
+    },
   },
   {
     meta: {
-      title: "Test Arcade",
+      title: "Public Arcades",
+    },
+    path: "/arcades",
+    name: "arcade_list",
+    component: () => import("@/views/ArcadesView.vue"),
+  },
+  {
+    meta: {
+      title: "Arcade Overview",
     },
     path: "/arcade/:id",
     name: "arcade",
-    component: () => import("@/views/ArcadeView.vue"),
+    component: () => import("@/views/Arcade/ArcadeView.vue"),
+  },
+  {
+    meta: {
+      title: "Event Settings",
+    },
+    path: "/arcade/:id/events",
+    name: "arcade_events",
+    component: () => import("@/views/Arcade/EventView.vue"),
+    options: {
+      hotReload: true, // disables Hot Reload
+    },
+  },
+  {
+    meta: {
+      title: "Machine List",
+    },
+    path: "/arcade/:id/machines",
+    name: "arcade_machines",
+    component: () => import("@/views/Arcade/MachinesView.vue"),
+    options: {
+      hotReload: true, // disables Hot Reload
+    },
+  },
+  {
+    meta: {
+      title: "PASELI Transactions",
+    },
+    path: "/arcade/:id/paseli",
+    name: "arcade_paseli",
+    component: () => import("@/views/Arcade/PaseliView.vue"),
+    options: {
+      hotReload: true, // disables Hot Reload
+    },
+  },
+  {
+    meta: {
+      title: "Error",
+    },
+    path: "/:catchAll(.*)",
+    name: "ErrorPage",
+    component: () => import("@/views/ErrorView.vue"),
   },
 ];
 

@@ -281,180 +281,659 @@ export function GetRandomMessage() {
   return selected;
 }
 
-const gameData = [
+export const gameData = [
   {
     id: GameConstants.BEATSTREAM,
     name: "BeatStream",
     icon: null,
     cardBG: null,
+    versions: [
+      {
+        id: VersionConstants.BEATSTREAM,
+        name: "Original",
+      },
+      {
+        id: VersionConstants.BEATSTREAM_2,
+        name: "アニムトライヴ",
+      },
+    ],
   },
   {
     id: GameConstants.BISHI_BASHI,
     name: "BishiBashi",
     icon: null,
     cardBG: null,
+    versions: [
+      {
+        id: VersionConstants.THE_STAR_BISHI_BASHI,
+        name: "The ⭐ Bishi Bashi",
+      },
+    ],
   },
   {
     id: GameConstants.BISHI_BASHI_NEW,
-    name: "BishiBashi Channel",
+    name: "BishiBashi (New)",
     icon: null,
     cardBG: null,
+    skip: true,
+    versions: [
+      {
+        id: VersionConstants.BISHI_BASHI_CHANNEL,
+        name: "Channel",
+      },
+    ],
   },
   {
     id: GameConstants.DANCE_EVOLUTION,
     name: "DanceEvolution",
     icon: null,
     cardBG: null,
+    versions: [
+      {
+        id: VersionConstants.DANCE_EVOLUTION,
+        name: "DanceEvolution",
+      },
+    ],
   },
   {
     id: GameConstants.DANCE_RUSH,
     name: "DanceRush",
     icon: null,
     cardBG: null,
+    versions: [
+      {
+        id: VersionConstants.DANCE_RUSH_STARDOM,
+        name: "STARDOM",
+      },
+    ],
   },
   {
     id: GameConstants.DDR,
     name: "DanceDance Revolution",
     icon: null,
     cardBG: null,
+    versions: [
+      {
+        id: VersionConstants.DDR_1ST_MIX,
+        name: "1ST MIX",
+      },
+      {
+        id: VersionConstants.DDR_2ND_MIX,
+        name: "2ND MIX",
+      },
+      {
+        id: VersionConstants.DDR_3RD_MIX,
+        name: "3RD MIX",
+      },
+      {
+        id: VersionConstants.DDR_4TH_MIX,
+        name: "4TH MIX",
+      },
+      {
+        id: VersionConstants.DDR_5TH_MIX,
+        name: "5TH MIX",
+      },
+      {
+        id: VersionConstants.DDR_MAX,
+        name: "MAX",
+      },
+      {
+        id: VersionConstants.DDR_MAX2,
+        name: "MAX 2",
+      },
+      {
+        id: VersionConstants.DDR_EXTREME,
+        name: "EXTREME",
+      },
+      {
+        id: VersionConstants.DDR_SUPERNOVA,
+        name: "SuperNOVA",
+      },
+      {
+        id: VersionConstants.DDR_SUPERNOVA_2,
+        name: "SuperNOVA 2",
+      },
+      {
+        id: VersionConstants.DDR_X,
+        name: "X",
+      },
+      {
+        id: VersionConstants.DDR_X2,
+        name: "X2",
+      },
+      {
+        id: VersionConstants.DDR_X3_VS_2ND_MIX,
+        name: "X3 vs. 2ND MIX",
+      },
+      {
+        id: VersionConstants.DDR_2013,
+        name: "(2013)",
+      },
+      {
+        id: VersionConstants.DDR_2014,
+        name: "(2014)",
+      },
+      {
+        id: VersionConstants.DDR_ACE,
+        name: "A",
+      },
+      {
+        id: VersionConstants.DDR_A20,
+        name: "A20",
+      },
+      {
+        id: VersionConstants.DDR_A20_PLUS,
+        name: "A20 PLUS",
+      },
+      {
+        id: VersionConstants.DDR_A3,
+        name: "A3",
+      },
+    ],
   },
   {
     id: GameConstants.DDRCLASS,
     name: "Classic DDR",
     icon: "/assets/icon/ddr.png",
     cardBG: "/assets/card/ddr.png",
+    versions: [
+      {
+        id: VersionConstants.DDR_1ST_MIX,
+        name: "1ST MIX",
+      },
+      {
+        id: VersionConstants.DDR_2ND_MIX,
+        name: "2ND MIX",
+      },
+      {
+        id: VersionConstants.DDR_3RD_MIX,
+        name: "3RD MIX",
+      },
+      {
+        id: VersionConstants.DDR_4TH_MIX,
+        name: "4TH MIX",
+      },
+      {
+        id: VersionConstants.DDR_5TH_MIX,
+        name: "5TH MIX",
+      },
+      {
+        id: VersionConstants.DDR_MAX,
+        name: "MAX",
+      },
+      {
+        id: VersionConstants.DDR_MAX2,
+        name: "MAX 2",
+      },
+      {
+        id: VersionConstants.DDR_EXTREME,
+        name: "EXTREME",
+      },
+      {
+        id: VersionConstants.DDR_SUPERNOVA,
+        name: "SuperNOVA",
+      },
+      {
+        id: VersionConstants.DDR_SUPERNOVA_2,
+        name: "SuperNOVA 2",
+      },
+    ],
   },
   {
     id: GameConstants.DDROMNI,
     name: "DDR OmniMIX",
     icon: "/assets/icon/ddr.png",
     cardBG: "/assets/card/ddr.png",
+    versions: [
+      {
+        id: VersionConstants.DDR_1ST_MIX,
+        name: "1ST MIX",
+      },
+      {
+        id: VersionConstants.DDR_2ND_MIX,
+        name: "2ND MIX",
+      },
+      {
+        id: VersionConstants.DDR_3RD_MIX,
+        name: "3RD MIX",
+      },
+      {
+        id: VersionConstants.DDR_4TH_MIX,
+        name: "4TH MIX",
+      },
+      {
+        id: VersionConstants.DDR_5TH_MIX,
+        name: "5TH MIX",
+      },
+      {
+        id: VersionConstants.DDR_MAX,
+        name: "MAX",
+      },
+      {
+        id: VersionConstants.DDR_MAX2,
+        name: "MAX 2",
+      },
+      {
+        id: VersionConstants.DDR_EXTREME,
+        name: "EXTREME",
+      },
+      {
+        id: VersionConstants.DDR_SUPERNOVA,
+        name: "SuperNOVA",
+      },
+      {
+        id: VersionConstants.DDR_SUPERNOVA_2,
+        name: "SuperNOVA 2",
+      },
+      {
+        id: VersionConstants.DDR_X,
+        name: "X",
+      },
+      {
+        id: VersionConstants.DDR_X2,
+        name: "X2",
+      },
+      {
+        id: VersionConstants.DDR_X3_VS_2ND_MIX,
+        name: "X3 vs. 2ND MIX",
+      },
+      {
+        id: VersionConstants.DDR_2013,
+        name: "(2013)",
+      },
+      {
+        id: VersionConstants.DDR_2014,
+        name: "(2014)",
+      },
+      {
+        id: VersionConstants.DDR_ACE,
+        name: "A",
+      },
+      {
+        id: VersionConstants.DDR_A20,
+        name: "A20",
+      },
+      {
+        id: VersionConstants.DDR_A20_PLUS,
+        name: "OmniMIX (A20 PLUS)",
+      },
+    ],
   },
   {
     id: GameConstants.DRUMMANIA,
     name: "DRUMMANIA",
     icon: null,
     cardBG: null,
+    versions: [
+      {
+        id: VersionConstants.DRUMMANIA_1ST,
+        name: "1ST MIX",
+      },
+      {
+        id: VersionConstants.DRUMMANIA_2ND,
+        name: "2ND MIX",
+      },
+      {
+        id: VersionConstants.DRUMMANIA_3RD,
+        name: "3RD MIX",
+      },
+      {
+        id: VersionConstants.DRUMMANIA_4TH,
+        name: "4TH MIX",
+      },
+      {
+        id: VersionConstants.DRUMMANIA_5TH,
+        name: "5TH MIX",
+      },
+      {
+        id: VersionConstants.DRUMMANIA_6TH,
+        name: "6TH MIX",
+      },
+      {
+        id: VersionConstants.DRUMMANIA_7TH,
+        name: "7TH MIX",
+      },
+      {
+        id: VersionConstants.DRUMMANIA_8TH,
+        name: "8TH MIX",
+      },
+      {
+        id: VersionConstants.DRUMMANIA_9TH,
+        name: "9TH MIX",
+      },
+      {
+        id: VersionConstants.DRUMMANIA_10TH,
+        name: "10TH MIX",
+      },
+      {
+        id: VersionConstants.DRUMMANIA_V,
+        name: "V",
+      },
+      {
+        id: VersionConstants.DRUMMANIA_V2,
+        name: "V2",
+      },
+      {
+        id: VersionConstants.DRUMMANIA_V3,
+        name: "V3",
+      },
+      {
+        id: VersionConstants.DRUMMANIA_V4,
+        name: "V4",
+      },
+      {
+        id: VersionConstants.DRUMMANIA_V5,
+        name: "V5",
+      },
+      {
+        id: VersionConstants.DRUMMANIA_V6,
+        name: "V6",
+      },
+      {
+        id: VersionConstants.DRUMMANIA_V7,
+        name: "V7",
+      },
+      {
+        id: VersionConstants.DRUMMANIA_V8,
+        name: "V8",
+      },
+    ],
   },
   {
     id: GameConstants.EEMALL,
     name: "eeMall",
     icon: null,
     cardBG: null,
+    skip: true,
+    versions: [
+      {
+        id: VersionConstants.EEMALL,
+        name: "1st Avenue",
+      },
+      {
+        id: VersionConstants.EEMALL_2ND,
+        name: "2nd Avenue",
+      },
+    ],
   },
   {
     id: GameConstants.FUTURETOMTOM,
     name: "Future Tom Tom",
     icon: null,
     cardBG: null,
+    versions: [
+      {
+        id: VersionConstants.FUTURETOMTOM,
+        name: "Ver 1",
+      },
+      {
+        id: VersionConstants.FUTURETOMTOM_VER2,
+        name: "Ver 2",
+      },
+    ],
   },
   {
     id: GameConstants.GITADORA_DM,
     name: "GITADORA (Drums)",
     icon: null,
     cardBG: null,
+    versions: [
+      {
+        id: VersionConstants,
+        name: "",
+      },
+    ],
   },
   {
     id: GameConstants.GITADORA_GF,
     name: "GITADORA (Guitar)",
     icon: null,
     cardBG: null,
+    versions: [
+      {
+        id: VersionConstants,
+        name: "",
+      },
+    ],
   },
   {
     id: GameConstants.GUITARFREAKS,
     name: "GUITAR FREAKS",
     icon: null,
     cardBG: null,
+    versions: [
+      {
+        id: VersionConstants,
+        name: "",
+      },
+    ],
   },
   {
     id: GameConstants.IIDX,
     name: "beatmaniaIIDX",
     icon: "/assets/icon/iidx.png",
     cardBG: "/assets/card/iidx.png",
+    versions: [
+      {
+        id: VersionConstants,
+        name: "",
+      },
+    ],
   },
   {
     id: GameConstants.IIDXCLASS,
     name: "Classic IIDX",
     icon: "/assets/icon/iidx.png",
     cardBG: "/assets/card/iidx.png",
+    versions: [
+      {
+        id: VersionConstants,
+        name: "",
+      },
+    ],
   },
   {
     id: GameConstants.JUBEAT,
-    name: "JUBEAT",
+    name: "jubeat",
     icon: null,
     cardBG: null,
+    versions: [
+      {
+        id: VersionConstants,
+        name: "",
+      },
+    ],
   },
   {
     id: GameConstants.LOVEPLUS,
     name: "LovePlus",
     icon: null,
     cardBG: null,
+    skip: true,
+    versions: [
+      {
+        id: VersionConstants.LOVEPLUS_ARCADE,
+        name: "Medal",
+      },
+      {
+        id: VersionConstants.LOVEPLUS_CC,
+        name: "Colorful Clip",
+      },
+    ],
   },
   {
     id: GameConstants.MGA,
     name: "Metal Gear Arcade",
     icon: null,
     cardBG: null,
+    skip: true,
+    versions: [
+      {
+        id: VersionConstants,
+        name: "",
+      },
+    ],
   },
   {
     id: GameConstants.MUSECA,
     name: "Museca",
     icon: null,
     cardBG: null,
+    versions: [
+      {
+        id: VersionConstants,
+        name: "",
+      },
+    ],
   },
   {
     id: GameConstants.NOSTALGIA,
     name: "Nostalgia",
     icon: null,
     cardBG: null,
+    versions: [
+      {
+        id: VersionConstants,
+        name: "",
+      },
+    ],
   },
   {
     id: GameConstants.OTOMEDIUS,
     name: "Otomedius",
     icon: null,
     cardBG: null,
+    skip: true,
+    versions: [
+      {
+        id: VersionConstants,
+        name: "",
+      },
+    ],
   },
   {
     id: GameConstants.OTOCA,
     name: "Otoca d' Or",
     icon: null,
     cardBG: null,
+    skip: true,
+    versions: [
+      {
+        id: VersionConstants,
+        name: "",
+      },
+    ],
   },
   {
     id: GameConstants.POPN_HELLO,
     name: "Hello! Pop'n Music",
     icon: "/assets/icon/popn.png",
     cardBG: "/assets/card/popn.png",
+    skip: true,
+    versions: [
+      {
+        id: VersionConstants,
+        name: "",
+      },
+    ],
   },
   {
     id: GameConstants.POPN_MUSIC,
     name: "pop'n music",
     icon: "/assets/icon/popn.png",
     cardBG: "/assets/card/popn.png",
+    versions: [
+      {
+        id: VersionConstants,
+        name: "",
+      },
+    ],
   },
   {
     id: GameConstants.QMA,
     name: "Quiz Magic Academy",
     icon: null,
     cardBG: null,
+    skip: true,
+    versions: [
+      {
+        id: VersionConstants,
+        name: "",
+      },
+    ],
   },
   {
     id: GameConstants.REFLEC_BEAT,
     name: "ReflecBeat",
     icon: null,
     cardBG: null,
+    versions: [
+      {
+        id: VersionConstants,
+        name: "",
+      },
+    ],
   },
   {
     id: GameConstants.ROAD_FIGHTERS,
     name: "Road Fighters",
     icon: null,
     cardBG: null,
+    skip: true,
+    versions: [
+      {
+        id: VersionConstants,
+        name: "",
+      },
+    ],
   },
   {
     id: GameConstants.SDVX,
     name: "SOUND VOLTEX",
     icon: null,
     cardBG: null,
+    versions: [
+      {
+        id: VersionConstants,
+        name: "",
+      },
+    ],
+  },
+];
+
+export const arcadeList = [
+  {
+    id: 0,
+    name: "Speakeasy Smashcade",
+    area: "US-IL",
+    image:
+      "https://scontent-ord5-2.xx.fbcdn.net/v/t39.30808-6/345607186_2854756104656166_4038613677498709113_n.png?stp=dst-jpg&_nc_cat=103&ccb=1-7&_nc_sid=8631f5&_nc_ohc=ps88GQTw7pYAX_kG-ZY&_nc_ht=scontent-ord5-2.xx&oh=00_AfCeXwmodvTitMUxzk9EDGb-Rl2lGN9PdLFYQPPjD-iphw&oe=6492362F",
+    address: null,
+    public: false,
+    beta: true,
+    admins: ["Trmazi", "SpeakEZ", "kohai"],
+  },
+  {
+    id: 1,
+    name: "Boss Battle Games",
+    area: "US-IN",
+    image:
+      "https://scontent-ord5-2.xx.fbcdn.net/v/t1.6435-9/118871039_2818450415068886_7737385160957713953_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=8bfeb9&_nc_ohc=W8tEpuL3C14AX8XL09Z&_nc_ht=scontent-ord5-2.xx&oh=00_AfAneLjV1pukiSgE7S0Q6e-g6VFYEHSyFVk-kQh5elofJw&oe=64B49BD7",
+    address: "6020 E. 82nd St, Indianapolis, Indiana 46250",
+    public: true,
+    beta: true,
+    admins: ["Trmazi", "Pat", "Jeff"],
+  },
+  {
+    id: 2,
+    name: "BladeCN",
+    area: "UK",
+    image:
+      "https://media.discordapp.net/attachments/717595745275871232/1119697819020824616/image.png",
+    address: "6020 E. 82nd St",
+    public: true,
+    beta: false,
+    admins: ["blade"],
   },
 ];
 

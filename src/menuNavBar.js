@@ -4,6 +4,7 @@ import {
   mdiLogout,
   mdiServerNetwork,
   mdiBrushOutline,
+  mdiFlagCheckered,
 } from "@mdi/js";
 
 export default [
@@ -26,6 +27,11 @@ export default [
         to: "/profile/integrate",
       },
     ],
+  },
+  {
+    to: "/goals",
+    icon: mdiFlagCheckered,
+    label: "Goals",
   },
   {
     icon: mdiCogs,

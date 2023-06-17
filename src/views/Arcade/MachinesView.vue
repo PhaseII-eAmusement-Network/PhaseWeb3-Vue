@@ -1,5 +1,6 @@
 <script setup>
-import { mdiStoreOutline, mdiGamepad } from "@mdi/js";
+import { useRoute } from "vue-router";
+import { mdiGamepad } from "@mdi/js";
 import SectionMain from "@/components/SectionMain.vue";
 import TableMachines from "@/components/Tables/TableMachine.vue";
 import CardBox from "@/components/CardBox.vue";
@@ -7,6 +8,12 @@ import LayoutAuthenticated from "@/layouts/LayoutAuthenticated.vue";
 import SectionTitleLine from "@/components/SectionTitleLine.vue";
 import ArcadeCard from "@/components/ArcadeCard.vue";
 import CardBoxComponentEmpty from "@/components/CardBoxComponentEmpty.vue";
+import { arcadeList } from "@/constants";
+
+const $route = useRoute();
+const arcadeID = parseInt($route.params.id);
+
+const thisArcade = arcadeList.find((x) => x.id === arcadeID);
 
 const machineList = [
   {
@@ -29,16 +36,13 @@ const machineList = [
 <template>
   <LayoutAuthenticated>
     <SectionMain>
-      <SectionTitleLine :icon="mdiStoreOutline" title="Manage Arcade" main />
-      <ArcadeCard class="mb-6" />
+      <ArcadeCard class="mb-6" :arcade-data="thisArcade" />
+      <SectionTitleLine :icon="mdiGamepad" title="Machines" main />
 
-      <SectionTitleLine :icon="mdiGamepad" title="Machines" />
       <CardBox class="mb-6" has-table>
         <TableMachines v-if="machineList.length" :machines="machineList" />
         <CardBoxComponentEmpty v-if="!machineList.length" />
       </CardBox>
-
-      <SectionTitleLine :icon="mdiGamepad" title="Game Settings" />
     </SectionMain>
   </LayoutAuthenticated>
 </template>

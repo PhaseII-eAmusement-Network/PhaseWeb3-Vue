@@ -52,28 +52,28 @@ const submitPass = () => {
         <PillTag color="info" label="Discord Notifications" class="mb-4" />
         <div class="grid gap-4 grid-cols-2 md:grid-cols-4">
           <FormCheckRadio
-            name="scorecards"
+            name="goals"
             :model-value="true"
             type="switch"
             label="Goal Alerts"
             class="outline outline-gray-400 rounded-xl outline-1 text-sm md:text-md p-2"
           />
           <FormCheckRadio
-            name="scorecards"
+            name="tournaments"
             :model-value="true"
             type="switch"
             label="Tournament Status"
             class="outline outline-gray-400 rounded-xl outline-1 text-sm md:text-md p-2"
           />
           <FormCheckRadio
-            name="scorecards"
+            name="paseli"
             :model-value="true"
             type="switch"
             label="PASELI Transactions"
             class="outline outline-gray-400 rounded-xl outline-1 text-sm md:text-md p-2"
           />
           <FormCheckRadio
-            name="scorecards"
+            name="system"
             :model-value="true"
             type="switch"
             label="System Alerts"
@@ -117,6 +117,13 @@ const submitPass = () => {
               required
               autocomplete="pin"
             />
+          </FormField>
+
+          <FormField
+            label="Public Profile"
+            help="Allow your profile to be seen publicly"
+          >
+            <FormCheckRadio name="system" :model-value="true" type="switch" />
           </FormField>
 
           <template #footer>

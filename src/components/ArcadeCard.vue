@@ -4,6 +4,18 @@ import BaseLevel from "@/components/BaseLevel.vue";
 import CardBox from "@/components/CardBox.vue";
 import PillTag from "@/components/PillTag.vue";
 
+defineProps({
+  useSmall: {
+    type: Boolean,
+    required: false,
+    default: true,
+  },
+  arcadeData: {
+    type: Object,
+    required: true,
+  },
+});
+
 function getCardStyle(game) {
   if (game !== null) {
     return `
@@ -13,25 +25,32 @@ function getCardStyle(game) {
     `;
   }
 }
-
-const arcadeData = {
-  id: 0,
-  name: "Test Arcade",
-  beta: true,
-  public: true,
-  cover:
-    "https://nianticlabs.com/img/posts/smb-spotlight-boss-battle-games.jpg",
-};
 </script>
 
 <template>
-  <CardBox :style="getCardStyle(arcadeData.cover)">
+  <CardBox :style="getCardStyle(arcadeData.image)">
     <BaseLevel
       type="justify-center"
       class="bg-white dark:bg-slate-900/90 rounded-2xl p-3"
     >
       <div class="space-y-3 text-center">
-        <h1 class="text-2xl lg:text-3xl">{{ arcadeData.name }}</h1>
+        <h1 class="text-2xl lg:text-3xl font-bold">{{ arcadeData.name }}</h1>
+        <h2 class="text-xl md:text-2xl font-bold">{{ arcadeData.area }}</h2>
+        <hr class="border-t border-1 w-full" />
+        <p class="text-lg">
+          Managed by
+          <span
+            v-for="(user, index) in arcadeData.admins"
+            :key="index"
+            class="font-bold"
+          >
+            <span v-if="index === 0">{{ user }}</span>
+            <span v-else-if="index >= arcadeData.admins.length - 1"
+              >, <span class="font-normal">and</span> {{ user }}.</span
+            >
+            <span v-else>, {{ user }}</span>
+          </span>
+        </p>
         <div class="flex flex-wrap gap-4 place-content-center">
           <PillTag
             v-if="arcadeData.beta"
