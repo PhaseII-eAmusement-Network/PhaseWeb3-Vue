@@ -7,6 +7,7 @@ import {
   mdiChartBellCurveCumulative,
   mdiGamepad,
   mdiTestTube,
+  mdiFlagCheckered,
 } from "@mdi/js";
 import UserCard from "@/components/UserCard.vue";
 import * as chartConfig from "@/components/Charts/chart.config.js";
@@ -20,6 +21,7 @@ import LayoutAuthenticated from "@/layouts/LayoutAuthenticated.vue";
 import SectionTitleLine from "@/components/SectionTitleLine.vue";
 import PillTag from "@/components/PillTag.vue";
 import TableRivalsFull from "@/components/Tables/TableRivalsFull.vue";
+import TableGoals from "@/components/Tables/TableGoals.vue";
 import NotificationBar from "@/components/NotificationBar.vue";
 import { GameConstants } from "@/constants";
 
@@ -32,6 +34,23 @@ const fillChartData = () => {
 onMounted(() => {
   fillChartData();
 });
+
+const setGoals = [
+  {
+    game: "DanceDance Revolution",
+    type: "Rank",
+    goal: "Top 10 Ranking",
+    status: "#10 of 132",
+    deadline: "3 Weeks",
+  },
+  {
+    game: "pop'n music",
+    type: "Plays",
+    goal: "100 Plays",
+    status: "2 Plays Since Creation",
+    deadline: "1 Week",
+  },
+];
 </script>
 
 <template>
@@ -105,6 +124,13 @@ onMounted(() => {
           profile-name="TRMAZI"
           type="ranking"
         />
+      </div>
+
+      <SectionTitleLine :icon="mdiFlagCheckered" title="Active Goals" main />
+      <div class="mb-6">
+        <CardBox has-table>
+          <TableGoals :goals="setGoals" />
+        </CardBox>
       </div>
 
       <SectionTitleLine

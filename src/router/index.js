@@ -76,6 +76,14 @@ const routes = [
   },
   {
     meta: {
+      title: "Goals",
+    },
+    path: "/goals",
+    name: "profile_goals",
+    component: () => import("@/views/Profile/GoalsView.vue"),
+  },
+  {
+    meta: {
       title: "View Profile",
     },
     path: "/profiles/:id",

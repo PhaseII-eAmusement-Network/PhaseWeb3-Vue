@@ -19,6 +19,11 @@ defineProps({
     required: false,
     default: false,
   },
+  evenSmaller: {
+    type: Boolean,
+    required: false,
+    default: false,
+  },
 });
 
 import { GetRandomMessage } from "@/constants";
@@ -60,12 +65,13 @@ function getCardStyle(game) {
           <h1 v-if="useSmall" class="text-3xl md:text-4xl">
             <b>{{ mainStore.userName }}</b>
           </h1>
-          <p v-if="useSmall" class="text-md md:text-lg">
+          <p v-if="useSmall && !evenSmaller" class="text-md md:text-lg">
             Last seen playing <b>{{ last.game }} {{ last.version }}</b> at
             <b>{{ last.arcade }}</b>
           </p>
         </div>
         <div
+          v-if="!evenSmaller"
           class="md:grid md:grid-flow-col md:auto-cols-max md:grid-rows-2 flex flex-wrap gap-4 md:place-content-start place-content-center"
         >
           <PillTag label="System Admin" color="danger" :icon="mdiSecurity" />

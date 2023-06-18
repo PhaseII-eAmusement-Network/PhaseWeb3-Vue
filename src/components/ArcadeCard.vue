@@ -1,10 +1,11 @@
 <script setup>
 import { mdiTestTube, mdiStoreOutline, mdiHomeOutline } from "@mdi/js";
+import { getArea } from "@/constants/area";
 import BaseLevel from "@/components/BaseLevel.vue";
 import CardBox from "@/components/CardBox.vue";
 import PillTag from "@/components/PillTag.vue";
 
-defineProps({
+const props = defineProps({
   useSmall: {
     type: Boolean,
     required: false,
@@ -25,6 +26,8 @@ function getCardStyle(game) {
     `;
   }
 }
+
+const areaData = getArea(props.arcadeData.area);
 </script>
 
 <template>
@@ -35,7 +38,14 @@ function getCardStyle(game) {
     >
       <div class="space-y-3 text-center">
         <h1 class="text-2xl lg:text-3xl font-bold">{{ arcadeData.name }}</h1>
-        <h2 class="text-xl md:text-2xl font-bold">{{ arcadeData.area }}</h2>
+        <div class="flex gap-2 justify-center items-center">
+          <h2 class="text-2xl md:text-3xl font-bold lg:hidden">
+            {{ areaData.flag }}
+          </h2>
+          <h2 class="text-xl md:text-2xl font-bold">
+            {{ areaData.name }}
+          </h2>
+        </div>
         <hr class="border-t border-1 w-full" />
         <p class="text-lg">
           Managed by

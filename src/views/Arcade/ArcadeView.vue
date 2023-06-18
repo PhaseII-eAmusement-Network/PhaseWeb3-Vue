@@ -6,12 +6,15 @@ import LayoutAuthenticated from "@/layouts/LayoutAuthenticated.vue";
 import SectionTitleLine from "@/components/SectionTitleLine.vue";
 import ArcadeCard from "@/components/ArcadeCard.vue";
 import CardBox from "@/components/CardBox.vue";
+import FormField from "@/components/FormField.vue";
 import FormFilePicker from "@/components/FormFilePicker.vue";
 import FormCheckRadio from "@/components/FormCheckRadio.vue";
+import FormControl from "@/components/FormControl.vue";
 import PillTag from "@/components/PillTag.vue";
 import BaseButton from "@/components/BaseButton.vue";
 import CardBoxWidget from "@/components/CardBoxWidget.vue";
 import { arcadeList } from "@/constants";
+import { listCodes } from "@/constants/area";
 
 const $route = useRoute();
 const arcadeID = parseInt($route.params.id);
@@ -31,24 +34,32 @@ const thisArcade = arcadeList.find((x) => x.id === arcadeID);
         <div class="grid gap-4 grid-cols-2 md:grid-cols-4 mb-4">
           <FormCheckRadio
             :model-value="thisArcade.public"
+            :input-value="thisArcade.public"
+            name="public"
             type="switch"
             label="Public Arcade"
             class="outline outline-gray-400 rounded-xl outline-1 text-sm md:text-md p-2"
           />
           <FormCheckRadio
             :model-value="thisArcade.paseli"
+            :input-value="thisArcade.paseli"
+            name="paseli"
             type="switch"
-            label="PASELI Enabled"
+            label="PASELI"
             class="outline outline-gray-400 rounded-xl outline-1 text-sm md:text-md p-2"
           />
           <FormCheckRadio
-            :model-value="thisArcade.paseli_infinite"
+            :model-value="thisArcade.infinite_paseli"
+            :input-value="thisArcade.infinite_paseli"
+            name="infinite_paseli"
             type="switch"
             label="Infinite PASELI"
             class="outline outline-gray-400 rounded-xl outline-1 text-sm md:text-md p-2"
           />
           <FormCheckRadio
             :model-value="thisArcade.maintenance"
+            :input-value="thisArcade.maintenance"
+            name="maintenance"
             type="switch"
             label="Maintenance Mode"
             class="outline outline-gray-400 rounded-xl outline-1 text-sm md:text-md p-2"
@@ -76,7 +87,46 @@ const thisArcade = arcadeList.find((x) => x.id === arcadeID);
           <p class="pb-1 dark:text-white/50">
             NSFW = BAN. Children use this server. 60MB max.
           </p>
-          <FormFilePicker label="Upload" accept="image/*" />
+          <FormFilePicker label="Upload" name="upload" accept="image/*" />
+
+          <BaseButton
+            :small="false"
+            color="success"
+            class="mt-4"
+            label="Save"
+          />
+        </CardBox>
+
+        <CardBox>
+          <h1 class="text-lg md:text-xl mb-2">Location Settings</h1>
+
+          <FormField label="Area" help="Set your arcade's area.">
+            <FormControl
+              v-model="thisArcade.area"
+              name="area"
+              :options="listCodes()"
+            />
+          </FormField>
+
+          <FormField label="Address" help="Set your arcade's address.">
+            <FormControl
+              v-model="thisArcade.address"
+              name="address"
+              placeholder="No address"
+            />
+          </FormField>
+
+          <FormField
+            label="Show Address"
+            help="Allow your arcade's address to be seen publicly."
+          >
+            <FormCheckRadio
+              :model-value="thisArcade.show_address"
+              :input-value="thisArcade.show_address"
+              name="show_address"
+              type="switch"
+            />
+          </FormField>
 
           <BaseButton
             :small="false"
