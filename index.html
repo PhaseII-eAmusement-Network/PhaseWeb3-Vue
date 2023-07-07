@@ -7,16 +7,17 @@
     <link rel="icon" href="/favicon.png">
     <title>PhaseWeb 3</title>
 
-    <script type="module" crossorigin src="/assets/index.6ee415e0.js"></script>
-    <link rel="stylesheet" href="/assets/index.b25b5e2d.css">
+    <script type="module" crossorigin src="/assets/index.7d8b1dcc.js"></script>
+    <link rel="stylesheet" href="/assets/index.a9f4149c.css">
   </head>
-  <body>
+  <body class="scroll-smooth">
     <noscript>
       <strong>We're sorry but this app doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
     </noscript>
     <div id="app"></div>
     
     <!-- built files will be auto injected -->
+    <audio id="audio" src="/assets/sounds/konami.mp3" class="hidden" />
   </body>
 
   <style>
@@ -30,4 +31,27 @@
       }
     }
   </style>
+
+  <script>
+    var pattern = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
+  var current = 0;
+
+  var keyHandler = function (event) {
+    if (pattern.indexOf(event.key) < 0 || event.key !== pattern[current]) {
+      current = 0;
+      return;
+    }
+
+    current++;
+
+    if (pattern.length === current) {
+      current = 0;
+      document.getElementById('audio').play();
+      window.alert('+30 lives.');
+    }
+
+  };
+
+  document.addEventListener('keydown', keyHandler, false);
+  </script>
 </html>
