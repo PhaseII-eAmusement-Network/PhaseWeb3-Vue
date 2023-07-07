@@ -17,7 +17,7 @@ import PillTag from "@/components/PillTag.vue";
 <template>
   <LayoutAuthenticated>
     <SectionMain>
-      <UserCard class="mb-6" use-small />
+      <UserCard class="mb-6" use-small even-smaller />
       <SectionTitleLine
         :icon="mdiServerNetwork"
         title="Server Integrations"

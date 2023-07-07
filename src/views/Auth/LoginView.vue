@@ -39,10 +39,10 @@ const submit = () => {
             <p class="text-sm text-gray-700 dark:text-white/75">
               Spinnin' since 2021
             </p>
-            <hr class="border-t border-1 my-1 w-full" />
+            <hr class="border-r-1 my-1 w-full" />
             <p class="text-lg relative bottom-0">Please log in.</p>
           </div>
-          <div class="md:border-r md:border-1"></div>
+          <div class="md:border-r" />
           <div>
             <FormField label="Username">
               <FormControl
@@ -74,7 +74,7 @@ const submit = () => {
               <BaseButton label="Log In" color="success" @click="submit()" />
             </div>
 
-            <hr class="border-t border-1 my-4 w-full" />
+            <hr class="border-t my-4 w-full" />
 
             <div class="flex flex-col gap-2 my-4">
               <h2>Not Registered?</h2>

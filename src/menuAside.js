@@ -12,13 +12,13 @@ var sortedMenu = [];
 for (const game of gameData) {
   if (!game.skip) {
     sortedMenu.push({
-      label: game.name,
+      label: game.shortName ? game.shortName : game.name,
       menu: [
-        { label: "Overview", to: `/${game.id}` },
-        { label: "Network Records", to: `/${game.id}/records/all` },
-        { label: "Network Scores", to: `/${game.id}/scores/all` },
-        { label: "Personal Records", to: `/${game.id}/records/personal` },
-        { label: "Personal Scores", to: `/${game.id}/scores/personal` },
+        { label: "Overview", to: `/games/${game.id}` },
+        { label: "Network Records", to: `/games/${game.id}/records/all` },
+        { label: "Network Scores", to: `/games/${game.id}/scores/all` },
+        { label: "Personal Records", to: `/games/${game.id}/records/personal` },
+        { label: "Personal Scores", to: `/games/${game.id}/scores/personal` },
       ],
     });
   }

@@ -194,8 +194,8 @@ const setGoals = [
             </p>
           </div>
 
-          <template v-if="createGoal()" #footer>
-            <div class="space-x-2">
+          <template #footer>
+            <div v-if="formData.deadline !== '...'" class="space-x-2">
               <BaseButton
                 type="submit"
                 color="success"

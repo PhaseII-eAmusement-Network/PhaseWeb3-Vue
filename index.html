@@ -8,13 +8,14 @@
     <title>PhaseWeb 3</title>
 
   </head>
-  <body>
+  <body class="scroll-smooth">
     <noscript>
       <strong>We're sorry but this app doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
     </noscript>
     <div id="app"></div>
     <script type="module" src="/src/main.js"></script>
     <!-- built files will be auto injected -->
+    <audio id="audio" src="/assets/sounds/konami.mp3" class="hidden" />
   </body>
 
   <style>
@@ -28,4 +29,27 @@
       }
     }
   </style>
+
+  <script>
+    var pattern = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
+  var current = 0;
+
+  var keyHandler = function (event) {
+    if (pattern.indexOf(event.key) < 0 || event.key !== pattern[current]) {
+      current = 0;
+      return;
+    }
+
+    current++;
+
+    if (pattern.length === current) {
+      current = 0;
+      document.getElementById('audio').play();
+      window.alert('+30 lives.');
+    }
+
+  };
+
+  document.addEventListener('keydown', keyHandler, false);
+  </script>
 </html>

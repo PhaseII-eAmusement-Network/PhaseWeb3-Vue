@@ -12,7 +12,7 @@ import FormControl from "@/components/FormControl.vue";
 <template>
   <LayoutAuthenticated>
     <SectionMain>
-      <UserCard class="mb-6" use-small />
+      <UserCard class="mb-6" use-small even-smaller />
       <SectionTitleLine
         :icon="mdiAccountTieHat"
         title="Profile Customizations"
@@ -21,7 +21,7 @@ import FormControl from "@/components/FormControl.vue";
 
       <div>
         <CardBox>
-          <div class="grid grid-cols-3 gap-6">
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
             <div>
               <h2 class="text-lg mb-2">Avatar Source</h2>
               <FormControl

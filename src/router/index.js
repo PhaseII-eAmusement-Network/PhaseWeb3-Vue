@@ -144,6 +144,28 @@ const routes = [
   },
   {
     meta: {
+      title: "Game Overview",
+    },
+    path: "/games/:id/",
+    name: "game_page",
+    component: () => import("@/views/Game/GameView.vue"),
+    options: {
+      hotReload: true, // disables Hot Reload
+    },
+  },
+  {
+    meta: {
+      title: "View Profile",
+    },
+    path: "/games/:game/profiles/:userID/",
+    name: "game_profile",
+    component: () => import("@/views/Game/PlayerView.vue"),
+    options: {
+      hotReload: true, // disables Hot Reload
+    },
+  },
+  {
+    meta: {
       title: "Error",
     },
     path: "/:catchAll(.*)",

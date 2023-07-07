@@ -1,7 +1,7 @@
 <script setup>
 import { mdiForwardburger, mdiBackburger, mdiMenu } from "@mdi/js";
 import { ref } from "vue";
-import { useRouter } from "vue-router";
+import { useRouter, useRoute } from "vue-router";
 import menuAside from "@/menuAside.js";
 import menuNavBar from "@/menuNavBar.js";
 import { useMainStore } from "@/stores/main.js";
@@ -24,6 +24,7 @@ const layoutAsidePadding = "xl:pl-60";
 const styleStore = useStyleStore();
 
 const router = useRouter();
+const route = useRoute();
 
 const isAsideMobileExpanded = ref(false);
 const isAsideLgActive = ref(false);
@@ -42,6 +43,7 @@ const menuClick = (event, item) => {
 
 <template>
   <div
+    :key="route.fullPath"
     :class="{
       dark: styleStore.darkMode,
       'overflow-hidden lg:overflow-visible': isAsideMobileExpanded,
@@ -49,7 +51,7 @@ const menuClick = (event, item) => {
   >
     <div
       :class="[layoutAsidePadding, { 'ml-60 lg:ml-0': isAsideMobileExpanded }]"
-      class="pt-14 min-h-screen w-screen transition-position lg:w-auto bg-gray-50 dark:bg-slate-800 dark:text-slate-100"
+      class="pt-14 min-h-screen w-screen lg:w-auto bg-gray-50 dark:bg-slate-800 dark:text-slate-100"
     >
       <NavBar
         :menu="menuNavBar"
@@ -83,8 +85,53 @@ const menuClick = (event, item) => {
         @menu-click="menuClick"
         @aside-lg-close-click="isAsideLgActive = false"
       />
-      <slot />
-      <FooterBar />
+      <div class="animated animatedFadeInUp fadeInUp">
+        <slot />
+        <FooterBar />
+      </div>
     </div>
   </div>
 </template>
+
+<style>
+/* Animation */
+
+@keyframes fadeInUp {
+  from {
+    transform: translate3d(0, 10px, 0);
+  }
+
+  to {
+    transform: translate3d(0, 0, 0);
+    opacity: 1;
+  }
+}
+
+@-webkit-keyframes fadeInUp {
+  from {
+    transform: translate3d(0, 10px, 0);
+  }
+
+  to {
+    transform: translate3d(0, 0, 0);
+    opacity: 1;
+  }
+}
+
+.animated {
+  animation-duration: 0.7s;
+  animation-fill-mode: both;
+  -webkit-animation-duration: 0.7s;
+  -webkit-animation-fill-mode: both;
+}
+
+.animatedFadeInUp {
+  opacity: 0;
+}
+
+.fadeInUp {
+  opacity: 0;
+  animation-name: fadeInUp;
+  -webkit-animation-name: fadeInUp;
+}
+</style>

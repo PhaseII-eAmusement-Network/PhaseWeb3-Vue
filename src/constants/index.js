@@ -284,39 +284,39 @@ export function GetRandomMessage() {
 const GITADORA_VERSION_DATA = [
   {
     id: VersionConstants.GITADORA,
-    name: "Original",
+    label: "Original",
   },
   {
     id: VersionConstants.GITADORA_OVERDRIVE,
-    name: "OverDrive",
+    label: "OverDrive",
   },
   {
     id: VersionConstants.GITADORA_TRIBOOST,
-    name: "Tri-Boost",
+    label: "Tri-Boost",
   },
   {
     id: VersionConstants.GITADORA_TRIBOOST_RE_EVOLVE,
-    name: "Tri-Boost RE:Evolve",
+    label: "Tri-Boost RE:Evolve",
   },
   {
     id: VersionConstants.GITADORA_MATIXX,
-    name: "Matixx",
+    label: "Matixx",
   },
   {
     id: VersionConstants.GITADORA_EXCHAIN,
-    name: "EXCHAIN",
+    label: "EXCHAIN",
   },
   {
     id: VersionConstants.GITADORA_NEXTAGE,
-    name: "Nex+Age",
+    label: "Nex+Age",
   },
   {
     id: VersionConstants.GITADORA_HIGH_VOLTAGE,
-    name: "HIGH-VOLTAGE",
+    label: "HIGH-VOLTAGE",
   },
   {
     id: VersionConstants.GITADORA_FUZZUP,
-    name: "FUZZUP",
+    label: "FUZZUP",
   },
 ];
 
@@ -329,11 +329,11 @@ export const gameData = [
     versions: [
       {
         id: VersionConstants.BEATSTREAM,
-        name: "Original",
+        label: "Original",
       },
       {
         id: VersionConstants.BEATSTREAM_2,
-        name: "アニムトライヴ",
+        label: "アニムトライヴ",
       },
     ],
   },
@@ -364,91 +364,92 @@ export const gameData = [
     versions: [
       {
         id: VersionConstants.DANCE_RUSH_STARDOM,
-        name: "STARDOM",
+        label: "STARDOM",
       },
     ],
   },
   {
     id: GameConstants.DDR,
-    name: "DanceDance Revolution",
+    name: "DanceDanceRevolution",
+    shortName: "DDR",
     icon: null,
     cardBG: null,
     versions: [
       {
         id: VersionConstants.DDR_1ST_MIX,
-        name: "1ST MIX",
+        label: "1ST MIX",
       },
       {
         id: VersionConstants.DDR_2ND_MIX,
-        name: "2ND MIX",
+        label: "2ND MIX",
       },
       {
         id: VersionConstants.DDR_3RD_MIX,
-        name: "3RD MIX",
+        label: "3RD MIX",
       },
       {
         id: VersionConstants.DDR_4TH_MIX,
-        name: "4TH MIX",
+        label: "4TH MIX",
       },
       {
         id: VersionConstants.DDR_5TH_MIX,
-        name: "5TH MIX",
+        label: "5TH MIX",
       },
       {
         id: VersionConstants.DDR_MAX,
-        name: "MAX",
+        label: "MAX",
       },
       {
         id: VersionConstants.DDR_MAX2,
-        name: "MAX 2",
+        label: "MAX 2",
       },
       {
         id: VersionConstants.DDR_EXTREME,
-        name: "EXTREME",
+        label: "EXTREME",
       },
       {
         id: VersionConstants.DDR_SUPERNOVA,
-        name: "SuperNOVA",
+        label: "SuperNOVA",
       },
       {
         id: VersionConstants.DDR_SUPERNOVA_2,
-        name: "SuperNOVA 2",
+        label: "SuperNOVA 2",
       },
       {
         id: VersionConstants.DDR_X,
-        name: "X",
+        label: "X",
       },
       {
         id: VersionConstants.DDR_X2,
-        name: "X2",
+        label: "X2",
       },
       {
         id: VersionConstants.DDR_X3_VS_2ND_MIX,
-        name: "X3 vs. 2ND MIX",
+        label: "X3 vs. 2ND MIX",
       },
       {
         id: VersionConstants.DDR_2013,
-        name: "(2013)",
+        label: "(2013)",
       },
       {
         id: VersionConstants.DDR_2014,
-        name: "(2014)",
+        label: "(2014)",
       },
       {
         id: VersionConstants.DDR_ACE,
-        name: "A",
+        label: "Ace",
       },
       {
         id: VersionConstants.DDR_A20,
-        name: "A20",
+        label: "A20",
       },
       {
         id: VersionConstants.DDR_A20_PLUS,
-        name: "A20 PLUS",
+        label: "A20 PLUS",
       },
       {
         id: VersionConstants.DDR_A3,
-        name: "A3",
+        label: "A3",
       },
     ],
   },
@@ -460,43 +461,43 @@ export const gameData = [
     versions: [
       {
         id: VersionConstants.DDR_1ST_MIX,
-        name: "1ST MIX",
+        label: "1ST MIX",
       },
       {
         id: VersionConstants.DDR_2ND_MIX,
-        name: "2ND MIX",
+        label: "2ND MIX",
       },
       {
         id: VersionConstants.DDR_3RD_MIX,
-        name: "3RD MIX",
+        label: "3RD MIX",
       },
       {
         id: VersionConstants.DDR_4TH_MIX,
-        name: "4TH MIX",
+        label: "4TH MIX",
       },
       {
         id: VersionConstants.DDR_5TH_MIX,
-        name: "5TH MIX",
+        label: "5TH MIX",
       },
       {
         id: VersionConstants.DDR_MAX,
-        name: "MAX",
+        label: "MAX",
       },
       {
         id: VersionConstants.DDR_MAX2,
-        name: "MAX 2",
+        label: "MAX 2",
       },
       {
         id: VersionConstants.DDR_EXTREME,
-        name: "EXTREME",
+        label: "EXTREME",
       },
       {
         id: VersionConstants.DDR_SUPERNOVA,
-        name: "SuperNOVA",
+        label: "SuperNOVA",
       },
       {
         id: VersionConstants.DDR_SUPERNOVA_2,
-        name: "SuperNOVA 2",
+        label: "SuperNOVA 2",
       },
     ],
   },
@@ -508,75 +509,75 @@ export const gameData = [
     versions: [
       {
         id: VersionConstants.DDR_1ST_MIX,
-        name: "1ST MIX",
+        label: "1ST MIX",
       },
       {
         id: VersionConstants.DDR_2ND_MIX,
-        name: "2ND MIX",
+        label: "2ND MIX",
       },
       {
         id: VersionConstants.DDR_3RD_MIX,
-        name: "3RD MIX",
+        label: "3RD MIX",
       },
       {
         id: VersionConstants.DDR_4TH_MIX,
-        name: "4TH MIX",
+        label: "4TH MIX",
       },
       {
         id: VersionConstants.DDR_5TH_MIX,
-        name: "5TH MIX",
+        label: "5TH MIX",
       },
       {
         id: VersionConstants.DDR_MAX,
-        name: "MAX",
+        label: "MAX",
       },
       {
         id: VersionConstants.DDR_MAX2,
-        name: "MAX 2",
+        label: "MAX 2",
       },
       {
         id: VersionConstants.DDR_EXTREME,
-        name: "EXTREME",
+        label: "EXTREME",
       },
       {
         id: VersionConstants.DDR_SUPERNOVA,
-        name: "SuperNOVA",
+        label: "SuperNOVA",
       },
       {
         id: VersionConstants.DDR_SUPERNOVA_2,
-        name: "SuperNOVA 2",
+        label: "SuperNOVA 2",
       },
       {
         id: VersionConstants.DDR_X,
-        name: "X",
+        label: "X",
       },
       {
         id: VersionConstants.DDR_X2,
-        name: "X2",
+        label: "X2",
       },
       {
         id: VersionConstants.DDR_X3_VS_2ND_MIX,
-        name: "X3 vs. 2ND MIX",
+        label: "X3 vs. 2ND MIX",
       },
       {
         id: VersionConstants.DDR_2013,
-        name: "(2013)",
+        label: "(2013)",
       },
       {
         id: VersionConstants.DDR_2014,
-        name: "(2014)",
+        label: "(2014)",
       },
       {
         id: VersionConstants.DDR_ACE,
-        name: "A",
+        label: "A",
       },
       {
         id: VersionConstants.DDR_A20,
-        name: "A20",
+        label: "A20",
       },
       {
         id: VersionConstants.DDR_A20_PLUS,
-        name: "OmniMIX (A20 PLUS)",
+        label: "OmniMIX (A20 PLUS)",
       },
     ],
   },
@@ -588,75 +589,75 @@ export const gameData = [
     versions: [
       {
         id: VersionConstants.DRUMMANIA_1ST,
-        name: "1ST MIX",
+        label: "1ST MIX",
       },
       {
         id: VersionConstants.DRUMMANIA_2ND,
-        name: "2ND MIX",
+        label: "2ND MIX",
       },
       {
         id: VersionConstants.DRUMMANIA_3RD,
-        name: "3RD MIX",
+        label: "3RD MIX",
       },
       {
         id: VersionConstants.DRUMMANIA_4TH,
-        name: "4TH MIX",
+        label: "4TH MIX",
       },
       {
         id: VersionConstants.DRUMMANIA_5TH,
-        name: "5TH MIX",
+        label: "5TH MIX",
       },
       {
         id: VersionConstants.DRUMMANIA_6TH,
-        name: "6TH MIX",
+        label: "6TH MIX",
       },
       {
         id: VersionConstants.DRUMMANIA_7TH,
-        name: "7TH MIX",
+        label: "7TH MIX",
       },
       {
         id: VersionConstants.DRUMMANIA_8TH,
-        name: "8TH MIX",
+        label: "8TH MIX",
       },
       {
         id: VersionConstants.DRUMMANIA_9TH,
-        name: "9TH MIX",
+        label: "9TH MIX",
       },
       {
         id: VersionConstants.DRUMMANIA_10TH,
-        name: "10TH MIX",
+        label: "10TH MIX",
       },
       {
         id: VersionConstants.DRUMMANIA_V,
-        name: "V",
+        label: "V",
       },
       {
         id: VersionConstants.DRUMMANIA_V2,
-        name: "V2",
+        label: "V2",
       },
       {
         id: VersionConstants.DRUMMANIA_V3,
-        name: "V3",
+        label: "V3",
       },
       {
         id: VersionConstants.DRUMMANIA_V4,
-        name: "V4",
+        label: "V4",
       },
       {
         id: VersionConstants.DRUMMANIA_V5,
-        name: "V5",
+        label: "V5",
       },
       {
         id: VersionConstants.DRUMMANIA_V6,
-        name: "V6",
+        label: "V6",
       },
       {
         id: VersionConstants.DRUMMANIA_V7,
-        name: "V7",
+        label: "V7",
       },
       {
         id: VersionConstants.DRUMMANIA_V8,
-        name: "V8",
+        label: "V8",
       },
     ],
   },
@@ -669,11 +670,11 @@ export const gameData = [
     versions: [
       {
         id: VersionConstants.EEMALL,
-        name: "1st Avenue",
+        label: "1st Avenue",
       },
       {
         id: VersionConstants.EEMALL_2ND,
-        name: "2nd Avenue",
+        label: "2nd Avenue",
       },
     ],
   },
@@ -685,11 +686,11 @@ export const gameData = [
     versions: [
       {
         id: VersionConstants.FUTURETOMTOM,
-        name: "Ver 1",
+        label: "Ver 1",
       },
       {
         id: VersionConstants.FUTURETOMTOM_VER2,
-        name: "Ver 2",
+        label: "Ver 2",
       },
     ],
   },
@@ -715,207 +716,208 @@ export const gameData = [
     versions: [
       {
         id: VersionConstants.GUITARFREAKS_1ST,
-        name: "1ST MIX",
+        label: "1ST MIX",
       },
       {
         id: VersionConstants.GUITARFREAKS_2ND,
-        name: "2ND MIX",
+        label: "2ND MIX",
       },
       {
         id: VersionConstants.GUITARFREAKS_3RD,
-        name: "3RD MIX",
+        label: "3RD MIX",
       },
       {
         id: VersionConstants.GUITARFREAKS_4TH,
-        name: "4TH MIX",
+        label: "4TH MIX",
       },
       {
         id: VersionConstants.GUITARFREAKS_5TH,
-        name: "5TH MIX",
+        label: "5TH MIX",
       },
       {
         id: VersionConstants.GUITARFREAKS_6TH,
-        name: "6TH MIX",
+        label: "6TH MIX",
       },
       {
         id: VersionConstants.GUITARFREAKS_7TH,
-        name: "7TH MIX",
+        label: "7TH MIX",
       },
       {
         id: VersionConstants.GUITARFREAKS_8TH,
-        name: "8TH MIX",
+        label: "8TH MIX",
       },
       {
         id: VersionConstants.GUITARFREAKS_9TH,
-        name: "9TH MIX",
+        label: "9TH MIX",
       },
       {
         id: VersionConstants.GUITARFREAKS_10TH,
-        name: "10TH MIX",
+        label: "10TH MIX",
       },
       {
         id: VersionConstants.GUITARFREAKS_11TH,
-        name: "11TH MIX",
+        label: "11TH MIX",
       },
       {
         id: VersionConstants.GUITARFREAKS_V,
-        name: "V",
+        label: "V",
       },
       {
         id: VersionConstants.GUITARFREAKS_V2,
-        name: "V2",
+        label: "V2",
       },
       {
         id: VersionConstants.GUITARFREAKS_V3,
-        name: "V3",
+        label: "V3",
       },
       {
         id: VersionConstants.GUITARFREAKS_V4,
-        name: "V4",
+        label: "V4",
       },
       {
         id: VersionConstants.GUITARFREAKS_V5,
-        name: "V5",
+        label: "V5",
       },
       {
         id: VersionConstants.GUITARFREAKS_V6,
-        name: "V6",
+        label: "V6",
       },
       {
         id: VersionConstants.GUITARFREAKS_V7,
-        name: "V7",
+        label: "V7",
       },
       {
         id: VersionConstants.GUITARFREAKS_V8,
-        name: "V8",
+        label: "V8",
       },
     ],
   },
   {
     id: GameConstants.IIDX,
     name: "beatmaniaIIDX",
+    shortName: "IIDX",
     icon: "/assets/icon/iidx.png",
     cardBG: "/assets/card/iidx.png",
     versions: [
       {
         id: VersionConstants.IIDX,
-        name: "1st Style",
+        label: "1st Style",
       },
       {
         id: VersionConstants.IIDX_2ND_STYLE,
-        name: "2nd Style",
+        label: "2nd Style",
       },
       {
         id: VersionConstants.IIDX_3RD_STYLE,
-        name: "3rd Style",
+        label: "3rd Style",
       },
       {
         id: VersionConstants.IIDX_4TH_STYLE,
-        name: "4th Style",
+        label: "4th Style",
       },
       {
         id: VersionConstants.IIDX_5TH_STYLE,
-        name: "5th Style",
+        label: "5th Style",
       },
       {
         id: VersionConstants.IIDX_6TH_STYLE,
-        name: "6th Style",
+        label: "6th Style",
       },
       {
         id: VersionConstants.IIDX_7TH_STYLE,
-        name: "7th Style",
+        label: "7th Style",
       },
       {
         id: VersionConstants.IIDX_8TH_STYLE,
-        name: "8th Style",
+        label: "8th Style",
       },
       {
         id: VersionConstants.IIDX_9TH_STYLE,
-        name: "9th Style",
+        label: "9th Style",
       },
       {
         id: VersionConstants.IIDX_10TH_STYLE,
-        name: "10th Style",
+        label: "10th Style",
       },
       {
         id: VersionConstants.IIDX_RED,
-        name: "RED",
+        label: "RED",
       },
       {
         id: VersionConstants.IIDX_HAPPY_SKY,
-        name: "HAPPY SKY",
+        label: "HAPPY SKY",
       },
       {
         id: VersionConstants.IIDX_DISTORTED,
-        name: "DistorteD",
+        label: "DistorteD",
       },
       {
         id: VersionConstants.IIDX_GOLD,
-        name: "GOLD",
+        label: "GOLD",
       },
       {
         id: VersionConstants.IIDX_DJ_TROOPERS,
-        name: "DJ TROOPERS",
+        label: "DJ TROOPERS",
       },
       {
         id: VersionConstants.IIDX_EMPRESS,
-        name: "EMPRESS",
+        label: "EMPRESS",
       },
       {
         id: VersionConstants.IIDX_SIRIUS,
-        name: "SIRIUS",
+        label: "SIRIUS",
       },
       {
         id: VersionConstants.IIDX_RESORT_ANTHEM,
-        name: "Resort Anthem",
+        label: "Resort Anthem",
       },
       {
         id: VersionConstants.IIDX_LINCLE,
-        name: "Lincle",
+        label: "Lincle",
       },
       {
         id: VersionConstants.IIDX_TRICORO,
-        name: "tricoro",
+        label: "tricoro",
       },
       {
         id: VersionConstants.IIDX_SPADA,
-        name: "SPADA",
+        label: "SPADA",
       },
       {
         id: VersionConstants.IIDX_PENDUAL,
-        name: "PENDUAL",
+        label: "PENDUAL",
       },
       {
         id: VersionConstants.IIDX_COPULA,
-        name: "COPULA",
+        label: "COPULA",
       },
       {
         id: VersionConstants.IIDX_SINOBUZ,
-        name: "SINOBUZ",
+        label: "SINOBUZ",
       },
       {
         id: VersionConstants.IIDX_CANNON_BALLERS,
-        name: "CANNON BALLERS",
+        label: "CANNON BALLERS",
       },
       {
         id: VersionConstants.IIDX_ROOTAGE,
-        name: "ROOTAGE",
+        label: "ROOTAGE",
       },
       {
         id: VersionConstants.IIDX_HEROIC_VERSE,
-        name: "HEROIC VERSE",
+        label: "HEROIC VERSE",
       },
       {
         id: VersionConstants.IIDX_BISTROVER,
-        name: "BISTROVER",
+        label: "BISTROVER",
       },
       {
         id: VersionConstants.IIDX_CASTHOUR,
-        name: "CastHour",
+        label: "CastHour",
       },
       {
         id: VersionConstants.IIDX_RESIDENT,
-        name: "RESIDENT",
+        label: "RESIDENT",
       },
     ],
   },
@@ -927,79 +929,79 @@ export const gameData = [
     versions: [
       {
         id: VersionConstants.IIDX,
-        name: "1st Style",
+        label: "1st Style",
       },
       {
         id: VersionConstants.IIDX_2ND_STYLE,
-        name: "2nd Style",
+        label: "2nd Style",
       },
       {
         id: VersionConstants.IIDX_3RD_STYLE,
-        name: "3rd Style",
+        label: "3rd Style",
       },
       {
         id: VersionConstants.IIDX_4TH_STYLE,
-        name: "4th Style",
+        label: "4th Style",
       },
       {
         id: VersionConstants.IIDX_5TH_STYLE,
-        name: "5th Style",
+        label: "5th Style",
       },
       {
         id: VersionConstants.IIDX_6TH_STYLE,
-        name: "6th Style",
+        label: "6th Style",
       },
       {
         id: VersionConstants.IIDX_7TH_STYLE,
-        name: "7th Style",
+        label: "7th Style",
       },
       {
         id: VersionConstants.IIDX_8TH_STYLE,
-        name: "8th Style",
+        label: "8th Style",
       },
       {
         id: VersionConstants.IIDX_9TH_STYLE,
-        name: "9th Style",
+        label: "9th Style",
       },
       {
         id: VersionConstants.IIDX_10TH_STYLE,
-        name: "10th Style",
+        label: "10th Style",
       },
       {
         id: VersionConstants.IIDX_RED,
-        name: "RED",
+        label: "RED",
       },
       {
         id: VersionConstants.IIDX_HAPPY_SKY,
-        name: "HAPPY SKY",
+        label: "HAPPY SKY",
       },
       {
         id: VersionConstants.IIDX_DISTORTED,
-        name: "DistorteD",
+        label: "DistorteD",
       },
       {
         id: VersionConstants.IIDX_GOLD,
-        name: "GOLD",
+        label: "GOLD",
       },
       {
         id: VersionConstants.IIDX_DJ_TROOPERS,
-        name: "DJ TROOPERS",
+        label: "DJ TROOPERS",
       },
       {
         id: VersionConstants.IIDX_EMPRESS,
-        name: "EMPRESS",
+        label: "EMPRESS",
       },
       {
         id: VersionConstants.IIDX_SIRIUS,
-        name: "SIRIUS",
+        label: "SIRIUS",
       },
       {
         id: VersionConstants.IIDX_RESORT_ANTHEM,
-        name: "Resort Anthem",
+        label: "Resort Anthem",
       },
       {
         id: VersionConstants.IIDX_LINCLE,
-        name: "Lincle",
+        label: "Lincle",
       },
     ],
   },
@@ -1011,59 +1013,59 @@ export const gameData = [
     versions: [
       {
         id: VersionConstants.JUBEAT,
-        name: "Original",
+        label: "Original",
       },
       {
         id: VersionConstants.JUBEAT_RIPPLES,
-        name: "Ripples",
+        label: "Ripples",
       },
       {
         id: VersionConstants.JUBEAT_RIPPLES_APPEND,
-        name: "Ripples (Append)",
+        label: "Ripples (Append)",
       },
       {
         id: VersionConstants.JUBEAT_KNIT,
-        name: "Knit",
+        label: "Knit",
       },
       {
         id: VersionConstants.JUBEAT_KNIT_APPEND,
-        name: "Knit (Append)",
+        label: "Knit (Append)",
       },
       {
         id: VersionConstants.JUBEAT_COPIOUS,
-        name: "Copious",
+        label: "Copious",
       },
       {
         id: VersionConstants.JUBEAT_COPIOUS_APPEND,
-        name: "Copious (Append)",
+        label: "Copious (Append)",
       },
       {
         id: VersionConstants.JUBEAT_SAUCER,
-        name: "Saucer",
+        label: "Saucer",
       },
       {
         id: VersionConstants.JUBEAT_SAUCER_FULFILL,
-        name: "Saucer Fulfill",
+        label: "Saucer Fulfill",
       },
       {
         id: VersionConstants.JUBEAT_PROP,
-        name: "Prop",
+        label: "Prop",
       },
       {
         id: VersionConstants.JUBEAT_QUBELL,
-        name: "Qubell",
+        label: "Qubell",
       },
       {
         id: VersionConstants.JUBEAT_CLAN,
-        name: "Clan",
+        label: "Clan",
       },
       {
         id: VersionConstants.JUBEAT_FESTO,
-        name: "Festo",
+        label: "Festo",
       },
       {
         id: VersionConstants.JUBEAT_AVE,
-        name: "Avenue",
+        label: "Avenue",
       },
     ],
   },
@@ -1076,11 +1078,11 @@ export const gameData = [
     versions: [
       {
         id: VersionConstants.LOVEPLUS_ARCADE,
-        name: "Medal",
+        label: "Medal",
       },
       {
         id: VersionConstants.LOVEPLUS_CC,
-        name: "Colorful Clip",
+        label: "Colorful Clip",
       },
     ],
   },
@@ -1099,11 +1101,11 @@ export const gameData = [
     versions: [
       {
         id: VersionConstants.MUSECA,
-        name: "Original",
+        label: "Original",
       },
       {
         id: VersionConstants.MUSECA_1_PLUS,
-        name: "1 + 1/2",
+        label: "1 + 1/2",
       },
     ],
   },
@@ -1115,19 +1117,19 @@ export const gameData = [
     versions: [
       {
         id: VersionConstants.NOSTALGIA,
-        name: "Original",
+        label: "Original",
       },
       {
         id: VersionConstants.NOSTALGIA_FORTE,
-        name: "Forte",
+        label: "Forte",
       },
       {
         id: VersionConstants.NOSTALGIA_OP_2,
-        name: "OP.2",
+        label: "OP.2",
       },
       {
         id: VersionConstants.NOSTALGIA_OP_3,
-        name: "OP.3",
+        label: "OP.3",
       },
     ],
   },
@@ -1155,112 +1157,113 @@ export const gameData = [
   {
     id: GameConstants.POPN_MUSIC,
     name: "pop'n music",
+    shortName: "pop'n",
     icon: "/assets/icon/popn.png",
     cardBG: "/assets/card/popn.png",
     versions: [
       {
         id: VersionConstants.POPN_MUSIC,
-        name: "Original",
+        label: "Original",
       },
       {
         id: VersionConstants.POPN_MUSIC_2,
-        name: "2",
+        label: "2",
       },
       {
         id: VersionConstants.POPN_MUSIC_3,
-        name: "3",
+        label: "3",
       },
       {
         id: VersionConstants.POPN_MUSIC_4,
-        name: "4",
+        label: "4",
       },
       {
         id: VersionConstants.POPN_MUSIC_5,
-        name: "5",
+        label: "5",
       },
       {
         id: VersionConstants.POPN_MUSIC_6,
-        name: "6",
+        label: "6",
       },
       {
         id: VersionConstants.POPN_MUSIC_7,
-        name: "7",
+        label: "7",
       },
       {
         id: VersionConstants.POPN_MUSIC_8,
-        name: "8",
+        label: "8",
       },
       {
         id: VersionConstants.POPN_MUSIC_9,
-        name: "9",
+        label: "9",
       },
       {
         id: VersionConstants.POPN_MUSIC_10,
-        name: "10",
+        label: "10",
       },
       {
         id: VersionConstants.POPN_MUSIC_11,
-        name: "11",
+        label: "11",
       },
       {
         id: VersionConstants.POPN_MUSIC_IROHA,
-        name: "いろは (Iroha)",
+        label: "いろは (Iroha)",
       },
       {
         id: VersionConstants.POPN_MUSIC_CARNIVAL,
-        name: "カーニバル (Carnival)",
+        label: "カーニバル (Carnival)",
       },
       {
         id: VersionConstants.POPN_MUSIC_FEVER,
-        name: "FEVER!",
+        label: "FEVER!",
       },
       {
         id: VersionConstants.POPN_MUSIC_ADVENTURE,
-        name: "ADVENTURE",
+        label: "ADVENTURE",
       },
       {
         id: VersionConstants.POPN_MUSIC_PARTY,
-        name: "PARTY♪",
+        label: "PARTY♪",
       },
       {
         id: VersionConstants.POPN_MUSIC_THE_MOVIE,
-        name: "THE MOVIE",
+        label: "THE MOVIE",
       },
       {
         id: VersionConstants.POPN_MUSIC_SENGOKU_RETSUDEN,
-        name: "せんごく列伝 (Sengoku Retsuden)",
+        label: "せんごく列伝 (Sengoku Retsuden)",
       },
       {
         id: VersionConstants.POPN_MUSIC_TUNE_STREET,
-        name: "TUNE STREET",
+        label: "TUNE STREET",
       },
       {
         id: VersionConstants.POPN_MUSIC_FANTASIA,
-        name: "fantasia",
+        label: "fantasia",
       },
       {
         id: VersionConstants.POPN_MUSIC_SUNNY_PARK,
-        name: "Sunny Park",
+        label: "Sunny Park",
       },
       {
         id: VersionConstants.POPN_MUSIC_LAPISTORIA,
-        name: "ラピストリア (Lapistoria)",
+        label: "ラピストリア (Lapistoria)",
       },
       {
         id: VersionConstants.POPN_MUSIC_ECLALE,
-        name: "éclale",
+        label: "éclale",
       },
       {
         id: VersionConstants.POPN_MUSIC_USANEKO,
-        name: "うさぎと猫と少年の夢 (Usaneko)",
+        label: "うさぎと猫と少年の夢 (Usaneko)",
       },
       {
         id: VersionConstants.POPN_MUSIC_PEACE,
-        name: "peace",
+        label: "peace",
       },
       {
         id: VersionConstants.POPN_MUSIC_KAIMEI_RIDDLES,
-        name: "解明リドルズ (Kaimei riddles)",
+        label: "解明リドルズ (Kaimei riddles)",
       },
     ],
   },
@@ -1279,27 +1282,27 @@ export const gameData = [
     versions: [
       {
         id: VersionConstants.REFLEC_BEAT,
-        name: "Original",
+        label: "Original",
       },
       {
         id: VersionConstants.REFLEC_BEAT_LIMELIGHT,
-        name: "Limelight",
+        label: "Limelight",
       },
       {
         id: VersionConstants.REFLEC_BEAT_COLETTE,
-        name: "Colette",
+        label: "Colette",
       },
       {
         id: VersionConstants.REFLEC_BEAT_GROOVIN,
-        name: "groovin'!!",
+        label: "groovin'!!",
       },
       {
         id: VersionConstants.REFLEC_BEAT_VOLZZA,
-        name: "VOLZZA",
+        label: "VOLZZA",
       },
       {
         id: VersionConstants.REFLEC_BEAT_VOLZZA_2,
-        name: "VOLZZA 2",
+        label: "VOLZZA 2",
       },
     ],
   },
@@ -1313,32 +1316,33 @@ export const gameData = [
   {
     id: GameConstants.SDVX,
     name: "SOUND VOLTEX",
+    shortName: "SDVX",
     icon: null,
     cardBG: null,
     versions: [
       {
         id: VersionConstants.SDVX_BOOTH,
-        name: "BOOTH",
+        label: "BOOTH",
       },
       {
         id: VersionConstants.SDVX_INFINITE_INFECTION,
-        name: "-II- Infinite Infection",
+        label: "-II- Infinite Infection",
       },
       {
         id: VersionConstants.SDVX_GRAVITY_WARS,
-        name: "GRAVITY WARS",
+        label: "GRAVITY WARS",
       },
       {
         id: VersionConstants.SDVX_HEAVENLY_HAVEN,
-        name: "HEAVENLY HAVEN",
+        label: "HEAVENLY HAVEN",
       },
       {
         id: VersionConstants.SDVX_VIVID_WAVE,
-        name: "VIVID WAVE",
+        label: "VIVID WAVE",
       },
       {
         id: VersionConstants.SDVX_EXCEED_GEAR,
-        name: "EXCEED GEAR",
+        label: "EXCEED GEAR",
       },
     ],
   },

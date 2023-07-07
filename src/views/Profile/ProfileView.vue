@@ -45,7 +45,7 @@ const submitPass = () => {
 <template>
   <LayoutAuthenticated>
     <SectionMain>
-      <UserCard class="mb-6" use-small />
+      <UserCard class="mb-6" use-small even-smaller />
       <SectionTitleLine :icon="mdiAccount" title="Profile Settings" main />
 
       <CardBox is-form class="mb-6" @submit.prevent="">

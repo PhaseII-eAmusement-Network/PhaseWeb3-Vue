@@ -23,7 +23,7 @@ const spanClass = computed(
 
 <template>
   <span :class="spanClass">
-    <img :src="path" class="rounded-full" :class="w + ' ' + h" />
+    <img :src="path" class="rounded-full" :class="`${w}`" />
     <slot />
   </span>
 </template>

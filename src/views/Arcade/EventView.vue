@@ -11,7 +11,7 @@ import FormField from "@/components/FormField.vue";
 import FormControl from "@/components/FormControl.vue";
 import FormCheckRadio from "@/components/FormCheckRadio.vue";
 import BaseButton from "@/components/BaseButton.vue";
-import { arcadeList, getGameTitle, getGameInfo } from "@/constants";
+import { arcadeList, gameData, getGameInfo } from "@/constants";
 
 const $route = useRoute();
 const arcadeID = parseInt($route.params.id);
@@ -48,15 +48,15 @@ const eventSettings = [
         options: [
           {
             id: 0,
-            name: "No Event",
+            label: "No Event",
           },
           {
             id: 1,
-            name: "Chrono Seeker",
+            label: "Chrono Seeker",
           },
           {
             id: 2,
-            name: "QPronicle Chord",
+            label: "QPronicle Chord",
           },
         ],
         value: 1,
@@ -83,33 +83,6 @@ const filterForm = reactive({
   game: null,
   version: null,
 });
-
-function listGames() {
-  var games = [];
-  for (const object of eventSettings) {
-    const gameName = getGameInfo(object.game).name;
-    if (games[gameName] == undefined) {
-      games.push(gameName);
-    }
-  }
-
-  return games;
-}
-
-function listVersions() {
-  var versions = [];
-  for (const object of eventSettings) {
-    if (object.game == getGameInfo(filterForm.game).id) {
-      const gameObject = getGameInfo(object.game);
-      const version = object.version;
-      if (versions[version] == undefined) {
-        versions.push(gameObject.versions.find((x) => x.id == version).name);
-      }
-    }
-  }
-
-  return versions;
-}
 
 function getGameSettings() {
   const gameObject = getGameInfo(filterForm.game);
@@ -151,7 +124,7 @@ watch(
                 <FormControl
                   v-model="filterForm.game"
                   name="game"
-                  :options="listGames()"
+                  :options="gameData"
                 />
               </div>
               <div v-if="filterForm.game">
