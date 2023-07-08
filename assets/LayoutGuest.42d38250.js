@@ -1,0 +1,1 @@
+import{O as t,o,c as r,b as e,G as n,D as _,g as d}from"./index.afb896a8.js";const l={class:"bg-gray-50 dark:bg-slate-800 dark:text-slate-100"},c={class:"animated animatedFadeInUp fadeInUp"},m={__name:"LayoutGuest",setup(u){const a=t();return(s,i)=>(o(),r("div",{class:_({dark:d(a).darkMode})},[e("div",l,[e("div",c,[n(s.$slots,"default")])])],2))}};export{m as _};
