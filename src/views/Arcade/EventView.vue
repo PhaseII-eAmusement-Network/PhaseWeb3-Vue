@@ -17,63 +17,75 @@ const $route = useRoute();
 const arcadeID = parseInt($route.params.id);
 const thisArcade = arcadeList.find((x) => x.id === arcadeID);
 
-function multiSelectOptions(Options) {
-  var filtered = [];
-  for (const option of Options) {
-    filtered.push(option.name);
-  }
-
-  return filtered;
-}
-
 const eventSettings = [
   {
-    game: "iidx",
-    version: 22,
-    settings: [
+    id: "iidx",
+    versions: [
       {
-        id: 0,
-        keyId: "coke",
-        type: "bool",
-        name: "Enable Coke-X-BEMANI",
-        tooltip: "Enables the long forgotten Coca-Cola event.",
-        value: true,
-      },
-      {
-        id: 1,
-        keyId: "phase",
-        type: "select",
-        name: "Current BOSS Phase",
-        tooltip: "Set the main game event.",
-        options: [
+        id: 22,
+        settings: [
           {
             id: 0,
-            label: "No Event",
+            keyId: "coke",
+            type: Boolean,
+            name: "Enable Coke-X-BEMANI",
+            tooltip: "Enables the long forgotten Coca-Cola event.",
+            value: true,
           },
           {
             id: 1,
-            label: "Chrono Seeker",
-          },
-          {
-            id: 2,
-            label: "QPronicle Chord",
+            keyId: "phase",
+            type: Array,
+            name: "Current BOSS Phase",
+            tooltip: "Set the main game event.",
+            options: [
+              {
+                id: 0,
+                label: "No Event",
+              },
+              {
+                id: 1,
+                label: "Chrono Seeker",
+              },
+              {
+                id: 2,
+                label: "QPronicle Chord",
+              },
+            ],
+            value: 1,
           },
         ],
-        value: 1,
       },
     ],
   },
   {
-    game: "dm",
-    version: 18,
-    settings: [
+    id: "dm",
+    versions: [
       {
-        id: 0,
-        keyId: "banner",
-        type: "string",
-        name: "Title Screen Banner",
-        tooltip: "Set the text for the banner.",
-        value: "",
+        id: 18,
+        settings: [
+          {
+            id: 0,
+            keyId: "banner",
+            type: String,
+            name: "Title Screen Banner",
+            tooltip: "Set the text for the banner.",
+            value: "",
+          },
+        ],
+      },
+      {
+        id: 17,
+        settings: [
+          {
+            id: 0,
+            keyId: "banner",
+            type: String,
+            name: "Title Screen Banner",
+            tooltip: "Set the text for the banner.",
+            value: "",
+          },
+        ],
       },
     ],
   },
@@ -84,14 +96,58 @@ const filterForm = reactive({
   version: null,
 });
 
+function getGamesWithSettings() {
+  var gamesWithSettings = [];
+  for (const game of gameData) {
+    const gameSettings = eventSettings.find((x) => x.id == game.id);
+    if (gameSettings) {
+      gamesWithSettings.push(game.id);
+    }
+  }
+  return gamesWithSettings;
+}
+
+function makeGameOptions() {
+  var gameOptions = [];
+  const gamesWithSettings = getGamesWithSettings();
+  for (const game of gamesWithSettings) {
+    gameOptions.push({
+      id: game,
+      label: getGameInfo(game).name,
+    });
+  }
+  return gameOptions;
+}
+
+function makeVersionOptions() {
+  const selectedGame = eventSettings.find((x) => x.id == filterForm.game);
+  var gameVersions = [];
+  for (const version of selectedGame.versions) {
+    const versionInfo = getGameInfo(filterForm.game).versions.find(
+      (x) => x.id == version.id
+    );
+
+    gameVersions.push({
+      id: version.id,
+      label: versionInfo.label,
+    });
+  }
+  return gameVersions;
+}
+
 function getGameSettings() {
+  const settings = eventSettings.find((x) => x.id == filterForm.game);
+
+  return settings.versions.find((x) => x.id == filterForm.version);
+}
+
+function getCurrentGameVersion() {
   const gameObject = getGameInfo(filterForm.game);
-  const version = gameObject.versions.find((x) => x.name == filterForm.version);
-  const data = eventSettings.find(
-    (x) => x.game == gameObject.id && x.version == version.id
+  const versionObject = gameObject.versions.find(
+    (x) => x.id == filterForm.version
   );
 
-  return data;
+  return `${gameObject.name} ${versionObject.label}`;
 }
 
 watch(
@@ -124,7 +180,7 @@ watch(
                 <FormControl
                   v-model="filterForm.game"
                   name="game"
-                  :options="gameData"
+                  :options="makeGameOptions()"
                 />
               </div>
               <div v-if="filterForm.game">
@@ -132,7 +188,7 @@ watch(
                 <FormControl
                   v-model="filterForm.version"
                   name="version"
-                  :options="listVersions()"
+                  :options="makeVersionOptions()"
                 />
               </div>
             </div>
@@ -142,9 +198,7 @@ watch(
         <div v-if="filterForm.game && filterForm.version">
           <h2 class="text-xl">
             Settings for
-            <b>{{
-              getGameTitle(getGameSettings().game, getGameSettings().version)
-            }}</b>
+            <b>{{ getCurrentGameVersion() }}</b>
           </h2>
           <hr class="pb-1 my-2" />
 
@@ -155,24 +209,24 @@ watch(
             :help="setting.tooltip"
           >
             <FormControl
-              v-if="setting.type == 'string'"
+              v-if="setting.type == String"
               v-model="setting.value"
               :model-value="setting.value"
               :name="setting.keyId"
               placeholder="Not Set"
             />
             <FormCheckRadio
-              v-else-if="setting.type == 'bool'"
+              v-else-if="setting.type == Boolean"
               v-model="setting.value"
               :input-value="setting.value"
               type="switch"
               :name="setting.keyId"
             />
             <FormControl
-              v-if="setting.type == 'select'"
-              v-model="multiSelectOptions(setting.options)[setting.value]"
+              v-if="setting.type == Array"
+              v-model="setting.options[setting.value]"
               :name="setting.keyId"
-              :options="multiSelectOptions(setting.options)"
+              :options="setting.options"
               placeholder="Select..."
             />
           </FormField>

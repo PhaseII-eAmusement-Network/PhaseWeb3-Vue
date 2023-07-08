@@ -24,9 +24,9 @@ var last = {
 </script>
 
 <template>
-  <div class="flex justify-center items-center">
+  <div class="flex content-center justify-center items-center">
     <img v-if="avatar" class="h-40" :src="avatar" />
-    <div class="space-y-2 text-left lg:mx-12 p-2">
+    <div class="space-y-2 text-center md:text-left lg:mx-12 p-2">
       <h1 class="text-3xl md:text-4xl font-bold">TRMAZI</h1>
       <p class="text-xl ordinal slashed-zero">1234-5678</p>
       <p class="text-md md:text-lg">

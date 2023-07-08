@@ -86,7 +86,7 @@ function getCardStyle(game) {
           />
         </div>
       </div>
-      <div v-if="!useSmall">
+      <div v-if="!useSmall" class="text-center md:text-right">
         <p class="text-xl md:text-lg lg:text-2lg">{{ greeting.comment }}</p>
         <p class="text-xs italic">Greeting by: {{ greeting.author }}</p>
       </div>

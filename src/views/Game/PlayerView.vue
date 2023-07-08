@@ -1,14 +1,13 @@
 <script setup>
 import { reactive } from "vue";
 import { useRoute, useRouter } from "vue-router";
-import { mdiAccountTieHat, mdiBackburger } from "@mdi/js";
+import { mdiAccountOutline, mdiAccountTieHat, mdiBackburger } from "@mdi/js";
 import SectionMain from "@/components/SectionMain.vue";
 import CardBox from "@/components/CardBox.vue";
 import BaseButton from "@/components/BaseButton.vue";
 import ProfileCard from "@/components/Cards/ProfileCard.vue";
 import LayoutAuthenticated from "@/layouts/LayoutAuthenticated.vue";
 import SectionTitleLine from "@/components/SectionTitleLine.vue";
-import GameTitleLine from "@/components/GameTitleLine.vue";
 import FormField from "@/components/FormField.vue";
 import FormCheckRadio from "@/components/FormCheckRadio.vue";
 import FormControl from "@/components/FormControl.vue";
@@ -115,38 +114,45 @@ function getCardStyle() {
 <template>
   <LayoutAuthenticated>
     <SectionMain>
-      <div :style="getCardStyle()" class="rounded-2xl mb-6">
-        <div class="bg-white dark:bg-slate-900/90 rounded-2xl p-3">
-          <div class="w-full">
-            <div
-              class="md:flex pb-6 md:px-5 md:space-x-10 md:justify-between md:items-center"
-            >
-              <GameTitleLine :path="thisGame.icon" :title="thisGame.name" />
-              <div class="md:w-1/3 md:text-right">
-                <h2 class="text-md sm:text-lg md:text-xl font-bold p-2">
-                  Select Version
-                </h2>
-                <FormControl
-                  v-model="versionForm.currentVersion"
-                  :options="thisGame.versions"
-                />
-              </div>
-            </div>
-          </div>
+      <div
+        class="md:flex pb-6 md:px-5 md:space-x-10 md:justify-between md:items-center"
+      >
+        <div>
+          <SectionTitleLine
+            :icon="mdiAccountOutline"
+            title="View Profile"
+            main
+          />
+          <BaseButton
+            :icon="mdiBackburger"
+            :href="'/#/games/' + gameID"
+            class="w-full md:w-auto"
+            color="info"
+            label="Go Back"
+          />
+        </div>
+        <div class="mt-2 md:mt-0 md:w-1/3 md:text-right">
+          <h2 class="text-md sm:text-lg md:text-xl font-bold p-2">
+            Select Version
+          </h2>
+          <FormControl
+            v-model="versionForm.currentVersion"
+            :options="thisGame.versions"
+          />
+        </div>
+      </div>
+      <div
+        v-if="versionForm.currentVersion"
+        :style="getCardStyle()"
+        class="rounded-2xl mb-6"
+      >
+        <div class="bg-white dark:bg-slate-900/90 rounded-2xl pt-6 p-3">
           <div class="w-full">
             <ProfileCard
-              v-if="versionForm.currentVersion"
               use-small
               avatar="https://static.wikia.nocookie.net/dancedancerevolutionddr/images/3/3b/Yuni_img1.gif/"
             />
           </div>
-          <BaseButton
-            :icon="mdiBackburger"
-            :href="'/#/games/' + gameID"
-            class="mt-2"
-            color="info"
-            label="Go Back"
-          />
         </div>
       </div>
       <SectionTitleLine

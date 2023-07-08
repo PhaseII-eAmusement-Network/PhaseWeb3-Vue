@@ -62,7 +62,7 @@ function getCardStyle() {
               class="md:flex pb-6 md:px-5 md:space-x-10 md:justify-between md:items-center"
             >
               <GameTitleLine :path="thisGame.icon" :title="thisGame.name" />
-              <div class="md:w-1/3 md:text-right">
+              <div v-if="thisGame.versions" class="md:w-1/3 md:text-right">
                 <h2 class="text-md sm:text-lg md:text-xl font-bold p-2">
                   Select Version
                 </h2>
