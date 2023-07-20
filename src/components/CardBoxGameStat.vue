@@ -1,11 +1,13 @@
 <script setup>
 import { computed } from "vue";
+import { useRouter } from "vue-router";
 import CardBoxComponentBody from "@/components/CardBoxComponentBody.vue";
 import BaseLevel from "@/components/BaseLevel.vue";
 import PillTag from "@/components/PillTag.vue";
 import GameIcon from "@/components/GameIcon.vue";
 import { getGameInfo } from "@/constants";
 
+const router = useRouter();
 const props = defineProps({
   game: {
     type: String,
@@ -45,6 +47,10 @@ const tag = computed(() => {
   };
 });
 
+function loadGamePage() {
+  router.push(`/games/${props.game}`);
+}
+
 const selectedGame = getGameInfo(props.game);
 const cardStyle = `
   background-image: linear-gradient(to left, transparent, rgba(0, 0, 0, 1)),
@@ -55,7 +61,11 @@ const cardStyle = `
 </script>
 
 <template>
-  <div class="flex rounded-2xl" :style="cardStyle">
+  <button
+    class="flex rounded-2xl hover:outline outline-blue-500/50 hover:bg-slate-500 hover:dark:bg-slate-950 transition-all duration-50"
+    :style="cardStyle"
+    @click="loadGamePage()"
+  >
     <div
       class="relative w-full h-full bg-white dark:bg-slate-900/70 rounded-2xl"
     >
@@ -79,5 +89,5 @@ const cardStyle = `
         </BaseLevel>
       </CardBoxComponentBody>
     </div>
-  </div>
+  </button>
 </template>

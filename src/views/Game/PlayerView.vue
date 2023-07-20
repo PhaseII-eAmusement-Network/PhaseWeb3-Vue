@@ -69,6 +69,18 @@ const settings = [
   },
 ];
 
+const profile = {
+  id: 1,
+  name: "Trmazi",
+  extid: 12345678,
+  avatar:
+    "https://static.wikia.nocookie.net/dancedancerevolutionddr/images/3/3b/Yuni_img1.gif/",
+  last: {
+    arcade: "GhettoCade",
+    date: "7/16/2023",
+  },
+};
+
 const userSettings = reactive({
   username: "TRMAZI",
   fastSlow: true,
@@ -90,6 +102,10 @@ if (!thisGame) {
       catchAll: "404",
     },
   });
+}
+
+if (!thisGame.versions) {
+  versionForm.currentVersion = 1;
 }
 
 function getSources() {
@@ -117,21 +133,17 @@ function getCardStyle() {
       <div
         class="md:flex pb-6 md:px-5 md:space-x-10 md:justify-between md:items-center"
       >
-        <div>
-          <SectionTitleLine
-            :icon="mdiAccountOutline"
-            title="View Profile"
-            main
-          />
-          <BaseButton
-            :icon="mdiBackburger"
-            :href="'/#/games/' + gameID"
-            class="w-full md:w-auto"
-            color="info"
-            label="Go Back"
-          />
-        </div>
-        <div class="mt-2 md:mt-0 md:w-1/3 md:text-right">
+        <BaseButton
+          :icon="mdiBackburger"
+          :href="`/#/games/${gameID}`"
+          class="w-full md:w-auto"
+          color="info"
+          label="Go Back"
+        />
+        <div
+          v-if="thisGame.versions"
+          class="mt-2 md:mt-0 md:w-1/3 md:text-right"
+        >
           <h2 class="text-md sm:text-lg md:text-xl font-bold p-2">
             Select Version
           </h2>
@@ -148,13 +160,11 @@ function getCardStyle() {
       >
         <div class="bg-white dark:bg-slate-900/90 rounded-2xl pt-6 p-3">
           <div class="w-full">
-            <ProfileCard
-              use-small
-              avatar="https://static.wikia.nocookie.net/dancedancerevolutionddr/images/3/3b/Yuni_img1.gif/"
-            />
+            <ProfileCard use-small :profile="profile" />
           </div>
         </div>
       </div>
+      <SectionTitleLine :icon="mdiAccountOutline" title="View Profile" main />
       <SectionTitleLine
         v-if="versionForm.currentVersion"
         :icon="mdiAccountTieHat"

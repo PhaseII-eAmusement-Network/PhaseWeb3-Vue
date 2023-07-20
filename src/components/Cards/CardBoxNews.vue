@@ -39,7 +39,7 @@ function getCardStyle(cover) {
 }
 
 function openNewsView() {
-  router.push(`/news/${props.id}`); // Navigate to the dedicated news view with the news title as the route parameter
+  router.push(`/news/${props.id}`);
 }
 </script>
 

@@ -17,7 +17,7 @@ import LayoutGuest from "@/layouts/LayoutGuest.vue";
             <img src="/favicon.png" class="rounded-full shadow-lg mb-2" />
             <h1 class="text-xl"><samp>PhaseII</samp></h1>
             <p class="text-sm text-gray-700 dark:text-white/75">
-              Spinnin' since 2021
+              Broken since 2021
             </p>
             <hr class="border-t border-1 my-1 w-full" />
             <p class="text-lg relative bottom-0">404 - File not found</p>

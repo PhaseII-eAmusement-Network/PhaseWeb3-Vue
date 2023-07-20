@@ -326,6 +326,7 @@ export const gameData = [
     name: "BeatStream",
     icon: null,
     cardBG: null,
+    noRivals: true,
     versions: [
       {
         id: VersionConstants.BEATSTREAM,
@@ -342,6 +343,9 @@ export const gameData = [
     name: "The ⭐ Bishi Bashi",
     icon: null,
     cardBG: null,
+    noRivals: true,
+    noScores: true,
+    noRecords: true,
   },
   {
     id: GameConstants.BISHI_BASHI_NEW,
@@ -349,18 +353,25 @@ export const gameData = [
     icon: null,
     cardBG: null,
     skip: true,
+    noRivals: true,
+    noScores: true,
+    noRecords: true,
   },
   {
     id: GameConstants.DANCE_EVOLUTION,
     name: "DanceEvolution",
     icon: null,
     cardBG: null,
+    noRivals: true,
+    noScores: true,
+    noRecords: true,
   },
   {
     id: GameConstants.DANCE_RUSH,
     name: "DanceRush",
     icon: null,
     cardBG: null,
+    noRivals: true,
     versions: [
       {
         id: VersionConstants.DANCE_RUSH_STARDOM,
@@ -458,6 +469,9 @@ export const gameData = [
     name: "Classic DDR",
     icon: "/assets/icon/ddr.png",
     cardBG: "/assets/card/ddr.png",
+    noRivals: true,
+    noScores: true,
+    noRecords: true,
     versions: [
       {
         id: VersionConstants.DDR_1ST_MIX,
@@ -641,15 +655,15 @@ export const gameData = [
       },
       {
         id: VersionConstants.DRUMMANIA_V4,
-        label: "V4",
+        label: "V4: ROCKxROCK",
       },
       {
         id: VersionConstants.DRUMMANIA_V5,
-        label: "V5",
+        label: "V5: ROCK TO INFINITY!",
       },
       {
         id: VersionConstants.DRUMMANIA_V6,
-        label: "V6",
+        label: "V6: BLAZING!!!!",
       },
       {
         id: VersionConstants.DRUMMANIA_V7,
@@ -667,6 +681,9 @@ export const gameData = [
     icon: null,
     cardBG: null,
     skip: true,
+    noRivals: true,
+    noScores: true,
+    noRecords: true,
     versions: [
       {
         id: VersionConstants.EEMALL,
@@ -683,6 +700,9 @@ export const gameData = [
     name: "Future Tom Tom",
     icon: null,
     cardBG: null,
+    noRivals: true,
+    noScores: true,
+    noRecords: true,
     versions: [
       {
         id: VersionConstants.FUTURETOMTOM,
@@ -699,6 +719,7 @@ export const gameData = [
     name: "GITADORA (Drums)",
     icon: null,
     cardBG: null,
+    noRivals: true,
     versions: GITADORA_VERSION_DATA,
   },
   {
@@ -706,6 +727,7 @@ export const gameData = [
     name: "GITADORA (Guitar)",
     icon: null,
     cardBG: null,
+    noRivals: true,
     versions: GITADORA_VERSION_DATA,
   },
   {
@@ -772,15 +794,15 @@ export const gameData = [
       },
       {
         id: VersionConstants.GUITARFREAKS_V4,
-        label: "V4",
+        label: "V4: ROCKxROCK",
       },
       {
         id: VersionConstants.GUITARFREAKS_V5,
-        label: "V5",
+        label: "V5: ROCK TO INFINITY!",
       },
       {
         id: VersionConstants.GUITARFREAKS_V6,
-        label: "V6",
+        label: "V6: BLAZING!!!!",
       },
       {
         id: VersionConstants.GUITARFREAKS_V7,
@@ -926,6 +948,9 @@ export const gameData = [
     name: "Classic IIDX",
     icon: "/assets/icon/iidx.png",
     cardBG: "/assets/card/iidx.png",
+    noRivals: true,
+    noScores: true,
+    noRecords: true,
     versions: [
       {
         id: VersionConstants.IIDX,
@@ -1074,7 +1099,9 @@ export const gameData = [
     name: "LovePlus",
     icon: null,
     cardBG: null,
-    skip: true,
+    noRivals: true,
+    noScores: true,
+    noRecords: true,
     versions: [
       {
         id: VersionConstants.LOVEPLUS_ARCADE,
@@ -1092,6 +1119,9 @@ export const gameData = [
     icon: null,
     cardBG: null,
     skip: true,
+    noRivals: true,
+    noScores: true,
+    noRecords: true,
   },
   {
     id: GameConstants.MUSECA,
@@ -1139,6 +1169,9 @@ export const gameData = [
     icon: null,
     cardBG: null,
     skip: true,
+    noRivals: true,
+    noScores: true,
+    noRecords: true,
   },
   {
     id: GameConstants.OTOCA,
@@ -1146,6 +1179,9 @@ export const gameData = [
     icon: null,
     cardBG: null,
     skip: true,
+    noRivals: true,
+    noScores: true,
+    noRecords: true,
   },
   {
     id: GameConstants.POPN_HELLO,
@@ -1153,6 +1189,9 @@ export const gameData = [
     icon: "/assets/icon/popn.png",
     cardBG: "/assets/card/popn.png",
     skip: true,
+    noRivals: true,
+    noScores: true,
+    noRecords: true,
   },
   {
     id: GameConstants.POPN_MUSIC,
@@ -1273,6 +1312,9 @@ export const gameData = [
     icon: null,
     cardBG: null,
     skip: true,
+    noRivals: true,
+    noScores: true,
+    noRecords: true,
   },
   {
     id: GameConstants.REFLEC_BEAT,
@@ -1312,6 +1354,9 @@ export const gameData = [
     icon: null,
     cardBG: null,
     skip: true,
+    noRivals: true,
+    noScores: true,
+    noRecords: true,
   },
   {
     id: GameConstants.SDVX,
@@ -1353,11 +1398,10 @@ export const arcadeList = [
     id: 0,
     name: "Speakeasy Smashcade",
     area: "US-IL",
-    image:
-      "https://scontent-ord5-2.xx.fbcdn.net/v/t39.30808-6/345607186_2854756104656166_4038613677498709113_n.png?stp=dst-jpg&_nc_cat=103&ccb=1-7&_nc_sid=8631f5&_nc_ohc=ps88GQTw7pYAX_kG-ZY&_nc_ht=scontent-ord5-2.xx&oh=00_AfCeXwmodvTitMUxzk9EDGb-Rl2lGN9PdLFYQPPjD-iphw&oe=6492362F",
+    image: "https://i.imgur.com/HApAZgW.gif",
     address: null,
     show_address: false,
-    public: false,
+    public: true,
     beta: true,
     paseli: true,
     infinite_paseli: true,
@@ -1393,6 +1437,19 @@ export const arcadeList = [
     infinite_paseli: true,
     maintenance: false,
     admins: ["blade"],
+  },
+  {
+    id: 3,
+    name: "GhettoCade",
+    area: "US-IN",
+    image: "https://ik.imagekit.io/suedbykonami/arcade/card/IMG_7096.jpg",
+    show_address: false,
+    public: true,
+    beta: true,
+    paseli: true,
+    infinite_paseli: true,
+    maintenance: false,
+    admins: ["Trmazi"],
   },
 ];
 

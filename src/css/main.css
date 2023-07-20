@@ -17,3 +17,13 @@
   opacity: 0;
   transform: scale(0.9);
 }
+
+img {
+  pointer-events: none;
+}
+
+body {
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10 and IE 11 */
+  user-select: none; /* Standard syntax */
+}

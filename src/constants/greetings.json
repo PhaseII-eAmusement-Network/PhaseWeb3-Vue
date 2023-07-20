@@ -88,5 +88,50 @@
         "author": "barru",
         "header": "What's good, <username>?",
         "comment": "As long as you're around, everything's great 😄"
+    },
+    {
+        "author": "yaladre",
+        "header": "Ready to kick it up a notch, <username>?",
+        "comment": "Get pumped up!"
+    },
+    {
+        "author": "caldenza",
+        "header": "Alone in the night again, <username>?",
+        "comment": "Honestly, just go play Minecraft tbh"
+    },
+    {
+        "author": "caldenza",
+        "header": "Did you make sure to restart the Mango, <username>?",
+        "comment": "It's not the mango. It's always the mango. God damnit."
+    },
+    {
+        "author": "azui.573",
+        "header": "Welcome home, <username>.",
+        "comment": "Ready to crush those rankings?"
+    },
+    {
+        "author": "azui.573",
+        "header": "Introducing... <username>!",
+        "comment": "Live from the RESIDENT PARTY!"
+    },
+    {
+        "author": "Shilofax",
+        "header": "Make it make money, <username>",
+        "comment": "GOOOOOOOOOOOOOLD"
+    },
+    {
+        "author": "daydensteve",
+        "header": "Welcome, <username>.",
+        "comment": "PhaseII, here for all your net needs!"
+    },
+    {
+        "author": "sierrathebluejay",
+        "header": "Welcome to the party, <username>.",
+        "comment": "We've been waiting for you!"
+    },
+    {
+        "author": "sierrathebluejay",
+        "header": "Wild <username> appeared!",
+        "comment": "They're super effective!"
     }
 ]

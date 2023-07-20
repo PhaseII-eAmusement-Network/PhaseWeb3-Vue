@@ -11,15 +11,47 @@ import { gameData, arcadeList } from "./constants";
 var sortedMenu = [];
 for (const game of gameData) {
   if (!game.skip) {
+    const menuItems = [
+      "overview",
+      "rivals",
+      "net_records",
+      "net_scores",
+      "my_records",
+      "my_scores",
+    ];
+    var menu = [];
+
+    for (const item of menuItems) {
+      if (item === "overview") {
+        menu.push({ label: "Overview", to: `/games/${game.id}` });
+      } else if (item == "rivals" && !game.noRivals) {
+        menu.push({ label: "Rivals", to: `/games/${game.id}/rivals` });
+      } else if (item == "net_records" && !game.noRecords) {
+        menu.push({
+          label: "Network Records",
+          to: `/games/${game.id}/records/all`,
+        });
+      } else if (item == "net_scores" && !game.noScores) {
+        menu.push({
+          label: "Network Scores",
+          to: `/games/${game.id}/scores/all`,
+        });
+      } else if (item == "my_records" && !game.noRecords) {
+        menu.push({
+          label: "Personal Records",
+          to: `/games/${game.id}/records/personal`,
+        });
+      } else if (item == "my_scores" && !game.noScores) {
+        menu.push({
+          label: "Personal Scores",
+          to: `/games/${game.id}/scores/personal`,
+        });
+      }
+    }
+
     sortedMenu.push({
       label: game.shortName ? game.shortName : game.name,
-      menu: [
-        { label: "Overview", to: `/games/${game.id}` },
-        { label: "Network Records", to: `/games/${game.id}/records/all` },
-        { label: "Network Scores", to: `/games/${game.id}/scores/all` },
-        { label: "Personal Records", to: `/games/${game.id}/records/personal` },
-        { label: "Personal Scores", to: `/games/${game.id}/scores/personal` },
-      ],
+      menu: menu,
     });
   }
 }
@@ -33,7 +65,7 @@ for (const arcade of arcadeList) {
         { label: "Overview", to: `/arcade/${arcade.id}` },
         { label: "Event Settings", to: `/arcade/${arcade.id}/events` },
         { label: "Machine List", to: `/arcade/${arcade.id}/machines` },
-        { label: "PASELI Transactions", to: `/arcade/${arcade.id}/paseli` },
+        { label: "PASELI", to: `/arcade/${arcade.id}/paseli` },
       ],
     });
   }

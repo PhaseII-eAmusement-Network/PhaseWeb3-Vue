@@ -51,6 +51,33 @@ const setGoals = [
     deadline: "1 Week",
   },
 ];
+
+const gameStats = [
+  {
+    id: GameConstants.IIDX,
+    username: "DJ. TRMAZI",
+    type: "ranking",
+    value: "#22 of 330",
+  },
+  {
+    id: GameConstants.DDR,
+    username: "TRMAZI",
+    type: "scores",
+    value: 233,
+  },
+  {
+    id: GameConstants.POPN_MUSIC,
+    username: "TRMAZI",
+    type: "plays",
+    value: 69,
+  },
+  {
+    id: GameConstants.SDVX,
+    username: "TRMAZI",
+    type: "scores",
+    value: 420,
+  },
+];
 </script>
 
 <template>
@@ -101,28 +128,12 @@ const setGoals = [
         class="grid grid-flow-row auto-rows-auto grid-cols-1 md:grid-cols-2 gap-5 mb-5"
       >
         <CardBoxGameStat
-          :game="GameConstants.DDR"
-          value="#10 out of 132"
-          profile-name="DJ. TRMAZI"
-          type="ranking"
-        />
-        <CardBoxGameStat
-          :game="GameConstants.POPN_MUSIC"
-          :value="300"
-          profile-name="TRMAZI"
-          type="plays"
-        />
-        <CardBoxGameStat
-          :game="GameConstants.JUBEAT"
-          :value="392"
-          profile-name="TRMAZI"
-          type="scores"
-        />
-        <CardBoxGameStat
-          :game="GameConstants.SDVX"
-          value="#15 out of 200"
-          profile-name="TRMAZI"
-          type="ranking"
+          v-for="stat of gameStats"
+          :key="stat.id"
+          :game="stat.id"
+          :value="stat.value"
+          :profile-name="stat.username"
+          :type="stat.type"
         />
       </div>
 

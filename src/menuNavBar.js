@@ -5,6 +5,7 @@ import {
   mdiServerNetwork,
   mdiBrushOutline,
   mdiFlagCheckered,
+  mdiCardAccountDetailsOutline,
 } from "@mdi/js";
 
 export default [
@@ -25,6 +26,11 @@ export default [
         icon: mdiServerNetwork,
         label: "Integrations",
         to: "/profile/integrate",
+      },
+      {
+        icon: mdiCardAccountDetailsOutline,
+        label: "Login Cards",
+        to: "/profile/cards",
       },
     ],
   },

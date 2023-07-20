@@ -76,6 +76,14 @@ const routes = [
   },
   {
     meta: {
+      title: "Login Cards",
+    },
+    path: "/profile/cards",
+    name: "profile_cards",
+    component: () => import("@/views/Profile/CardsView.vue"),
+  },
+  {
+    meta: {
       title: "Goals",
     },
     path: "/goals",
@@ -160,6 +168,17 @@ const routes = [
     path: "/games/:game/profiles/:userID/",
     name: "game_profile",
     component: () => import("@/views/Game/PlayerView.vue"),
+    options: {
+      hotReload: true, // disables Hot Reload
+    },
+  },
+  {
+    meta: {
+      title: "Rivals",
+    },
+    path: "/games/:game/rivals",
+    name: "game_rivals",
+    component: () => import("@/views/Game/RivalsView.vue"),
     options: {
       hotReload: true, // disables Hot Reload
     },

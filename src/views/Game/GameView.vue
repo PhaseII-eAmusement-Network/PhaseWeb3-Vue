@@ -7,6 +7,7 @@ import SectionTitleLine from "@/components/SectionTitleLine.vue";
 import GameTitleLine from "@/components/GameTitleLine.vue";
 import LayoutAuthenticated from "@/layouts/LayoutAuthenticated.vue";
 import CardBox from "@/components/CardBox.vue";
+import CardBoxWidget from "@/components/CardBoxWidget.vue";
 import FormControl from "@/components/FormControl.vue";
 import ProfileCard from "@/components/Cards/ProfileCard.vue";
 import TablePlayers from "@/components/Tables/TablePlayers.vue";
@@ -21,8 +22,24 @@ const versionForm = reactive({
   currentVersion: null,
 });
 
+const profile = {
+  id: 1,
+  name: "Trmazi",
+  extid: 12345678,
+  avatar:
+    "https://static.wikia.nocookie.net/dancedancerevolutionddr/images/3/3b/Yuni_img1.gif/",
+  last: {
+    arcade: "GhettoCade",
+    date: "7/16/2023",
+  },
+};
+
 gameID = $route.params.id;
 thisGame = getGameInfo(gameID);
+
+if (!thisGame.versions) {
+  versionForm.currentVersion = 1;
+}
 
 if (!thisGame) {
   $router.push({
@@ -74,9 +91,18 @@ function getCardStyle() {
             </div>
           </div>
           <div class="w-full">
-            <ProfileCard
-              avatar="https://static.wikia.nocookie.net/dancedancerevolutionddr/images/3/3b/Yuni_img1.gif/"
-            />
+            <ProfileCard :game="gameID" :profile="profile">
+              <div class="grid grid-cols-1 gap-6 lg:grid-cols-4 pt-6">
+                <CardBoxWidget :number="3733" label="Scores (All Versions)" />
+                <CardBoxWidget :number="1244" label="Plays (All Versions)" />
+                <CardBoxWidget
+                  prefix="#"
+                  :number="43"
+                  suffix=" / 300"
+                  label="Ranking (All Versions)"
+                />
+                <CardBoxWidget :number="2" label="Rivals" /></div
+            ></ProfileCard>
           </div>
         </div>
       </div>
