@@ -1,7 +1,7 @@
 <script setup>
 import { reactive } from "vue";
 import { useRoute, useRouter } from "vue-router";
-import { mdiSwordCross, mdiPlus, mdiBackburger } from "@mdi/js";
+import { mdiSwordCross, mdiPlus } from "@mdi/js";
 import SectionMain from "@/components/SectionMain.vue";
 import CardBox from "@/components/CardBox.vue";
 import BaseButton from "@/components/BaseButton.vue";
@@ -10,7 +10,6 @@ import LayoutAuthenticated from "@/layouts/LayoutAuthenticated.vue";
 import SectionTitleLine from "@/components/SectionTitleLine.vue";
 import FormField from "@/components/FormField.vue";
 import FormControl from "@/components/FormControl.vue";
-import TableRivals from "@/components/Tables/TableRivals.vue";
 import { getGameInfo } from "@/constants";
 
 const $route = useRoute();
@@ -104,18 +103,7 @@ function getCardStyle() {
 <template>
   <LayoutAuthenticated>
     <SectionMain>
-      <div
-        class="md:flex pb-6 md:px-5 md:space-x-10 md:justify-between md:items-center"
-      >
-        <div>
-          <BaseButton
-            :icon="mdiBackburger"
-            :href="'/#/games/' + gameID"
-            class="w-full md:w-auto"
-            color="info"
-            label="Go Back"
-          />
-        </div>
+      <div class="md:flex md:justify-end pb-6 items-center">
         <div
           v-if="thisGame.versions"
           class="mt-2 md:mt-0 md:w-1/3 md:text-right"
@@ -175,8 +163,24 @@ function getCardStyle() {
       </CardBox>
 
       <SectionTitleLine :icon="mdiSwordCross" title="Rivals" main />
-      <CardBox v-if="versionForm.currentVersion" has-table class="mb-6">
-        <TableRivals />
+      <CardBox v-if="versionForm.currentVersion" class="mb-6">
+        <div class="grid gap-3">
+          <CardBox v-for="rival of rivals" :key="rival.id">
+            <div class="flex justify-between items-center">
+              <div class="flex">
+                <img
+                  class="w-10 mr-3"
+                  src="https://static.wikia.nocookie.net/dancedancerevolutionddr/images/3/3b/Yuni_img1.gif/"
+                />
+                <div class="grid">
+                  <h1 class="text-lg">{{ rival.name }}</h1>
+                  <h2 class="text-md font-mono">{{ rival.rivalID }}</h2>
+                </div>
+              </div>
+              <BaseButton label="Remove Rival" color="danger" />
+            </div>
+          </CardBox>
+        </div>
       </CardBox>
     </SectionMain>
   </LayoutAuthenticated>

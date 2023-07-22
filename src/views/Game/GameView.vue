@@ -32,6 +32,17 @@ const profile = {
     arcade: "GhettoCade",
     date: "7/16/2023",
   },
+  stats: {
+    firstPlay: "1/14/2021",
+    singlePlays: 165,
+    singleDan: 1900,
+    singlePoint: 1877,
+    doublePlays: 15,
+    doubleDan: 0,
+    doublePoint: 187,
+    skillPoints: 3723,
+    jubility: 7690,
+  },
 };
 
 gameID = $route.params.id;

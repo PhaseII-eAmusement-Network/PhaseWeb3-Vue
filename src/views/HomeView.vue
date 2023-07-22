@@ -86,7 +86,7 @@ const gameStats = [
       <h2 class="pb-4 text-4xl lg:text-5xl">Welcome to <samp>PhaseII</samp></h2>
       <UserCard class="mb-6" />
 
-      <div class="my-4">
+      <div class="my-6">
         <NotificationBar color="info">
           You have unread news!
           <template #right>

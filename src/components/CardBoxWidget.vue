@@ -30,6 +30,10 @@ defineProps({
     type: String,
     default: "text-gray-500 dark:text-slate-400",
   },
+  numColor: {
+    type: String,
+    default: "",
+  },
   trend: {
     type: String,
     default: null,
@@ -52,7 +56,14 @@ defineProps({
           {{ label }}
         </h3>
         <h1 class="text-3xl leading-tight font-semibold">
-          <NumberDynamic :value="number" :prefix="prefix" :suffix="suffix" />
+          <NumberDynamic
+            v-if="number"
+            :class="numColor"
+            :value="number"
+            :prefix="prefix"
+            :suffix="suffix"
+          />
+          <slot />
         </h1>
       </div>
       <BaseIcon

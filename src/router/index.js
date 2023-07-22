@@ -174,6 +174,17 @@ const routes = [
   },
   {
     meta: {
+      title: "Edit Profile",
+    },
+    path: "/games/:game/profiles/:userID/edit",
+    name: "edit_profile",
+    component: () => import("@/views/Game/EditView.vue"),
+    options: {
+      hotReload: true, // disables Hot Reload
+    },
+  },
+  {
+    meta: {
       title: "Rivals",
     },
     path: "/games/:game/rivals",

@@ -1,17 +1,17 @@
 <script setup>
 import { reactive } from "vue";
 import { useRoute, useRouter } from "vue-router";
-import { mdiAccountOutline, mdiAccountTieHat, mdiBackburger } from "@mdi/js";
+import { mdiAccountOutline, mdiBackburger } from "@mdi/js";
 import SectionMain from "@/components/SectionMain.vue";
-import CardBox from "@/components/CardBox.vue";
+import CardBoxWidget from "@/components/CardBoxWidget.vue";
 import BaseButton from "@/components/BaseButton.vue";
 import ProfileCard from "@/components/Cards/ProfileCard.vue";
 import LayoutAuthenticated from "@/layouts/LayoutAuthenticated.vue";
 import SectionTitleLine from "@/components/SectionTitleLine.vue";
-import FormField from "@/components/FormField.vue";
-import FormCheckRadio from "@/components/FormCheckRadio.vue";
 import FormControl from "@/components/FormControl.vue";
 import { getGameInfo } from "@/constants";
+import { getIIDXDan } from "@/constants/danClass.js";
+import { getGitadoraColor, getJubilityColor } from "@/constants/skillColor";
 
 const $route = useRoute();
 const $router = useRouter();
@@ -21,53 +21,6 @@ var thisGame = null;
 const versionForm = reactive({
   currentVersion: null,
 });
-
-const settings = [
-  {
-    id: "username",
-    name: "Username",
-    help: "Set your username for this profile",
-    type: String,
-  },
-  {
-    id: "fastSlow",
-    name: "Fast/Slow Display",
-    help: "Enable or disable displaying of Fast/Slow",
-    type: Boolean,
-  },
-  {
-    id: "comboPosition",
-    name: "Combo Position",
-    help: "Change order of the combo and notes",
-    type: Boolean,
-  },
-  {
-    id: "weight",
-    name: "Weight (kg)",
-    help: "Set your weight for in-game workout mode",
-    type: Number,
-  },
-  {
-    id: "dancer",
-    name: "Character",
-    help: "Set your background dancer",
-    type: Array,
-    options: [
-      { id: 0, label: "Afro" },
-      { id: 1, label: "Emi" },
-    ],
-  },
-  {
-    id: "arrow",
-    name: "Arrow Skin",
-    help: "Set your arrow skin",
-    type: Array,
-    options: [
-      { id: 0, label: "Normal" },
-      { id: 1, label: "Classic" },
-    ],
-  },
-];
 
 const profile = {
   id: 1,
@@ -79,18 +32,80 @@ const profile = {
     arcade: "GhettoCade",
     date: "7/16/2023",
   },
+  stats: {
+    firstPlay: "1/14/2021",
+    singlePlays: 165,
+    singleDan: 1900,
+    singlePoint: 1877,
+    doublePlays: 15,
+    doubleDan: 0,
+    doublePoint: 187,
+    skillPoints: 193090,
+    jubility: 7600,
+  },
 };
 
-const userSettings = reactive({
-  username: "TRMAZI",
-  fastSlow: true,
-  comboPosition: false,
-  weight: 100,
-  dancer: 0,
-  arrow: 1,
-  guideLines: 0,
-  filter: 3,
-});
+const loadStats = [
+  {
+    id: 0,
+    label: "Register Date",
+    type: String,
+    span: "md:col-span-2",
+    key: "firstPlay",
+  },
+  {
+    id: 1,
+    label: "Single Plays",
+    type: Number,
+    key: "singlePlays",
+  },
+  {
+    id: 2,
+    label: "Single Dan",
+    type: String,
+    key: "singleDan",
+    isIIDXDan: true,
+  },
+  {
+    id: 3,
+    label: "Single DJ POINT",
+    type: Number,
+    key: "singlePoint",
+  },
+  {
+    id: 4,
+    label: "Double Plays",
+    type: Number,
+    key: "doublePlays",
+  },
+  {
+    id: 5,
+    label: "Double Dan",
+    type: String,
+    key: "doubleDan",
+    isIIDXDan: true,
+  },
+  {
+    id: 6,
+    label: "Double DJ POINT",
+    type: Number,
+    key: "doublePoint",
+  },
+  {
+    id: 7,
+    label: "SKILL Points",
+    type: Number,
+    key: "skillPoints",
+    isSkill: true,
+  },
+  {
+    id: 8,
+    label: "Jubility",
+    type: Number,
+    key: "jubility",
+    isJubility: true,
+  },
+];
 
 gameID = $route.params.game;
 thisGame = getGameInfo(gameID);
@@ -125,6 +140,25 @@ function getCardStyle() {
       background-repeat: no-repeat;
     `;
 }
+
+function returnNumber(stat) {
+  if (stat.isSkill) {
+    return profile.stats[stat.key] / 100;
+  } else if (stat.isJubility) {
+    return profile.stats[stat.key] / 10;
+  }
+
+  return profile.stats[stat.key];
+}
+
+function colorText(stat) {
+  if (stat.isSkill) {
+    return getGitadoraColor(profile.stats[stat.key]);
+  } else if (stat.isJubility) {
+    return getJubilityColor(profile.stats[stat.key]);
+  }
+  return "";
+}
 </script>
 
 <template>
@@ -153,6 +187,7 @@ function getCardStyle() {
           />
         </div>
       </div>
+      <SectionTitleLine :icon="mdiAccountOutline" title="View Profile" main />
       <div
         v-if="versionForm.currentVersion"
         :style="getCardStyle()"
@@ -160,64 +195,31 @@ function getCardStyle() {
       >
         <div class="bg-white dark:bg-slate-900/90 rounded-2xl pt-6 p-3">
           <div class="w-full">
-            <ProfileCard use-small :profile="profile" />
+            <ProfileCard use-small :profile="profile">
+              <div class="my-6 grid grid-cols-1 md:grid-cols-4 gap-6">
+                <CardBoxWidget
+                  v-for="stat in loadStats"
+                  :key="stat.id"
+                  :class="stat.span"
+                  :label="stat.label"
+                  :number="stat.type == Number ? returnNumber(stat) : None"
+                  :num-color="colorText(stat)"
+                >
+                  {{
+                    stat.type == String && !stat.isIIDXDan && !stat.isSkill
+                      ? profile.stats[stat.key]
+                      : None
+                  }}
+                  {{
+                    stat.type == String && stat.isIIDXDan
+                      ? getIIDXDan(profile.stats[stat.key]).label
+                      : None
+                  }}
+                </CardBoxWidget>
+              </div>
+            </ProfileCard>
           </div>
         </div>
-      </div>
-      <SectionTitleLine :icon="mdiAccountOutline" title="View Profile" main />
-      <SectionTitleLine
-        v-if="versionForm.currentVersion"
-        :icon="mdiAccountTieHat"
-        title="Profile Customizations"
-        main
-      />
-
-      <div v-if="versionForm.currentVersion">
-        <CardBox>
-          <div>
-            <FormField
-              v-for="setting of settings"
-              :key="setting.id"
-              :label="setting.name"
-              :help="setting.help"
-            >
-              <FormControl
-                v-if="setting.type == String"
-                :v-model="userSettings[setting.id]"
-                :model-value="userSettings[setting.id]"
-              />
-
-              <FormControl
-                v-if="setting.type == Number"
-                :v-model="userSettings[setting.id]"
-                :model-value="userSettings[setting.id]"
-                type="number"
-              />
-
-              <FormControl
-                v-if="setting.type == Array"
-                :options="setting.options"
-                :v-model="userSettings[setting.id]"
-                :model-value="userSettings[setting.id]"
-                :selected="userSettings[setting.id]"
-              />
-
-              <FormCheckRadio
-                v-if="setting.type == Boolean"
-                :v-model="userSettings[setting.id]"
-                :model-value="userSettings[setting.id]"
-                type="switch"
-              />
-            </FormField>
-          </div>
-
-          <template #footer>
-            <div class="space-x-2">
-              <BaseButton type="submit" color="success" label="Save" />
-              <BaseButton type="submit" color="danger" label="Revert" />
-            </div>
-          </template>
-        </CardBox>
       </div>
     </SectionMain>
   </LayoutAuthenticated>
