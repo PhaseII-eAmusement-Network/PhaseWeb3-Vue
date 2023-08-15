@@ -29,22 +29,22 @@ for (const game of gameData) {
       } else if (item == "net_records" && !game.noRecords) {
         menu.push({
           label: "Network Records",
-          to: `/games/${game.id}/records/all`,
+          to: `/games/${game.id}/records`,
         });
       } else if (item == "net_scores" && !game.noScores) {
         menu.push({
           label: "Network Scores",
-          to: `/games/${game.id}/scores/all`,
+          to: `/games/${game.id}/scores`,
         });
       } else if (item == "my_records" && !game.noRecords) {
         menu.push({
           label: "Personal Records",
-          to: `/games/${game.id}/records/personal`,
+          to: `/games/${game.id}/records/1`,
         });
       } else if (item == "my_scores" && !game.noScores) {
         menu.push({
           label: "Personal Scores",
-          to: `/games/${game.id}/scores/personal`,
+          to: `/games/${game.id}/scores/1`,
         });
       }
     }

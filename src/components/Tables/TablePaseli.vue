@@ -49,7 +49,11 @@ const pagesList = computed(() => {
       </tr>
     </thead>
     <tbody>
-      <tr v-for="transaction of itemsPaginated" :key="transaction.id">
+      <tr
+        v-for="transaction of itemsPaginated"
+        :key="transaction.id"
+        class="border-b-[12px] lg:border-b-0"
+      >
         <td data-label="User">{{ transaction.user }}</td>
         <td data-label="Value">{{ transaction.value }}</td>
         <td data-label="Machine">{{ transaction.machine }}</td>

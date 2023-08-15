@@ -48,7 +48,11 @@ const pagesList = computed(() => {
       </tr>
     </thead>
     <tbody>
-      <tr v-for="machine of itemsPaginated" :key="machine.id">
+      <tr
+        v-for="machine of itemsPaginated"
+        :key="machine.id"
+        class="border-b-[12px] lg:border-b-0"
+      >
         <td data-label="Name">{{ machine.name }}</td>
         <td data-label="PCBID">{{ machine.pcbid }}</td>
         <td data-label="Cabinet?">{{ machine.cabinet ? "Yes" : "No" }}</td>

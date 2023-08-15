@@ -140,9 +140,7 @@ function getCardStyle() {
 <template>
   <LayoutAuthenticated>
     <SectionMain>
-      <div
-        class="md:flex pb-6 md:px-5 md:space-x-10 md:justify-between md:items-center"
-      >
+      <div class="md:flex pb-6 md:justify-between md:items-center">
         <BaseButton
           :icon="mdiBackburger"
           :href="`/#/games/${gameID}`"

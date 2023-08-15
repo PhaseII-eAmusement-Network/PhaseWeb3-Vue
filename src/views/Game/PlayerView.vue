@@ -1,7 +1,12 @@
 <script setup>
 import { reactive } from "vue";
 import { useRoute, useRouter } from "vue-router";
-import { mdiAccountOutline, mdiBackburger } from "@mdi/js";
+import {
+  mdiAccountOutline,
+  mdiBackburger,
+  mdiPlaylistMusicOutline,
+  mdiFormatListText,
+} from "@mdi/js";
 import SectionMain from "@/components/SectionMain.vue";
 import CardBoxWidget from "@/components/CardBoxWidget.vue";
 import BaseButton from "@/components/BaseButton.vue";
@@ -164,9 +169,7 @@ function colorText(stat) {
 <template>
   <LayoutAuthenticated>
     <SectionMain>
-      <div
-        class="md:flex pb-6 md:px-5 md:space-x-10 md:justify-between md:items-center"
-      >
+      <div class="md:flex pb-6 md:justify-between md:items-center">
         <BaseButton
           :icon="mdiBackburger"
           :href="`/#/games/${gameID}`"
@@ -196,6 +199,23 @@ function colorText(stat) {
         <div class="bg-white dark:bg-slate-900/90 rounded-2xl pt-6 p-3">
           <div class="w-full">
             <ProfileCard use-small :profile="profile">
+              <div class="my-4 w-full flex gap-2 justify-center">
+                <BaseButton
+                  :href="`/#/games/${gameID}/scores/${profile.id}`"
+                  :icon="mdiPlaylistMusicOutline"
+                  class="w-full md:w-auto"
+                  color="info"
+                  label="View Scores"
+                />
+
+                <BaseButton
+                  :href="`/#/games/${gameID}/records/${profile.id}`"
+                  :icon="mdiFormatListText"
+                  class="w-full md:w-auto"
+                  color="info"
+                  label="View Records"
+                />
+              </div>
               <div class="my-6 grid grid-cols-1 md:grid-cols-4 gap-6">
                 <CardBoxWidget
                   v-for="stat in loadStats"

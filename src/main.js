@@ -4,8 +4,8 @@ import { createPinia } from "pinia";
 import App from "./App.vue";
 import router from "./router";
 import { useMainStore } from "@/stores/main.js";
-import { useStyleStore } from "@/stores/style.js";
-import { styleKey } from "@/config.js";
+// import { useStyleStore } from "@/stores/style.js";
+// import { styleKey } from "@/config.js";
 
 import "./css/main.css";
 
@@ -17,19 +17,21 @@ createApp(App).use(router).use(pinia).mount("#app");
 
 /* Init Pinia stores */
 const mainStore = useMainStore(pinia);
-const styleStore = useStyleStore(pinia);
+// const styleStore = useStyleStore(pinia);
 
 /* Fetch sample data */
 mainStore.fetch("clients");
 mainStore.fetch("history");
 
-/* App style */
+/* App style 
 styleStore.setStyle(localStorage[styleKey] ?? "basic");
+*/
 
-/* Dark mode */
+/* Dark mode 
 styleStore.setDarkMode(
   window.matchMedia("(prefers-color-scheme: dark)").matches
 );
+*/
 
 /* Default title tag */
 const defaultDocumentTitle = "PhaseII eAmusement Network";

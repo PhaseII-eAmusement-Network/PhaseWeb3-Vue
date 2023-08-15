@@ -6,6 +6,7 @@ import menuAside from "@/menuAside.js";
 import menuNavBar from "@/menuNavBar.js";
 import { useMainStore } from "@/stores/main.js";
 import { useStyleStore } from "@/stores/style.js";
+import LoadingModal from "@/components/LoadingModal.vue";
 import BaseIcon from "@/components/BaseIcon.vue";
 import NavBar from "@/components/NavBar.vue";
 import NavBarItemPlain from "@/components/NavBarItemPlain.vue";
@@ -49,6 +50,7 @@ const menuClick = (event, item) => {
       'overflow-hidden lg:overflow-visible': isAsideMobileExpanded,
     }"
   >
+    <LoadingModal :active="false" is-save />
     <div
       :class="[layoutAsidePadding, { 'ml-60 lg:ml-0': isAsideMobileExpanded }]"
       class="pt-14 min-h-screen w-screen lg:w-auto bg-gray-50 dark:bg-slate-800 dark:text-slate-100"
@@ -58,6 +60,7 @@ const menuClick = (event, item) => {
         :class="[
           layoutAsidePadding,
           { 'ml-60 lg:ml-0': isAsideMobileExpanded },
+          'opacity-95',
         ]"
         @menu-click="menuClick"
       >

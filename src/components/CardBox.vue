@@ -16,7 +16,6 @@ const props = defineProps({
   hasTable: Boolean,
   isForm: Boolean,
   isHoverable: Boolean,
-  isModal: Boolean,
   isAuth: {
     type: Boolean,
     default: false,
@@ -29,16 +28,14 @@ const slots = useSlots();
 
 const hasFooterSlot = computed(() => slots.footer && !!slots.footer());
 
+var color = "bg-slate-900 dark:bg-slate-900";
+
+if (props.isAuth) {
+  color = "bg-slate-800 md:bg-slate-900 dark:bg-slate-800 md:dark:bg-slate-900";
+}
+
 const componentClass = computed(() => {
-  const base = [
-    props.rounded,
-    props.flex,
-    props.isAuth
-      ? "dark:bg-slate-800 md:dark:bg-slate-900"
-      : props.isModal
-      ? "dark:bg-slate-900"
-      : "dark:bg-slate-900/70",
-  ];
+  const base = [props.rounded, props.flex, color];
 
   if (props.isHoverable) {
     base.push("hover:shadow-lg transition-shadow duration-500");

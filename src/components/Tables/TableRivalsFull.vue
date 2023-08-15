@@ -58,7 +58,11 @@ function getCardStyle(game) {
       </tr>
     </thead>
     <tbody>
-      <tr v-for="client in itemsPaginated" :key="client.id">
+      <tr
+        v-for="client in itemsPaginated"
+        :key="client.id"
+        class="border-b-[12px] lg:border-b-0"
+      >
         <td
           class="border-b-0 lg:w-6 before:hidden"
           :style="getCardStyle('pride')"

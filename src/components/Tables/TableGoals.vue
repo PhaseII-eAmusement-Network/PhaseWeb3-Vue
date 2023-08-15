@@ -52,7 +52,11 @@ const pagesList = computed(() => {
       </tr>
     </thead>
     <tbody>
-      <tr v-for="goal of itemsPaginated" :key="goal.id">
+      <tr
+        v-for="goal of itemsPaginated"
+        :key="goal.id"
+        class="border-b-[12px] lg:border-b-0"
+      >
         <td data-label="Game">{{ goal.game }}</td>
         <td data-label="Goal">{{ goal.goal.replace("# of", goal.value) }}</td>
         <td v-if="!isPast" data-label="Status">{{ goal.status }}</td>

@@ -48,7 +48,11 @@ const pagesList = computed(() => {
       </tr>
     </thead>
     <tbody>
-      <tr v-for="client in itemsPaginated" :key="client.id">
+      <tr
+        v-for="client in itemsPaginated"
+        :key="client.id"
+        class="border-b-[12px] lg:border-b-0"
+      >
         <td data-label="Username">TRMAZI</td>
         <td data-label="Rival ID">1234-5678</td>
         <td data-label="Creation Date">10/22/2022</td>

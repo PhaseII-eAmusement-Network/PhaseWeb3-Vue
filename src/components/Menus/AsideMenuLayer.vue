@@ -4,7 +4,7 @@ import { computed } from "vue";
 import { useStyleStore } from "@/stores/style.js";
 import AsideMenuList from "@/components/Menus/AsideMenuList.vue";
 import AsideMenuItem from "@/components/Menus/AsideMenuItem.vue";
-import BaseIcon from "@/components/BaseIcon.vue";
+import BaseButton from "@/components/BaseButton.vue";
 
 defineProps({
   menu: {
@@ -36,26 +36,28 @@ const asideLgCloseClick = (event) => {
 <template>
   <aside
     id="aside"
-    class="lg:py-2 lg:pl-2 w-60 fixed flex z-40 top-0 h-screen transition-position overflow-hidden"
+    class="w-60 xl:w-62 fixed flex z-40 top-0 h-screen transition-position shadow-xl shadow-gray-900"
   >
     <div
       :class="styleStore.asideStyle"
-      class="lg:rounded-2xl flex-1 flex flex-col overflow-hidden dark:bg-slate-900"
+      class="rounded-r-2xl md:rounded-none flex-1 flex flex-col pt-2 overflow-hidden dark:bg-slate-900"
     >
-      <div class="dark:bg-slate-900">
-        <div class="flex items-center space-x-3 my-2 mx-2">
+      <div class="dark:bg-slate-900 space-y-4 my-2 pb-4 border-b-2">
+        <div class="flex items-center space-x-3 mx-2">
           <img class="rounded-full shadow-xl" src="/favicon.png" />
           <h2 class="text-md">
             <samp class="tracking-tighter">PhaseII</samp> eAmusement Network
           </h2>
         </div>
-        <hr class="my-2" />
-        <button
-          class="hidden lg:inline-block xl:hidden p-3"
-          @click.prevent="asideLgCloseClick"
-        >
-          <BaseIcon :path="mdiClose" />
-        </button>
+        <div class="hidden lg:block xl:hidden w-full">
+          <BaseButton
+            :icon="mdiClose"
+            label="Close"
+            color="danger"
+            class="w-full mx-2"
+            @click.prevent="asideLgCloseClick"
+          />
+        </div>
       </div>
       <div
         :class="
