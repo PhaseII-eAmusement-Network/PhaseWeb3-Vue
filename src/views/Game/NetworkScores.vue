@@ -30,6 +30,7 @@ const scores = [
   {
     id: 1,
     player: "TRMAZI",
+    playerId: 1,
     timestamp: "2023.05.30 12:00:39 AM",
     isHighScore: false,
     song: {
@@ -50,6 +51,7 @@ const scores = [
   {
     id: 1,
     player: "BARRU",
+    playerId: 2,
     timestamp: "2023.05.30 12:00:39 AM",
     isHighScore: false,
     song: {
@@ -70,6 +72,7 @@ const scores = [
   {
     id: 1,
     player: "HO",
+    playerId: 3,
     timestamp: "2023.05.30 12:00:39 AM",
     isHighScore: false,
     song: {

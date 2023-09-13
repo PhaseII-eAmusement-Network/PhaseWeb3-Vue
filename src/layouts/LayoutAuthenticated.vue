@@ -53,7 +53,7 @@ const menuClick = (event, item) => {
     <LoadingModal :active="false" is-save />
     <div
       :class="[layoutAsidePadding, { 'ml-60 lg:ml-0': isAsideMobileExpanded }]"
-      class="pt-14 min-h-screen w-screen lg:w-auto bg-gray-50 dark:bg-slate-800 dark:text-slate-100"
+      class="pt-14 min-h-screen w-screen lg:w-auto bg-gradient-to-b from-slate-900 from-5% via-slate-800 via-10% to-slate-800 to-85% dark:text-slate-100"
     >
       <NavBar
         :menu="menuNavBar"

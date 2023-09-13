@@ -13,6 +13,7 @@ const form = reactive({
   login: "john.doe",
   pass: "highly-secure-password-fYjUw-",
   remember: true,
+  spinin: false,
 });
 
 const router = useRouter();
@@ -27,6 +28,7 @@ const submit = () => {
     <div class="flex md:min-h-screen md:items-center md:justify-center">
       <CardBox
         class="w-full md:w-auto rounded-none md:rounded-xl md:drop-shadow-xl"
+        :class="form.spinin ? 'animate-spin' : 'animate-none'"
         has-table
         is-auth
       >
@@ -36,9 +38,12 @@ const submit = () => {
           <div class="flex flex-col items-center text-wrap h-full md:mt-5">
             <img src="/favicon.png" class="rounded-full shadow-lg mb-2" />
             <h1 class="text-xl"><samp>PhaseII</samp></h1>
-            <p class="text-sm text-gray-700 dark:text-white/75">
+            <button
+              class="text-sm text-gray-700 dark:text-white/75"
+              @click="form.spinin = !form.spinin"
+            >
               Spinnin' since 2021
-            </p>
+            </button>
             <hr class="border-r-1 my-1 w-full" />
             <p class="text-lg relative bottom-0">Please log in.</p>
           </div>

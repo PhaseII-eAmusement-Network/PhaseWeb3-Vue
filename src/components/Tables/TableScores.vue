@@ -41,7 +41,14 @@ const currentPage = reactive(0);
         :key="score.id"
         class="border-b-[12px] lg:border-b-0"
       >
-        <td v-if="!isPersonal" data-label="Player">{{ score.player }}</td>
+        <td v-if="!isPersonal" data-label="Player">
+          <a
+            class="grid grid-cols-1 hover:underline decoration-blue-700"
+            :href="`/#/games/${game}/profiles/${score.playerId}`"
+          >
+            {{ score.player }}
+          </a>
+        </td>
 
         <td data-label="Timestamp">{{ score.timestamp }}</td>
 

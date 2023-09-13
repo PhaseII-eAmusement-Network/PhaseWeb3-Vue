@@ -40,7 +40,7 @@ const asideLgCloseClick = (event) => {
   >
     <div
       :class="styleStore.asideStyle"
-      class="rounded-r-2xl md:rounded-none flex-1 flex flex-col pt-2 overflow-hidden dark:bg-slate-900"
+      class="rounded-br-2xl md:rounded-none flex-1 flex flex-col pt-2 overflow-hidden dark:bg-slate-900"
     >
       <div class="dark:bg-slate-900 space-y-4 my-2 pb-4 border-b-2">
         <div class="flex items-center space-x-3 mx-2">

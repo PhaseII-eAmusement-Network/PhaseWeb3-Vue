@@ -28,10 +28,10 @@ const username = computed(() => props.username);
         class="w-full h-auto bg-gray-100 dark:bg-slate-800 rounded-full overflow-hidden"
       />
       <img
-        src="/assets/border/trans.png"
+        src="/assets/border/pride.png"
         alt="border"
-        class="absolute inset-0 w-full h-full overflow-hidden"
-        style="object-fit: fill; transform: scale(1.02)"
+        class="absolute inset-0 w-full h-full overflow-hidden scale-[1.02]"
+        style="object-fit: fill"
       />
     </div>
     <slot />
