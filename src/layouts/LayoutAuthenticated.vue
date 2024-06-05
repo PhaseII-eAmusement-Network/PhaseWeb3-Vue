@@ -40,6 +40,9 @@ const menuClick = (event, item) => {
     //
   }
 };
+
+const active = false;
+const isSave = true;
 </script>
 
 <template>
@@ -50,7 +53,12 @@ const menuClick = (event, item) => {
       'overflow-hidden lg:overflow-visible': isAsideMobileExpanded,
     }"
   >
-    <LoadingModal :active="false" is-save />
+    <LoadingModal
+      :active="active"
+      :is-save="isSave"
+      class="transition-opacity duration-300 ease-out"
+      :class="{ 'opacity-100': active, 'opacity-0': !active }"
+    />
     <div
       :class="[layoutAsidePadding, { 'ml-60 lg:ml-0': isAsideMobileExpanded }]"
       class="pt-14 min-h-screen w-screen lg:w-auto bg-gradient-to-b from-slate-900 from-5% via-slate-800 via-10% to-slate-800 to-85% dark:text-slate-100"

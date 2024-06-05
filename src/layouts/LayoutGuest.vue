@@ -6,9 +6,7 @@ const styleStore = useStyleStore();
 
 <template>
   <div :class="{ dark: styleStore.darkMode }">
-    <div
-      class="bg-gradient-to-tr dark:from-gray-700 dark:via-gray-900 dark:to-gray-700 dark:text-slate-100"
-    >
+    <div class="bg-gray-950 dark:text-slate-100">
       <div class="animated animatedFadeInUp fadeInUp">
         <slot />
       </div>
