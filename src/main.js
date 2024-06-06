@@ -1,42 +1,29 @@
 import { createApp } from "vue";
 import { createPinia } from "pinia";
+import Vue3EasyDataTable from "vue3-easy-data-table";
+import "vue3-easy-data-table/dist/style.css";
 
 import App from "./App.vue";
 import router from "./router";
 import { useMainStore } from "@/stores/main.js";
-// import { useStyleStore } from "@/stores/style.js";
-// import { styleKey } from "@/config.js";
 
 import "./css/main.css";
 
-/* Init Pinia */
 const pinia = createPinia();
 
-/* Create Vue app */
-createApp(App).use(router).use(pinia).mount("#app");
+const app = createApp(App);
 
-/* Init Pinia stores */
-const mainStore = useMainStore(pinia);
-// const styleStore = useStyleStore(pinia);
+app.use(router);
+app.use(pinia);
 
-/* Fetch sample data */
-mainStore.fetch("clients");
-mainStore.fetch("history");
+app.component("EasyDataTable", Vue3EasyDataTable);
 
-/* App style 
-styleStore.setStyle(localStorage[styleKey] ?? "basic");
-*/
+app.mount("#app");
 
-/* Dark mode 
-styleStore.setDarkMode(
-  window.matchMedia("(prefers-color-scheme: dark)").matches
-);
-*/
+useMainStore(pinia);
 
-/* Default title tag */
 const defaultDocumentTitle = "PhaseII eAmusement Network";
 
-/* Set document title from route meta */
 router.afterEach((to) => {
   document.title = to.meta?.title
     ? `${to.meta.title} — ${defaultDocumentTitle}`

@@ -4,7 +4,7 @@ import { mdiCounter, mdiBackburger } from "@mdi/js";
 import SectionMain from "@/components/SectionMain.vue";
 import LayoutAuthenticated from "@/layouts/LayoutAuthenticated.vue";
 import SectionTitleLine from "@/components/SectionTitleLine.vue";
-import TableScores from "@/components/Tables/TableScores.vue";
+import GeneralTable from "@/components/GeneralTable.vue";
 import CardBox from "@/components/CardBox.vue";
 import BaseButton from "@/components/BaseButton.vue";
 import { getGameInfo } from "@/constants";
@@ -26,69 +26,99 @@ if (!thisGame) {
   });
 }
 
+const headers = [
+  { text: "Player", value: "username", width: 120 },
+  { text: "Timestamp", value: "timestamp", width: 180 },
+  { text: "Song", value: "song.name", width: 200 },
+  { text: "Artist", value: "song.artist", width: 150 },
+  { text: "Chart", value: "song.chart", width: 100 },
+  { text: "Difficulty", value: "song.difficulty", width: 100 },
+  { text: "Grade", value: "grade" },
+  { text: "Points", value: "points" },
+  { text: "Combos", value: "combo" },
+  { text: "Type", value: "type" },
+];
+
 const scores = [
   {
-    id: 1,
-    player: "TRMAZI",
-    playerId: 1,
+    username: "TRMAZI",
+    userId: 1,
     timestamp: "2023.05.30 12:00:39 AM",
-    isHighScore: false,
     song: {
       id: 10741,
       name: "100 Sec. Kitchen Battle!!",
       artist: "Orange Lounge",
       chart: "SP EXPERT",
-      difficulty: "12",
+      difficulty: 12,
     },
     grade: "B+",
     points: 787690,
     combo: 42,
-    location: {
-      arcade: "Ho-House",
-      type: "Cab",
-    },
+    type: "Cab",
   },
   {
-    id: 1,
-    player: "BARRU",
-    playerId: 2,
+    username: "TRMAZI",
+    userId: 1,
     timestamp: "2023.05.30 12:00:39 AM",
-    isHighScore: false,
     song: {
       id: 10741,
       name: "100 Sec. Kitchen Battle!!",
       artist: "Orange Lounge",
       chart: "SP EXPERT",
-      difficulty: "12",
+      difficulty: 12,
     },
     grade: "B+",
     points: 787690,
     combo: 42,
-    location: {
-      arcade: "Ho-House",
-      type: "Cab",
-    },
+    type: "Cab",
   },
   {
-    id: 1,
-    player: "HO",
-    playerId: 3,
+    username: "TRMAZI",
+    userId: 1,
     timestamp: "2023.05.30 12:00:39 AM",
-    isHighScore: false,
     song: {
       id: 10741,
       name: "100 Sec. Kitchen Battle!!",
       artist: "Orange Lounge",
       chart: "SP EXPERT",
-      difficulty: "12",
+      difficulty: 12,
     },
     grade: "B+",
     points: 787690,
     combo: 42,
-    location: {
-      arcade: "Ho-House",
-      type: "Cab",
+    type: "Cab",
+  },
+  {
+    username: "TRMAZI",
+    userId: 1,
+    timestamp: "2023.05.30 12:00:39 AM",
+    song: {
+      id: 10741,
+      name: "100 Sec. Kitchen Battle!!",
+      artist: "Orange Lounge",
+      chart: "SP EXPERT",
+      difficulty: 12,
     },
+    grade: "B+",
+    points: 787690,
+    combo: 42,
+    type: "Cab",
+  },
+  {
+    username: "TRMAZI",
+    userId: 1,
+    timestamp: "2023.05.30 12:00:39 AM",
+    song: {
+      id: 10741,
+      name: "100 Sec. Kitchen Battle!!",
+      artist: "Orange Lounge",
+      chart: "SP EXPERT",
+      difficulty: 12,
+    },
+    grade: "B+",
+    points: 78769330,
+    combo: 42,
+    type: "Cab",
   },
 ];
 </script>
@@ -115,7 +145,7 @@ const scores = [
       />
 
       <CardBox has-table>
-        <TableScores :game="gameID" :entries="scores" />
+        <GeneralTable :headers="headers" :items="scores" />
       </CardBox>
     </SectionMain>
   </LayoutAuthenticated>

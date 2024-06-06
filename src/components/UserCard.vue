@@ -2,11 +2,11 @@
 import { useMainStore } from "@/stores/main";
 import {
   mdiSecurity,
-  mdiTestTube,
-  mdiAccountStar,
-  mdiCodeBraces,
+  // mdiTestTube,
+  // mdiAccountStar,
+  // mdiCodeBraces,
   mdiAccountOff,
-  mdiAccountCheck,
+  // mdiAccountCheck,
 } from "@mdi/js";
 import BaseLevel from "@/components/BaseLevel.vue";
 import UserAvatarCurrentUser from "@/components/UserAvatarCurrentUser.vue";
@@ -32,11 +32,11 @@ const mainStore = useMainStore();
 
 const greeting = GetRandomMessage();
 
-var last = {
-  game: "beatmaniaIIDX",
-  version: "22 PENDUAL",
-  arcade: "Ho-House",
-};
+// var last = {
+//   game: "beatmaniaIIDX",
+//   version: "22 PENDUAL",
+//   arcade: "Ho-House",
+// };
 
 function getCardStyle(game) {
   if (game !== null) {
@@ -50,7 +50,7 @@ function getCardStyle(game) {
 </script>
 
 <template>
-  <CardBox :style="getCardStyle('iidx')">
+  <CardBox :style="getCardStyle(mainStore.userCardStyle)">
     <BaseLevel
       type="justify-around lg:justify-center md:space-x-4 lg:space-x-0"
       class="bg-white dark:bg-slate-900/90 rounded-2xl p-3"
@@ -66,24 +66,24 @@ function getCardStyle(game) {
             <b>{{ mainStore.userName }}</b>
           </h1>
           <p v-if="useSmall && !evenSmaller" class="text-md md:text-lg">
-            Last seen playing <b>{{ last.game }} {{ last.version }}</b> at
-            <b>{{ last.arcade }}</b>
+            <!-- Last seen playing <b>{{ last.game }} {{ last.version }}</b> at
+            <b>{{ last.arcade }}</b> -->
           </p>
         </div>
         <div
           v-if="!evenSmaller"
-          class="md:grid md:grid-flow-col md:auto-cols-max md:grid-rows-2 flex flex-wrap gap-4 md:place-content-start place-content-center"
+          class="md:grid md:grid-flow-col md:auto-cols-max md:grid-rows-1 flex flex-wrap gap-4 md:place-content-start place-content-center"
         >
           <PillTag label="System Admin" color="danger" :icon="mdiSecurity" />
-          <PillTag label="Beta Tester" color="warning" :icon="mdiTestTube" />
+          <!-- <PillTag label="Beta Tester" color="warning" :icon="mdiTestTube" />
           <PillTag label="Veteran" color="success" :icon="mdiAccountStar" />
-          <PillTag label="Active Dev" color="info" :icon="mdiCodeBraces" />
+          <PillTag label="Active Dev" color="info" :icon="mdiCodeBraces" /> -->
           <PillTag label="Private Profile" color="info" :icon="mdiAccountOff" />
-          <PillTag
+          <!-- <PillTag
             label="Public Profile"
             color="success"
             :icon="mdiAccountCheck"
-          />
+          /> -->
         </div>
       </div>
       <div v-if="!useSmall" class="text-center md:text-right">

@@ -17,7 +17,7 @@ const thisNews = NewsData.find((x) => x.id === newsID);
 const newsBody = thisNews.content.split("\n");
 
 function goBack() {
-  $router.push("/news");
+  $router.push("/");
 }
 </script>
 
@@ -52,7 +52,7 @@ function goBack() {
           <template #footer>
             <BaseButtons>
               <BaseButton
-                label="News"
+                label="Home"
                 color="info"
                 :icon="mdiBackburger"
                 icon-size="20"

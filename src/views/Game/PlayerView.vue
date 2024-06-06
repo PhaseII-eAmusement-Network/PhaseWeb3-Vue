@@ -175,8 +175,11 @@ function colorText(stat) {
           :href="`/#/games/${gameID}`"
           class="w-full md:w-auto"
           color="info"
-          label="Go Back"
+          :label="`${
+            thisGame.shortName ? thisGame.shortName : thisGame.name
+          } Home`"
         />
+
         <div
           v-if="thisGame.versions"
           class="mt-2 md:mt-0 md:w-1/3 md:text-right"

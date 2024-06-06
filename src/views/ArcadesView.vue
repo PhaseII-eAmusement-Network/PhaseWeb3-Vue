@@ -8,7 +8,6 @@ import CardBoxComponentEmpty from "@/components/CardBoxComponentEmpty.vue";
 import CardBoxArcade from "@/components/Cards/CardBoxArcade.vue";
 import FormField from "@/components/FormField.vue";
 import FormControl from "@/components/FormControl.vue";
-import { arcadeList } from "@/constants";
 </script>
 
 <script>
@@ -18,9 +17,7 @@ const filterForm = reactive({
 
 export default {
   data() {
-    return {
-      arcadeData: arcadeList,
-    };
+    return {};
   },
   methods: {
     filterArcade() {

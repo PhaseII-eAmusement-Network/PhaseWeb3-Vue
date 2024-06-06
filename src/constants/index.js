@@ -346,6 +346,10 @@ export const gameData = [
     noRivals: true,
     noScores: true,
     noRecords: true,
+    extraHeaders: [
+      { text: "Region", value: "region", sortable: true, width: 100 },
+      { text: "Home Arcade", value: "homeArcade", sortable: true, width: 150 },
+    ],
   },
   {
     id: GameConstants.BISHI_BASHI_NEW,
@@ -600,6 +604,15 @@ export const gameData = [
     name: "DRUMMANIA",
     icon: null,
     cardBG: null,
+    extraHeaders: [
+      { text: "SKILL LEVEL", value: "skill.level", sortable: true, width: 120 },
+      {
+        text: "SKILL POINT",
+        value: "skill.point",
+        sortable: true,
+        width: 150,
+      },
+    ],
     versions: [
       {
         id: VersionConstants.DRUMMANIA_1ST,
@@ -720,6 +733,14 @@ export const gameData = [
     icon: null,
     cardBG: null,
     noRivals: true,
+    extraHeaders: [
+      {
+        text: "SKILL POINT",
+        value: "skill.point",
+        sortable: true,
+        width: 150,
+      },
+    ],
     versions: GITADORA_VERSION_DATA,
   },
   {
@@ -728,6 +749,14 @@ export const gameData = [
     icon: null,
     cardBG: null,
     noRivals: true,
+    extraHeaders: [
+      {
+        text: "SKILL POINT",
+        value: "skill.point",
+        sortable: true,
+        width: 150,
+      },
+    ],
     versions: GITADORA_VERSION_DATA,
   },
   {
@@ -735,6 +764,15 @@ export const gameData = [
     name: "GUITAR FREAKS",
     icon: null,
     cardBG: null,
+    extraHeaders: [
+      { text: "SKILL LEVEL", value: "skill.level", sortable: true, width: 120 },
+      {
+        text: "SKILL POINT",
+        value: "skill.point",
+        sortable: true,
+        width: 150,
+      },
+    ],
     versions: [
       {
         id: VersionConstants.GUITARFREAKS_1ST,
@@ -820,6 +858,22 @@ export const gameData = [
     shortName: "IIDX",
     icon: "/assets/icon/iidx.png",
     cardBG: "/assets/card/iidx.png",
+    extraHeaders: [
+      { text: "SP DAN", value: "sp.dan", sortable: true, width: 100 },
+      { text: "DP DAN", value: "dp.dan", sortable: true, width: 100 },
+      {
+        text: "SP DJPOINT",
+        value: "sp.point",
+        sortable: true,
+        width: 150,
+      },
+      {
+        text: "DP DJPOINT",
+        value: "dp.point",
+        sortable: true,
+        width: 150,
+      },
+    ],
     versions: [
       {
         id: VersionConstants.IIDX,
@@ -951,6 +1005,22 @@ export const gameData = [
     noRivals: true,
     noScores: true,
     noRecords: true,
+    extraHeaders: [
+      { text: "SP DAN", value: "sp.dan", sortable: true, width: 100 },
+      { text: "DP DAN", value: "dp.dan", sortable: true, width: 100 },
+      {
+        text: "SP DJPOINT",
+        value: "sp.point",
+        sortable: true,
+        width: 150,
+      },
+      {
+        text: "DP DJPOINT",
+        value: "dp.point",
+        sortable: true,
+        width: 150,
+      },
+    ],
     versions: [
       {
         id: VersionConstants.IIDX,
@@ -1035,6 +1105,9 @@ export const gameData = [
     name: "jubeat",
     icon: null,
     cardBG: null,
+    extraHeaders: [
+      { text: "Jubility", value: "jubility", sortable: true, width: 120 },
+    ],
     versions: [
       {
         id: VersionConstants.JUBEAT,
@@ -1102,6 +1175,9 @@ export const gameData = [
     noRivals: true,
     noScores: true,
     noRecords: true,
+    extraHeaders: [
+      { text: "Girlfriend", value: "gf", sortable: true, width: 100 },
+    ],
     versions: [
       {
         id: VersionConstants.LOVEPLUS_ARCADE,
@@ -1364,6 +1440,10 @@ export const gameData = [
     shortName: "SDVX",
     icon: null,
     cardBG: null,
+    extraHeaders: [
+      { text: "Skill Level", value: "skillLevel", sortable: true, width: 100 },
+      { text: "VOLFORCE", value: "vf", sortable: true, width: 100 },
+    ],
     versions: [
       {
         id: VersionConstants.SDVX_BOOTH,

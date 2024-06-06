@@ -1,11 +1,4 @@
-import {
-  mdiMonitor,
-  mdiNewspaperVariant,
-  mdiStorefront,
-  mdiStoreCog,
-  mdiGamepad,
-} from "@mdi/js";
-
+import { mdiMonitor, mdiStoreCog, mdiGamepad } from "@mdi/js";
 import { gameData, arcadeList } from "./constants";
 
 var sortedMenu = [];
@@ -77,16 +70,11 @@ export default [
     icon: mdiMonitor,
     label: "Dashboard",
   },
-  {
-    to: "/news",
-    icon: mdiNewspaperVariant,
-    label: "News",
-  },
-  {
-    to: "/arcades",
-    icon: mdiStorefront,
-    label: "Public Arcades",
-  },
+  // {
+  //   to: "/arcades",
+  //   icon: mdiStorefront,
+  //   label: "Public Arcades",
+  // },
   {
     label: "My Arcades",
     icon: mdiStoreCog,

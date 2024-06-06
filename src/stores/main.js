@@ -7,13 +7,10 @@ export const useMainStore = defineStore("main", {
     userName: null,
     userEmail: null,
     userAvatar: null,
+    userCardStyle: null,
 
     /* Field focus with ctrl+k (to register only once) */
     isFieldFocusRegistered: false,
-
-    /* Sample data (commonly used) */
-    clients: [],
-    history: [],
   }),
   actions: {
     setUser(payload) {
@@ -25,6 +22,9 @@ export const useMainStore = defineStore("main", {
       }
       if (payload.avatar) {
         this.userAvatar = payload.avatar;
+      }
+      if (payload.cardStyle) {
+        this.userCardStyle = payload.cardStyle;
       }
     },
 

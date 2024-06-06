@@ -1,10 +1,5 @@
 <script setup>
-import {
-  mdiServerNetwork,
-  mdiMessage,
-  mdiScoreboard,
-  mdiTournament,
-} from "@mdi/js";
+import { mdiServerNetwork, mdiMessage, mdiScoreboard } from "@mdi/js";
 import SectionMain from "@/components/SectionMain.vue";
 import CardBox from "@/components/CardBox.vue";
 import BaseButton from "@/components/BaseButton.vue";
@@ -65,7 +60,7 @@ import PillTag from "@/components/PillTag.vue";
           </template>
         </CardBox>
 
-        <CardBox>
+        <!-- <CardBox>
           <PillTag
             :icon="mdiTournament"
             color="info"
@@ -83,7 +78,7 @@ import PillTag from "@/components/PillTag.vue";
               <BaseButton type="submit" color="danger" label="Unlink" />
             </div>
           </template>
-        </CardBox>
+        </CardBox> -->
       </div>
     </SectionMain>
   </LayoutAuthenticated>

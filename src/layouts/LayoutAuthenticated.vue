@@ -18,6 +18,7 @@ useMainStore().setUser({
   email: "sex@sex.com",
   avatar:
     "https://cdn.discordapp.com/avatars/372530806628941824/a2d1b66d0e2100a571305b8281c26f8b",
+  cardStyle: "time",
 });
 
 const layoutAsidePadding = "xl:pl-60";
@@ -42,7 +43,7 @@ const menuClick = (event, item) => {
 };
 
 const active = false;
-const isSave = true;
+const isSave = false;
 </script>
 
 <template>

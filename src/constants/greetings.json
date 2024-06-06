@@ -148,5 +148,60 @@
         "author": "Trmazi",
         "header": "<username> is the DJ of this gig!",
         "comment": "Are you good, or are you cool?"
+    },
+    {
+        "author": "Yonokid",
+        "header": "<username>. In the WebbedUI. Straight up \"Phase'n it\".",
+        "comment": "and by \"it\", haha, well, let's justr say; My II"
+    },
+    {
+        "author": "SQWERLY!",
+        "header": "<username> always told me that it was just a phase…",
+        "comment": "It wasn't a Phase, it was a PhaseII!"
+    },
+    {
+        "author": "yaladre",
+        "header": "<username>, is your refrigerator running?",
+        "comment": "Because you better go catch it!"
+    },
+    {
+        "author": "Kuusetsu",
+        "header": "If C's get degrees, <username>",
+        "comment": "You'd still fail."
+    },
+    {
+        "author": "Azui",
+        "header": "Ready to break the future, <username>?",
+        "comment": "All your MFCs are belong to us!"
+    },
+    {
+        "author": "towelie",
+        "header": "Don't forget to bring a towel, <username>!",
+        "comment": ""
+    },
+    {
+        "author": "barru",
+        "header": "Reject modernity, <username>",
+        "comment": "Embrace BEMANI"
+    },
+    {
+        "author": "barru",
+        "header": "Insert \"<username>\"'s greeting here",
+        "comment": "Insert caption here"
+    },
+    {
+        "author": "barru",
+        "header": "Welcome back, <username>!",
+        "comment": "We’re glad to have you."
+    },
+    {
+        "author": "barru",
+        "header": "Nice scores, <username>!",
+        "comment": "You never fail to impress."
+    },
+    {
+        "author": "Galexion",
+        "header": "Initializing User <username>...",
+        "comment": "Communicating With Server... Please Wait..."
     }
 ]

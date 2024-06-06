@@ -89,12 +89,12 @@ const submit = () => {
                 href="/#/auth/register"
               />
 
-              <h2>Forgot Password?</h2>
+              <!-- <h2>Forgot Password?</h2>
               <BaseButton
                 label="Password Reset"
                 color="warning"
                 href="/#/auth/reset"
-              />
+              /> -->
             </div>
           </div>
         </div>

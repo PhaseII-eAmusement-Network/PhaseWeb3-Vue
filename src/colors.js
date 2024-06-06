@@ -48,7 +48,7 @@ export const getButtonColor = (
       success: "ring-emerald-300 dark:ring-emerald-700",
       danger: "ring-red-300 dark:ring-red-700",
       warning: "ring-yellow-300 dark:ring-yellow-700",
-      info: "ring-blue-300 dark:ring-blue-700",
+      info: "ring-blue-300 dark:ring-blue-800",
     },
     active: {
       white: "bg-gray-100",
@@ -65,10 +65,10 @@ export const getButtonColor = (
       whiteDark: "bg-white text-black dark:bg-slate-900 dark:text-white",
       lightDark: "bg-gray-100 text-black dark:bg-slate-800 dark:text-white",
       contrast: "bg-gray-800 text-white dark:bg-white dark:text-black",
-      success: "bg-emerald-600 dark:bg-emerald-500 text-white",
-      danger: "bg-red-600 dark:bg-red-500 text-white",
-      warning: "bg-yellow-600 dark:bg-yellow-500 text-white",
-      info: "bg-blue-600 dark:bg-blue-500 text-white",
+      success: "bg-emerald-600 dark:bg-emerald-700 text-white",
+      danger: "bg-red-600 dark:bg-red-800 text-white",
+      warning: "bg-yellow-600 dark:bg-yellow-700 text-white",
+      info: "bg-blue-600 dark:bg-blue-900 text-white",
     },
     bgHover: {
       white: "hover:bg-gray-100",

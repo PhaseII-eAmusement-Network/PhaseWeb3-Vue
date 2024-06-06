@@ -11,7 +11,7 @@ import SectionMain from "@/components/SectionMain.vue";
 import CardBox from "@/components/CardBox.vue";
 import BaseDivider from "@/components/BaseDivider.vue";
 import FormField from "@/components/FormField.vue";
-import FormCheckRadio from "@/components/FormCheckRadio.vue";
+// import FormCheckRadio from "@/components/FormCheckRadio.vue";
 import FormControl from "@/components/FormControl.vue";
 import BaseButton from "@/components/BaseButton.vue";
 import UserCard from "@/components/UserCard.vue";
@@ -48,7 +48,7 @@ const submitPass = () => {
       <UserCard class="mb-6" use-small even-smaller />
       <SectionTitleLine :icon="mdiAccount" title="Profile Settings" main />
 
-      <CardBox is-form class="mb-6" @submit.prevent="">
+      <!-- <CardBox is-form class="mb-6" @submit.prevent="">
         <PillTag color="info" label="Discord Notifications" class="mb-4" />
         <div class="grid gap-4 grid-cols-2 md:grid-cols-4">
           <FormCheckRadio
@@ -80,7 +80,7 @@ const submitPass = () => {
             class="outline outline-gray-400 rounded-xl outline-1 text-sm md:text-md p-2"
           />
         </div>
-      </CardBox>
+      </CardBox> -->
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
         <CardBox is-form class="row-span-1" @submit.prevent="submitProfile">
@@ -96,7 +96,7 @@ const submitPass = () => {
           </FormField>
           <FormField
             label="E-mail"
-            help="Used for Gravatar and Password Resetting"
+            help="Not currently used, but will be soon™️"
           >
             <FormControl
               v-model="profileForm.email"
@@ -119,12 +119,12 @@ const submitPass = () => {
             />
           </FormField>
 
-          <FormField
+          <!-- <FormField
             label="Public Profile"
             help="Allow your profile to be seen publicly"
           >
             <FormCheckRadio name="system" :model-value="true" type="switch" />
-          </FormField>
+          </FormField> -->
 
           <template #footer>
             <BaseButton color="success" type="submit" label="Update" />

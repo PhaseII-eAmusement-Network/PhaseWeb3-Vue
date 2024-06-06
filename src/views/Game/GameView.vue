@@ -10,8 +10,10 @@ import CardBox from "@/components/CardBox.vue";
 import CardBoxWidget from "@/components/CardBoxWidget.vue";
 import FormControl from "@/components/FormControl.vue";
 import ProfileCard from "@/components/Cards/ProfileCard.vue";
-import TablePlayers from "@/components/Tables/TablePlayers.vue";
+import GeneralTable from "@/components/GeneralTable.vue";
 import { getGameInfo } from "@/constants";
+import { dashCode } from "@/constants/userData";
+import { getIIDXDan } from "@/constants/danClass";
 
 const $route = useRoute();
 const $router = useRouter();
@@ -48,17 +50,88 @@ const profile = {
 gameID = $route.params.id;
 thisGame = getGameInfo(gameID);
 
-if (!thisGame.versions) {
-  versionForm.currentVersion = 1;
-}
-
-if (!thisGame) {
+if (thisGame == null) {
   $router.push({
     name: "ErrorPage",
     params: {
       catchAll: "404",
     },
   });
+}
+
+const headers = [];
+headers.push({
+  text: "Player",
+  value: "username",
+  sortable: true,
+  width: 120,
+});
+
+if (!thisGame.noRivals) {
+  headers.push({ text: "Rival ID", value: "extid", width: 100 });
+}
+
+headers.push(
+  { text: "Plays", value: "plays", sortable: true, width: 50 },
+  { text: "Last Arcade", value: "last.arcade", sortable: true, width: 150 }
+);
+
+if (thisGame.extraHeaders) {
+  for (var header of thisGame.extraHeaders) {
+    headers.push(header);
+  }
+}
+
+const items = [
+  {
+    username: "Trmazi",
+    extid: 12345678,
+    plays: 30,
+    last: { arcade: "Ghettocade" },
+    sp: { dan: 100, point: 2001 },
+    dp: { dan: 200, point: 3000 },
+  },
+  {
+    username: "Trmazi",
+    extid: 12345678,
+    plays: 31,
+    last: { arcade: "Ghettocade" },
+    sp: { dan: 1900, point: 2000 },
+    dp: { dan: 1200, point: 3000 },
+  },
+  {
+    username: "Trmazi",
+    extid: 12345678,
+    plays: 32,
+    last: { arcade: "Ghettocade" },
+    sp: { dan: 800, point: 2000 },
+    dp: { dan: 900, point: 3000 },
+  },
+];
+
+var formattedItems = [];
+for (var item of items) {
+  if (item.extid) {
+    item.extid = dashCode(item.extid);
+  }
+
+  if (item.sp) {
+    if (item.sp.dan !== undefined) {
+      item.sp.dan = getIIDXDan(item.sp.dan).short;
+    }
+  }
+
+  if (item.dp) {
+    if (item.dp.dan !== undefined) {
+      item.dp.dan = getIIDXDan(item.dp.dan).short;
+    }
+  }
+
+  formattedItems.push(item);
+}
+
+if (!thisGame.versions) {
+  versionForm.currentVersion = 1;
 }
 
 function getSources() {
@@ -103,16 +176,9 @@ function getCardStyle() {
           </div>
           <div class="w-full">
             <ProfileCard :game="gameID" :profile="profile">
-              <div class="grid grid-cols-1 gap-6 lg:grid-cols-4 pt-6">
-                <CardBoxWidget :number="3733" label="Scores (All Versions)" />
-                <CardBoxWidget :number="1244" label="Plays (All Versions)" />
-                <CardBoxWidget
-                  prefix="#"
-                  :number="43"
-                  suffix=" / 300"
-                  label="Ranking (All Versions)"
-                />
-                <CardBoxWidget :number="2" label="Rivals" /></div
+              <div class="grid grid-cols-2 gap-6 pt-6">
+                <CardBoxWidget :number="3733" label="Scores" />
+                <CardBoxWidget :number="1244" label="Plays" /></div
             ></ProfileCard>
           </div>
         </div>
@@ -124,7 +190,7 @@ function getCardStyle() {
           class="bg-white dark:bg-slate-900/95 rounded-2xl lg:flex lg:justify-between"
         >
           <div class="w-full">
-            <TablePlayers />
+            <GeneralTable :headers="headers" :items="formattedItems" />
           </div>
         </div>
       </CardBox>

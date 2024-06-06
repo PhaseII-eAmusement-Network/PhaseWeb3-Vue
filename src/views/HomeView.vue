@@ -1,29 +1,29 @@
 <script setup>
 import { ref, onMounted } from "vue";
 import {
-  mdiAccountMultipleOutline,
-  mdiChartTimelineVariant,
   mdiReload,
   mdiChartBellCurveCumulative,
   mdiGamepad,
   mdiTestTube,
-  mdiFlagCheckered,
+  mdiNewspaperVariant,
 } from "@mdi/js";
 import UserCard from "@/components/UserCard.vue";
 import * as chartConfig from "@/components/Charts/chart.config.js";
 import LineChart from "@/components/Charts/LineChart.vue";
 import SectionMain from "@/components/SectionMain.vue";
-import CardBoxWidget from "@/components/CardBoxWidget.vue";
 import CardBox from "@/components/CardBox.vue";
 import BaseButton from "@/components/BaseButton.vue";
 import CardBoxGameStat from "@/components/CardBoxGameStat.vue";
 import LayoutAuthenticated from "@/layouts/LayoutAuthenticated.vue";
 import SectionTitleLine from "@/components/SectionTitleLine.vue";
 import PillTag from "@/components/PillTag.vue";
-import TableRivalsFull from "@/components/Tables/TableRivalsFull.vue";
-import TableGoals from "@/components/Tables/TableGoals.vue";
-import NotificationBar from "@/components/NotificationBar.vue";
 import { GameConstants } from "@/constants";
+
+// Public beta news data
+import CardBoxNews from "@/components/Cards/CardBoxNews.vue";
+import CardBoxComponentEmpty from "@/components/CardBoxComponentEmpty.vue";
+import testNews from "@/constants/news.json";
+const newsData = testNews;
 
 const chartData = ref(null);
 
@@ -35,34 +35,34 @@ onMounted(() => {
   fillChartData();
 });
 
-const setGoals = [
-  {
-    game: "DanceDance Revolution",
-    type: "Rank",
-    goal: "Top 10 Ranking",
-    status: "#10 of 132",
-    deadline: "3 Weeks",
-  },
-  {
-    game: "pop'n music",
-    type: "Plays",
-    goal: "100 Plays",
-    status: "2 Plays Since Creation",
-    deadline: "1 Week",
-  },
-];
+// const setGoals = [
+//   {
+//     game: "DanceDance Revolution",
+//     type: "Rank",
+//     goal: "Top 10 Ranking",
+//     status: "#10 of 132",
+//     deadline: "3 Weeks",
+//   },
+//   {
+//     game: "pop'n music",
+//     type: "Plays",
+//     goal: "100 Plays",
+//     status: "2 Plays Since Creation",
+//     deadline: "1 Week",
+//   },
+// ];
 
 const gameStats = [
   {
     id: GameConstants.IIDX,
     username: "DJ. TRMAZI",
-    type: "ranking",
-    value: "#22 of 330",
+    type: "plays",
+    value: 33,
   },
   {
     id: GameConstants.DDR,
     username: "TRMAZI",
-    type: "scores",
+    type: "plays",
     value: 233,
   },
   {
@@ -74,7 +74,7 @@ const gameStats = [
   {
     id: GameConstants.SDVX,
     username: "TRMAZI",
-    type: "scores",
+    type: "plays",
     value: 420,
   },
 ];
@@ -86,44 +86,48 @@ const gameStats = [
       <h2 class="pb-4 text-4xl lg:text-5xl">Welcome to <samp>PhaseII</samp></h2>
       <UserCard class="mb-6" />
 
-      <div class="my-6">
+      <!-- For public beta, we'll load the news here. -->
+      <SectionTitleLine :icon="mdiNewspaperVariant" title="Network News" main />
+
+      <div class="grid gap-4 grid-cols-1 w-full pb-4">
+        <CardBoxNews
+          v-for="news of newsData"
+          :id="news.id"
+          :key="news.id"
+          :title="news.title"
+          :content="news.content"
+          :date="news.timestamp"
+          :cover="news.cover"
+          class="w-full h-full"
+        />
+      </div>
+      <CardBoxComponentEmpty v-if="!newsData || !newsData.length" />
+
+      <!-- <div class="my-6">
         <NotificationBar color="info">
           You have unread news!
           <template #right>
             <a href="#/news" class="text-blue-300 hover:underline">View now</a>
           </template>
         </NotificationBar>
-      </div>
+      </div> -->
 
-      <SectionTitleLine
+      <!-- This is for tracking stats. -->
+      <!-- <SectionTitleLine
         :icon="mdiChartTimelineVariant"
         title="Quick Stats"
         main
-      />
-
-      <div class="grid grid-cols-1 gap-6 lg:grid-cols-3 mb-6">
+      /> -->
+      <!-- <div class="grid grid-cols-1 gap-6 lg:grid-cols-3 mb-6">
         <CardBoxWidget
           trend="12% (from last week)"
           trend-type="up"
           :number="37"
           label="Scores (This week)"
         />
-        <CardBoxWidget
-          trend="12%"
-          trend-type="down"
-          :number="770"
-          :prefix="'¢'"
-          label="PhaseCoin"
-        />
-        <CardBoxWidget
-          trend="None Completed"
-          trend-type="alert"
-          :number="2"
-          label="Active Goals"
-        />
-      </div>
+      </div> -->
 
-      <SectionTitleLine :icon="mdiGamepad" title="Game Stats" main />
+      <SectionTitleLine :icon="mdiGamepad" title="Showcase" main />
       <div
         class="grid grid-flow-row auto-rows-auto grid-cols-1 md:grid-cols-2 gap-5 mb-5"
       >
@@ -137,12 +141,12 @@ const gameStats = [
         />
       </div>
 
-      <SectionTitleLine :icon="mdiFlagCheckered" title="Active Goals" main />
+      <!-- <SectionTitleLine :icon="mdiFlagCheckered" title="Active Goals" main />
       <div class="mb-6">
         <CardBox has-table>
           <TableGoals :goals="setGoals" />
         </CardBox>
-      </div>
+      </div> -->
 
       <SectionTitleLine
         :icon="mdiChartBellCurveCumulative"
@@ -167,10 +171,10 @@ const gameStats = [
         </div>
       </CardBox>
 
-      <SectionTitleLine :icon="mdiAccountMultipleOutline" title="Rivals" main />
+      <!-- <SectionTitleLine :icon="mdiAccountMultipleOutline" title="Rivals" main />
       <CardBox has-table>
         <TableRivalsFull />
-      </CardBox>
+      </CardBox> -->
     </SectionMain>
   </LayoutAuthenticated>
 </template>
