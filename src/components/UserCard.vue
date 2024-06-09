@@ -74,7 +74,12 @@ function getCardStyle(game) {
           v-if="!evenSmaller"
           class="md:grid md:grid-flow-col md:auto-cols-max md:grid-rows-1 flex flex-wrap gap-4 md:place-content-start place-content-center"
         >
-          <PillTag label="System Admin" color="danger" :icon="mdiSecurity" />
+          <PillTag
+            v-if="mainStore.userAdmin"
+            label="System Admin"
+            color="danger"
+            :icon="mdiSecurity"
+          />
           <!-- <PillTag label="Beta Tester" color="warning" :icon="mdiTestTube" />
           <PillTag label="Veteran" color="success" :icon="mdiAccountStar" />
           <PillTag label="Active Dev" color="info" :icon="mdiCodeBraces" /> -->

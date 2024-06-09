@@ -327,6 +327,10 @@ export const gameData = [
     icon: null,
     cardBG: null,
     noRivals: true,
+    scoreHeaders: [
+      { text: "Combos", value: "combo" },
+      { text: "Halo", value: "halo" },
+    ],
     versions: [
       {
         id: VersionConstants.BEATSTREAM,
@@ -346,7 +350,7 @@ export const gameData = [
     noRivals: true,
     noScores: true,
     noRecords: true,
-    extraHeaders: [
+    playerHeaders: [
       { text: "Region", value: "region", sortable: true, width: 100 },
       { text: "Home Arcade", value: "homeArcade", sortable: true, width: 150 },
     ],
@@ -376,6 +380,10 @@ export const gameData = [
     icon: null,
     cardBG: null,
     noRivals: true,
+    scoreHeaders: [
+      { text: "Combos", value: "combo" },
+      { text: "Halo", value: "halo" },
+    ],
     versions: [
       {
         id: VersionConstants.DANCE_RUSH_STARDOM,
@@ -389,6 +397,11 @@ export const gameData = [
     shortName: "DDR",
     icon: null,
     cardBG: null,
+    scoreHeaders: [
+      { text: "EX Score", value: "exscore" },
+      { text: "Combos", value: "combo" },
+      { text: "Halo", value: "halo" },
+    ],
     versions: [
       {
         id: VersionConstants.DDR_1ST_MIX,
@@ -524,6 +537,11 @@ export const gameData = [
     name: "DDR OmniMIX",
     icon: "/assets/icon/ddr.png",
     cardBG: "/assets/card/ddr.png",
+    scoreHeaders: [
+      { text: "EX Score", value: "exscore" },
+      { text: "Combos", value: "combo" },
+      { text: "Halo", value: "halo" },
+    ],
     versions: [
       {
         id: VersionConstants.DDR_1ST_MIX,
@@ -604,7 +622,7 @@ export const gameData = [
     name: "DRUMMANIA",
     icon: null,
     cardBG: null,
-    extraHeaders: [
+    playerHeaders: [
       { text: "SKILL LEVEL", value: "skill.level", sortable: true, width: 120 },
       {
         text: "SKILL POINT",
@@ -612,6 +630,12 @@ export const gameData = [
         sortable: true,
         width: 150,
       },
+    ],
+    scoreHeaders: [
+      { text: "Combos", value: "combo" },
+      { text: "Halo", value: "halo" },
+      { text: "Skill %", value: "skill.perc" },
+      { text: "Skill Point", value: "skill.point" },
     ],
     versions: [
       {
@@ -733,13 +757,19 @@ export const gameData = [
     icon: null,
     cardBG: null,
     noRivals: true,
-    extraHeaders: [
+    playerHeaders: [
       {
         text: "SKILL POINT",
         value: "skill.point",
         sortable: true,
         width: 150,
       },
+    ],
+    scoreHeaders: [
+      { text: "Combos", value: "combo" },
+      { text: "Halo", value: "halo" },
+      { text: "Skill %", value: "skill.perc" },
+      { text: "Skill Point", value: "skill.point" },
     ],
     versions: GITADORA_VERSION_DATA,
   },
@@ -749,13 +779,19 @@ export const gameData = [
     icon: null,
     cardBG: null,
     noRivals: true,
-    extraHeaders: [
+    playerHeaders: [
       {
         text: "SKILL POINT",
         value: "skill.point",
         sortable: true,
         width: 150,
       },
+    ],
+    scoreHeaders: [
+      { text: "Combos", value: "combo" },
+      { text: "Halo", value: "halo" },
+      { text: "Skill %", value: "skill.perc" },
+      { text: "Skill Point", value: "skill.point" },
     ],
     versions: GITADORA_VERSION_DATA,
   },
@@ -764,7 +800,13 @@ export const gameData = [
     name: "GUITAR FREAKS",
     icon: null,
     cardBG: null,
-    extraHeaders: [
+    scoreHeaders: [
+      { text: "Combos", value: "combo" },
+      { text: "Halo", value: "halo" },
+      { text: "Skill %", value: "skill.perc" },
+      { text: "Skill Point", value: "skill.point" },
+    ],
+    playerHeaders: [
       { text: "SKILL LEVEL", value: "skill.level", sortable: true, width: 120 },
       {
         text: "SKILL POINT",
@@ -858,7 +900,14 @@ export const gameData = [
     shortName: "IIDX",
     icon: "/assets/icon/iidx.png",
     cardBG: "/assets/card/iidx.png",
-    extraHeaders: [
+    scoreHeaders: [
+      { text: "EX Score", value: "exscore" },
+      { text: "Combos", value: "combo" },
+      { text: "Misses", value: "misses" },
+      { text: "Halo", value: "halo" },
+      { text: "Gauge %", value: "gauge" },
+    ],
+    playerHeaders: [
       { text: "SP DAN", value: "sp.dan", sortable: true, width: 100 },
       { text: "DP DAN", value: "dp.dan", sortable: true, width: 100 },
       {
@@ -1005,7 +1054,7 @@ export const gameData = [
     noRivals: true,
     noScores: true,
     noRecords: true,
-    extraHeaders: [
+    playerHeaders: [
       { text: "SP DAN", value: "sp.dan", sortable: true, width: 100 },
       { text: "DP DAN", value: "dp.dan", sortable: true, width: 100 },
       {
@@ -1105,7 +1154,12 @@ export const gameData = [
     name: "jubeat",
     icon: null,
     cardBG: null,
-    extraHeaders: [
+    scoreHeaders: [
+      { text: "Combos", value: "combo" },
+      { text: "Halo", value: "halo" },
+      { text: "Music Rate", value: "rate" },
+    ],
+    playerHeaders: [
       { text: "Jubility", value: "jubility", sortable: true, width: 120 },
     ],
     versions: [
@@ -1175,7 +1229,7 @@ export const gameData = [
     noRivals: true,
     noScores: true,
     noRecords: true,
-    extraHeaders: [
+    playerHeaders: [
       { text: "Girlfriend", value: "gf", sortable: true, width: 100 },
     ],
     versions: [
@@ -1204,6 +1258,10 @@ export const gameData = [
     name: "Museca",
     icon: null,
     cardBG: null,
+    scoreHeaders: [
+      { text: "Combos", value: "combo" },
+      { text: "Halo", value: "halo" },
+    ],
     versions: [
       {
         id: VersionConstants.MUSECA,
@@ -1220,6 +1278,10 @@ export const gameData = [
     name: "Nostalgia",
     icon: null,
     cardBG: null,
+    scoreHeaders: [
+      { text: "Combos", value: "combo" },
+      { text: "Halo", value: "halo" },
+    ],
     versions: [
       {
         id: VersionConstants.NOSTALGIA,
@@ -1275,6 +1337,10 @@ export const gameData = [
     shortName: "pop'n",
     icon: "/assets/icon/popn.png",
     cardBG: "/assets/card/popn.png",
+    scoreHeaders: [
+      { text: "Combos", value: "combo" },
+      { text: "Halo", value: "halo" },
+    ],
     versions: [
       {
         id: VersionConstants.POPN_MUSIC,
@@ -1397,6 +1463,11 @@ export const gameData = [
     name: "ReflecBeat",
     icon: null,
     cardBG: null,
+    scoreHeaders: [
+      { text: "Combos", value: "combo" },
+      { text: "Misses", value: "misses" },
+      { text: "Halo", value: "halo" },
+    ],
     versions: [
       {
         id: VersionConstants.REFLEC_BEAT,
@@ -1440,7 +1511,11 @@ export const gameData = [
     shortName: "SDVX",
     icon: null,
     cardBG: null,
-    extraHeaders: [
+    scoreHeaders: [
+      { text: "Combos", value: "combo" },
+      { text: "Halo", value: "halo" },
+    ],
+    playerHeaders: [
       { text: "Skill Level", value: "skillLevel", sortable: true, width: 100 },
       { text: "VOLFORCE", value: "vf", sortable: true, width: 100 },
     ],

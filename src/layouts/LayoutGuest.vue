@@ -39,6 +39,7 @@ const styleStore = useStyleStore();
   }
 }
 
+/* Define animated class */
 .animated {
   animation-duration: 0.7s;
   animation-fill-mode: both;
@@ -46,6 +47,7 @@ const styleStore = useStyleStore();
   -webkit-animation-fill-mode: both;
 }
 
+/* Define custom class for fade in animation */
 .animatedFadeInUp {
   opacity: 0;
 }
@@ -54,5 +56,15 @@ const styleStore = useStyleStore();
   opacity: 0;
   animation-name: fadeInUp;
   -webkit-animation-name: fadeInUp;
+}
+
+/* Media query for smaller screens */
+@media screen and (max-width: 768px) {
+  .animatedFadeInUp,
+  .fadeInUp {
+    opacity: 1;
+    animation-name: none !important;
+    -webkit-animation-name: none !important;
+  }
 }
 </style>

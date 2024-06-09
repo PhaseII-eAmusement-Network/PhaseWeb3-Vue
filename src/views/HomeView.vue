@@ -22,8 +22,9 @@ import { GameConstants } from "@/constants";
 // Public beta news data
 import CardBoxNews from "@/components/Cards/CardBoxNews.vue";
 import CardBoxComponentEmpty from "@/components/CardBoxComponentEmpty.vue";
-import testNews from "@/constants/news.json";
-const newsData = testNews;
+import { useMainStore } from "@/stores/main";
+const mainStore = useMainStore();
+var newsData = ref([]);
 
 const chartData = ref(null);
 
@@ -31,9 +32,20 @@ const fillChartData = () => {
   chartData.value = chartConfig.sampleChartData();
 };
 
-onMounted(() => {
+onMounted(async () => {
   fillChartData();
+  try {
+    const data = await mainStore.fetchAllNews();
+    newsData.value = data;
+  } catch (error) {
+    console.error("Failed to fetch news data:", error);
+  }
 });
+
+function humanReadableTime(timestamp) {
+  const date = new Date(timestamp * 1000);
+  return date.toLocaleString();
+}
 
 // const setGoals = [
 //   {
@@ -89,15 +101,15 @@ const gameStats = [
       <!-- For public beta, we'll load the news here. -->
       <SectionTitleLine :icon="mdiNewspaperVariant" title="Network News" main />
 
-      <div class="grid gap-4 grid-cols-1 w-full pb-4">
+      <div v-if="newsData.length" class="grid gap-4 grid-cols-1 w-full pb-4">
         <CardBoxNews
           v-for="news of newsData"
           :id="news.id"
           :key="news.id"
           :title="news.title"
-          :content="news.content"
-          :date="news.timestamp"
-          :cover="news.cover"
+          :content="news.body"
+          :date="humanReadableTime(news.timestamp)"
+          :cover="news.data.img"
           class="w-full h-full"
         />
       </div>

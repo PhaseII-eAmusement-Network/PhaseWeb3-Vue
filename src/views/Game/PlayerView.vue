@@ -1,6 +1,7 @@
 <script setup>
-import { reactive } from "vue";
+import { reactive, onMounted } from "vue";
 import { useRoute, useRouter } from "vue-router";
+import { useMainStore } from "@/stores/main";
 import {
   mdiAccountOutline,
   mdiBackburger,
@@ -20,6 +21,7 @@ import { getGitadoraColor, getJubilityColor } from "@/constants/skillColor";
 
 const $route = useRoute();
 const $router = useRouter();
+const mainStore = useMainStore();
 var gameID = null;
 var thisGame = null;
 
@@ -49,6 +51,15 @@ const profile = {
     jubility: 7600,
   },
 };
+
+var userVersions = {};
+onMounted(() => {
+  userVersions = mainStore.profiles[gameID];
+  console.log(userVersions);
+  if (userVersions != undefined) {
+    versionForm.currentVersion = Math.max(...userVersions);
+  }
+});
 
 const loadStats = [
   {
@@ -181,7 +192,7 @@ function colorText(stat) {
         />
 
         <div
-          v-if="thisGame.versions"
+          v-if="thisGame.versions && profile && userVersions"
           class="mt-2 md:mt-0 md:w-1/3 md:text-right"
         >
           <h2 class="text-md sm:text-lg md:text-xl font-bold p-2">
@@ -195,7 +206,7 @@ function colorText(stat) {
       </div>
       <SectionTitleLine :icon="mdiAccountOutline" title="View Profile" main />
       <div
-        v-if="versionForm.currentVersion"
+        v-if="versionForm.currentVersion && profile && userVersions"
         :style="getCardStyle()"
         class="rounded-2xl mb-6"
       >

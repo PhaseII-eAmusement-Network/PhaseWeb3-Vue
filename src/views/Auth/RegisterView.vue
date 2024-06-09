@@ -2,6 +2,7 @@
 import { reactive } from "vue";
 import { useRouter } from "vue-router";
 import { mdiAccount, mdiAsterisk } from "@mdi/js";
+import Cookies from "js-cookie";
 import CardBox from "@/components/CardBox.vue";
 import FormCheckRadio from "@/components/FormCheckRadio.vue";
 import FormField from "@/components/FormField.vue";
@@ -9,18 +10,67 @@ import FormControl from "@/components/FormControl.vue";
 import BaseButton from "@/components/BaseButton.vue";
 import LayoutGuest from "@/layouts/LayoutGuest.vue";
 
+const router = useRouter();
+
+function validateEmail(email) {
+  var re = /\S+@\S+\.\S+/;
+  return re.test(email);
+}
+
+const submit = async () => {
+  if (
+    !form.username ||
+    !form.email ||
+    !form.pass ||
+    !form.pass_conf ||
+    !form.pin ||
+    !form.cardId
+  ) {
+    alert("Please fill in all fields.");
+    return;
+  }
+
+  if (!validateEmail(form.email)) {
+    alert("Please use a valid email.");
+    return;
+  }
+
+  if (form.pass !== form.pass_conf) {
+    alert("Passwords do not match!");
+    return;
+  }
+
+  // Simulate login API call
+  const response = await fakeLoginAPI(form.username, form.pass);
+  if (response.success) {
+    console.log(response);
+    Cookies.set("userAuthKey", response.authKey, {
+      expires: form.remember ? 30 : 0,
+    });
+    router.push("/");
+  } else {
+    alert("Create failed. Please try again."); // Show error message
+  }
+};
+
+// Simulated login API function
+const fakeLoginAPI = async (username, password) => {
+  // Simulate API call delay
+  await new Promise((resolve) => setTimeout(resolve, 1000));
+
+  // Simulated success response with generated auth key
+  return { success: true, authKey: "generatedAuthKey123" };
+};
+
 const form = reactive({
   username: "",
   email: "",
   pass: "",
+  pass_conf: "",
+  pin: "",
+  cardId: "",
   remember: true,
 });
-
-const router = useRouter();
-
-const submit = () => {
-  router.push("/");
-};
 </script>
 
 <template>
@@ -75,7 +125,7 @@ const submit = () => {
 
             <FormField label="Password Confirmation">
               <FormControl
-                v-model="form.pass"
+                v-model="form.pass_conf"
                 :icon="mdiAsterisk"
                 type="password"
                 name="password"
@@ -85,7 +135,7 @@ const submit = () => {
 
             <FormField label="Card ID">
               <FormControl
-                v-model="form.email"
+                v-model="form.cardId"
                 :icon="mdiAccount"
                 name="card"
                 autocomplete="card"
@@ -94,7 +144,7 @@ const submit = () => {
 
             <FormField label="Game PIN">
               <FormControl
-                v-model="form.pass"
+                v-model="form.pin"
                 :icon="mdiAsterisk"
                 type="password"
                 name="password"

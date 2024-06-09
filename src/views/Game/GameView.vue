@@ -1,8 +1,15 @@
 <script setup>
 import { reactive } from "vue";
 import { useRoute, useRouter } from "vue-router";
-import { mdiAccountMultiple } from "@mdi/js";
+import {
+  mdiAccountMultiple,
+  mdiPlaylistMusicOutline,
+  mdiFormatListText,
+} from "@mdi/js";
+import { useMainStore } from "@/stores/main";
+import { onMounted } from "vue";
 import SectionMain from "@/components/SectionMain.vue";
+import BaseButton from "@/components/BaseButton.vue";
 import SectionTitleLine from "@/components/SectionTitleLine.vue";
 import GameTitleLine from "@/components/GameTitleLine.vue";
 import LayoutAuthenticated from "@/layouts/LayoutAuthenticated.vue";
@@ -17,6 +24,7 @@ import { getIIDXDan } from "@/constants/danClass";
 
 const $route = useRoute();
 const $router = useRouter();
+const mainStore = useMainStore();
 var gameID = null;
 var thisGame = null;
 
@@ -24,7 +32,7 @@ const versionForm = reactive({
   currentVersion: null,
 });
 
-const profile = {
+var profile = {
   id: 1,
   name: "Trmazi",
   extid: 12345678,
@@ -76,8 +84,8 @@ headers.push(
   { text: "Last Arcade", value: "last.arcade", sortable: true, width: 150 }
 );
 
-if (thisGame.extraHeaders) {
-  for (var header of thisGame.extraHeaders) {
+if (thisGame.playerHeaders) {
+  for (var header of thisGame.playerHeaders) {
     headers.push(header);
   }
 }
@@ -134,6 +142,15 @@ if (!thisGame.versions) {
   versionForm.currentVersion = 1;
 }
 
+var userVersions = {};
+onMounted(() => {
+  userVersions = mainStore.profiles[gameID];
+  console.log(userVersions);
+  if (userVersions != undefined) {
+    versionForm.currentVersion = Math.max(...userVersions);
+  }
+});
+
 function getSources() {
   var sources = null;
   if (!versionForm.currentVersion) {
@@ -160,10 +177,17 @@ function getCardStyle() {
         <div class="bg-white dark:bg-slate-900/90 rounded-2xl p-3">
           <div class="w-full">
             <div
-              class="md:flex pb-6 md:px-5 md:space-x-10 md:justify-between md:items-center"
+              class="md:flex md:px-5 md:space-x-10 md:justify-between md:items-center"
             >
               <GameTitleLine :path="thisGame.icon" :title="thisGame.name" />
-              <div v-if="thisGame.versions" class="md:w-1/3 md:text-right">
+              <div
+                v-if="
+                  thisGame.versions &&
+                  userVersions &&
+                  gameID in mainStore.profiles
+                "
+                class="md:w-1/3 md:text-right"
+              >
                 <h2 class="text-md sm:text-lg md:text-xl font-bold p-2">
                   Select Version
                 </h2>
@@ -174,12 +198,30 @@ function getCardStyle() {
               </div>
             </div>
           </div>
-          <div class="w-full">
+          <div v-if="gameID in mainStore.profiles" class="w-full pt-6">
             <ProfileCard :game="gameID" :profile="profile">
               <div class="grid grid-cols-2 gap-6 pt-6">
                 <CardBoxWidget :number="3733" label="Scores" />
                 <CardBoxWidget :number="1244" label="Plays" /></div
             ></ProfileCard>
+          </div>
+          <div v-else class="md:w-1/2 grid grid-cols-1 md:grid-cols-2 gap-3">
+            <BaseButton
+              v-if="!thisGame.noScores"
+              :href="`/#/games/${gameID}/scores`"
+              :icon="mdiPlaylistMusicOutline"
+              :outline="false"
+              color="info"
+              label="Network Scores"
+            />
+            <BaseButton
+              v-if="!thisGame.noRecords"
+              :href="`/#/games/${gameID}/records`"
+              :icon="mdiFormatListText"
+              :outline="false"
+              color="info"
+              label="Network Records"
+            />
           </div>
         </div>
       </div>

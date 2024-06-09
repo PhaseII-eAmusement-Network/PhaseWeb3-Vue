@@ -1,7 +1,8 @@
 <script setup>
-import { reactive } from "vue";
 import { useRouter } from "vue-router";
 import { mdiAccount, mdiAsterisk } from "@mdi/js";
+import { reactive } from "vue";
+import { useMainStore } from "@/stores/main.js";
 import CardBox from "@/components/CardBox.vue";
 import FormCheckRadio from "@/components/FormCheckRadio.vue";
 import FormField from "@/components/FormField.vue";
@@ -9,17 +10,31 @@ import FormControl from "@/components/FormControl.vue";
 import BaseButton from "@/components/BaseButton.vue";
 import LayoutGuest from "@/layouts/LayoutGuest.vue";
 
+const router = useRouter();
+const mainStore = useMainStore();
+
+// Reactive form data
 const form = reactive({
-  login: "john.doe",
-  pass: "highly-secure-password-fYjUw-",
+  login: "",
+  pass: "",
   remember: true,
   spinin: false,
 });
 
-const router = useRouter();
+const submit = async () => {
+  if (!form.login || !form.pass) {
+    alert("Please fill in all fields.");
+    return;
+  }
 
-const submit = () => {
-  router.push("/");
+  const response = await mainStore.createUserSession(
+    form.login,
+    form.pass,
+    form.remember
+  );
+  if (response) {
+    router.push("/");
+  }
 };
 </script>
 
@@ -55,6 +70,7 @@ const submit = () => {
                 :icon="mdiAccount"
                 name="login"
                 autocomplete="username"
+                required
               />
             </FormField>
 
@@ -65,6 +81,7 @@ const submit = () => {
                 type="password"
                 name="password"
                 autocomplete="current-password"
+                required
               />
             </FormField>
 

@@ -1,6 +1,7 @@
 <script setup>
-import { reactive } from "vue";
+import { reactive, onMounted } from "vue";
 import { useRoute, useRouter } from "vue-router";
+import { useMainStore } from "@/stores/main";
 import { mdiAccountTieHat, mdiBackburger } from "@mdi/js";
 import SectionMain from "@/components/SectionMain.vue";
 import CardBox from "@/components/CardBox.vue";
@@ -15,6 +16,7 @@ import { getGameInfo } from "@/constants";
 
 const $route = useRoute();
 const $router = useRouter();
+const mainStore = useMainStore();
 var gameID = null;
 var thisGame = null;
 
@@ -118,6 +120,15 @@ if (!thisGame.versions) {
   versionForm.currentVersion = 1;
 }
 
+var userVersions = {};
+onMounted(() => {
+  userVersions = mainStore.profiles[gameID];
+  console.log(userVersions);
+  if (userVersions != undefined) {
+    versionForm.currentVersion = Math.max(...userVersions);
+  }
+});
+
 function getSources() {
   var sources = null;
   if (!versionForm.currentVersion) {
@@ -149,7 +160,7 @@ function getCardStyle() {
           label="Go Back"
         />
         <div
-          v-if="thisGame.versions"
+          v-if="thisGame.versions && profile && userVersions"
           class="mt-2 md:mt-0 md:w-1/3 md:text-right"
         >
           <h2 class="text-md sm:text-lg md:text-xl font-bold p-2">
@@ -174,12 +185,16 @@ function getCardStyle() {
       >
         <div class="bg-white dark:bg-slate-900/90 rounded-2xl pt-6 p-3">
           <div class="w-full">
-            <ProfileCard use-small :profile="profile" />
+            <ProfileCard
+              v-if="profile && userVersions"
+              use-small
+              :profile="profile"
+            />
           </div>
         </div>
       </div>
 
-      <div v-if="versionForm.currentVersion">
+      <div v-if="versionForm.currentVersion && profile && userVersions">
         <CardBox>
           <div>
             <FormField

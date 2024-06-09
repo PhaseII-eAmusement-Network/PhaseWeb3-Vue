@@ -181,12 +181,12 @@
     },
     {
         "author": "barru",
-        "header": "Reject modernity, <username>",
-        "comment": "Embrace BEMANI"
+        "header": "Reject modernity, <username>.",
+        "comment": "Embrace BEMANI."
     },
     {
         "author": "barru",
-        "header": "Insert \"<username>\"'s greeting here",
+        "header": "Insert <username>'s greeting here",
         "comment": "Insert caption here"
     },
     {
@@ -203,5 +203,20 @@
         "author": "Galexion",
         "header": "Initializing User <username>...",
         "comment": "Communicating With Server... Please Wait..."
+    },
+    {
+        "author": "Roganis",
+        "header": "If Phase is so cool, why didn't they make a second one, <username>?",
+        "comment": "Spoiler alert : they did."
+    },
+    {
+        "author": "Shilofax",
+        "header": "Hello, <username>!",
+        "comment": "May we interest you in a Comcast outage?"
+    },
+    {
+        "author": "Nevy",
+        "header": "Answer the question, <username>.",
+        "comment": "Why was nibs banned?"
     }
 ]

@@ -32,39 +32,60 @@ const profile = {
 };
 
 const headers = [
-  { text: "Timestamp", value: "timestamp", width: 180 },
-  { text: "Song", value: "song.name", width: 200 },
-  { text: "Artist", value: "song.artist", width: 150 },
+  { text: "Timestamp", value: "timestamp", width: 150 },
+  { text: "Song", value: "song.title", width: 180 },
+  { text: "Artist", value: "song.artist", width: 180 },
   { text: "Chart", value: "song.chart", width: 100 },
-  { text: "Difficulty", value: "song.difficulty", width: 100 },
-  { text: "Grade", value: "grade" },
-  { text: "Points", value: "points" },
-  { text: "Combos", value: "combo" },
-  { text: "Type", value: "type" },
+  { text: "Grade", value: "grade", width: 80 },
+  { text: "¥ Score", value: "points", width: 100 },
 ];
+
+if (thisGame.scoreHeaders) {
+  for (var header of thisGame.scoreHeaders) {
+    headers.push(header);
+  }
+}
+
+headers.push({ text: "Type", value: "type", width: 80 });
 
 const scores = [
   {
-    timestamp: "2023.05.30 12:00:39 AM",
+    timestamp: 1649542921,
     song: {
       id: 10741,
-      name: "100 Sec. Kitchen Battle!!",
-      artist: "Orange Lounge",
-      chart: "SP EXPERT",
+      title: "Colorful Days ~NEWラブプラス メインテーマ~",
+      artist: "高嶺愛花＆小早川凛子＆姉ヶ崎寧々",
+      chart: "SP EXPERT\n★12",
       difficulty: 12,
     },
-    grade: "B+",
-    points: 787690,
-    combo: 42,
+    grade: "AAA",
+    points: "1,000,000",
+    exscore: 1000,
+    combo: 1000,
+    halo: "MFC",
     type: "Cab",
+    raised: true,
   },
 ];
+
+var formattedItems = [];
+for (var item of scores) {
+  if (item.timestamp) {
+    const date = new Date(item.timestamp * 1000);
+    item.timestamp = date.toLocaleString();
+    if (item.raised) {
+      item.timestamp = `${item.timestamp}\nNew High Score!`;
+    }
+  }
+
+  formattedItems.push(item);
+}
 </script>
 
 <template>
   <LayoutAuthenticated>
     <SectionMain>
-      <div class="grid grid-cols-1 md:max-w-[150px] space-y-3 mb-5">
+      <div class="grid grid-cols-1 md:max-w-[180px] space-y-3 mb-5">
         <BaseButton
           :icon="mdiBackburger"
           :href="`/#/games/${gameID}/profiles/${profile.id}`"
@@ -93,7 +114,7 @@ const scores = [
       />
 
       <CardBox has-table>
-        <GeneralTable :headers="headers" :items="scores" />
+        <GeneralTable :headers="headers" :items="formattedItems" />
       </CardBox>
     </SectionMain>
   </LayoutAuthenticated>
