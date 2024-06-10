@@ -218,5 +218,40 @@
         "author": "Nevy",
         "header": "Answer the question, <username>.",
         "comment": "Why was nibs banned?"
+    },
+    {
+        "author": "barru",
+        "header": "Go For The Top, <username>!",
+        "comment": "You can do it."
+    },
+    {
+        "author": "TOPET",
+        "header": "Welcome to PhaseII, <username>!",
+        "comment": "Thank You For Playing!"
+    },
+    {
+        "author": "Manamaster",
+        "header": "Are you excited for IIDX 40 <username>?",
+        "comment": "Lawnmower Edition! So hyped!"
+    },
+    {
+        "author": "Manamaster",
+        "header": "Have you heard of Beatcraft Cyclon <username>?",
+        "comment": "It's super good I swear. You should play it. You really should."
+    },
+    {
+        "author": "Azui",
+        "header": "Do you think about me, <username>?",
+        "comment": "-EGOISM 440-"
+    },
+    {
+        "author": "Manamaster",
+        "header": "Go for Infini-Dan <username>!",
+        "comment": "You can do it!"
+    },
+    {
+        "author": "Manamaster",
+        "header": "Have you played portal on the Xbox 360 <username>?",
+        "comment": "Its ffffffrrrrrreeeeeeeeeee"
     }
 ]
