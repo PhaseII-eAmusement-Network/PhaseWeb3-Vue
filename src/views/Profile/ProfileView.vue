@@ -1,5 +1,5 @@
 <script setup>
-import { reactive } from "vue";
+import { reactive, ref, watch } from "vue";
 import { useMainStore } from "@/stores/main";
 import {
   mdiAccount,
@@ -20,10 +20,25 @@ import SectionTitleLine from "@/components/SectionTitleLine.vue";
 import PillTag from "@/components/PillTag.vue";
 
 const mainStore = useMainStore();
+const userName = ref(mainStore.userName);
+const userEmail = ref(mainStore.userEmail);
+
+watch(
+  () => mainStore.userName,
+  (newValue) => {
+    userName.value = newValue;
+  }
+);
+watch(
+  () => mainStore.userEmail,
+  (newValue) => {
+    userEmail.value = newValue;
+  }
+);
 
 const profileForm = reactive({
-  name: mainStore.userName,
-  email: mainStore.userEmail,
+  name: "",
+  email: "",
   pin: "****",
 });
 
@@ -87,7 +102,7 @@ const submitPass = () => {
           <PillTag color="info" label="General" class="mb-2" />
           <FormField label="Username">
             <FormControl
-              v-model="profileForm.name"
+              v-model="userName"
               :icon="mdiAccount"
               name="username"
               required
@@ -99,7 +114,7 @@ const submitPass = () => {
             help="Not currently used, but will be soon™️"
           >
             <FormControl
-              v-model="profileForm.email"
+              v-model="userEmail"
               :icon="mdiMail"
               type="email"
               name="email"

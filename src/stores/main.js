@@ -10,6 +10,7 @@ export const useMainStore = defineStore("main", {
     userAvatar: null,
     userAdmin: false,
     userCardStyle: null,
+    userData: null,
     profiles: {},
 
     /* Field focus with ctrl+k (to register only once) */
@@ -39,6 +40,9 @@ export const useMainStore = defineStore("main", {
       }
       if (payload.admin) {
         this.userAdmin = payload.admin;
+      }
+      if (payload.data) {
+        this.userData = payload.data;
       }
       if (payload.cardStyle) {
         this.userCardStyle = payload.cardStyle;
@@ -196,6 +200,7 @@ export const useMainStore = defineStore("main", {
               email: user.email,
               avatar: user.avatar,
               admin: user.admin,
+              data: user.data,
               cardStyle: "time",
               profiles: {
                 ddr: [17, 18, 19],
@@ -221,6 +226,16 @@ export const useMainStore = defineStore("main", {
         return data.user;
       } catch (error) {
         console.error("Error fetching user:", error);
+        throw error;
+      }
+    },
+
+    async getCards() {
+      try {
+        const data = await this.callApi(`/user/cards`);
+        return data.cards;
+      } catch (error) {
+        console.error("Error fetching cards:", error);
         throw error;
       }
     },

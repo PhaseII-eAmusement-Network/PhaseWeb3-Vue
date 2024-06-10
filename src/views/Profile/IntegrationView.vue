@@ -1,4 +1,6 @@
 <script setup>
+import { useMainStore } from "@/stores/main";
+import { ref, watch } from "vue";
 import { mdiServerNetwork, mdiMessage, mdiScoreboard } from "@mdi/js";
 import SectionMain from "@/components/SectionMain.vue";
 import CardBox from "@/components/CardBox.vue";
@@ -7,6 +9,16 @@ import UserCard from "@/components/UserCard.vue";
 import LayoutAuthenticated from "@/layouts/LayoutAuthenticated.vue";
 import SectionTitleLine from "@/components/SectionTitleLine.vue";
 import PillTag from "@/components/PillTag.vue";
+
+const mainStore = useMainStore();
+
+const userData = ref(mainStore.userData);
+watch(
+  () => mainStore.userData,
+  (newValue) => {
+    userData.value = newValue;
+  }
+);
 </script>
 
 <template>
@@ -28,14 +40,39 @@ import PillTag from "@/components/PillTag.vue";
             class="mb-2"
           />
 
-          <h1 class="text-lg">Discord is linked to <b>@trmazi</b></h1>
-          <h1 class="text-lg">Discord isn't linked!</h1>
+          <h1
+            v-if="userData.discord && userData.discord.linked"
+            class="text-lg"
+          >
+            Discord is linked to <b>{{ userData.discord.username }}</b>
+          </h1>
+          <h1
+            v-if="!userData.discord || !userData.discord.linked"
+            class="text-lg"
+          >
+            Discord isn't linked!
+          </h1>
 
           <template #footer>
             <div class="space-x-2">
-              <BaseButton type="submit" color="success" label="Link Now" />
-              <BaseButton type="submit" color="info" label="Relink" />
-              <BaseButton type="submit" color="danger" label="Unlink" />
+              <BaseButton
+                v-if="!userData.discord || !userData.discord.linked"
+                type="submit"
+                color="success"
+                label="Link Now"
+              />
+              <BaseButton
+                v-if="userData.discord && userData.discord.linked"
+                type="submit"
+                color="info"
+                label="Relink"
+              />
+              <BaseButton
+                v-if="userData.discord && userData.discord.linked"
+                type="submit"
+                color="danger"
+                label="Unlink"
+              />
             </div>
           </template>
         </CardBox>
@@ -48,14 +85,33 @@ import PillTag from "@/components/PillTag.vue";
             class="mb-2"
           />
 
-          <h1 class="text-lg">Kamaitachi is linked to <b>@trmazi</b></h1>
-          <h1 class="text-lg">Kamaitachi isn't linked!</h1>
+          <h1 v-if="userData.tachi && userData.tachi.linked" class="text-lg">
+            Kamaitachi is linked to <b>{{ userData.tachi.username }}</b>
+          </h1>
+          <h1 v-if="!userData.tachi || !userData.tachi.linked" class="text-lg">
+            Kamaitachi isn't linked!
+          </h1>
 
           <template #footer>
             <div class="space-x-2">
-              <BaseButton type="submit" color="success" label="Link Now" />
-              <BaseButton type="submit" color="info" label="Relink" />
-              <BaseButton type="submit" color="danger" label="Unlink" />
+              <BaseButton
+                v-if="!userData.tachi || !userData.tachi.linked"
+                type="submit"
+                color="success"
+                label="Link Now"
+              />
+              <BaseButton
+                v-if="userData.tachi && userData.tachi.linked"
+                type="submit"
+                color="info"
+                label="Relink"
+              />
+              <BaseButton
+                v-if="userData.tachi && userData.tachi.linked"
+                type="submit"
+                color="danger"
+                label="Unlink"
+              />
             </div>
           </template>
         </CardBox>
