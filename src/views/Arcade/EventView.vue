@@ -1,5 +1,5 @@
 <script setup>
-import { reactive, watch } from "vue";
+import { reactive, ref, watch, onMounted } from "vue";
 import { useRoute } from "vue-router";
 import { mdiNewspaperVariantMultiple } from "@mdi/js";
 import SectionMain from "@/components/SectionMain.vue";
@@ -11,11 +11,25 @@ import FormField from "@/components/FormField.vue";
 import FormControl from "@/components/FormControl.vue";
 import FormCheckRadio from "@/components/FormCheckRadio.vue";
 import BaseButton from "@/components/BaseButton.vue";
-import { arcadeList, gameData, getGameInfo } from "@/constants";
+import { gameData, getGameInfo } from "@/constants";
+import { useMainStore } from "@/stores/main";
+
+const mainStore = useMainStore();
+const arcadeData = ref({});
+const loading = ref(true);
 
 const $route = useRoute();
-const arcadeID = parseInt($route.params.id);
-const thisArcade = arcadeList.find((x) => x.id === arcadeID);
+const arcadeId = parseInt($route.params.id);
+
+onMounted(async () => {
+  try {
+    const data = await mainStore.getArcade(arcadeId);
+    arcadeData.value = data;
+    loading.value = false;
+  } catch (error) {
+    console.log("Failed to fetch arcade data:", error);
+  }
+});
 
 const eventSettings = [
   {
@@ -161,83 +175,85 @@ watch(
 <template>
   <LayoutAuthenticated>
     <SectionMain>
-      <ArcadeCard class="mb-6" :arcade-data="thisArcade" />
-      <SectionTitleLine
-        :icon="mdiNewspaperVariantMultiple"
-        title="Game Event Settings"
-        main
-      />
+      <template v-if="!loading">
+        <ArcadeCard class="mb-6" :arcade="arcadeData" :use-small="true" />
+        <SectionTitleLine
+          :icon="mdiNewspaperVariantMultiple"
+          title="Game Event Settings"
+          main
+        />
 
-      <CardBox class="mb-6">
-        <div class="mb-4">
-          <FormField
-            label="Select Game"
-            help="Pick a game and version to get started."
-          >
-            <div class="grid md:grid-cols-2 gap-4">
-              <div>
-                <p class="pb-2 text-lg">Game</p>
-                <FormControl
-                  v-model="filterForm.game"
-                  name="game"
-                  :options="makeGameOptions()"
-                />
+        <CardBox class="mb-6">
+          <div class="mb-4">
+            <FormField
+              label="Select Game"
+              help="Pick a game and version to get started."
+            >
+              <div class="grid md:grid-cols-2 gap-4">
+                <div>
+                  <p class="pb-2 text-lg">Game</p>
+                  <FormControl
+                    v-model="filterForm.game"
+                    name="game"
+                    :options="makeGameOptions()"
+                  />
+                </div>
+                <div v-if="filterForm.game">
+                  <p class="pb-2 text-lg">Version</p>
+                  <FormControl
+                    v-model="filterForm.version"
+                    name="version"
+                    :options="makeVersionOptions()"
+                  />
+                </div>
               </div>
-              <div v-if="filterForm.game">
-                <p class="pb-2 text-lg">Version</p>
-                <FormControl
-                  v-model="filterForm.version"
-                  name="version"
-                  :options="makeVersionOptions()"
-                />
-              </div>
-            </div>
-          </FormField>
-        </div>
+            </FormField>
+          </div>
 
-        <div v-if="filterForm.game && filterForm.version">
-          <h2 class="text-xl">
-            Settings for
-            <b>{{ getCurrentGameVersion() }}</b>
-          </h2>
-          <hr class="pb-1 my-2" />
+          <div v-if="filterForm.game && filterForm.version">
+            <h2 class="text-xl">
+              Settings for
+              <b>{{ getCurrentGameVersion() }}</b>
+            </h2>
+            <hr class="pb-1 my-2" />
 
-          <FormField
-            v-for="setting in getGameSettings().settings"
-            :key="setting.id"
-            :label="setting.name"
-            :help="setting.tooltip"
-          >
-            <FormControl
-              v-if="setting.type == String"
-              v-model="setting.value"
-              :model-value="setting.value"
-              :name="setting.keyId"
-              placeholder="Not Set"
+            <FormField
+              v-for="setting in getGameSettings().settings"
+              :key="setting.id"
+              :label="setting.name"
+              :help="setting.tooltip"
+            >
+              <FormControl
+                v-if="setting.type == String"
+                v-model="setting.value"
+                :model-value="setting.value"
+                :name="setting.keyId"
+                placeholder="Not Set"
+              />
+              <FormCheckRadio
+                v-else-if="setting.type == Boolean"
+                v-model="setting.value"
+                :input-value="setting.value"
+                type="switch"
+                :name="setting.keyId"
+              />
+              <FormControl
+                v-if="setting.type == Array"
+                v-model="setting.options[setting.value]"
+                :name="setting.keyId"
+                :options="setting.options"
+                placeholder="Select..."
+              />
+            </FormField>
+            <BaseButton
+              color="success"
+              type="submit"
+              label="Save"
+              :small="false"
             />
-            <FormCheckRadio
-              v-else-if="setting.type == Boolean"
-              v-model="setting.value"
-              :input-value="setting.value"
-              type="switch"
-              :name="setting.keyId"
-            />
-            <FormControl
-              v-if="setting.type == Array"
-              v-model="setting.options[setting.value]"
-              :name="setting.keyId"
-              :options="setting.options"
-              placeholder="Select..."
-            />
-          </FormField>
-          <BaseButton
-            color="success"
-            type="submit"
-            label="Save"
-            :small="false"
-          />
-        </div>
-      </CardBox>
+          </div>
+        </CardBox>
+      </template>
     </SectionMain>
   </LayoutAuthenticated>
 </template>

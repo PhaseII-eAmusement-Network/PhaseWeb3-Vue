@@ -1,23 +1,22 @@
 <script setup>
-import { ref, onMounted } from "vue";
+import { ref, onMounted, watch } from "vue";
 import {
-  mdiReload,
-  mdiChartBellCurveCumulative,
+  // mdiReload,
+  // mdiChartBellCurveCumulative,
   mdiGamepad,
-  mdiTestTube,
+  // mdiTestTube,
   mdiNewspaperVariant,
 } from "@mdi/js";
 import UserCard from "@/components/UserCard.vue";
 import * as chartConfig from "@/components/Charts/chart.config.js";
-import LineChart from "@/components/Charts/LineChart.vue";
+// import LineChart from "@/components/Charts/LineChart.vue";
 import SectionMain from "@/components/SectionMain.vue";
-import CardBox from "@/components/CardBox.vue";
-import BaseButton from "@/components/BaseButton.vue";
+// import CardBox from "@/components/CardBox.vue";
+// import BaseButton from "@/components/BaseButton.vue";
 import CardBoxGameStat from "@/components/CardBoxGameStat.vue";
 import LayoutAuthenticated from "@/layouts/LayoutAuthenticated.vue";
 import SectionTitleLine from "@/components/SectionTitleLine.vue";
-import PillTag from "@/components/PillTag.vue";
-import { GameConstants } from "@/constants";
+// import PillTag from "@/components/PillTag.vue";
 
 // Public beta news data
 import CardBoxNews from "@/components/Cards/CardBoxNews.vue";
@@ -64,32 +63,13 @@ function humanReadableTime(timestamp) {
 //   },
 // ];
 
-const gameStats = [
-  {
-    id: GameConstants.IIDX,
-    username: "DJ. TRMAZI",
-    type: "plays",
-    value: 33,
-  },
-  {
-    id: GameConstants.DDR,
-    username: "TRMAZI",
-    type: "plays",
-    value: 233,
-  },
-  {
-    id: GameConstants.POPN_MUSIC,
-    username: "TRMAZI",
-    type: "plays",
-    value: 69,
-  },
-  {
-    id: GameConstants.SDVX,
-    username: "TRMAZI",
-    type: "plays",
-    value: 420,
-  },
-];
+const userProfiles = ref(mainStore.userProfiles);
+watch(
+  () => mainStore.userProfiles,
+  (newValue) => {
+    userProfiles.value = newValue;
+  }
+);
 </script>
 
 <template>
@@ -141,15 +121,15 @@ const gameStats = [
 
       <SectionTitleLine :icon="mdiGamepad" title="Showcase" main />
       <div
-        class="grid grid-flow-row auto-rows-auto grid-cols-1 md:grid-cols-2 gap-5 mb-5"
+        class="grid grid-flow-row auto-rows-auto grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5 mb-5"
       >
         <CardBoxGameStat
-          v-for="stat of gameStats"
-          :key="stat.id"
-          :game="stat.id"
-          :value="stat.value"
-          :profile-name="stat.username"
-          :type="stat.type"
+          v-for="profile of userProfiles"
+          :key="profile.game"
+          :game="profile.game"
+          :value="profile.data.total_plays"
+          profile-name=" "
+          type="plays"
         />
       </div>
 
@@ -160,7 +140,7 @@ const gameStats = [
         </CardBox>
       </div> -->
 
-      <SectionTitleLine
+      <!-- <SectionTitleLine
         :icon="mdiChartBellCurveCumulative"
         title="Play Trends"
         main
@@ -181,7 +161,7 @@ const gameStats = [
         <div v-if="chartData">
           <line-chart :data="chartData" class="h-96" />
         </div>
-      </CardBox>
+      </CardBox> -->
 
       <!-- <SectionTitleLine :icon="mdiAccountMultipleOutline" title="Rivals" main />
       <CardBox has-table>

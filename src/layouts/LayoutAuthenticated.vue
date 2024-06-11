@@ -1,8 +1,14 @@
 <script setup>
-import { mdiForwardburger, mdiBackburger, mdiMenu } from "@mdi/js";
-import { ref, watch, onMounted } from "vue";
+import {
+  mdiForwardburger,
+  mdiBackburger,
+  mdiMenu,
+  mdiMonitor,
+  mdiStoreCog,
+  mdiGamepad,
+} from "@mdi/js";
+import { ref, watch, onMounted, computed } from "vue";
 import { useRouter, useRoute } from "vue-router";
-import menuAside from "@/menuAside.js";
 import menuNavBar from "@/menuNavBar.js";
 import { useMainStore } from "@/stores/main.js";
 import { useStyleStore } from "@/stores/style.js";
@@ -13,6 +19,7 @@ import NavBarItemPlain from "@/components/NavBarItemPlain.vue";
 import AsideMenu from "@/components/Menus/AsideMenu.vue";
 import FooterBar from "@/components/FooterBar.vue";
 import { loadUserAuthKey, deleteUserAuthKey } from "@/stores/auth";
+import { gameData } from "@/constants";
 
 const router = useRouter();
 const route = useRoute();
@@ -49,6 +56,7 @@ const loading = ref(mainStore.isLoading);
 const saving = ref(mainStore.isSaving);
 const errorCode = ref(mainStore.errorCode);
 const userLoaded = ref(mainStore.userLoaded);
+const userArcades = ref(mainStore.userArcades);
 
 watch(
   () => mainStore.isLoading,
@@ -78,6 +86,13 @@ watch(
   }
 );
 
+watch(
+  () => mainStore.userArcades,
+  (newValue) => {
+    userArcades.value = newValue;
+  }
+);
+
 const layoutAsidePadding = "xl:pl-60";
 
 const styleStore = useStyleStore();
@@ -98,6 +113,32 @@ const menuClick = (event, item) => {
     });
   }
 };
+
+const menuAside = computed(() => {
+  const sortedGames = gameData
+    .filter((game) => !game.skip)
+    .map((game) => ({
+      label: game.shortName || game.name,
+      to: `/games/${game.id}`,
+    }));
+
+  const sortedArcades = mainStore.userArcades.map((arcade) => ({
+    label: arcade.name,
+    to: `/arcade/${arcade.id}`,
+    // menu: [
+    //   { label: "Overview", to: `/arcade/${arcade.id}` },
+    //   { label: "Event Settings", to: `/arcade/${arcade.id}/events` },
+    //   { label: "Machine List", to: `/arcade/${arcade.id}/machines` },
+    //   { label: "PASELI", to: `/arcade/${arcade.id}/paseli` },
+    // ],
+  }));
+
+  return [
+    { to: "/", icon: mdiMonitor, label: "Dashboard" },
+    { label: "My Arcades", icon: mdiStoreCog, menu: sortedArcades },
+    { label: "Games", icon: mdiGamepad, menu: sortedGames },
+  ];
+});
 </script>
 
 <template>

@@ -11,6 +11,8 @@ export const useMainStore = defineStore("main", {
     userAdmin: false,
     userCardStyle: null,
     userData: null,
+    userProfiles: [],
+    userArcades: [],
     profiles: {},
 
     /* Field focus with ctrl+k (to register only once) */
@@ -48,7 +50,10 @@ export const useMainStore = defineStore("main", {
         this.userCardStyle = payload.cardStyle;
       }
       if (payload.profiles) {
-        this.profiles = payload.profiles;
+        this.userProfiles = payload.profiles;
+      }
+      if (payload.arcades) {
+        this.userArcades = payload.arcades;
       }
     },
 
@@ -103,6 +108,7 @@ export const useMainStore = defineStore("main", {
         if (response.data.status === "error") {
           this.errorCode = response.data.error_code;
           this.isSaving = false;
+          this.isLoading = true;
           return null;
         }
         this.isLoading = false; // reset flags
@@ -122,7 +128,7 @@ export const useMainStore = defineStore("main", {
         const data = await this.callApi("/news/getAllNews");
         return data.slice(0, 2);
       } catch (error) {
-        console.error("Error fetching news:", error);
+        console.log("Error fetching news:", error);
         throw error;
       }
     },
@@ -132,7 +138,7 @@ export const useMainStore = defineStore("main", {
         const data = await this.callApi(`/news/getNews/${newsID}`);
         return data;
       } catch (error) {
-        console.error("Error fetching news:", error);
+        console.log("Error fetching news:", error);
         throw error;
       }
     },
@@ -146,7 +152,7 @@ export const useMainStore = defineStore("main", {
         const data = await this.callApi(`/auth/checkSession`, "POST", request);
         return data;
       } catch (error) {
-        console.error("Error checking session:", error);
+        console.log("Error checking session:", error);
         throw error;
       }
     },
@@ -161,7 +167,7 @@ export const useMainStore = defineStore("main", {
         console.log(data);
         return data;
       } catch (error) {
-        console.error("Error deleting session:", error);
+        console.log("Error deleting session:", error);
         throw error;
       }
     },
@@ -182,7 +188,7 @@ export const useMainStore = defineStore("main", {
           return false;
         }
       } catch (error) {
-        console.error("Error creating session:", error);
+        console.log("Error creating session:", error);
         throw error;
       }
     },
@@ -202,9 +208,8 @@ export const useMainStore = defineStore("main", {
               admin: user.admin,
               data: user.data,
               cardStyle: "time",
-              profiles: {
-                ddr: [17, 18, 19],
-              },
+              profiles: user.profiles,
+              arcades: user.arcades,
             });
             this.userLoaded = true;
             return true;
@@ -215,7 +220,7 @@ export const useMainStore = defineStore("main", {
         }
         return false;
       } catch (error) {
-        console.error("Error loading user:", error);
+        console.log("Error loading user:", error);
         throw error;
       }
     },
@@ -225,7 +230,7 @@ export const useMainStore = defineStore("main", {
         const data = await this.callApi(`/user/${userId}`);
         return data.user;
       } catch (error) {
-        console.error("Error fetching user:", error);
+        console.log("Error fetching user:", error);
         throw error;
       }
     },
@@ -235,7 +240,27 @@ export const useMainStore = defineStore("main", {
         const data = await this.callApi(`/user/cards`);
         return data.cards;
       } catch (error) {
-        console.error("Error fetching cards:", error);
+        console.log("Error fetching cards:", error);
+        throw error;
+      }
+    },
+
+    async getArcade(arcadeId) {
+      try {
+        const data = await this.callApi(`/arcade/${arcadeId}`);
+        return data.arcade;
+      } catch (error) {
+        console.log("Error fetching arcade:", error);
+        throw error;
+      }
+    },
+
+    async getPaseliData(arcadeId) {
+      try {
+        const data = await this.callApi(`/arcade/${arcadeId}/paseli`);
+        return data.data;
+      } catch (error) {
+        console.log("Error fetching PASELI:", error);
         throw error;
       }
     },

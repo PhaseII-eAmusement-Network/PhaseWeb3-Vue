@@ -1,29 +1,13 @@
 <script setup>
-import { ref } from "vue";
-
 // Define props
 // eslint-disable-next-line vue/require-prop-types
-const props = defineProps(["headers", "items"]);
-
-// Create a loading state
-const isLoading = ref(true);
-
-var setItems = [];
-
-// Simulate loading data (for example, you might fetch data from an API)
-setTimeout(() => {
-  isLoading.value = false;
-  setItems = props.items;
-  // You can set props.items here if you are fetching data dynamically
-  // For demonstration, we leave it as an empty array to show the empty message slot
-}, 500);
+defineProps(["headers", "items"]);
 </script>
 
 <template>
   <EasyDataTable
     :headers="headers"
-    :items="setItems"
-    :loading="isLoading"
+    :items="items"
     theme-color="#1e293b"
     table-class-name="customize-table"
     header-text-direction="left"
