@@ -25,6 +25,8 @@ const username = computed(() => props.username);
       <img
         :src="avatar"
         :alt="username"
+        width="200"
+        height="200"
         class="w-full h-auto bg-gray-100 dark:bg-slate-800 rounded-full overflow-hidden"
       />
       <!-- <img
