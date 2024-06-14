@@ -1,17 +1,19 @@
 <script setup>
-import { ref, onMounted, watch } from "vue";
+import { computed, ref, onMounted, watch } from "vue";
 import {
   // mdiReload,
   // mdiChartBellCurveCumulative,
   mdiGamepad,
   // mdiTestTube,
   mdiNewspaperVariant,
+  mdiChartTimelineVariant,
 } from "@mdi/js";
 import UserCard from "@/components/UserCard.vue";
 import * as chartConfig from "@/components/Charts/chart.config.js";
 // import LineChart from "@/components/Charts/LineChart.vue";
 import SectionMain from "@/components/SectionMain.vue";
-// import CardBox from "@/components/CardBox.vue";
+//import CardBox from "@/components/CardBox.vue";
+import CardBoxWidget from "@/components/CardBoxWidget.vue";
 // import BaseButton from "@/components/BaseButton.vue";
 import CardBoxGameStat from "@/components/CardBoxGameStat.vue";
 import LayoutAuthenticated from "@/layouts/LayoutAuthenticated.vue";
@@ -21,6 +23,7 @@ import SectionTitleLine from "@/components/SectionTitleLine.vue";
 // Public beta news data
 import CardBoxNews from "@/components/Cards/CardBoxNews.vue";
 import CardBoxComponentEmpty from "@/components/CardBoxComponentEmpty.vue";
+import { getGameInfo } from "@/constants";
 import { useMainStore } from "@/stores/main";
 const mainStore = useMainStore();
 var newsData = ref([]);
@@ -70,6 +73,30 @@ watch(
     userProfiles.value = newValue;
   }
 );
+
+const cumulativePlays = computed(() => {
+  return userProfiles.value.reduce(
+    (total, user) => total + user.data.total_plays,
+    0
+  );
+});
+
+// const sortedUserProfiles = computed(() => {
+//   return [...userProfiles.value].sort(
+//     (a, b) => b.data.last_play_timestamp - a.data.last_play_timestamp
+//   );
+// });
+
+function filterUserProfiles(userProfiles) {
+  var filteredProfiles = [];
+  for (const profile of userProfiles) {
+    const game = getGameInfo(profile.game);
+    if (game && !game.skip) {
+      filteredProfiles.push(profile);
+    }
+  }
+  return filteredProfiles;
+}
 </script>
 
 <template>
@@ -104,27 +131,24 @@ watch(
         </NotificationBar>
       </div> -->
 
-      <!-- This is for tracking stats. -->
-      <!-- <SectionTitleLine
+      <SectionTitleLine
         :icon="mdiChartTimelineVariant"
         title="Quick Stats"
         main
-      /> -->
-      <!-- <div class="grid grid-cols-1 gap-6 lg:grid-cols-3 mb-6">
-        <CardBoxWidget
-          trend="12% (from last week)"
-          trend-type="up"
-          :number="37"
-          label="Scores (This week)"
-        />
-      </div> -->
+      />
+      <div
+        class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 mb-6"
+      >
+        <CardBoxWidget :number="cumulativePlays" label="Cumulative Plays" />
+        <CardBoxWidget :number="userProfiles.length" label="Games Played" />
+      </div>
 
       <SectionTitleLine :icon="mdiGamepad" title="Showcase" main />
       <div
         class="grid grid-flow-row auto-rows-auto grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5 mb-5"
       >
         <CardBoxGameStat
-          v-for="profile of userProfiles"
+          v-for="profile of filterUserProfiles(userProfiles)"
           :key="profile.game"
           :game="profile.game"
           :value="profile.data.total_plays"

@@ -26,13 +26,10 @@ const props = defineProps({
 });
 
 function colorText() {
-  if (props.profile.stats) {
-    const stats = props.profile.stats;
-    if (stats.jubility) {
-      return getJubilityColor(stats.jubility);
-    } else if (stats.skillPoints) {
-      return getGitadoraColor(stats.skillPoints);
-    }
+  if (props.profile.jubility) {
+    return getJubilityColor(props.profile.jubility);
+  } else if (props.profile.records) {
+    return getGitadoraColor(props.profile.records.skill);
   }
 }
 
@@ -44,7 +41,7 @@ const thisGame = getGameInfo(props.game);
     <!-- <img v-if="profile.avatar" class="h-40" :src="profile.avatar" /> -->
     <div class="grid grid-cols-1 text-center">
       <h1 :class="colorText()" class="text-4xl md:text-5xl font-bold">
-        {{ profile.name }}
+        {{ profile.username }}
       </h1>
       <p class="text-xl font-mono">{{ dashCode(profile.extid) }}</p>
     </div>

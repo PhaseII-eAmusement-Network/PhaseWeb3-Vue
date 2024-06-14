@@ -214,6 +214,7 @@ export class VersionConstants {
   static POPN_MUSIC_USANEKO = 24;
   static POPN_MUSIC_PEACE = 25;
   static POPN_MUSIC_KAIMEI_RIDDLES = 26;
+  static POPN_MUSIC_UNILAB = 27;
 
   static QMA = 1;
   static QMA_II = 2;
@@ -350,6 +351,7 @@ export const gameData = [
     noRivals: true,
     noScores: true,
     noRecords: true,
+    skip: true,
     playerHeaders: [
       { text: "Region", value: "region", sortable: true, width: 100 },
       { text: "Home Arcade", value: "homeArcade", sortable: true, width: 150 },
@@ -373,6 +375,7 @@ export const gameData = [
     noRivals: true,
     noScores: true,
     noRecords: true,
+    skip: true,
   },
   {
     id: GameConstants.DANCE_RUSH,
@@ -1229,6 +1232,7 @@ export const gameData = [
     noRivals: true,
     noScores: true,
     noRecords: true,
+    skip: true,
     playerHeaders: [
       { text: "Girlfriend", value: "gf", sortable: true, width: 100 },
     ],
@@ -1445,6 +1449,10 @@ export const gameData = [
       {
         id: VersionConstants.POPN_MUSIC_KAIMEI_RIDDLES,
         label: "解明リドルズ (Kaimei riddles)",
+      },
+      {
+        id: VersionConstants.POPN_MUSIC_UNILAB,
+        label: "UniLab",
       },
     ],
   },

@@ -5,6 +5,7 @@ import { loadUserAuthKey, saveUserAuthKey } from "@/stores/auth";
 export const useMainStore = defineStore("main", {
   state: () => ({
     /* User */
+    userId: null,
     userName: null,
     userEmail: null,
     userAvatar: null,
@@ -31,6 +32,9 @@ export const useMainStore = defineStore("main", {
   }),
   actions: {
     setUser(payload) {
+      if (payload.id) {
+        this.userId = payload.id;
+      }
       if (payload.name) {
         this.userName = payload.name;
       }
@@ -202,6 +206,7 @@ export const useMainStore = defineStore("main", {
             const response = await this.callApi(`/user/${userId}`);
             var user = response.user;
             this.setUser({
+              id: userId,
               name: user.name,
               email: user.email,
               avatar: user.avatar,
@@ -261,6 +266,32 @@ export const useMainStore = defineStore("main", {
         return data.data;
       } catch (error) {
         console.log("Error fetching PASELI:", error);
+        throw error;
+      }
+    },
+
+    async getGameProfiles(game) {
+      try {
+        const data = await this.callApi(`/game/${game}/profiles`);
+        return data.data;
+      } catch (error) {
+        console.log("Error fetching profiles:", error);
+        throw error;
+      }
+    },
+
+    async getUserProfile(game, version) {
+      while (!this.userId) {
+        await new Promise((resolve) => setTimeout(resolve, 200)); // Wait for 100 milliseconds
+      }
+
+      try {
+        const data = await this.callApi(
+          `/profile/${game}?version=${version}&userId=${this.userId}`
+        );
+        return data.data;
+      } catch (error) {
+        console.log("Error fetching profile:", error);
         throw error;
       }
     },

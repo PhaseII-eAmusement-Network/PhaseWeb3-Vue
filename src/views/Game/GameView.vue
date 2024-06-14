@@ -1,5 +1,5 @@
 <script setup>
-import { reactive } from "vue";
+import { reactive, ref, onMounted, watch } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import {
   mdiAccountMultiple,
@@ -7,7 +7,6 @@ import {
   mdiFormatListText,
 } from "@mdi/js";
 import { useMainStore } from "@/stores/main";
-import { onMounted } from "vue";
 import SectionMain from "@/components/SectionMain.vue";
 import BaseButton from "@/components/BaseButton.vue";
 import SectionTitleLine from "@/components/SectionTitleLine.vue";
@@ -32,28 +31,12 @@ const versionForm = reactive({
   currentVersion: null,
 });
 
-var profile = {
-  id: 1,
-  name: "Trmazi",
-  extid: 12345678,
-  avatar:
-    "https://static.wikia.nocookie.net/dancedancerevolutionddr/images/3/3b/Yuni_img1.gif/",
-  last: {
-    arcade: "GhettoCade",
-    date: "7/16/2023",
-  },
-  stats: {
-    firstPlay: "1/14/2021",
-    singlePlays: 165,
-    singleDan: 1900,
-    singlePoint: 1877,
-    doublePlays: 15,
-    doubleDan: 0,
-    doublePoint: 187,
-    skillPoints: 3723,
-    jubility: 7690,
-  },
-};
+watch(
+  () => versionForm.currentVersion,
+  () => {
+    loadProfile();
+  }
+);
 
 gameID = $route.params.id;
 thisGame = getGameInfo(gameID);
@@ -67,89 +50,39 @@ if (thisGame == null) {
   });
 }
 
-const headers = [];
-headers.push({
-  text: "Player",
-  value: "username",
-  sortable: true,
-  width: 120,
+const myProfile = ref(null);
+const profiles = ref([]);
+
+onMounted(async () => {
+  try {
+    const data = await mainStore.getGameProfiles(gameID);
+    profiles.value = formatProfiles(data);
+  } catch (error) {
+    console.error("Failed to fetch profile data:", error);
+  }
+
+  loadProfile();
 });
-
-if (!thisGame.noRivals) {
-  headers.push({ text: "Rival ID", value: "extid", width: 100 });
-}
-
-headers.push(
-  { text: "Plays", value: "plays", sortable: true, width: 50 },
-  { text: "Last Arcade", value: "last.arcade", sortable: true, width: 150 }
-);
-
-if (thisGame.playerHeaders) {
-  for (var header of thisGame.playerHeaders) {
-    headers.push(header);
-  }
-}
-
-const items = [
-  {
-    username: "Trmazi",
-    extid: 12345678,
-    plays: 30,
-    last: { arcade: "Ghettocade" },
-    sp: { dan: 100, point: 2001 },
-    dp: { dan: 200, point: 3000 },
-  },
-  {
-    username: "Trmazi",
-    extid: 12345678,
-    plays: 31,
-    last: { arcade: "Ghettocade" },
-    sp: { dan: 1900, point: 2000 },
-    dp: { dan: 1200, point: 3000 },
-  },
-  {
-    username: "Trmazi",
-    extid: 12345678,
-    plays: 32,
-    last: { arcade: "Ghettocade" },
-    sp: { dan: 800, point: 2000 },
-    dp: { dan: 900, point: 3000 },
-  },
-];
-
-var formattedItems = [];
-for (var item of items) {
-  if (item.extid) {
-    item.extid = dashCode(item.extid);
-  }
-
-  if (item.sp) {
-    if (item.sp.dan !== undefined) {
-      item.sp.dan = getIIDXDan(item.sp.dan).short;
-    }
-  }
-
-  if (item.dp) {
-    if (item.dp.dan !== undefined) {
-      item.dp.dan = getIIDXDan(item.dp.dan).short;
-    }
-  }
-
-  formattedItems.push(item);
-}
 
 if (!thisGame.versions) {
   versionForm.currentVersion = 1;
 }
 
-var userVersions = {};
-onMounted(() => {
-  userVersions = mainStore.profiles[gameID];
-  console.log(userVersions);
-  if (userVersions != undefined) {
-    versionForm.currentVersion = Math.max(...userVersions);
+async function loadProfile() {
+  try {
+    const data = await mainStore.getUserProfile(
+      gameID,
+      versionForm.currentVersion
+    );
+    myProfile.value = data;
+
+    if (data && !versionForm.currentVersion) {
+      versionForm.currentVersion = data.versions[data.versions.length - 1];
+    }
+  } catch (error) {
+    console.error("Failed to fetch user profile data:", error);
   }
-});
+}
 
 function getSources() {
   var sources = null;
@@ -168,6 +101,77 @@ function getCardStyle() {
       background-repeat: no-repeat;
     `;
 }
+
+const headers = [];
+headers.push({
+  text: "Player",
+  value: "username",
+  sortable: true,
+  width: 120,
+});
+
+if (!thisGame.noRivals) {
+  headers.push({ text: "Rival ID", value: "extid", width: 100 });
+}
+
+headers.push(
+  { text: "Last Play", value: "stats.last_play_timestamp", width: 150 },
+  { text: "Plays", value: "stats.total_plays", sortable: true, width: 50 }
+  // { text: "Last Arcade", value: "last.arcade", sortable: true, width: 150 }
+);
+
+if (thisGame.playerHeaders) {
+  for (var header of thisGame.playerHeaders) {
+    headers.push(header);
+  }
+}
+
+function formatProfiles(profiles) {
+  var formattedItems = [];
+  for (var item of profiles) {
+    if (item.extid) {
+      item.extid = dashCode(item.extid);
+    }
+
+    if (item.stats) {
+      if (item.stats.last_play_timestamp) {
+        const date = new Date(item.stats.last_play_timestamp * 1000);
+        item.stats.last_play_timestamp = date.toLocaleString();
+      }
+
+      if (item.sp) {
+        if (item.sp.dan !== undefined) {
+          item.sp.dan = getIIDXDan(item.sp.dan).short;
+        }
+      }
+
+      if (item.dp) {
+        if (item.dp.dan !== undefined) {
+          item.dp.dan = getIIDXDan(item.dp.dan).short;
+        }
+      }
+    }
+
+    formattedItems.push(item);
+  }
+
+  formattedItems.sort((a, b) => {
+    const totalPlaysA = a.stats ? a.stats.total_plays || 0 : 0;
+    const totalPlaysB = b.stats ? b.stats.total_plays || 0 : 0;
+    return totalPlaysB - totalPlaysA; // Sort in descending order
+  });
+  return formattedItems;
+}
+
+function filterVersions(haveVersions) {
+  var filtered = [];
+  for (const version of thisGame.versions) {
+    if (haveVersions.includes(version.id)) {
+      filtered.push(version);
+    }
+  }
+  return filtered;
+}
 </script>
 
 <template>
@@ -181,11 +185,7 @@ function getCardStyle() {
             >
               <GameTitleLine :path="thisGame.icon" :title="thisGame.name" />
               <div
-                v-if="
-                  thisGame.versions &&
-                  userVersions &&
-                  gameID in mainStore.profiles
-                "
+                v-if="thisGame.versions && myProfile"
                 class="md:w-1/3 md:text-right"
               >
                 <h2 class="text-md sm:text-lg md:text-xl font-bold p-2">
@@ -193,17 +193,28 @@ function getCardStyle() {
                 </h2>
                 <FormControl
                   v-model="versionForm.currentVersion"
-                  :options="thisGame.versions"
+                  :options="filterVersions(myProfile.versions)"
                 />
               </div>
             </div>
           </div>
-          <div v-if="gameID in mainStore.profiles" class="w-full pt-6">
-            <ProfileCard :game="gameID" :profile="profile">
+          <div v-if="myProfile" class="w-full pt-6">
+            <ProfileCard :game="gameID" :profile="myProfile">
               <div class="grid grid-cols-2 gap-6 pt-6">
-                <CardBoxWidget :number="3733" label="Scores" />
-                <CardBoxWidget :number="1244" label="Plays" /></div
-            ></ProfileCard>
+                <CardBoxWidget
+                  :number="myProfile.stats.total_plays"
+                  label="Plays"
+                />
+
+                <template v-if="myProfile.records">
+                  <CardBoxWidget
+                    v-if="myProfile.records.skill"
+                    :number="myProfile.records.skill"
+                    label="Skill Points"
+                  />
+                </template>
+              </div>
+            </ProfileCard>
           </div>
           <div v-else class="md:w-1/2 grid grid-cols-1 md:grid-cols-2 gap-3">
             <BaseButton
@@ -232,7 +243,7 @@ function getCardStyle() {
           class="bg-white dark:bg-slate-900/95 rounded-2xl lg:flex lg:justify-between"
         >
           <div class="w-full">
-            <GeneralTable :headers="headers" :items="formattedItems" />
+            <GeneralTable :headers="headers" :items="profiles" />
           </div>
         </div>
       </CardBox>
