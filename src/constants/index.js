@@ -915,13 +915,13 @@ export const gameData = [
       { text: "DP DAN", value: "dp.dan", sortable: true, width: 100 },
       {
         text: "SP DJPOINT",
-        value: "sp.point",
+        value: "stats.single_dj_points",
         sortable: true,
         width: 150,
       },
       {
         text: "DP DJPOINT",
-        value: "dp.point",
+        value: "stats.double_dj_points",
         sortable: true,
         width: 150,
       },
@@ -1062,13 +1062,13 @@ export const gameData = [
       { text: "DP DAN", value: "dp.dan", sortable: true, width: 100 },
       {
         text: "SP DJPOINT",
-        value: "sp.point",
+        value: "stats.single_dj_points",
         sortable: true,
         width: 150,
       },
       {
         text: "DP DJPOINT",
-        value: "dp.point",
+        value: "stats.double_dj_points",
         sortable: true,
         width: 150,
       },

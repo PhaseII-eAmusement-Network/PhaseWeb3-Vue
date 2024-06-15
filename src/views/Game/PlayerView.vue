@@ -1,5 +1,5 @@
 <script setup>
-import { reactive, onMounted } from "vue";
+import { reactive, ref, onMounted, watch } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { useMainStore } from "@/stores/main";
 import {
@@ -25,104 +25,6 @@ const mainStore = useMainStore();
 var gameID = null;
 var thisGame = null;
 
-const versionForm = reactive({
-  currentVersion: null,
-});
-
-const profile = {
-  id: 1,
-  name: "Trmazi",
-  extid: 12345678,
-  avatar:
-    "https://static.wikia.nocookie.net/dancedancerevolutionddr/images/3/3b/Yuni_img1.gif/",
-  last: {
-    arcade: "GhettoCade",
-    date: "7/16/2023",
-  },
-  stats: {
-    firstPlay: "1/14/2021",
-    singlePlays: 165,
-    singleDan: 1900,
-    singlePoint: 1877,
-    doublePlays: 15,
-    doubleDan: 0,
-    doublePoint: 187,
-    skillPoints: 193090,
-    jubility: 7600,
-  },
-};
-
-var userVersions = {};
-onMounted(() => {
-  userVersions = mainStore.profiles[gameID];
-  console.log(userVersions);
-  if (userVersions != undefined) {
-    versionForm.currentVersion = Math.max(...userVersions);
-  }
-});
-
-const loadStats = [
-  {
-    id: 0,
-    label: "Register Date",
-    type: String,
-    span: "md:col-span-2",
-    key: "firstPlay",
-  },
-  {
-    id: 1,
-    label: "Single Plays",
-    type: Number,
-    key: "singlePlays",
-  },
-  {
-    id: 2,
-    label: "Single Dan",
-    type: String,
-    key: "singleDan",
-    isIIDXDan: true,
-  },
-  {
-    id: 3,
-    label: "Single DJ POINT",
-    type: Number,
-    key: "singlePoint",
-  },
-  {
-    id: 4,
-    label: "Double Plays",
-    type: Number,
-    key: "doublePlays",
-  },
-  {
-    id: 5,
-    label: "Double Dan",
-    type: String,
-    key: "doubleDan",
-    isIIDXDan: true,
-  },
-  {
-    id: 6,
-    label: "Double DJ POINT",
-    type: Number,
-    key: "doublePoint",
-  },
-  {
-    id: 7,
-    label: "SKILL Points",
-    type: Number,
-    key: "skillPoints",
-    isSkill: true,
-  },
-  {
-    id: 8,
-    label: "Jubility",
-    type: Number,
-    key: "jubility",
-    isJubility: true,
-  },
-];
-
 gameID = $route.params.game;
 thisGame = getGameInfo(gameID);
 
@@ -135,9 +37,87 @@ if (!thisGame) {
   });
 }
 
+const versionForm = reactive({
+  currentVersion: null,
+});
+
+watch(
+  () => versionForm.currentVersion,
+  () => {
+    loadProfile();
+  }
+);
+
+const myProfile = ref(null);
+
+onMounted(async () => {
+  loadProfile();
+});
+
 if (!thisGame.versions) {
   versionForm.currentVersion = 1;
 }
+
+async function loadProfile() {
+  try {
+    const data = await mainStore.getUserProfile(
+      gameID,
+      versionForm.currentVersion
+    );
+    myProfile.value = formatProfile(data);
+
+    if (data && !versionForm.currentVersion) {
+      versionForm.currentVersion = data.versions[data.versions.length - 1];
+    }
+  } catch (error) {
+    console.error("Failed to fetch user profile data:", error);
+  }
+}
+
+var loadStats = [
+  {
+    label: "Register Date",
+    type: String,
+    span: "md:col-span-2",
+    key: "first_play_timestamp",
+  },
+  {
+    label: "Last Play",
+    type: String,
+    span: "md:col-span-2",
+    key: "last_play_timestamp",
+  },
+  {
+    label: "Total Plays",
+    type: Number,
+    key: "total_plays",
+  },
+  {
+    label: "EXP",
+    type: Number,
+    key: "exp",
+  },
+  {
+    label: "Single Plays",
+    type: Number,
+    key: "single_plays",
+  },
+  {
+    label: "Double Plays",
+    type: Number,
+    key: "double_plays",
+  },
+  {
+    label: "Single DJPOINT",
+    type: Number,
+    key: "single_dj_points",
+  },
+  {
+    label: "Double DJPOINT",
+    type: Number,
+    key: "double_dj_points",
+  },
+];
 
 function getSources() {
   var sources = null;
@@ -157,7 +137,28 @@ function getCardStyle() {
     `;
 }
 
-function returnNumber(stat) {
+function colorText(stat, profile) {
+  if (profile) {
+    if (stat.isSkill && profile.jubility) {
+      return getGitadoraColor(profile.jubility);
+    } else if (stat.isJubility && profile.records.skill) {
+      return getJubilityColor(profile.records.skill);
+    }
+  }
+  return "";
+}
+
+function filterVersions(haveVersions) {
+  var filtered = [];
+  for (const version of thisGame.versions) {
+    if (haveVersions.includes(version.id)) {
+      filtered.push(version);
+    }
+  }
+  return filtered;
+}
+
+function returnNumber(stat, profile) {
   if (stat.isSkill) {
     return profile.stats[stat.key] / 100;
   } else if (stat.isJubility) {
@@ -167,94 +168,138 @@ function returnNumber(stat) {
   return profile.stats[stat.key];
 }
 
-function colorText(stat) {
-  if (stat.isSkill) {
-    return getGitadoraColor(profile.stats[stat.key]);
-  } else if (stat.isJubility) {
-    return getJubilityColor(profile.stats[stat.key]);
+function formatNumber(number, tenth) {
+  if (!tenth) {
+    return number / 100;
+  } else {
+    return number / 10;
   }
-  return "";
+}
+
+function formatProfile(profile) {
+  if (profile.stats) {
+    if (profile.stats.first_play_timestamp) {
+      const date = new Date(profile.stats.first_play_timestamp * 1000);
+      profile.stats.first_play_timestamp = date.toLocaleString();
+    }
+
+    if (profile.stats.last_play_timestamp) {
+      const date = new Date(profile.stats.last_play_timestamp * 1000);
+      profile.stats.last_play_timestamp = date.toLocaleString();
+    }
+
+    if (profile.dp) {
+      if (profile.dp.dan !== undefined) {
+        profile.dp.dan = getIIDXDan(profile.dp.dan).short;
+      }
+    }
+  }
+
+  return profile;
 }
 </script>
 
 <template>
   <LayoutAuthenticated>
-    <SectionMain>
-      <div class="md:flex pb-6 md:justify-between md:items-center">
-        <BaseButton
-          :icon="mdiBackburger"
-          :href="`/#/games/${gameID}`"
-          class="w-full md:w-auto"
-          color="info"
-          :label="`${
-            thisGame.shortName ? thisGame.shortName : thisGame.name
-          } Home`"
-        />
-
-        <div
-          v-if="thisGame.versions && profile && userVersions"
-          class="mt-2 md:mt-0 md:w-1/3 md:text-right"
-        >
-          <h2 class="text-md sm:text-lg md:text-xl font-bold p-2">
-            Select Version
-          </h2>
-          <FormControl
-            v-model="versionForm.currentVersion"
-            :options="thisGame.versions"
+    <template v-if="myProfile">
+      <SectionMain>
+        <div class="md:flex pb-6 md:justify-between md:items-center">
+          <BaseButton
+            :icon="mdiBackburger"
+            :href="`/#/games/${gameID}`"
+            class="w-full md:w-auto"
+            color="info"
+            :label="`${
+              thisGame.shortName ? thisGame.shortName : thisGame.name
+            } Home`"
           />
-        </div>
-      </div>
-      <SectionTitleLine :icon="mdiAccountOutline" title="View Profile" main />
-      <div
-        v-if="versionForm.currentVersion && profile && userVersions"
-        :style="getCardStyle()"
-        class="rounded-2xl mb-6"
-      >
-        <div class="bg-white dark:bg-slate-900/90 rounded-2xl pt-6 p-3">
-          <div class="w-full">
-            <ProfileCard use-small :profile="profile">
-              <div class="my-4 w-full flex gap-2 justify-center">
-                <BaseButton
-                  :href="`/#/games/${gameID}/scores/${profile.id}`"
-                  :icon="mdiPlaylistMusicOutline"
-                  class="w-full md:w-auto"
-                  color="info"
-                  label="View Scores"
-                />
 
-                <BaseButton
-                  :href="`/#/games/${gameID}/records/${profile.id}`"
-                  :icon="mdiFormatListText"
-                  class="w-full md:w-auto"
-                  color="info"
-                  label="View Records"
-                />
-              </div>
-              <div class="my-6 grid grid-cols-1 md:grid-cols-4 gap-6">
-                <CardBoxWidget
-                  v-for="stat in loadStats"
-                  :key="stat.id"
-                  :class="stat.span"
-                  :label="stat.label"
-                  :number="stat.type == Number ? returnNumber(stat) : None"
-                  :num-color="colorText(stat)"
-                >
-                  {{
-                    stat.type == String && !stat.isIIDXDan && !stat.isSkill
-                      ? profile.stats[stat.key]
-                      : None
-                  }}
-                  {{
-                    stat.type == String && stat.isIIDXDan
-                      ? getIIDXDan(profile.stats[stat.key]).label
-                      : None
-                  }}
-                </CardBoxWidget>
-              </div>
-            </ProfileCard>
+          <div
+            v-if="thisGame.versions && myProfile"
+            class="mt-2 md:mt-0 md:w-1/3 md:text-right"
+          >
+            <h2 class="text-md sm:text-lg md:text-xl font-bold p-2">
+              Select Version
+            </h2>
+            <FormControl
+              v-model="versionForm.currentVersion"
+              :options="filterVersions(myProfile.versions)"
+            />
           </div>
         </div>
-      </div>
-    </SectionMain>
+        <SectionTitleLine :icon="mdiAccountOutline" title="View Profile" main />
+        <div
+          v-if="versionForm.currentVersion && myProfile"
+          :style="getCardStyle()"
+          class="rounded-2xl mb-6"
+        >
+          <div class="bg-white dark:bg-slate-900/90 rounded-2xl pt-6 p-3">
+            <div class="w-full">
+              <ProfileCard use-small :profile="myProfile">
+                <div class="md:w-1/3 grid grid-cols-1 md:grid-cols-2 gap-3">
+                  <BaseButton
+                    :href="`/#/games/${gameID}/scores/${myProfile.id}`"
+                    :icon="mdiPlaylistMusicOutline"
+                    class="w-full md:w-auto"
+                    color="info"
+                    label="View Scores"
+                  />
+
+                  <BaseButton
+                    :href="`/#/games/${gameID}/records/${myProfile.id}`"
+                    :icon="mdiFormatListText"
+                    class="w-full md:w-auto"
+                    color="info"
+                    label="View Records"
+                  />
+                </div>
+              </ProfileCard>
+            </div>
+          </div>
+        </div>
+        <div class="my-6 grid grid-cols-1 md:grid-cols-4 gap-6">
+          <template v-for="stat in loadStats" :key="stat">
+            <CardBoxWidget
+              v-if="myProfile.stats[stat.key]"
+              :class="stat.span"
+              :label="stat.label"
+              :number="
+                stat.type == Number ? returnNumber(stat, myProfile) : null
+              "
+              :num-color="colorText(stat)"
+            >
+              {{ stat.type == String ? myProfile.stats[stat.key] : null }}
+              <!-- {{
+                      stat.type == String && stat.isIIDXDan
+                        ? getIIDXDan(myProfile[stat.key]).label
+                        : None
+                    }} -->
+            </CardBoxWidget>
+          </template>
+          <CardBoxWidget
+            v-if="myProfile.skill"
+            label="Skill Points"
+            :number="formatNumber(myProfile.skill, false)"
+            :num-color="getGitadoraColor(myProfile.skill)"
+          />
+          <CardBoxWidget
+            v-if="myProfile.profile_skill"
+            label="Skill Level"
+            :number="myProfile.profile_skill"
+          />
+          <CardBoxWidget
+            v-if="myProfile.deller"
+            label="Deller"
+            :number="myProfile.deller"
+          />
+          <CardBoxWidget v-if="myProfile.sgrade" label="SP DAN">{{
+            getIIDXDan(myProfile.sgrade).label
+          }}</CardBoxWidget>
+          <CardBoxWidget v-if="myProfile.dgrade" label="DP DAN">{{
+            getIIDXDan(myProfile.dgrade).label
+          }}</CardBoxWidget>
+        </div>
+      </SectionMain>
+    </template>
   </LayoutAuthenticated>
 </template>

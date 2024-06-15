@@ -37,7 +37,7 @@ const thisGame = getGameInfo(props.game);
 </script>
 
 <template>
-  <div class="md:flex content-center justify-center items-center">
+  <div class="content-center justify-center items-center">
     <!-- <img v-if="profile.avatar" class="h-40" :src="profile.avatar" /> -->
     <div class="grid grid-cols-1 text-center">
       <h1 :class="colorText()" class="text-4xl md:text-5xl font-bold">
@@ -50,11 +50,11 @@ const thisGame = getGameInfo(props.game);
         Last played at <b>{{ profile.last.arcade }}</b> on
         <b>{{ profile.last.date }}</b>
       </p> -->
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+      <div class="pt-2 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-3">
         <BaseButton
           v-if="!useSmall && game"
           :icon="mdiAccountDetails"
-          :href="`/#/games/${game}/profiles/${profile.id}`"
+          :href="`/#/games/${game}/profiles/${profile.userId}`"
           :outline="false"
           color="info"
           label="View Profile"
@@ -62,14 +62,14 @@ const thisGame = getGameInfo(props.game);
         <BaseButton
           v-if="!useSmall && game"
           :icon="mdiCog"
-          :href="`/#/games/${game}/profiles/${profile.id}/edit`"
+          :href="`/#/games/${game}/profiles/${profile.userId}/edit`"
           :outline="false"
           color="info"
           label="Edit Profile"
         />
         <BaseButton
           v-if="!useSmall && !thisGame.noScores"
-          :href="`/#/games/${game}/scores/${profile.id}`"
+          :href="`/#/games/${game}/scores/${profile.userId}`"
           :icon="mdiPlaylistMusicOutline"
           :outline="false"
           color="info"
@@ -77,7 +77,7 @@ const thisGame = getGameInfo(props.game);
         />
         <BaseButton
           v-if="!useSmall && !thisGame.noRecords"
-          :href="`/#/games/${game}/records/${profile.id}`"
+          :href="`/#/games/${game}/records/${profile.userId}`"
           :icon="mdiFormatListText"
           :outline="false"
           color="info"

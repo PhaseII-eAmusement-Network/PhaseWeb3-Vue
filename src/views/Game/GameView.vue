@@ -209,7 +209,7 @@ function filterVersions(haveVersions) {
                 <template v-if="myProfile.records">
                   <CardBoxWidget
                     v-if="myProfile.records.skill"
-                    :number="myProfile.records.skill"
+                    :number="myProfile.records.skill / 100"
                     label="Skill Points"
                   />
                 </template>
