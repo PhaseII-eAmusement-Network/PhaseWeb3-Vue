@@ -157,7 +157,7 @@ const routes = [
     meta: {
       title: "View Profile",
     },
-    path: "/games/:game/profiles/:userID/",
+    path: "/games/:game/profiles/:userId/",
     name: "game_profile",
     component: () => import("@/views/Game/PlayerView.vue"),
     options: {
@@ -168,7 +168,7 @@ const routes = [
     meta: {
       title: "Edit Profile",
     },
-    path: "/games/:game/profiles/:userID/edit",
+    path: "/games/:game/profiles/:userId/edit",
     name: "edit_profile",
     component: () => import("@/views/Game/EditView.vue"),
     options: {
@@ -190,7 +190,7 @@ const routes = [
     meta: {
       title: "View Scores",
     },
-    path: "/games/:game/scores/:userID",
+    path: "/games/:game/scores/:userId",
     name: "personal_scores",
     component: () => import("@/views/Game/PersonalScores.vue"),
     options: {

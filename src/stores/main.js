@@ -280,14 +280,17 @@ export const useMainStore = defineStore("main", {
       }
     },
 
-    async getUserProfile(game, version) {
-      while (!this.userId) {
-        await new Promise((resolve) => setTimeout(resolve, 200)); // Wait for 100 milliseconds
+    async getUserProfile(game, version, userId = null) {
+      if (!userId) {
+        while (!this.userId) {
+          await new Promise((resolve) => setTimeout(resolve, 200));
+        }
+        userId = this.userId;
       }
 
       try {
         const data = await this.callApi(
-          `/profile/${game}?version=${version}&userId=${this.userId}`
+          `/profile/${game}?version=${version}&userId=${userId}`
         );
         return data.data;
       } catch (error) {

@@ -1,7 +1,13 @@
 <script setup>
-// Define props
+import { defineProps, defineEmits } from "vue";
+
 // eslint-disable-next-line vue/require-prop-types
 defineProps(["headers", "items"]);
+const emits = defineEmits(["row-clicked"]);
+
+const handleRowClick = (item) => {
+  emits("row-clicked", item);
+};
 </script>
 
 <template>
@@ -12,6 +18,7 @@ defineProps(["headers", "items"]);
     table-class-name="customize-table"
     header-text-direction="left"
     body-text-direction="left"
+    @click-row="handleRowClick"
   >
     <template #loading>
       <div class="text-center align-center grid">

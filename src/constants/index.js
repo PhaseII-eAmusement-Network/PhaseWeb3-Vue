@@ -911,8 +911,8 @@ export const gameData = [
       { text: "Gauge %", value: "gauge" },
     ],
     playerHeaders: [
-      { text: "SP DAN", value: "sp.dan", sortable: true, width: 100 },
-      { text: "DP DAN", value: "dp.dan", sortable: true, width: 100 },
+      { text: "SP DAN", value: "sgrade", width: 100 },
+      { text: "DP DAN", value: "dgrade", width: 100 },
       {
         text: "SP DJPOINT",
         value: "stats.single_dj_points",
@@ -1058,8 +1058,8 @@ export const gameData = [
     noScores: true,
     noRecords: true,
     playerHeaders: [
-      { text: "SP DAN", value: "sp.dan", sortable: true, width: 100 },
-      { text: "DP DAN", value: "dp.dan", sortable: true, width: 100 },
+      { text: "SP DAN", value: "sgrade", width: 100 },
+      { text: "DP DAN", value: "dgrade", width: 100 },
       {
         text: "SP DJPOINT",
         value: "stats.single_dj_points",

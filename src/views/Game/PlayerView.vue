@@ -24,8 +24,10 @@ const $router = useRouter();
 const mainStore = useMainStore();
 var gameID = null;
 var thisGame = null;
+var profileUserId = null;
 
 gameID = $route.params.game;
+profileUserId = $route.params.userId;
 thisGame = getGameInfo(gameID);
 
 if (!thisGame) {
@@ -62,7 +64,8 @@ async function loadProfile() {
   try {
     const data = await mainStore.getUserProfile(
       gameID,
-      versionForm.currentVersion
+      versionForm.currentVersion,
+      profileUserId
     );
     myProfile.value = formatProfile(data);
 
@@ -98,22 +101,22 @@ var loadStats = [
     key: "exp",
   },
   {
-    label: "Single Plays",
+    label: "SP Plays",
     type: Number,
     key: "single_plays",
   },
   {
-    label: "Double Plays",
+    label: "DP Plays",
     type: Number,
     key: "double_plays",
   },
   {
-    label: "Single DJPOINT",
+    label: "SP DJPOINT",
     type: Number,
     key: "single_dj_points",
   },
   {
-    label: "Double DJPOINT",
+    label: "DP DJPOINT",
     type: Number,
     key: "double_dj_points",
   },
@@ -238,7 +241,7 @@ function formatProfile(profile) {
               <ProfileCard use-small :profile="myProfile">
                 <div class="md:w-1/3 grid grid-cols-1 md:grid-cols-2 gap-3">
                   <BaseButton
-                    :href="`/#/games/${gameID}/scores/${myProfile.id}`"
+                    :href="`/#/games/${gameID}/scores/${myProfile.userId}`"
                     :icon="mdiPlaylistMusicOutline"
                     class="w-full md:w-auto"
                     color="info"
@@ -246,7 +249,7 @@ function formatProfile(profile) {
                   />
 
                   <BaseButton
-                    :href="`/#/games/${gameID}/records/${myProfile.id}`"
+                    :href="`/#/games/${gameID}/records/${myProfile.userId}`"
                     :icon="mdiFormatListText"
                     class="w-full md:w-auto"
                     color="info"

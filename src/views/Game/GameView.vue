@@ -139,16 +139,12 @@ function formatProfiles(profiles) {
         item.stats.last_play_timestamp = date.toLocaleString();
       }
 
-      if (item.sp) {
-        if (item.sp.dan !== undefined) {
-          item.sp.dan = getIIDXDan(item.sp.dan).short;
-        }
+      if (item.sgrade) {
+        item.sgrade = getIIDXDan(item.sgrade).short;
       }
 
-      if (item.dp) {
-        if (item.dp.dan !== undefined) {
-          item.dp.dan = getIIDXDan(item.dp.dan).short;
-        }
+      if (item.dgrade) {
+        item.dgrade = getIIDXDan(item.dgrade).short;
       }
     }
 
@@ -172,6 +168,11 @@ function filterVersions(haveVersions) {
   }
   return filtered;
 }
+
+const navigateToProfile = (item) => {
+  const userID = item.userId;
+  $router.push(`/games/${gameID}/profiles/${userID}`);
+};
 </script>
 
 <template>
@@ -243,7 +244,12 @@ function filterVersions(haveVersions) {
           class="bg-white dark:bg-slate-900/95 rounded-2xl lg:flex lg:justify-between"
         >
           <div class="w-full">
-            <GeneralTable :headers="headers" :items="profiles" />
+            <GeneralTable
+              :headers="headers"
+              :items="profiles"
+              :path="`/#/${gameID}/profiles/`"
+              @row-clicked="navigateToProfile"
+            />
           </div>
         </div>
       </CardBox>
