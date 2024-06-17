@@ -91,6 +91,18 @@ var loadStats = [
     key: "last_play_timestamp",
   },
   {
+    label: "First Arcade",
+    type: String,
+    span: "md:col-span-2",
+    key: "first_play_arcade",
+  },
+  {
+    label: "Last Arcade",
+    type: String,
+    span: "md:col-span-2",
+    key: "last_play_arcade",
+  },
+  {
     label: "Total Plays",
     type: Number,
     key: "total_plays",

@@ -116,6 +116,7 @@ if (!thisGame.noRivals) {
 
 headers.push(
   { text: "Last Play", value: "stats.last_play_timestamp", width: 150 },
+  { text: "Last Arcade", value: "stats.last_play_arcade", width: 150 },
   { text: "Plays", value: "stats.total_plays", sortable: true, width: 50 }
   // { text: "Last Arcade", value: "last.arcade", sortable: true, width: 150 }
 );
