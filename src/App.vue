@@ -33,6 +33,7 @@ import { RouterView } from "vue-router";
 
   --easy-table-footer-background-color: #0f172a;
   --easy-table-footer-font-color: #c0c7d2;
+  --easy-table-footer-click-button-color: #c0c7d2;
   --easy-table-footer-font-size: 14px;
   --easy-table-footer-padding: 0px 10px;
   --easy-table-footer-height: 50px;

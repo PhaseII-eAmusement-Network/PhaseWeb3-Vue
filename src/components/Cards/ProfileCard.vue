@@ -62,7 +62,7 @@ const thisGame = getGameInfo(props.game);
         <BaseButton
           v-if="!useSmall && game"
           :icon="mdiCog"
-          :href="`/#/games/${game}/profiles/${profile.userId}/edit`"
+          :href="`/#/games/${game}/edit`"
           :outline="false"
           color="info"
           label="Edit Profile"

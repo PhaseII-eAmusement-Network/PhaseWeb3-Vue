@@ -1564,6 +1564,16 @@ export const gameData = [
     noScores: false,
     noRecords: true,
   },
+  {
+    id: GameConstants.ROAD_FIGHTERS,
+    name: "Road Fighters 3D",
+    icon: "/assets/icon/rf.png",
+    cardBG: "/assets/card/rf.png",
+    skip: true,
+    noRivals: true,
+    noScores: true,
+    noRecords: true,
+  },
 ];
 
 export function getGameInfo(game) {

@@ -168,7 +168,7 @@ const routes = [
     meta: {
       title: "Edit Profile",
     },
-    path: "/games/:game/profiles/:userId/edit",
+    path: "/games/:game/edit",
     name: "edit_profile",
     component: () => import("@/views/Game/EditView.vue"),
     options: {

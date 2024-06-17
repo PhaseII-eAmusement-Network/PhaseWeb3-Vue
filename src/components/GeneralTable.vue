@@ -14,7 +14,7 @@ const handleRowClick = (item) => {
   <EasyDataTable
     :headers="headers"
     :items="items"
-    theme-color="#1e293b"
+    theme-color="#c0c7d2"
     table-class-name="customize-table"
     header-text-direction="left"
     body-text-direction="left"
