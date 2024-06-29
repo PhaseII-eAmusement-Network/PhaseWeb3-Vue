@@ -246,4 +246,12 @@ const menuAside = computed(() => {
   animation-name: fadeInUp;
   -webkit-animation-name: fadeInUp;
 }
+
+.arrow {
+  color: white;
+}
+
+.next-page__click-button {
+  color: white;
+}
 </style>

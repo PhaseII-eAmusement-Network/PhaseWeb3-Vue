@@ -70,6 +70,7 @@ if (!thisGame.versions) {
 
 async function loadProfile() {
   try {
+    myProfile.value = null;
     const data = await mainStore.getUserProfile(
       gameID,
       versionForm.currentVersion
@@ -201,7 +202,11 @@ const navigateToProfile = (item) => {
             </div>
           </div>
           <div v-if="myProfile" class="w-full pt-6">
-            <ProfileCard :game="gameID" :profile="myProfile">
+            <ProfileCard
+              :game="gameID"
+              :version="versionForm.currentVersion"
+              :profile="myProfile"
+            >
               <div class="grid grid-cols-2 gap-6 pt-6">
                 <CardBoxWidget
                   :number="myProfile.stats.total_plays"

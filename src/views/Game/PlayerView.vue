@@ -62,6 +62,7 @@ if (!thisGame.versions) {
 
 async function loadProfile() {
   try {
+    myProfile.value = null;
     const data = await mainStore.getUserProfile(
       gameID,
       versionForm.currentVersion,
@@ -250,7 +251,12 @@ function formatProfile(profile) {
         >
           <div class="bg-white dark:bg-slate-900/90 rounded-2xl pt-6 p-3">
             <div class="w-full">
-              <ProfileCard use-small :profile="myProfile">
+              <ProfileCard
+                use-small
+                :game="gameID"
+                :version="versionForm.currentVersion"
+                :profile="myProfile"
+              >
                 <div class="md:w-1/3 grid grid-cols-1 md:grid-cols-2 gap-3">
                   <BaseButton
                     :href="`/#/games/${gameID}/scores/${myProfile.userId}`"

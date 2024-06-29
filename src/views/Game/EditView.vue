@@ -92,6 +92,7 @@ function filterVersions(haveVersions) {
 
 async function loadProfile() {
   try {
+    myProfile.value = null;
     const data = await mainStore.getUserProfile(
       gameID,
       versionForm.currentVersion
@@ -144,7 +145,13 @@ async function loadProfile() {
       >
         <div class="bg-white dark:bg-slate-900/90 rounded-2xl pt-6 p-3">
           <div class="w-full">
-            <ProfileCard v-if="myProfile" use-small :profile="myProfile" />
+            <ProfileCard
+              v-if="myProfile"
+              use-small
+              :game="gameID"
+              :profile="myProfile"
+              :version="versionForm.currentVersion"
+            />
           </div>
         </div>
       </div>
