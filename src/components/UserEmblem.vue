@@ -10,6 +10,10 @@ const props = defineProps({
     type: Number,
     default: 14,
   },
+  size: {
+    type: Number,
+    default: 128,
+  },
 });
 
 const userProfile = ref(props.profile);
@@ -62,13 +66,17 @@ function formatEmblem(emblem) {
 
 <template>
   <div class="inner">
-    <div style="position: relative; width: 128px; height: 128px">
+    <div :style="`position: relative; width: ${size}px; height: ${size}px`">
       <div
         v-for="(src, index) in emblemImages"
         :key="index"
         style="position: absolute"
       >
-        <img :src="src" style="width: 128px; height: 128px" />
+        <img
+          :src="src"
+          :style="`width: ${size}px; height: ${size}px`"
+          class="drop-shadow-lg"
+        />
       </div>
     </div>
   </div>

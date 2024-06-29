@@ -9,6 +9,7 @@ import { dashCode } from "@/constants/userData";
 import { getGameInfo } from "@/constants";
 import BaseButton from "@/components/BaseButton.vue";
 import UserEmblem from "@/components/UserEmblem.vue";
+import UserQpro from "@/components/UserQpro.vue";
 import { getGitadoraColor, getJubilityColor } from "@/constants/skillColor.js";
 
 const props = defineProps({
@@ -48,6 +49,12 @@ const thisGame = getGameInfo(props.game);
     >
       <UserEmblem
         v-if="game == 'jubeat' && version >= 10 && profile.last?.emblem"
+        :version="version"
+        :profile="profile"
+        class="place-self-center pb-6 md:pb-0"
+      />
+      <UserQpro
+        v-if="game == 'iidx' && version >= 20 && profile.qpro"
         :version="version"
         :profile="profile"
         class="place-self-center pb-6 md:pb-0"

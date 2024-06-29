@@ -12,6 +12,9 @@ import SectionTitleLine from "@/components/SectionTitleLine.vue";
 import FormField from "@/components/FormField.vue";
 import FormCheckRadio from "@/components/FormCheckRadio.vue";
 import FormControl from "@/components/FormControl.vue";
+import EmblemCardBox from "@/components/Cards/EmblemCardBox.vue";
+import QproCardBox from "@/components/Cards/QproCardBox.vue";
+import PillTag from "@/components/PillTag.vue";
 import { getGameInfo } from "@/constants";
 
 const $route = useRoute();
@@ -159,6 +162,7 @@ async function loadProfile() {
       <div v-if="versionForm.currentVersion && myProfile">
         <CardBox>
           <div>
+            <PillTag color="info" label="General" class="mb-2" />
             <FormField
               v-for="setting of settings"
               :key="setting.id"
@@ -202,6 +206,24 @@ async function loadProfile() {
             </div>
           </template>
         </CardBox>
+        <EmblemCardBox
+          v-if="
+            gameID == 'jubeat' &&
+            versionForm.currentVersion >= 10 &&
+            myProfile.last?.emblem
+          "
+          :profile="myProfile"
+          :version="versionForm.currentVersion"
+        />
+        <QproCardBox
+          v-if="
+            (gameID == 'iidx' || gameID == 'iidxclass') &&
+            versionForm.currentVersion >= 19 &&
+            myProfile.qpro
+          "
+          :profile="myProfile"
+          :version="versionForm.currentVersion"
+        />
       </div>
     </SectionMain>
   </LayoutAuthenticated>
