@@ -186,28 +186,28 @@ const routes = [
       hotReload: true, // disables Hot Reload
     },
   },
-  {
-    meta: {
-      title: "View Scores",
-    },
-    path: "/games/:game/scores/:userId",
-    name: "personal_scores",
-    component: () => import("@/views/Game/PersonalScores.vue"),
-    options: {
-      hotReload: true, // disables Hot Reload
-    },
-  },
-  {
-    meta: {
-      title: "Network Scores",
-    },
-    path: "/games/:game/scores",
-    name: "all_scores",
-    component: () => import("@/views/Game/NetworkScores.vue"),
-    options: {
-      hotReload: true, // disables Hot Reload
-    },
-  },
+  // {
+  //   meta: {
+  //     title: "View Scores",
+  //   },
+  //   path: "/games/:game/scores/:userId",
+  //   name: "personal_scores",
+  //   component: () => import("@/views/Game/PersonalScores.vue"),
+  //   options: {
+  //     hotReload: true, // disables Hot Reload
+  //   },
+  // },
+  // {
+  //   meta: {
+  //     title: "Network Scores",
+  //   },
+  //   path: "/games/:game/scores",
+  //   name: "all_scores",
+  //   component: () => import("@/views/Game/NetworkScores.vue"),
+  //   options: {
+  //     hotReload: true, // disables Hot Reload
+  //   },
+  // },
   {
     meta: {
       title: "Error",

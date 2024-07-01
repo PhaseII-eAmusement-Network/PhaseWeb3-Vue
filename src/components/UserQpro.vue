@@ -36,6 +36,14 @@ const assetPaths = computed(() => {
     :style="{ width: `${props.size}px`, height: `${props.size}px`, relative }"
   >
     <div class="qpro-character relative w-full h-full">
+      <!-- Hair Back -->
+      <img
+        class="qpro-hair-back absolute"
+        :src="assetPaths.hair + '_b.png'"
+        alt="Hair Back"
+        style="top: -22px; left: 6px; width: 90px"
+      />
+
       <!-- Right Arm -->
       <img
         class="qpro-arm-right-upper absolute"
@@ -112,13 +120,7 @@ const assetPaths = computed(() => {
         style="top: -5px; left: 30px; width: 50px"
       />
 
-      <!-- Hair -->
-      <img
-        class="qpro-hair-back absolute"
-        :src="assetPaths.hair + '_b.png'"
-        alt="Hair Back"
-        style="top: -22px; left: 6px; width: 90px"
-      />
+      <!-- Hair Front -->
       <img
         class="qpro-hair-front absolute"
         :src="assetPaths.hair + '_f.png'"
