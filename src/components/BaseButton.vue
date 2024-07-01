@@ -47,7 +47,7 @@ const props = defineProps({
   },
   outline: {
     type: Boolean,
-    default: true,
+    default: false,
   },
   active: Boolean,
   disabled: Boolean,

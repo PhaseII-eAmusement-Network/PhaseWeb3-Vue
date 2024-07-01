@@ -39,7 +39,7 @@ defineProps({
           width="70"
         />
         <h1 class="text-xl md:text-2xl">
-          {{ isSave ? `Saving...` : `Loading...` }}
+          {{ isSave ? `Submitting...` : `Loading...` }}
         </h1>
         <p class="text-lg md:text-xl">Please wait</p>
       </div>

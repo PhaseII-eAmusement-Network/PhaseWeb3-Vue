@@ -1,5 +1,7 @@
 export class IIDXDanConstants {
   static danList = [
+    { id: 0, label: "--", short: "--" },
+
     { id: 100, label: "7th Kyu (七級)", short: "七級" },
     { id: 200, label: "6th Kyu (六級)", short: "六級" },
     { id: 300, label: "5th Kyu (五級)", short: "五級" },
@@ -24,9 +26,8 @@ export class IIDXDanConstants {
 }
 
 export function getIIDXDan(level) {
-  var val = IIDXDanConstants.danList.find((x) => x.id == level);
-  if (!val) {
-    val = { id: 0, label: "--", short: "--" };
+  if (level == 0) {
+    return { id: 0, label: "--", short: "--" };
   }
-  return val;
+  return IIDXDanConstants.danList.find((x) => x.id == level);
 }

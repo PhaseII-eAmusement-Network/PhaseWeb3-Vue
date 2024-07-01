@@ -12,14 +12,6 @@ const routes = [
   },
   {
     meta: {
-      title: "News",
-    },
-    path: "/news",
-    name: "news",
-    component: () => import("@/views/NewsView.vue"),
-  },
-  {
-    meta: {
       title: "News Post",
     },
     path: "/news/:id",
@@ -42,14 +34,14 @@ const routes = [
     name: "register",
     component: () => import("@/views/Auth/RegisterView.vue"),
   },
-  {
-    meta: {
-      title: "Reset Password",
-    },
-    path: "/auth/reset",
-    name: "reset_pass",
-    component: () => import("@/views/Auth/ResetView.vue"),
-  },
+  // {
+  //   meta: {
+  //     title: "Reset Password",
+  //   },
+  //   path: "/auth/reset",
+  //   name: "reset_pass",
+  //   component: () => import("@/views/Auth/ResetView.vue"),
+  // },
   {
     meta: {
       title: "Profile",
@@ -58,14 +50,14 @@ const routes = [
     name: "profile",
     component: () => import("@/views/Profile/ProfileView.vue"),
   },
-  {
-    meta: {
-      title: "Customizations",
-    },
-    path: "/profile/customize",
-    name: "profile_customizations",
-    component: () => import("@/views/Profile/CustomizeView.vue"),
-  },
+  // {
+  //   meta: {
+  //     title: "Customizations",
+  //   },
+  //   path: "/profile/customize",
+  //   name: "profile_customizations",
+  //   component: () => import("@/views/Profile/CustomizeView.vue"),
+  // },
   {
     meta: {
       title: "Integrations",
@@ -82,14 +74,14 @@ const routes = [
     name: "profile_cards",
     component: () => import("@/views/Profile/CardsView.vue"),
   },
-  {
-    meta: {
-      title: "Goals",
-    },
-    path: "/goals",
-    name: "profile_goals",
-    component: () => import("@/views/Profile/GoalsView.vue"),
-  },
+  // {
+  //   meta: {
+  //     title: "Goals",
+  //   },
+  //   path: "/goals",
+  //   name: "profile_goals",
+  //   component: () => import("@/views/Profile/GoalsView.vue"),
+  // },
   {
     meta: {
       title: "View Profile",
@@ -101,14 +93,14 @@ const routes = [
       hotReload: true, // disables Hot Reload
     },
   },
-  {
-    meta: {
-      title: "Public Arcades",
-    },
-    path: "/arcades",
-    name: "arcade_list",
-    component: () => import("@/views/ArcadesView.vue"),
-  },
+  // {
+  //   meta: {
+  //     title: "Public Arcades",
+  //   },
+  //   path: "/arcades",
+  //   name: "arcade_list",
+  //   component: () => import("@/views/ArcadesView.vue"),
+  // },
   {
     meta: {
       title: "Arcade Overview",
@@ -165,7 +157,7 @@ const routes = [
     meta: {
       title: "View Profile",
     },
-    path: "/games/:game/profiles/:userID/",
+    path: "/games/:game/profiles/:userId/",
     name: "game_profile",
     component: () => import("@/views/Game/PlayerView.vue"),
     options: {
@@ -176,7 +168,7 @@ const routes = [
     meta: {
       title: "Edit Profile",
     },
-    path: "/games/:game/profiles/:userID/edit",
+    path: "/games/:game/edit",
     name: "edit_profile",
     component: () => import("@/views/Game/EditView.vue"),
     options: {
@@ -194,28 +186,28 @@ const routes = [
       hotReload: true, // disables Hot Reload
     },
   },
-  {
-    meta: {
-      title: "View Scores",
-    },
-    path: "/games/:game/scores/:userID",
-    name: "personal_scores",
-    component: () => import("@/views/Game/PersonalScores.vue"),
-    options: {
-      hotReload: true, // disables Hot Reload
-    },
-  },
-  {
-    meta: {
-      title: "Network Scores",
-    },
-    path: "/games/:game/scores",
-    name: "all_scores",
-    component: () => import("@/views/Game/NetworkScores.vue"),
-    options: {
-      hotReload: true, // disables Hot Reload
-    },
-  },
+  // {
+  //   meta: {
+  //     title: "View Scores",
+  //   },
+  //   path: "/games/:game/scores/:userId",
+  //   name: "personal_scores",
+  //   component: () => import("@/views/Game/PersonalScores.vue"),
+  //   options: {
+  //     hotReload: true, // disables Hot Reload
+  //   },
+  // },
+  // {
+  //   meta: {
+  //     title: "Network Scores",
+  //   },
+  //   path: "/games/:game/scores",
+  //   name: "all_scores",
+  //   component: () => import("@/views/Game/NetworkScores.vue"),
+  //   options: {
+  //     hotReload: true, // disables Hot Reload
+  //   },
+  // },
   {
     meta: {
       title: "Error",

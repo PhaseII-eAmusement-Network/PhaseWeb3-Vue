@@ -1,29 +1,32 @@
 <script setup>
-import { ref, onMounted } from "vue";
+import { computed, ref, onMounted, watch } from "vue";
 import {
-  mdiAccountMultipleOutline,
-  mdiChartTimelineVariant,
-  mdiReload,
-  mdiChartBellCurveCumulative,
+  // mdiReload,
+  // mdiChartBellCurveCumulative,
   mdiGamepad,
-  mdiTestTube,
-  mdiFlagCheckered,
+  // mdiTestTube,
+  mdiNewspaperVariant,
+  mdiChartTimelineVariant,
 } from "@mdi/js";
 import UserCard from "@/components/UserCard.vue";
 import * as chartConfig from "@/components/Charts/chart.config.js";
-import LineChart from "@/components/Charts/LineChart.vue";
+// import LineChart from "@/components/Charts/LineChart.vue";
 import SectionMain from "@/components/SectionMain.vue";
+//import CardBox from "@/components/CardBox.vue";
 import CardBoxWidget from "@/components/CardBoxWidget.vue";
-import CardBox from "@/components/CardBox.vue";
-import BaseButton from "@/components/BaseButton.vue";
+// import BaseButton from "@/components/BaseButton.vue";
 import CardBoxGameStat from "@/components/CardBoxGameStat.vue";
 import LayoutAuthenticated from "@/layouts/LayoutAuthenticated.vue";
 import SectionTitleLine from "@/components/SectionTitleLine.vue";
-import PillTag from "@/components/PillTag.vue";
-import TableRivalsFull from "@/components/Tables/TableRivalsFull.vue";
-import TableGoals from "@/components/Tables/TableGoals.vue";
-import NotificationBar from "@/components/NotificationBar.vue";
-import { GameConstants } from "@/constants";
+// import PillTag from "@/components/PillTag.vue";
+
+// Public beta news data
+import CardBoxNews from "@/components/Cards/CardBoxNews.vue";
+import CardBoxComponentEmpty from "@/components/CardBoxComponentEmpty.vue";
+import { getGameInfo } from "@/constants";
+import { useMainStore } from "@/stores/main";
+const mainStore = useMainStore();
+var newsData = ref([]);
 
 const chartData = ref(null);
 
@@ -31,53 +34,69 @@ const fillChartData = () => {
   chartData.value = chartConfig.sampleChartData();
 };
 
-onMounted(() => {
+onMounted(async () => {
   fillChartData();
+  try {
+    const data = await mainStore.fetchAllNews();
+    newsData.value = data;
+  } catch (error) {
+    console.error("Failed to fetch news data:", error);
+  }
 });
 
-const setGoals = [
-  {
-    game: "DanceDance Revolution",
-    type: "Rank",
-    goal: "Top 10 Ranking",
-    status: "#10 of 132",
-    deadline: "3 Weeks",
-  },
-  {
-    game: "pop'n music",
-    type: "Plays",
-    goal: "100 Plays",
-    status: "2 Plays Since Creation",
-    deadline: "1 Week",
-  },
-];
+function humanReadableTime(timestamp) {
+  const date = new Date(timestamp * 1000);
+  return date.toLocaleString();
+}
 
-const gameStats = [
-  {
-    id: GameConstants.IIDX,
-    username: "DJ. TRMAZI",
-    type: "ranking",
-    value: "#22 of 330",
-  },
-  {
-    id: GameConstants.DDR,
-    username: "TRMAZI",
-    type: "scores",
-    value: 233,
-  },
-  {
-    id: GameConstants.POPN_MUSIC,
-    username: "TRMAZI",
-    type: "plays",
-    value: 69,
-  },
-  {
-    id: GameConstants.SDVX,
-    username: "TRMAZI",
-    type: "scores",
-    value: 420,
-  },
-];
+// const setGoals = [
+//   {
+//     game: "DanceDance Revolution",
+//     type: "Rank",
+//     goal: "Top 10 Ranking",
+//     status: "#10 of 132",
+//     deadline: "3 Weeks",
+//   },
+//   {
+//     game: "pop'n music",
+//     type: "Plays",
+//     goal: "100 Plays",
+//     status: "2 Plays Since Creation",
+//     deadline: "1 Week",
+//   },
+// ];
+
+const userProfiles = ref(mainStore.userProfiles);
+watch(
+  () => mainStore.userProfiles,
+  (newValue) => {
+    userProfiles.value = newValue;
+  }
+);
+
+const cumulativePlays = computed(() => {
+  return userProfiles.value.reduce(
+    (total, user) => total + user.data.total_plays,
+    0
+  );
+});
+
+// const sortedUserProfiles = computed(() => {
+//   return [...userProfiles.value].sort(
+//     (a, b) => b.data.last_play_timestamp - a.data.last_play_timestamp
+//   );
+// });
+
+function filterUserProfiles(userProfiles) {
+  var filteredProfiles = [];
+  for (const profile of userProfiles) {
+    const game = getGameInfo(profile.game);
+    if (game && !game.skip) {
+      filteredProfiles.push(profile);
+    }
+  }
+  return filteredProfiles;
+}
 </script>
 
 <template>
@@ -86,65 +105,66 @@ const gameStats = [
       <h2 class="pb-4 text-4xl lg:text-5xl">Welcome to <samp>PhaseII</samp></h2>
       <UserCard class="mb-6" />
 
-      <div class="my-6">
+      <!-- For public beta, we'll load the news here. -->
+      <SectionTitleLine :icon="mdiNewspaperVariant" title="Network News" main />
+
+      <div v-if="newsData.length" class="grid gap-4 grid-cols-1 w-full pb-4">
+        <CardBoxNews
+          v-for="news of newsData"
+          :id="news.id"
+          :key="news.id"
+          :title="news.title"
+          :content="news.body"
+          :date="humanReadableTime(news.timestamp)"
+          :cover="news.data.img"
+          class="w-full h-full"
+        />
+      </div>
+      <CardBoxComponentEmpty v-if="!newsData || !newsData.length" />
+
+      <!-- <div class="my-6">
         <NotificationBar color="info">
           You have unread news!
           <template #right>
             <a href="#/news" class="text-blue-300 hover:underline">View now</a>
           </template>
         </NotificationBar>
-      </div>
+      </div> -->
 
       <SectionTitleLine
         :icon="mdiChartTimelineVariant"
         title="Quick Stats"
         main
       />
-
-      <div class="grid grid-cols-1 gap-6 lg:grid-cols-3 mb-6">
-        <CardBoxWidget
-          trend="12% (from last week)"
-          trend-type="up"
-          :number="37"
-          label="Scores (This week)"
-        />
-        <CardBoxWidget
-          trend="12%"
-          trend-type="down"
-          :number="770"
-          :prefix="'¢'"
-          label="PhaseCoin"
-        />
-        <CardBoxWidget
-          trend="None Completed"
-          trend-type="alert"
-          :number="2"
-          label="Active Goals"
-        />
+      <div
+        class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 mb-6"
+      >
+        <CardBoxWidget :number="cumulativePlays" label="Cumulative Plays" />
+        <CardBoxWidget :number="userProfiles.length" label="Games Played" />
       </div>
 
-      <SectionTitleLine :icon="mdiGamepad" title="Game Stats" main />
+      <SectionTitleLine :icon="mdiGamepad" title="Showcase" main />
       <div
-        class="grid grid-flow-row auto-rows-auto grid-cols-1 md:grid-cols-2 gap-5 mb-5"
+        class="grid grid-flow-row auto-rows-auto grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5 mb-5"
       >
         <CardBoxGameStat
-          v-for="stat of gameStats"
-          :key="stat.id"
-          :game="stat.id"
-          :value="stat.value"
-          :profile-name="stat.username"
-          :type="stat.type"
+          v-for="profile of filterUserProfiles(userProfiles)"
+          :key="profile.game"
+          :game="profile.game"
+          :value="profile.data.total_plays"
+          profile-name=" "
+          type="plays"
         />
       </div>
 
-      <SectionTitleLine :icon="mdiFlagCheckered" title="Active Goals" main />
+      <!-- <SectionTitleLine :icon="mdiFlagCheckered" title="Active Goals" main />
       <div class="mb-6">
         <CardBox has-table>
           <TableGoals :goals="setGoals" />
         </CardBox>
-      </div>
+      </div> -->
 
-      <SectionTitleLine
+      <!-- <SectionTitleLine
         :icon="mdiChartBellCurveCumulative"
         title="Play Trends"
         main
@@ -165,12 +185,12 @@ const gameStats = [
         <div v-if="chartData">
           <line-chart :data="chartData" class="h-96" />
         </div>
-      </CardBox>
+      </CardBox> -->
 
-      <SectionTitleLine :icon="mdiAccountMultipleOutline" title="Rivals" main />
+      <!-- <SectionTitleLine :icon="mdiAccountMultipleOutline" title="Rivals" main />
       <CardBox has-table>
         <TableRivalsFull />
-      </CardBox>
+      </CardBox> -->
     </SectionMain>
   </LayoutAuthenticated>
 </template>

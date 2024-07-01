@@ -1,4 +1,5 @@
 <script setup>
+import { ref, onMounted } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { mdiBackburger } from "@mdi/js";
 import SectionMain from "@/components/SectionMain.vue";
@@ -6,18 +7,27 @@ import LayoutAuthenticated from "@/layouts/LayoutAuthenticated.vue";
 import CardBox from "@/components/CardBox.vue";
 import BaseButtons from "@/components/BaseButtons.vue";
 import BaseButton from "@/components/BaseButton.vue";
-import testNews from "@/constants/news.json";
+import { useMainStore } from "@/stores/main";
 const $route = useRoute();
 const $router = useRouter();
 const newsID = parseInt($route.params.id);
 
-const NewsData = testNews;
-const thisNews = NewsData.find((x) => x.id === newsID);
+const mainStore = useMainStore();
+var thisNews = ref({ data: {} });
+var newsBody = ref("");
 
-const newsBody = thisNews.content.split("\n");
+onMounted(async () => {
+  try {
+    const data = await mainStore.fetchNews(newsID);
+    thisNews.value = data.news;
+    newsBody.value = data.news.body.split("\n");
+  } catch (error) {
+    console.error("Failed to fetch news data:", error);
+  }
+});
 
 function goBack() {
-  $router.push("/news");
+  $router.push("/");
 }
 </script>
 
@@ -25,10 +35,10 @@ function goBack() {
   <LayoutAuthenticated>
     <SectionMain>
       <transition>
-        <CardBox has-table>
+        <CardBox v-if="thisNews != {}" has-table>
           <div class="flex flex-col items-center">
             <img
-              :src="thisNews.cover"
+              :src="thisNews.data.img"
               class="rounded-t-2xl md:rounded-2xl md:w-1/2 md:m-4"
             />
           </div>
@@ -52,7 +62,7 @@ function goBack() {
           <template #footer>
             <BaseButtons>
               <BaseButton
-                label="News"
+                label="Home"
                 color="info"
                 :icon="mdiBackburger"
                 icon-size="20"

@@ -49,7 +49,6 @@ function openNewsView() {
       <div
         class="outline outline-green-900/50 hover:scale-[1.01] hover:shadow-xl hover:outline hover:outline-blue-500/50 hover:bg-slate-500 hover:dark:bg-slate-950/90 bg-white dark:bg-slate-900/90 rounded-xl p-4 h-full w-full transition-all duration-10"
       >
-        <p class="text-sm font-bold">Unread</p>
         <p class="text-sm">{{ props.date }}</p>
         <hr class="pb-1" />
         <h2 class="text-xl pb-2">{{ props.title }}</h2>

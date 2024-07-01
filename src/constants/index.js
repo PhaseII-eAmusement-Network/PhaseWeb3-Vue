@@ -214,6 +214,7 @@ export class VersionConstants {
   static POPN_MUSIC_USANEKO = 24;
   static POPN_MUSIC_PEACE = 25;
   static POPN_MUSIC_KAIMEI_RIDDLES = 26;
+  static POPN_MUSIC_UNILAB = 27;
 
   static QMA = 1;
   static QMA_II = 2;
@@ -327,6 +328,10 @@ export const gameData = [
     icon: null,
     cardBG: null,
     noRivals: true,
+    scoreHeaders: [
+      { text: "Combos", value: "combo" },
+      { text: "Halo", value: "halo" },
+    ],
     versions: [
       {
         id: VersionConstants.BEATSTREAM,
@@ -346,6 +351,11 @@ export const gameData = [
     noRivals: true,
     noScores: true,
     noRecords: true,
+    skip: true,
+    playerHeaders: [
+      { text: "Region", value: "region", sortable: true, width: 100 },
+      { text: "Home Arcade", value: "homeArcade", sortable: true, width: 150 },
+    ],
   },
   {
     id: GameConstants.BISHI_BASHI_NEW,
@@ -365,6 +375,7 @@ export const gameData = [
     noRivals: true,
     noScores: true,
     noRecords: true,
+    skip: true,
   },
   {
     id: GameConstants.DANCE_RUSH,
@@ -372,6 +383,10 @@ export const gameData = [
     icon: null,
     cardBG: null,
     noRivals: true,
+    scoreHeaders: [
+      { text: "Combos", value: "combo" },
+      { text: "Halo", value: "halo" },
+    ],
     versions: [
       {
         id: VersionConstants.DANCE_RUSH_STARDOM,
@@ -385,6 +400,11 @@ export const gameData = [
     shortName: "DDR",
     icon: null,
     cardBG: null,
+    scoreHeaders: [
+      { text: "EX Score", value: "exscore" },
+      { text: "Combos", value: "combo" },
+      { text: "Halo", value: "halo" },
+    ],
     versions: [
       {
         id: VersionConstants.DDR_1ST_MIX,
@@ -520,6 +540,11 @@ export const gameData = [
     name: "DDR OmniMIX",
     icon: "/assets/icon/ddr.png",
     cardBG: "/assets/card/ddr.png",
+    scoreHeaders: [
+      { text: "EX Score", value: "exscore" },
+      { text: "Combos", value: "combo" },
+      { text: "Halo", value: "halo" },
+    ],
     versions: [
       {
         id: VersionConstants.DDR_1ST_MIX,
@@ -600,6 +625,21 @@ export const gameData = [
     name: "DRUMMANIA",
     icon: null,
     cardBG: null,
+    playerHeaders: [
+      { text: "SKILL LEVEL", value: "skill.level", sortable: true, width: 120 },
+      {
+        text: "SKILL POINT",
+        value: "skill.point",
+        sortable: true,
+        width: 150,
+      },
+    ],
+    scoreHeaders: [
+      { text: "Combos", value: "combo" },
+      { text: "Halo", value: "halo" },
+      { text: "Skill %", value: "skill.perc" },
+      { text: "Skill Point", value: "skill.point" },
+    ],
     versions: [
       {
         id: VersionConstants.DRUMMANIA_1ST,
@@ -720,6 +760,20 @@ export const gameData = [
     icon: null,
     cardBG: null,
     noRivals: true,
+    playerHeaders: [
+      {
+        text: "SKILL POINT",
+        value: "skill.point",
+        sortable: true,
+        width: 150,
+      },
+    ],
+    scoreHeaders: [
+      { text: "Combos", value: "combo" },
+      { text: "Halo", value: "halo" },
+      { text: "Skill %", value: "skill.perc" },
+      { text: "Skill Point", value: "skill.point" },
+    ],
     versions: GITADORA_VERSION_DATA,
   },
   {
@@ -728,6 +782,20 @@ export const gameData = [
     icon: null,
     cardBG: null,
     noRivals: true,
+    playerHeaders: [
+      {
+        text: "SKILL POINT",
+        value: "skill.point",
+        sortable: true,
+        width: 150,
+      },
+    ],
+    scoreHeaders: [
+      { text: "Combos", value: "combo" },
+      { text: "Halo", value: "halo" },
+      { text: "Skill %", value: "skill.perc" },
+      { text: "Skill Point", value: "skill.point" },
+    ],
     versions: GITADORA_VERSION_DATA,
   },
   {
@@ -735,6 +803,21 @@ export const gameData = [
     name: "GUITAR FREAKS",
     icon: null,
     cardBG: null,
+    scoreHeaders: [
+      { text: "Combos", value: "combo" },
+      { text: "Halo", value: "halo" },
+      { text: "Skill %", value: "skill.perc" },
+      { text: "Skill Point", value: "skill.point" },
+    ],
+    playerHeaders: [
+      { text: "SKILL LEVEL", value: "skill.level", sortable: true, width: 120 },
+      {
+        text: "SKILL POINT",
+        value: "skill.point",
+        sortable: true,
+        width: 150,
+      },
+    ],
     versions: [
       {
         id: VersionConstants.GUITARFREAKS_1ST,
@@ -820,6 +903,29 @@ export const gameData = [
     shortName: "IIDX",
     icon: "/assets/icon/iidx.png",
     cardBG: "/assets/card/iidx.png",
+    scoreHeaders: [
+      { text: "EX Score", value: "exscore" },
+      { text: "Combos", value: "combo" },
+      { text: "Misses", value: "misses" },
+      { text: "Halo", value: "halo" },
+      { text: "Gauge %", value: "gauge" },
+    ],
+    playerHeaders: [
+      { text: "SP DAN", value: "sgrade", width: 100 },
+      { text: "DP DAN", value: "dgrade", width: 100 },
+      {
+        text: "SP DJPOINT",
+        value: "stats.single_dj_points",
+        sortable: true,
+        width: 150,
+      },
+      {
+        text: "DP DJPOINT",
+        value: "stats.double_dj_points",
+        sortable: true,
+        width: 150,
+      },
+    ],
     versions: [
       {
         id: VersionConstants.IIDX,
@@ -951,6 +1057,22 @@ export const gameData = [
     noRivals: true,
     noScores: true,
     noRecords: true,
+    playerHeaders: [
+      { text: "SP DAN", value: "sgrade", width: 100 },
+      { text: "DP DAN", value: "dgrade", width: 100 },
+      {
+        text: "SP DJPOINT",
+        value: "stats.single_dj_points",
+        sortable: true,
+        width: 150,
+      },
+      {
+        text: "DP DJPOINT",
+        value: "stats.double_dj_points",
+        sortable: true,
+        width: 150,
+      },
+    ],
     versions: [
       {
         id: VersionConstants.IIDX,
@@ -1035,6 +1157,14 @@ export const gameData = [
     name: "jubeat",
     icon: null,
     cardBG: null,
+    scoreHeaders: [
+      { text: "Combos", value: "combo" },
+      { text: "Halo", value: "halo" },
+      { text: "Music Rate", value: "rate" },
+    ],
+    playerHeaders: [
+      { text: "Jubility", value: "jubility", sortable: true, width: 120 },
+    ],
     versions: [
       {
         id: VersionConstants.JUBEAT,
@@ -1102,6 +1232,10 @@ export const gameData = [
     noRivals: true,
     noScores: true,
     noRecords: true,
+    skip: true,
+    playerHeaders: [
+      { text: "Girlfriend", value: "gf", sortable: true, width: 100 },
+    ],
     versions: [
       {
         id: VersionConstants.LOVEPLUS_ARCADE,
@@ -1128,6 +1262,10 @@ export const gameData = [
     name: "Museca",
     icon: null,
     cardBG: null,
+    scoreHeaders: [
+      { text: "Combos", value: "combo" },
+      { text: "Halo", value: "halo" },
+    ],
     versions: [
       {
         id: VersionConstants.MUSECA,
@@ -1144,6 +1282,10 @@ export const gameData = [
     name: "Nostalgia",
     icon: null,
     cardBG: null,
+    scoreHeaders: [
+      { text: "Combos", value: "combo" },
+      { text: "Halo", value: "halo" },
+    ],
     versions: [
       {
         id: VersionConstants.NOSTALGIA,
@@ -1199,6 +1341,10 @@ export const gameData = [
     shortName: "pop'n",
     icon: "/assets/icon/popn.png",
     cardBG: "/assets/card/popn.png",
+    scoreHeaders: [
+      { text: "Combos", value: "combo" },
+      { text: "Halo", value: "halo" },
+    ],
     versions: [
       {
         id: VersionConstants.POPN_MUSIC,
@@ -1304,6 +1450,10 @@ export const gameData = [
         id: VersionConstants.POPN_MUSIC_KAIMEI_RIDDLES,
         label: "解明リドルズ (Kaimei riddles)",
       },
+      {
+        id: VersionConstants.POPN_MUSIC_UNILAB,
+        label: "UniLab",
+      },
     ],
   },
   {
@@ -1321,6 +1471,11 @@ export const gameData = [
     name: "ReflecBeat",
     icon: null,
     cardBG: null,
+    scoreHeaders: [
+      { text: "Combos", value: "combo" },
+      { text: "Misses", value: "misses" },
+      { text: "Halo", value: "halo" },
+    ],
     versions: [
       {
         id: VersionConstants.REFLEC_BEAT,
@@ -1364,6 +1519,14 @@ export const gameData = [
     shortName: "SDVX",
     icon: null,
     cardBG: null,
+    scoreHeaders: [
+      { text: "Combos", value: "combo" },
+      { text: "Halo", value: "halo" },
+    ],
+    playerHeaders: [
+      { text: "Skill Level", value: "skillLevel", sortable: true, width: 100 },
+      { text: "VOLFORCE", value: "vf", sortable: true, width: 100 },
+    ],
     versions: [
       {
         id: VersionConstants.SDVX_BOOTH,
@@ -1391,65 +1554,25 @@ export const gameData = [
       },
     ],
   },
-];
-
-export const arcadeList = [
   {
-    id: 0,
-    name: "Speakeasy Smashcade",
-    area: "US-IL",
-    image: "https://i.imgur.com/HApAZgW.gif",
-    address: null,
-    show_address: false,
-    public: true,
-    beta: true,
-    paseli: true,
-    infinite_paseli: true,
-    maintenance: false,
-    admins: ["Trmazi", "SpeakEZ", "kohai"],
+    id: GameConstants.TSUMTSUM,
+    name: "Tsum Tsum",
+    icon: "/assets/icon/tsum.png",
+    cardBG: "/assets/card/tsum.png",
+    skip: false,
+    noRivals: true,
+    noScores: false,
+    noRecords: true,
   },
   {
-    id: 1,
-    name: "Boss Battle Games",
-    area: "US-IN",
-    image:
-      "https://scontent-ord5-2.xx.fbcdn.net/v/t1.6435-9/118871039_2818450415068886_7737385160957713953_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=8bfeb9&_nc_ohc=W8tEpuL3C14AX8XL09Z&_nc_ht=scontent-ord5-2.xx&oh=00_AfAneLjV1pukiSgE7S0Q6e-g6VFYEHSyFVk-kQh5elofJw&oe=64B49BD7",
-    address: "6020 E. 82nd St, Indianapolis, Indiana 46250",
-    show_address: true,
-    public: true,
-    beta: true,
-    paseli: true,
-    infinite_paseli: false,
-    maintenance: false,
-    admins: ["Trmazi", "Pat", "Jeff"],
-  },
-  {
-    id: 2,
-    name: "BladeCN",
-    area: "GB",
-    image:
-      "https://media.discordapp.net/attachments/717595745275871232/1119697819020824616/image.png",
-    address: "6020 E. 82nd St",
-    show_address: false,
-    public: true,
-    beta: false,
-    paseli: true,
-    infinite_paseli: true,
-    maintenance: false,
-    admins: ["blade"],
-  },
-  {
-    id: 3,
-    name: "GhettoCade",
-    area: "US-IN",
-    image: "https://ik.imagekit.io/suedbykonami/arcade/card/IMG_7096.jpg",
-    show_address: false,
-    public: true,
-    beta: true,
-    paseli: true,
-    infinite_paseli: true,
-    maintenance: false,
-    admins: ["Trmazi"],
+    id: GameConstants.ROAD_FIGHTERS,
+    name: "Road Fighters 3D",
+    icon: "/assets/icon/rf.png",
+    cardBG: "/assets/card/rf.png",
+    skip: true,
+    noRivals: true,
+    noScores: true,
+    noRecords: true,
   },
 ];
 

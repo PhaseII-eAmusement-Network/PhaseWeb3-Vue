@@ -1,34 +1,54 @@
 <script setup>
+import { ref, onMounted } from "vue";
 import { useRoute } from "vue-router";
 import { mdiGamepad } from "@mdi/js";
 import SectionMain from "@/components/SectionMain.vue";
-import TableMachines from "@/components/Tables/TableMachine.vue";
 import CardBox from "@/components/CardBox.vue";
 import LayoutAuthenticated from "@/layouts/LayoutAuthenticated.vue";
 import SectionTitleLine from "@/components/SectionTitleLine.vue";
 import ArcadeCard from "@/components/ArcadeCard.vue";
-import CardBoxComponentEmpty from "@/components/CardBoxComponentEmpty.vue";
-import { arcadeList } from "@/constants";
+import GeneralTable from "@/components/GeneralTable.vue";
+import { useMainStore } from "@/stores/main";
+
+const mainStore = useMainStore();
+const arcadeData = ref({});
+const loading = ref(true);
 
 const $route = useRoute();
-const arcadeID = parseInt($route.params.id);
+const arcadeId = parseInt($route.params.id);
 
-const thisArcade = arcadeList.find((x) => x.id === arcadeID);
+onMounted(async () => {
+  try {
+    const data = await mainStore.getArcade(arcadeId);
+    arcadeData.value = data;
+    loading.value = false;
+  } catch (error) {
+    console.log("Failed to fetch arcade data:", error);
+  }
+});
 
-const machineList = [
+const headers = [
   {
-    id: 0,
-    pcbid: "1A2B3C4D0000",
-    name: "Test PCBID",
-    ota: false,
-    cabinet: false,
+    text: "PCBID",
+    value: "pcbId",
+    width: 200,
   },
   {
-    id: 1,
-    pcbid: "1E2R3G3F4JJ0",
-    name: "Other PCBID",
-    ota: true,
-    cabinet: true,
+    text: "Name",
+    value: "description",
+    width: 200,
+  },
+  {
+    text: "Port",
+    value: "port",
+    sortable: true,
+    width: 120,
+  },
+  {
+    text: "OTA",
+    value: "ota",
+    sortable: true,
+    width: 120,
   },
 ];
 </script>
@@ -36,13 +56,20 @@ const machineList = [
 <template>
   <LayoutAuthenticated>
     <SectionMain>
-      <ArcadeCard class="mb-6" :arcade-data="thisArcade" />
-      <SectionTitleLine :icon="mdiGamepad" title="Machines" main />
+      <template v-if="!loading">
+        <ArcadeCard class="mb-6" :arcade="arcadeData" :use-small="true" />
+        <SectionTitleLine :icon="mdiGamepad" title="Machines" main />
 
-      <CardBox class="mb-6" has-table>
-        <TableMachines v-if="machineList.length" :machines="machineList" />
-        <CardBoxComponentEmpty v-if="!machineList.length" />
-      </CardBox>
+        <CardBox has-table>
+          <div
+            class="bg-white dark:bg-slate-900/95 rounded-2xl lg:flex lg:justify-between"
+          >
+            <div class="w-full">
+              <GeneralTable :headers="headers" :items="arcadeData.machines" />
+            </div>
+          </div>
+        </CardBox>
+      </template>
     </SectionMain>
   </LayoutAuthenticated>
 </template>

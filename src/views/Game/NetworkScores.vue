@@ -4,7 +4,7 @@ import { mdiCounter, mdiBackburger } from "@mdi/js";
 import SectionMain from "@/components/SectionMain.vue";
 import LayoutAuthenticated from "@/layouts/LayoutAuthenticated.vue";
 import SectionTitleLine from "@/components/SectionTitleLine.vue";
-import TableScores from "@/components/Tables/TableScores.vue";
+import GeneralTable from "@/components/GeneralTable.vue";
 import CardBox from "@/components/CardBox.vue";
 import BaseButton from "@/components/BaseButton.vue";
 import { getGameInfo } from "@/constants";
@@ -26,71 +26,111 @@ if (!thisGame) {
   });
 }
 
+const headers = [
+  { text: "Player", value: "username", width: 100 },
+  { text: "Timestamp", value: "timestamp", width: 150 },
+  { text: "Song", value: "song.title", width: 180 },
+  { text: "Artist", value: "song.artist", width: 180 },
+  { text: "Chart", value: "song.chart", width: 100 },
+  { text: "Grade", value: "grade", width: 80 },
+  { text: "¥ Score", value: "points", width: 100 },
+];
+
+if (thisGame.scoreHeaders) {
+  for (var header of thisGame.scoreHeaders) {
+    headers.push(header);
+  }
+}
+
+headers.push({ text: "Type", value: "type", width: 80 });
+
 const scores = [
   {
-    id: 1,
-    player: "TRMAZI",
-    playerId: 1,
-    timestamp: "2023.05.30 12:00:39 AM",
-    isHighScore: false,
+    timestamp: 1649542921,
+    username: "TRMAZI",
     song: {
       id: 10741,
-      name: "100 Sec. Kitchen Battle!!",
-      artist: "Orange Lounge",
-      chart: "SP EXPERT",
-      difficulty: "12",
+      title: "Colorful Days ~NEWラブプラス メインテーマ~",
+      artist: "高嶺愛花＆小早川凛子＆姉ヶ崎寧々",
+      chart: "SP EXPERT\n★12",
+      difficulty: 12,
     },
-    grade: "B+",
-    points: 787690,
-    combo: 42,
-    location: {
-      arcade: "Ho-House",
-      type: "Cab",
-    },
+    grade: "AAA",
+    points: "1,000,000",
+    exscore: 1000,
+    combo: 1000,
+    halo: "MFC",
+    type: "Cab",
+    raised: true,
   },
   {
-    id: 1,
-    player: "BARRU",
-    playerId: 2,
-    timestamp: "2023.05.30 12:00:39 AM",
-    isHighScore: false,
+    timestamp: 1649542921,
+    username: "TRMAZI",
     song: {
       id: 10741,
-      name: "100 Sec. Kitchen Battle!!",
-      artist: "Orange Lounge",
-      chart: "SP EXPERT",
-      difficulty: "12",
+      title: "Colorful Days ～NEWラブプラス メインテーマ～",
+      artist: "高嶺愛花＆小早川凛子＆姉ヶ崎寧々",
+      chart: "SP EXPERT\n★12",
+      difficulty: 12,
     },
-    grade: "B+",
-    points: 787690,
-    combo: 42,
-    location: {
-      arcade: "Ho-House",
-      type: "Cab",
-    },
+    grade: "AAA",
+    points: "1,000,000",
+    exscore: 1000,
+    combo: 1000,
+    halo: "MFC",
+    type: "Cab",
+    raised: true,
   },
   {
-    id: 1,
-    player: "HO",
-    playerId: 3,
-    timestamp: "2023.05.30 12:00:39 AM",
-    isHighScore: false,
+    timestamp: 1649542921,
+    username: "TRMAZI",
     song: {
       id: 10741,
-      name: "100 Sec. Kitchen Battle!!",
-      artist: "Orange Lounge",
-      chart: "SP EXPERT",
-      difficulty: "12",
+      title: "Colorful Days ～NEWラブプラス メインテーマ～",
+      artist: "高嶺愛花＆小早川凛子＆姉ヶ崎寧々",
+      chart: "SP EXPERT\n★12",
+      difficulty: 12,
     },
-    grade: "B+",
-    points: 787690,
-    combo: 42,
-    location: {
-      arcade: "Ho-House",
-      type: "Cab",
+    grade: "AAA",
+    points: "1,000,000",
+    exscore: 1000,
+    combo: 1000,
+    halo: "MFC",
+    type: "Cab",
+    raised: true,
+  },
+  {
+    timestamp: 1649542921,
+    username: "TRMAZI",
+    song: {
+      id: 10741,
+      title: "Colorful Days ～NEWラブプラス メインテーマ～",
+      artist: "高嶺愛花＆小早川凛子＆姉ヶ崎寧々",
+      chart: "SP EXPERT\n★12",
+      difficulty: 12,
     },
+    grade: "AAA",
+    points: "1,000,000",
+    exscore: 1000,
+    combo: 1000,
+    halo: "MFC",
+    type: "Cab",
+    raised: true,
   },
 ];
+
+var formattedItems = [];
+for (var item of scores) {
+  if (item.timestamp) {
+    const date = new Date(item.timestamp * 1000);
+    item.timestamp = date.toLocaleString();
+    if (item.raised) {
+      item.timestamp = `${item.timestamp}\nNew High Score!`;
+    }
+  }
+
+  formattedItems.push(item);
+}
 </script>
 
 <template>
@@ -115,7 +155,7 @@ const scores = [
       />
 
       <CardBox has-table>
-        <TableScores :game="gameID" :entries="scores" />
+        <GeneralTable :headers="headers" :items="scores" />
       </CardBox>
     </SectionMain>
   </LayoutAuthenticated>

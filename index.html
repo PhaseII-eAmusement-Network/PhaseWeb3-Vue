@@ -7,6 +7,40 @@
     <link rel="icon" href="/favicon.png">
     <title>PhaseWeb 3</title>
 
+    <style>
+      body {
+        background-color: #ffffff;
+      }
+      
+      @media (prefers-color-scheme: dark) {
+        body {
+          background-color: #1f2937;
+        }
+      }
+    </style>
+  
+    <script>
+      var pattern = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
+      var current = 0;
+    
+      var keyHandler = function (event) {
+        if (pattern.indexOf(event.key) < 0 || event.key !== pattern[current]) {
+          current = 0;
+          return;
+        }
+    
+        current++;
+    
+        if (pattern.length === current) {
+          current = 0;
+          document.getElementById('audio').play();
+          window.alert('+30 lives.');
+        }
+    
+      };
+    
+      document.addEventListener('keydown', keyHandler, false);
+    </script>
   </head>
   <body class="scroll-smooth">
     <noscript>
@@ -15,41 +49,6 @@
     <div id="app"></div>
     <script type="module" src="/src/main.js"></script>
     <!-- built files will be auto injected -->
-    <audio id="audio" src="/assets/sounds/konami.mp3" class="hidden" />
+    <audio id="audio" src="/assets/sounds/konami.mp3" class="hidden">
   </body>
-
-  <style>
-    body {
-      background-color: #ffffff;
-    }
-    
-    @media (prefers-color-scheme: dark) {
-      body {
-        background-color: #1f2937;
-      }
-    }
-  </style>
-
-  <script>
-    var pattern = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'ArrowLeft', 'ArrowRight', 'b', 'a'];
-  var current = 0;
-
-  var keyHandler = function (event) {
-    if (pattern.indexOf(event.key) < 0 || event.key !== pattern[current]) {
-      current = 0;
-      return;
-    }
-
-    current++;
-
-    if (pattern.length === current) {
-      current = 0;
-      document.getElementById('audio').play();
-      window.alert('+30 lives.');
-    }
-
-  };
-
-  document.addEventListener('keydown', keyHandler, false);
-  </script>
 </html>

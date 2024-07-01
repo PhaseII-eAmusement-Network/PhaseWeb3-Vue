@@ -25,14 +25,16 @@ const username = computed(() => props.username);
       <img
         :src="avatar"
         :alt="username"
+        width="200"
+        height="200"
         class="w-full h-auto bg-gray-100 dark:bg-slate-800 rounded-full overflow-hidden"
       />
-      <img
+      <!-- <img
         src="/assets/border/pride.png"
         alt="border"
         class="absolute inset-0 w-full h-full overflow-hidden scale-[1.02]"
         style="object-fit: fill"
-      />
+      /> -->
     </div>
     <slot />
   </div>

@@ -1,8 +1,14 @@
 <script setup>
-import { mdiForwardburger, mdiBackburger, mdiMenu } from "@mdi/js";
-import { ref } from "vue";
+import {
+  mdiForwardburger,
+  mdiBackburger,
+  mdiMenu,
+  mdiMonitor,
+  mdiStoreCog,
+  mdiGamepad,
+} from "@mdi/js";
+import { ref, watch, onMounted, computed } from "vue";
 import { useRouter, useRoute } from "vue-router";
-import menuAside from "@/menuAside.js";
 import menuNavBar from "@/menuNavBar.js";
 import { useMainStore } from "@/stores/main.js";
 import { useStyleStore } from "@/stores/style.js";
@@ -12,20 +18,84 @@ import NavBar from "@/components/NavBar.vue";
 import NavBarItemPlain from "@/components/NavBarItemPlain.vue";
 import AsideMenu from "@/components/Menus/AsideMenu.vue";
 import FooterBar from "@/components/FooterBar.vue";
+import { loadUserAuthKey, deleteUserAuthKey } from "@/stores/auth";
+import { gameData } from "@/constants";
 
-useMainStore().setUser({
-  name: "Trmazi",
-  email: "sex@sex.com",
-  avatar:
-    "https://cdn.discordapp.com/avatars/372530806628941824/a2d1b66d0e2100a571305b8281c26f8b",
+const router = useRouter();
+const route = useRoute();
+const userKey = loadUserAuthKey();
+
+if (!userKey) {
+  router.push({
+    name: "login",
+  });
+}
+
+const mainStore = useMainStore();
+onMounted(async () => {
+  try {
+    const validSession = await mainStore.loadUser();
+    if (!validSession) {
+      mainStore.deleteUserSession();
+      deleteUserAuthKey();
+      router.push({
+        name: "login",
+      });
+    }
+  } catch (error) {
+    console.error("Failed to check SessionID:", error);
+    mainStore.deleteUserSession();
+    deleteUserAuthKey();
+    router.push({
+      name: "login",
+    });
+  }
 });
+
+const loading = ref(mainStore.isLoading);
+const saving = ref(mainStore.isSaving);
+const errorCode = ref(mainStore.errorCode);
+const userLoaded = ref(mainStore.userLoaded);
+const userArcades = ref(mainStore.userArcades);
+
+watch(
+  () => mainStore.isLoading,
+  (newValue) => {
+    loading.value = newValue;
+  }
+);
+
+watch(
+  () => mainStore.isSaving,
+  (newValue) => {
+    saving.value = newValue;
+  }
+);
+
+watch(
+  () => mainStore.errorCode,
+  (newValue) => {
+    errorCode.value = newValue;
+  }
+);
+
+watch(
+  () => mainStore.userLoaded,
+  (newValue) => {
+    userLoaded.value = newValue;
+  }
+);
+
+watch(
+  () => mainStore.userArcades,
+  (newValue) => {
+    userArcades.value = newValue;
+  }
+);
 
 const layoutAsidePadding = "xl:pl-60";
 
 const styleStore = useStyleStore();
-
-const router = useRouter();
-const route = useRoute();
 
 const isAsideMobileExpanded = ref(false);
 const isAsideLgActive = ref(false);
@@ -37,12 +107,38 @@ router.beforeEach(() => {
 
 const menuClick = (event, item) => {
   if (item.isLogout) {
-    //
+    deleteUserAuthKey();
+    router.push({
+      name: "login",
+    });
   }
 };
 
-const active = false;
-const isSave = true;
+const menuAside = computed(() => {
+  const sortedGames = gameData
+    .filter((game) => !game.skip)
+    .map((game) => ({
+      label: game.shortName || game.name,
+      to: `/games/${game.id}`,
+    }));
+
+  const sortedArcades = mainStore.userArcades.map((arcade) => ({
+    label: arcade.name,
+    to: `/arcade/${arcade.id}`,
+    // menu: [
+    //   { label: "Overview", to: `/arcade/${arcade.id}` },
+    //   { label: "Event Settings", to: `/arcade/${arcade.id}/events` },
+    //   { label: "Machine List", to: `/arcade/${arcade.id}/machines` },
+    //   { label: "PASELI", to: `/arcade/${arcade.id}/paseli` },
+    // ],
+  }));
+
+  return [
+    { to: "/", icon: mdiMonitor, label: "Dashboard" },
+    { label: "My Arcades", icon: mdiStoreCog, menu: sortedArcades },
+    { label: "Games", icon: mdiGamepad, menu: sortedGames },
+  ];
+});
 </script>
 
 <template>
@@ -54,12 +150,17 @@ const isSave = true;
     }"
   >
     <LoadingModal
-      :active="active"
-      :is-save="isSave"
+      :active="loading || saving"
+      :is-save="saving"
+      :error-code="errorCode"
       class="transition-opacity duration-300 ease-out"
-      :class="{ 'opacity-100': active, 'opacity-0': !active }"
+      :class="{
+        'opacity-100': loading || saving,
+        'opacity-0': !loading && !saving,
+      }"
     />
     <div
+      v-if="userLoaded"
       :class="[layoutAsidePadding, { 'ml-60 lg:ml-0': isAsideMobileExpanded }]"
       class="pt-14 min-h-screen w-screen lg:w-auto bg-gradient-to-b from-slate-900 from-5% via-slate-800 via-10% to-slate-800 to-85% dark:text-slate-100"
     >
@@ -144,5 +245,13 @@ const isSave = true;
   opacity: 0;
   animation-name: fadeInUp;
   -webkit-animation-name: fadeInUp;
+}
+
+.arrow {
+  color: white;
+}
+
+.next-page__click-button {
+  color: white;
 }
 </style>

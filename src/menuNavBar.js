@@ -1,10 +1,7 @@
 import {
-  mdiCogs,
   mdiAccount,
   mdiLogout,
   mdiServerNetwork,
-  mdiBrushOutline,
-  mdiFlagCheckered,
   mdiCardAccountDetailsOutline,
 } from "@mdi/js";
 
@@ -18,11 +15,6 @@ export default [
         to: "/profile",
       },
       {
-        icon: mdiBrushOutline,
-        label: "Customizations",
-        to: "/profile/customize",
-      },
-      {
         icon: mdiServerNetwork,
         label: "Integrations",
         to: "/profile/integrate",
@@ -34,15 +26,15 @@ export default [
       },
     ],
   },
-  {
-    to: "/goals",
-    icon: mdiFlagCheckered,
-    label: "Goals",
-  },
-  {
-    icon: mdiCogs,
-    label: "Edit Dashboard",
-  },
+  // {
+  //   to: "/goals",
+  //   icon: mdiFlagCheckered,
+  //   label: "Goals",
+  // },
+  // {
+  //   icon: mdiCogs,
+  //   label: "Edit Dashboard",
+  // },
   {
     icon: mdiLogout,
     label: "Log out",
