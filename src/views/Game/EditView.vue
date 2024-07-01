@@ -218,8 +218,7 @@ async function loadProfile() {
         <QproCardBox
           v-if="
             (gameID == 'iidx' || gameID == 'iidxclass') &&
-            versionForm.currentVersion >= 19 &&
-            myProfile.qpro
+            versionForm.currentVersion >= 19
           "
           :profile="myProfile"
           :version="versionForm.currentVersion"

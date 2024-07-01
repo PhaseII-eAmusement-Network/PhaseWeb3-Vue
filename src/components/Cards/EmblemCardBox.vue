@@ -1,5 +1,6 @@
 <script setup>
-import { watch, ref } from "vue";
+import axios from "axios";
+import { watch, ref, reactive } from "vue";
 import BaseButton from "@/components/BaseButton.vue";
 import CardBox from "@/components/CardBox.vue";
 import FormField from "@/components/FormField.vue";
@@ -20,28 +21,78 @@ const props = defineProps({
 
 const userProfile = ref(props.profile);
 const version = ref(props.version);
+const emblemKey = ref(0);
+
+const newEmblem = reactive(formatEmblem(userProfile.value?.last?.emblem));
+const emblemSettings = ref([]);
 
 watch(
   () => props.version,
   () => {
     userProfile.value = props.profile;
+    version.value = props.version;
+    loadEmblemSettings();
+    newEmblem.value = formatEmblem(userProfile.value.last?.emblem);
   }
 );
 
 watch(
-  () => props.version,
+  newEmblem,
   () => {
-    version.value = props.version;
-  }
+    emblemKey.value++;
+  },
+  { deep: true }
 );
 
-const valid_emblem_options = [
-  "background",
-  "main",
-  "ornament",
-  "effect",
-  "speech_bubble",
-];
+loadEmblemSettings();
+function loadEmblemSettings() {
+  axios
+    .get(
+      `https://web3.phaseii.network/gameassets/emblems/${version.value}.json`
+    )
+    .then((r) => {
+      if (r.data) {
+        emblemSettings.value = r.data;
+      }
+    })
+    .catch((error) => {
+      console.log(error.message);
+    });
+}
+
+function formatEmblem(emblem) {
+  if (emblem) {
+    return {
+      background: emblem[0],
+      main: emblem[1],
+      ornament: emblem[2],
+      effect: emblem[3],
+      speech_bubble: emblem[4],
+    };
+  } else {
+    return {
+      background: 0,
+      main: 0,
+      ornament: 0,
+      effect: 0,
+      speech_bubble: 0,
+    };
+  }
+}
+
+function encodeEmblem(emblem) {
+  if (emblem) {
+    return [
+      emblem.background,
+      emblem.main,
+      emblem.ornament,
+      emblem.effect,
+      emblem.speech_bubble,
+    ];
+  } else {
+    return [0, 0, 0, 0, 0];
+  }
+}
 </script>
 
 <template>
@@ -50,18 +101,24 @@ const valid_emblem_options = [
     <div class="grid md:grid-cols-2 space-y-6 align-center">
       <div>
         <FormField
-          v-for="option of valid_emblem_options"
-          :key="option"
-          :label="option"
+          v-for="option of emblemSettings"
+          :key="option.id"
+          :label="option.name"
+          :help="option.help"
         >
           <FormControl
-            :v-model="profile.last.emblem"
-            :model-value="profile.last.emblem"
+            v-model="newEmblem[option.id]"
+            :options="option.options"
           />
         </FormField>
       </div>
       <div class="place-self-center">
-        <UserEmblem :version="version" :profile="profile" :size="300" />
+        <UserEmblem
+          :key="emblemKey"
+          :version="version"
+          :profile="{ last: { emblem: encodeEmblem(newEmblem) } }"
+          :size="300"
+        />
       </div>
     </div>
 

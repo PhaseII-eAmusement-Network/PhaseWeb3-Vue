@@ -33,7 +33,7 @@ const assetPaths = computed(() => {
 <template>
   <div
     class="justify-center items-center mb-4 md:mb-0 drop-shadow-xl"
-    :style="{ width: `${props.size}px`, height: `${props.size}px`, relative }"
+    :style="{ width: `${props.size}px`, height: `${props.size}px` }"
   >
     <div class="qpro-character relative w-full h-full">
       <!-- Hair Back -->
@@ -98,18 +98,12 @@ const assetPaths = computed(() => {
         style="top: -45px; left: -6px; width: 400px"
       />
 
-      <!-- Head -->
+      <!-- Head Back -->
       <img
         class="qpro-head-back absolute"
         :src="assetPaths.head + '_b.png'"
         alt="Head Back"
-        style="top: -5px; left: 30px; width: 50px"
-      />
-      <img
-        class="qpro-head-front absolute"
-        :src="assetPaths.head + '_f.png'"
-        alt="Head Front"
-        style="top: -5px; left: 30px; width: 50px"
+        style="top: -20px; left: 15px; width: 80px"
       />
 
       <!-- Face -->
@@ -147,13 +141,21 @@ const assetPaths = computed(() => {
         class="qpro-hand-left absolute"
         :src="assetPaths.hand + '_l.png'"
         alt="Left Hand"
-        style="top: 35px; left: 53px; width: 70px"
+        style="top: -25px; left: 45px; width: 70px"
       />
       <img
         class="qpro-hand-right absolute"
         :src="assetPaths.hand + '_r.png'"
         alt="Right Hand"
-        style="top: 0px; left: -10px; width: 70px"
+        style="top: 0px; left: -13px; width: 70px"
+      />
+
+      <!-- Head Front -->
+      <img
+        class="qpro-head-front absolute"
+        :src="assetPaths.head + '_f.png'"
+        alt="Head Front"
+        style="top: -20px; left: 15px; width: 80px"
       />
     </div>
   </div>

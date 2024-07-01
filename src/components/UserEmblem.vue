@@ -51,7 +51,6 @@ const emblemImages = computed(() => {
 });
 
 function formatEmblem(emblem) {
-  console.log(emblem);
   if (emblem) {
     return {
       background: emblem[0],
