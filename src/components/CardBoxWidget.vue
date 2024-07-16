@@ -63,7 +63,9 @@ defineProps({
             :prefix="prefix"
             :suffix="suffix"
           />
-          <slot />
+          <div :class="numColor">
+            <slot />
+          </div>
         </h1>
       </div>
       <BaseIcon

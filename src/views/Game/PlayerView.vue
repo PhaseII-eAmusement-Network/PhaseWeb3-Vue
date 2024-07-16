@@ -303,22 +303,25 @@ function formatProfile(profile) {
             :number="formatNumber(myProfile.skill, false)"
             :num-color="getGitadoraColor(myProfile.skill)"
           />
-          <CardBoxWidget
-            v-if="myProfile.profile_skill"
-            label="Skill Level"
-            :number="myProfile.profile_skill"
-          />
-          <CardBoxWidget v-if="myProfile.jubility" label="Jubility">{{
-            myProfile.jubility / 10
+          <CardBoxWidget v-if="myProfile.profile_skill" label="Skill Level">{{
+            myProfile.profile_skill / 100
           }}</CardBoxWidget>
+          <CardBoxWidget
+            v-if="myProfile.jubility"
+            label="Jubility"
+            :num-color="getJubilityColor(myProfile.jubility)"
+            >{{ myProfile.jubility / 10 }}</CardBoxWidget
+          >
           <CardBoxWidget
             v-if="myProfile.pick_up_jubility"
             label="Pick-Up Jubility"
+            :num-color="getJubilityColor(myProfile.pick_up_jubility)"
             >{{ myProfile.pick_up_jubility / 10 }}</CardBoxWidget
           >
           <CardBoxWidget
             v-if="myProfile.common_jubility"
             label="Common Jubility"
+            :num-color="getJubilityColor(myProfile.common_jubility)"
             >{{ myProfile.common_jubility / 10 }}</CardBoxWidget
           >
           <CardBoxWidget

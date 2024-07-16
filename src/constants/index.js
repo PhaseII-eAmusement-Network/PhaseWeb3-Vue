@@ -626,10 +626,15 @@ export const gameData = [
     icon: null,
     cardBG: null,
     playerHeaders: [
-      { text: "SKILL LEVEL", value: "skill.level", sortable: true, width: 120 },
+      {
+        text: "SKILL LEVEL",
+        value: "profile_skill",
+        sortable: true,
+        width: 120,
+      },
       {
         text: "SKILL POINT",
-        value: "skill.point",
+        value: "skill",
         sortable: true,
         width: 150,
       },
@@ -763,7 +768,7 @@ export const gameData = [
     playerHeaders: [
       {
         text: "SKILL POINT",
-        value: "skill.point",
+        value: "profile_skill",
         sortable: true,
         width: 150,
       },
@@ -785,7 +790,7 @@ export const gameData = [
     playerHeaders: [
       {
         text: "SKILL POINT",
-        value: "skill.point",
+        value: "skill",
         sortable: true,
         width: 150,
       },
@@ -810,10 +815,15 @@ export const gameData = [
       { text: "Skill Point", value: "skill.point" },
     ],
     playerHeaders: [
-      { text: "SKILL LEVEL", value: "skill.level", sortable: true, width: 120 },
+      {
+        text: "SKILL LEVEL",
+        value: "profile_skill",
+        sortable: true,
+        width: 120,
+      },
       {
         text: "SKILL POINT",
-        value: "skill.point",
+        value: "skill",
         sortable: true,
         width: 150,
       },
