@@ -308,6 +308,19 @@ function formatProfile(profile) {
             label="Skill Level"
             :number="myProfile.profile_skill"
           />
+          <CardBoxWidget v-if="myProfile.jubility" label="Jubility">{{
+            myProfile.jubility / 10
+          }}</CardBoxWidget>
+          <CardBoxWidget
+            v-if="myProfile.pick_up_jubility"
+            label="Pick-Up Jubility"
+            >{{ myProfile.pick_up_jubility / 10 }}</CardBoxWidget
+          >
+          <CardBoxWidget
+            v-if="myProfile.common_jubility"
+            label="Common Jubility"
+            >{{ myProfile.common_jubility / 10 }}</CardBoxWidget
+          >
           <CardBoxWidget
             v-if="myProfile.deller"
             label="Deller"
