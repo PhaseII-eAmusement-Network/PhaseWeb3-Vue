@@ -288,5 +288,40 @@
         "author": "Ho",
         "header": "Dancing Stage featuring <username>'s RAVE",
         "comment": "ミッキーたちのDJで踊ろう!"
+    },
+    {
+        "author": "Roganis",
+        "header": "WE LOVE <username>!",
+        "comment": "Phase'n Music"
+    },
+    {
+        "author": "4848",
+        "header": "Come along and sing a song, and join the jamboree, <username>!",
+        "comment": "Em Eye See, Kay E Why. Em Oh You S E"
+    },
+    {
+        "author": "4848",
+        "header": "Do NOT lick the buttons, <username>",
+        "comment": "*I SEE YOU THERE*"
+    },
+    {
+        "author": "Ryuto Setsujin",
+        "header": "Ayo, <username>",
+        "comment": "Go get those scores!"
+    },
+    {
+        "author": "Pairasea",
+        "header": "Welcome to Lapistoria, <username>!",
+        "comment": "WE LOVE POP'N MUSIC!"
+    },
+    {
+        "author": "SQWERLY!",
+        "header": "WOW, <username>!",
+        "comment": "It's a new rekkid!!!"
+    },
+    {
+        "author": "Axel",
+        "header": "Select a game mode, <username>",
+        "comment": "ARE YOU SURE?"
     }
 ]
