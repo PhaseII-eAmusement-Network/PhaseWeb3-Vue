@@ -487,8 +487,8 @@ export const gameData = [
   {
     id: GameConstants.DDRCLASS,
     name: "Classic DDR",
-    icon: "/assets/icon/ddr.png",
-    cardBG: "/assets/card/ddr.png",
+    icon: "/assets/icon/ddr.webp",
+    cardBG: "/assets/card/ddr.webp",
     noRivals: true,
     noScores: true,
     noRecords: true,
@@ -538,8 +538,8 @@ export const gameData = [
   {
     id: GameConstants.DDROMNI,
     name: "DDR OmniMIX",
-    icon: "/assets/icon/ddr.png",
-    cardBG: "/assets/card/ddr.png",
+    icon: "/assets/icon/ddr.webp",
+    cardBG: "/assets/card/ddr.webp",
     scoreHeaders: [
       { text: "EX Score", value: "exscore" },
       { text: "Combos", value: "combo" },
@@ -911,8 +911,8 @@ export const gameData = [
     id: GameConstants.IIDX,
     name: "beatmaniaIIDX",
     shortName: "IIDX",
-    icon: "/assets/icon/iidx.png",
-    cardBG: "/assets/card/iidx.png",
+    icon: "/assets/icon/iidx.webp",
+    cardBG: "/assets/card/iidx.webp",
     scoreHeaders: [
       { text: "EX Score", value: "exscore" },
       { text: "Combos", value: "combo" },
@@ -1062,8 +1062,8 @@ export const gameData = [
   {
     id: GameConstants.IIDXCLASS,
     name: "Classic IIDX",
-    icon: "/assets/icon/iidx.png",
-    cardBG: "/assets/card/iidx.png",
+    icon: "/assets/icon/iidx.webp",
+    cardBG: "/assets/card/iidx.webp",
     noRivals: true,
     noScores: true,
     noRecords: true,
@@ -1338,8 +1338,8 @@ export const gameData = [
   {
     id: GameConstants.POPN_HELLO,
     name: "Hello! Pop'n Music",
-    icon: "/assets/icon/popn.png",
-    cardBG: "/assets/card/popn.png",
+    icon: "/assets/icon/popn.webp",
+    cardBG: "/assets/card/popn.webp",
     skip: true,
     noRivals: true,
     noScores: true,
@@ -1349,8 +1349,8 @@ export const gameData = [
     id: GameConstants.POPN_MUSIC,
     name: "pop'n music",
     shortName: "pop'n",
-    icon: "/assets/icon/popn.png",
-    cardBG: "/assets/card/popn.png",
+    icon: "/assets/icon/popn.webp",
+    cardBG: "/assets/card/popn.webp",
     scoreHeaders: [
       { text: "Combos", value: "combo" },
       { text: "Halo", value: "halo" },
@@ -1567,8 +1567,8 @@ export const gameData = [
   {
     id: GameConstants.TSUMTSUM,
     name: "Tsum Tsum",
-    icon: "/assets/icon/tsum.png",
-    cardBG: "/assets/card/tsum.png",
+    icon: "/assets/icon/tsum.webp",
+    cardBG: "/assets/card/tsum.webp",
     skip: false,
     noRivals: true,
     noScores: false,
@@ -1577,8 +1577,8 @@ export const gameData = [
   {
     id: GameConstants.ROAD_FIGHTERS,
     name: "Road Fighters 3D",
-    icon: "/assets/icon/rf.png",
-    cardBG: "/assets/card/rf.png",
+    icon: "/assets/icon/rf.webp",
+    cardBG: "/assets/card/rf.webp",
     skip: true,
     noRivals: true,
     noScores: true,
@@ -1599,10 +1599,10 @@ export function getGameInfo(game) {
   }
 
   if (!requestedData.icon) {
-    requestedData.icon = `/assets/icon/${game}.png`;
+    requestedData.icon = `/assets/icon/${game}.webp`;
   }
   if (!requestedData.cardBG) {
-    requestedData.cardBG = `/assets/card/${game}.png`;
+    requestedData.cardBG = `/assets/card/${game}.webp`;
   }
   return requestedData;
 }

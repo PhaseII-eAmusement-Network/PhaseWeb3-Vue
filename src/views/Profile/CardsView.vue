@@ -54,7 +54,7 @@ const copyToClipboard = (text) => {
           class="grid dark:bg-slate-900/70 rounded-2xl p-5"
         >
           <div class="flex justify-between md:grid md:gap-2 mb-4 items-center">
-            <img src="/assets/passes/generic.png" class="w-24 md:w-auto" />
+            <img src="/assets/passes/generic.webp" class="w-24 md:w-auto" />
             <h1 class="text-xl text-center font-mono">
               {{ dashCode(card.encoded) }}
             </h1>

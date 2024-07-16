@@ -86,7 +86,7 @@ function getSources() {
   if (!versionForm.currentVersion) {
     sources = thisGame.cardBG;
   } else {
-    sources = `/assets/games/${thisGame.id}/card/${versionForm.currentVersion}.png`;
+    sources = `/assets/games/${thisGame.id}/card/${versionForm.currentVersion}.webp`;
   }
   return sources;
 }
