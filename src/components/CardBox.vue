@@ -1,5 +1,5 @@
 <script setup>
-import { computed, useSlots } from "vue";
+import { computed, useSlots, ref } from "vue";
 import CardBoxComponentBody from "@/components/CardBoxComponentBody.vue";
 import CardBoxComponentFooter from "@/components/CardBoxComponentFooter.vue";
 
@@ -20,6 +20,10 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  color: {
+    type: String,
+    default: "bg-slate-900 dark:bg-slate-900",
+  },
 });
 
 const emit = defineEmits(["submit"]);
@@ -28,14 +32,15 @@ const slots = useSlots();
 
 const hasFooterSlot = computed(() => slots.footer && !!slots.footer());
 
-var color = "bg-slate-900 dark:bg-slate-900";
+const color = ref(props.color);
 
 if (props.isAuth) {
-  color = "bg-slate-800 md:bg-slate-900 dark:bg-slate-800 md:dark:bg-slate-900";
+  color.value =
+    "bg-slate-800 md:bg-slate-900 dark:bg-slate-800 md:dark:bg-slate-900";
 }
 
 const componentClass = computed(() => {
-  const base = [props.rounded, props.flex, color];
+  const base = [props.rounded, props.flex, color.value];
 
   if (props.isHoverable) {
     base.push("hover:shadow-lg transition-shadow duration-500");

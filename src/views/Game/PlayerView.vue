@@ -7,14 +7,18 @@ import {
   mdiBackburger,
   mdiPlaylistMusicOutline,
   mdiFormatListText,
+  mdiChartBarStacked,
 } from "@mdi/js";
 import SectionMain from "@/components/SectionMain.vue";
 import CardBoxWidget from "@/components/CardBoxWidget.vue";
+import CardBox from "@/components/CardBox.vue";
 import BaseButton from "@/components/BaseButton.vue";
 import ProfileCard from "@/components/Cards/ProfileCard.vue";
 import LayoutAuthenticated from "@/layouts/LayoutAuthenticated.vue";
 import SectionTitleLine from "@/components/SectionTitleLine.vue";
 import FormControl from "@/components/FormControl.vue";
+import PillTag from "@/components/PillTag.vue";
+import JubilityTable from "@/components/Tables/JubilityTable.vue";
 import { getGameInfo } from "@/constants";
 import { getIIDXDan } from "@/constants/danClass.js";
 import { getGitadoraColor, getJubilityColor } from "@/constants/skillColor";
@@ -336,6 +340,33 @@ function formatProfile(profile) {
             getIIDXDan(myProfile.dgrade).label
           }}</CardBoxWidget>
         </div>
+
+        <template v-if="myProfile.jubility">
+          <SectionTitleLine
+            :icon="mdiChartBarStacked"
+            title="Jubility Breakdown"
+            main
+          />
+
+          <div class="my-6 grid grid-cols-1 md:grid-cols-2 gap-6">
+            <CardBox v-if="myProfile.pick_up_breakdown">
+              <PillTag label="Pick-Up" color="info" />
+              <JubilityTable
+                :jubility-data="myProfile.pick_up_breakdown"
+                ,
+                :version="versionForm.currentVersion"
+              />
+            </CardBox>
+            <CardBox v-if="myProfile.other_breakdown">
+              <PillTag label="Common" color="info" />
+              <JubilityTable
+                :jubility-data="myProfile.other_breakdown"
+                ,
+                :version="versionForm.currentVersion"
+              />
+            </CardBox>
+          </div>
+        </template>
       </SectionMain>
     </template>
   </LayoutAuthenticated>

@@ -298,5 +298,18 @@ export const useMainStore = defineStore("main", {
         throw error;
       }
     },
+
+    async getMusicData(game, version, songIds = null, oneChart = false) {
+      try {
+        const data = await this.callApi(
+          `/music?game=${game}&version=${version}&songIds=${songIds.toString()}` +
+            (oneChart ? "&oneChart=true" : "")
+        );
+        return data.data;
+      } catch (error) {
+        console.log("Error fetching music data:", error);
+        throw error;
+      }
+    },
   },
 });
