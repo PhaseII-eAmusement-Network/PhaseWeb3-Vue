@@ -68,7 +68,7 @@ onMounted(async () => {
     <CardBox
       v-for="song of songData"
       :key="song.id"
-      color="bg-slate-700"
+      color-prop="bg-slate-800 dark:bg-slate-800"
       class="my-3 p-5"
       has-table
     >

@@ -20,7 +20,7 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
-  color: {
+  colorProp: {
     type: String,
     default: "bg-slate-900 dark:bg-slate-900",
   },
@@ -32,7 +32,7 @@ const slots = useSlots();
 
 const hasFooterSlot = computed(() => slots.footer && !!slots.footer());
 
-const color = ref(props.color);
+const color = ref(props.colorProp);
 
 if (props.isAuth) {
   color.value =
