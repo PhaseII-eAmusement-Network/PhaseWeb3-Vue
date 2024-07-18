@@ -768,7 +768,7 @@ export const gameData = [
     playerHeaders: [
       {
         text: "SKILL POINT",
-        value: "profile_skill",
+        value: "skill",
         sortable: true,
         width: 150,
       },
