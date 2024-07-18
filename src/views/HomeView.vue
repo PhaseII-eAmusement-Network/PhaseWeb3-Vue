@@ -95,6 +95,11 @@ function filterUserProfiles(userProfiles) {
       filteredProfiles.push(profile);
     }
   }
+
+  filteredProfiles.sort(function (x, y) {
+    return y.data.last_play_timestamp - x.data.last_play_timestamp;
+  });
+
   return filteredProfiles;
 }
 </script>
