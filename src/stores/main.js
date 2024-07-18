@@ -74,10 +74,11 @@ export const useMainStore = defineStore("main", {
         });
     },
 
-    async callApi(endpoint, method = "GET", data = null) {
+    async callApi(endpoint, method = "GET", data = null, extraHeaders = {}) {
       const apiServer = import.meta.env.VITE_API_URL;
       const apiKey = import.meta.env.VITE_API_KEY;
       let loadingTimeout;
+      this.errorCode = ""; // We want to reset the network error.
 
       const startLoading = () => {
         loadingTimeout = setTimeout(() => {
@@ -90,10 +91,12 @@ export const useMainStore = defineStore("main", {
       // Start loading after the specified delay
       startLoading();
 
-      const headers = {
+      const baseHeaders = {
         "App-Auth-Key": apiKey,
         "User-Auth-Key": loadUserAuthKey(),
       };
+
+      const headers = { ...baseHeaders, ...extraHeaders };
 
       const url = `${apiServer}/v1${endpoint}`;
 
@@ -302,8 +305,11 @@ export const useMainStore = defineStore("main", {
     async getMusicData(game, version, songIds = null, oneChart = false) {
       try {
         const data = await this.callApi(
-          `/music?game=${game}&version=${version}&songIds=${songIds.toString()}` +
-            (oneChart ? "&oneChart=true" : "")
+          `/music?game=${game}&version=${version}` +
+            (oneChart ? "&oneChart=true" : ""),
+          "GET",
+          null,
+          { songIds: songIds.toString() }
         );
         return data.data;
       } catch (error) {

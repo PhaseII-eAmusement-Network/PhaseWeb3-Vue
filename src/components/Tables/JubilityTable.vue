@@ -85,6 +85,7 @@ onMounted(async () => {
           <h2 class="text-md">{{ song.songData.artist }}</h2>
         </div>
         <div>
+          <h2 class="text-lg">Jubility: {{ song.value / 10 }}</h2>
           <h2 class="text-lg">Rate: {{ song.rate / 10 }}</h2>
         </div>
       </div>
