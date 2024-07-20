@@ -8,6 +8,7 @@ import {
   mdiPlaylistMusicOutline,
   mdiFormatListText,
   mdiChartBarStacked,
+  mdiChartAreasplineVariant,
 } from "@mdi/js";
 import SectionMain from "@/components/SectionMain.vue";
 import CardBoxWidget from "@/components/CardBoxWidget.vue";
@@ -211,7 +212,7 @@ function formatProfile(profile) {
 }
 
 function formatCounts(profile) {
-  const stats = profile.stats[`count_${versionForm.currentVersion}`];
+  const stats = profile.stats?.count;
 
   return stats
     ? [
@@ -333,6 +334,16 @@ function formatCounts(profile) {
             </CardBoxWidget>
           </template>
           <CardBoxWidget
+            v-if="myProfile.stats?.count?.records"
+            label="Records"
+            :number="myProfile.stats?.count?.records"
+          />
+          <CardBoxWidget
+            v-if="myProfile.stats?.count?.attempts"
+            label="Attempts"
+            :number="myProfile.stats?.count?.attempts"
+          />
+          <CardBoxWidget
             v-if="myProfile.skill"
             label="Skill Points"
             :number="myProfile.skill / 100"
@@ -372,18 +383,24 @@ function formatCounts(profile) {
           }}</CardBoxWidget>
         </div>
 
-        <div
-          v-if="myProfile.stats[`count_${versionForm.currentVersion}`]"
-          class="my-6 grid grid-cols-2 md:grid-cols-5 xl:grid-cols-6 gap-6"
-        >
-          <template v-for="stat of formatCounts(myProfile)" :key="stat">
-            <CardBoxWidget
-              v-if="stat.value"
-              :label="stat.label"
-              :number="stat.value"
-            />
-          </template>
-        </div>
+        <template v-if="myProfile.stats?.count">
+          <SectionTitleLine
+            :icon="mdiChartAreasplineVariant"
+            title="Stats"
+            main
+          />
+          <div
+            class="my-6 grid grid-cols-2 md:grid-cols-5 xl:grid-cols-6 gap-6"
+          >
+            <template v-for="stat of formatCounts(myProfile)" :key="stat">
+              <CardBoxWidget
+                v-if="stat.value"
+                :label="stat.label"
+                :number="stat.value"
+              />
+            </template>
+          </div>
+        </template>
 
         <template v-if="myProfile.jubility">
           <SectionTitleLine
