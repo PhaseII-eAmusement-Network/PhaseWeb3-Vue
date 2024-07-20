@@ -188,14 +188,6 @@ function returnNumber(stat, profile) {
   return profile.stats[stat.key];
 }
 
-function formatNumber(number, tenth) {
-  if (!tenth) {
-    return number / 100;
-  } else {
-    return number / 10;
-  }
-}
-
 function formatProfile(profile) {
   if (profile.stats) {
     if (profile.stats.first_play_timestamp) {
@@ -216,6 +208,45 @@ function formatProfile(profile) {
   }
 
   return profile;
+}
+
+function formatCounts(profile) {
+  const stats = profile.stats[`count_${versionForm.currentVersion}`];
+
+  return stats
+    ? [
+        stats.mfc != null
+          ? {
+              label: "MFCs",
+              value: stats.mfc,
+            }
+          : 0,
+        stats.pfc != null
+          ? {
+              label: "PFCs",
+              value: stats.pfc,
+            }
+          : 0,
+        stats.fc != null
+          ? {
+              label: "GFCs",
+              value: stats.fc,
+            }
+          : 0,
+        stats.gfc != null
+          ? {
+              label: "FCs",
+              value: stats.gfc,
+            }
+          : 0,
+        stats.life4 != null
+          ? {
+              label: "Life-4 Clears",
+              value: stats.life4,
+            }
+          : 0,
+      ]
+    : [];
 }
 </script>
 
@@ -304,7 +335,7 @@ function formatProfile(profile) {
           <CardBoxWidget
             v-if="myProfile.skill"
             label="Skill Points"
-            :number="formatNumber(myProfile.skill, false)"
+            :number="myProfile.skill / 100"
             :num-color="getGitadoraColor(myProfile.skill)"
           />
           <CardBoxWidget v-if="myProfile.profile_skill" label="Skill Level">{{
@@ -339,6 +370,19 @@ function formatProfile(profile) {
           <CardBoxWidget v-if="myProfile.dgrade" label="DP DAN">{{
             getIIDXDan(myProfile.dgrade).label
           }}</CardBoxWidget>
+        </div>
+
+        <div
+          v-if="myProfile.stats[`count_${versionForm.currentVersion}`]"
+          class="my-6 grid grid-cols-2 md:grid-cols-5 xl:grid-cols-6 gap-6"
+        >
+          <template v-for="stat of formatCounts(myProfile)" :key="stat">
+            <CardBoxWidget
+              v-if="stat.value"
+              :label="stat.label"
+              :number="stat.value"
+            />
+          </template>
         </div>
 
         <template v-if="myProfile.jubility">
