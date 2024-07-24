@@ -36,12 +36,13 @@ const myProfile = ref(null);
 const scores = ref([]);
 
 const headers = [
-  { text: "Timestamp", value: "timestamp", width: 170 },
+  { text: "Timestamp", value: "timestamp", width: 140 },
+  { text: "New PB", value: "newRecord", width: 100 },
   { text: "Song", value: "song.name", width: 180 },
   { text: "Artist", value: "song.artist", width: 180 },
   { text: "Chart", value: "song.chart", width: 100 },
   { text: "Grade", value: "data.rank", width: 80 },
-  { text: "Score", value: "points", width: 100 },
+  { text: "Score", value: "points", width: 120 },
 ];
 
 if (thisGame.scoreHeaders) {
@@ -50,7 +51,7 @@ if (thisGame.scoreHeaders) {
   }
 }
 
-headers.push({ text: "Type", value: "type", width: 80 });
+// headers.push({ text: "Type", value: "type", width: 80 });
 
 onMounted(async () => {
   try {
@@ -76,18 +77,80 @@ async function loadProfile() {
 function formatScores(scores) {
   var formattedItems = [];
   for (var item of scores) {
+    if (item.newRecord) {
+      item.newRecord = "✅";
+    } else {
+      item.newRecord = "";
+    }
+
     if (item.timestamp) {
       const date = new Date(item.timestamp * 1000);
       item.timestamp = date.toLocaleString();
-      if (item.newRecord) {
-        item.timestamp = `${item.timestamp}\nNew High Score!`;
-      }
     }
 
-    if (item.points) {
+    if (item.points != undefined) {
       item.points = item.points
         .toString()
         .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+    }
+
+    if (item.data?.stats?.score != undefined) {
+      item.exscore = item.points.toString();
+      item.points = item.data?.stats?.score
+        .toString()
+        .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+    }
+
+    if (item.song?.chart != undefined && thisGame.chartTable) {
+      item.song.chart = thisGame.chartTable[item.song?.chart];
+    }
+
+    if (item.data?.halo != undefined && thisGame.haloTable) {
+      item.data.halo = thisGame.haloTable[item.data?.halo];
+    }
+
+    if (item.data?.medal != undefined && thisGame.medalTable) {
+      item.data.medal = thisGame.medalTable[item.data?.medal];
+    }
+
+    if (item.data?.clear_status != undefined && thisGame.medalTable) {
+      item.data.medal = thisGame.medalTable[item.data?.clear_status];
+    }
+
+    if (item.data?.rank != undefined && thisGame.rankTable) {
+      item.data.rank = thisGame.rankTable[item.data?.rank];
+    }
+
+    if (item.data?.result_rank != undefined && thisGame.rankTable) {
+      item.data.rank = thisGame.rankTable[item.data?.result_rank];
+    }
+
+    if (item.data?.grade != undefined && thisGame.rankTable) {
+      item.data.rank = thisGame.rankTable[item.data?.grade];
+    }
+
+    if (item.data?.skill_perc > 0) {
+      item.data.skill_perc = `${item.data?.skill_perc / 100}%`;
+    } else {
+      item.data.skill_perc = "0%";
+    }
+
+    if (item.data?.skill_points) {
+      item.data.skill_points = item.data?.skill_points / 10;
+    }
+
+    if (item.data?.perc > 0) {
+      item.data.perc = `${item.data?.perc / 100}%`;
+    } else {
+      item.data.perc = "0%";
+    }
+
+    if (item.data?.new_skill) {
+      item.data.new_skill = item.data?.new_skill / 10;
+    }
+
+    if (item.data?.music_rate) {
+      item.data.music_rate = item.data?.music_rate / 10;
     }
 
     formattedItems.push(item);
@@ -106,7 +169,7 @@ function formatScores(scores) {
             :href="`/#/games/${gameID}/profiles/${myProfile.userId}`"
             class="w-full md:w-auto"
             color="info"
-            :label="`${myProfile.name}'s Profile`"
+            :label="`${myProfile.username}'s Profile`"
           />
 
           <BaseButton
@@ -122,7 +185,7 @@ function formatScores(scores) {
 
         <SectionTitleLine
           :icon="mdiCounter"
-          :title="`${myProfile.name}'s ${
+          :title="`${myProfile.username}'s ${
             thisGame.shortName ? thisGame.shortName : thisGame.name
           } Scores`"
           main
