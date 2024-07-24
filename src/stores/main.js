@@ -317,5 +317,19 @@ export const useMainStore = defineStore("main", {
         throw error;
       }
     },
+
+    async getAttemptData(game, userId = null) {
+      try {
+        const data = await this.callApi(
+          `/attempts/${game}` + (userId ? `?userId=${userId}` : ""),
+          "GET",
+          null
+        );
+        return data.data;
+      } catch (error) {
+        console.log("Error fetching attempt data:", error);
+        throw error;
+      }
+    },
   },
 });
