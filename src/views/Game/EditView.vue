@@ -66,21 +66,34 @@ var settings = [
 ];
 
 function getSources() {
-  var sources = null;
   if (!versionForm.currentVersion) {
-    sources = thisGame.cardBG;
+    return thisGame.cardBG;
   } else {
-    sources = `/assets/games/${thisGame.id}/card/${versionForm.currentVersion}.webp`;
+    return `/assets/games/${thisGame.id}/card/${versionForm.currentVersion}.webp`;
   }
-  return sources;
+}
+
+function getVideoSource() {
+  if (
+    versionForm.currentVersion &&
+    thisGame.videoTable?.includes(versionForm.currentVersion)
+  ) {
+    return `https://web3.phaseii.network/gameassets/video/${thisGame.id}/${versionForm.currentVersion}.mp4`;
+  } else {
+    return null;
+  }
 }
 
 function getCardStyle() {
-  return `
+  if (thisGame.videoTable?.includes(versionForm.currentVersion)) {
+    return null;
+  } else {
+    return `
       background-image: url('${getSources()}');
       background-size: cover;
       background-repeat: no-repeat;
     `;
+  }
 }
 
 function filterVersions(haveVersions) {
@@ -142,11 +155,21 @@ async function loadProfile() {
         main
       />
       <div
-        v-if="versionForm.currentVersion"
+        v-if="versionForm.currentVersion && myProfile"
         :style="getCardStyle()"
-        class="rounded-2xl mb-6"
+        class="rounded-2xl mb-6 card-container"
       >
-        <div class="bg-white dark:bg-slate-900/90 rounded-2xl pt-6 p-3">
+        <video
+          autoplay
+          muted
+          loop
+          playsinline
+          :src="getVideoSource()"
+          class="background-video"
+        ></video>
+        <div
+          class="bg-white dark:bg-slate-900/90 rounded-2xl pt-6 p-3 card-content"
+        >
           <div class="w-full">
             <ProfileCard
               v-if="myProfile"

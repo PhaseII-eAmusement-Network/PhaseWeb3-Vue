@@ -444,6 +444,12 @@ export const gameData = [
     shortName: "DDR",
     icon: null,
     cardBG: null,
+    videoTable: [
+      VersionConstants.DDR_ACE,
+      VersionConstants.DDR_A20,
+      VersionConstants.DDR_A20_PLUS,
+      VersionConstants.DDR_A3,
+    ],
     scoreHeaders: [
       { text: "Combos", value: "data.combo" },
       { text: "Halo", value: "data.halo" },
@@ -624,6 +630,7 @@ export const gameData = [
     name: "DDR OmniMIX",
     icon: "/assets/icon/ddr.webp",
     cardBG: "/assets/card/ddr.webp",
+    videoTable: [VersionConstants.DDR_A20_PLUS],
     scoreHeaders: [
       { text: "Combos", value: "data.combo" },
       { text: "Halo", value: "data.halo" },
@@ -904,6 +911,17 @@ export const gameData = [
     name: "GITADORA (Drums)",
     icon: null,
     cardBG: null,
+    videoTable: [
+      VersionConstants.GITADORA,
+      VersionConstants.GITADORA_OVERDRIVE,
+      VersionConstants.GITADORA_TRIBOOST,
+      VersionConstants.GITADORA_TRIBOOST_RE_EVOLVE,
+      VersionConstants.GITADORA_MATIXX,
+      VersionConstants.GITADORA_EXCHAIN,
+      VersionConstants.GITADORA_NEXTAGE,
+      VersionConstants.GITADORA_HIGH_VOLTAGE,
+      VersionConstants.GITADORA_FUZZUP,
+    ],
     noRivals: true,
     playerHeaders: [
       {
@@ -942,6 +960,17 @@ export const gameData = [
     name: "GITADORA (Guitar)",
     icon: null,
     cardBG: null,
+    videoTable: [
+      VersionConstants.GITADORA,
+      VersionConstants.GITADORA_OVERDRIVE,
+      VersionConstants.GITADORA_TRIBOOST,
+      VersionConstants.GITADORA_TRIBOOST_RE_EVOLVE,
+      VersionConstants.GITADORA_MATIXX,
+      VersionConstants.GITADORA_EXCHAIN,
+      VersionConstants.GITADORA_NEXTAGE,
+      VersionConstants.GITADORA_HIGH_VOLTAGE,
+      VersionConstants.GITADORA_FUZZUP,
+    ],
     noRivals: true,
     playerHeaders: [
       {
@@ -1109,6 +1138,14 @@ export const gameData = [
     shortName: "IIDX",
     icon: "/assets/icon/iidx.webp",
     cardBG: "/assets/card/iidx.webp",
+    videoTable: [
+      VersionConstants.IIDX_CANNON_BALLERS,
+      VersionConstants.IIDX_ROOTAGE,
+      VersionConstants.IIDX_HEROIC_VERSE,
+      VersionConstants.IIDX_BISTROVER,
+      VersionConstants.IIDX_CASTHOUR,
+      VersionConstants.IIDX_RESIDENT,
+    ],
     scoreHeaders: [
       { text: "Misses", value: "data.misses" },
       { text: "Clear Status", value: "data.medal" },
