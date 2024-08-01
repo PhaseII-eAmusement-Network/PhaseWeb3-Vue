@@ -63,7 +63,7 @@ const submit = async () => {
             <p class="text-lg relative bottom-0">Please log in.</p>
           </div>
           <div class="md:border-r" />
-          <div>
+          <form @submit.prevent="submit()">
             <FormField label="Username">
               <FormControl
                 v-model="form.login"
@@ -93,7 +93,7 @@ const submit = async () => {
             />
 
             <div class="flex flex-col gap-2 mt-4">
-              <BaseButton label="Log In" color="success" @click="submit()" />
+              <BaseButton label="Log In" color="success" type="submit" />
             </div>
 
             <hr class="border-t my-4 w-full" />
@@ -113,7 +113,7 @@ const submit = async () => {
                 href="/#/auth/reset"
               /> -->
             </div>
-          </div>
+          </form>
         </div>
       </CardBox>
     </div>
