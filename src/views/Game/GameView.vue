@@ -13,7 +13,6 @@ import SectionTitleLine from "@/components/SectionTitleLine.vue";
 import GameTitleLine from "@/components/GameTitleLine.vue";
 import LayoutAuthenticated from "@/layouts/LayoutAuthenticated.vue";
 import CardBox from "@/components/CardBox.vue";
-import CardBoxWidget from "@/components/CardBoxWidget.vue";
 import FormControl from "@/components/FormControl.vue";
 import ProfileCard from "@/components/Cards/ProfileCard.vue";
 import GeneralTable from "@/components/GeneralTable.vue";
@@ -228,26 +227,12 @@ const navigateToProfile = (item) => {
               </div>
             </div>
           </div>
-          <div v-if="myProfile" class="w-full pt-6">
+          <div v-if="myProfile" class="w-full pt-6 pb-10">
             <ProfileCard
               :game="gameID"
               :version="versionForm.currentVersion"
               :profile="myProfile"
             >
-              <div class="grid grid-cols-2 gap-6 pt-6">
-                <CardBoxWidget
-                  :number="myProfile.stats.total_plays"
-                  label="Plays"
-                />
-
-                <template v-if="myProfile.records">
-                  <CardBoxWidget
-                    v-if="myProfile.records.skill"
-                    :number="myProfile.records.skill / 100"
-                    label="Skill Points"
-                  />
-                </template>
-              </div>
             </ProfileCard>
           </div>
           <div v-else class="md:w-1/2 grid grid-cols-1 md:grid-cols-2 gap-3">

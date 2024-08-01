@@ -2,7 +2,7 @@
 import { ref, onMounted } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { useMainStore } from "@/stores/main";
-import { mdiCounter, mdiBackburger } from "@mdi/js";
+import { mdiCounter } from "@mdi/js";
 import SectionMain from "@/components/SectionMain.vue";
 import LayoutAuthenticated from "@/layouts/LayoutAuthenticated.vue";
 import SectionTitleLine from "@/components/SectionTitleLine.vue";
@@ -148,16 +148,6 @@ function formatScores(scores) {
 <template>
   <LayoutAuthenticated>
     <SectionMain>
-      <BaseButton
-        :icon="mdiBackburger"
-        :href="`/#/games/${gameID}`"
-        class="w-full md:w-auto mb-6"
-        color="info"
-        :label="`${
-          thisGame.shortName ? thisGame.shortName : thisGame.name
-        } Home`"
-      />
-
       <SectionTitleLine
         :icon="mdiCounter"
         :title="`All ${
@@ -165,6 +155,19 @@ function formatScores(scores) {
         } Scores`"
         main
       />
+
+      <div
+        class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 2xl:grid-cols-5 gap-3 pb-6"
+      >
+        <BaseButton
+          :icon="mdiHome"
+          :href="`/#/games/${gameID}`"
+          color="info"
+          :label="`${
+            thisGame.shortName ? thisGame.shortName : thisGame.name
+          } Home`"
+        />
+      </div>
 
       <CardBox has-table>
         <GeneralTable :headers="headers" :items="scores" />

@@ -163,26 +163,6 @@ function formatScores(scores) {
   <LayoutAuthenticated>
     <SectionMain>
       <template v-if="myProfile">
-        <div class="grid grid-cols-1 md:max-w-[180px] space-y-3 mb-5">
-          <BaseButton
-            :icon="mdiBackburger"
-            :href="`/#/games/${gameID}/profiles/${myProfile.userId}`"
-            class="w-full md:w-auto"
-            color="info"
-            :label="`${myProfile.username}'s Profile`"
-          />
-
-          <BaseButton
-            :icon="mdiHome"
-            :href="`/#/games/${gameID}`"
-            class="w-full md:w-auto"
-            color="info"
-            :label="`${
-              thisGame.shortName ? thisGame.shortName : thisGame.name
-            } Home`"
-          />
-        </div>
-
         <SectionTitleLine
           :icon="mdiCounter"
           :title="`${myProfile.username}'s ${
@@ -190,6 +170,25 @@ function formatScores(scores) {
           } Scores`"
           main
         />
+        <div
+          class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 2xl:grid-cols-5 gap-3 pb-6"
+        >
+          <BaseButton
+            :icon="mdiBackburger"
+            :href="`/#/games/${gameID}/profiles/${myProfile.userId}`"
+            color="info"
+            :label="`${myProfile.username}'s Profile`"
+          />
+
+          <BaseButton
+            :icon="mdiHome"
+            :href="`/#/games/${gameID}`"
+            color="info"
+            :label="`${
+              thisGame.shortName ? thisGame.shortName : thisGame.name
+            } Home`"
+          />
+        </div>
 
         <CardBox has-table>
           <GeneralTable :headers="headers" :items="scores" />

@@ -37,17 +37,21 @@ const copyToClipboard = (text) => {
   <LayoutAuthenticated>
     <SectionMain>
       <UserCard class="mb-6" use-small even-smaller />
-      <SectionTitleLine
-        :icon="mdiCardAccountDetailsOutline"
-        title="Login Cards"
-        main
-      />
-      <div class="text-xl mb-4">
-        <h4>AC = Web Access Code</h4>
-        <h4>NFC-ID = Internal ID for card0.txt</h4>
+      <div class="grid md:grid-cols-2 mb-2">
+        <SectionTitleLine
+          :icon="mdiCardAccountDetailsOutline"
+          title="Login Cards"
+          main
+        />
+        <div class="text-xl md:text-right">
+          <h4>AC = Web Access Code</h4>
+          <h4>NFC-ID = Internal ID for <samp>card0.txt</samp></h4>
+        </div>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div
+        class="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-6"
+      >
         <div
           v-for="card of cardData"
           :key="card.id"

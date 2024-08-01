@@ -67,7 +67,9 @@ const thisGame = getGameInfo(props.game);
       </div>
     </div>
     <div class="space-y-2 text-center md:text-left lg:mx-12 p-2">
-      <div class="pt-2 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-3">
+      <div
+        class="pt-6 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 2xl:grid-cols-5 gap-3"
+      >
         <BaseButton
           v-if="!useSmall && game"
           :icon="mdiAccountDetails"

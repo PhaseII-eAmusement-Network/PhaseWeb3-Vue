@@ -107,13 +107,15 @@ function filterUserProfiles(userProfiles) {
 <template>
   <LayoutAuthenticated>
     <SectionMain>
-      <h2 class="pb-4 text-4xl lg:text-5xl">Welcome to <samp>PhaseII</samp></h2>
-      <UserCard class="mb-6" />
+      <UserCard class="mb-6 mt-2 shadow-xl" />
 
       <!-- For public beta, we'll load the news here. -->
       <SectionTitleLine :icon="mdiNewspaperVariant" title="Network News" main />
 
-      <div v-if="newsData.length" class="grid gap-4 grid-cols-1 w-full pb-4">
+      <div
+        v-if="newsData.length"
+        class="grid gap-4 grid-cols-1 xl:grid-cols-2 w-full pb-4"
+      >
         <CardBoxNews
           v-for="news of newsData"
           :id="news.id"
@@ -150,7 +152,7 @@ function filterUserProfiles(userProfiles) {
 
       <SectionTitleLine :icon="mdiGamepad" title="Showcase" main />
       <div
-        class="grid grid-flow-row auto-rows-auto grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5 mb-5"
+        class="grid grid-flow-row auto-rows-auto grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-5 mb-5"
       >
         <CardBoxGameStat
           v-for="profile of filterUserProfiles(userProfiles)"

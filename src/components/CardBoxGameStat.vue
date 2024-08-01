@@ -74,11 +74,13 @@ const cardStyle = `
           <BaseLevel type="justify-start">
             <GameIcon class="md:mr-6" :path="selectedGame.icon" />
             <div class="text-center space-y-1 md:text-left md:mr-6">
-              <div class="md:flex md:items-center mb-4 md:mb-0 md:space-x-2">
-                <h2 class="text-xl">{{ selectedGame.name }}</h2>
+              <h2 class="text-xl">{{ selectedGame.name }}</h2>
+              <div
+                class="flex space-x-2 justify-center md:justify-start pt-2 md:pt-0"
+              >
                 <PillTag :color="tag.type" :label="type" small />
+                <h4 class="text-lg">{{ value }}</h4>
               </div>
-              <h4 class="text-lg">{{ value }}</h4>
             </div>
           </BaseLevel>
           <div class="text-center md:text-right">
