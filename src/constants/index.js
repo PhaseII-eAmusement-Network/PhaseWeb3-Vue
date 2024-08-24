@@ -153,6 +153,7 @@ export class VersionConstants {
   static IIDX_BISTROVER = 28;
   static IIDX_CASTHOUR = 29;
   static IIDX_RESIDENT = 30;
+  static IIDX_EPOLIS = 30;
 
   static JUBEAT = 1;
   static JUBEAT_RIPPLES = 2;
@@ -1318,6 +1319,10 @@ export const gameData = [
       {
         id: VersionConstants.IIDX_RESIDENT,
         label: "RESIDENT",
+      },
+      {
+        id: VersionConstants.IIDX_EPOLIS,
+        label: "EPOLIS",
       },
     ],
   },
