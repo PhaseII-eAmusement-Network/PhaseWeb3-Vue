@@ -153,7 +153,7 @@ export class VersionConstants {
   static IIDX_BISTROVER = 28;
   static IIDX_CASTHOUR = 29;
   static IIDX_RESIDENT = 30;
-  static IIDX_EPOLIS = 30;
+  static IIDX_EPOLIS = 31;
 
   static JUBEAT = 1;
   static JUBEAT_RIPPLES = 2;
@@ -1146,6 +1146,7 @@ export const gameData = [
       VersionConstants.IIDX_BISTROVER,
       VersionConstants.IIDX_CASTHOUR,
       VersionConstants.IIDX_RESIDENT,
+      VersionConstants.IIDX_EPOLIS,
     ],
     scoreHeaders: [
       { text: "Misses", value: "data.misses" },
