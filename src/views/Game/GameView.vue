@@ -192,11 +192,7 @@ const navigateToProfile = (item) => {
 <template>
   <LayoutAuthenticated>
     <SectionMain>
-      <div
-        v-if="versionForm.currentVersion && myProfile"
-        :style="getCardStyle()"
-        class="rounded-2xl mb-6 card-container"
-      >
+      <div :style="getCardStyle()" class="rounded-2xl mb-6 card-container">
         <video
           autoplay
           muted
