@@ -6,6 +6,7 @@ import {
   mdiMonitor,
   mdiStoreCog,
   mdiGamepad,
+  mdiSecurity,
 } from "@mdi/js";
 import { ref, watch, onMounted, computed } from "vue";
 import { useRouter, useRoute } from "vue-router";
@@ -133,11 +134,72 @@ const menuAside = computed(() => {
     // ],
   }));
 
-  return [
-    { to: "/", icon: mdiMonitor, label: "Dashboard" },
-    { label: "My Arcades", icon: mdiStoreCog, menu: sortedArcades },
-    { label: "Games", icon: mdiGamepad, menu: sortedGames },
+  const adminMenu = [
+    {
+      label: "Dashboard",
+      to: "/admin",
+    },
+    {
+      label: "Onboarding",
+      to: "/admin/onboarding",
+    },
+    {
+      label: "Events",
+      to: "/admin/events",
+    },
+    {
+      label: "API",
+      to: "/admin/api",
+    },
+    {
+      label: "Arcades",
+      to: "/admin/arcades",
+    },
+    {
+      label: "Machines",
+      to: "/admin/machines",
+    },
+    {
+      label: "Cards",
+      to: "/admin/cards",
+    },
+    {
+      label: "Users",
+      to: "/admin/users",
+    },
+    {
+      label: "News",
+      to: "/admin/news",
+    },
   ];
+
+  var sideMenu = [{ to: "/", icon: mdiMonitor, label: "Dashboard" }];
+
+  if (mainStore.userAdmin) {
+    sideMenu.push({
+      label: "Admin",
+      icon: mdiSecurity,
+      menu: adminMenu,
+    });
+  }
+
+  if (sortedGames.length) {
+    sideMenu.push({
+      label: "Games",
+      icon: mdiGamepad,
+      menu: sortedGames,
+    });
+  }
+
+  if (sortedArcades.length) {
+    sideMenu.push({
+      label: "My Arcades",
+      icon: mdiStoreCog,
+      menu: sortedArcades,
+    });
+  }
+
+  return sideMenu;
 });
 </script>
 

@@ -18,10 +18,15 @@ const props = defineProps({
     type: [String, Number],
     default: null,
   },
+  color: {
+    type: String,
+    default: "",
+  },
 });
 
 const spanClass = computed(
-  () => `inline-flex justify-center items-center ${props.w} ${props.h}`
+  () =>
+    `inline-flex justify-center items-center ${props.w} ${props.h} ${props.color}`
 );
 
 const iconSize = computed(() => props.size ?? 16);

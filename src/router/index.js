@@ -93,6 +93,78 @@ const routes = [
       hotReload: true, // disables Hot Reload
     },
   },
+  {
+    meta: {
+      title: "Admin Dashboard",
+    },
+    path: "/admin",
+    name: "admin_dashboard",
+    component: () => import("@/views/Admin/DashboardView.vue"),
+  },
+  {
+    meta: {
+      title: "Onboarding",
+    },
+    path: "/admin/onboarding",
+    name: "onboarding",
+    component: () => import("@/views/Admin/OnboardingView.vue"),
+  },
+  {
+    meta: {
+      title: "Events",
+    },
+    path: "/admin/events",
+    name: "admin_events",
+    component: () => import("@/views/Admin/EventsView.vue"),
+  },
+  {
+    meta: {
+      title: "Data API",
+    },
+    path: "/admin/api",
+    name: "data_api",
+    component: () => import("@/views/Admin/APIView.vue"),
+  },
+  {
+    meta: {
+      title: "Arcades",
+    },
+    path: "/admin/arcades",
+    name: "admin_arcades",
+    component: () => import("@/views/Admin/ArcadesView.vue"),
+  },
+  {
+    meta: {
+      title: "Machines",
+    },
+    path: "/admin/machines",
+    name: "admin_machines",
+    component: () => import("@/views/Admin/MachinesView.vue"),
+  },
+  {
+    meta: {
+      title: "Cards",
+    },
+    path: "/admin/cards",
+    name: "admin_cards",
+    component: () => import("@/views/Admin/CardsView.vue"),
+  },
+  {
+    meta: {
+      title: "Users",
+    },
+    path: "/admin/users",
+    name: "admin_users",
+    component: () => import("@/views/Admin/UsersView.vue"),
+  },
+  {
+    meta: {
+      title: "News",
+    },
+    path: "/admin/news",
+    name: "admin_news",
+    component: () => import("@/views/Admin/NewsView.vue"),
+  },
   // {
   //   meta: {
   //     title: "Public Arcades",

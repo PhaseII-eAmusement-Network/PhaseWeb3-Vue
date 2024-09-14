@@ -1,13 +1,13 @@
 <script setup>
 import { useRoute } from "vue-router";
 import { ref, onMounted } from "vue";
-import { mdiStore } from "@mdi/js";
+import { mdiStore, mdiCogOutline } from "@mdi/js";
 import SectionMain from "@/components/SectionMain.vue";
 import LayoutAuthenticated from "@/layouts/LayoutAuthenticated.vue";
 import SectionTitleLine from "@/components/SectionTitleLine.vue";
 import ArcadeCard from "@/components/ArcadeCard.vue";
 import CardBox from "@/components/CardBox.vue";
-// import FormField from "@/components/FormField.vue";
+import FormField from "@/components/FormField.vue";
 // import FormFilePicker from "@/components/FormFilePicker.vue";
 import FormCheckRadio from "@/components/FormCheckRadio.vue";
 // import FormControl from "@/components/FormControl.vue";
@@ -33,6 +33,41 @@ onMounted(async () => {
     console.log("Failed to fetch arcade data:", error);
   }
 });
+
+function formatName(inputString, replaceWith = "NA_") {
+  var asciiFriendly = [...inputString]
+    .map((c) => {
+      return c.charCodeAt(0) < 128 ? c : replaceWith;
+    })
+    .join("");
+
+  asciiFriendly = asciiFriendly.replace(
+    /[!"#$%&'()*+,-./:;<=>?@[\\\]^_`{|}~]/g,
+    ""
+  );
+
+  asciiFriendly = asciiFriendly.replace(/\s+/g, "_");
+  return asciiFriendly;
+}
+
+async function exportVPN() {
+  try {
+    const data = await mainStore.getArcadeVPN(arcadeId);
+    const blob = new Blob([data], { type: "application/ovpn" });
+    const link = document.createElement("a");
+    link.href = URL.createObjectURL(blob);
+    link.download = `gradius-${formatName(
+      arcadeData.value.name
+    )}-phaseii-config.ovpn`;
+    document.body.appendChild(link);
+    link.click();
+
+    URL.revokeObjectURL(link.href);
+    document.body.removeChild(link);
+  } catch (error) {
+    console.log("Failed to fetch arcade data:", error);
+  }
+}
 </script>
 
 <template>
@@ -41,50 +76,64 @@ onMounted(async () => {
       <template v-if="!loading">
         <ArcadeCard class="mb-6" :arcade="arcadeData" />
 
-        <SectionTitleLine :icon="mdiStore" title="Admin Overview" main />
+        <SectionTitleLine :icon="mdiStore" title="Arcade Overview" main />
 
         <CardBox is-form class="mb-6" @submit.prevent="">
-          <PillTag color="info" label="General Settings" class="mb-4" />
-          <div class="grid gap-4 grid-cols-2 md:grid-cols-4 mb-4">
-            <!-- <FormCheckRadio
-            :model-value="arcadeData.public"
-            :input-value="arcadeData.public"
-            name="public"
-            type="switch"
-            label="Public Arcade"
-            class="outline outline-gray-400 rounded-xl outline-1 text-sm md:text-md p-2"
-          /> -->
-            <FormCheckRadio
-              :model-value="arcadeData.data.paseli_enabled"
-              :input-value="arcadeData.data.paseli_enabled"
-              name="paseli_enabled"
-              type="switch"
-              label="PASELI"
-              class="outline outline-gray-400 rounded-xl outline-1 text-sm md:text-md p-2"
-            />
-            <FormCheckRadio
-              :model-value="arcadeData.data.paseli_infinite"
-              :input-value="arcadeData.data.paseli_infinite"
-              name="paseli_infinite"
-              type="switch"
-              label="Infinite PASELI"
-              class="outline outline-gray-400 rounded-xl outline-1 text-sm md:text-md p-2"
-            />
-            <FormCheckRadio
-              :model-value="arcadeData.data.maint"
-              :input-value="arcadeData.data.maint"
-              name="maint"
-              type="switch"
-              label="Maintenance Mode"
-              class="outline outline-gray-400 rounded-xl outline-1 text-sm md:text-md p-2"
-            />
-          </div>
-          <BaseButton
-            color="success"
-            type="submit"
-            label="Save"
-            :small="false"
+          <PillTag
+            color="info"
+            label="Settings"
+            :icon="mdiCogOutline"
+            class="mb-2"
           />
+          <div
+            class="grid grid-cols-1 w-full gap-2 md:gap-6 md:flex md:place-content-stretch"
+          >
+            <FormField
+              label="PASELI Enabled"
+              help="Enable or disable PASELI services."
+            >
+              <FormCheckRadio
+                v-model="arcadeData.data.paseli_enabled"
+                :input-value="arcadeData.data.paseli_enabled"
+                name="paseli"
+                type="switch"
+              />
+            </FormField>
+            <FormField
+              label="Infinite PASELI"
+              help="Enable or disable infinite PASELI."
+            >
+              <FormCheckRadio
+                v-model="arcadeData.data.paseli_infinite"
+                :input-value="arcadeData.data.paseli_infinite"
+                name="infinitePaseli"
+                type="switch"
+              />
+            </FormField>
+            <FormField
+              label="Maintenance Mode"
+              help="Place this arcade under Maintenance."
+            >
+              <FormCheckRadio
+                v-model="arcadeData.data.maint"
+                :input-value="arcadeData.data.maint"
+                name="maintenance"
+                type="switch"
+              />
+            </FormField>
+            <FormField
+              label="Incognito Mode"
+              help="Hide the eAmusement network and ranking data."
+            >
+              <FormCheckRadio
+                v-model="arcadeData.data.hide_network"
+                :input-value="arcadeData.data.hide_network"
+                name="incognito"
+                type="switch"
+              />
+            </FormField>
+          </div>
+          <BaseButton color="success" type="submit" label="Save" />
         </CardBox>
 
         <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 mb-6">
@@ -98,6 +147,7 @@ onMounted(async () => {
               color="success"
               class="my-2"
               label="Export"
+              @click="exportVPN()"
             />
           </CardBox>
 

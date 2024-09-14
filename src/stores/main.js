@@ -263,6 +263,16 @@ export const useMainStore = defineStore("main", {
       }
     },
 
+    async getArcadeVPN(arcadeId) {
+      try {
+        const data = await this.callApi(`/arcade/${arcadeId}/exportVPN`);
+        return data;
+      } catch (error) {
+        console.log("Error fetching arcade VPN:", error);
+        throw error;
+      }
+    },
+
     async getPaseliData(arcadeId) {
       try {
         const data = await this.callApi(`/arcade/${arcadeId}/paseli`);

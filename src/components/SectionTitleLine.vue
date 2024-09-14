@@ -8,6 +8,10 @@ defineProps({
     type: String,
     default: null,
   },
+  color: {
+    type: String,
+    default: null,
+  },
   title: {
     type: String,
     required: true,
@@ -27,11 +31,18 @@ const hasSlot = computed(() => useSlots().default);
       <IconRounded
         v-if="icon && main"
         :icon="icon"
+        :icon-color="color"
         color="light"
         class="mr-3"
         bg
       />
-      <BaseIcon v-else-if="icon" :path="icon" class="mr-2" size="20" />
+      <BaseIcon
+        v-else-if="icon"
+        :path="icon"
+        :color="color"
+        class="mr-2"
+        size="20"
+      />
       <h1 :class="main ? 'text-3xl' : 'text-2xl'" class="leading-tight">
         {{ title }}
       </h1>

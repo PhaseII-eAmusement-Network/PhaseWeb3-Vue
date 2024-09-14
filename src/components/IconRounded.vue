@@ -1,11 +1,15 @@
 <script setup>
-import { colorsText, colorsBgLight } from "@/colors.js";
+import { computed } from "vue";
 import BaseIcon from "@/components/BaseIcon.vue";
 
-defineProps({
+const props = defineProps({
   icon: {
     type: String,
     required: true,
+  },
+  iconColor: {
+    type: String,
+    default: "",
   },
   color: {
     type: String,
@@ -21,6 +25,8 @@ defineProps({
   },
   bg: Boolean,
 });
+
+const spanColor = computed(() => props.iconColor);
 </script>
 
 <template>
@@ -28,12 +34,8 @@ defineProps({
     :path="icon"
     :w="w"
     :h="h"
+    :color="spanColor"
     size="24"
-    class="rounded-full"
-    :class="
-      bg
-        ? colorsBgLight[color]
-        : [colorsText[color], 'bg-gray-50 dark:bg-slate-800']
-    "
+    class="rounded-full bg-slate-900"
   />
 </template>
