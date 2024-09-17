@@ -1,6 +1,13 @@
 <script setup>
-import { reactive } from "vue";
-import { mdiInformationOutline, mdiCogOutline, mdiSailBoat } from "@mdi/js";
+import { reactive, ref } from "vue";
+import { useRouter } from "vue-router";
+import {
+  mdiInformationOutline,
+  mdiCogOutline,
+  mdiSailBoat,
+  mdiCheckOutline,
+  mdiCloseOutline,
+} from "@mdi/js";
 import SectionMain from "@/components/SectionMain.vue";
 import CardBox from "@/components/CardBox.vue";
 import FormField from "@/components/FormField.vue";
@@ -9,9 +16,20 @@ import FormControl from "@/components/FormControl.vue";
 import LayoutAuthenticated from "@/layouts/LayoutAuthenticated.vue";
 import SectionTitleLine from "@/components/SectionTitleLine.vue";
 import PillTag from "@/components/PillTag.vue";
+import BaseIcon from "@/components/BaseIcon.vue";
 import BaseButton from "@/components/BaseButton.vue";
 
+import {
+  checkArcadeName,
+  checkPCBID,
+  APIOnboardArcade,
+} from "@/stores/api/admin";
+import { onboardArcadeDiscord, exportVPNDiscord } from "@/stores/api/discord";
 import { generatePCBID } from "@/constants/pcbid.js";
+import { useMainStore } from "@/stores/main";
+
+const $router = useRouter();
+const mainStore = useMainStore();
 
 const initArcade = {
   name: "",
@@ -42,9 +60,20 @@ const newMachine = reactive({
   ...initMachine,
 });
 
-function addMachine() {
+const arcadeCheck = ref(undefined);
+
+async function addMachine() {
   if (newMachine.generatePCBID) {
     newMachine.PCBID = generatePCBID();
+  }
+
+  while (!(await checkPCBID(newMachine.PCBID))) {
+    if (newMachine.generatePCBID) {
+      newMachine.PCBID = generatePCBID();
+    } else {
+      window.alert("PCBID already in use!");
+      return;
+    }
   }
 
   newArcade.machineList.push({
@@ -60,6 +89,95 @@ function removeMachine(machinePCBID) {
   newArcade.machineList = newArcade.machineList.filter(
     (machine) => machine.PCBID !== machinePCBID
   );
+}
+
+async function checkName() {
+  if (newArcade.name) {
+    const data = await checkArcadeName(newArcade.name);
+    if (data.unused != undefined) {
+      arcadeCheck.value = data.unused;
+    }
+  }
+}
+
+function formatName(inputString, replaceWith = "NA_") {
+  var asciiFriendly = [...inputString]
+    .map((c) => {
+      return c.charCodeAt(0) < 128 ? c : replaceWith;
+    })
+    .join("");
+
+  asciiFriendly = asciiFriendly.replace(
+    /[!"#$%&'()*+,-./:;<=>?@[\\\]^_`{|}~]/g,
+    ""
+  );
+
+  asciiFriendly = asciiFriendly.replace(/\s+/g, "_");
+  return asciiFriendly;
+}
+
+async function exportVPN(arcadeId, arcadeData) {
+  try {
+    const data = await mainStore.getArcadeVPN(arcadeId);
+    const blob = new Blob([data], { type: "application/ovpn" });
+    const link = document.createElement("a");
+    link.href = URL.createObjectURL(blob);
+    link.download = `gradius-${formatName(
+      arcadeData.name
+    )}-phaseii-config.ovpn`;
+    document.body.appendChild(link);
+    link.click();
+
+    URL.revokeObjectURL(link.href);
+    document.body.removeChild(link);
+  } catch (error) {
+    console.log("Failed to fetch arcade data:", error);
+  }
+}
+
+async function onboardArcade(exportArcade) {
+  if (newArcade.name == initArcade.name) {
+    window.alert("Please input a name.");
+    return;
+  }
+  if (
+    newArcade.discordId == initArcade.discordId &&
+    newArcade.useDiscord &&
+    exportArcade
+  ) {
+    window.alert("Please input a Discord ID.");
+    return;
+  }
+  if (
+    newArcade.description == initArcade.description &&
+    !newArcade.useDiscord
+  ) {
+    window.alert("Please input a description.");
+    return;
+  }
+
+  const arcadeResponse = await APIOnboardArcade(newArcade);
+
+  if (exportArcade && arcadeResponse.arcadeId) {
+    if (newArcade.useDiscord) {
+      await onboardArcadeDiscord(arcadeResponse.arcadeId, newArcade.discordId);
+      await exportVPNDiscord(arcadeResponse.arcadeId, newArcade.discordId);
+    } else {
+      await exportVPN(arcadeResponse.arcadeId, newArcade);
+    }
+  }
+
+  if (arcadeResponse.arcadeId) {
+    window.alert("Onboarding complete!");
+    $router.push({
+      name: "arcade",
+      params: {
+        id: arcadeResponse.arcadeId,
+      },
+    });
+  } else {
+    window.alert("Failed to onboard!");
+  }
 }
 </script>
 
@@ -82,14 +200,37 @@ function removeMachine(machinePCBID) {
             class="mb-2"
           />
           <FormField label="Arcade Name">
-            <FormControl v-model="newArcade.name" name="arcadeName" required />
+            <FormControl
+              v-model="newArcade.name"
+              :input-value="newArcade.name"
+              name="arcadeName"
+              required
+            />
           </FormField>
+
+          <div class="mb-4 flex gap-2 items-stretch">
+            <BaseButton color="info" label="Check Name" @click="checkName()" />
+            <BaseIcon
+              v-if="arcadeCheck == true"
+              :path="mdiCheckOutline"
+              color="text-green-400"
+              size="25"
+            />
+            <BaseIcon
+              v-else-if="arcadeCheck == false"
+              :path="mdiCloseOutline"
+              color="text-red-400"
+              size="25"
+            />
+          </div>
+
           <FormField
             label="Use Discord"
             help="Automated provisioning rather than manual. BadManiac will DM the user via Discord."
           >
             <FormCheckRadio
               v-model="newArcade.useDiscord"
+              :input-value="newArcade.useDiscord"
               name="useDiscord"
               type="switch"
             />
@@ -101,17 +242,21 @@ function removeMachine(machinePCBID) {
           >
             <FormControl
               v-model="newArcade.discordId"
+              :input-value="newArcade.discordId"
               name="discordId"
               required
             />
           </FormField>
           <FormField
             v-if="!newArcade.useDiscord"
-            v-model="newArcade.description"
             label="Description"
             help="Manual description rather than automated."
           >
-            <FormControl name="description" required />
+            <FormControl
+              v-model="newArcade.description"
+              name="description"
+              required
+            />
           </FormField>
         </CardBox>
 
@@ -131,6 +276,7 @@ function removeMachine(machinePCBID) {
             >
               <FormCheckRadio
                 v-model="newArcade.paseli"
+                :input-value="newArcade.paseli"
                 name="paseli"
                 type="switch"
               />
@@ -141,6 +287,7 @@ function removeMachine(machinePCBID) {
             >
               <FormCheckRadio
                 v-model="newArcade.infinitePaseli"
+                :input-value="newArcade.infinitePaseli"
                 name="infinitePaseli"
                 type="switch"
               />
@@ -151,6 +298,7 @@ function removeMachine(machinePCBID) {
             >
               <FormCheckRadio
                 v-model="newArcade.maintenance"
+                :input-value="newArcade.maintenance"
                 name="maintenance"
                 type="switch"
               />
@@ -161,6 +309,7 @@ function removeMachine(machinePCBID) {
             >
               <FormCheckRadio
                 v-model="newArcade.incognito"
+                :input-value="newArcade.incognito"
                 name="incognito"
                 type="switch"
               />
@@ -171,6 +320,7 @@ function removeMachine(machinePCBID) {
             >
               <FormCheckRadio
                 v-model="newArcade.betas"
+                :input-value="newArcade.betas"
                 name="betas"
                 type="switch"
               />
@@ -194,6 +344,7 @@ function removeMachine(machinePCBID) {
               >
                 <FormCheckRadio
                   v-model="newMachine.generatePCBID"
+                  :input-value="newMachine.generatePCBID"
                   name="generatePCBID"
                   type="switch"
                 />
@@ -220,6 +371,7 @@ function removeMachine(machinePCBID) {
                 >
                   <FormCheckRadio
                     v-model="newMachine.cabinet"
+                    :input-value="newMachine.cabinet"
                     name="cabinet"
                     type="switch"
                   />
@@ -230,6 +382,7 @@ function removeMachine(machinePCBID) {
                 >
                   <FormCheckRadio
                     v-model="newMachine.ota"
+                    :input-value="newMachine.ota"
                     name="ota"
                     type="switch"
                   />
@@ -275,20 +428,20 @@ function removeMachine(machinePCBID) {
           <BaseButton
             type="submit"
             color="success"
-            label="Create Arcade with Discord"
+            :label="
+              newArcade.useDiscord
+                ? 'Create Arcade with Discord'
+                : 'Create Arcade and VPN'
+            "
             :small="false"
-          />
-          <BaseButton
-            type="submit"
-            color="success"
-            label="Create Arcade with VPN"
-            :small="false"
+            @click="onboardArcade(true)"
           />
           <BaseButton
             type="submit"
             color="info"
             label="Create Arcade"
             :small="false"
+            @click="onboardArcade(false)"
           />
         </div>
       </div>
