@@ -16,6 +16,8 @@ import EmblemCardBox from "@/components/Cards/EmblemCardBox.vue";
 import QproCardBox from "@/components/Cards/QproCardBox.vue";
 import PillTag from "@/components/PillTag.vue";
 import { getGameInfo } from "@/constants";
+import { getVideoSource, getCardStyle } from "@/constants/sources";
+import { getGameOptions } from "@/constants/options";
 
 const $route = useRoute();
 const $router = useRouter();
@@ -55,46 +57,6 @@ const myProfile = ref(null);
 onMounted(() => {
   loadProfile();
 });
-
-var settings = [
-  {
-    id: "name",
-    name: "Username",
-    help: "Set your username for this profile",
-    type: String,
-  },
-];
-
-function getSources() {
-  if (!versionForm.currentVersion) {
-    return thisGame.cardBG;
-  } else {
-    return `/assets/games/${thisGame.id}/card/${versionForm.currentVersion}.webp`;
-  }
-}
-
-function getVideoSource() {
-  if (
-    versionForm.currentVersion &&
-    thisGame.videoTable?.includes(versionForm.currentVersion)
-  ) {
-    return `https://web3.phaseii.network/gameassets/video/${thisGame.id}/${versionForm.currentVersion}.mp4`;
-  } else {
-    return null;
-  }
-}
-
-function getCardStyle() {
-  if (thisGame.videoTable?.includes(versionForm.currentVersion)) {
-    return null;
-  } else {
-    return `
-      background-image: url('${getSources()}');
-      background-size: cover;
-      background-repeat: no-repeat;
-    `;
-  }
-}
 
 function filterVersions(haveVersions) {
   var filtered = [];
@@ -156,7 +118,7 @@ async function loadProfile() {
       />
       <div
         v-if="versionForm.currentVersion && myProfile"
-        :style="getCardStyle()"
+        :style="getCardStyle(thisGame, versionForm.currentVersion)"
         class="rounded-2xl mb-6 card-container"
       >
         <video
@@ -164,7 +126,7 @@ async function loadProfile() {
           muted
           loop
           playsinline
-          :src="getVideoSource()"
+          :src="getVideoSource(thisGame, versionForm.currentVersion)"
           class="background-video"
         ></video>
         <div
@@ -187,36 +149,44 @@ async function loadProfile() {
           <div>
             <PillTag color="info" label="General" class="mb-2" />
             <FormField
-              v-for="setting of settings"
+              v-for="setting of getGameOptions(
+                thisGame,
+                versionForm.currentVersion
+              )"
               :key="setting.id"
               :label="setting.name"
               :help="setting.help"
             >
               <FormControl
                 v-if="setting.type == String"
-                :v-model="myProfile[setting.id]"
+                v-model="myProfile[setting.id]"
+                :name="setting.id"
                 :model-value="myProfile[setting.id]"
               />
 
               <FormControl
                 v-if="setting.type == Number"
-                :v-model="myProfile[setting.id]"
+                v-model="myProfile[setting.id]"
+                :name="setting.id"
                 :model-value="myProfile[setting.id]"
                 type="number"
               />
 
               <FormControl
                 v-if="setting.type == Array"
+                v-model="myProfile[setting.id]"
                 :options="setting.options"
-                :v-model="myProfile[setting.id]"
+                :name="setting.id"
                 :model-value="myProfile[setting.id]"
                 :selected="myProfile[setting.id]"
               />
 
               <FormCheckRadio
                 v-if="setting.type == Boolean"
-                :v-model="myProfile[setting.id]"
-                :model-value="myProfile[setting.id]"
+                v-model="myProfile[setting.id]"
+                :name="setting.id"
+                :input-value="Boolean(myProfile[setting.id])"
+                :model-value="Boolean(myProfile[setting.id])"
                 type="switch"
               />
             </FormField>

@@ -17,6 +17,7 @@ import FormControl from "@/components/FormControl.vue";
 import ProfileCard from "@/components/Cards/ProfileCard.vue";
 import GeneralTable from "@/components/GeneralTable.vue";
 import { getGameInfo } from "@/constants";
+import { getVideoSource, getCardStyle } from "@/constants/sources";
 import { dashCode } from "@/constants/userData";
 import { getIIDXDan } from "@/constants/danClass";
 
@@ -81,37 +82,6 @@ async function loadProfile() {
     }
   } catch (error) {
     console.error("Failed to fetch user profile data:", error);
-  }
-}
-
-function getSources() {
-  if (!versionForm.currentVersion) {
-    return thisGame.cardBG;
-  } else {
-    return `/assets/games/${thisGame.id}/card/${versionForm.currentVersion}.webp`;
-  }
-}
-
-function getVideoSource() {
-  if (
-    versionForm.currentVersion &&
-    thisGame.videoTable?.includes(versionForm.currentVersion)
-  ) {
-    return `https://web3.phaseii.network/gameassets/video/${thisGame.id}/${versionForm.currentVersion}.mp4`;
-  } else {
-    return null;
-  }
-}
-
-function getCardStyle() {
-  if (thisGame.videoTable?.includes(versionForm.currentVersion)) {
-    return null;
-  } else {
-    return `
-      background-image: url('${getSources()}');
-      background-size: cover;
-      background-repeat: no-repeat;
-    `;
   }
 }
 
@@ -192,13 +162,16 @@ const navigateToProfile = (item) => {
 <template>
   <LayoutAuthenticated>
     <SectionMain>
-      <div :style="getCardStyle()" class="rounded-2xl mb-6 card-container">
+      <div
+        :style="getCardStyle(thisGame, versionForm.currentVersion)"
+        class="rounded-2xl mb-6 card-container"
+      >
         <video
           autoplay
           muted
           loop
           playsinline
-          :src="getVideoSource()"
+          :src="getVideoSource(thisGame, versionForm.currentVersion)"
           class="background-video"
         ></video>
         <div
