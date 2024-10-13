@@ -1,0 +1,1 @@
+import{M as t,a as o,i as n,g as e,H as r,z as _,e as d}from"./index.3d249920.js";const l={class:"bg-gray-950 dark:text-slate-100"},c={class:"animated animatedFadeInUp fadeInUp"},m={__name:"LayoutGuest",setup(i){const a=t();return(s,u)=>(o(),n("div",{class:_({dark:d(a).darkMode})},[e("div",l,[e("div",c,[r(s.$slots,"default")])])],2))}};export{m as _};
