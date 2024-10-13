@@ -24,6 +24,14 @@ const props = defineProps({
     type: String,
     default: null,
   },
+  max: {
+    type: String,
+    default: null,
+  },
+  min: {
+    type: String,
+    default: null,
+  },
   placeholder: {
     type: String,
     default: null,
@@ -154,6 +162,8 @@ if (props.ctrlKFocus) {
       :name="name"
       :maxlength="maxlength"
       :minlength="minlength"
+      :min="min"
+      :max="max"
       :placeholder="placeholder"
       :required="required"
     />
@@ -165,6 +175,8 @@ if (props.ctrlKFocus) {
       :name="name"
       :maxlength="maxlength"
       :minlength="minlength"
+      :min="min"
+      :max="max"
       :inputmode="inputmode"
       :autocomplete="autocomplete"
       :required="required"

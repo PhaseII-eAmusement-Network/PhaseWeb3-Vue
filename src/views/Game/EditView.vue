@@ -52,6 +52,7 @@ if (!thisGame.versions) {
   versionForm.currentVersion = 1;
 }
 
+const optionForm = ref(null);
 const myProfile = ref(null);
 
 onMounted(() => {
@@ -71,11 +72,13 @@ function filterVersions(haveVersions) {
 async function loadProfile() {
   try {
     myProfile.value = null;
+    optionForm.value = null;
     const data = await mainStore.getUserProfile(
       gameID,
       versionForm.currentVersion
     );
     myProfile.value = data;
+    optionForm.value = data;
 
     if (data && !versionForm.currentVersion) {
       versionForm.currentVersion = data.versions[data.versions.length - 1];
@@ -83,6 +86,10 @@ async function loadProfile() {
   } catch (error) {
     console.error("Failed to fetch user profile data:", error);
   }
+}
+
+function getNestedValue(obj, path) {
+  return path.split(".").reduce((acc, part) => acc && acc[part], obj);
 }
 </script>
 
@@ -144,61 +151,61 @@ async function loadProfile() {
         </div>
       </div>
 
-      <div v-if="versionForm.currentVersion && myProfile">
+      <div v-if="versionForm.currentVersion && myProfile && optionForm">
         <CardBox>
-          <div>
-            <PillTag color="info" label="General" class="mb-2" />
-            <FormField
-              v-for="setting of getGameOptions(
-                thisGame,
-                versionForm.currentVersion
-              )"
-              :key="setting.id"
-              :label="setting.name"
-              :help="setting.help"
-            >
-              <FormControl
-                v-if="setting.type == String"
-                v-model="myProfile[setting.id]"
-                :name="setting.id"
-                :model-value="myProfile[setting.id]"
-              />
+          <form>
+            <div>
+              <PillTag color="info" label="General" class="mb-2" />
+              <FormField
+                v-for="setting of getGameOptions(
+                  thisGame,
+                  versionForm.currentVersion
+                )"
+                :key="setting.id"
+                :label="setting.name"
+                :help="setting.help"
+              >
+                <FormControl
+                  v-if="setting.type == 'String'"
+                  :name="setting.id"
+                  :model-value="getNestedValue(optionForm, setting.id)"
+                />
 
-              <FormControl
-                v-if="setting.type == Number"
-                v-model="myProfile[setting.id]"
-                :name="setting.id"
-                :model-value="myProfile[setting.id]"
-                type="number"
-              />
+                <FormControl
+                  v-if="setting.type == 'Number'"
+                  :name="setting.id"
+                  :model-value="getNestedValue(optionForm, setting.id)"
+                  type="number"
+                  onkeypress="return event.charCode >= 48 && event.charCode <= 57"
+                  min="0"
+                  max="999"
+                />
 
-              <FormControl
-                v-if="setting.type == Array"
-                v-model="myProfile[setting.id]"
-                :options="setting.options"
-                :name="setting.id"
-                :model-value="myProfile[setting.id]"
-                :selected="myProfile[setting.id]"
-              />
+                <FormControl
+                  v-if="setting.type == 'Array'"
+                  :options="setting.options"
+                  :name="setting.id"
+                  :model-value="getNestedValue(optionForm, setting.id)"
+                  :selected="getNestedValue(optionForm, setting.id)"
+                />
 
-              <FormCheckRadio
-                v-if="setting.type == Boolean"
-                v-model="myProfile[setting.id]"
-                :name="setting.id"
-                :input-value="Boolean(myProfile[setting.id])"
-                :model-value="Boolean(myProfile[setting.id])"
-                type="switch"
-              />
-            </FormField>
-          </div>
+                <FormCheckRadio
+                  v-if="setting.type == 'Boolean'"
+                  :name="setting.id"
+                  :input-value="Boolean(getNestedValue(optionForm, setting.id))"
+                  :model-value="Boolean(getNestedValue(optionForm, setting.id))"
+                  type="switch"
+                />
+              </FormField>
+            </div>
 
-          <template #footer>
-            <div class="space-x-2">
+            <div class="space-x-2 mt-6">
               <BaseButton type="submit" color="success" label="Save" />
               <BaseButton type="submit" color="danger" label="Revert" />
             </div>
-          </template>
+          </form>
         </CardBox>
+
         <EmblemCardBox
           v-if="
             gameID == 'jubeat' &&
