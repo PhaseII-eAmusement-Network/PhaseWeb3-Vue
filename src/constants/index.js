@@ -329,6 +329,7 @@ export const gameData = [
     icon: null,
     cardBG: null,
     noRivals: true,
+    useUnicode: true,
     scoreHeaders: [
       { text: "Combos", value: "data.combo" },
       { text: "Medal", value: "data.medal" },
@@ -376,6 +377,7 @@ export const gameData = [
     noScores: true,
     noRecords: true,
     skip: true,
+    useUnicode: true,
     playerHeaders: [
       { text: "Region", value: "region", sortable: true, width: 100 },
       { text: "Home Arcade", value: "homeArcade", sortable: true, width: 150 },
@@ -400,6 +402,7 @@ export const gameData = [
     noScores: true,
     noRecords: true,
     skip: true,
+    useUnicode: true,
   },
   {
     id: GameConstants.DANCE_RUSH,
@@ -896,6 +899,7 @@ export const gameData = [
     noRivals: true,
     noScores: true,
     noRecords: true,
+    useUnicode: true,
     versions: [
       {
         id: VersionConstants.FUTURETOMTOM,

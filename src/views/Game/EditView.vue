@@ -169,6 +169,7 @@ function getNestedValue(obj, path) {
                   v-if="setting.type == 'String'"
                   :name="setting.id"
                   :model-value="getNestedValue(optionForm, setting.id)"
+                  :maxlength="setting.maxLength ?? 15"
                 />
 
                 <FormControl
