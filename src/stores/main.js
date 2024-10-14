@@ -84,6 +84,10 @@ export const useMainStore = defineStore("main", {
         loadingTimeout = setTimeout(() => {
           if (method === "GET") {
             this.isLoading = true;
+            this.isSaving = false;
+          } else if (method === "POST") {
+            this.isLoading = true;
+            this.isSaving = true;
           }
         }, 200); // Wait for .2 seconds before showing loading modal
       };
