@@ -27,7 +27,7 @@ const username = computed(() => props.username);
         :alt="username"
         width="200"
         height="200"
-        class="w-full h-auto bg-gray-100 dark:bg-slate-800 rounded-full overflow-hidden"
+        class="w-full h-auto bg-gray-100 dark:bg-slate-800 rounded-full overflow-hidden drop-shadow-lg"
       />
       <!-- <img
         src="/assets/border/pride.webp"

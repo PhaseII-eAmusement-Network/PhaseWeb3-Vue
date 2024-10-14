@@ -11,7 +11,8 @@ export function getGameOptions(game, version) {
       name: "Username",
       help: "Set your username for this profile",
       type: "String",
-      maxLength: 8,
+      maxLength: game.maxLength ?? 8,
+      useUnicode: game.useUnicode ?? false,
     },
   ];
 

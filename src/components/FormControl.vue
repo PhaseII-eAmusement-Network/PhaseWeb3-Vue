@@ -17,11 +17,11 @@ const props = defineProps({
     default: null,
   },
   maxlength: {
-    type: String,
+    type: Number,
     default: null,
   },
   minlength: {
-    type: String,
+    type: Number,
     default: null,
   },
   max: {

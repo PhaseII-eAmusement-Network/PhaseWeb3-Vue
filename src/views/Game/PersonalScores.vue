@@ -9,6 +9,8 @@ import SectionTitleLine from "@/components/SectionTitleLine.vue";
 import GeneralTable from "@/components/GeneralTable.vue";
 import CardBox from "@/components/CardBox.vue";
 import BaseButton from "@/components/BaseButton.vue";
+
+import { APIGetProfile } from "@/stores/api/profile";
 import { getGameInfo } from "@/constants";
 
 const $route = useRoute();
@@ -67,7 +69,7 @@ onMounted(async () => {
 async function loadProfile() {
   try {
     myProfile.value = null;
-    const data = await mainStore.getUserProfile(gameID, null, profileUserId);
+    const data = await APIGetProfile(gameID, null, profileUserId);
     myProfile.value = data;
   } catch (error) {
     console.error("Failed to fetch user profile data:", error);

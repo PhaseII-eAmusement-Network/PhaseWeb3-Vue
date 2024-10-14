@@ -283,35 +283,6 @@ export const useMainStore = defineStore("main", {
       }
     },
 
-    async getGameProfiles(game) {
-      try {
-        const data = await this.callApi(`/game/${game}/profiles`);
-        return data.data;
-      } catch (error) {
-        console.log("Error fetching profiles:", error);
-        throw error;
-      }
-    },
-
-    async getUserProfile(game, version, userId = null) {
-      if (!userId) {
-        while (!this.userId) {
-          await new Promise((resolve) => setTimeout(resolve, 200));
-        }
-        userId = this.userId;
-      }
-
-      try {
-        const data = await this.callApi(
-          `/profile/${game}?version=${version}&userId=${userId}`
-        );
-        return data.data;
-      } catch (error) {
-        console.log("Error fetching profile:", error);
-        throw error;
-      }
-    },
-
     async getMusicData(game, version, songIds = null, oneChart = false) {
       try {
         const data = await this.callApi(

@@ -6,7 +6,6 @@ import {
   mdiPlaylistMusicOutline,
   mdiFormatListText,
 } from "@mdi/js";
-import { useMainStore } from "@/stores/main";
 import SectionMain from "@/components/SectionMain.vue";
 import BaseButton from "@/components/BaseButton.vue";
 import SectionTitleLine from "@/components/SectionTitleLine.vue";
@@ -16,6 +15,8 @@ import CardBox from "@/components/CardBox.vue";
 import FormControl from "@/components/FormControl.vue";
 import ProfileCard from "@/components/Cards/ProfileCard.vue";
 import GeneralTable from "@/components/GeneralTable.vue";
+
+import { APIGetProfile, APIGetAllProfiles } from "@/stores/api/profile";
 import { getGameInfo } from "@/constants";
 import { getVideoSource, getCardStyle } from "@/constants/sources";
 import { dashCode } from "@/constants/userData";
@@ -23,7 +24,6 @@ import { getIIDXDan } from "@/constants/danClass";
 
 const $route = useRoute();
 const $router = useRouter();
-const mainStore = useMainStore();
 var gameID = null;
 var thisGame = null;
 
@@ -55,7 +55,7 @@ const profiles = ref([]);
 
 onMounted(async () => {
   try {
-    const data = await mainStore.getGameProfiles(gameID);
+    const data = await APIGetAllProfiles(gameID);
     profiles.value = formatProfiles(data);
   } catch (error) {
     console.error("Failed to fetch profile data:", error);
@@ -71,10 +71,7 @@ if (!thisGame.versions) {
 async function loadProfile() {
   try {
     myProfile.value = null;
-    const data = await mainStore.getUserProfile(
-      gameID,
-      versionForm.currentVersion
-    );
+    const data = await APIGetProfile(gameID, versionForm.currentVersion);
     myProfile.value = data;
 
     if (data && !versionForm.currentVersion) {

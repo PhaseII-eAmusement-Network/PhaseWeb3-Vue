@@ -1,7 +1,6 @@
 <script setup>
 import { reactive, onMounted, watch, ref } from "vue";
 import { useRoute, useRouter } from "vue-router";
-import { useMainStore } from "@/stores/main";
 import { mdiAccountTieHat, mdiBackburger } from "@mdi/js";
 import SectionMain from "@/components/SectionMain.vue";
 import CardBox from "@/components/CardBox.vue";
@@ -15,13 +14,14 @@ import FormControl from "@/components/FormControl.vue";
 import EmblemCardBox from "@/components/Cards/EmblemCardBox.vue";
 import QproCardBox from "@/components/Cards/QproCardBox.vue";
 import PillTag from "@/components/PillTag.vue";
+
+import { APIGetProfile, APIUpdateProfile } from "@/stores/api/profile";
 import { getGameInfo } from "@/constants";
 import { getVideoSource, getCardStyle } from "@/constants/sources";
 import { getGameOptions } from "@/constants/options";
 
 const $route = useRoute();
 const $router = useRouter();
-const mainStore = useMainStore();
 var gameID = null;
 var thisGame = null;
 
@@ -53,6 +53,7 @@ if (!thisGame.versions) {
 }
 
 const optionForm = ref(null);
+const bareForm = ref(null);
 const myProfile = ref(null);
 
 onMounted(() => {
@@ -72,13 +73,20 @@ function filterVersions(haveVersions) {
 async function loadProfile() {
   try {
     myProfile.value = null;
-    optionForm.value = null;
-    const data = await mainStore.getUserProfile(
-      gameID,
-      versionForm.currentVersion
-    );
+    optionForm.value = {};
+    bareForm.value = {};
+    const data = await APIGetProfile(gameID, versionForm.currentVersion);
     myProfile.value = data;
-    optionForm.value = data;
+
+    // Deep clone nested values from myProfile to optionForm using paths
+    for (const setting of getGameOptions(
+      thisGame,
+      versionForm.currentVersion
+    )) {
+      const value = getNestedValue(myProfile.value, setting.id);
+      setNestedValue(optionForm.value, setting.id, value);
+      setNestedValue(bareForm.value, setting.id, value);
+    }
 
     if (data && !versionForm.currentVersion) {
       versionForm.currentVersion = data.versions[data.versions.length - 1];
@@ -90,6 +98,75 @@ async function loadProfile() {
 
 function getNestedValue(obj, path) {
   return path.split(".").reduce((acc, part) => acc && acc[part], obj);
+}
+
+function setNestedValue(obj, path, value) {
+  const keys = path.split(".");
+  const lastKey = keys.pop();
+  const nestedObj = keys.reduce((acc, key) => (acc[key] = acc[key] || {}), obj);
+  nestedObj[lastKey] = value;
+}
+
+function transformNonUnicode(value, maxLength) {
+  const allowedCharsRegex = /^[0-9A-Z!?#$&*-. ]*$/;
+  const transformedValue = value.toUpperCase().slice(0, maxLength);
+
+  return (
+    allowedCharsRegex.test(transformedValue) ? transformedValue : ""
+  ).toUpperCase();
+}
+
+function transformUnicode(value, maxLength) {
+  let transformedValue = "";
+
+  for (
+    let i = 0;
+    i < value.length && transformedValue.length < maxLength;
+    i++
+  ) {
+    let c = value.charCodeAt(i);
+    if (c >= 0x30 && c <= 0x39) {
+      // '0' to '9'
+      c = 0xff10 + (c - 0x30);
+    } else if (c >= 0x41 && c <= 0x5a) {
+      // 'A' to 'Z'
+      c = 0xff21 + (c - 0x41);
+    } else if (c >= 0x61 && c <= 0x7a) {
+      // 'a' to 'z'
+      c = 0xff41 + (c - 0x61);
+    } else if (c === 0x40) {
+      // '@'
+      c = 0xff20;
+    } else if (c === 0x2c) {
+      // ','
+      c = 0xff0c;
+    } else if (c === 0x2e) {
+      // '.'
+      c = 0xff0e;
+    } else if (c === 0x5f) {
+      // '_'
+      c = 0xff3f;
+    }
+    transformedValue += String.fromCharCode(c);
+  }
+
+  const allowedCharsRegex =
+    /^[\uFF20-\uFF3A\uFF41-\uFF5A\uFF10-\uFF19\uFF0C\uFF0E\uFF3F\u3041-\u308D\u308F\u3092\u3093\u30A1-\u30ED\u30EF\u30F2\u30F3\u30FC]*$/;
+  return (
+    allowedCharsRegex.test(transformedValue) ? transformedValue : ""
+  ).toUpperCase();
+}
+
+async function updateProfile() {
+  const response = await APIUpdateProfile(
+    thisGame.id,
+    versionForm.currentVersion,
+    optionForm.value
+  );
+
+  if (response.status != "error") {
+    await loadProfile();
+  }
 }
 </script>
 
@@ -151,58 +228,87 @@ function getNestedValue(obj, path) {
         </div>
       </div>
 
-      <div v-if="versionForm.currentVersion && myProfile && optionForm">
-        <CardBox>
-          <form>
-            <div>
-              <PillTag color="info" label="General" class="mb-2" />
-              <FormField
-                v-for="setting of getGameOptions(
-                  thisGame,
-                  versionForm.currentVersion
-                )"
-                :key="setting.id"
-                :label="setting.name"
-                :help="setting.help"
-              >
-                <FormControl
-                  v-if="setting.type == 'String'"
-                  :name="setting.id"
-                  :model-value="getNestedValue(optionForm, setting.id)"
-                  :maxlength="setting.maxLength ?? 15"
-                />
+      <div v-if="versionForm.currentVersion && myProfile">
+        <CardBox is-form>
+          <form @submit.prevent="updateProfile()">
+            <PillTag color="info" label="General" class="mb-2" />
+            <FormField
+              v-for="setting of getGameOptions(
+                thisGame,
+                versionForm.currentVersion
+              )"
+              :key="setting.id"
+              :label="setting.name"
+              :help="setting.help"
+            >
+              <FormControl
+                v-if="setting.type == 'String'"
+                :model-value="getNestedValue(optionForm, setting.id) ?? ``"
+                :name="setting.id"
+                :maxlength="setting.maxLength ?? 15"
+                @update:model-value="
+                  (value) =>
+                    setNestedValue(
+                      optionForm,
+                      setting.id,
+                      setting.useUnicode
+                        ? transformUnicode(value, setting.maxLength)
+                        : transformNonUnicode(value, setting.maxLength)
+                    )
+                "
+              />
 
-                <FormControl
-                  v-if="setting.type == 'Number'"
-                  :name="setting.id"
-                  :model-value="getNestedValue(optionForm, setting.id)"
-                  type="number"
-                  onkeypress="return event.charCode >= 48 && event.charCode <= 57"
-                  min="0"
-                  max="999"
-                />
+              <FormControl
+                v-if="setting.type == 'Number'"
+                :model-value="getNestedValue(optionForm, setting.id) ?? 0"
+                :name="setting.id"
+                type="number"
+                onkeypress="return event.charCode >= 48 && event.charCode <= 57"
+                min="0"
+                max="999"
+                @update:model-value="
+                  (value) =>
+                    setNestedValue(optionForm, setting.id, Number(value))
+                "
+              />
 
-                <FormControl
-                  v-if="setting.type == 'Array'"
-                  :options="setting.options"
-                  :name="setting.id"
-                  :model-value="getNestedValue(optionForm, setting.id)"
-                  :selected="getNestedValue(optionForm, setting.id)"
-                />
+              <FormControl
+                v-if="setting.type == 'Array'"
+                :model-value="getNestedValue(optionForm, setting.id) ?? 0"
+                :options="setting.options"
+                :name="setting.id"
+                :selected="getNestedValue(myProfile, setting.id) ?? 0"
+                @update:model-value="
+                  (value) =>
+                    setNestedValue(optionForm, setting.id, Number(value))
+                "
+              />
 
-                <FormCheckRadio
-                  v-if="setting.type == 'Boolean'"
-                  :name="setting.id"
-                  :input-value="Boolean(getNestedValue(optionForm, setting.id))"
-                  :model-value="Boolean(getNestedValue(optionForm, setting.id))"
-                  type="switch"
-                />
-              </FormField>
-            </div>
+              <FormCheckRadio
+                v-if="setting.type == 'Boolean'"
+                :name="setting.id"
+                :model-value="
+                  Boolean(getNestedValue(optionForm, setting.id) ?? 0)
+                "
+                :input-value="true"
+                type="switch"
+                @update:model-value="
+                  (value) =>
+                    setNestedValue(optionForm, setting.id, Number(value) ?? 0)
+                "
+              />
+            </FormField>
 
-            <div class="space-x-2 mt-6">
-              <BaseButton type="submit" color="success" label="Save" />
-              <BaseButton type="submit" color="danger" label="Revert" />
+            <div
+              v-if="JSON.stringify(optionForm) !== JSON.stringify(bareForm)"
+              class="space-x-2 mt-6"
+            >
+              <BaseButton color="success" label="Save" type="submit" />
+              <BaseButton
+                color="danger"
+                label="Revert"
+                @click="loadProfile()"
+              />
             </div>
           </form>
         </CardBox>

@@ -1649,6 +1649,8 @@ export const gameData = [
     shortName: "pop'n",
     icon: "/assets/icon/popn.webp",
     cardBG: "/assets/card/popn.webp",
+    useUnicode: true,
+    maxLength: 6,
     scoreHeaders: [
       { text: "Combos", value: "combo" },
       { text: "Halo", value: "halo" },
@@ -1779,6 +1781,7 @@ export const gameData = [
     name: "ReflecBeat",
     icon: null,
     cardBG: null,
+    useUnicode: true,
     scoreHeaders: [
       { text: "Combos", value: "combo" },
       { text: "Misses", value: "misses" },
@@ -1813,9 +1816,9 @@ export const gameData = [
   },
   {
     id: GameConstants.ROAD_FIGHTERS,
-    name: "Road Fighters",
-    icon: null,
-    cardBG: null,
+    name: "Road Fighters 3D",
+    icon: "/assets/icon/rf.webp",
+    cardBG: "/assets/card/rf.webp",
     skip: true,
     noRivals: true,
     noScores: true,
@@ -1832,8 +1835,9 @@ export const gameData = [
       { text: "Halo", value: "halo" },
     ],
     playerHeaders: [
-      { text: "Skill Level", value: "skillLevel", sortable: true, width: 100 },
-      { text: "VOLFORCE", value: "vf", sortable: true, width: 100 },
+      { text: "Skill Level", value: "skill_level", sortable: true, width: 100 },
+      { text: "BLOCK", value: "block", sortable: false, width: 100 },
+      { text: "PACKET", value: "packet", sortable: false, width: 100 },
     ],
     versions: [
       {
@@ -1871,16 +1875,7 @@ export const gameData = [
     noRivals: true,
     noScores: false,
     noRecords: true,
-  },
-  {
-    id: GameConstants.ROAD_FIGHTERS,
-    name: "Road Fighters 3D",
-    icon: "/assets/icon/rf.webp",
-    cardBG: "/assets/card/rf.webp",
-    skip: true,
-    noRivals: true,
-    noScores: true,
-    noRecords: true,
+    useUnicode: true,
   },
 ];
 

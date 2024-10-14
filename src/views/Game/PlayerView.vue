@@ -1,7 +1,6 @@
 <script setup>
 import { reactive, ref, onMounted, watch } from "vue";
 import { useRoute, useRouter } from "vue-router";
-import { useMainStore } from "@/stores/main";
 import {
   mdiAccountOutline,
   mdiBackburger,
@@ -20,13 +19,14 @@ import SectionTitleLine from "@/components/SectionTitleLine.vue";
 import FormControl from "@/components/FormControl.vue";
 import PillTag from "@/components/PillTag.vue";
 import JubilityTable from "@/components/Tables/JubilityTable.vue";
+
+import { APIGetProfile } from "@/stores/api/profile";
 import { getGameInfo } from "@/constants";
 import { getIIDXDan } from "@/constants/danClass.js";
 import { getGitadoraColor, getJubilityColor } from "@/constants/skillColor";
 
 const $route = useRoute();
 const $router = useRouter();
-const mainStore = useMainStore();
 var gameID = null;
 var thisGame = null;
 var profileUserId = null;
@@ -68,7 +68,7 @@ if (!thisGame.versions) {
 async function loadProfile() {
   try {
     myProfile.value = null;
-    const data = await mainStore.getUserProfile(
+    const data = await APIGetProfile(
       gameID,
       versionForm.currentVersion,
       profileUserId
