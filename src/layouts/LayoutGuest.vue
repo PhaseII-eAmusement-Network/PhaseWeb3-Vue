@@ -1,11 +1,49 @@
 <script setup>
+import { useMainStore } from "@/stores/main.js";
 import { useStyleStore } from "@/stores/style.js";
+import { ref, watch } from "vue";
+import LoadingModal from "@/components/LoadingModal.vue";
+const mainStore = useMainStore();
 
+const loading = ref(mainStore.isLoading);
+const saving = ref(mainStore.isSaving);
+const errorCode = ref(mainStore.errorCode);
 const styleStore = useStyleStore();
+
+watch(
+  () => mainStore.isLoading,
+  (newValue) => {
+    loading.value = newValue;
+  }
+);
+
+watch(
+  () => mainStore.isSaving,
+  (newValue) => {
+    saving.value = newValue;
+  }
+);
+
+watch(
+  () => mainStore.errorCode,
+  (newValue) => {
+    errorCode.value = newValue;
+  }
+);
 </script>
 
 <template>
   <div :class="{ dark: styleStore.darkMode }">
+    <LoadingModal
+      :active="loading || saving"
+      :is-save="saving"
+      :error-code="errorCode"
+      class="transition-opacity duration-300 ease-out"
+      :class="{
+        'opacity-100': loading || saving,
+        'opacity-0': !loading && !saving,
+      }"
+    />
     <div class="bg-gray-950 dark:text-slate-100">
       <div class="animated animatedFadeInUp fadeInUp">
         <slot />

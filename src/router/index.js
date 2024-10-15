@@ -34,14 +34,14 @@ const routes = [
     name: "register",
     component: () => import("@/views/Auth/RegisterView.vue"),
   },
-  // {
-  //   meta: {
-  //     title: "Reset Password",
-  //   },
-  //   path: "/auth/reset",
-  //   name: "reset_pass",
-  //   component: () => import("@/views/Auth/ResetView.vue"),
-  // },
+  {
+    meta: {
+      title: "Reset Password",
+    },
+    path: "/auth/reset",
+    name: "reset_pass",
+    component: () => import("@/views/Auth/ResetView.vue"),
+  },
   {
     meta: {
       title: "Profile",
