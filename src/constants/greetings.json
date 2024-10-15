@@ -323,5 +323,65 @@
         "author": "Axel",
         "header": "Select a game mode, <username>",
         "comment": "ARE YOU SURE?"
+    },
+    {
+        "author": "a fox",
+        "header": "Spin my knobs, <username>",
+        "comment": "Beep beep lettuce"
+    },
+    {
+        "author": "Azui",
+        "header": "Don't stop, <username>",
+        "comment": "You're so close to Kaiden!"
+    },
+    {
+        "author": "FluffyOMC",
+        "header": "I curse you, <username>",
+        "comment": "1-miss FC attempts upon ye!"
+    },
+    {
+        "author": "heeho",
+        "header": "Please return all dongles to their rightful owners, <username>",
+        "comment": "Or don't I'm not your mom"
+    },
+    {
+        "author": "FluffyOMC",
+        "header": "Welcome to os- PhaseII, <username>",
+        "comment": "Tap the buttons, to the beat!"
+    },
+    {
+        "author": "Phoenix",
+        "header": "Welcome to PhaseII, <username>",
+        "comment": "I love you"
+    },
+    {
+        "author": "Azui",
+        "header": "You did it, <username>!",
+        "comment": "And it only took 1,000,000 plays"
+    },
+    {
+        "author": "Anonymous",
+        "header": "You are based, <username>.",
+        "comment": ""
+    },
+    {
+        "author": "FluffyOMC",
+        "header": "What if you wanted an FC, <username>",
+        "comment": "But god said: \"1 miss\""
+    },
+    {
+        "author": "Anonymous",
+        "header": "<username>",
+        "comment": "No Regerts!"
+    },
+    {
+        "author": "FluffyOMC",
+        "header": "NullReferenceException {<username>}",
+        "comment": "And this, kids, is why you don't use Java"
+    },
+    {
+        "author": "caldenzer",
+        "header": "YO YO YO YO YO WHAT IT IS <username>",
+        "comment": "hey pac man, what's up?"
     }
 ]
