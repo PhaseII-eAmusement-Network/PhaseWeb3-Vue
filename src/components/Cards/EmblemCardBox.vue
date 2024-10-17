@@ -1,12 +1,18 @@
 <script setup>
 import axios from "axios";
 import { watch, ref, reactive } from "vue";
+import { useRouter } from "vue-router";
+import { mdiLoading } from "@mdi/js";
 import BaseButton from "@/components/BaseButton.vue";
+import BaseIcon from "@/components/BaseIcon.vue";
 import CardBox from "@/components/CardBox.vue";
 import FormField from "@/components/FormField.vue";
 import FormControl from "@/components/FormControl.vue";
 import UserEmblem from "@/components/UserEmblem.vue";
 import PillTag from "@/components/PillTag.vue";
+
+import { GameConstants } from "@/constants";
+import { APIUpdateProfile } from "@/stores/api/profile";
 
 const props = defineProps({
   profile: {
@@ -19,12 +25,15 @@ const props = defineProps({
   },
 });
 
+const router = useRouter();
 const userProfile = ref(props.profile);
 const version = ref(props.version);
 const emblemKey = ref(0);
 
 const newEmblem = reactive(formatEmblem(userProfile.value?.last?.emblem));
 const emblemSettings = ref([]);
+const isModified = ref(false);
+const loading = ref(false);
 
 watch(
   () => props.version,
@@ -33,6 +42,7 @@ watch(
     version.value = props.version;
     loadEmblemSettings();
     newEmblem.value = formatEmblem(userProfile.value.last?.emblem);
+    isModified.value = false;
   }
 );
 
@@ -40,6 +50,7 @@ watch(
   newEmblem,
   () => {
     emblemKey.value++;
+    isModified.value = !emblemEquals(newEmblem, userProfile.value.last?.emblem);
   },
   { deep: true }
 );
@@ -93,13 +104,39 @@ function encodeEmblem(emblem) {
     return [0, 0, 0, 0, 0];
   }
 }
+
+function emblemEquals(emblem1, emblem2) {
+  return JSON.stringify(emblem1) === JSON.stringify(formatEmblem(emblem2));
+}
+
+async function updateProfile() {
+  loading.value = true;
+  var newProfile = JSON.parse(JSON.stringify(props.profile));
+  if (!newProfile.last) {
+    newProfile.last = {};
+  }
+  newProfile.last.emblem = encodeEmblem(newEmblem);
+  const profileStatus = await APIUpdateProfile(
+    GameConstants.JUBEAT,
+    props.version,
+    newProfile
+  );
+  if (profileStatus.status != "error") {
+    router.go();
+  }
+}
+
+function revertEmblem() {
+  Object.assign(newEmblem, formatEmblem(userProfile.value.last?.emblem));
+  isModified.value = false;
+}
 </script>
 
 <template>
   <CardBox class="mt-6">
     <PillTag color="info" label="Emblem" class="mb-2" />
     <div class="grid md:grid-cols-2 space-y-6 align-center">
-      <div>
+      <form>
         <FormField
           v-for="option of emblemSettings"
           :key="option.id"
@@ -111,7 +148,7 @@ function encodeEmblem(emblem) {
             :options="option.options"
           />
         </FormField>
-      </div>
+      </form>
       <div class="place-self-center">
         <UserEmblem
           :key="emblemKey"
@@ -124,8 +161,24 @@ function encodeEmblem(emblem) {
 
     <template #footer>
       <div class="space-x-2">
-        <BaseButton type="submit" color="success" label="Save" />
-        <BaseButton type="submit" color="danger" label="Revert" />
+        <BaseButton
+          v-if="isModified"
+          color="success"
+          label="Save"
+          @click="updateProfile()"
+        />
+        <BaseButton
+          v-if="isModified"
+          color="danger"
+          label="Revert"
+          @click="revertEmblem()"
+        />
+        <BaseIcon
+          v-if="loading"
+          :path="mdiLoading"
+          color="text-yellow-500"
+          class="animate animate-spin"
+        />
       </div>
     </template>
   </CardBox>
