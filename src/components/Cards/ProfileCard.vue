@@ -59,7 +59,14 @@ const thisGame = getGameInfo(props.game);
         :profile="profile"
         class="place-self-center pb-6 md:pb-0"
       />
-      <div class="drop-shadow-xl">
+      <div class="drop-shadow-2xl">
+        <p
+          v-if="profile.title"
+          :class="colorText()"
+          class="text-2xl tracking-widest font-light -mb-1"
+        >
+          {{ profile.title }}
+        </p>
         <h1 :class="colorText()" class="text-4xl md:text-5xl font-bold">
           {{ profile.username }}
         </h1>
