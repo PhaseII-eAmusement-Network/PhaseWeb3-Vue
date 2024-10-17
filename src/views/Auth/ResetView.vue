@@ -153,6 +153,8 @@ async function resetPassword() {
                   v-model="form.newPassword"
                   :icon="mdiAsterisk"
                   type="password"
+                  required
+                  minlength="8"
                 />
               </FormField>
               <FormField label="Confirm Password">
@@ -160,6 +162,8 @@ async function resetPassword() {
                   v-model="form.confirmPassword"
                   :icon="mdiAsterisk"
                   type="password"
+                  required
+                  minlength="8"
                 />
               </FormField>
               <BaseButton

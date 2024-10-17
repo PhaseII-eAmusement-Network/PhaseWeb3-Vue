@@ -1,5 +1,14 @@
 import { useMainStore } from "@/stores/main";
 const mainStore = useMainStore();
+export async function APIAdminDashboard() {
+  try {
+    const data = await mainStore.callApi(`/admin`);
+    return data.data;
+  } catch (error) {
+    console.log("Error loading admin dashboard:", error);
+    throw error;
+  }
+}
 
 export async function checkArcadeName(arcadeName) {
   try {
