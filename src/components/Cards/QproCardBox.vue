@@ -31,7 +31,14 @@ const version = ref(props.version);
 const QproKey = ref(0);
 
 const newQpro = reactive(
-  userProfile.value?.qpro ?? { head: 0, hair: 0, face: 0, body: 0, hand: 0 }
+  userProfile.value?.qpro ?? {
+    head: 0,
+    hair: 0,
+    face: 0,
+    body: 0,
+    hand: 0,
+    bg: 0,
+  }
 );
 const QproSettings = ref([]);
 const isModified = ref(false);
@@ -58,7 +65,7 @@ watch(
   newQpro,
   () => {
     QproKey.value++;
-    isModified.value = !qproEquals(newQpro.value, props.profile.qpro);
+    isModified.value = !qproEquals(newQpro, props.profile.qpro);
   },
   { deep: true }
 );
@@ -85,11 +92,12 @@ async function updateProfile() {
   loading.value = true;
   var newProfile = JSON.parse(JSON.stringify(props.profile));
 
-  newProfile.qpro = newQpro.value;
+  newProfile.qpro = newQpro;
+  console.log(newQpro);
   const profileStatus = await APIUpdateProfile(
     GameConstants.IIDX,
     props.version,
-    newProfile
+    { qpro: newQpro }
   );
   if (profileStatus.status != "error") {
     router.go();
@@ -97,7 +105,6 @@ async function updateProfile() {
 }
 
 function revert() {
-  isModified.value = false;
   Object.assign(
     newQpro,
     JSON.parse(JSON.stringify(props.profile)).qpro ?? {
