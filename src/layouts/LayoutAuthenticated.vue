@@ -108,6 +108,7 @@ router.beforeEach(() => {
 
 const menuClick = (event, item) => {
   if (item.isLogout) {
+    mainStore.deleteUserSession();
     deleteUserAuthKey();
     router.push({
       name: "login",

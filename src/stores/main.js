@@ -136,7 +136,7 @@ export const useMainStore = defineStore("main", {
 
     async fetchAllNews() {
       try {
-        const data = await this.callApi("/news/getAllNews");
+        const data = await this.callApi("/news");
         return data.slice(0, 2);
       } catch (error) {
         console.log("Error fetching news:", error);
@@ -146,7 +146,7 @@ export const useMainStore = defineStore("main", {
 
     async fetchNews(newsID) {
       try {
-        const data = await this.callApi(`/news/getNews/${newsID}`);
+        const data = await this.callApi(`/news/${newsID}`);
         return data;
       } catch (error) {
         console.log("Error fetching news:", error);
@@ -160,7 +160,7 @@ export const useMainStore = defineStore("main", {
       };
 
       try {
-        const data = await this.callApi(`/auth/checkSession`, "POST", request);
+        const data = await this.callApi(`/auth/session`, "GET", request);
         return data;
       } catch (error) {
         console.log("Error checking session:", error);
@@ -174,8 +174,8 @@ export const useMainStore = defineStore("main", {
       };
 
       try {
-        const data = await this.callApi(`/auth/deleteSession`, "POST", request);
-        console.log(data);
+        const data = await this.callApi(`/auth/session`, "DELETE", request);
+        this.userLoaded = false;
         return data;
       } catch (error) {
         console.log("Error deleting session:", error);
@@ -190,7 +190,7 @@ export const useMainStore = defineStore("main", {
       };
 
       try {
-        const data = await this.callApi(`/auth/createSession`, "POST", request);
+        const data = await this.callApi(`/auth/session`, "POST", request);
         if (data && data.status === "success") {
           saveUserAuthKey(data.sessionId, remember ? 30 : 1);
           return true;
@@ -210,7 +210,7 @@ export const useMainStore = defineStore("main", {
         if (validSession && validSession.activeSession && !this.userLoaded) {
           const userId = validSession.userId;
           if (userId) {
-            const response = await this.callApi(`/user/${userId}`);
+            const response = await this.callApi(`/user?userId=${userId}`);
             var user = response.user;
             this.setUser({
               id: userId,
@@ -243,6 +243,16 @@ export const useMainStore = defineStore("main", {
         return data.user;
       } catch (error) {
         console.log("Error fetching user:", error);
+        throw error;
+      }
+    },
+
+    async putUser(newUser) {
+      try {
+        const data = await this.callApi("/user", "POST", newUser);
+        return data;
+      } catch (error) {
+        console.log("Error updating user:", error);
         throw error;
       }
     },
