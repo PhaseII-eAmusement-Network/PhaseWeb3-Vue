@@ -1144,6 +1144,11 @@ export const gameData = [
     icon: "/assets/icon/iidx.webp",
     cardBG: "/assets/card/iidx.webp",
     videoTable: [
+      VersionConstants.IIDX_TRICORO,
+      VersionConstants.IIDX_SPADA,
+      VersionConstants.IIDX_PENDUAL,
+      VersionConstants.IIDX_COPULA,
+      VersionConstants.IIDX_SINOBUZ,
       VersionConstants.IIDX_CANNON_BALLERS,
       VersionConstants.IIDX_ROOTAGE,
       VersionConstants.IIDX_HEROIC_VERSE,

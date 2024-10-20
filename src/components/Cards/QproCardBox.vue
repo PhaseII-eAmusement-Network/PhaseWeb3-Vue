@@ -138,8 +138,8 @@ function revert() {
           :key="QproKey"
           :version="version"
           :profile="{ qpro: newQpro }"
-          style="scale: 1.9"
-          class="my-16 mb-10"
+          style="scale: 1.6"
+          class="my-16 md:my-0 md:mb-8"
         />
       </div>
     </div>

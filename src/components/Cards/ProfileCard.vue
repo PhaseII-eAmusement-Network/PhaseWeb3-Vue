@@ -57,7 +57,7 @@ const thisGame = getGameInfo(props.game);
         v-if="game == 'iidx' && version >= 20 && profile.qpro"
         :version="version"
         :profile="profile"
-        class="place-self-center pb-6 md:pb-0"
+        class="place-self-center md:mt-10 mb-10 md:mb-0"
       />
       <div class="drop-shadow-2xl">
         <p
