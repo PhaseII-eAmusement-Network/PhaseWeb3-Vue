@@ -8,6 +8,7 @@ import {
   mdiFormatListText,
   mdiChartBarStacked,
   mdiChartAreasplineVariant,
+  mdiChartTimeline,
 } from "@mdi/js";
 import SectionMain from "@/components/SectionMain.vue";
 import CardBoxWidget from "@/components/CardBoxWidget.vue";
@@ -21,6 +22,7 @@ import PillTag from "@/components/PillTag.vue";
 import JubilityTable from "@/components/Tables/JubilityTable.vue";
 
 import { APIGetProfile } from "@/stores/api/profile";
+import { APIGetArcade } from "@/stores/api/arcade";
 import { getGameInfo } from "@/constants";
 import { getIIDXDan } from "@/constants/danClass.js";
 import { getGitadoraColor, getJubilityColor } from "@/constants/skillColor";
@@ -68,11 +70,13 @@ if (!thisGame.versions) {
 async function loadProfile() {
   try {
     myProfile.value = null;
-    const data = await APIGetProfile(
+    var data = await APIGetProfile(
       gameID,
       versionForm.currentVersion,
       profileUserId
     );
+    data.timeline = await generateTimeline(data);
+
     myProfile.value = formatProfile(data);
 
     if (data && !versionForm.currentVersion) {
@@ -80,6 +84,17 @@ async function loadProfile() {
     }
   } catch (error) {
     console.error("Failed to fetch user profile data:", error);
+  }
+}
+
+async function loadArcade(arcadeId) {
+  try {
+    const data = await APIGetArcade(arcadeId);
+    console.log(data);
+
+    return data;
+  } catch (error) {
+    console.error("Failed to fetch arcade data:", error);
   }
 }
 
@@ -261,6 +276,56 @@ function formatCounts(profile) {
           : 0,
       ]
     : [];
+}
+
+async function generateTimeline(myProfile) {
+  const stats = myProfile?.stats;
+  const firstPlay = stats?.first_play_timestamp;
+  const lastPlay = stats?.last_play_timestamp;
+  const arcadeHistory = stats?.arcade_history;
+
+  const plays = [];
+
+  // Add the first play
+  if (firstPlay) {
+    plays.push({
+      timestamp: new Date(firstPlay * 1000).toLocaleString(),
+      arcade: stats?.first_play_arcade,
+      first_play: true,
+    });
+  }
+
+  // Add arcade history
+  if (arcadeHistory) {
+    for (const [arcadeId, machines] of Object.entries(arcadeHistory)) {
+      const arcade = await loadArcade(arcadeId);
+      for (const [machineId, timestamps] of Object.entries(machines)) {
+        for (const timestamp of timestamps) {
+          const date = new Date(timestamp * 1000);
+          if (![firstPlay, lastPlay].includes(timestamp)) {
+            plays.push({
+              timestamp: date.toLocaleString(),
+              arcade: arcade.name,
+              machineId: machineId,
+              first_play: false,
+            });
+          }
+        }
+      }
+    }
+  }
+
+  // Add the last play
+  if (lastPlay) {
+    plays.push({
+      timestamp: new Date(lastPlay * 1000).toLocaleString(),
+      arcade: stats?.last_play_arcade,
+      first_play: false,
+    });
+  }
+
+  // Sort plays by timestamp
+  return plays.sort((a, b) => a.timestamp - b.timestamp);
 }
 </script>
 
@@ -448,6 +513,39 @@ function formatCounts(profile) {
                 ,
                 :version="versionForm.currentVersion"
               />
+            </CardBox>
+          </div>
+        </template>
+
+        <template v-if="myProfile?.timeline">
+          <SectionTitleLine :icon="mdiChartTimeline" title="Timeline" main />
+
+          <div class="my-6">
+            <CardBox>
+              <ol
+                class="border-s border-neutral-300 md:flex md:justify-center md:gap-6 md:border-s-0 md:border-t"
+              >
+                <li
+                  v-for="playHistory of myProfile?.timeline"
+                  :key="playHistory.timestamp"
+                >
+                  <div
+                    class="flex-start flex items-center pt-2 md:block md:pt-0"
+                  >
+                    <div
+                      class="-ms-[5px] me-3 h-[9px] w-[9px] rounded-full bg-gray-300 md:-mt-[5px] md:me-0 md:ms-0"
+                    ></div>
+                    <p class="mt-2 text-sm font-light">
+                      {{ playHistory.timestamp }}
+                    </p>
+                  </div>
+                  <div class="ms-4 pb-4 md:ms-0">
+                    <h4 class="text-lg font-semibold">
+                      {{ playHistory.arcade }}
+                    </h4>
+                  </div>
+                </li>
+              </ol>
             </CardBox>
           </div>
         </template>
