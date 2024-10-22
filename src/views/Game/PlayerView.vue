@@ -523,23 +523,26 @@ async function generateTimeline(myProfile) {
           <div class="my-6">
             <CardBox>
               <ol
-                class="border-s border-neutral-300 md:flex md:justify-center md:gap-6 md:border-s-0 md:border-t"
+                class="border-s border-neutral-300 md:flex md:justify-start md:gap-10 md:border-s-0 md:border-t md:overflow-x-auto overflow-y-visible md:whitespace-nowrap scrollbar"
               >
                 <li
-                  v-for="playHistory of myProfile?.timeline"
+                  v-for="playHistory of JSON.parse(
+                    JSON.stringify(myProfile?.timeline)
+                  ).reverse()"
                   :key="playHistory.timestamp"
+                  class="md:inline-block flex-shrink-0"
                 >
                   <div
-                    class="flex-start flex items-center pt-2 md:block md:pt-0"
+                    class="flex-start flex items-center pt-2 md:block md:pt-4"
                   >
                     <div
-                      class="-ms-[5px] me-3 h-[9px] w-[9px] rounded-full bg-gray-300 md:-mt-[5px] md:me-0 md:ms-0"
+                      class="-ms-[6px] me-3 h-[12px] w-[12px] md:w-0.5 md:h-4 rounded-full md:rounded-none bg-gray-300 md:-mt-6 md:me-0 md:ms-0"
                     ></div>
                     <p class="mt-2 text-sm font-light">
                       {{ playHistory.timestamp }}
                     </p>
                   </div>
-                  <div class="ms-4 pb-4 md:ms-0">
+                  <div class="ms-4 pb-6 md:ms-0">
                     <h4 class="text-lg font-semibold">
                       {{ playHistory.arcade }}
                     </h4>
