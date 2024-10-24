@@ -2,6 +2,7 @@
 import { reactive, ref, watch } from "vue";
 import { useRouter } from "vue-router";
 import { useMainStore } from "@/stores/main";
+import { APIUpdatePassword } from "@/stores/api/account";
 import { mdiAccount, mdiMail, mdiAsterisk, mdiLoading } from "@mdi/js";
 import SectionMain from "@/components/SectionMain.vue";
 import CardBox from "@/components/CardBox.vue";
@@ -31,9 +32,9 @@ const profileForm = reactive({
 });
 
 const passwordForm = reactive({
-  password_current: "",
-  password: "",
-  password_confirmation: "",
+  currentPassword: "",
+  newPassword: "",
+  confirmPassword: "",
 });
 
 const profileLoading = ref(false);
@@ -57,17 +58,28 @@ watch(
 
 async function submitProfile() {
   profileLoading.value = true;
-  const saveStatus = await mainStore.putUser(profileForm);
-  if (saveStatus.status == "success") {
+  const response = await mainStore.putUser(profileForm);
+  if (response.status == "success") {
     profileLoading.value = false;
     await mainStore.loadUser();
     $router.go();
   }
 }
 
-const submitPass = () => {
-  //
-};
+async function submitPassword() {
+  passwordLoading.value = true;
+  const response = await APIUpdatePassword(
+    passwordForm.currentPassword,
+    passwordForm.newPassword,
+    passwordForm.confirmPassword
+  );
+  if (response.status == "success") {
+    alert("Password changed.");
+    passwordLoading.value = false;
+    await mainStore.loadUser();
+    $router.go();
+  }
+}
 
 function pinInput(event) {
   event.target.value = event.target.value.replace(/\D/g, "");
@@ -142,34 +154,34 @@ function userChanged(oldProfile, newProfile) {
           </template>
         </CardBox>
 
-        <CardBox is-form class="row-span-2" @submit.prevent="submitPass">
+        <CardBox is-form class="row-span-2" @submit.prevent="submitPassword()">
           <PillTag color="info" label="Change Password" class="mb-2" />
-          <FormField label="Current password">
+          <FormField label="Current Password">
             <FormControl
-              v-model="passwordForm.password_current"
+              v-model="passwordForm.currentPassword"
               :icon="mdiAsterisk"
-              name="password_current"
+              name="currentPassword"
               type="password"
               required
             />
           </FormField>
           <BaseDivider />
 
-          <FormField label="New password">
+          <FormField label="New Password">
             <FormControl
-              v-model="passwordForm.password"
+              v-model="passwordForm.newPassword"
               :icon="mdiAsterisk"
-              name="password"
+              name="newPassword"
               type="password"
               required
             />
           </FormField>
 
-          <FormField label="Confirm password">
+          <FormField label="Confirm Password">
             <FormControl
-              v-model="passwordForm.password_confirmation"
+              v-model="passwordForm.confirmPassword"
               :icon="mdiAsterisk"
-              name="password_confirmation"
+              name="confirmPassword"
               type="password"
               required
             />

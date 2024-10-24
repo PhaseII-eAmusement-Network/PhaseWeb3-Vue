@@ -122,6 +122,12 @@ export const useMainStore = defineStore("main", {
           this.isLoading = true;
           return null;
         }
+        if (response.data.status === "warn") {
+          alert(response.data.error_code);
+          this.isSaving = false;
+          this.isLoading = false;
+          return null;
+        }
         this.isLoading = false; // reset flags
         this.isSaving = false;
         return response.data;

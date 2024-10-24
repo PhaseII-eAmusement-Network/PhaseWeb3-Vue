@@ -38,3 +38,21 @@ export async function APIResetPassword(key, newPassword, confirmPassword) {
     throw error;
   }
 }
+
+export async function APIUpdatePassword(
+  currentPassword,
+  newPassword,
+  confirmPassword
+) {
+  try {
+    const data = await mainStore.callApi(`/user/updatePassword`, "POST", {
+      currentPassword: currentPassword,
+      newPassword: newPassword,
+      confirmPassword: confirmPassword,
+    });
+    return data;
+  } catch (error) {
+    console.log("Error updating password:", error);
+    throw error;
+  }
+}
