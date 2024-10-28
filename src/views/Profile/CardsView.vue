@@ -100,8 +100,8 @@ const copyToClipboard = (text) => {
             name="cardId"
             type="card"
             placeholder="XXXX-XXXX-XXXX-XXXX"
-            minlength="19"
-            maxlength="19"
+            :minlength="19"
+            :maxlength="19"
             required
             @input="cardInput"
           />

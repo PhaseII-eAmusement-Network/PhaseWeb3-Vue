@@ -57,6 +57,16 @@ export async function APIUpdatePassword(
   }
 }
 
+export async function APIRegisterUser(newProfile) {
+  try {
+    const data = await mainStore.callApi(`/user`, "PUT", newProfile);
+    return data;
+  } catch (error) {
+    console.log("Error registering:", error);
+    throw error;
+  }
+}
+
 export async function APIGetCards() {
   try {
     const data = await mainStore.callApi(`/user/card`);

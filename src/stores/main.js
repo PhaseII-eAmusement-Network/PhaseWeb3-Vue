@@ -97,6 +97,9 @@ export const useMainStore = defineStore("main", {
           } else if (method === "POST") {
             this.isLoading = true;
             this.isSaving = true;
+          } else if (method === "PUT") {
+            this.isLoading = true;
+            this.isSaving = true;
           }
         }, 200); // Wait for .2 seconds before showing loading modal
       };

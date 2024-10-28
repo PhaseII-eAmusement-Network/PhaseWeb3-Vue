@@ -1,76 +1,65 @@
 <script setup>
-import { reactive } from "vue";
+import { reactive, ref } from "vue";
 import { useRouter } from "vue-router";
-import { mdiAccount, mdiAsterisk } from "@mdi/js";
-import Cookies from "js-cookie";
+import {
+  mdiAccount,
+  mdiMail,
+  mdiAsterisk,
+  mdiCardAccountDetailsOutline,
+  mdiLoading,
+} from "@mdi/js";
 import CardBox from "@/components/CardBox.vue";
 import FormCheckRadio from "@/components/FormCheckRadio.vue";
 import FormField from "@/components/FormField.vue";
 import FormControl from "@/components/FormControl.vue";
 import BaseButton from "@/components/BaseButton.vue";
+import BaseIcon from "@/components/BaseIcon.vue";
 import LayoutGuest from "@/layouts/LayoutGuest.vue";
 
-const router = useRouter();
+import { APIRegisterUser } from "@/stores/api/account";
 
-function validateEmail(email) {
-  var re = /\S+@\S+\.\S+/;
-  return re.test(email);
-}
+const $router = useRouter();
 
-const submit = async () => {
-  if (
-    !form.username ||
-    !form.email ||
-    !form.pass ||
-    !form.pass_conf ||
-    !form.pin ||
-    !form.cardId
-  ) {
-    alert("Please fill in all fields.");
-    return;
-  }
-
-  if (!validateEmail(form.email)) {
-    alert("Please use a valid email.");
-    return;
-  }
-
-  if (form.pass !== form.pass_conf) {
-    alert("Passwords do not match!");
-    return;
-  }
-
-  // Simulate login API call
-  const response = await fakeLoginAPI(form.username, form.pass);
-  if (response.success) {
-    console.log(response);
-    Cookies.set("userAuthKey", response.authKey, {
-      expires: form.remember ? 30 : 0,
-    });
-    router.push("/");
-  } else {
-    alert("Create failed. Please try again."); // Show error message
-  }
-};
-
-// Simulated login API function
-const fakeLoginAPI = async (username, password) => {
-  // Simulate API call delay
-  await new Promise((resolve) => setTimeout(resolve, 1000));
-
-  // Simulated success response with generated auth key
-  return { success: true, authKey: "generatedAuthKey123" };
-};
-
-const form = reactive({
+const registerLoading = ref(false);
+const profileForm = reactive({
   username: "",
   email: "",
-  pass: "",
-  pass_conf: "",
+  newPassword: "",
+  confirmPassword: "",
   pin: "",
   cardId: "",
   remember: true,
 });
+
+function pinInput(event) {
+  var input = event.target.value;
+  input = input.replace(/[^0-9]/g, "");
+
+  profileForm.pin = input;
+}
+
+function cardInput(event) {
+  var input = event.target.value;
+  input = input.replace(/[^A-Za-z0-9]/g, "");
+
+  // Format the input to XXXX-XXXX-XXXX-XXXX
+  input = input
+    .toUpperCase()
+    .replace(/(.{4})/g, "$1-")
+    .replace(/-$/, "");
+
+  profileForm.cardId = input;
+}
+
+async function registerProfile() {
+  registerLoading.value = true;
+  const response = await APIRegisterUser(profileForm);
+  if (response.status == "success") {
+    registerLoading.value = false;
+    alert("User account registered. Please log in!");
+    $router.push("login");
+  }
+}
 </script>
 
 <template>
@@ -93,82 +82,106 @@ const form = reactive({
             <hr class="border-t border-1 my-1 w-full" />
             <p class="text-lg relative bottom-0">Account Registration</p>
           </div>
-          <div class="md:border-r md:border-1"></div>
-          <div class="grid grid-cols-2 gap-x-2">
-            <FormField label="Desired Username">
-              <FormControl
-                v-model="form.username"
-                :icon="mdiAccount"
-                name="username"
-                autocomplete="username"
+          <div class="md:border-r md:border-1" />
+
+          <div>
+            <form
+              class="grid grid-cols-2 gap-x-2"
+              @submit.prevent="registerProfile()"
+            >
+              <FormField label="Desired Username">
+                <FormControl
+                  v-model="profileForm.username"
+                  :icon="mdiAccount"
+                  name="username"
+                  required
+                  autocomplete="username"
+                />
+              </FormField>
+
+              <FormField label="Email Address">
+                <FormControl
+                  v-model="profileForm.email"
+                  :icon="mdiMail"
+                  type="email"
+                  name="email"
+                  required
+                  autocomplete="email"
+                />
+              </FormField>
+
+              <FormField label="Password">
+                <FormControl
+                  v-model="profileForm.newPassword"
+                  :icon="mdiAsterisk"
+                  name="newPassword"
+                  type="password"
+                  required
+                />
+              </FormField>
+
+              <FormField label="Password Confirmation">
+                <FormControl
+                  v-model="profileForm.confirmPassword"
+                  :icon="mdiAsterisk"
+                  name="confirmPassword"
+                  type="password"
+                  required
+                />
+              </FormField>
+
+              <FormField
+                label="Card ID"
+                help="The ACCESS CODE provided by the game."
+              >
+                <FormControl
+                  v-model="profileForm.cardId"
+                  :icon="mdiCardAccountDetailsOutline"
+                  name="cardId"
+                  type="card"
+                  placeholder="XXXX-XXXX-XXXX-XXXX"
+                  :minlength="19"
+                  :maxlength="19"
+                  required
+                  @input="cardInput"
+                />
+              </FormField>
+
+              <FormField label="Game PIN">
+                <FormControl
+                  v-model="profileForm.pin"
+                  :icon="mdiAsterisk"
+                  type="password"
+                  name="pin"
+                  required
+                  :minlength="4"
+                  :maxlength="4"
+                  inputmode="numeric"
+                  pattern="\d{4}"
+                  autocomplete="pin"
+                  @input="pinInput"
+                />
+              </FormField>
+
+              <FormCheckRadio
+                v-model="profileForm.remember"
+                class="col-span-2"
+                name="remember"
+                label="Remember Me"
+                :input-value="true"
               />
-            </FormField>
 
-            <FormField label="Email Address">
-              <FormControl
-                v-model="form.email"
-                :icon="mdiAccount"
-                name="email"
-                autocomplete="email"
-              />
-            </FormField>
-
-            <FormField label="Password">
-              <FormControl
-                v-model="form.pass"
-                :icon="mdiAsterisk"
-                type="password"
-                name="password"
-                autocomplete="current-password"
-              />
-            </FormField>
-
-            <FormField label="Password Confirmation">
-              <FormControl
-                v-model="form.pass_conf"
-                :icon="mdiAsterisk"
-                type="password"
-                name="password"
-                autocomplete="current-password"
-              />
-            </FormField>
-
-            <FormField label="Card ID">
-              <FormControl
-                v-model="form.cardId"
-                :icon="mdiAccount"
-                name="card"
-                autocomplete="card"
-              />
-            </FormField>
-
-            <FormField label="Game PIN">
-              <FormControl
-                v-model="form.pin"
-                :icon="mdiAsterisk"
-                type="password"
-                name="password"
-                autocomplete="current-password"
-              />
-            </FormField>
-
-            <FormCheckRadio
-              v-model="form.remember"
-              class="col-span-2"
-              name="remember"
-              label="Remember Me"
-              :input-value="true"
-            />
-
-            <div class="col-span-2">
-              <div class="flex flex-col gap-2 mt-4">
-                <BaseButton
-                  label="Create Account"
-                  color="success"
-                  @click="submit()"
+              <div class="flex gap-2 mt-4">
+                <BaseButton type="submit" label="Register" color="success" />
+                <BaseIcon
+                  v-if="registerLoading"
+                  :path="mdiLoading"
+                  color="text-yellow-500"
+                  class="animate animate-spin"
                 />
               </div>
-
+            </form>
+            <div class="col-span-2">
               <hr class="border-t border-1 my-4 w-full" />
 
               <div class="flex flex-col gap-2 my-4">
