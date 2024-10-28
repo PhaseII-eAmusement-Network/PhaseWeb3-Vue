@@ -56,3 +56,37 @@ export async function APIUpdatePassword(
     throw error;
   }
 }
+
+export async function APIGetCards() {
+  try {
+    const data = await mainStore.callApi(`/user/card`);
+    return data.cards;
+  } catch (error) {
+    console.log("Error fetching cards:", error);
+    throw error;
+  }
+}
+
+export async function APIPutCard(cardId) {
+  try {
+    const data = await mainStore.callApi(`/user/card`, "POST", {
+      cardId: cardId,
+    });
+    return data;
+  } catch (error) {
+    console.log("Error adding card:", error);
+    throw error;
+  }
+}
+
+export async function APIDeleteCard(cardId) {
+  try {
+    const data = await mainStore.callApi(`/user/card`, "DELETE", {
+      cardId: cardId,
+    });
+    return data;
+  } catch (error) {
+    console.log("Error deleting card:", error);
+    throw error;
+  }
+}

@@ -15,22 +15,57 @@ import FormControl from "@/components/FormControl.vue";
 import LayoutAuthenticated from "@/layouts/LayoutAuthenticated.vue";
 import SectionTitleLine from "@/components/SectionTitleLine.vue";
 
-import { useMainStore } from "@/stores/main";
-const mainStore = useMainStore();
+import { APIGetCards, APIPutCard, APIDeleteCard } from "@/stores/api/account";
 var cardData = ref([]);
 
+const cardLoading = ref(false);
 const cardForm = reactive({
   newCard: null,
 });
 
-onMounted(async () => {
+async function loadCards() {
+  cardData.value = null;
   try {
-    const data = await mainStore.getCards();
+    const data = await APIGetCards();
     cardData.value = data;
   } catch (error) {
     console.error("Failed to fetch card data:", error);
   }
+}
+
+onMounted(async () => {
+  await loadCards();
 });
+
+function cardInput(event) {
+  var input = event.target.value;
+  input = input.replace(/[^A-Za-z0-9]/g, "");
+
+  // Format the input to XXXX-XXXX-XXXX-XXXX
+  input = input
+    .toUpperCase()
+    .replace(/(.{4})/g, "$1-")
+    .replace(/-$/, "");
+
+  cardForm.newCard = input;
+}
+
+async function submitCard() {
+  cardLoading.value = true;
+  const response = await APIPutCard(cardForm.newCard);
+  if (response.status == "success") {
+    cardForm.newCard = null;
+    cardLoading.value = false;
+    await loadCards();
+  }
+}
+
+async function deleteCard(cardId) {
+  const response = await APIDeleteCard(dashCode(cardId));
+  if (response.status == "success") {
+    await loadCards();
+  }
+}
 
 const copyToClipboard = (text) => {
   navigator.clipboard
@@ -54,7 +89,7 @@ const copyToClipboard = (text) => {
         title="Register Card"
         main
       />
-      <CardBox is-form class="row-span-2 mb-6">
+      <CardBox is-form class="row-span-2 mb-6" @submit.prevent="submitCard()">
         <FormField
           label="Card ID"
           help="The 16 character ACCESS CODE. If your card is dated after 2016, you'll need to get the ACCESS CODE from a game."
@@ -65,16 +100,17 @@ const copyToClipboard = (text) => {
             name="cardId"
             type="card"
             placeholder="XXXX-XXXX-XXXX-XXXX"
-            minlength="16"
+            minlength="19"
             maxlength="19"
             required
+            @input="cardInput"
           />
         </FormField>
 
         <template #footer>
           <BaseButton type="submit" color="success" label="Add Card" />
           <BaseIcon
-            v-if="passwordLoading"
+            v-if="cardLoading"
             :path="mdiLoading"
             color="text-yellow-500"
             class="animate animate-spin"
@@ -95,6 +131,7 @@ const copyToClipboard = (text) => {
       </div>
 
       <div
+        v-if="cardData"
         class="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-6"
       >
         <div
@@ -120,7 +157,11 @@ const copyToClipboard = (text) => {
               label="Copy NFC-ID"
               @click="copyToClipboard(card.id)"
             />
-            <BaseButton color="danger" label="Delete" />
+            <BaseButton
+              color="danger"
+              label="Delete"
+              @click="deleteCard(card.encoded)"
+            />
           </div>
         </div>
       </div>

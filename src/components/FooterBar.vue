@@ -20,7 +20,7 @@ import BaseButton from "@/components/BaseButton.vue";
       </div>
       <div class="md:py-2">
         <BaseButton
-          color="info"
+          color="warning"
           href="https://paypal.me/trmazi"
           label="Donate"
           :icon="mdiCash"

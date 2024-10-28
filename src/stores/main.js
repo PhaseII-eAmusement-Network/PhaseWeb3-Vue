@@ -75,6 +75,15 @@ export const useMainStore = defineStore("main", {
     },
 
     async callApi(endpoint, method = "GET", data = null, extraHeaders = {}) {
+      if (method === "DELETE") {
+        const confirmed = window.confirm("Are you really?");
+        if (!confirmed) {
+          this.isSaving = false;
+          this.isLoading = false;
+          return null; // Exit if user does not confirm
+        }
+      }
+
       const apiServer = import.meta.env.VITE_API_URL;
       const apiKey = import.meta.env.VITE_API_KEY;
       let loadingTimeout;
@@ -259,16 +268,6 @@ export const useMainStore = defineStore("main", {
         return data;
       } catch (error) {
         console.log("Error updating user:", error);
-        throw error;
-      }
-    },
-
-    async getCards() {
-      try {
-        const data = await this.callApi(`/user/cards`);
-        return data.cards;
-      } catch (error) {
-        console.log("Error fetching cards:", error);
         throw error;
       }
     },

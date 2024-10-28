@@ -59,8 +59,8 @@ function getCardStyle(game) {
       <div class="space-y-3 text-center md:text-left lg:mx-12">
         <div class="space-y-2 md:space-y-0">
           <h1 v-if="!useSmall" class="text-2xl md:text-xl lg:text-2xl">
-            {{ greeting.header[0] }}
-            <b>{{ mainStore.userName }} </b>{{ greeting.header[1] }}
+            {{ greeting.header[0] }}<b>{{ mainStore.userName }} </b
+            >{{ greeting.header[1] }}
           </h1>
           <h1 v-if="useSmall" class="text-3xl md:text-4xl">
             <b>{{ mainStore.userName }}</b>
