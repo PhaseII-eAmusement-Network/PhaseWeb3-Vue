@@ -75,15 +75,6 @@ export const useMainStore = defineStore("main", {
     },
 
     async callApi(endpoint, method = "GET", data = null, extraHeaders = {}) {
-      if (method === "DELETE") {
-        const confirmed = window.confirm("Are you really?");
-        if (!confirmed) {
-          this.isSaving = false;
-          this.isLoading = false;
-          return null; // Exit if user does not confirm
-        }
-      }
-
       const apiServer = import.meta.env.VITE_API_URL;
       const apiKey = import.meta.env.VITE_API_KEY;
       let loadingTimeout;

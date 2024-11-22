@@ -91,10 +91,13 @@ export async function APIPutCard(cardId) {
 
 export async function APIDeleteCard(cardId) {
   try {
-    const data = await mainStore.callApi(`/user/card`, "DELETE", {
-      cardId: cardId,
-    });
-    return data;
+    const confirmed = window.confirm("Are you really?");
+    if (confirmed) {
+      const data = await mainStore.callApi(`/user/card`, "DELETE", {
+        cardId: cardId,
+      });
+      return data;
+    }
   } catch (error) {
     console.log("Error deleting card:", error);
     throw error;

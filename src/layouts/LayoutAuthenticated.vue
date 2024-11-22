@@ -14,6 +14,7 @@ import menuNavBar from "@/menuNavBar.js";
 import { useMainStore } from "@/stores/main.js";
 import { useStyleStore } from "@/stores/style.js";
 import LoadingModal from "@/components/LoadingModal.vue";
+// import EmailModal from "@/components/EmailModal.vue";
 import BaseIcon from "@/components/BaseIcon.vue";
 import NavBar from "@/components/NavBar.vue";
 import NavBarItemPlain from "@/components/NavBarItemPlain.vue";
@@ -222,6 +223,7 @@ const menuAside = computed(() => {
         'opacity-0': !loading && !saving,
       }"
     />
+    <!-- <EmailModal class="transition-opacity duration-300 ease-out" /> -->
     <div
       v-if="userLoaded"
       :class="[layoutAsidePadding, { 'ml-60 lg:ml-0': isAsideMobileExpanded }]"

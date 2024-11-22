@@ -43,3 +43,8 @@
 img {
   pointer-events: none;
 }
+
+#particles-js {
+  height: full;
+  position: absolute;
+}
