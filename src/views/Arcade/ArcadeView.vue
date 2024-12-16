@@ -1,37 +1,88 @@
 <script setup>
 import { useRoute } from "vue-router";
 import { ref, onMounted } from "vue";
-import { mdiStore, mdiCogOutline } from "@mdi/js";
+import { mdiStore, mdiStoreCog, mdiCogOutline } from "@mdi/js";
 import SectionMain from "@/components/SectionMain.vue";
 import LayoutAuthenticated from "@/layouts/LayoutAuthenticated.vue";
 import SectionTitleLine from "@/components/SectionTitleLine.vue";
 import ArcadeCard from "@/components/ArcadeCard.vue";
 import CardBox from "@/components/CardBox.vue";
 import FormField from "@/components/FormField.vue";
-// import FormFilePicker from "@/components/FormFilePicker.vue";
 import FormCheckRadio from "@/components/FormCheckRadio.vue";
-// import FormControl from "@/components/FormControl.vue";
 import PillTag from "@/components/PillTag.vue";
 import BaseButton from "@/components/BaseButton.vue";
-// import CardBoxWidget from "@/components/CardBoxWidget.vue";
-// import { listCodes } from "@/constants/area";
+import CardBoxWidget from "@/components/CardBoxWidget.vue";
+import { getNestedValue, setNestedValue } from "@/constants/values";
+import {
+  APIGetArcade,
+  APIUpdateArcade,
+  APIGetArcadeVPN,
+} from "@/stores/api/arcade";
 
-import { useMainStore } from "@/stores/main";
-const mainStore = useMainStore();
-const arcadeData = ref({});
+const optionForm = ref(null);
+const bareForm = ref(null);
+const arcadeData = ref(null);
 const loading = ref(true);
 
 const $route = useRoute();
 const arcadeId = parseInt($route.params.id);
 
-onMounted(async () => {
+var arcadeOptions = [
+  {
+    id: "paseli_enabled",
+    name: "PASELI Services",
+    help: "Enable PASELI for this arcade.",
+    type: "Boolean",
+  },
+  {
+    id: "paseli_infinite",
+    name: "Infinite PASELI",
+    help: "Enable infinite PASELI for this arcade.",
+    type: "Boolean",
+  },
+  {
+    id: "maint",
+    name: "Maintenance Mode",
+    help: "Place this arcade under maintenance.",
+    type: "Boolean",
+  },
+  {
+    id: "hide_network",
+    name: "Incognito Mode",
+    help: "Hide the network and all ranking data.",
+    type: "Boolean",
+  },
+];
+
+async function loadArcade() {
   try {
-    const data = await mainStore.getArcade(arcadeId);
+    arcadeData.value = {};
+    optionForm.value = {};
+    bareForm.value = {};
+    const data = await APIGetArcade(arcadeId);
     arcadeData.value = data;
+
+    for (const setting of arcadeOptions) {
+      const value = getNestedValue(arcadeData.value.data, setting.id);
+      setNestedValue(optionForm.value, setting.id, value);
+      setNestedValue(bareForm.value, setting.id, value);
+    }
     loading.value = false;
   } catch (error) {
-    console.log("Failed to fetch arcade data:", error);
+    console.error("Failed to fetch arcade data:", error);
   }
+}
+
+async function updateArcade() {
+  const response = await APIUpdateArcade(arcadeId, optionForm.value);
+
+  if (response.status != "error") {
+    await loadArcade();
+  }
+}
+
+onMounted(() => {
+  loadArcade();
 });
 
 function formatName(inputString, replaceWith = "NA_") {
@@ -52,7 +103,7 @@ function formatName(inputString, replaceWith = "NA_") {
 
 async function exportVPN() {
   try {
-    const data = await mainStore.getArcadeVPN(arcadeId);
+    const data = await APIGetArcadeVPN(arcadeId);
     const blob = new Blob([data], { type: "application/ovpn" });
     const link = document.createElement("a");
     link.href = URL.createObjectURL(blob);
@@ -76,9 +127,13 @@ async function exportVPN() {
       <template v-if="!loading">
         <ArcadeCard class="mb-6" :arcade="arcadeData" />
 
-        <SectionTitleLine :icon="mdiStore" title="Arcade Overview" main />
+        <SectionTitleLine
+          :icon="mdiStoreCog"
+          title="Arcade Administration"
+          main
+        />
 
-        <CardBox is-form class="mb-6" @submit.prevent="">
+        <CardBox is-form class="mb-6" @submit.prevent="updateArcade">
           <PillTag
             color="info"
             label="Settings"
@@ -89,155 +144,57 @@ async function exportVPN() {
             class="grid grid-cols-1 w-full gap-2 md:gap-6 md:flex md:place-content-stretch"
           >
             <FormField
-              label="PASELI Enabled"
-              help="Enable or disable PASELI services."
+              v-for="setting of arcadeOptions"
+              :key="setting.id"
+              :label="setting.name"
+              :help="setting.help"
             >
               <FormCheckRadio
-                v-model="arcadeData.data.paseli_enabled"
-                :input-value="arcadeData.data.paseli_enabled"
-                name="paseli"
+                v-if="setting.type == 'Boolean'"
+                :name="setting.id"
+                :model-value="
+                  Boolean(getNestedValue(optionForm, setting.id) ?? 0)
+                "
+                :input-value="true"
                 type="switch"
-              />
-            </FormField>
-            <FormField
-              label="Infinite PASELI"
-              help="Enable or disable infinite PASELI."
-            >
-              <FormCheckRadio
-                v-model="arcadeData.data.paseli_infinite"
-                :input-value="arcadeData.data.paseli_infinite"
-                name="infinitePaseli"
-                type="switch"
-              />
-            </FormField>
-            <FormField
-              label="Maintenance Mode"
-              help="Place this arcade under Maintenance."
-            >
-              <FormCheckRadio
-                v-model="arcadeData.data.maint"
-                :input-value="arcadeData.data.maint"
-                name="maintenance"
-                type="switch"
-              />
-            </FormField>
-            <FormField
-              label="Incognito Mode"
-              help="Hide the eAmusement network and ranking data."
-            >
-              <FormCheckRadio
-                v-model="arcadeData.data.hide_network"
-                :input-value="arcadeData.data.hide_network"
-                name="incognito"
-                type="switch"
+                @update:model-value="
+                  (value) =>
+                    setNestedValue(optionForm, setting.id, Number(value) ?? 0)
+                "
               />
             </FormField>
           </div>
-          <BaseButton color="success" type="submit" label="Save" />
+          <div
+            v-if="JSON.stringify(optionForm) !== JSON.stringify(bareForm)"
+            class="space-x-2 mt-6"
+          >
+            <BaseButton color="success" label="Save" type="submit" />
+            <BaseButton color="danger" label="Revert" @click="loadArcade()" />
+          </div>
         </CardBox>
 
-        <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 mb-6">
-          <CardBox>
-            <h1 class="text-lg md:text-xl">OpenVPN Configuration</h1>
-            <p class="pb-1 dark:text-white/50">
-              Use this to export your VPN config.
-            </p>
-            <BaseButton
-              :small="false"
-              color="success"
-              class="my-2"
-              label="Export"
-              @click="exportVPN()"
-            />
-          </CardBox>
-
-          <!-- <CardBox>
-            <h1 class="text-lg md:text-xl">Cover Photo</h1>
-            <p class="pb-1 dark:text-white/50">
-              NSFW = BAN. Children use this server. 60MB max.
-            </p>
-            <FormFilePicker label="Upload" name="upload" accept="image/*" />
-
-            <BaseButton
-              :small="false"
-              color="success"
-              class="mt-4"
-              label="Save"
-            />
-          </CardBox> -->
-
-          <!-- <CardBox>
-          <h1 class="text-lg md:text-xl mb-2">Location Settings</h1>
-
-          <FormField label="Area" help="Set your arcade's area.">
-            <FormControl
-              v-model="thisArcade.area"
-              name="area"
-              :options="listCodes()"
-            />
-          </FormField>
-
-          <FormField label="Address" help="Set your arcade's address.">
-            <FormControl
-              v-model="thisArcade.address"
-              name="address"
-              placeholder="No address"
-            />
-          </FormField>
-
-          <FormField
-            label="Show Address"
-            help="Allow your arcade's address to be seen publicly."
-          >
-            <FormCheckRadio
-              :model-value="thisArcade.show_address"
-              :input-value="thisArcade.show_address"
-              name="show_address"
-              type="switch"
-            />
-          </FormField>
-
+        <CardBox class="w-1/2 mb-6">
+          <h1 class="text-lg md:text-xl">OpenVPN Configuration</h1>
+          <p class="pb-1 dark:text-white/50">
+            Use this to download your VPN config.
+          </p>
           <BaseButton
             :small="false"
             color="success"
-            class="mt-4"
-            label="Save"
+            class="my-2"
+            label="Export"
+            @click="exportVPN()"
           />
-        </CardBox> -->
-        </div>
+        </CardBox>
 
-        <!-- <SectionTitleLine
-          :icon="mdiChartTimelineVariant"
-          title="Arcade Overview"
-          main
-        />
+        <SectionTitleLine :icon="mdiStore" title="Arcade Overview" main />
 
         <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 mb-6">
           <CardBoxWidget
-            trend="12% (from last week)"
-            trend-type="up"
-            :number="37"
-            label="Arcade Scores (This Week)"
+            :number="arcadeData?.machines?.length"
+            label="Active Machines"
           />
-          <CardBoxWidget
-            trend="40% (from last month)"
-            trend-type="up"
-            :number="3"
-            label="Unique Games (All Time)"
-          />
-          <CardBoxWidget
-            trend="No new players this week"
-            :number="2"
-            label="Unique Players (All Time)"
-          />
-          <CardBoxWidget
-            trend="40% (from last month)"
-            trend-type="up"
-            :number="123456789"
-            :prefix="'¥'"
-            label="PASELI Spent (This Month)"
-          />
-        </div> -->
+        </div>
       </template>
     </SectionMain>
   </LayoutAuthenticated>

@@ -8,23 +8,27 @@ import LayoutAuthenticated from "@/layouts/LayoutAuthenticated.vue";
 import SectionTitleLine from "@/components/SectionTitleLine.vue";
 import ArcadeCard from "@/components/ArcadeCard.vue";
 import GeneralTable from "@/components/GeneralTable.vue";
-import { useMainStore } from "@/stores/main";
+import { APIGetArcade } from "@/stores/api/arcade";
 
-const mainStore = useMainStore();
 const arcadeData = ref({});
 const loading = ref(true);
 
 const $route = useRoute();
 const arcadeId = parseInt($route.params.id);
 
-onMounted(async () => {
+async function loadArcade() {
   try {
-    const data = await mainStore.getArcade(arcadeId);
+    arcadeData.value = null;
+    const data = await APIGetArcade(arcadeId);
     arcadeData.value = data;
     loading.value = false;
   } catch (error) {
-    console.log("Failed to fetch arcade data:", error);
+    console.error("Failed to fetch arcade data:", error);
   }
+}
+
+onMounted(() => {
+  loadArcade();
 });
 
 const headers = [

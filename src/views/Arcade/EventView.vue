@@ -12,23 +12,47 @@ import FormControl from "@/components/FormControl.vue";
 import FormCheckRadio from "@/components/FormCheckRadio.vue";
 import BaseButton from "@/components/BaseButton.vue";
 import { gameData, getGameInfo } from "@/constants";
-import { useMainStore } from "@/stores/main";
+import { getNestedValue, setNestedValue } from "@/constants/values";
+import { APIGetArcade } from "@/stores/api/arcade";
 
-const mainStore = useMainStore();
-const arcadeData = ref({});
+const optionForm = ref(null);
+const bareForm = ref(null);
+const arcadeData = ref(null);
 const loading = ref(true);
 
 const $route = useRoute();
 const arcadeId = parseInt($route.params.id);
 
-onMounted(async () => {
+var arcadeOptions = [
+  {
+    id: "data.paseli_enabled",
+    name: "PASELI Enabled.",
+    help: "Enable PASELI for this arcade.",
+    type: "Boolean",
+  },
+];
+
+async function loadArcade() {
   try {
-    const data = await mainStore.getArcade(arcadeId);
+    arcadeData.value = null;
+    optionForm.value = {};
+    bareForm.value = {};
+    const data = await APIGetArcade(arcadeId);
     arcadeData.value = data;
+
+    for (const setting of arcadeOptions) {
+      const value = getNestedValue(arcadeData.value, setting.id);
+      setNestedValue(optionForm.value, setting.id, value);
+      setNestedValue(bareForm.value, setting.id, value);
+    }
     loading.value = false;
   } catch (error) {
-    console.log("Failed to fetch arcade data:", error);
+    console.error("Failed to fetch arcade data:", error);
   }
+}
+
+onMounted(() => {
+  loadArcade();
 });
 
 const eventSettings = [

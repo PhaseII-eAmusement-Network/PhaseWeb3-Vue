@@ -266,36 +266,6 @@ export const useMainStore = defineStore("main", {
       }
     },
 
-    async getArcade(arcadeId) {
-      try {
-        const data = await this.callApi(`/arcade/${arcadeId}`);
-        return data.arcade;
-      } catch (error) {
-        console.log("Error fetching arcade:", error);
-        throw error;
-      }
-    },
-
-    async getArcadeVPN(arcadeId) {
-      try {
-        const data = await this.callApi(`/arcade/${arcadeId}/exportVPN`);
-        return data;
-      } catch (error) {
-        console.log("Error fetching arcade VPN:", error);
-        throw error;
-      }
-    },
-
-    async getPaseliData(arcadeId) {
-      try {
-        const data = await this.callApi(`/arcade/${arcadeId}/paseli`);
-        return data.data;
-      } catch (error) {
-        console.log("Error fetching PASELI:", error);
-        throw error;
-      }
-    },
-
     async getMusicData(game, version, songIds = null, oneChart = false) {
       try {
         const data = await this.callApi(
