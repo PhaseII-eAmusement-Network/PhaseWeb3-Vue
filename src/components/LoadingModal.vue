@@ -1,8 +1,12 @@
 <script setup>
+import { useRouter } from "vue-router";
 import CardBox from "@/components/CardBox.vue";
 import OverlayLayer from "@/components/OverlayLayer.vue";
 import BaseIcon from "./BaseIcon.vue";
+import BaseButton from "./BaseButton.vue";
 import { mdiCheckOutline, mdiCloseOutline } from "@mdi/js";
+
+const $router = useRouter();
 
 defineProps({
   active: {
@@ -22,6 +26,11 @@ defineProps({
     default: null,
   },
 });
+
+function hotReload() {
+  $router.go();
+  return null;
+}
 </script>
 
 <template>
@@ -71,13 +80,22 @@ defineProps({
             :size="45"
           />
         </div>
-        <h1 class="text-xl md:text-2xl">Fuck.</h1>
+        <h1 class="text-xl md:text-2xl">Uh Oh!</h1>
         <h1 class="text-lg md:text-xl">
           The server had some trouble processing your request at this time.
         </h1>
         <h1 class="text-lg md:text-xl">
           Error: <span class="text-red-500">{{ errorCode }}</span>
         </h1>
+        <div>
+          <BaseButton
+            type="submit"
+            color="info"
+            label="Reload"
+            :small="false"
+            @click="hotReload()"
+          />
+        </div>
       </div>
     </CardBox>
   </OverlayLayer>
