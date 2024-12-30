@@ -13,24 +13,21 @@ import FormCheckRadio from "@/components/FormCheckRadio.vue";
 import BaseButton from "@/components/BaseButton.vue";
 import { gameData, getGameInfo } from "@/constants";
 import { getNestedValue, setNestedValue } from "@/constants/values";
-import { APIGetArcade } from "@/stores/api/arcade";
+import { APIGetArcade, APIGetArcadeSettings } from "@/stores/api/arcade";
 
 const optionForm = ref(null);
+const filterForm = reactive({
+  game: null,
+  version: null,
+});
+
+const gamesWithSettings = reactive([]);
 const bareForm = ref(null);
 const arcadeData = ref(null);
 const loading = ref(true);
 
 const $route = useRoute();
 const arcadeId = parseInt($route.params.id);
-
-var arcadeOptions = [
-  {
-    id: "data.paseli_enabled",
-    name: "PASELI Enabled.",
-    help: "Enable PASELI for this arcade.",
-    type: "Boolean",
-  },
-];
 
 async function loadArcade() {
   try {
@@ -40,158 +37,107 @@ async function loadArcade() {
     const data = await APIGetArcade(arcadeId);
     arcadeData.value = data;
 
-    for (const setting of arcadeOptions) {
-      const value = getNestedValue(arcadeData.value, setting.id);
-      setNestedValue(optionForm.value, setting.id, value);
-      setNestedValue(bareForm.value, setting.id, value);
-    }
     loading.value = false;
   } catch (error) {
     console.error("Failed to fetch arcade data:", error);
   }
 }
 
+async function loadSettings() {
+  try {
+    optionForm.value = {};
+    bareForm.value = {};
+    const data = await APIGetArcadeSettings(
+      arcadeId,
+      filterForm.game,
+      filterForm.version
+    );
+    console.log(data);
+    optionForm.value = data;
+    bareForm.value = data;
+  } catch (error) {
+    console.error("Failed to fetch arcade setting data:", error);
+  }
+}
+
 onMounted(() => {
   loadArcade();
-});
-
-const eventSettings = [
-  {
-    id: "iidx",
-    versions: [
-      {
-        id: 22,
-        settings: [
-          {
-            id: 0,
-            keyId: "coke",
-            type: Boolean,
-            name: "Enable Coke-X-BEMANI",
-            tooltip: "Enables the long forgotten Coca-Cola event.",
-            value: true,
-          },
-          {
-            id: 1,
-            keyId: "phase",
-            type: Array,
-            name: "Current BOSS Phase",
-            tooltip: "Set the main game event.",
-            options: [
-              {
-                id: 0,
-                label: "No Event",
-              },
-              {
-                id: 1,
-                label: "Chrono Seeker",
-              },
-              {
-                id: 2,
-                label: "QPronicle Chord",
-              },
-            ],
-            value: 1,
-          },
-        ],
-      },
-    ],
-  },
-  {
-    id: "dm",
-    versions: [
-      {
-        id: 18,
-        settings: [
-          {
-            id: 0,
-            keyId: "banner",
-            type: String,
-            name: "Title Screen Banner",
-            tooltip: "Set the text for the banner.",
-            value: "",
-          },
-        ],
-      },
-      {
-        id: 17,
-        settings: [
-          {
-            id: 0,
-            keyId: "banner",
-            type: String,
-            name: "Title Screen Banner",
-            tooltip: "Set the text for the banner.",
-            value: "",
-          },
-        ],
-      },
-    ],
-  },
-];
-
-const filterForm = reactive({
-  game: null,
-  version: null,
+  getGamesWithSettings();
 });
 
 function getGamesWithSettings() {
-  var gamesWithSettings = [];
   for (const game of gameData) {
-    const gameSettings = eventSettings.find((x) => x.id == game.id);
-    if (gameSettings) {
-      gamesWithSettings.push(game.id);
+    const gameOptions = game.gameOptions;
+    if (gameOptions) {
+      gamesWithSettings.push({ game: game.id, gameOptions: gameOptions });
     }
   }
-  return gamesWithSettings;
 }
 
-function makeGameOptions() {
-  var gameOptions = [];
-  const gamesWithSettings = getGamesWithSettings();
-  for (const game of gamesWithSettings) {
-    gameOptions.push({
-      id: game,
-      label: getGameInfo(game).name,
-    });
+function makeGameList() {
+  var gameList = [];
+  for (const gameObject of gamesWithSettings) {
+    if (gameObject.gameOptions) {
+      gameList.push({
+        id: gameObject.game,
+        label: getGameInfo(gameObject.game).name,
+      });
+    }
   }
-  return gameOptions;
+  return gameList;
 }
 
 function makeVersionOptions() {
-  const selectedGame = eventSettings.find((x) => x.id == filterForm.game);
-  var gameVersions = [];
-  for (const version of selectedGame.versions) {
-    const versionInfo = getGameInfo(filterForm.game).versions.find(
-      (x) => x.id == version.id
-    );
-
-    gameVersions.push({
-      id: version.id,
-      label: versionInfo.label,
-    });
+  const selectedGame = gamesWithSettings.find((x) => x.game == filterForm.game);
+  const game = getGameInfo(filterForm.game);
+  var selectableVersions = [];
+  for (const version of Object.entries(selectedGame.gameOptions)) {
+    if (game.versions == undefined) {
+      selectableVersions.push({
+        id: version[0],
+        label: game.name,
+      });
+      filterForm.version = 1;
+    } else {
+      const versionInfo = game.versions.find((x) => x.id == version[0]);
+      selectableVersions.push({
+        id: version[0],
+        label: versionInfo.label,
+      });
+    }
   }
-  return gameVersions;
-}
-
-function getGameSettings() {
-  const settings = eventSettings.find((x) => x.id == filterForm.game);
-
-  return settings.versions.find((x) => x.id == filterForm.version);
+  return selectableVersions;
 }
 
 function getCurrentGameVersion() {
   const gameObject = getGameInfo(filterForm.game);
-  const versionObject = gameObject.versions.find(
-    (x) => x.id == filterForm.version
-  );
+  var versionObject = null;
+  if (gameObject.versions) {
+    versionObject = gameObject.versions.find((x) => x.id == filterForm.version);
+  }
 
-  return `${gameObject.name} ${versionObject.label}`;
+  return `${gameObject.name} ${versionObject?.label ?? ""}`;
+}
+
+function getSettings() {
+  const selectedGame = gamesWithSettings.find((x) => x.game == filterForm.game);
+  return selectedGame.gameOptions[filterForm.version];
 }
 
 watch(
   () => filterForm.game,
   () => {
-    filterForm.version = null; // Reset selected version to null
+    filterForm.version = null;
+    optionForm.value = {};
+  }
+);
+
+watch(
+  () => filterForm.version,
+  () => {
+    if (filterForm.version) {
+      loadSettings();
+    }
   }
 );
 </script>
@@ -219,7 +165,7 @@ watch(
                   <FormControl
                     v-model="filterForm.game"
                     name="game"
-                    :options="makeGameOptions()"
+                    :options="makeGameList()"
                   />
                 </div>
                 <div v-if="filterForm.game">
@@ -242,31 +188,53 @@ watch(
             <hr class="pb-1 my-2" />
 
             <FormField
-              v-for="setting in getGameSettings().settings"
+              v-for="setting in getSettings()"
               :key="setting.id"
               :label="setting.name"
-              :help="setting.tooltip"
+              :help="setting.help"
             >
               <FormControl
-                v-if="setting.type == String"
-                v-model="setting.value"
-                :model-value="setting.value"
-                :name="setting.keyId"
+                v-if="setting.type == 'String'"
+                :model-value="getNestedValue(optionForm, setting.id) ?? ``"
+                :name="setting.name"
                 placeholder="Not Set"
+                @update:model-value="
+                  (value) => setNestedValue(optionForm, setting.id, value)
+                "
+              /><FormControl
+                v-if="setting.type == 'LargeText'"
+                :model-value="getNestedValue(optionForm, setting.id) ?? ``"
+                :name="setting.name"
+                placeholder="Not Set"
+                type="textarea"
+                @update:model-value="
+                  (value) => setNestedValue(optionForm, setting.id, value)
+                "
               />
               <FormCheckRadio
-                v-else-if="setting.type == Boolean"
-                v-model="setting.value"
-                :input-value="setting.value"
+                v-if="setting.type == 'Boolean'"
+                :name="setting.id"
+                :model-value="
+                  Boolean(getNestedValue(optionForm, setting.id) ?? 0)
+                "
+                :input-value="true"
                 type="switch"
-                :name="setting.keyId"
+                @update:model-value="
+                  (value) =>
+                    setNestedValue(optionForm, setting.id, Number(value) ?? 0)
+                "
               />
               <FormControl
-                v-if="setting.type == Array"
-                v-model="setting.options[setting.value]"
-                :name="setting.keyId"
+                v-if="setting.type == 'Array'"
+                :model-value="getNestedValue(optionForm, setting.id) ?? 0"
                 :options="setting.options"
+                :name="setting.id"
+                :selected="getNestedValue(optionForm, setting.id) ?? 0"
                 placeholder="Select..."
+                @update:model-value="
+                  (value) =>
+                    setNestedValue(optionForm, setting.id, Number(value))
+                "
               />
             </FormField>
             <BaseButton

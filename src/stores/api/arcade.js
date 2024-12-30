@@ -11,6 +11,18 @@ export async function APIGetArcade(arcadeId) {
   }
 }
 
+export async function APIGetArcadeSettings(arcadeId, game, version) {
+  try {
+    const data = await mainStore.callApi(
+      `/arcade/${arcadeId}/settings?game=${game}&version=${version}`
+    );
+    return data.data;
+  } catch (error) {
+    console.log("Error fetching arcade settings:", error);
+    throw error;
+  }
+}
+
 export async function APIGetArcadeVPN(arcadeId) {
   try {
     const data = await mainStore.callApi(`/arcade/${arcadeId}/exportVPN`);
