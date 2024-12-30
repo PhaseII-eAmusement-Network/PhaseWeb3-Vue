@@ -126,7 +126,6 @@ export const useMainStore = defineStore("main", {
           return null;
         }
         if (response.data.status === "warn") {
-          alert(response.data.error_code);
           this.isSaving = false;
           this.isLoading = false;
           return null;
