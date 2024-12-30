@@ -1,4 +1,16 @@
 import Greetings from "@/constants/greetings.json";
+import { BishiBashiOptions } from "@/constants/gameOptions/bishiOptions";
+import { DDRClassOptions } from "@/constants/gameOptions/ddrclassOptions";
+import { DDROptions } from "@/constants/gameOptions/ddrOptions";
+import { GFDMOptions } from "@/constants/gameOptions/gfdmOptions";
+import { IIDXOptions } from "@/constants/gameOptions/iidxOptions";
+import { MusecaOptions } from "@/constants/gameOptions/musecaOptions";
+import { NostalgiaOptions } from "@/constants/gameOptions/nostalgiaOptions";
+import { PaseliChargeOptions } from "@/constants/gameOptions/paseliOptions";
+import { PopnMusicOptions } from "@/constants/gameOptions/popnOptions";
+import { ReflecBeatOptions } from "@/constants/gameOptions/reflecOptions";
+import { SDVXOptions } from "@/constants/gameOptions/sdvxOptions";
+import { WinningElevenOptions } from "@/constants/gameOptions/weOptions";
 
 export class GameConstants {
   static BEATSTREAM = "bst";
@@ -24,6 +36,7 @@ export class GameConstants {
   static NOSTALGIA = "nost";
   static OTOMEDIUS = "oto";
   static OTOCA = "otoca";
+  static PASELI_CHARGE_MACHINE = "paseli";
   static POPN_HELLO = "hpm";
   static POPN_MUSIC = "pnm";
   static QMA = "qma";
@@ -186,6 +199,8 @@ export class VersionConstants {
   static OTOMEDIUS = 1;
 
   static OTOCA_DOLL = 1;
+
+  static PASELI_CHARGE_MACHINE = 1;
 
   static HELLO_POPN_MUSIC = 1;
 
@@ -378,6 +393,7 @@ export const gameData = [
     noRecords: true,
     skip: true,
     useUnicode: true,
+    gameOptions: BishiBashiOptions,
     playerHeaders: [
       { text: "Region", value: "region", sortable: true, width: 100 },
       { text: "Home Arcade", value: "homeArcade", sortable: true, width: 150 },
@@ -448,6 +464,7 @@ export const gameData = [
     shortName: "DDR",
     icon: null,
     cardBG: null,
+    gameOptions: DDROptions,
     videoTable: [
       VersionConstants.DDR_ACE,
       VersionConstants.DDR_A20,
@@ -586,6 +603,7 @@ export const gameData = [
     noRivals: true,
     noScores: true,
     noRecords: true,
+    gameOptions: DDRClassOptions,
     versions: [
       {
         id: VersionConstants.DDR_1ST_MIX,
@@ -760,6 +778,7 @@ export const gameData = [
     name: "DRUMMANIA",
     icon: null,
     cardBG: null,
+    gameOptions: GFDMOptions,
     playerHeaders: [
       {
         text: "SKILL LEVEL",
@@ -1014,6 +1033,7 @@ export const gameData = [
     name: "GUITAR FREAKS",
     icon: null,
     cardBG: null,
+    gameOptions: GFDMOptions,
     scoreHeaders: [
       { text: "Combos", value: "data.combo" },
       { text: "Medal", value: "medal", width: 140 },
@@ -1143,6 +1163,7 @@ export const gameData = [
     shortName: "IIDX",
     icon: "/assets/icon/iidx.webp",
     cardBG: "/assets/card/iidx.webp",
+    gameOptions: IIDXOptions,
     videoTable: [
       VersionConstants.IIDX_TRICORO,
       VersionConstants.IIDX_SPADA,
@@ -1575,6 +1596,7 @@ export const gameData = [
     name: "Museca",
     icon: null,
     cardBG: null,
+    gameOptions: MusecaOptions,
     scoreHeaders: [
       { text: "Combos", value: "combo" },
       { text: "Halo", value: "halo" },
@@ -1595,6 +1617,7 @@ export const gameData = [
     name: "Nostalgia",
     icon: null,
     cardBG: null,
+    gameOptions: NostalgiaOptions,
     scoreHeaders: [
       { text: "Combos", value: "combo" },
       { text: "Halo", value: "halo" },
@@ -1639,6 +1662,17 @@ export const gameData = [
     noRecords: true,
   },
   {
+    id: GameConstants.PASELI_CHARGE_MACHINE,
+    name: "PASELI Charge Machine",
+    icon: "/assets/icon/paseli.webp",
+    cardBG: "/assets/card/paseli.webp",
+    skip: true,
+    noRivals: true,
+    noScores: true,
+    noRecords: true,
+    gameOptions: PaseliChargeOptions,
+  },
+  {
     id: GameConstants.POPN_HELLO,
     name: "Hello! Pop'n Music",
     icon: "/assets/icon/popn.webp",
@@ -1656,6 +1690,7 @@ export const gameData = [
     cardBG: "/assets/card/popn.webp",
     useUnicode: true,
     maxLength: 6,
+    gameOptions: PopnMusicOptions,
     scoreHeaders: [
       { text: "Combos", value: "combo" },
       { text: "Halo", value: "halo" },
@@ -1787,6 +1822,7 @@ export const gameData = [
     icon: null,
     cardBG: null,
     useUnicode: true,
+    gameOptions: ReflecBeatOptions,
     scoreHeaders: [
       { text: "Combos", value: "combo" },
       { text: "Misses", value: "misses" },
@@ -1835,6 +1871,7 @@ export const gameData = [
     shortName: "SDVX",
     icon: null,
     cardBG: null,
+    gameOptions: SDVXOptions,
     scoreHeaders: [
       { text: "Combos", value: "combo" },
       { text: "Halo", value: "halo" },
@@ -1881,6 +1918,35 @@ export const gameData = [
     noScores: false,
     noRecords: true,
     useUnicode: true,
+  },
+  {
+    id: GameConstants.WINNING_ELEVEN,
+    name: "World Soccer",
+    icon: "/assets/icon/we.webp",
+    cardBG: "/assets/card/we.webp",
+    skip: false,
+    noRivals: true,
+    noScores: true,
+    noRecords: true,
+    gameOptions: WinningElevenOptions,
+    versions: [
+      {
+        id: VersionConstants.WINNING_ELEVEN_2008,
+        label: "Winning Eleven Arcade Championship 2008",
+      },
+      {
+        id: VersionConstants.WINNING_ELEVEN_2010,
+        label: "Winning Eleven Arcade Championship 2010",
+      },
+      {
+        id: VersionConstants.WINNING_ELEVEN_2012,
+        label: "Winning Eleven Arcade Championship 2012",
+      },
+      {
+        id: VersionConstants.WINNING_ELEVEN_2014,
+        label: "Winning Eleven Arcade Championship 2014",
+      },
+    ],
   },
 ];
 
