@@ -165,6 +165,14 @@ const routes = [
     name: "admin_news",
     component: () => import("@/views/Admin/NewsView.vue"),
   },
+  {
+    meta: {
+      title: "OTA Updates",
+    },
+    path: "/admin/ota",
+    name: "admin_ota",
+    component: () => import("@/views/Admin/OTAView.vue"),
+  },
   // {
   //   meta: {
   //     title: "Public Arcades",
