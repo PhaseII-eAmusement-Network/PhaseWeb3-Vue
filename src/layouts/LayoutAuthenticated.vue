@@ -173,6 +173,10 @@ const menuAside = computed(() => {
       label: "News",
       to: "/admin/news",
     },
+    {
+      label: "OTA Updates",
+      to: "/admin/ota",
+    },
   ];
 
   var sideMenu = [{ to: "/", icon: mdiMonitor, label: "Dashboard" }];

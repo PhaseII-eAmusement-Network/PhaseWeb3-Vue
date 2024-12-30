@@ -92,10 +92,14 @@ function getCardStyle(path) {
           </span>
         </p>
 
-        <div
-          v-if="!useSmall"
-          class="md:w-full grid grid-cols-1 md:grid-cols-3 gap-3"
-        >
+        <div class="md:w-full grid grid-cols-1 md:grid-cols-4 gap-3">
+          <BaseButton
+            :href="`/#/arcade/${arcade.id}`"
+            :icon="mdiHome"
+            color="info"
+            label="Arcade Home"
+            class="w-full md:w-[150px]"
+          />
           <BaseButton
             :href="`/#/arcade/${arcade.id}/events`"
             :icon="mdiNewspaperVariantMultiple"
@@ -113,15 +117,6 @@ function getCardStyle(path) {
             :icon="mdiCashRegister"
             color="info"
             label="PASELI"
-          />
-        </div>
-        <div v-if="useSmall" class="w-full flex justify-center">
-          <BaseButton
-            :href="`/#/arcade/${arcade.id}`"
-            :icon="mdiHome"
-            color="info"
-            label="Arcade Home"
-            class="w-full md:w-[150px]"
           />
         </div>
       </div>

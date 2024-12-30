@@ -22,7 +22,6 @@ async function loadArcade() {
     arcadeData.value = null;
     const data = await APIGetArcade(arcadeId);
     arcadeData.value = data;
-    loading.value = false;
   } catch (error) {
     console.error("Failed to fetch arcade data:", error);
   }
@@ -40,6 +39,7 @@ async function loadPASELI() {
 }
 
 onMounted(() => {
+  loading.value = true;
   loadArcade();
   loadPASELI();
 });
@@ -96,9 +96,7 @@ function filterTransactions(transactions) {
 <template>
   <LayoutAuthenticated>
     <SectionMain>
-      <template
-        v-if="!loading && paseliData.balances && paseliData.transactions"
-      >
+      <template v-if="!loading && arcadeData">
         <ArcadeCard class="mb-6" :arcade="arcadeData" :use-small="true" />
         <SectionTitleLine
           :icon="mdiAccountCash"
