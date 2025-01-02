@@ -159,7 +159,7 @@ function getSources() {
   if (!versionForm.currentVersion) {
     return thisGame.cardBG;
   } else {
-    return `/assets/games/${thisGame.id}/card/${versionForm.currentVersion}.webp`;
+    return `/web-assets/games/${thisGame.id}/card/${versionForm.currentVersion}.webp`;
   }
 }
 

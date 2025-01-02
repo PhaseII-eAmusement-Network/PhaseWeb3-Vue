@@ -2,7 +2,7 @@ export function getSources(game, version) {
   if (!version) {
     return game?.cardBG;
   } else {
-    return `/assets/games/${game.id}/card/${version}.webp`;
+    return `/web-assets/games/${game.id}/card/${version}.webp`;
   }
 }
 

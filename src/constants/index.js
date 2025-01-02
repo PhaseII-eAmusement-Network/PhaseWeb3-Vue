@@ -598,8 +598,8 @@ export const gameData = [
   {
     id: GameConstants.DDRCLASS,
     name: "Classic DDR",
-    icon: "/assets/icon/ddr.webp",
-    cardBG: "/assets/card/ddr.webp",
+    icon: "/web-assets/icon/ddr.webp",
+    cardBG: "/web-assets/card/ddr.webp",
     noRivals: true,
     noScores: true,
     noRecords: true,
@@ -650,8 +650,8 @@ export const gameData = [
   {
     id: GameConstants.DDROMNI,
     name: "DDR OmniMIX",
-    icon: "/assets/icon/ddr.webp",
-    cardBG: "/assets/card/ddr.webp",
+    icon: "/web-assets/icon/ddr.webp",
+    cardBG: "/web-assets/card/ddr.webp",
     videoTable: [VersionConstants.DDR_A20_PLUS],
     scoreHeaders: [
       { text: "Combos", value: "data.combo" },
@@ -1161,8 +1161,8 @@ export const gameData = [
     id: GameConstants.IIDX,
     name: "beatmaniaIIDX",
     shortName: "IIDX",
-    icon: "/assets/icon/iidx.webp",
-    cardBG: "/assets/card/iidx.webp",
+    icon: "/web-assets/icon/iidx.webp",
+    cardBG: "/web-assets/card/iidx.webp",
     gameOptions: IIDXOptions,
     videoTable: [
       VersionConstants.IIDX_TRICORO,
@@ -1360,8 +1360,8 @@ export const gameData = [
   {
     id: GameConstants.IIDXCLASS,
     name: "Classic IIDX",
-    icon: "/assets/icon/iidx.webp",
-    cardBG: "/assets/card/iidx.webp",
+    icon: "/web-assets/icon/iidx.webp",
+    cardBG: "/web-assets/card/iidx.webp",
     noRivals: true,
     noScores: true,
     noRecords: true,
@@ -1664,8 +1664,8 @@ export const gameData = [
   {
     id: GameConstants.PASELI_CHARGE_MACHINE,
     name: "PASELI Charge Machine",
-    icon: "/assets/icon/paseli.webp",
-    cardBG: "/assets/card/paseli.webp",
+    icon: "/web-assets/icon/paseli.webp",
+    cardBG: "/web-assets/card/paseli.webp",
     skip: true,
     noRivals: true,
     noScores: true,
@@ -1675,8 +1675,8 @@ export const gameData = [
   {
     id: GameConstants.POPN_HELLO,
     name: "Hello! Pop'n Music",
-    icon: "/assets/icon/popn.webp",
-    cardBG: "/assets/card/popn.webp",
+    icon: "/web-assets/icon/popn.webp",
+    cardBG: "/web-assets/card/popn.webp",
     skip: true,
     noRivals: true,
     noScores: true,
@@ -1686,8 +1686,8 @@ export const gameData = [
     id: GameConstants.POPN_MUSIC,
     name: "pop'n music",
     shortName: "pop'n",
-    icon: "/assets/icon/popn.webp",
-    cardBG: "/assets/card/popn.webp",
+    icon: "/web-assets/icon/popn.webp",
+    cardBG: "/web-assets/card/popn.webp",
     useUnicode: true,
     maxLength: 6,
     gameOptions: PopnMusicOptions,
@@ -1858,8 +1858,8 @@ export const gameData = [
   {
     id: GameConstants.ROAD_FIGHTERS,
     name: "Road Fighters 3D",
-    icon: "/assets/icon/rf.webp",
-    cardBG: "/assets/card/rf.webp",
+    icon: "/web-assets/icon/rf.webp",
+    cardBG: "/web-assets/card/rf.webp",
     skip: true,
     noRivals: true,
     noScores: true,
@@ -1911,8 +1911,8 @@ export const gameData = [
   {
     id: GameConstants.TSUMTSUM,
     name: "Tsum Tsum",
-    icon: "/assets/icon/tsum.webp",
-    cardBG: "/assets/card/tsum.webp",
+    icon: "/web-assets/icon/tsum.webp",
+    cardBG: "/web-assets/card/tsum.webp",
     skip: false,
     noRivals: true,
     noScores: false,
@@ -1922,8 +1922,8 @@ export const gameData = [
   {
     id: GameConstants.WINNING_ELEVEN,
     name: "World Soccer",
-    icon: "/assets/icon/we.webp",
-    cardBG: "/assets/card/we.webp",
+    icon: "/web-assets/icon/we.webp",
+    cardBG: "/web-assets/card/we.webp",
     skip: false,
     noRivals: true,
     noScores: true,
@@ -1963,10 +1963,10 @@ export function getGameInfo(game) {
   }
 
   if (!requestedData.icon) {
-    requestedData.icon = `/assets/icon/${game}.webp`;
+    requestedData.icon = `/web-assets/icon/${game}.webp`;
   }
   if (!requestedData.cardBG) {
-    requestedData.cardBG = `/assets/card/${game}.webp`;
+    requestedData.cardBG = `/web-assets/card/${game}.webp`;
   }
   return requestedData;
 }

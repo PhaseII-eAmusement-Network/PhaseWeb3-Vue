@@ -41,7 +41,7 @@ function getCardStyle(path) {
 
 <template>
   <div
-    :style="getCardStyle('/assets/card/carpet.webp')"
+    :style="getCardStyle('/web-assets/card/carpet.webp')"
     class="rounded-2xl mb-6 w-full"
   >
     <BaseLevel

@@ -41,7 +41,7 @@ const greeting = GetRandomMessage();
 function getCardStyle(game) {
   if (game !== null) {
     return `
-      background-image: url('/assets/card/${game}.webp');
+      background-image: url('/web-assets/card/${game}.webp');
       background-size: cover;
       background-repeat: no-repeat;
     `;
