@@ -14,6 +14,7 @@ import FormField from "@/components/FormField.vue";
 import FormControl from "@/components/FormControl.vue";
 import LayoutAuthenticated from "@/layouts/LayoutAuthenticated.vue";
 import SectionTitleLine from "@/components/SectionTitleLine.vue";
+const ASSET_PATH = import.meta.env.VITE_ASSET_PATH;
 
 import { APIGetCards, APIPutCard, APIDeleteCard } from "@/stores/api/account";
 var cardData = ref([]);
@@ -140,7 +141,10 @@ const copyToClipboard = (text) => {
           class="grid dark:bg-slate-900/70 rounded-2xl p-5"
         >
           <div class="flex justify-between md:grid md:gap-2 mb-4 items-center">
-            <img src="/web-assets/passes/generic.webp" class="w-24 md:w-auto" />
+            <img
+              :src="`${ASSET_PATH}/passes/generic.webp`"
+              class="w-24 md:w-auto"
+            />
             <h1 class="text-xl text-center font-mono">
               {{ dashCode(card.encoded) }}
             </h1>

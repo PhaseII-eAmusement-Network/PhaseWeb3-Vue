@@ -12,6 +12,7 @@ import BaseLevel from "@/components/BaseLevel.vue";
 import UserAvatarCurrentUser from "@/components/UserAvatarCurrentUser.vue";
 import CardBox from "@/components/CardBox.vue";
 import PillTag from "@/components/PillTag.vue";
+const ASSET_PATH = import.meta.env.VITE_ASSET_PATH;
 
 defineProps({
   useSmall: {
@@ -41,7 +42,7 @@ const greeting = GetRandomMessage();
 function getCardStyle(game) {
   if (game !== null) {
     return `
-      background-image: url('/web-assets/card/${game}.webp');
+      background-image: url('${ASSET_PATH}/card/${game}.webp');
       background-size: cover;
       background-repeat: no-repeat;
     `;

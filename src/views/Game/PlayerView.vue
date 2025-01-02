@@ -26,6 +26,7 @@ import { APIGetArcade } from "@/stores/api/arcade";
 import { getGameInfo } from "@/constants";
 import { getIIDXDan } from "@/constants/danClass.js";
 import { getGitadoraColor, getJubilityColor } from "@/constants/skillColor";
+const ASSET_PATH = import.meta.env.VITE_ASSET_PATH;
 
 const $route = useRoute();
 const $router = useRouter();
@@ -159,7 +160,7 @@ function getSources() {
   if (!versionForm.currentVersion) {
     return thisGame.cardBG;
   } else {
-    return `/web-assets/games/${thisGame.id}/card/${versionForm.currentVersion}.webp`;
+    return `${ASSET_PATH}/games/${thisGame.id}/card/${versionForm.currentVersion}.webp`;
   }
 }
 

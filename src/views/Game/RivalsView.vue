@@ -11,6 +11,7 @@ import SectionTitleLine from "@/components/SectionTitleLine.vue";
 import FormField from "@/components/FormField.vue";
 import FormControl from "@/components/FormControl.vue";
 import { getGameInfo } from "@/constants";
+const ASSET_PATH = import.meta.env.VITE_ASSET_PATH;
 
 const $route = useRoute();
 const $router = useRouter();
@@ -86,7 +87,7 @@ function getSources() {
   if (!versionForm.currentVersion) {
     sources = thisGame.cardBG;
   } else {
-    sources = `/web-assets/games/${thisGame.id}/card/${versionForm.currentVersion}.webp`;
+    sources = `${ASSET_PATH}/games/${thisGame.id}/card/${versionForm.currentVersion}.webp`;
   }
   return sources;
 }

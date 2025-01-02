@@ -1,8 +1,9 @@
+const ASSET_PATH = import.meta.env.VITE_ASSET_PATH;
 export function getSources(game, version) {
   if (!version) {
     return game?.cardBG;
   } else {
-    return `/web-assets/games/${game.id}/card/${version}.webp`;
+    return `${ASSET_PATH}/games/${game.id}/card/${version}.webp`;
   }
 }
 

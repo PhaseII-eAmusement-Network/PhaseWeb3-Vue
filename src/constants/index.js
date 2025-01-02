@@ -11,6 +11,7 @@ import { PopnMusicOptions } from "@/constants/gameOptions/popnOptions";
 import { ReflecBeatOptions } from "@/constants/gameOptions/reflecOptions";
 import { SDVXOptions } from "@/constants/gameOptions/sdvxOptions";
 import { WinningElevenOptions } from "@/constants/gameOptions/weOptions";
+const ASSET_PATH = import.meta.env.VITE_ASSET_PATH;
 
 export class GameConstants {
   static BEATSTREAM = "bst";
@@ -598,8 +599,8 @@ export const gameData = [
   {
     id: GameConstants.DDRCLASS,
     name: "Classic DDR",
-    icon: "/web-assets/icon/ddr.webp",
-    cardBG: "/web-assets/card/ddr.webp",
+    icon: `${ASSET_PATH}/icon/ddr.webp`,
+    cardBG: `${ASSET_PATH}/card/ddr.webp`,
     noRivals: true,
     noScores: true,
     noRecords: true,
@@ -650,8 +651,8 @@ export const gameData = [
   {
     id: GameConstants.DDROMNI,
     name: "DDR OmniMIX",
-    icon: "/web-assets/icon/ddr.webp",
-    cardBG: "/web-assets/card/ddr.webp",
+    icon: `${ASSET_PATH}/icon/ddr.webp`,
+    cardBG: `${ASSET_PATH}/card/ddr.webp`,
     videoTable: [VersionConstants.DDR_A20_PLUS],
     scoreHeaders: [
       { text: "Combos", value: "data.combo" },
@@ -1161,8 +1162,8 @@ export const gameData = [
     id: GameConstants.IIDX,
     name: "beatmaniaIIDX",
     shortName: "IIDX",
-    icon: "/web-assets/icon/iidx.webp",
-    cardBG: "/web-assets/card/iidx.webp",
+    icon: `${ASSET_PATH}/icon/iidx.webp`,
+    cardBG: `${ASSET_PATH}/card/iidx.webp`,
     gameOptions: IIDXOptions,
     videoTable: [
       VersionConstants.IIDX_TRICORO,
@@ -1360,8 +1361,8 @@ export const gameData = [
   {
     id: GameConstants.IIDXCLASS,
     name: "Classic IIDX",
-    icon: "/web-assets/icon/iidx.webp",
-    cardBG: "/web-assets/card/iidx.webp",
+    icon: `${ASSET_PATH}/icon/iidx.webp`,
+    cardBG: `${ASSET_PATH}/card/iidx.webp`,
     noRivals: true,
     noScores: true,
     noRecords: true,
@@ -1664,8 +1665,6 @@ export const gameData = [
   {
     id: GameConstants.PASELI_CHARGE_MACHINE,
     name: "PASELI Charge Machine",
-    icon: "/web-assets/icon/paseli.webp",
-    cardBG: "/web-assets/card/paseli.webp",
     skip: true,
     noRivals: true,
     noScores: true,
@@ -1675,8 +1674,8 @@ export const gameData = [
   {
     id: GameConstants.POPN_HELLO,
     name: "Hello! Pop'n Music",
-    icon: "/web-assets/icon/popn.webp",
-    cardBG: "/web-assets/card/popn.webp",
+    icon: `${ASSET_PATH}/icon/popn.webp`,
+    cardBG: `${ASSET_PATH}/card/popn.webp`,
     skip: true,
     noRivals: true,
     noScores: true,
@@ -1686,8 +1685,8 @@ export const gameData = [
     id: GameConstants.POPN_MUSIC,
     name: "pop'n music",
     shortName: "pop'n",
-    icon: "/web-assets/icon/popn.webp",
-    cardBG: "/web-assets/card/popn.webp",
+    icon: `${ASSET_PATH}/icon/popn.webp`,
+    cardBG: `${ASSET_PATH}/card/popn.webp`,
     useUnicode: true,
     maxLength: 6,
     gameOptions: PopnMusicOptions,
@@ -1858,8 +1857,8 @@ export const gameData = [
   {
     id: GameConstants.ROAD_FIGHTERS,
     name: "Road Fighters 3D",
-    icon: "/web-assets/icon/rf.webp",
-    cardBG: "/web-assets/card/rf.webp",
+    icon: `${ASSET_PATH}/icon/rf.webp`,
+    cardBG: `${ASSET_PATH}/card/rf.webp`,
     skip: true,
     noRivals: true,
     noScores: true,
@@ -1911,8 +1910,6 @@ export const gameData = [
   {
     id: GameConstants.TSUMTSUM,
     name: "Tsum Tsum",
-    icon: "/web-assets/icon/tsum.webp",
-    cardBG: "/web-assets/card/tsum.webp",
     skip: false,
     noRivals: true,
     noScores: false,
@@ -1922,8 +1919,8 @@ export const gameData = [
   {
     id: GameConstants.WINNING_ELEVEN,
     name: "World Soccer",
-    icon: "/web-assets/icon/we.webp",
-    cardBG: "/web-assets/card/we.webp",
+    icon: `${ASSET_PATH}/icon/we.webp`,
+    cardBG: `${ASSET_PATH}/card/we.webp`,
     skip: false,
     noRivals: true,
     noScores: true,
@@ -1963,10 +1960,10 @@ export function getGameInfo(game) {
   }
 
   if (!requestedData.icon) {
-    requestedData.icon = `/web-assets/icon/${game}.webp`;
+    requestedData.icon = `${ASSET_PATH}/icon/${game}.webp`;
   }
   if (!requestedData.cardBG) {
-    requestedData.cardBG = `/web-assets/card/${game}.webp`;
+    requestedData.cardBG = `${ASSET_PATH}/card/${game}.webp`;
   }
   return requestedData;
 }

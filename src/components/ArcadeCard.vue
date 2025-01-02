@@ -12,6 +12,7 @@ import { ref } from "vue";
 import BaseLevel from "@/components/BaseLevel.vue";
 import BaseButton from "@/components/BaseButton.vue";
 import PillTag from "@/components/PillTag.vue";
+const ASSET_PATH = import.meta.env.VITE_ASSET_PATH;
 
 const props = defineProps({
   useSmall: {
@@ -41,7 +42,7 @@ function getCardStyle(path) {
 
 <template>
   <div
-    :style="getCardStyle('/web-assets/card/carpet.webp')"
+    :style="getCardStyle(`${ASSET_PATH}/card/carpet.webp`)"
     class="rounded-2xl mb-6 w-full"
   >
     <BaseLevel
