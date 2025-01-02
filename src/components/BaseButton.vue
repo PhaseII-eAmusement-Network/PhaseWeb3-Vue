@@ -55,10 +55,6 @@ const props = defineProps({
     type: Boolean,
     default: true,
   },
-  thin: {
-    type: Boolean,
-    default: false,
-  },
 });
 
 const is = computed(() => {
@@ -103,7 +99,6 @@ const componentClass = computed(() => {
     "hover:scale-[1.02] hover:shadow-xl",
     props.disabled ? "cursor-not-allowed" : "cursor-pointer",
     props.roundedFull ? "rounded-lg" : "rounded",
-    props.thin ? "scale-y-0" : "scale-y-[90%]",
     getButtonColor(props.color, props.outline, !props.disabled, props.active),
   ];
 
