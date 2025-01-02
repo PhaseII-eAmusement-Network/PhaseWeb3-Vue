@@ -8,6 +8,7 @@ import {
 import { dashCode } from "@/constants/userData.js";
 import SectionMain from "@/components/SectionMain.vue";
 import BaseButton from "@/components/BaseButton.vue";
+import BaseIcon from "@/components/BaseIcon.vue";
 import UserCard from "@/components/UserCard.vue";
 import CardBox from "@/components/CardBox.vue";
 import FormField from "@/components/FormField.vue";

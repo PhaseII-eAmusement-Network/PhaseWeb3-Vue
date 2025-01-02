@@ -4,7 +4,6 @@ import { computed } from "vue";
 import { useStyleStore } from "@/stores/style.js";
 import AsideMenuList from "@/components/Menus/AsideMenuList.vue";
 import AsideMenuItem from "@/components/Menus/AsideMenuItem.vue";
-import BaseButton from "@/components/BaseButton.vue";
 
 defineProps({
   menu: {
@@ -22,6 +21,12 @@ const logoutItem = computed(() => ({
   icon: mdiLogout,
   color: "info",
   isLogout: true,
+}));
+
+const closeItem = computed(() => ({
+  label: "Close",
+  icon: mdiClose,
+  color: "danger",
 }));
 
 const menuClick = (event, item) => {
@@ -49,15 +54,6 @@ const asideLgCloseClick = (event) => {
             <samp class="tracking-tighter">PhaseII</samp> eAmusement Network
           </h2>
         </div>
-        <div class="hidden lg:block xl:hidden w-full">
-          <BaseButton
-            :icon="mdiClose"
-            label="Close"
-            color="danger"
-            class="w-full mx-2"
-            @click.prevent="asideLgCloseClick"
-          />
-        </div>
       </div>
       <div
         :class="
@@ -71,6 +67,11 @@ const asideLgCloseClick = (event) => {
       </div>
 
       <ul class="invisible lg:visible">
+        <AsideMenuItem
+          class="hidden lg:block xl:hidden w-full"
+          :item="closeItem"
+          @menu-click="asideLgCloseClick"
+        />
         <AsideMenuItem :item="logoutItem" @menu-click="menuClick" />
       </ul>
     </div>

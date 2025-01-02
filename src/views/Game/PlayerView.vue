@@ -33,6 +33,7 @@ const $router = useRouter();
 var gameID = null;
 var thisGame = null;
 var profileUserId = null;
+var firstLoad = true;
 
 gameID = $route.params.game;
 profileUserId = $route.params.userId;
@@ -54,7 +55,11 @@ const versionForm = reactive({
 watch(
   () => versionForm.currentVersion,
   () => {
-    loadProfile();
+    if (firstLoad) {
+      firstLoad = false;
+    } else {
+      loadProfile();
+    }
   }
 );
 
