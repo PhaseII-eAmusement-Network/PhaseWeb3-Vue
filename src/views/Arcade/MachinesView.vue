@@ -55,6 +55,17 @@ const headers = [
     width: 120,
   },
 ];
+
+const copyToClipboard = (text) => {
+  navigator.clipboard
+    .writeText(text.pcbId)
+    .then(() => {
+      alert("Copied to clipboard!");
+    })
+    .catch(() => {
+      alert("Failed to copy to clipboard!");
+    });
+};
 </script>
 
 <template>
@@ -69,7 +80,11 @@ const headers = [
             class="bg-white dark:bg-slate-900/95 rounded-2xl lg:flex lg:justify-between"
           >
             <div class="w-full">
-              <GeneralTable :headers="headers" :items="arcadeData.machines" />
+              <GeneralTable
+                :headers="headers"
+                :items="arcadeData.machines"
+                @row-clicked="copyToClipboard"
+              />
             </div>
           </div>
         </CardBox>
