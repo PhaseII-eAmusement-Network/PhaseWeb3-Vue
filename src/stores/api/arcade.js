@@ -23,6 +23,29 @@ export async function APIGetArcadeSettings(arcadeId, game, version) {
   }
 }
 
+export async function APIUpdateArcadeSettings(
+  arcadeId,
+  game,
+  version,
+  newSettings
+) {
+  try {
+    while (!mainStore.userId) {
+      await new Promise((resolve) => setTimeout(resolve, 200));
+    }
+
+    const data = await mainStore.callApi(
+      `/arcade/${arcadeId}/settings?game=${game}&version=${version}`,
+      "POST",
+      newSettings
+    );
+    return data;
+  } catch (error) {
+    console.log("Error updating settings:", error);
+    throw error;
+  }
+}
+
 export async function APIGetArcadeVPN(arcadeId) {
   try {
     const data = await mainStore.callApi(`/arcade/${arcadeId}/exportVPN`);

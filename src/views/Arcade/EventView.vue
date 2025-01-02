@@ -13,7 +13,11 @@ import FormCheckRadio from "@/components/FormCheckRadio.vue";
 import BaseButton from "@/components/BaseButton.vue";
 import { gameData, getGameInfo } from "@/constants";
 import { getNestedValue, setNestedValue } from "@/constants/values";
-import { APIGetArcade, APIGetArcadeSettings } from "@/stores/api/arcade";
+import {
+  APIGetArcade,
+  APIGetArcadeSettings,
+  APIUpdateArcadeSettings,
+} from "@/stores/api/arcade";
 
 const optionForm = ref(null);
 const filterForm = reactive({
@@ -52,8 +56,7 @@ async function loadSettings() {
       filterForm.game,
       filterForm.version
     );
-    console.log(data);
-    optionForm.value = data;
+    optionForm.value = JSON.parse(JSON.stringify(data));
     bareForm.value = data;
   } catch (error) {
     console.error("Failed to fetch arcade setting data:", error);
@@ -122,6 +125,19 @@ function getCurrentGameVersion() {
 function getSettings() {
   const selectedGame = gamesWithSettings.find((x) => x.game == filterForm.game);
   return selectedGame.gameOptions[filterForm.version];
+}
+
+async function updateSettings() {
+  const response = await APIUpdateArcadeSettings(
+    arcadeId,
+    filterForm.game,
+    filterForm.version,
+    optionForm.value
+  );
+
+  if (response.status != "error") {
+    await loadSettings();
+  }
 }
 
 watch(
@@ -237,12 +253,21 @@ watch(
                 "
               />
             </FormField>
-            <BaseButton
-              color="success"
-              type="submit"
-              label="Save"
-              :small="false"
-            />
+            <div
+              v-if="JSON.stringify(optionForm) != JSON.stringify(bareForm)"
+              class="space-x-2 mt-6"
+            >
+              <BaseButton
+                color="success"
+                label="Save"
+                @click="updateSettings()"
+              />
+              <BaseButton
+                color="danger"
+                label="Revert"
+                @click="loadSettings()"
+              />
+            </div>
           </div>
         </CardBox>
       </template>
