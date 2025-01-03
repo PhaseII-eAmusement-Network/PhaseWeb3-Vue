@@ -9,6 +9,8 @@ import UserCard from "@/components/UserCard.vue";
 import LayoutAuthenticated from "@/layouts/LayoutAuthenticated.vue";
 import SectionTitleLine from "@/components/SectionTitleLine.vue";
 import PillTag from "@/components/PillTag.vue";
+const DISCORD_OAUTH_URL = import.meta.env.VITE_DISCORD_OAUTH_URL;
+const TACHI_OAUTH_URL = import.meta.env.VITE_TACHI_OAUTH_URL;
 
 const mainStore = useMainStore();
 
@@ -19,6 +21,28 @@ watch(
     userData.value = newValue;
   }
 );
+
+const services = [
+  {
+    id: "discord",
+    name: "Discord",
+    icon: mdiMessage,
+    oAuth: DISCORD_OAUTH_URL,
+  },
+  {
+    id: "tachi",
+    name: "Kamaitachi",
+    icon: mdiScoreboard,
+    oAuth: TACHI_OAUTH_URL,
+  },
+];
+
+function removeService(service) {
+  const confirmed = window.confirm("Are you really?");
+  if (confirmed) {
+    console.log(`get fucked, ${service.id}`);
+  }
+}
 </script>
 
 <template>
@@ -32,22 +56,23 @@ watch(
       />
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <CardBox>
+        <CardBox v-for="service of services" :key="service.id">
           <PillTag
             color="info"
-            :icon="mdiMessage"
-            label="Discord"
+            :icon="service.icon"
+            :label="service.name"
             class="mb-2"
           />
 
           <h1
-            v-if="userData.discord && userData.discord.linked"
+            v-if="userData[service.id] && userData[service.id]?.linked"
             class="text-lg"
           >
-            Discord is linked to <b>{{ userData.discord.username }}</b>
+            {{ service.name }} is linked to
+            <b>{{ userData[service.id]?.username }}</b>
           </h1>
           <h1
-            v-if="!userData.discord || !userData.discord.linked"
+            v-if="!userData[service.id] || !userData[service.id]?.linked"
             class="text-lg"
           >
             Discord isn't linked!
@@ -56,85 +81,28 @@ watch(
           <template #footer>
             <div class="space-x-2">
               <BaseButton
-                v-if="!userData.discord || !userData.discord.linked"
-                type="submit"
+                v-if="!userData[service.id] || !userData[service.id]?.linked"
                 color="success"
                 label="Link Now"
+                :href="service.oAuth"
+                target="_blank"
               />
               <BaseButton
-                v-if="userData.discord && userData.discord.linked"
-                type="submit"
+                v-if="userData[service.id] && userData[service.id]?.linked"
                 color="info"
                 label="Relink"
+                :href="service.oAuth"
+                target="_blank"
               />
               <BaseButton
-                v-if="userData.discord && userData.discord.linked"
-                type="submit"
+                v-if="userData[service.id] && userData[service.id]?.linked"
                 color="danger"
                 label="Unlink"
+                @click="removeService(service)"
               />
             </div>
           </template>
         </CardBox>
-
-        <CardBox>
-          <PillTag
-            :icon="mdiScoreboard"
-            color="info"
-            label="Kamaitachi"
-            class="mb-2"
-          />
-
-          <h1 v-if="userData.tachi && userData.tachi.linked" class="text-lg">
-            Kamaitachi is linked to <b>{{ userData.tachi.username }}</b>
-          </h1>
-          <h1 v-if="!userData.tachi || !userData.tachi.linked" class="text-lg">
-            Kamaitachi isn't linked!
-          </h1>
-
-          <template #footer>
-            <div class="space-x-2">
-              <BaseButton
-                v-if="!userData.tachi || !userData.tachi.linked"
-                type="submit"
-                color="success"
-                label="Link Now"
-              />
-              <BaseButton
-                v-if="userData.tachi && userData.tachi.linked"
-                type="submit"
-                color="info"
-                label="Relink"
-              />
-              <BaseButton
-                v-if="userData.tachi && userData.tachi.linked"
-                type="submit"
-                color="danger"
-                label="Unlink"
-              />
-            </div>
-          </template>
-        </CardBox>
-
-        <!-- <CardBox>
-          <PillTag
-            :icon="mdiTournament"
-            color="info"
-            label="Start.GG"
-            class="mb-2"
-          />
-
-          <h1 class="text-lg">Start.GG is linked to <b>@trmazi</b></h1>
-          <h1 class="text-lg">Start.GG isn't linked!</h1>
-
-          <template #footer>
-            <div class="space-x-2">
-              <BaseButton type="submit" color="success" label="Link Now" />
-              <BaseButton type="submit" color="info" label="Relink" />
-              <BaseButton type="submit" color="danger" label="Unlink" />
-            </div>
-          </template>
-        </CardBox> -->
       </div>
     </SectionMain>
   </LayoutAuthenticated>
