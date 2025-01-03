@@ -45,7 +45,7 @@ img {
 }
 
 #particles-js {
-  min-width: screen;
-  min-height: screen;
+  min-width: 100vw;
+  min-height: 100vh;
   position: absolute;
 }
