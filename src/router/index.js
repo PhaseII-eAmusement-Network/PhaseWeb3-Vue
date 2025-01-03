@@ -84,6 +84,14 @@ const routes = [
   // },
   {
     meta: {
+      title: "Play Videos",
+    },
+    path: "/profile/videos",
+    name: "profile_videos",
+    component: () => import("@/views/Profile/VideoView.vue"),
+  },
+  {
+    meta: {
       title: "View Profile",
     },
     path: "/profiles/:id",

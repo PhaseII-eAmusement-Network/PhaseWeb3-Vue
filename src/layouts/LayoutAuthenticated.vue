@@ -7,6 +7,7 @@ import {
   mdiStoreCog,
   mdiGamepad,
   mdiSecurity,
+  mdiMultimedia,
 } from "@mdi/js";
 import { ref, watch, onMounted, computed } from "vue";
 import { useRouter, useRoute } from "vue-router";
@@ -128,12 +129,6 @@ const menuAside = computed(() => {
   const sortedArcades = mainStore.userArcades.map((arcade) => ({
     label: arcade.name,
     to: `/arcade/${arcade.id}`,
-    // menu: [
-    //   { label: "Overview", to: `/arcade/${arcade.id}` },
-    //   { label: "Event Settings", to: `/arcade/${arcade.id}/events` },
-    //   { label: "Machine List", to: `/arcade/${arcade.id}/machines` },
-    //   { label: "PASELI", to: `/arcade/${arcade.id}/paseli` },
-    // ],
   }));
 
   const adminMenu = [
@@ -204,6 +199,17 @@ const menuAside = computed(() => {
       menu: sortedArcades,
     });
   }
+
+  sideMenu.push({
+    label: "My Content",
+    icon: mdiMultimedia,
+    menu: [
+      {
+        label: "Play Videos",
+        to: `/profile/videos`,
+      },
+    ],
+  });
 
   return sideMenu;
 });

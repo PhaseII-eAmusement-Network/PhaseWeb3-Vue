@@ -103,3 +103,13 @@ export async function APIDeleteCard(cardId) {
     throw error;
   }
 }
+
+export async function APIGetPlayVideos() {
+  try {
+    const data = await mainStore.callApi(`/user/playVideos`);
+    return data.data;
+  } catch (error) {
+    console.log("Error fetching videos:", error);
+    throw error;
+  }
+}
