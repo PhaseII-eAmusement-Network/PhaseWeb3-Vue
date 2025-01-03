@@ -1,6 +1,6 @@
 <script setup>
 import { containerMaxW } from "@/config.js";
-import { mdiCash } from "@mdi/js";
+import { mdiCash, mdiGithub } from "@mdi/js";
 import BaseLevel from "@/components/BaseLevel.vue";
 import BaseButton from "@/components/BaseButton.vue";
 </script>
@@ -14,16 +14,25 @@ import BaseButton from "@/components/BaseButton.vue";
           <a
             class="text-blue-400 hover:text-blue-600"
             href="https://github.com/justboil/admin-one-vue-tailwind"
+            target="_blank"
             >Admin One</a
           >.
         </p>
       </div>
-      <div class="md:py-2">
+      <div class="md:py-2 space-x-2">
         <BaseButton
           color="warning"
           href="https://paypal.me/trmazi"
           label="Donate"
           :icon="mdiCash"
+          icon-size="24"
+        />
+        <BaseButton
+          color="info"
+          href="https://github.com/PhaseII-eAmusement-Network/PhaseWeb3-Vue"
+          target="_blank"
+          label="View on GitHub"
+          :icon="mdiGithub"
           icon-size="24"
         />
       </div>

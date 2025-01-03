@@ -44,8 +44,21 @@ img {
   pointer-events: none;
 }
 
-#particles-js {
-  min-width: 100vw;
-  min-height: 100vh;
-  position: absolute;
+@media screen and (min-width: 768px) {
+  #particles-js {
+    min-width: 100vw;
+    min-height: 100vh;
+    position: absolute;
+    z-index: -0.9;
+  }
 }
+
+@media screen and (max-width: 768px) {
+  #particles-js {
+    min-width: 100vw;
+    min-height: 100vh;
+    position: absolute;
+    z-index: 0;
+  }
+}
+

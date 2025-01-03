@@ -29,6 +29,10 @@ export const useMainStore = defineStore("main", {
 
     /* User Loaded state */
     userLoaded: false,
+
+    /* Save news state */
+    loadedNews: null,
+    loadedArticles: {},
   }),
   actions: {
     setUser(payload) {
@@ -143,22 +147,32 @@ export const useMainStore = defineStore("main", {
     },
 
     async fetchAllNews() {
-      try {
-        const data = await this.callApi("/news");
-        return data.slice(0, 2);
-      } catch (error) {
-        console.log("Error fetching news:", error);
-        throw error;
+      if (!this.loadedNews) {
+        try {
+          const data = await this.callApi("/news");
+          this.loadedNews = data.slice(0, 2);
+          return this.loadedNews;
+        } catch (error) {
+          console.log("Error fetching news:", error);
+          throw error;
+        }
+      } else {
+        return this.loadedNews;
       }
     },
 
     async fetchNews(newsID) {
-      try {
-        const data = await this.callApi(`/news/${newsID}`);
-        return data;
-      } catch (error) {
-        console.log("Error fetching news:", error);
-        throw error;
+      if (!this.loadedArticles[newsID]) {
+        try {
+          const data = await this.callApi(`/news/${newsID}`);
+          this.loadedArticles[newsID] = data;
+          return data;
+        } catch (error) {
+          console.log("Error fetching news:", error);
+          throw error;
+        }
+      } else {
+        return this.loadedArticles[newsID];
       }
     },
 

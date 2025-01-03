@@ -173,7 +173,7 @@ async function exportVPN() {
           </div>
         </CardBox>
 
-        <CardBox class="w-1/2 mb-6">
+        <CardBox class="w-full md:w-1/2 mb-6">
           <h1 class="text-lg md:text-xl">OpenVPN Configuration</h1>
           <p class="pb-1 dark:text-white/50">
             Use this to download your VPN config.

@@ -105,4 +105,13 @@ watch(
     -webkit-animation-name: none !important;
   }
 }
+
+@media screen and (max-width: 768px) {
+  #particles-js {
+    min-width: 100vw;
+    min-height: 100vh;
+    position: absolute;
+    z-index: -1;
+  }
+}
 </style>
