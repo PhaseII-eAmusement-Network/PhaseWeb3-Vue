@@ -331,7 +331,9 @@ async function generateTimeline(myProfile) {
   }
 
   // Sort plays by timestamp
-  return plays.sort((a, b) => a.timestamp - b.timestamp);
+  return plays.sort(
+    (a, b) => new Date(a.timestamp).getTime() - new Date(b.timestamp).getTime()
+  );
 }
 </script>
 
