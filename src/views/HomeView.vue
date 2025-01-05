@@ -49,6 +49,39 @@ const cumulativePlays = computed(() => {
   );
 });
 
+const longestStreak = computed(() => {
+  const groupByDay = (timestamps) => {
+    const dayMap = {};
+    timestamps.forEach((timestamp) => {
+      const day = new Date(timestamp * 1000).toISOString().split("T")[0];
+      dayMap[day] = (dayMap[day] || 0) + 1;
+    });
+    return dayMap;
+  };
+
+  var maxStreak = 0;
+
+  userProfiles.value.forEach((user) => {
+    const arcadeHistory = user.data?.arcade_history
+      ? user.data?.arcade_history
+      : {};
+    const allTimestamps = [];
+
+    Object.values(arcadeHistory).forEach((machines) => {
+      Object.values(machines).forEach((timestamps) => {
+        allTimestamps.push(...timestamps);
+      });
+    });
+
+    const playsByDay = groupByDay(allTimestamps);
+
+    const longestStreakForUser = Math.max(...Object.values(playsByDay));
+    maxStreak = Math.max(maxStreak, longestStreakForUser);
+  });
+
+  return maxStreak;
+});
+
 function filterUserProfiles(userProfiles) {
   var filteredProfiles = [];
   for (const profile of userProfiles) {
@@ -100,6 +133,7 @@ function filterUserProfiles(userProfiles) {
       >
         <CardBoxWidget :number="cumulativePlays" label="Cumulative Plays" />
         <CardBoxWidget :number="userProfiles.length" label="Games Played" />
+        <CardBoxWidget :number="longestStreak" label="Longest Play Streak" />
       </div>
 
       <SectionTitleLine :icon="mdiGamepad" title="Showcase" main />
