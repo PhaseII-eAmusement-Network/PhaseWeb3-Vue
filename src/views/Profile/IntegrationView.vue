@@ -1,6 +1,7 @@
 <script setup>
 import { useMainStore } from "@/stores/main";
 import { ref, watch } from "vue";
+import { useRoute, useRouter } from "vue-router";
 import { mdiServerNetwork, mdiMessage, mdiScoreboard } from "@mdi/js";
 import SectionMain from "@/components/SectionMain.vue";
 import CardBox from "@/components/CardBox.vue";
@@ -9,8 +10,24 @@ import UserCard from "@/components/UserCard.vue";
 import LayoutAuthenticated from "@/layouts/LayoutAuthenticated.vue";
 import SectionTitleLine from "@/components/SectionTitleLine.vue";
 import PillTag from "@/components/PillTag.vue";
+
+import { APIRemoveIntegration, APIIntegrateWith } from "@/stores/api/account";
+
+const $route = useRoute();
+const $router = useRouter();
 const DISCORD_OAUTH_URL = import.meta.env.VITE_DISCORD_OAUTH_URL;
 const TACHI_OAUTH_URL = import.meta.env.VITE_TACHI_OAUTH_URL;
+const serviceType = ref($route.params.service);
+
+if (serviceType.value) {
+  const urlParams = new URLSearchParams(window.location.search);
+  const code = urlParams.get("code");
+  urlParams.delete("code");
+  if (code !== undefined) {
+    console.log(code);
+    integrateWith(serviceType.value, code);
+  }
+}
 
 const mainStore = useMainStore();
 
@@ -37,10 +54,32 @@ const services = [
   },
 ];
 
-function removeService(service) {
-  const confirmed = window.confirm("Are you really?");
-  if (confirmed) {
-    console.log(`get fucked, ${service.id}`);
+async function removeService(service) {
+  const removal_data = await APIRemoveIntegration(service.id);
+  if (removal_data) {
+    mainStore.userLoaded = false;
+    mainStore.loadUser();
+    $router.push({
+      name: "profile_integrations",
+    });
+  }
+}
+
+async function integrateWith(service, code) {
+  const resp_data = await APIIntegrateWith(service, code);
+  if (resp_data) {
+    const urlParams = new URLSearchParams(window.location.search);
+    urlParams.delete("code");
+    const newQuery = urlParams.toString();
+    const newUrl = `${window.location.pathname}${
+      newQuery ? "?" + newQuery : ""
+    }`;
+    window.history.replaceState(null, "", newUrl);
+    mainStore.userLoaded = false;
+    mainStore.loadUser();
+    $router.push({
+      name: "profile_integrations",
+    });
   }
 }
 </script>
@@ -75,7 +114,7 @@ function removeService(service) {
             v-if="!userData[service.id] || !userData[service.id]?.linked"
             class="text-lg"
           >
-            Discord isn't linked!
+            {{ service.name }} isn't linked!
           </h1>
 
           <template #footer>

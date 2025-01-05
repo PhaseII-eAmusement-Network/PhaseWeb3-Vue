@@ -14,6 +14,8 @@ export function saveUserAuthKey(sessionId, expires) {
   try {
     Cookies.set("userAuthKey", sessionId, {
       expires: expires,
+      path: "",
+      sameSite: "strict",
     });
   } catch (error) {
     this.errorCode = error.message;

@@ -68,6 +68,14 @@ const routes = [
   },
   {
     meta: {
+      title: "Integration Callback",
+    },
+    path: "/profile/integrate/:service",
+    name: "profile_integration_callback",
+    component: () => import("@/views/Profile/IntegrationView.vue"),
+  },
+  {
+    meta: {
       title: "Login Cards",
     },
     path: "/profile/cards",

@@ -113,3 +113,31 @@ export async function APIGetPlayVideos() {
     throw error;
   }
 }
+
+export async function APIRemoveIntegration(service) {
+  try {
+    const confirmed = window.confirm("Are you really?");
+    if (confirmed) {
+      const data = await mainStore.callApi(
+        `/user/integrate/${service}`,
+        "DELETE"
+      );
+      return data;
+    }
+  } catch (error) {
+    console.log("Error deleting integration:", error);
+    throw error;
+  }
+}
+
+export async function APIIntegrateWith(service, code) {
+  try {
+    const data = await mainStore.callApi(`/user/integrate/${service}`, "POST", {
+      code: code,
+    });
+    return data;
+  } catch (error) {
+    console.log(`Error integrating with ${service}:`, error);
+    throw error;
+  }
+}
