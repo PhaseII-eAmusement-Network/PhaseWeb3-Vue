@@ -3,6 +3,7 @@ import {
   mdiLogout,
   mdiServerNetwork,
   mdiCardAccountDetailsOutline,
+  mdiAccountArrowLeftOutline,
 } from "@mdi/js";
 
 export default [
@@ -23,6 +24,11 @@ export default [
         icon: mdiCardAccountDetailsOutline,
         label: "Login Cards",
         to: "/profile/cards",
+      },
+      {
+        icon: mdiAccountArrowLeftOutline,
+        label: "Claim Profile",
+        to: "/profile/claim",
       },
     ],
   },

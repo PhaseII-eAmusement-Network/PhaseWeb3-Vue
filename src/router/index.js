@@ -82,6 +82,14 @@ const routes = [
     name: "profile_cards",
     component: () => import("@/views/Profile/CardsView.vue"),
   },
+  {
+    meta: {
+      title: "Claim a Profile",
+    },
+    path: "/profile/claim",
+    name: "profile_claim",
+    component: () => import("@/views/Profile/ClaimView.vue"),
+  },
   // {
   //   meta: {
   //     title: "Goals",

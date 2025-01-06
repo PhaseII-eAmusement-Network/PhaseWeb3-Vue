@@ -153,13 +153,13 @@ async function exportVPN() {
                 v-if="setting.type == 'Boolean'"
                 :name="setting.id"
                 :model-value="
-                  Boolean(getNestedValue(optionForm, setting.id) ?? 0)
+                  Boolean(getNestedValue(optionForm, setting.id) ?? false)
                 "
                 :input-value="true"
                 type="switch"
                 @update:model-value="
                   (value) =>
-                    setNestedValue(optionForm, setting.id, Number(value) ?? 0)
+                    setNestedValue(optionForm, setting.id, value ?? false)
                 "
               />
             </FormField>
