@@ -4,6 +4,7 @@ import { DDRClassOptions } from "@/constants/gameOptions/ddrclassOptions";
 import { DDROptions } from "@/constants/gameOptions/ddrOptions";
 import { GFDMOptions } from "@/constants/gameOptions/gfdmOptions";
 import { IIDXOptions } from "@/constants/gameOptions/iidxOptions";
+import { LovePlusOptions } from "@/constants/gameOptions/lovePlusOptions";
 import { MusecaOptions } from "@/constants/gameOptions/musecaOptions";
 import { NostalgiaOptions } from "@/constants/gameOptions/nostalgiaOptions";
 import { PaseliChargeOptions } from "@/constants/gameOptions/paseliOptions";
@@ -1571,6 +1572,7 @@ export const gameData = [
     playerHeaders: [
       { text: "Girlfriend", value: "gf", sortable: true, width: 100 },
     ],
+    gameOptions: LovePlusOptions,
     versions: [
       {
         id: VersionConstants.LOVEPLUS_ARCADE,
