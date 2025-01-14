@@ -25,6 +25,10 @@ const props = defineProps({
     type: String,
     required: true,
   },
+  disableLocalClick: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 const tag = computed(() => {
@@ -48,7 +52,9 @@ const tag = computed(() => {
 });
 
 function loadGamePage() {
-  router.push(`/games/${props.game}`);
+  if (!props.disableLocalClick) {
+    router.push(`/games/${props.game}`);
+  }
 }
 
 const selectedGame = getGameInfo(props.game);

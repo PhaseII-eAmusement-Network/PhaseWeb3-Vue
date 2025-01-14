@@ -116,6 +116,20 @@ export async function APIStartTakeover(cardId, pin) {
   }
 }
 
+export async function APISaveTakeover(cardId, pin, mergeSettings) {
+  try {
+    await mainStore.callApi(`/user/takeover`, "POST", {
+      cardId: cardId,
+      pin: pin,
+      mergeSettings: mergeSettings,
+    });
+    return true;
+  } catch (error) {
+    console.log("Error saving takeover:", error);
+    throw error;
+  }
+}
+
 export async function APIGetPlayVideos() {
   try {
     const data = await mainStore.callApi(`/user/playVideos`);
