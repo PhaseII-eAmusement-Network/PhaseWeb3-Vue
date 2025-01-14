@@ -208,6 +208,10 @@ const menuAside = computed(() => {
         label: "Play Videos",
         to: `/profile/videos`,
       },
+      {
+        label: "Game Images",
+        to: `/profile/content`,
+      },
     ],
   });
 

@@ -104,12 +104,34 @@ export async function APIDeleteCard(cardId) {
   }
 }
 
+export async function APIStartTakeover(cardId, pin) {
+  try {
+    const data = await mainStore.callApi(
+      `/user/takeover?cardId=${cardId}&pin=${pin}`
+    );
+    return data.data;
+  } catch (error) {
+    console.log("Error fetching takeover:", error);
+    throw error;
+  }
+}
+
 export async function APIGetPlayVideos() {
   try {
     const data = await mainStore.callApi(`/user/playVideos`);
     return data.data;
   } catch (error) {
     console.log("Error fetching videos:", error);
+    throw error;
+  }
+}
+
+export async function APIGetUserContent(type) {
+  try {
+    const data = await mainStore.callApi(`/user/content?type=${type}`);
+    return data.data;
+  } catch (error) {
+    console.log("Error fetching content:", error);
     throw error;
   }
 }

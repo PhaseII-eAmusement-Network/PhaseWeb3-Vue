@@ -108,6 +108,14 @@ const routes = [
   },
   {
     meta: {
+      title: "Game Images",
+    },
+    path: "/profile/content",
+    name: "profile_content",
+    component: () => import("@/views/Profile/ContentView.vue"),
+  },
+  {
+    meta: {
       title: "View Profile",
     },
     path: "/profiles/:id",

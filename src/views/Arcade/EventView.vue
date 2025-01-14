@@ -236,8 +236,7 @@ watch(
                 :input-value="true"
                 type="switch"
                 @update:model-value="
-                  (value) =>
-                    setNestedValue(optionForm, setting.id, Number(value) ?? 0)
+                  (value) => setNestedValue(optionForm, setting.id, value ?? 0)
                 "
               />
               <FormControl
