@@ -93,7 +93,6 @@ async function updateProfile() {
   var newProfile = JSON.parse(JSON.stringify(props.profile));
 
   newProfile.qpro = newQpro;
-  console.log(newQpro);
   const profileStatus = await APIUpdateProfile(
     GameConstants.IIDX,
     props.version,

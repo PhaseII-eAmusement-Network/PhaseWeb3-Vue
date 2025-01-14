@@ -19,7 +19,6 @@ async function loadVideos() {
   try {
     const data = await APIGetUserContent("lpac_upload");
     contentData.value = filterContent(data);
-    console.log(contentData.value);
   } catch (error) {
     console.error("Failed to fetch content:", error);
   }

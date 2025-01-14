@@ -24,7 +24,6 @@ if (serviceType.value) {
   const code = urlParams.get("code");
   urlParams.delete("code");
   if (code !== undefined) {
-    console.log(code);
     integrateWith(serviceType.value, code);
   }
 }

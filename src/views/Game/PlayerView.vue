@@ -96,8 +96,6 @@ async function loadProfile() {
 async function loadArcade(arcadeId) {
   try {
     const data = await APIGetArcade(arcadeId);
-    console.log(data);
-
     return data;
   } catch (error) {
     console.error("Failed to fetch arcade data:", error);

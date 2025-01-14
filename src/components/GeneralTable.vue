@@ -1,6 +1,4 @@
 <script setup>
-import { defineProps, defineEmits } from "vue";
-
 // eslint-disable-next-line vue/require-prop-types
 defineProps(["headers", "items"]);
 const emits = defineEmits(["row-clicked"]);
