@@ -88,7 +88,7 @@ const copyToClipboard = (text) => {
 
       <SectionTitleLine
         :icon="mdiCreditCardPlusOutline"
-        title="Register Card"
+        title="Add a Card"
         main
       />
       <CardBox is-form class="row-span-2 mb-6" @submit.prevent="submitCard()">
@@ -110,7 +110,7 @@ const copyToClipboard = (text) => {
         </FormField>
 
         <template #footer>
-          <BaseButton type="submit" color="success" label="Add Card" />
+          <BaseButton type="submit" color="success" label="Add" />
           <BaseIcon
             v-if="cardLoading"
             :path="mdiLoading"
@@ -134,7 +134,7 @@ const copyToClipboard = (text) => {
 
       <div
         v-if="cardData"
-        class="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-6"
+        class="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 3xl:grid-cols-6 4xl:grid-cols-7 gap-6"
       >
         <div
           v-for="card of cardData"

@@ -79,7 +79,7 @@ function filterContent(data) {
 
           <div
             v-if="content.data?.status == 'uploaded'"
-            class="w-full grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-6 place-items-center"
+            class="w-full grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-6 3xl:grid-cols-7 4xl:grid-cols-8 gap-6 place-items-center"
           >
             <div
               v-for="image in content.data?.filelist"
