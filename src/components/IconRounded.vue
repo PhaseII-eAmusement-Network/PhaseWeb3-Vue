@@ -23,7 +23,10 @@ const props = defineProps({
     type: String,
     default: "h-12",
   },
-  bg: Boolean,
+  bgColor: {
+    type: String,
+    default: "bg-slate-900",
+  },
 });
 
 const spanColor = computed(() => props.iconColor);
@@ -36,6 +39,7 @@ const spanColor = computed(() => props.iconColor);
     :h="h"
     :color="spanColor"
     size="24"
-    class="rounded-full bg-slate-900"
+    class="rounded-full"
+    :class="props.bgColor"
   />
 </template>

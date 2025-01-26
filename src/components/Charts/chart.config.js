@@ -6,16 +6,6 @@ export const chartColors = {
   },
 };
 
-const randomChartData = (n) => {
-  const data = [];
-
-  for (let i = 0; i < n; i++) {
-    data.push(Math.round(Math.random() * 200));
-  }
-
-  return data;
-};
-
 const datasetObject = (color, points) => {
   return {
     fill: false,
@@ -30,21 +20,65 @@ const datasetObject = (color, points) => {
     pointHoverRadius: 4,
     pointHoverBorderWidth: 15,
     pointRadius: 4,
-    data: randomChartData(points),
+    data: points,
     tension: 0.5,
     cubicInterpolationMode: "default",
+    label: "Plays",
   };
 };
 
-export const sampleChartData = (points = 7) => {
-  const labels = [];
+const parseArcadeHistory = (users) => {
+  const groupByDay = (timestamps) => {
+    const dayMap = {};
+    timestamps.forEach((timestamp) => {
+      const day = new Date(timestamp * 1000).toISOString().split("T")[0];
+      dayMap[day] = (dayMap[day] || 0) + 1;
+    });
+    return dayMap;
+  };
 
-  for (let i = 1; i <= points; i++) {
-    labels.push(`0${i}`);
+  const generateLast14Days = () => {
+    const today = new Date();
+    const dates = [];
+    for (let i = 13; i >= 0; i--) {
+      const date = new Date(today);
+      date.setDate(today.getDate() - i);
+      dates.push(date.toISOString().split("T")[0]); // Format: YYYY-MM-DD
+    }
+    return dates;
+  };
+
+  const allTimestamps = [];
+  users.forEach((user) => {
+    const arcadeHistory = user.data?.arcade_history || {};
+    Object.values(arcadeHistory).forEach((machines) => {
+      Object.values(machines).forEach((timestamps) => {
+        allTimestamps.push(...timestamps);
+      });
+    });
+  });
+
+  const playsByDay = groupByDay(allTimestamps);
+  const last14Days = generateLast14Days();
+
+  // Populate data for the last 14 days, filling 0 for days without plays
+  const playCounts = last14Days.map((day) => playsByDay[day] || 0);
+
+  return { labels: last14Days, data: playCounts };
+};
+
+export const generateChartData = (users) => {
+  if (!Array.isArray(users) || users.length === 0) {
+    return {
+      labels: [],
+      datasets: [],
+    };
   }
+
+  const { labels, data } = parseArcadeHistory(users);
 
   return {
     labels,
-    datasets: [datasetObject("info", points)],
+    datasets: [datasetObject("info", data)],
   };
 };

@@ -1,9 +1,9 @@
 <script setup>
 import CardBox from "@/components/CardBox.vue";
 import NumberDynamic from "@/components/NumberDynamic.vue";
-import BaseIcon from "@/components/BaseIcon.vue";
 import BaseLevel from "@/components/BaseLevel.vue";
 import PillTagTrend from "@/components/PillTagTrend.vue";
+import IconRounded from "@/components/IconRounded.vue";
 
 defineProps({
   number: {
@@ -34,6 +34,14 @@ defineProps({
     type: String,
     default: "",
   },
+  iconColor: {
+    type: String,
+    default: "",
+  },
+  iconBGColor: {
+    type: String,
+    default: null,
+  },
   trend: {
     type: String,
     default: null,
@@ -47,35 +55,38 @@ defineProps({
 
 <template>
   <CardBox>
-    <BaseLevel v-if="trend" class="mb-3" mobile>
-      <PillTagTrend :trend="trend" :trend-type="trendType" small />
-    </BaseLevel>
-    <BaseLevel mobile>
-      <div>
-        <h3 :class="color" class="text-lg leading-tight mb-1.5">
-          {{ label }}
-        </h3>
-        <h1 class="text-3xl leading-tight font-semibold">
-          <NumberDynamic
-            v-if="number"
-            :class="numColor"
-            :value="number"
-            :prefix="prefix"
-            :suffix="suffix"
-          />
-          <div :class="numColor">
-            <slot />
-          </div>
-        </h1>
-      </div>
-      <BaseIcon
+    <div class="flex gap-4">
+      <IconRounded
         v-if="icon"
-        :path="icon"
-        size="48"
-        w=""
-        h="h-16"
-        :class="color"
+        :icon="icon"
+        size="30"
+        :class="iconColor"
+        bg-color="bg-gray-800"
       />
-    </BaseLevel>
+      <div>
+        <BaseLevel v-if="trend" class="mb-3" mobile>
+          <PillTagTrend :trend="trend" :trend-type="trendType" small />
+        </BaseLevel>
+        <BaseLevel mobile>
+          <div>
+            <h3 :class="color" class="text-lg leading-tight mb-1.5">
+              {{ label }}
+            </h3>
+            <h1 class="text-3xl leading-tight font-semibold">
+              <NumberDynamic
+                v-if="number"
+                :class="numColor"
+                :value="number"
+                :prefix="prefix"
+                :suffix="suffix"
+              />
+              <div :class="numColor">
+                <slot />
+              </div>
+            </h1>
+          </div>
+        </BaseLevel>
+      </div>
+    </div>
   </CardBox>
 </template>

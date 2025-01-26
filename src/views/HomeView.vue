@@ -4,13 +4,19 @@ import {
   mdiGamepad,
   mdiNewspaperVariant,
   mdiChartTimelineVariant,
+  mdiCounter,
+  mdiGamepadOutline,
+  mdiFire,
+  mdiTrendingUp,
 } from "@mdi/js";
 import UserCard from "@/components/UserCard.vue";
 import SectionMain from "@/components/SectionMain.vue";
+import CardBox from "@/components/CardBox.vue";
 import CardBoxWidget from "@/components/CardBoxWidget.vue";
 import CardBoxGameStat from "@/components/CardBoxGameStat.vue";
 import LayoutAuthenticated from "@/layouts/LayoutAuthenticated.vue";
 import SectionTitleLine from "@/components/SectionTitleLine.vue";
+import LineChart from "@/components/Charts/LineChart.vue";
 
 import { useMainStore } from "@/stores/main";
 const mainStore = useMainStore();
@@ -18,6 +24,7 @@ const mainStore = useMainStore();
 import CardBoxNews from "@/components/Cards/CardBoxNews.vue";
 import CardBoxComponentEmpty from "@/components/CardBoxComponentEmpty.vue";
 import { getGameInfo } from "@/constants";
+import { generateChartData } from "@/components/Charts/chart.config";
 var newsData = ref([]);
 
 onMounted(async () => {
@@ -129,22 +136,28 @@ function filterUserProfiles(userProfiles) {
         main
       />
       <div
-        class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 3xl:grid-cols-6 mb-6"
+        class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 3xl:grid-cols-5 mb-6"
       >
         <CardBoxWidget
+          :icon="mdiCounter"
           :number="cumulativePlays"
           label="Cumulative Plays"
           suffix="plays"
+          icon-color="text-emerald-600"
         />
         <CardBoxWidget
+          :icon="mdiGamepadOutline"
           :number="userProfiles.length"
           label="Games Played"
           suffix="games"
+          icon-color="text-sky-300"
         />
         <CardBoxWidget
+          :icon="mdiFire"
           :number="longestStreak"
           label="Longest Play Streak"
           suffix="plays"
+          icon-color="text-red-600"
         />
       </div>
 
@@ -161,6 +174,13 @@ function filterUserProfiles(userProfiles) {
           type="plays"
         />
       </div>
+
+      <SectionTitleLine :icon="mdiTrendingUp" title="Play Trends" main />
+      <CardBox class="mb-6">
+        <div v-if="userProfiles">
+          <LineChart :data="generateChartData(userProfiles)" class="h-96" />
+        </div>
+      </CardBox>
     </SectionMain>
   </LayoutAuthenticated>
 </template>
