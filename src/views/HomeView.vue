@@ -131,9 +131,21 @@ function filterUserProfiles(userProfiles) {
       <div
         class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 3xl:grid-cols-6 mb-6"
       >
-        <CardBoxWidget :number="cumulativePlays" label="Cumulative Plays" />
-        <CardBoxWidget :number="userProfiles.length" label="Games Played" />
-        <CardBoxWidget :number="longestStreak" label="Longest Play Streak" />
+        <CardBoxWidget
+          :number="cumulativePlays"
+          label="Cumulative Plays"
+          suffix="plays"
+        />
+        <CardBoxWidget
+          :number="userProfiles.length"
+          label="Games Played"
+          suffix="games"
+        />
+        <CardBoxWidget
+          :number="longestStreak"
+          label="Longest Play Streak"
+          suffix="plays"
+        />
       </div>
 
       <SectionTitleLine :icon="mdiGamepad" title="Showcase" main />
