@@ -55,7 +55,9 @@ defineProps({
 
 <template>
   <CardBox>
-    <div class="flex gap-4">
+    <div
+      class="grid grid-cols-1 justify-center md:justify-start w-full md:flex gap-4"
+    >
       <IconRounded
         v-if="icon"
         :icon="icon"

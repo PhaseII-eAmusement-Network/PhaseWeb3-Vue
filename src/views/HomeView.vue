@@ -136,7 +136,7 @@ function filterUserProfiles(userProfiles) {
         main
       />
       <div
-        class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 3xl:grid-cols-5 mb-6"
+        class="grid grid-cols-2 sm:grid-cols-3 gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 3xl:grid-cols-5 mb-6"
       >
         <CardBoxWidget
           :icon="mdiCounter"
@@ -163,7 +163,7 @@ function filterUserProfiles(userProfiles) {
 
       <SectionTitleLine :icon="mdiGamepad" title="Showcase" main />
       <div
-        class="grid grid-flow-row auto-rows-auto grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-3 3xl:grid-cols-4 4xl:grid-cols-6 gap-5 mb-5"
+        class="grid grid-flow-row auto-rows-auto grid-cols-2 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-3 3xl:grid-cols-4 4xl:grid-cols-6 gap-5 mb-5"
       >
         <CardBoxGameStat
           v-for="profile of filterUserProfiles(userProfiles)"
