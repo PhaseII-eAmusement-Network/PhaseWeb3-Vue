@@ -1,0 +1,125 @@
+<script setup>
+import { ref, reactive, onMounted } from "vue";
+import { mdiWrenchCogOutline, mdiWrenchClock } from "@mdi/js";
+import SectionMain from "@/components/SectionMain.vue";
+import CardBox from "@/components/CardBox.vue";
+import GeneralTable from "@/components/GeneralTable.vue";
+import FormField from "@/components/FormField.vue";
+import FormControl from "@/components/FormControl.vue";
+import LayoutAuthenticated from "@/layouts/LayoutAuthenticated.vue";
+import SectionTitleLine from "@/components/SectionTitleLine.vue";
+import BaseButton from "@/components/BaseButton.vue";
+
+import {
+  APIAdminMaintenancePeriods,
+  APIAdminCreateMaintenancePeriod,
+} from "@/stores/api/admin";
+
+const maintData = ref([]);
+const maintHeaders = [
+  {
+    text: "Start Timestamp",
+    value: "timestamp",
+    width: 120,
+  },
+  {
+    text: "End Timestamp",
+    value: "data.endTimestamp",
+    width: 120,
+  },
+  {
+    text: "Reason",
+    value: "data.reason",
+    width: 120,
+  },
+];
+
+const initMaint = {
+  endTimestamp: Date.now(),
+};
+
+const newMaint = reactive({
+  ...initMaint,
+});
+
+onMounted(async () => {
+  loadMaintenance();
+});
+
+async function loadMaintenance() {
+  try {
+    const data = await APIAdminMaintenancePeriods();
+    maintData.value = data;
+  } catch (error) {
+    console.error("Failed to fetch maint data:", error);
+  }
+}
+
+async function enterMaintenance() {
+  try {
+    const data = await APIAdminCreateMaintenancePeriod(newMaint);
+    maintData.value = data;
+  } catch (error) {
+    console.error("Failed to post maint:", error);
+  }
+
+  loadMaintenance();
+}
+</script>
+
+<template>
+  <LayoutAuthenticated>
+    <SectionMain>
+      <SectionTitleLine
+        :icon="mdiWrenchCogOutline"
+        title="Recent Maintenance Periods"
+        color="text-blue-400"
+        main
+      />
+
+      <CardBox has-table class="mb-6">
+        <div
+          class="bg-white dark:bg-slate-900/95 rounded-2xl lg:flex lg:justify-between"
+        >
+          <div class="w-full">
+            <GeneralTable :headers="maintHeaders" :items="maintData" />
+          </div>
+        </div>
+      </CardBox>
+
+      <SectionTitleLine
+        :icon="mdiWrenchClock"
+        title="Create Maintenance Period"
+        color="text-yellow-600"
+        main
+      />
+      <CardBox is-form class="row-span-1" @submit="enterMaintenance()">
+        <FormField label="Reason" help="Why are we going under maintenance?">
+          <FormControl v-model="newMaint.reason" required />
+        </FormField>
+
+        <FormField
+          label="Period End"
+          help="When the network will release the maintenance window."
+        >
+          <VueDatePicker
+            v-model="newMaint.endTimestamp"
+            dark
+            @update:model-value="
+              (val) => (newMaint.endTimestamp = new Date(val).getTime())
+            "
+          />
+        </FormField>
+
+        <div>
+          <BaseButton
+            type="submit"
+            color="warning"
+            label="Enter Maintenance"
+            :small="false"
+          />
+        </div>
+      </CardBox>
+    </SectionMain>
+  </LayoutAuthenticated>
+</template>

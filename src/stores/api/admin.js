@@ -45,3 +45,23 @@ export async function APIOnboardArcade(newArcade) {
     throw error;
   }
 }
+
+export async function APIAdminMaintenancePeriods() {
+  try {
+    const data = await mainStore.callApi(`/admin/maint`);
+    return data.data;
+  } catch (error) {
+    console.log("Error loading maint:", error);
+    throw error;
+  }
+}
+
+export async function APIAdminCreateMaintenancePeriod(newPeriod) {
+  try {
+    const data = await mainStore.callApi(`/admin/maint`, "POST", newPeriod);
+    return data;
+  } catch (error) {
+    console.log("Error posting maint:", error);
+    throw error;
+  }
+}

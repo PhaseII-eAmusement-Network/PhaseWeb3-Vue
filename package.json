@@ -10,6 +10,7 @@
   "dependencies": {
     "@mdi/js": "^7.0.96",
     "@rushstack/eslint-patch": "^1.1.4",
+    "@vuepic/vue-datepicker": "^11.0.1",
     "axios": "^0.27.0",
     "chart.js": "^3.6.0",
     "crypto-js": "^4.2.0",

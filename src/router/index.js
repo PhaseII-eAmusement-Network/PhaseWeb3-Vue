@@ -143,6 +143,14 @@ const routes = [
   },
   {
     meta: {
+      title: "Network Maintenance",
+    },
+    path: "/admin/maint",
+    name: "admin_maint",
+    component: () => import("@/views/Admin/MaintView.vue"),
+  },
+  {
+    meta: {
       title: "Events",
     },
     path: "/admin/events",

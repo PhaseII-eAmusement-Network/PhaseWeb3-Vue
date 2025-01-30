@@ -141,6 +141,10 @@ const menuAside = computed(() => {
       to: "/admin/onboarding",
     },
     {
+      label: "Network Maintenance",
+      to: "/admin/maint",
+    },
+    {
       label: "Events",
       to: "/admin/events",
     },
