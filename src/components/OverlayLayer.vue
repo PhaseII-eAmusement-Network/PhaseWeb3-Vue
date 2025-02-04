@@ -28,7 +28,7 @@ const styleStore = useStyleStore();
 <template>
   <div
     :class="[type, zIndex]"
-    class="items-center flex-col justify-center overflow-hidden fixed inset-0"
+    class="items-center flex-col justify-center md:h-full fixed inset-0"
   >
     <transition
       enter-active-class="transition duration-150 ease-in"
@@ -39,7 +39,7 @@ const styleStore = useStyleStore();
       leave-to-class="opacity-0"
     >
       <div
-        class="absolute inset-0 bg-gradient-to-tr dark:from-gray-700 dark:via-gray-900 dark:to-gray-700"
+        class="absolute inset-0 bg-gradient-to-tr dark:from-gray-700 dark:via-gray-900 dark:to-gray-700 h-screen"
         :class="`${styleStore.overlayStyle} ${
           transparent ? 'opacity-90' : 'opacity-100'
         }`"

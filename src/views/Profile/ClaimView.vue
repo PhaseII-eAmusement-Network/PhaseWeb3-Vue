@@ -4,7 +4,9 @@ import {
   mdiAccountArrowLeftOutline,
   mdiCreditCardEditOutline,
   mdiAsterisk,
+  mdiCardAccountDetails,
   mdiLoading,
+  mdiAccountConvertOutline,
 } from "@mdi/js";
 import SectionMain from "@/components/SectionMain.vue";
 import BaseButton from "@/components/BaseButton.vue";
@@ -14,9 +16,11 @@ import CardBox from "@/components/CardBox.vue";
 import CardBoxGameStat from "@/components/CardBoxGameStat.vue";
 import FormField from "@/components/FormField.vue";
 import FormControl from "@/components/FormControl.vue";
+import FormCheckRadio from "@/components/FormCheckRadio.vue";
 import LayoutAuthenticated from "@/layouts/LayoutAuthenticated.vue";
 import SectionTitleLine from "@/components/SectionTitleLine.vue";
 import MergeModal from "@/components/MergeModal.vue";
+import ConfirmMergeModal from "@/components/ConfirmMergeModal.vue";
 
 import { APIStartTakeover, APISaveTakeover } from "@/stores/api/account";
 import { getGameInfo } from "@/constants";
@@ -24,6 +28,7 @@ import { getGameInfo } from "@/constants";
 const cardLoading = ref(false);
 const takeoverData = ref(null);
 const modalActive = ref(false);
+const confirmModalActive = ref(false);
 const profileForm = reactive({
   cardId: null,
   pin: null,
@@ -33,7 +38,9 @@ const modalForm = ref({
   scores: false,
   // data: false,
 });
-const mergeSettings = reactive({});
+const mergeSettings = reactive({ card: true });
+const saveState = ref(null);
+const recordCount = ref(0);
 
 function cardInput(event) {
   var input = event.target.value;
@@ -69,6 +76,10 @@ function openModal(gameId) {
   modalActive.value = true;
 }
 
+function openConfirmModal() {
+  confirmModalActive.value = true;
+}
+
 function filterUserProfiles(userProfiles) {
   var filteredProfiles = [];
   for (const profile of userProfiles) {
@@ -101,8 +112,16 @@ async function saveSettings() {
     profileForm.pin,
     mergeSettings
   );
+  confirmModalActive.value = false;
   if (!saveResult) {
     window.alert("Failed to merge!");
+  }
+
+  if (saveResult.status === "success") {
+    saveState.value = true;
+    recordCount.value = saveResult.count ?? 0;
+  } else {
+    saveState.value = false;
   }
 }
 </script>
@@ -168,7 +187,7 @@ async function saveSettings() {
         </CardBox>
       </template>
 
-      <div v-if="takeoverData">
+      <div v-if="takeoverData && saveState == null">
         <SectionTitleLine
           :icon="mdiAccountArrowLeftOutline"
           title="Select Profiles to Merge"
@@ -181,7 +200,9 @@ async function saveSettings() {
             Please note that this cannot be undone once complete.
           </h2>
 
-          <div class="grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-4 gap-4">
+          <div
+            class="grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-4 gap-4 mb-6"
+          >
             <CardBoxGameStat
               v-for="profile of filterUserProfiles(takeoverData.profiles)"
               :key="profile.game"
@@ -199,12 +220,63 @@ async function saveSettings() {
             />
           </div>
 
+          <FormField
+            label="Transfer Card"
+            help="Moves the card to your account."
+          >
+            <FormCheckRadio
+              v-model="mergeSettings.card"
+              :input-value="mergeSettings.card"
+              :icon="mdiCardAccountDetails"
+              type="switch"
+              name="card"
+            />
+          </FormField>
+
           <div class="mt-4">
             <BaseButton
               color="success"
               label="Start Merge"
               :disabled="JSON.stringify(mergeSettings) == JSON.stringify({})"
-              @click="saveSettings"
+              @click="openConfirmModal"
+            />
+          </div>
+        </CardBox>
+      </div>
+
+      <div v-if="saveState == true">
+        <SectionTitleLine
+          :icon="mdiAccountConvertOutline"
+          title="Merge Results"
+          main
+        />
+
+        <CardBox>
+          <h2 class="text-xl mb-6">
+            ✅ Successfully merged {{ recordCount }} records. Yippie!
+          </h2>
+
+          <div class="mt-4">
+            <BaseButton color="success" label="Return to Dashboard" href="#/" />
+          </div>
+        </CardBox>
+      </div>
+
+      <div v-if="saveState == false">
+        <SectionTitleLine
+          :icon="mdiAccountConvertOutline"
+          title="Merge Results"
+          main
+        />
+
+        <CardBox>
+          <h2 class="text-xl mb-6">❌ Failed to merge. Please try again.</h2>
+
+          <div class="mt-4">
+            <BaseButton
+              color="warning"
+              label="Retry"
+              @click="openConfirmModal"
             />
           </div>
         </CardBox>
@@ -217,6 +289,15 @@ async function saveSettings() {
           :settings="mergeSettings[modalForm.game]"
           @save-merge="saveModal"
           @close-modal="modalActive = false"
+        />
+      </template>
+
+      <template v-if="confirmModalActive">
+        <ConfirmMergeModal
+          :game="modalForm.game"
+          :settings="mergeSettings"
+          @save-merge="saveSettings"
+          @close-modal="confirmModalActive = false"
         />
       </template>
     </SectionMain>
