@@ -172,7 +172,8 @@ function getVideoSource() {
     versionForm.currentVersion &&
     thisGame.videoTable?.includes(versionForm.currentVersion)
   ) {
-    return `https://web3.phaseii.network/gameassets/video/${thisGame.id}/${versionForm.currentVersion}.mp4`;
+    const ASSET_PATH = import.meta.env.VITE_GAME_ASSET_PATH;
+    return `${ASSET_PATH}/video/${thisGame.id}/${versionForm.currentVersion}.mp4`;
   } else {
     return null;
   }

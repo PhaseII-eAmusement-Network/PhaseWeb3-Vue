@@ -9,7 +9,8 @@ export function getSources(game, version) {
 
 export function getVideoSource(game, version) {
   if (version && game.videoTable?.includes(version)) {
-    return `https://web3.phaseii.network/gameassets/video/${game.id}/${version}.mp4`;
+    const ASSET_PATH = import.meta.env.VITE_GAME_ASSET_PATH;
+    return `${ASSET_PATH}/video/${game.id}/${version}.mp4`;
   } else {
     return null;
   }

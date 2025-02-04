@@ -72,8 +72,9 @@ watch(
 
 loadQproSettings();
 function loadQproSettings() {
+  const ASSET_PATH = import.meta.env.VITE_GAME_ASSET_PATH;
   axios
-    .get(`https://web3.phaseii.network/gameassets/qpro/${version.value}.json`)
+    .get(`${ASSET_PATH}/qpro/${version.value}.json`)
     .then((r) => {
       if (r.data) {
         QproSettings.value = r.data;

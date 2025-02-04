@@ -44,8 +44,10 @@ const valid_emblem_options = [
 ];
 
 const emblemImages = computed(() => {
+  const ASSET_PATH = import.meta.env.VITE_GAME_ASSET_PATH;
+
   return valid_emblem_options.map((option) => {
-    const templatePath = "https://web3.phaseii.network/gameassets/emblems";
+    const templatePath = `${ASSET_PATH}/emblems`;
     return `${templatePath}/${version.value}/${userProfile.value.emblem?.[option]}.png`;
   });
 });

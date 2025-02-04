@@ -19,7 +19,8 @@ const props = defineProps({
 const userProfile = ref(props.profile);
 
 const assetPaths = computed(() => {
-  const templatePath = `https://web3.phaseii.network/gameassets/qpro/${props.version}`;
+  const ASSET_PATH = import.meta.env.VITE_GAME_ASSET_PATH;
+  const templatePath = `${ASSET_PATH}/qpro/${props.version}`;
   return {
     head: `${templatePath}/head/${userProfile.value.qpro?.head}`,
     hair: `${templatePath}/hair/${userProfile.value.qpro?.hair}`,
