@@ -5,6 +5,7 @@ import {
   mdiMenu,
   mdiMonitor,
   mdiStoreCog,
+  mdiStorePlus,
   mdiGamepad,
   mdiSecurity,
   mdiMultimedia,
@@ -196,14 +197,6 @@ const menuAside = computed(() => {
     });
   }
 
-  if (sortedArcades.length) {
-    sideMenu.push({
-      label: "My Arcades",
-      icon: mdiStoreCog,
-      menu: sortedArcades,
-    });
-  }
-
   sideMenu.push({
     label: "My Content",
     icon: mdiMultimedia,
@@ -217,6 +210,20 @@ const menuAside = computed(() => {
         to: `/profile/content`,
       },
     ],
+  });
+
+  if (sortedArcades.length) {
+    sideMenu.push({
+      label: "My Arcades",
+      icon: mdiStoreCog,
+      menu: sortedArcades,
+    });
+  }
+
+  sideMenu.push({
+    label: "Claim Arcade",
+    icon: mdiStorePlus,
+    to: `/arcade/claim`,
   });
 
   return sideMenu;

@@ -79,3 +79,28 @@ export async function APIGetArcadePASELI(arcadeId) {
     throw error;
   }
 }
+
+export async function APIStartTakeover(PCBID) {
+  try {
+    const data = await mainStore.callApi(`/arcade/takeover?PCBID=${PCBID}`);
+    if (data.status == "warn") {
+      window.alert(data.error_code);
+    }
+    return data.data;
+  } catch (error) {
+    console.log("Error fetching takeover:", error);
+    throw error;
+  }
+}
+
+export async function APISaveTakeover(PCBID) {
+  try {
+    const data = await mainStore.callApi(`/arcade/takeover`, "POST", {
+      PCBID: PCBID,
+    });
+    return data;
+  } catch (error) {
+    console.log("Error saving takeover:", error);
+    throw error;
+  }
+}

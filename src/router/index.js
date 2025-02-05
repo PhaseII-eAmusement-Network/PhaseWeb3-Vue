@@ -264,6 +264,14 @@ const routes = [
   },
   {
     meta: {
+      title: "Claim an Arcade",
+    },
+    path: "/arcade/claim",
+    name: "arcade_claim",
+    component: () => import("@/views/Arcade/ClaimView.vue"),
+  },
+  {
+    meta: {
       title: "Game Overview",
     },
     path: "/games/:id/",
