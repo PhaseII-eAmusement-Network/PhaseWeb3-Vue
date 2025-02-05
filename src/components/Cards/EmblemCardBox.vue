@@ -57,9 +57,8 @@ watch(
 
 loadEmblemSettings();
 function loadEmblemSettings() {
-  const ASSET_PATH = import.meta.env.VITE_GAME_ASSET_PATH;
   axios
-    .get(`${ASSET_PATH}/emblems/${version.value}.json`)
+    .get(`/data-sources/emblems/${version.value}.json`)
     .then((r) => {
       if (r.data) {
         emblemSettings.value = r.data;
