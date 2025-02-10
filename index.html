@@ -9,6 +9,7 @@
     <meta name="apple-mobile-web-app-title" content="PhaseII">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="manifest" href="/data-sources/standalone.json" />
     <title>PhaseWeb 3</title>
 
     <style>
@@ -44,8 +45,6 @@
       };
     
       document.addEventListener('keydown', keyHandler, false);
-
-      if (window.navigator.standalone) {document.querySelector('meta[name=viewport]').setAttribute('content', 'width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no');}
     </script>
     <script type="module" crossorigin src="/assets/index.af302b91.js"></script>
     <link rel="stylesheet" href="/assets/index.6925e9df.css">
