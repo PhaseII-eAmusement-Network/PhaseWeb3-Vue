@@ -80,7 +80,16 @@ const cardStyle = `
           <BaseLevel type="justify-start">
             <GameIcon class="md:mr-6" :path="selectedGame.icon" />
             <div class="text-center space-y-1 md:text-left md:mr-6">
-              <h2 class="text-xl">{{ selectedGame.name }}</h2>
+              <h2 class="text-xl sr-only sm:not-sr-only">
+                {{ selectedGame.name }}
+              </h2>
+              <h2 class="text-xl font-semibold not-sr-only sm:sr-only">
+                {{
+                  selectedGame.shortName
+                    ? selectedGame.shortName
+                    : selectedGame.name
+                }}
+              </h2>
               <div
                 class="flex space-x-2 justify-center md:justify-start pt-2 md:pt-0"
               >
