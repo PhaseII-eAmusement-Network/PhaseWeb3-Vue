@@ -59,7 +59,7 @@ function loadGamePage() {
 
 const selectedGame = getGameInfo(props.game);
 const cardStyle = `
-  background-image: linear-gradient(to left, transparent, rgba(0, 0, 0, 1)),
+  background-image: linear-gradient(to top, transparent, rgba(0, 0, 0, .6)),
     url('${selectedGame.cardBG}');
   background-size: cover;
   background-repeat: no-repeat;
@@ -68,7 +68,7 @@ const cardStyle = `
 
 <template>
   <button
-    class="flex rounded-2xl hover:scale-[1.01] hover:shadow-xl hover:outline outline-blue-500/50 hover:bg-slate-500 hover:dark:bg-slate-950 transition-all duration-10"
+    class="flex rounded-2xl hover:scale-[1.01] hover:shadow-xl hover:outline outline-blue-500/50 hover:bg-slate-500 hover:dark:bg-slate-950 transition-all duration-1"
     :style="cardStyle"
     @click="loadGamePage()"
   >
@@ -78,12 +78,15 @@ const cardStyle = `
       <CardBoxComponentBody>
         <BaseLevel>
           <BaseLevel type="justify-start">
-            <GameIcon class="md:mr-6" :path="selectedGame.icon" />
+            <GameIcon
+              class="md:mr-6 scale-110 md:scale-100"
+              :path="selectedGame.icon"
+            />
             <div class="text-center space-y-1 md:text-left md:mr-6">
               <h2 class="text-xl sr-only sm:not-sr-only">
                 {{ selectedGame.name }}
               </h2>
-              <h2 class="text-xl font-semibold not-sr-only sm:sr-only">
+              <h2 class="text-xl font-semibold not-sr-only sm:sr-only -my-2">
                 {{
                   selectedGame.shortName
                     ? selectedGame.shortName

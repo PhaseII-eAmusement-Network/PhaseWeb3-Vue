@@ -108,7 +108,6 @@ export const useMainStore = defineStore("main", {
 
       // Start loading after the specified delay
       startLoading();
-      console.log(this.loadingPool);
 
       const baseHeaders = {
         "App-Auth-Key": apiKey,
