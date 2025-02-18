@@ -25,6 +25,8 @@ export const useMainStore = defineStore("main", {
     /* Loading state */
     isLoading: false,
     isSaving: false,
+    loadingPool: [],
+    savingPool: [],
     errorCode: null,
 
     /* User Loaded state */
@@ -87,12 +89,17 @@ export const useMainStore = defineStore("main", {
       const startLoading = () => {
         loadingTimeout = setTimeout(() => {
           if (method === "GET") {
+            this.loadingPool.push(endpoint);
             this.isLoading = true;
             this.isSaving = false;
           } else if (method === "POST") {
+            this.loadingPool.push(endpoint);
+            this.savingPool.push(endpoint);
             this.isLoading = true;
             this.isSaving = true;
           } else if (method === "PUT") {
+            this.loadingPool.push(endpoint);
+            this.savingPool.push(endpoint);
             this.isLoading = true;
             this.isSaving = true;
           }
@@ -101,6 +108,7 @@ export const useMainStore = defineStore("main", {
 
       // Start loading after the specified delay
       startLoading();
+      console.log(this.loadingPool);
 
       const baseHeaders = {
         "App-Auth-Key": apiKey,
@@ -127,19 +135,25 @@ export const useMainStore = defineStore("main", {
           this.errorCode = response.data.error_code;
           this.isSaving = false;
           this.isLoading = true;
+          this.savingPool = this.savingPool.filter((e) => e !== endpoint);
           return null;
         }
         if (response.data.status === "warn") {
           this.isSaving = false;
           this.isLoading = false;
+          this.loadingPool = this.loadingPool.filter((e) => e !== endpoint);
+          this.savingPool = this.savingPool.filter((e) => e !== endpoint);
           return null;
         }
         this.isLoading = false; // reset flags
         this.isSaving = false;
+        this.loadingPool = this.loadingPool.filter((e) => e !== endpoint);
+        this.savingPool = this.savingPool.filter((e) => e !== endpoint);
         return response.data;
       } catch (error) {
         this.errorCode = error.message;
         this.isSaving = false;
+        this.savingPool = this.savingPool.filter((e) => e !== endpoint);
         throw error;
       } finally {
         clearTimeout(loadingTimeout);

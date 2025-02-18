@@ -56,21 +56,21 @@ onMounted(async () => {
   }
 });
 
-const loading = ref(mainStore.isLoading);
-const saving = ref(mainStore.isSaving);
+const loading = ref(mainStore.loadingPool.length !== 0);
+const saving = ref(mainStore.savingPool.length !== 0);
 const errorCode = ref(mainStore.errorCode);
 const userLoaded = ref(mainStore.userLoaded);
 const userArcades = ref(mainStore.userArcades);
 
 watch(
-  () => mainStore.isLoading,
+  () => mainStore.loadingPool.length !== 0,
   (newValue) => {
     loading.value = newValue;
   }
 );
 
 watch(
-  () => mainStore.isSaving,
+  () => mainStore.savingPool.length !== 0,
   (newValue) => {
     saving.value = newValue;
   }
