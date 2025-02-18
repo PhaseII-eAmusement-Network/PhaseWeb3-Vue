@@ -34,17 +34,17 @@ const assetPaths = computed(() => {
 
 <template>
   <div
-    class="w-full drop-shadow-xl"
+    class="qpro-container relative w-full drop-shadow-xl mt-10 md:mt-0"
     :style="{ width: `${props.size}px`, height: `${props.size}px` }"
   >
-    <div class="qpro-character absolute w-full h-full mt-8 md:mt-0">
+    <div class="qpro-character absolute w-full h-full">
       <!-- BG -->
       <img
         v-if="profile?.qpro?.bg"
         class="qpro-bg absolute"
         :src="assetPaths.bg + '_bg.png'"
         alt="bg"
-        style="top: -50px; left: -6px; width: 200px"
+        style="top: -50px; left: -6px; width: 150px"
       />
 
       <!-- Head Back -->
@@ -115,13 +115,13 @@ const assetPaths = computed(() => {
         class="qpro-body-back absolute"
         :src="assetPaths.body + '_b.png'"
         alt="Body Back"
-        style="top: -45px; left: 0px; width: 400px"
+        style="top: -45px; left: 0px; width: auto"
       />
       <img
         class="qpro-body-front absolute"
         :src="assetPaths.body + '_f.png'"
         alt="Body Front"
-        style="top: -45px; left: 0px; width: 400px"
+        style="top: -45px; left: 0px; width: auto"
       />
 
       <!-- Face -->
@@ -172,6 +172,13 @@ const assetPaths = computed(() => {
 </template>
 
 <style scoped>
+.qpro-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .qpro-character img {
   width: auto;
   height: auto;
