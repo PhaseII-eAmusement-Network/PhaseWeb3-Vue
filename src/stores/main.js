@@ -103,7 +103,7 @@ export const useMainStore = defineStore("main", {
             this.isLoading = true;
             this.isSaving = true;
           }
-        }, 200); // Wait for .2 seconds before showing loading modal
+        }, 0); // Wait for .2 seconds before showing loading modal
       };
 
       // Start loading after the specified delay
