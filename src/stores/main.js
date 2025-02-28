@@ -137,13 +137,6 @@ export const useMainStore = defineStore("main", {
           this.savingPool = this.savingPool.filter((e) => e !== endpoint);
           return null;
         }
-        if (response.data.status === "warn") {
-          this.isSaving = false;
-          this.isLoading = false;
-          this.loadingPool = this.loadingPool.filter((e) => e !== endpoint);
-          this.savingPool = this.savingPool.filter((e) => e !== endpoint);
-          return null;
-        }
         this.isLoading = false; // reset flags
         this.isSaving = false;
         this.loadingPool = this.loadingPool.filter((e) => e !== endpoint);
