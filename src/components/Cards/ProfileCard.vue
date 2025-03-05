@@ -1,12 +1,14 @@
 <script setup>
+import axios from "axios";
 import {
   mdiCog,
   mdiAccountDetails,
   mdiPlaylistMusicOutline,
   mdiFormatListText,
 } from "@mdi/js";
+import { ref, onMounted } from "vue";
 import { dashCode } from "@/constants/userData";
-import { getGameInfo } from "@/constants";
+import { GameConstants, getGameInfo } from "@/constants";
 import BaseButton from "@/components/BaseButton.vue";
 import UserEmblem from "@/components/UserEmblem.vue";
 import UserQpro from "@/components/UserQpro.vue";
@@ -40,6 +42,32 @@ function colorText() {
 }
 
 const thisGame = getGameInfo(props.game);
+const version = ref(props.version);
+const AkanameSettings = ref([]);
+const fullyLoaded = ref(false);
+
+async function loadAkanameSettings() {
+  try {
+    const response = await axios.get(
+      `/data-sources/sdvx/akaname/${version.value}.json`
+    );
+    if (response.data) {
+      AkanameSettings.value = response.data;
+    }
+  } catch (error) {
+    console.error("Error loading Akaname settings:", error.message);
+  } finally {
+    fullyLoaded.value = true;
+  }
+}
+
+onMounted(async () => {
+  if (thisGame.id === GameConstants.SDVX) {
+    await loadAkanameSettings();
+  } else {
+    fullyLoaded.value = true;
+  }
+});
 </script>
 
 <template>
@@ -70,6 +98,16 @@ const thisGame = getGameInfo(props.game);
         <h1 :class="colorText()" class="text-4xl md:text-5xl font-bold">
           {{ profile.username }}
         </h1>
+        <template v-if="fullyLoaded">
+          <p
+            v-if="profile.akaname"
+            class="text-2xl tracking-widest font-light my-1"
+          >
+            {{
+              AkanameSettings.find((item) => item.id === profile.akaname)?.label
+            }}
+          </p>
+        </template>
         <p class="text-xl font-mono">{{ dashCode(profile.extid) }}</p>
       </div>
     </div>

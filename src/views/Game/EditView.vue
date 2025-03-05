@@ -13,6 +13,7 @@ import FormCheckRadio from "@/components/FormCheckRadio.vue";
 import FormControl from "@/components/FormControl.vue";
 import EmblemCardBox from "@/components/Cards/EmblemCardBox.vue";
 import QproCardBox from "@/components/Cards/QproCardBox.vue";
+import AkanameCardBox from "@/components/Cards/AkanameCardBox.vue";
 import PillTag from "@/components/PillTag.vue";
 
 import { APIGetProfile, APIUpdateProfile } from "@/stores/api/profile";
@@ -272,6 +273,11 @@ async function updateProfile() {
             (gameID == 'iidx' || gameID == 'iidxclass') &&
             versionForm.currentVersion >= 19
           "
+          :profile="myProfile"
+          :version="versionForm.currentVersion"
+        />
+        <AkanameCardBox
+          v-if="gameID == 'sdvx' && versionForm.currentVersion >= 5"
           :profile="myProfile"
           :version="versionForm.currentVersion"
         />
