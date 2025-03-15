@@ -11,14 +11,28 @@ import GeneralTable from "@/components/GeneralTable.vue";
 import { getGameInfo } from "@/constants";
 
 import { APIGetPlayVideos } from "@/stores/api/account";
+import { APIGetMusicData } from "@/stores/api/music";
+import BaseDivider from "@/components/BaseDivider.vue";
 
-var videoData = ref([]);
+const videoData = ref([]);
 const loading = ref(false);
 
 const headers = [
   {
     text: "Timestamp",
     value: "timestamp",
+    sortable: true,
+    width: 120,
+  },
+  {
+    text: "Song",
+    value: "name",
+    sortable: true,
+    width: 120,
+  },
+  {
+    text: "Artist",
+    value: "artist",
     sortable: true,
     width: 120,
   },
@@ -46,7 +60,30 @@ async function loadVideos() {
   videoData.value = null;
   try {
     const data = await APIGetPlayVideos();
-    videoData.value = filterVideos(data);
+    videoData.value = filterVideos(JSON.parse(JSON.stringify(data)));
+
+    const uniqueMusicIds = [
+      ...new Set(videoData.value.map((video) => video.musicid)),
+    ];
+
+    if (uniqueMusicIds.length > 0) {
+      const songData = await APIGetMusicData(
+        "iidx",
+        data[0].version,
+        uniqueMusicIds,
+        true
+      );
+
+      const songMap = Object.fromEntries(
+        songData.map((song) => [song.id, song])
+      );
+
+      videoData.value = videoData.value.map((video) => ({
+        ...video,
+        name: songMap[video.musicid]?.name || "Unknown Song",
+        artist: songMap[video.musicid]?.artist || "Unknown Artist",
+      }));
+    }
   } catch (error) {
     console.error("Failed to fetch video data:", error);
   }
@@ -91,6 +128,10 @@ const copyToClipboard = (text) => {
       alert("Failed to copy to clipboard!");
     });
 };
+
+function openInNewTab(url) {
+  window.open(url.data?.url, "_blank").focus();
+}
 </script>
 
 <template>
@@ -117,16 +158,21 @@ const copyToClipboard = (text) => {
             <div
               class="text-center md:text-left grid grid-cols-1 place-content-start gap-6"
             >
-              <div class="space-y-1">
-                <!-- <h1 class="text-2xl xl:text-4xl font-bold">
-                  {{ videoData[0]?.musicid }}
-                </h1> -->
+              <div class="space-y-2">
+                <div>
+                  <h1 class="text-2xl xl:text-4xl font-bold">
+                    {{ videoData[0]?.name }}
+                  </h1>
+                  <h1 class="text-xl xl:text-3xl font-semibold">
+                    {{ videoData[0]?.artist }}
+                  </h1>
+                </div>
+
+                <BaseDivider class="mx-1" />
+
                 <h2 class="text-xl xl:text-2xl font-light">
                   {{ videoData[0]?.game }} {{ videoData[0]?.version }}
                 </h2>
-                <!-- <h2 class="text-xl xl:text-xl">SP HYPER LV. 7</h2> -->
-              </div>
-              <div>
                 <p>{{ videoData[0]?.timestamp }}</p>
               </div>
 
@@ -165,7 +211,7 @@ const copyToClipboard = (text) => {
             <GeneralTable
               :headers="headers"
               :items="videoData"
-              @row-clicked="copyToClipboard"
+              @row-clicked="openInNewTab"
             />
           </div>
         </div>
