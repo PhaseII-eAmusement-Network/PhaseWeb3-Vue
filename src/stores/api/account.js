@@ -180,3 +180,15 @@ export async function APIIntegrateWith(service, code) {
     throw error;
   }
 }
+
+export async function APIUserCustomize(customize) {
+  try {
+    const data = await mainStore.callApi(`/user/customize`, "POST", {
+      customize: customize,
+    });
+    return data;
+  } catch (error) {
+    console.log(`Error saving user customize!`, error);
+    throw error;
+  }
+}

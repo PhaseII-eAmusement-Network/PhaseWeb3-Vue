@@ -15,6 +15,7 @@ export const useMainStore = defineStore("main", {
     userProfiles: [],
     userArcades: [],
     profiles: {},
+    userCustomize: {},
 
     /* Field focus with ctrl+k (to register only once) */
     isFieldFocusRegistered: false,
@@ -64,6 +65,9 @@ export const useMainStore = defineStore("main", {
       }
       if (payload.arcades) {
         this.userArcades = payload.arcades;
+      }
+      if (payload.customize) {
+        this.userCustomize = payload.customize;
       }
     },
 
@@ -250,6 +254,7 @@ export const useMainStore = defineStore("main", {
               cardStyle: "time",
               profiles: user.profiles,
               arcades: user.arcades,
+              customize: user.data?.customize,
             });
             this.userLoaded = true;
             return true;

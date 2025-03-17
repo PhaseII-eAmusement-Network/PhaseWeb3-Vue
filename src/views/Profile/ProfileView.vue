@@ -61,6 +61,7 @@ async function submitProfile() {
   const response = await mainStore.putUser(profileForm);
   if (response.status == "success") {
     profileLoading.value = false;
+    mainStore.userLoaded = false;
     await mainStore.loadUser();
     $router.go();
   }

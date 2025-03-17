@@ -50,14 +50,14 @@ const routes = [
     name: "profile",
     component: () => import("@/views/Profile/ProfileView.vue"),
   },
-  // {
-  //   meta: {
-  //     title: "Customizations",
-  //   },
-  //   path: "/profile/customize",
-  //   name: "profile_customizations",
-  //   component: () => import("@/views/Profile/CustomizeView.vue"),
-  // },
+  {
+    meta: {
+      title: "Customizations",
+    },
+    path: "/profile/customize",
+    name: "profile_customizations",
+    component: () => import("@/views/Profile/CustomizeView.vue"),
+  },
   {
     meta: {
       title: "Integrations",

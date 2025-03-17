@@ -33,25 +33,19 @@ const mainStore = useMainStore();
 
 const greeting = GetRandomMessage();
 
-// var last = {
-//   game: "beatmaniaIIDX",
-//   version: "22 PENDUAL",
-//   arcade: "Ho-House",
-// };
-
-function getCardStyle(game) {
-  if (game !== null) {
-    return `
-      background-image: url('${ASSET_PATH}/card/${game}.webp');
-      background-size: cover;
-      background-repeat: no-repeat;
-    `;
-  }
+function getCardStyle() {
+  return `
+    background-image: url('${ASSET_PATH}/card/${
+    mainStore.userCustomize?.card ?? "time"
+  }.webp');
+    background-size: cover;
+    background-repeat: no-repeat;
+  `;
 }
 </script>
 
 <template>
-  <CardBox :style="getCardStyle(mainStore.userCardStyle)">
+  <CardBox :style="getCardStyle()">
     <BaseLevel
       type="justify-around lg:justify-center md:space-x-4 lg:space-x-0"
       class="bg-white dark:bg-slate-900/90 rounded-2xl p-3"
@@ -59,17 +53,19 @@ function getCardStyle(game) {
       <UserAvatarCurrentUser class="w-28 md:w-32 lg:w-44 lg:mx-12" />
       <div class="space-y-3 text-center md:text-left lg:mx-12">
         <div class="space-y-2 md:space-y-0">
-          <h1 v-if="!useSmall" class="text-2xl md:text-xl lg:text-2xl">
+          <h1
+            v-if="!useSmall && !mainStore.userCustomize.disableGreeting"
+            class="text-2xl md:text-xl lg:text-2xl"
+          >
             {{ greeting.header[0] }}<b>{{ mainStore.userName }} </b
             >{{ greeting.header[1] }}
           </h1>
-          <h1 v-if="useSmall" class="text-3xl md:text-4xl">
+          <h1
+            v-if="useSmall || mainStore.userCustomize.disableGreeting"
+            class="text-3xl md:text-4xl"
+          >
             <b>{{ mainStore.userName }}</b>
           </h1>
-          <p v-if="useSmall && !evenSmaller" class="text-md md:text-lg">
-            <!-- Last seen playing <b>{{ last.game }} {{ last.version }}</b> at
-            <b>{{ last.arcade }}</b> -->
-          </p>
         </div>
         <div
           v-if="!evenSmaller"
@@ -92,7 +88,10 @@ function getCardStyle(game) {
           /> -->
         </div>
       </div>
-      <div v-if="!useSmall" class="text-center md:text-right">
+      <div
+        v-if="!useSmall && !mainStore.userCustomize.disableGreeting"
+        class="text-center md:text-right"
+      >
         <p class="text-xl md:text-lg lg:text-2lg">{{ greeting.comment }}</p>
         <p class="text-xs italic">Greeting by: {{ greeting.author }}</p>
       </div>

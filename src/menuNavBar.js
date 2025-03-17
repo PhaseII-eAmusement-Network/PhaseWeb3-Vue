@@ -1,6 +1,7 @@
 import {
   mdiAccount,
   mdiLogout,
+  mdiBrushVariant,
   mdiServerNetwork,
   mdiCardAccountDetailsOutline,
   mdiAccountArrowLeftOutline,
@@ -14,6 +15,11 @@ export default [
         icon: mdiAccount,
         label: "Settings",
         to: "/profile",
+      },
+      {
+        icon: mdiBrushVariant,
+        label: "Customize",
+        to: "/profile/customize",
       },
       {
         icon: mdiServerNetwork,
