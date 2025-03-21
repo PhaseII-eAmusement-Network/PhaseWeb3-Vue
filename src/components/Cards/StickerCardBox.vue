@@ -54,6 +54,10 @@ watch(
       JSON.stringify(userProfile.value?.trbitem ?? {})
     );
     Object.assign(newTrbitem, newProfileData);
+    if (!newTrbitem.stickers) {
+      newTrbitem.stickers = [];
+    }
+
     // Set all stickers to collapsed when version changes
     collapsedStickers.value = Array.isArray(newTrbitem.stickers)
       ? newTrbitem.stickers.map(() => true)
