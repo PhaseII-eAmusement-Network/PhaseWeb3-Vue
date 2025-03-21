@@ -44,6 +44,10 @@ const collapsedStickers = ref(
   Array.isArray(newTrbitem.stickers) ? newTrbitem.stickers.map(() => true) : []
 );
 
+if (!newTrbitem.stickers) {
+  newTrbitem.stickers = [];
+}
+
 watch(
   () => props.version,
   () => {
