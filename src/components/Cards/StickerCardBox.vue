@@ -8,10 +8,9 @@ import BaseIcon from "@/components/BaseIcon.vue";
 import CardBox from "@/components/CardBox.vue";
 import FormField from "@/components/FormField.vue";
 import FormControl from "@/components/FormControl.vue";
-import UserQpro from "@/components/UserQpro.vue";
+import UserSticker from "@/components/UserSticker.vue";
 import PillTag from "@/components/PillTag.vue";
 
-import { GameConstants } from "@/constants";
 import { APIUpdateProfile } from "@/stores/api/profile";
 
 const props = defineProps({
@@ -19,64 +18,60 @@ const props = defineProps({
     type: Object,
     default: null,
   },
+  game: {
+    type: String,
+    default: null,
+  },
   version: {
     type: Number,
-    default: 14,
+    default: 9,
   },
 });
 
 const router = useRouter();
-const userProfile = ref(JSON.parse(JSON.stringify(props.profile)));
+const userProfile = ref(props.profile);
 const version = ref(props.version);
-const QproKey = ref(0);
+const emblemKey = ref(0);
 
-const newQpro = reactive(
-  userProfile.value?.qpro ?? {
-    head: 0,
-    hair: 0,
-    face: 0,
-    body: 0,
-    hand: 0,
-    bg: 0,
-  }
+const newTrbitem = reactive(
+  JSON.parse(JSON.stringify(userProfile.value?.trbitem ?? {}))
 );
-const QproSettings = ref([]);
+const trbitemSettings = ref([]);
 const isModified = ref(false);
 const loading = ref(false);
 
 watch(
   () => props.version,
   () => {
-    userProfile.value = JSON.parse(JSON.stringify(props.profile));
-    loadQproSettings();
-    newQpro.value = userProfile.value?.qpro;
+    userProfile.value = props.profile;
+    version.value = props.version;
+    loadTrbitemSettings();
+    newTrbitem.value = JSON.parse(
+      JSON.stringify(userProfile.value?.trbitem ?? {})
+    );
     isModified.value = false;
   }
 );
 
 watch(
-  () => props.version,
+  newTrbitem,
   () => {
-    version.value = props.version;
-  }
-);
-
-watch(
-  newQpro,
-  () => {
-    QproKey.value++;
-    isModified.value = !qproEquals(newQpro, props.profile.qpro);
+    emblemKey.value++;
+    isModified.value = !emblemEquals(
+      newTrbitem,
+      userProfile.value?.trbitem ?? {}
+    );
   },
   { deep: true }
 );
 
-loadQproSettings();
-function loadQproSettings() {
+loadTrbitemSettings();
+function loadTrbitemSettings() {
   axios
-    .get(`/data-sources/qpro/${version.value}.json`)
+    .get(`/data-sources/trbitem/${version.value}.json`)
     .then((r) => {
       if (r.data) {
-        QproSettings.value = r.data;
+        trbitemSettings.value = r.data;
       }
     })
     .catch((error) => {
@@ -84,19 +79,21 @@ function loadQproSettings() {
     });
 }
 
-function qproEquals(qpro1, qpro2) {
-  return JSON.stringify(qpro1) === JSON.stringify(qpro2);
+function emblemEquals(emblem1, emblem2) {
+  return JSON.stringify(emblem1) === JSON.stringify(emblem2);
 }
 
 async function updateProfile() {
   loading.value = true;
   var newProfile = JSON.parse(JSON.stringify(props.profile));
-
-  newProfile.qpro = newQpro;
+  if (!newProfile.last) {
+    newProfile.last = {};
+  }
+  newProfile.trbitem = newTrbitem;
   const profileStatus = await APIUpdateProfile(
-    GameConstants.IIDX,
+    props.game,
     props.version,
-    { qpro: newQpro }
+    newProfile
   );
   if (profileStatus.status != "error") {
     router.go();
@@ -105,15 +102,8 @@ async function updateProfile() {
 
 function revert() {
   Object.assign(
-    newQpro,
-    JSON.parse(JSON.stringify(props.profile)).qpro ?? {
-      head: 0,
-      hair: 0,
-      face: 0,
-      body: 0,
-      hand: 0,
-      bg: 0,
-    }
+    newTrbitem,
+    JSON.parse(JSON.stringify(userProfile.value?.trbitem ?? {}))
   );
   isModified.value = false;
 }
@@ -121,31 +111,28 @@ function revert() {
 
 <template>
   <CardBox class="mt-6">
-    <PillTag color="info" label="QPro" class="mb-2" />
+    <PillTag color="info" label="Sticker Board" class="mb-2" />
     <div class="grid md:grid-cols-2 space-y-6 align-center">
       <form>
-        <FormField
-          v-for="option of QproSettings"
-          :key="option.id"
-          :label="option.name"
-          :help="option.help"
-        >
-          <FormControl v-model="newQpro[option.id]" :options="option.options" />
+        <FormField key="base" label="Base">
+          <FormControl
+            v-model="newTrbitem.base"
+            :options="trbitemSettings.base"
+          />
         </FormField>
       </form>
       <div class="place-self-center">
-        <UserQpro
-          :key="QproKey"
+        <UserSticker
+          :key="emblemKey"
           :version="version"
-          :profile="{ qpro: newQpro }"
-          style="scale: 1.6"
-          class="my-16 md:my-0 md:mb-8"
+          :profile="{ trbitem: newTrbitem }"
+          :size="300"
         />
       </div>
     </div>
 
     <template #footer>
-      <div class="space-x-2 pb-4">
+      <div class="space-x-2">
         <BaseButton
           v-if="isModified"
           color="success"
