@@ -10,6 +10,7 @@ import {
   mdiChartAreasplineVariant,
   mdiChartTimeline,
   mdiStickerOutline,
+  mdiChartDonutVariant,
 } from "@mdi/js";
 import SectionMain from "@/components/SectionMain.vue";
 import CardBoxWidget from "@/components/CardBoxWidget.vue";
@@ -22,10 +23,11 @@ import FormControl from "@/components/FormControl.vue";
 import PillTag from "@/components/PillTag.vue";
 import JubilityTable from "@/components/Tables/JubilityTable.vue";
 import UserSticker from "@/components/UserSticker.vue";
+import UserNotesRadar from "@/components/Charts/UserNotesRadar.vue";
 
 import { APIGetProfile } from "@/stores/api/profile";
 import { APIGetArcade } from "@/stores/api/arcade";
-import { getGameInfo } from "@/constants";
+import { GameConstants, getGameInfo } from "@/constants";
 import { getIIDXDan } from "@/constants/danClass.js";
 import { getGitadoraColor, getJubilityColor } from "@/constants/skillColor";
 const ASSET_PATH = import.meta.env.VITE_ASSET_PATH;
@@ -538,6 +540,24 @@ async function generateTimeline(myProfile) {
               />
             </CardBox>
           </div>
+        </template>
+
+        <template
+          v-if="
+            thisGame.id == GameConstants.IIDX &&
+            versionForm.currentVersion >= 29
+          "
+        >
+          <SectionTitleLine
+            :icon="mdiChartDonutVariant"
+            title="Notes Radar"
+            main
+          />
+          <UserNotesRadar
+            :game="thisGame.id"
+            :version="versionForm.currentVersion"
+            :profile="profileUserId"
+          />
         </template>
 
         <template v-if="myProfile?.timeline">

@@ -48,3 +48,42 @@ export async function APIUpdateProfile(game, version, newProfile) {
     throw error;
   }
 }
+
+export async function APIGetAchievements(
+  game,
+  version,
+  userId = null,
+  achievements = []
+) {
+  if (!userId) {
+    while (!mainStore.userId) {
+      await new Promise((resolve) => setTimeout(resolve, 200));
+    }
+    userId = mainStore.userId;
+  }
+
+  var formattedAchievements = "";
+  for (const achievement of achievements) {
+    const achievementType = achievement[0];
+    const achievementId = achievement[1];
+    formattedAchievements += `${achievementType}:${achievementId},`;
+  }
+
+  try {
+    const data = await mainStore.callApi(
+      `/profile/${game}/achievements?version=${version}&userId=${userId}`,
+      "GET",
+      null,
+      {
+        achievements: formattedAchievements.substring(
+          0,
+          formattedAchievements.length - 1
+        ),
+      }
+    );
+    return data.data;
+  } catch (error) {
+    console.log("Error fetching achievements:", error);
+    throw error;
+  }
+}
