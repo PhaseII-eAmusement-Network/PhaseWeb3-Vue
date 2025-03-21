@@ -12,7 +12,7 @@ const props = defineProps({
   },
   size: {
     type: Number,
-    default: 128,
+    default: 320,
   },
 });
 
@@ -35,32 +35,34 @@ function getPath(id) {
 
 function getStickerStyle(sticker) {
   return {
-    left: `${sticker.sticker_pos_x}px`,
-    top: `${sticker.sticker_pos_y}px`,
-    transform: `scale(${sticker.sticker_scale_x}, ${sticker.sticker_scale_y}) rotate(${sticker.sticker_rotate}deg)`,
+    // Use transform for positioning, scaling, and rotation
+    transform: `translate(${sticker.sticker_pos_x - 150}px, ${
+      sticker.sticker_pos_y - 100
+    }px) scale(${sticker.sticker_scale_x}, ${sticker.sticker_scale_x}) rotate(${
+      sticker.sticker_rotate
+    }deg)`,
+    // Ensure the base position is at the top-left corner of the sticker
+    position: "absolute",
   };
 }
 </script>
 
 <template>
-  <div class="inner">
-    <div :style="`position: relative; width: ${size}px; height: 500px`">
-      <div key="base" style="position: absolute">
-        <img
-          :src="getPath(userProfile.trbitem?.base ?? 0)"
-          :style="`width: ${size}px`"
-          class="drop-shadow-lg"
-        />
-      </div>
+  <div class="relative overflow-hidden w-[320px] h-[554px] border">
+    <!-- Base Image -->
+    <img
+      :src="getPath(userProfile.trbitem?.base ?? 0)"
+      class="absolute w-[320px] h-[554px] drop-shadow-lg"
+    />
 
-      <div
-        v-for="sticker of userProfile.trbitem?.stickers ?? []"
-        :key="sticker.sticker_id"
-        class="absolute cursor-pointer"
-        :style="getStickerStyle(sticker)"
-      >
-        <img :src="getPath(sticker.sticker_id)" />
-      </div>
+    <!-- Stickers -->
+    <div
+      v-for="sticker in userProfile.trbitem?.stickers ?? []"
+      :key="sticker.sticker_id"
+      class="absolute"
+      :style="getStickerStyle(sticker)"
+    >
+      <img :src="getPath(sticker.sticker_id)" class="w-[300px] h-[300px]" />
     </div>
   </div>
 </template>

@@ -9,6 +9,7 @@ import {
   mdiChartBarStacked,
   mdiChartAreasplineVariant,
   mdiChartTimeline,
+  mdiStickerOutline,
 } from "@mdi/js";
 import SectionMain from "@/components/SectionMain.vue";
 import CardBoxWidget from "@/components/CardBoxWidget.vue";
@@ -20,6 +21,7 @@ import SectionTitleLine from "@/components/SectionTitleLine.vue";
 import FormControl from "@/components/FormControl.vue";
 import PillTag from "@/components/PillTag.vue";
 import JubilityTable from "@/components/Tables/JubilityTable.vue";
+import UserSticker from "@/components/UserSticker.vue";
 
 import { APIGetProfile } from "@/stores/api/profile";
 import { APIGetArcade } from "@/stores/api/arcade";
@@ -488,11 +490,7 @@ async function generateTimeline(myProfile) {
             class="my-6 grid grid-cols-2 md:grid-cols-5 xl:grid-cols-6 gap-6"
           >
             <template v-for="stat of formatCounts(myProfile)" :key="stat">
-              <CardBoxWidget
-                v-if="stat.value"
-                :label="stat.label"
-                :number="stat.value"
-              />
+              <CardBoxWidget v-if="stat" :label="stat.label" :number="stat" />
             </template>
           </div>
         </template>
@@ -519,6 +517,24 @@ async function generateTimeline(myProfile) {
                 :jubility-data="myProfile.other_breakdown"
                 ,
                 :version="versionForm.currentVersion"
+              />
+            </CardBox>
+          </div>
+        </template>
+
+        <template v-if="myProfile?.trbitem">
+          <SectionTitleLine
+            :icon="mdiStickerOutline"
+            title="Sticker Board"
+            main
+          />
+
+          <div class="my-6">
+            <CardBox class="w-full grid place-content-center">
+              <UserSticker
+                :version="versionForm.currentVersion"
+                :profile="myProfile"
+                :size="290"
               />
             </CardBox>
           </div>
