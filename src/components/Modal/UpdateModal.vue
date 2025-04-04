@@ -58,6 +58,7 @@ async function updateUserData(disable = false) {
   if (data?.status === "success") {
     activeState.value = false;
     mainStore.userLoaded = false;
+    await mainStore.loadUser();
   }
 }
 </script>
