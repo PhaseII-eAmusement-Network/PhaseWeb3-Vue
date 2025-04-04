@@ -46,6 +46,7 @@ function isActive() {
 }
 
 async function updateUserData(disable = false) {
+  const mainStore = useMainStore();
   var data = null;
 
   try {
@@ -56,6 +57,7 @@ async function updateUserData(disable = false) {
 
   if (data?.status === "success") {
     activeState.value = false;
+    mainStore.userLoaded = false;
   }
 }
 </script>
