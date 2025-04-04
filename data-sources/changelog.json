@@ -1,0 +1,3 @@
+{
+    "3.0.1": ["- (Feature) Added update popup", "- (Optimization) Disabled ParticlesJS for the time being. This will be returned as an option in the future.", "- (Optimization) Fill in more score table data for GFDM.", "- (soon™️) I've started rival support, but it's not ready just yet. Stay tuned!"]
+}
