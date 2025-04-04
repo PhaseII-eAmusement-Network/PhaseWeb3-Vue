@@ -1,7 +1,8 @@
 import { useMainStore } from "@/stores/main";
-const mainStore = useMainStore();
 
 export async function APIEmailAuth(email) {
+  const mainStore = useMainStore();
+
   try {
     const data = await mainStore.callApi(`/auth/emailAuth`, "POST", {
       email: email,
@@ -14,6 +15,8 @@ export async function APIEmailAuth(email) {
 }
 
 export async function APICheckKey(key) {
+  const mainStore = useMainStore();
+
   try {
     const data = await mainStore.callApi(`/auth/check2FAKey`, "POST", {
       key: key,
@@ -26,6 +29,8 @@ export async function APICheckKey(key) {
 }
 
 export async function APIResetPassword(key, newPassword, confirmPassword) {
+  const mainStore = useMainStore();
+
   try {
     const data = await mainStore.callApi(`/auth/changePassword`, "POST", {
       key: key,
@@ -44,6 +49,8 @@ export async function APIUpdatePassword(
   newPassword,
   confirmPassword
 ) {
+  const mainStore = useMainStore();
+
   try {
     const data = await mainStore.callApi(`/user/updatePassword`, "POST", {
       currentPassword: currentPassword,
@@ -58,6 +65,8 @@ export async function APIUpdatePassword(
 }
 
 export async function APIRegisterUser(newProfile) {
+  const mainStore = useMainStore();
+
   try {
     const data = await mainStore.callApi(`/user`, "PUT", newProfile);
     return data;
@@ -68,6 +77,8 @@ export async function APIRegisterUser(newProfile) {
 }
 
 export async function APIGetCards() {
+  const mainStore = useMainStore();
+
   try {
     const data = await mainStore.callApi(`/user/card`);
     return data.cards;
@@ -78,6 +89,8 @@ export async function APIGetCards() {
 }
 
 export async function APIPutCard(cardId) {
+  const mainStore = useMainStore();
+
   try {
     const data = await mainStore.callApi(`/user/card`, "POST", {
       cardId: cardId,
@@ -90,6 +103,8 @@ export async function APIPutCard(cardId) {
 }
 
 export async function APIDeleteCard(cardId) {
+  const mainStore = useMainStore();
+
   try {
     const confirmed = window.confirm("Are you really?");
     if (confirmed) {
@@ -105,6 +120,8 @@ export async function APIDeleteCard(cardId) {
 }
 
 export async function APIStartTakeover(cardId, pin) {
+  const mainStore = useMainStore();
+
   try {
     const data = await mainStore.callApi(
       `/user/takeover?cardId=${cardId}&pin=${pin}`
@@ -120,6 +137,8 @@ export async function APIStartTakeover(cardId, pin) {
 }
 
 export async function APISaveTakeover(cardId, pin, mergeSettings) {
+  const mainStore = useMainStore();
+
   try {
     const data = await mainStore.callApi(`/user/takeover`, "POST", {
       cardId: cardId,
@@ -134,6 +153,8 @@ export async function APISaveTakeover(cardId, pin, mergeSettings) {
 }
 
 export async function APIGetPlayVideos() {
+  const mainStore = useMainStore();
+
   try {
     const data = await mainStore.callApi(`/user/playVideos`);
     return data.data;
@@ -144,6 +165,8 @@ export async function APIGetPlayVideos() {
 }
 
 export async function APIGetUserContent(type) {
+  const mainStore = useMainStore();
+
   try {
     const data = await mainStore.callApi(`/user/content?type=${type}`);
     return data.data;
@@ -154,6 +177,8 @@ export async function APIGetUserContent(type) {
 }
 
 export async function APIRemoveIntegration(service) {
+  const mainStore = useMainStore();
+
   try {
     const confirmed = window.confirm("Are you really?");
     if (confirmed) {
@@ -170,6 +195,8 @@ export async function APIRemoveIntegration(service) {
 }
 
 export async function APIIntegrateWith(service, code) {
+  const mainStore = useMainStore();
+
   try {
     const data = await mainStore.callApi(`/user/integrate/${service}`, "POST", {
       code: code,
@@ -182,6 +209,8 @@ export async function APIIntegrateWith(service, code) {
 }
 
 export async function APIUserCustomize(customize) {
+  const mainStore = useMainStore();
+
   try {
     const data = await mainStore.callApi(`/user/customize`, "POST", {
       customize: customize,
@@ -189,6 +218,21 @@ export async function APIUserCustomize(customize) {
     return data;
   } catch (error) {
     console.log(`Error saving user customize!`, error);
+    throw error;
+  }
+}
+
+export async function APIUserAppUpdate(version = null, disable = false) {
+  const mainStore = useMainStore();
+
+  try {
+    const data = await mainStore.callApi(`/user/appVersion`, "POST", {
+      version: version,
+      disable: disable,
+    });
+    return data;
+  } catch (error) {
+    console.log(`Error saving user!`, error);
     throw error;
   }
 }

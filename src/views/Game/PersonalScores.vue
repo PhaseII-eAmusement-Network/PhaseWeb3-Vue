@@ -155,6 +155,16 @@ function formatScores(scores) {
       item.data.music_rate = item.data?.music_rate / 10;
     }
 
+    if (item.data?.excellent) {
+      item.medal = "EX FC";
+    } else if (item.data?.fullcombo) {
+      item.medal = "FC";
+    } else if (item.data?.clear) {
+      item.medal = "CLEARED";
+    } else {
+      item.medal = "FAILED";
+    }
+
     formattedItems.push(item);
   }
   return formattedItems;

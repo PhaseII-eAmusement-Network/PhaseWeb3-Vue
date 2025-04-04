@@ -2,7 +2,7 @@
 import { useMainStore } from "@/stores/main.js";
 import { useStyleStore } from "@/stores/style.js";
 import { ref, watch } from "vue";
-import LoadingModal from "@/components/LoadingModal.vue";
+import LoadingModal from "@/components/Modal/LoadingModal.vue";
 const mainStore = useMainStore();
 
 const loading = ref(mainStore.isLoading);

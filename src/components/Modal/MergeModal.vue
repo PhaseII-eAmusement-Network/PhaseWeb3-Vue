@@ -4,7 +4,7 @@ import OverlayLayer from "@/components/OverlayLayer.vue";
 import GameIcon from "@/components/GameIcon.vue";
 import FormField from "@/components/FormField.vue";
 import FormCheckRadio from "@/components/FormCheckRadio.vue";
-import BaseButton from "./BaseButton.vue";
+import BaseButton from "@/components/BaseButton.vue";
 import { getGameInfo } from "@/constants";
 import { APIGetProfile } from "@/stores/api/profile";
 import { onMounted, ref } from "vue";

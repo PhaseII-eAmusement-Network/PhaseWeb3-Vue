@@ -1,5 +1,5 @@
 <script setup>
-import { reactive } from "vue";
+import { reactive, watch, ref, onMounted } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { mdiSwordCross, mdiPlus } from "@mdi/js";
 import SectionMain from "@/components/SectionMain.vue";
@@ -8,60 +8,82 @@ import BaseButton from "@/components/BaseButton.vue";
 import ProfileCard from "@/components/Cards/ProfileCard.vue";
 import LayoutAuthenticated from "@/layouts/LayoutAuthenticated.vue";
 import SectionTitleLine from "@/components/SectionTitleLine.vue";
+import GameTitleLine from "@/components/GameTitleLine.vue";
 import FormField from "@/components/FormField.vue";
 import FormControl from "@/components/FormControl.vue";
+
+import { APIGetProfile, APIGetAllProfiles } from "@/stores/api/profile";
 import { getGameInfo } from "@/constants";
-const ASSET_PATH = import.meta.env.VITE_ASSET_PATH;
+import { getVideoSource, getCardStyle } from "@/constants/sources";
+import { dashCode } from "@/constants/userData";
 
 const $route = useRoute();
 const $router = useRouter();
 var gameID = null;
 var thisGame = null;
 
-const profile = {
-  id: 1,
-  name: "Trmazi",
-  extid: 12345678,
-  avatar:
-    "https://static.wikia.nocookie.net/dancedancerevolutionddr/images/3/3b/Yuni_img1.gif/",
-  last: {
-    arcade: "GhettoCade",
-    date: "7/16/2023",
-  },
-};
+gameID = $route.params.game;
+thisGame = getGameInfo(gameID);
 
-const rivals = [
-  {
-    id: 1,
-    name: "TRMAZI",
-    rivalID: "1234-5678",
-  },
-  {
-    id: 2,
-    name: "BLADE",
-    rivalID: "1454-5687",
-  },
-  {
-    id: 3,
-    name: "HO!",
-    rivalID: "5364-5568",
-  },
-];
-
+const profile = ref(null);
+const allProfiles = ref([]);
 const versionForm = reactive({
   currentVersion: null,
 });
 
-const filterForm = reactive({
-  filter: null,
-});
+watch(
+  () => versionForm.currentVersion,
+  () => {
+    loadProfile();
+    loadAllProfiles();
+  }
+);
 
-gameID = $route.params.game;
-thisGame = getGameInfo(gameID);
+onMounted(async () => {
+  loadAllProfiles();
+  loadProfile();
+});
 
 if (!thisGame.versions) {
   versionForm.currentVersion = 1;
 }
+
+async function loadProfile() {
+  try {
+    profile.value = null;
+    const data = await APIGetProfile(gameID, versionForm.currentVersion);
+    profile.value = data;
+
+    if (data && !versionForm.currentVersion) {
+      versionForm.currentVersion = data.versions[data.versions.length - 1];
+    }
+  } catch (error) {
+    console.error("Failed to fetch user profile data:", error);
+  }
+}
+
+async function loadAllProfiles() {
+  try {
+    const data = await APIGetAllProfiles(gameID, versionForm.currentVersion);
+    allProfiles.value = data;
+  } catch (error) {
+    console.error("Failed to fetch profile data:", error);
+  }
+}
+
+function filterVersions(haveVersions) {
+  var filtered = [];
+  for (const version of thisGame.versions) {
+    if (haveVersions.includes(version.id)) {
+      filtered.push(version);
+    }
+  }
+  return filtered;
+}
+
+const filterForm = reactive({
+  filter: null,
+});
 
 if (!thisGame) {
   $router.push({
@@ -72,60 +94,67 @@ if (!thisGame) {
   });
 }
 
-function filterUsers() {
+function filterProfiles() {
   if (filterForm.filter) {
-    return rivals.filter(
+    return allProfiles.value.filter(
       (rival) =>
-        rival.name.toLowerCase().includes(filterForm.filter.toLowerCase()) ||
-        rival.rivalID.toLowerCase().includes(filterForm.filter.toLowerCase())
+        rival.username
+          .toLowerCase()
+          .includes(filterForm.filter.toLowerCase()) ||
+        rival.extid
+          .toString()
+          .toLowerCase()
+          .includes(filterForm.filter.toLowerCase())
     );
   }
-}
-
-function getSources() {
-  var sources = null;
-  if (!versionForm.currentVersion) {
-    sources = thisGame.cardBG;
-  } else {
-    sources = `${ASSET_PATH}/games/${thisGame.id}/card/${versionForm.currentVersion}.webp`;
-  }
-  return sources;
-}
-
-function getCardStyle() {
-  return `
-      background-image: url('${getSources()}');
-      background-size: cover;
-      background-repeat: no-repeat;
-    `;
 }
 </script>
 
 <template>
   <LayoutAuthenticated>
     <SectionMain>
-      <div class="md:flex md:justify-end pb-6 items-center">
-        <div
-          v-if="thisGame.versions"
-          class="mt-2 md:mt-0 md:w-1/3 md:text-right"
-        >
-          <h2 class="text-md sm:text-lg md:text-xl font-bold p-2">
-            Select Version
-          </h2>
-          <FormControl
-            v-model="versionForm.currentVersion"
-            :options="thisGame.versions"
-          />
-        </div>
-      </div>
       <div
-        v-if="versionForm.currentVersion"
-        :style="getCardStyle()"
-        class="rounded-2xl mb-6"
+        :style="getCardStyle(thisGame, versionForm.currentVersion)"
+        class="rounded-2xl mb-6 card-container"
       >
-        <div class="bg-white dark:bg-slate-900/90 rounded-2xl pt-6 p-3">
+        <video
+          autoplay
+          muted
+          loop
+          playsinline
+          :src="getVideoSource(thisGame, versionForm.currentVersion)"
+          class="background-video"
+        ></video>
+        <div
+          class="bg-white dark:bg-slate-900/90 rounded-2xl pt-6 p-3 card-content"
+        >
           <div class="w-full">
-            <ProfileCard use-small :profile="profile" />
+            <div
+              class="md:flex md:px-5 md:space-x-10 md:justify-between md:items-center"
+            >
+              <GameTitleLine :path="thisGame.icon" :title="thisGame.name" />
+              <div
+                v-if="thisGame.versions && profile"
+                class="md:w-1/3 md:text-right"
+              >
+                <h2 class="text-md sm:text-lg md:text-xl font-bold p-2">
+                  Select Version
+                </h2>
+                <FormControl
+                  v-model="versionForm.currentVersion"
+                  :options="filterVersions(profile.versions)"
+                />
+              </div>
+            </div>
+          </div>
+          <div v-if="profile" class="w-full">
+            <ProfileCard
+              :game="gameID"
+              :version="versionForm.currentVersion"
+              :profile="profile"
+              use-small
+            >
+            </ProfileCard>
           </div>
         </div>
       </div>
@@ -144,35 +173,39 @@ function getCardStyle() {
           />
         </FormField>
 
-        <div class="grid gap-3">
-          <CardBox v-for="rival of filterUsers()" :key="rival.id">
-            <div class="flex justify-between items-center">
-              <div class="flex">
-                <img
-                  class="w-10 mr-3"
-                  src="https://static.wikia.nocookie.net/dancedancerevolutionddr/images/3/3b/Yuni_img1.gif/"
-                />
-                <div class="grid">
-                  <h1 class="text-lg">{{ rival.name }}</h1>
-                  <h2 class="text-md font-mono">{{ rival.rivalID }}</h2>
-                </div>
+        <div class="grid gap-4">
+          <div
+            v-for="player of filterProfiles()"
+            :key="player.id"
+            class="bg-slate-800 p-4 rounded-xl"
+          >
+            <div class="flex w-full place-content-between">
+              <div>
+                <h1 class="text-lg md:text-xl">{{ player.username }}</h1>
+                <h2 class="text-md md:text-lg font-mono">
+                  {{ dashCode(player.extid) }}
+                </h2>
               </div>
-              <BaseButton label="Add Rival" color="success" />
+
+              <div class="flex align-middle">
+                <BaseButton
+                  label="Add Rival"
+                  color="success"
+                  :disabled="player.userId == profile?.userId"
+                  tooltip="penis"
+                />
+              </div>
             </div>
-          </CardBox>
+          </div>
         </div>
       </CardBox>
 
       <SectionTitleLine :icon="mdiSwordCross" title="Rivals" main />
       <CardBox v-if="versionForm.currentVersion" class="mb-6">
         <div class="grid gap-3">
-          <CardBox v-for="rival of rivals" :key="rival.id">
+          <CardBox v-for="rival of profile?.rivals" :key="rival.id">
             <div class="flex justify-between items-center">
               <div class="flex">
-                <img
-                  class="w-10 mr-3"
-                  src="https://static.wikia.nocookie.net/dancedancerevolutionddr/images/3/3b/Yuni_img1.gif/"
-                />
                 <div class="grid">
                   <h1 class="text-lg">{{ rival.name }}</h1>
                   <h2 class="text-md font-mono">{{ rival.rivalID }}</h2>
@@ -180,6 +213,9 @@ function getCardStyle() {
               </div>
               <BaseButton label="Remove Rival" color="danger" />
             </div>
+          </CardBox>
+          <CardBox v-if="!profile?.rivals">
+            <h1 class="text-2xl">You have no rivals!</h1>
           </CardBox>
         </div>
       </CardBox>

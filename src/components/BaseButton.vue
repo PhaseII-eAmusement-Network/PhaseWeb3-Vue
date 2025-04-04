@@ -55,6 +55,10 @@ const props = defineProps({
     type: Boolean,
     default: true,
   },
+  tooltip: {
+    type: String,
+    default: null,
+  },
 });
 
 const is = computed(() => {
@@ -128,6 +132,12 @@ const componentClass = computed(() => {
     :target="target"
     :disabled="disabled"
   >
+    <div
+      v-if="tooltip"
+      class="absolute bottom-full left-1/2 mb-1 -translate-x-1/2 whitespace-nowrap rounded bg-black px-2 py-1 text-xs text-white opacity-0 group-hover:opacity-100 transition-opacity duration-200 z-10"
+    >
+      {{ tooltip }}
+    </div>
     <BaseIcon v-if="icon" :path="icon" :size="iconSize" />
     <span v-if="label" :class="labelClass">{{ label }}</span>
   </component>

@@ -19,8 +19,8 @@ import FormControl from "@/components/FormControl.vue";
 import FormCheckRadio from "@/components/FormCheckRadio.vue";
 import LayoutAuthenticated from "@/layouts/LayoutAuthenticated.vue";
 import SectionTitleLine from "@/components/SectionTitleLine.vue";
-import MergeModal from "@/components/MergeModal.vue";
-import ConfirmMergeModal from "@/components/ConfirmMergeModal.vue";
+import MergeModal from "@/components/Modal/MergeModal.vue";
+import ConfirmMergeModal from "@/components/Modal/ConfirmMergeModal.vue";
 
 import { APIStartTakeover, APISaveTakeover } from "@/stores/api/account";
 import { getGameInfo } from "@/constants";

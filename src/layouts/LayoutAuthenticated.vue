@@ -15,8 +15,9 @@ import { useRouter, useRoute } from "vue-router";
 import menuNavBar from "@/menuNavBar.js";
 import { useMainStore } from "@/stores/main.js";
 import { useStyleStore } from "@/stores/style.js";
-import LoadingModal from "@/components/LoadingModal.vue";
-// import EmailModal from "@/components/EmailModal.vue";
+import LoadingModal from "@/components/Modal/LoadingModal.vue";
+// import EmailModal from "@/components/Modal/EmailModal.vue";
+import UpdateModal from "@/components/Modal/UpdateModal.vue";
 import BaseIcon from "@/components/BaseIcon.vue";
 import NavBar from "@/components/NavBar.vue";
 import NavBarItemPlain from "@/components/NavBarItemPlain.vue";
@@ -238,6 +239,10 @@ const menuAside = computed(() => {
       'overflow-hidden lg:overflow-visible': isAsideMobileExpanded,
     }"
   >
+    <template v-if="userLoaded">
+      <UpdateModal class="transition-opacity duration-300 ease-out" />
+      <!-- <EmailModal class="transition-opacity duration-300 ease-out" /> -->
+    </template>
     <LoadingModal
       :active="loading || saving"
       :is-save="saving"
@@ -248,7 +253,6 @@ const menuAside = computed(() => {
         'opacity-0': !loading && !saving,
       }"
     />
-    <!-- <EmailModal class="transition-opacity duration-300 ease-out" /> -->
     <div
       v-if="userLoaded"
       :class="[layoutAsidePadding, { 'ml-60 lg:ml-0': isAsideMobileExpanded }]"

@@ -5,10 +5,11 @@ import {
   mdiAccountDetails,
   mdiPlaylistMusicOutline,
   mdiFormatListText,
+  mdiAxeBattle,
 } from "@mdi/js";
 import { ref, onMounted } from "vue";
 import { dashCode } from "@/constants/userData";
-import { GameConstants, getGameInfo } from "@/constants";
+import { GameConstants, getGameInfo, getRivalInfo } from "@/constants";
 import BaseButton from "@/components/BaseButton.vue";
 import UserEmblem from "@/components/UserEmblem.vue";
 import UserQpro from "@/components/UserQpro.vue";
@@ -130,6 +131,14 @@ onMounted(async () => {
           :outline="false"
           color="info"
           label="Edit Profile"
+        />
+        <BaseButton
+          v-if="!useSmall && game && getRivalInfo(game, version)"
+          :icon="mdiAxeBattle"
+          :href="`/#/games/${game}/rivals`"
+          :outline="false"
+          color="info"
+          label="Rivals"
         />
         <BaseButton
           v-if="!useSmall && !thisGame.noScores"

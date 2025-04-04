@@ -2,7 +2,7 @@
 import CardBox from "@/components/CardBox.vue";
 import OverlayLayer from "@/components/OverlayLayer.vue";
 import GameIcon from "@/components/GameIcon.vue";
-import BaseButton from "./BaseButton.vue";
+import BaseButton from "@/components/BaseButton.vue";
 import { getGameInfo } from "@/constants";
 
 defineProps({

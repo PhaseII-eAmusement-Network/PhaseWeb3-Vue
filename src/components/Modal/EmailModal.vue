@@ -3,11 +3,11 @@ import { computed, ref } from "vue";
 import CardBox from "@/components/CardBox.vue";
 import OverlayLayer from "@/components/OverlayLayer.vue";
 import BaseButton from "@/components/BaseButton.vue";
-import BaseIcon from "./BaseIcon.vue";
+import BaseIcon from "@/components/BaseIcon.vue";
 import { mdiEmailAlertOutline } from "@mdi/js";
 
 import { useMainStore } from "@/stores/main.js";
-import { loadCookie, saveCookie, deleteCookie } from "@/stores/cookies";
+import { loadCookie, saveCookie } from "@/stores/cookies";
 
 const mainStore = useMainStore();
 

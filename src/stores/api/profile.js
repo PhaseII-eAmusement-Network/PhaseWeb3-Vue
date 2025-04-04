@@ -1,9 +1,11 @@
 import { useMainStore } from "@/stores/main";
 const mainStore = useMainStore();
 
-export async function APIGetAllProfiles(game) {
+export async function APIGetAllProfiles(game, version = null) {
   try {
-    const data = await mainStore.callApi(`/game/${game}/profiles`);
+    const data = await mainStore.callApi(
+      `/game/${game}/profiles?version=${version}`
+    );
     return data.data;
   } catch (error) {
     console.log("Error fetching profiles:", error);

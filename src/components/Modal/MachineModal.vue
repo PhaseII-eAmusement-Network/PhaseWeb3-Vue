@@ -1,9 +1,6 @@
 <script setup>
 import CardBox from "@/components/CardBox.vue";
 import OverlayLayer from "@/components/OverlayLayer.vue";
-import BaseIcon from "./BaseIcon.vue";
-import BaseButton from "./BaseButton.vue";
-import { mdiCheckOutline, mdiCloseOutline } from "@mdi/js";
 
 defineProps({
   active: {

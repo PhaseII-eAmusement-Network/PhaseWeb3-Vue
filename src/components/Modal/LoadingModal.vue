@@ -2,8 +2,8 @@
 import { useRouter } from "vue-router";
 import CardBox from "@/components/CardBox.vue";
 import OverlayLayer from "@/components/OverlayLayer.vue";
-import BaseIcon from "./BaseIcon.vue";
-import BaseButton from "./BaseButton.vue";
+import BaseIcon from "@/components/BaseIcon.vue";
+import BaseButton from "@/components/BaseButton.vue";
 import { mdiCheckOutline, mdiCloseOutline } from "@mdi/js";
 
 const $router = useRouter();

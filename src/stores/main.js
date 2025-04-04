@@ -4,6 +4,9 @@ import { loadUserAuthKey, saveUserAuthKey } from "@/stores/auth";
 
 export const useMainStore = defineStore("main", {
   state: () => ({
+    /* App Information */
+    appVersion: import.meta.env.VITE_APP_VERSION,
+
     /* User */
     userId: null,
     userName: null,

@@ -304,38 +304,47 @@ const GITADORA_VERSION_DATA = [
   {
     id: VersionConstants.GITADORA,
     label: "Original",
+    maxRivals: 3,
   },
   {
     id: VersionConstants.GITADORA_OVERDRIVE,
     label: "OverDrive",
+    maxRivals: 3,
   },
   {
     id: VersionConstants.GITADORA_TRIBOOST,
     label: "Tri-Boost",
+    maxRivals: 3,
   },
   {
     id: VersionConstants.GITADORA_TRIBOOST_RE_EVOLVE,
     label: "Tri-Boost RE:Evolve",
+    maxRivals: 3,
   },
   {
     id: VersionConstants.GITADORA_MATIXX,
     label: "Matixx",
+    maxRivals: 3,
   },
   {
     id: VersionConstants.GITADORA_EXCHAIN,
     label: "EXCHAIN",
+    maxRivals: 3,
   },
   {
     id: VersionConstants.GITADORA_NEXTAGE,
     label: "Nex+Age",
+    maxRivals: 3,
   },
   {
     id: VersionConstants.GITADORA_HIGH_VOLTAGE,
     label: "HIGH-VOLTAGE",
+    maxRivals: 3,
   },
   {
     id: VersionConstants.GITADORA_FUZZUP,
     label: "FUZZUP",
+    maxRivals: 3,
   },
 ];
 
@@ -428,10 +437,7 @@ export const gameData = [
     icon: null,
     cardBG: null,
     noRivals: true,
-    scoreHeaders: [
-      { text: "Combos", value: "data.combo" },
-      { text: "Halo", value: "halo" },
-    ],
+    scoreHeaders: [{ text: "Combos", value: "data.combo" }],
     chartTable: {
       0: "1A",
       1: "2A",
@@ -566,34 +572,42 @@ export const gameData = [
       {
         id: VersionConstants.DDR_X2,
         label: "X2",
+        maxRivals: 1,
       },
       {
         id: VersionConstants.DDR_X3_VS_2ND_MIX,
         label: "X3 vs. 2ND MIX",
+        maxRivals: 3,
       },
       {
         id: VersionConstants.DDR_2013,
         label: "(2013)",
+        maxRivals: 3,
       },
       {
         id: VersionConstants.DDR_2014,
         label: "(2014)",
+        maxRivals: 3,
       },
       {
         id: VersionConstants.DDR_ACE,
         label: "Ace",
+        maxRivals: 3,
       },
       {
         id: VersionConstants.DDR_A20,
         label: "A20",
+        maxRivals: 3,
       },
       {
         id: VersionConstants.DDR_A20_PLUS,
         label: "A20 PLUS",
+        maxRivals: 3,
       },
       {
         id: VersionConstants.DDR_A3,
         label: "A3",
+        maxRivals: 3,
       },
     ],
   },
@@ -656,6 +670,7 @@ export const gameData = [
     icon: `${ASSET_PATH}/icon/ddr.webp`,
     cardBG: `${ASSET_PATH}/card/ddr.webp`,
     assetId: "ddr",
+    gameOptions: DDROptions,
     videoTable: [VersionConstants.DDR_A20_PLUS],
     scoreHeaders: [
       { text: "Combos", value: "data.combo" },
@@ -774,6 +789,7 @@ export const gameData = [
       {
         id: VersionConstants.DDR_A20_PLUS,
         label: "OmniMIX (A20 PLUS)",
+        maxRivals: 3,
       },
     ],
   },
@@ -799,7 +815,7 @@ export const gameData = [
     ],
     scoreHeaders: [
       { text: "Combos", value: "data.combo" },
-      { text: "Medal", value: "medal", width: 140 },
+      { text: "Medal", value: "medal", width: 100 },
       { text: "SKILL %", value: "data.skill_perc", width: 90 },
       { text: "SKILL POINT", value: "data.skill_points", width: 140 },
     ],
@@ -875,22 +891,27 @@ export const gameData = [
       {
         id: VersionConstants.DRUMMANIA_V4,
         label: "V4: ROCKxROCK",
+        maxRivals: 3,
       },
       {
         id: VersionConstants.DRUMMANIA_V5,
         label: "V5: ROCK TO INFINITY!",
+        maxRivals: 3,
       },
       {
         id: VersionConstants.DRUMMANIA_V6,
         label: "V6: BLAZING!!!!",
+        maxRivals: 3,
       },
       {
         id: VersionConstants.DRUMMANIA_V7,
         label: "V7",
+        maxRivals: 3,
       },
       {
         id: VersionConstants.DRUMMANIA_V8,
         label: "V8",
+        maxRivals: 3,
       },
     ],
   },
@@ -1040,7 +1061,7 @@ export const gameData = [
     gameOptions: GFDMOptions,
     scoreHeaders: [
       { text: "Combos", value: "data.combo" },
-      { text: "Medal", value: "medal", width: 140 },
+      { text: "Medal", value: "medal", width: 100 },
       { text: "SKILL %", value: "data.skill_perc", width: 90 },
       { text: "SKILL POINT", value: "data.skill_points", width: 140 },
     ],
@@ -1142,22 +1163,27 @@ export const gameData = [
       {
         id: VersionConstants.GUITARFREAKS_V4,
         label: "V4: ROCKxROCK",
+        maxRivals: 3,
       },
       {
         id: VersionConstants.GUITARFREAKS_V5,
         label: "V5: ROCK TO INFINITY!",
+        maxRivals: 3,
       },
       {
         id: VersionConstants.GUITARFREAKS_V6,
         label: "V6: BLAZING!!!!",
+        maxRivals: 3,
       },
       {
         id: VersionConstants.GUITARFREAKS_V7,
         label: "V7",
+        maxRivals: 3,
       },
       {
         id: VersionConstants.GUITARFREAKS_V8,
         label: "V8",
+        maxRivals: 3,
       },
     ],
   },
@@ -1169,6 +1195,7 @@ export const gameData = [
     cardBG: `${ASSET_PATH}/card/iidx.webp`,
     assetId: "iidx",
     gameOptions: IIDXOptions,
+    splitRivals: true,
     videoTable: [
       VersionConstants.IIDX_TRICORO,
       VersionConstants.IIDX_SPADA,
@@ -1315,50 +1342,62 @@ export const gameData = [
       {
         id: VersionConstants.IIDX_TRICORO,
         label: "tricoro",
+        maxRivals: 5,
       },
       {
         id: VersionConstants.IIDX_SPADA,
         label: "SPADA",
+        maxRivals: 5,
       },
       {
         id: VersionConstants.IIDX_PENDUAL,
         label: "PENDUAL",
+        maxRivals: 5,
       },
       {
         id: VersionConstants.IIDX_COPULA,
         label: "COPULA",
+        maxRivals: 5,
       },
       {
         id: VersionConstants.IIDX_SINOBUZ,
         label: "SINOBUZ",
+        maxRivals: 5,
       },
       {
         id: VersionConstants.IIDX_CANNON_BALLERS,
         label: "CANNON BALLERS",
+        maxRivals: 5,
       },
       {
         id: VersionConstants.IIDX_ROOTAGE,
         label: "ROOTAGE",
+        maxRivals: 5,
       },
       {
         id: VersionConstants.IIDX_HEROIC_VERSE,
         label: "HEROIC VERSE",
+        maxRivals: 5,
       },
       {
         id: VersionConstants.IIDX_BISTROVER,
         label: "BISTROVER",
+        maxRivals: 5,
       },
       {
         id: VersionConstants.IIDX_CASTHOUR,
         label: "CastHour",
+        maxRivals: 5,
       },
       {
         id: VersionConstants.IIDX_RESIDENT,
         label: "RESIDENT",
+        maxRivals: 5,
       },
       {
         id: VersionConstants.IIDX_EPOLIS,
         label: "EPOLIS",
+        maxRivals: 5,
       },
     ],
   },
@@ -1537,30 +1576,37 @@ export const gameData = [
       {
         id: VersionConstants.JUBEAT_SAUCER,
         label: "Saucer",
+        maxRivals: 3,
       },
       {
         id: VersionConstants.JUBEAT_SAUCER_FULFILL,
         label: "Saucer Fulfill",
+        maxRivals: 3,
       },
       {
         id: VersionConstants.JUBEAT_PROP,
         label: "Prop",
+        maxRivals: 3,
       },
       {
         id: VersionConstants.JUBEAT_QUBELL,
         label: "Qubell",
+        maxRivals: 3,
       },
       {
         id: VersionConstants.JUBEAT_CLAN,
         label: "Clan",
+        maxRivals: 3,
       },
       {
         id: VersionConstants.JUBEAT_FESTO,
         label: "Festo",
+        maxRivals: 3,
       },
       {
         id: VersionConstants.JUBEAT_AVE,
         label: "Avenue",
+        maxRivals: 3,
       },
     ],
   },
@@ -1778,38 +1824,47 @@ export const gameData = [
       {
         id: VersionConstants.POPN_MUSIC_TUNE_STREET,
         label: "TUNE STREET",
+        maxRivals: 2,
       },
       {
         id: VersionConstants.POPN_MUSIC_FANTASIA,
         label: "fantasia",
+        maxRivals: 2,
       },
       {
         id: VersionConstants.POPN_MUSIC_SUNNY_PARK,
         label: "Sunny Park",
+        maxRivals: 2,
       },
       {
         id: VersionConstants.POPN_MUSIC_LAPISTORIA,
         label: "ラピストリア (Lapistoria)",
+        maxRivals: 4,
       },
       {
         id: VersionConstants.POPN_MUSIC_ECLALE,
         label: "éclale",
+        maxRivals: 4,
       },
       {
         id: VersionConstants.POPN_MUSIC_USANEKO,
         label: "うさぎと猫と少年の夢 (Usaneko)",
+        maxRivals: 4,
       },
       {
         id: VersionConstants.POPN_MUSIC_PEACE,
         label: "peace",
+        maxRivals: 4,
       },
       {
         id: VersionConstants.POPN_MUSIC_KAIMEI_RIDDLES,
         label: "解明リドルズ (Kaimei riddles)",
+        maxRivals: 4,
       },
       {
         id: VersionConstants.POPN_MUSIC_UNILAB,
         label: "UniLab",
+        maxRivals: 4,
       },
     ],
   },
@@ -1843,22 +1898,27 @@ export const gameData = [
       {
         id: VersionConstants.REFLEC_BEAT_LIMELIGHT,
         label: "Limelight",
+        maxRivals: 3,
       },
       {
         id: VersionConstants.REFLEC_BEAT_COLETTE,
         label: "Colette",
+        maxRivals: 3,
       },
       {
         id: VersionConstants.REFLEC_BEAT_GROOVIN,
         label: "groovin'!!",
+        maxRivals: 3,
       },
       {
         id: VersionConstants.REFLEC_BEAT_VOLZZA,
         label: "VOLZZA",
+        maxRivals: 3,
       },
       {
         id: VersionConstants.REFLEC_BEAT_VOLZZA_2,
         label: "VOLZZA 2",
+        maxRivals: 3,
       },
     ],
   },
@@ -1893,26 +1953,32 @@ export const gameData = [
       {
         id: VersionConstants.SDVX_BOOTH,
         label: "BOOTH",
+        maxRivals: 3,
       },
       {
         id: VersionConstants.SDVX_INFINITE_INFECTION,
         label: "-II- Infinite Infection",
+        maxRivals: 3,
       },
       {
         id: VersionConstants.SDVX_GRAVITY_WARS,
         label: "GRAVITY WARS",
+        maxRivals: 3,
       },
       {
         id: VersionConstants.SDVX_HEAVENLY_HAVEN,
         label: "HEAVENLY HAVEN",
+        maxRivals: 3,
       },
       {
         id: VersionConstants.SDVX_VIVID_WAVE,
         label: "VIVID WAVE",
+        maxRivals: 3,
       },
       {
         id: VersionConstants.SDVX_EXCEED_GEAR,
         label: "EXCEED GEAR",
+        maxRivals: 3,
       },
     ],
   },
@@ -1983,10 +2049,25 @@ export function getGameTitle(game, version) {
   var output = gameObject.name;
 
   const versions = gameObject.versions;
-  if (versions !== null) {
+  if (versions !== undefined) {
     const thisVersion = versions.find((x) => x.id == version);
     if (thisVersion !== undefined) {
       output += ` ${thisVersion.name}`;
+    }
+  }
+
+  return output;
+}
+
+export function getRivalInfo(game, version) {
+  const gameObject = gameData.find((x) => x.id == game);
+  var output = null;
+
+  const versions = gameObject.versions;
+  if (versions !== undefined) {
+    const thisVersion = versions.find((x) => x.id == version);
+    if (thisVersion !== undefined) {
+      output = thisVersion.maxRivals;
     }
   }
 
