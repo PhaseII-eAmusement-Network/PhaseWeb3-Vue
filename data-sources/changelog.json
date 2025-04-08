@@ -1,3 +1,4 @@
 {
-    "3.0.1": ["- (Feature) Added update popup", "- (Optimization) Disabled ParticlesJS for the time being. This will be returned as an option in the future.", "- (Optimization) Fill in more score table data for GFDM.", "- (soon™️) I've started rival support, but it's not ready just yet. Stay tuned!"]
+    "3.0.1": ["- (Feature) Added update popup", "- (Optimization) Disabled ParticlesJS for the time being. This will be returned as an option in the future.", "- (Optimization) Fill in more score table data for GFDM.", "- (soon™️) I've started rival support, but it's not ready just yet. Stay tuned!"],
+    "3.0.2": ["- (Feature) Added new greetings", "- (Feature) Added new user background", "- (Feature) Added toggle for disabling/enabling this popup", "- (Feature) Added version info to footer", "- (Feature) Fill in more profile data on personal profile view", "- (Fix) DDR stats now work again", "- (Fix) DDR player weight can now be set (kinda)"]
 }
