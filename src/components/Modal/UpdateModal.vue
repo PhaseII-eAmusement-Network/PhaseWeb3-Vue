@@ -6,7 +6,7 @@ import OverlayLayer from "@/components/OverlayLayer.vue";
 import BaseButton from "@/components/BaseButton.vue";
 import BaseIcon from "@/components/BaseIcon.vue";
 import { mdiSourceBranchRefresh } from "@mdi/js";
-import { APIUserAppUpdate } from "@/stores/api/account";
+import { APIUserAppUpdate, APIUserCustomize } from "@/stores/api/account";
 
 import { useMainStore } from "@/stores/main.js";
 
@@ -38,7 +38,7 @@ function isActive() {
     }
   }
 
-  if (mainStore.userData.disableUpdateModal) {
+  if (mainStore.userCustomize.disableUpdatePopup) {
     activeState.value = false;
   }
 
@@ -50,9 +50,17 @@ async function updateUserData(disable = false) {
   var data = null;
 
   try {
-    data = await APIUserAppUpdate(appVersion, disable);
+    data = await APIUserAppUpdate(appVersion, false);
   } catch (error) {
     console.error("Failed to update user:", error);
+  }
+
+  if (disable) {
+    try {
+      await APIUserCustomize({ disableUpdatePopup: true });
+    } catch (error) {
+      console.error("Failed to update customize:", error);
+    }
   }
 
   if (data?.status === "success") {

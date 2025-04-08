@@ -212,7 +212,7 @@ async function updateProfile() {
                 type="number"
                 onkeypress="return event.charCode >= 48 && event.charCode <= 57"
                 min="0"
-                max="999"
+                max="10000"
                 @update:model-value="
                   (value) =>
                     setNestedValue(optionForm, setting.id, Number(value))

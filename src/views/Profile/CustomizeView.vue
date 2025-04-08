@@ -45,8 +45,6 @@ async function updateCustomize() {
 }
 
 function userChanged() {
-  console.log(originalData);
-  console.log(userCustomize.value);
   if (JSON.stringify(originalData) !== JSON.stringify(userCustomize.value)) {
     return true;
   } else {
@@ -97,6 +95,15 @@ async function revert() {
                 type="switch"
                 :input-value="userCustomize.disableGreeting ?? false"
                 name="disableGreeting"
+              />
+            </FormField>
+
+            <FormField label="Disable WebUI Update Popup">
+              <FormCheckRadio
+                v-model="userCustomize.disableUpdatePopup"
+                type="switch"
+                :input-value="userCustomize.disableUpdatePopup ?? false"
+                name="disableUpdatePopup"
               />
             </FormField>
 

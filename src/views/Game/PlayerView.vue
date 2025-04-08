@@ -250,7 +250,6 @@ function formatProfile(profile) {
 
 function formatCounts(profile) {
   const stats = profile.stats?.count;
-
   return stats
     ? [
         stats.mfc != null
@@ -258,31 +257,46 @@ function formatCounts(profile) {
               label: "MFCs",
               value: stats.mfc,
             }
-          : 0,
+          : {
+              label: "MFCs",
+              value: 0,
+            },
         stats.pfc != null
           ? {
               label: "PFCs",
               value: stats.pfc,
             }
-          : 0,
+          : {
+              label: "PFCs",
+              value: 0,
+            },
         stats.fc != null
           ? {
               label: "GFCs",
               value: stats.fc,
             }
-          : 0,
+          : {
+              label: "GFCs",
+              value: 0,
+            },
         stats.gfc != null
           ? {
               label: "FCs",
               value: stats.gfc,
             }
-          : 0,
+          : {
+              label: "FCs",
+              value: 0,
+            },
         stats.life4 != null
           ? {
               label: "Life-4 Clears",
               value: stats.life4,
             }
-          : 0,
+          : {
+              label: "Life-4 Clears",
+              value: 0,
+            },
       ]
     : [];
 }
@@ -425,11 +439,6 @@ async function generateTimeline(myProfile) {
               :num-color="colorText(stat)"
             >
               {{ stat.type == String ? myProfile.stats[stat.key] : null }}
-              <!-- {{
-                      stat.type == String && stat.isIIDXDan
-                        ? getIIDXDan(myProfile[stat.key]).label
-                        : None
-                    }} -->
             </CardBoxWidget>
           </template>
           <CardBoxWidget
@@ -442,47 +451,87 @@ async function generateTimeline(myProfile) {
             label="Attempts"
             :number="myProfile.stats?.count?.attempts"
           />
+
+          <!-- GFDM -->
           <CardBoxWidget
             v-if="myProfile.skill"
             label="Skill Points"
             :number="myProfile.skill / 100"
             :num-color="getGitadoraColor(myProfile.skill)"
           />
-          <CardBoxWidget v-if="myProfile.profile_skill" label="Skill Level">{{
-            myProfile.profile_skill / 100
-          }}</CardBoxWidget>
+          <CardBoxWidget v-if="myProfile.profile_skill" label="Skill Level">
+            {{ myProfile.profile_skill / 100 }}
+          </CardBoxWidget>
+
+          <!-- Jubeat -->
           <CardBoxWidget
             v-if="myProfile.jubility"
             label="Jubility"
             :num-color="getJubilityColor(myProfile.jubility)"
-            >{{ myProfile.jubility / 10 }}</CardBoxWidget
+          >
+            {{ myProfile.jubility / 10 }}</CardBoxWidget
           >
           <CardBoxWidget
             v-if="myProfile.pick_up_jubility"
             label="Pick-Up Jubility"
             :num-color="getJubilityColor(myProfile.pick_up_jubility)"
-            >{{ myProfile.pick_up_jubility / 10 }}</CardBoxWidget
+          >
+            {{ myProfile.pick_up_jubility / 10 }}</CardBoxWidget
           >
           <CardBoxWidget
             v-if="myProfile.common_jubility"
             label="Common Jubility"
             :num-color="getJubilityColor(myProfile.common_jubility)"
-            >{{ myProfile.common_jubility / 10 }}</CardBoxWidget
           >
+            {{ myProfile.common_jubility / 10 }}
+          </CardBoxWidget>
+
+          <!-- IIDX -->
           <CardBoxWidget
             v-if="myProfile.deller"
             label="Deller"
             :number="myProfile.deller"
           />
-          <CardBoxWidget v-if="myProfile.sgrade" label="SP DAN">{{
-            getIIDXDan(myProfile.sgrade).label
-          }}</CardBoxWidget>
-          <CardBoxWidget v-if="myProfile.dgrade" label="DP DAN">{{
-            getIIDXDan(myProfile.dgrade).label
-          }}</CardBoxWidget>
+          <CardBoxWidget v-if="myProfile.sgrade" label="SP DAN">
+            {{ getIIDXDan(myProfile.sgrade).label }}
+          </CardBoxWidget>
+          <CardBoxWidget v-if="myProfile.dgrade" label="DP DAN">
+            {{ getIIDXDan(myProfile.dgrade).label }}
+          </CardBoxWidget>
+
+          <!-- Tsum Tsum -->
+          <CardBoxWidget
+            v-if="myProfile.total_exp"
+            label="EXP"
+            :number="myProfile.total_exp"
+          />
+          <CardBoxWidget
+            v-if="myProfile.coin_num"
+            label="Coins"
+            :number="myProfile.coin_num"
+          />
+
+          <!-- SDVX -->
+          <CardBoxWidget
+            v-if="myProfile.block"
+            label="Block"
+            :number="myProfile.block"
+          />
+          <CardBoxWidget
+            v-if="myProfile.packet"
+            label="Packet"
+            :number="myProfile.packet"
+          />
         </div>
 
-        <template v-if="myProfile.stats?.count">
+        <template
+          v-if="
+            myProfile.stats?.count ||
+            myProfile.tune_cnt ||
+            myProfile.max_clear_diff ||
+            myProfile.battle_data
+          "
+        >
           <SectionTitleLine
             :icon="mdiChartAreasplineVariant"
             title="Stats"
@@ -492,8 +541,138 @@ async function generateTimeline(myProfile) {
             class="my-6 grid grid-cols-2 md:grid-cols-5 xl:grid-cols-6 gap-6"
           >
             <template v-for="stat of formatCounts(myProfile)" :key="stat">
-              <CardBoxWidget v-if="stat" :label="stat.label" :number="stat" />
+              <CardBoxWidget
+                v-if="stat !== undefined"
+                :label="stat.label"
+                :number="stat.value"
+              >
+                {{ stat.value ? null : "0" }}
+              </CardBoxWidget>
             </template>
+
+            <!-- Jubeat -->
+            <CardBoxWidget
+              v-if="myProfile.tune_cnt"
+              label="Total Tunes"
+              :number="myProfile.tune_cnt"
+            />
+            <CardBoxWidget
+              v-if="myProfile.ex_cnt"
+              label="Total EXC"
+              :number="myProfile.ex_cnt"
+            />
+            <CardBoxWidget
+              v-if="myProfile.fc_cnt"
+              label="Total FC"
+              :number="myProfile.fc_cnt"
+            />
+            <CardBoxWidget
+              v-if="myProfile.clear_cnt"
+              label="Total Clear"
+              :number="myProfile.clear_cnt"
+            />
+            <CardBoxWidget
+              v-if="myProfile.saved_cnt"
+              label="Total Saved"
+              :number="myProfile.saved_cnt"
+            />
+            <CardBoxWidget
+              v-if="myProfile.match_cnt"
+              label="Total Matches"
+              :number="myProfile.match_cnt"
+            />
+
+            <!-- Gitadora -->
+            <CardBoxWidget
+              v-if="myProfile.max_clear_diff"
+              label="Max Clear Difficulty"
+            >
+              {{ myProfile.max_clear_diff / 100 }}
+            </CardBoxWidget>
+            <CardBoxWidget
+              v-if="myProfile.max_full_diff"
+              label="Max FC Difficulty"
+            >
+              {{ myProfile.max_full_diff / 100 }}
+            </CardBoxWidget>
+            <CardBoxWidget
+              v-if="myProfile.max_exce_diff"
+              label="Max EX FC Difficulty"
+            >
+              {{ myProfile.max_exce_diff / 100 }}
+            </CardBoxWidget>
+            <CardBoxWidget
+              v-if="myProfile.clear_num"
+              label="Total Clear"
+              :number="myProfile.clear_num"
+            />
+            <CardBoxWidget
+              v-if="myProfile.full_num"
+              label="Total FC"
+              :number="myProfile.full_num"
+            />
+            <CardBoxWidget
+              v-if="myProfile.exce_num"
+              label="Total EX FC"
+              :number="myProfile.exce_num"
+            />
+            <CardBoxWidget
+              v-if="myProfile.e_num"
+              label="Total E"
+              :number="myProfile.e_num"
+            />
+            <CardBoxWidget
+              v-if="myProfile.d_num"
+              label="Total D"
+              :number="myProfile.d_num"
+            />
+            <CardBoxWidget
+              v-if="myProfile.c_num"
+              label="Total C"
+              :number="myProfile.c_num"
+            />
+            <CardBoxWidget
+              v-if="myProfile.b_num"
+              label="Total B"
+              :number="myProfile.b_num"
+            />
+            <CardBoxWidget
+              v-if="myProfile.a_num"
+              label="Total A"
+              :number="myProfile.a_num"
+            />
+            <CardBoxWidget
+              v-if="myProfile.s_num"
+              label="Total S"
+              :number="myProfile.s_num"
+            />
+            <CardBoxWidget
+              v-if="myProfile.ss_num"
+              label="Total SS"
+              :number="myProfile.ss_num"
+            />
+            <CardBoxWidget
+              v-if="myProfile.session_cnt"
+              label="Sessions Played"
+              :number="myProfile.session_cnt"
+            />
+
+            <!-- Tsum Tsum -->
+            <CardBoxWidget
+              v-if="myProfile.battle_data?.win_num"
+              label="Total Wins"
+              :number="myProfile.battle_data?.win_num"
+            />
+            <CardBoxWidget
+              v-if="myProfile.battle_data?.lose_num"
+              label="Total Losses"
+              :number="myProfile.battle_data?.lose_num"
+            />
+            <CardBoxWidget
+              v-if="myProfile.battle_data?.draw_num"
+              label="Total Draws"
+              :number="myProfile.battle_data?.draw_num"
+            />
           </div>
         </template>
 

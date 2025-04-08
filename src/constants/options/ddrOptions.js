@@ -15,7 +15,7 @@ export const DDROptions = {
     {
       id: "weight",
       name: "Weight (kg)",
-      help: "Set your weight for in-game workout mode",
+      help: "Set your weight for in-game workout mode. Input is kg multiplied by 10. EX: 100lbs -> ~45kg -> 4500. This will be fixed soon™️.",
       type: "Number",
     },
     {

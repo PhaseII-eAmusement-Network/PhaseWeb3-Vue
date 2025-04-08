@@ -8,6 +8,7 @@ export class ProfileCustomizations {
     { id: "pride", label: "Pride Flag" },
     { id: "trans", label: "Trans Flag" },
     { id: "loveplus", label: "LovePlus" },
+    { id: "paint", label: "i eat paint" },
   ];
 
   static get cardList() {

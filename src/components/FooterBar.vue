@@ -3,6 +3,8 @@ import { containerMaxW } from "@/config.js";
 import { mdiCash, mdiGithub } from "@mdi/js";
 import BaseLevel from "@/components/BaseLevel.vue";
 import BaseButton from "@/components/BaseButton.vue";
+
+const appVersion = import.meta.env.VITE_APP_VERSION;
 </script>
 
 <template>
@@ -19,7 +21,10 @@ import BaseButton from "@/components/BaseButton.vue";
           >.
         </p>
       </div>
-      <div class="md:py-2 space-x-2">
+      <div class="flex md:py-2 gap-2">
+        <span class="text-pink-700 bg-slate-900 p-1.5 font-mono rounded-lg">
+          v{{ appVersion }}
+        </span>
         <BaseButton
           color="warning"
           href="https://paypal.me/trmazi"
