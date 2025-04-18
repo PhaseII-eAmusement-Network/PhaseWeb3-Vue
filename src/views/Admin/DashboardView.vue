@@ -25,7 +25,7 @@ onMounted(async () => {
 const eventHeaders = [
   {
     text: "Timestamp",
-    value: "timestamp",
+    value: "date",
     width: 120,
   },
   {
@@ -58,7 +58,7 @@ const eventHeaders = [
 const transactionHeaders = [
   {
     text: "Timestamp",
-    value: "timestamp",
+    value: "date",
     width: 120,
   },
   {
@@ -89,7 +89,7 @@ function formatTransactions(events) {
     if (item.type == "paseli_transaction") {
       if (item.timestamp) {
         const date = new Date(item.timestamp * 1000);
-        item.timestamp = date.toLocaleString();
+        item.date = date.toLocaleString();
       }
 
       formattedItems.push(item);
@@ -105,7 +105,7 @@ function formatEvents(events) {
     if (item.type == "pcbevent") {
       if (item.timestamp) {
         const date = new Date(item.timestamp * 1000);
-        item.timestamp = date.toLocaleString();
+        item.date = date.toLocaleString();
       }
 
       formattedItems.push(item);

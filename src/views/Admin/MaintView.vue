@@ -49,27 +49,48 @@ onMounted(async () => {
 async function loadMaintenance() {
   try {
     const data = await APIAdminMaintenancePeriods();
-    maintData.value = data;
+    var formattedItems = [];
+    for (var item of data) {
+      if (item.timestamp) {
+        const date = new Date(item.timestamp * 1000);
+        item.timestamp = date.toLocaleString();
+      }
+
+      if (item.data.endTimestamp) {
+        const date = new Date(item.data.endTimestamp * 1000);
+        item.data.endTimestamp = date.toLocaleString();
+      }
+
+      formattedItems.push(item);
+    }
+
+    maintData.value = formattedItems;
   } catch (error) {
     console.error("Failed to fetch maint data:", error);
   }
 }
 
 async function enterMaintenance() {
-  try {
-    const data = await APIAdminCreateMaintenancePeriod(newMaint);
-    maintData.value = data;
-  } catch (error) {
-    console.error("Failed to post maint:", error);
+  const confirmed = window.confirm("Are you really?");
+  if (confirmed) {
+    try {
+      const data = await APIAdminCreateMaintenancePeriod(newMaint);
+      maintData.value = data;
+      loadMaintenance();
+    } catch (error) {
+      console.error("Failed to post maint:", error);
+    }
   }
-
-  loadMaintenance();
 }
 </script>
 
 <template>
   <LayoutAuthenticated>
     <SectionMain>
+      <CardBox class="mb-6 p-1">
+        <h1 class="text-3xl">Network Maintenance</h1>
+      </CardBox>
+
       <SectionTitleLine
         :icon="mdiWrenchCogOutline"
         title="Recent Maintenance Periods"
@@ -93,7 +114,7 @@ async function enterMaintenance() {
         color="text-yellow-600"
         main
       />
-      <CardBox is-form class="row-span-1" @submit="enterMaintenance()">
+      <CardBox is-form class="row-span-1" @submit.prevent="enterMaintenance()">
         <FormField label="Reason" help="Why are we going under maintenance?">
           <FormControl v-model="newMaint.reason" required />
         </FormField>

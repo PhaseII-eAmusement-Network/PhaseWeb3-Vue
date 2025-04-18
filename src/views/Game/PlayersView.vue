@@ -16,7 +16,7 @@ import GeneralTable from "@/components/GeneralTable.vue";
 
 import { APIGetAllProfiles } from "@/stores/api/profile";
 import { getGameInfo } from "@/constants";
-import { getVideoSource, getCardStyle } from "@/constants/sources";
+import { getCardStyle } from "@/constants/sources";
 import { dashCode } from "@/constants/userData";
 import { getIIDXDan } from "@/constants/danClass";
 

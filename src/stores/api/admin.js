@@ -65,3 +65,23 @@ export async function APIAdminCreateMaintenancePeriod(newPeriod) {
     throw error;
   }
 }
+
+export async function APIAdminClients() {
+  try {
+    const data = await mainStore.callApi(`/admin/client`);
+    return data.data;
+  } catch (error) {
+    console.log("Error loading client:", error);
+    throw error;
+  }
+}
+
+export async function APIAdminCreateClient(newClient) {
+  try {
+    const data = await mainStore.callApi(`/admin/client`, "POST", newClient);
+    return data;
+  } catch (error) {
+    console.log("Error posting client:", error);
+    throw error;
+  }
+}

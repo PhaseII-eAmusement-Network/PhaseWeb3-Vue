@@ -2,9 +2,9 @@
 import { useMainStore } from "@/stores/main";
 import {
   mdiSecurity,
-  // mdiTestTube,
-  // mdiAccountStar,
-  // mdiCodeBraces,
+  mdiTestTube,
+  mdiAccountStar,
+  mdiCodeBraces,
   mdiAccountOff,
   // mdiAccountCheck,
 } from "@mdi/js";
@@ -50,7 +50,9 @@ function getCardStyle() {
       type="justify-around lg:justify-center md:space-x-4 lg:space-x-0"
       class="bg-white dark:bg-slate-900/90 rounded-2xl p-3"
     >
-      <UserAvatarCurrentUser class="w-28 md:w-32 lg:w-44 lg:mx-12" />
+      <UserAvatarCurrentUser
+        class="w-28 md:w-30 lg:w-[128px] lg:mx-12 lg:m-2"
+      />
       <div class="space-y-3 text-center md:text-left lg:mx-12">
         <div class="space-y-2 md:space-y-0">
           <h1
@@ -69,18 +71,42 @@ function getCardStyle() {
         </div>
         <div
           v-if="!evenSmaller"
-          class="md:grid md:grid-flow-col md:auto-cols-max md:grid-rows-1 flex flex-wrap gap-4 md:place-content-start place-content-center"
+          class="flex flex-wrap gap-2 md:place-content-start place-content-center px-5 sm:px-0 py-2 sm:py-0 md:max-w-[400px]"
         >
           <PillTag
             v-if="mainStore.userAdmin"
             label="System Admin"
             color="danger"
             :icon="mdiSecurity"
+            small
           />
-          <!-- <PillTag label="Beta Tester" color="warning" :icon="mdiTestTube" />
-          <PillTag label="Veteran" color="success" :icon="mdiAccountStar" />
-          <PillTag label="Active Dev" color="info" :icon="mdiCodeBraces" /> -->
-          <PillTag label="Private Profile" color="info" :icon="mdiAccountOff" />
+          <PillTag
+            v-if="mainStore.userData.beta"
+            label="Beta Tester"
+            color="warning"
+            :icon="mdiTestTube"
+            small
+          />
+          <PillTag
+            v-if="mainStore.userData.vet"
+            label="Veteran"
+            color="success"
+            :icon="mdiAccountStar"
+            small
+          />
+          <PillTag
+            v-if="mainStore.userData.dev"
+            label="Active Dev"
+            color="info"
+            :icon="mdiCodeBraces"
+            small
+          />
+          <PillTag
+            label="Private Profile"
+            color="info"
+            :icon="mdiAccountOff"
+            small
+          />
           <!-- <PillTag
             label="Public Profile"
             color="success"

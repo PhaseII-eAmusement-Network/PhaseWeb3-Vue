@@ -85,8 +85,10 @@ async function updateUserData(disable = false) {
               w="w-20"
               :size="45"
             />
-            <h1 class="text-2xl font-bold">Since you've been gone...</h1>
-            <h1 class="text-lg md:text-xl">
+            <h1 class="text-xl xl:text-2xl font-bold">
+              While you were away...
+            </h1>
+            <h1 class="text-lg xl:text-xl">
               We've updated the site! These updates include feature updates and
               bugfixes.
             </h1>
@@ -96,7 +98,7 @@ async function updateUserData(disable = false) {
 
           <div
             v-if="changelog"
-            class="text-lg md:text-xl space-y-2 text-left text-pink-500 bg-slate-950 p-2"
+            class="text-sm md:text-md space-y-2 text-left text-pink-500 bg-slate-950 p-2 max-h-[120px] overflow-scroll"
           >
             <h1>Changelog:</h1>
             <h2
