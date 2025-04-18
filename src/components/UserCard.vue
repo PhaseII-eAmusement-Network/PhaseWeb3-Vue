@@ -88,7 +88,7 @@ function getCardStyle() {
             small
           />
           <PillTag
-            v-if="mainStore.userData.vet"
+            v-if="mainStore.userId < 300"
             label="Veteran"
             color="success"
             :icon="mdiAccountStar"
