@@ -208,6 +208,18 @@ export const SDVXOptions = {
       type: "Boolean",
     },
     {
+      id: "submonitor_vsync_enable",
+      name: "Enable sub-screen VSYNC",
+      help: "May cause performance issues when not running arcade hardware.",
+      type: "Boolean",
+    },
+    {
+      id: "use_cuda_video_presenter",
+      name: "Enable CUDA engine",
+      help: "May cause performance issues when not running arcade hardware.",
+      type: "Boolean",
+    },
+    {
       id: "force_unlock_songs",
       name: "Force Unlock Songs",
       help: "Force unlock all songs.",
