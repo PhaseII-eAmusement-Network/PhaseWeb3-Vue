@@ -18,9 +18,12 @@ export const colorsText = {
   light: "text-gray-700 dark:text-slate-400",
   contrast: "dark:text-white",
   success: "text-emerald-500",
+  slight_danger: "text-red-300",
   danger: "text-red-500",
   warning: "text-yellow-500",
   info: "text-blue-500",
+  sakura: "text-pink-400",
+  gold: "text-amber-300",
 };
 
 export const colorsOutline = {
@@ -28,9 +31,12 @@ export const colorsOutline = {
   light: [colorsText.light, "border-gray-100"],
   contrast: [colorsText.contrast, "border-gray-900 dark:border-slate-100"],
   success: [colorsText.success, "border-emerald-500"],
+  slight_danger: [colorsText.slight_danger, "border-red-300"],
   danger: [colorsText.danger, "border-red-500"],
   warning: [colorsText.warning, "border-yellow-500"],
   info: [colorsText.info, "border-blue-500"],
+  sakura: [colorsText.sakura, "border-pink-400"],
+  gold: [colorsText.gold, "border-amber-300"],
 };
 
 export const getButtonColor = (

@@ -1,11 +1,19 @@
 <script setup>
 import { useMainStore } from "@/stores/main";
+import { RoleConstants } from "@/constants/discordRoles";
 import {
   mdiSecurity,
   mdiTestTube,
   mdiAccountStar,
   mdiCodeBraces,
   mdiAccountOff,
+  mdiFlowerPoppy,
+  mdiSharkFinOutline,
+  mdiHandCoinOutline,
+  mdiAccountTieHat,
+  mdiAccountTie,
+  mdiHeartMultipleOutline,
+  mdiCheckDecagramOutline,
   // mdiAccountCheck,
 } from "@mdi/js";
 import BaseLevel from "@/components/BaseLevel.vue";
@@ -81,13 +89,6 @@ function getCardStyle() {
             small
           />
           <PillTag
-            v-if="mainStore.userData.beta"
-            label="Beta Tester"
-            color="warning"
-            :icon="mdiTestTube"
-            small
-          />
-          <PillTag
             v-if="mainStore.userId < 300"
             label="Veteran"
             color="success"
@@ -105,6 +106,62 @@ function getCardStyle() {
             label="Private Profile"
             color="info"
             :icon="mdiAccountOff"
+            small
+          />
+          <PillTag
+            v-if="mainStore.discordRoles?.includes(RoleConstants.PLAYER)"
+            label="Verified"
+            color="success"
+            :icon="mdiCheckDecagramOutline"
+            small
+          />
+          <PillTag
+            v-if="mainStore.discordRoles?.includes(RoleConstants.JACKASS)"
+            label="Jackass"
+            color="slight_danger"
+            :icon="mdiHeartMultipleOutline"
+            small
+          />
+          <PillTag
+            v-if="mainStore.discordRoles?.includes(RoleConstants.DEVELOPER)"
+            label="Developer"
+            color="success"
+            :icon="mdiAccountTie"
+            small
+          />
+          <PillTag
+            v-if="mainStore.discordRoles?.includes(RoleConstants.MODERATOR)"
+            label="Moderator"
+            color="slight_danger"
+            :icon="mdiAccountTieHat"
+            small
+          />
+          <PillTag
+            v-if="mainStore.discordRoles?.includes(RoleConstants.BETA_TESTER)"
+            label="Beta Tester"
+            color="warning"
+            :icon="mdiTestTube"
+            small
+          />
+          <PillTag
+            v-if="mainStore.discordRoles?.includes(RoleConstants.DONOR)"
+            label="Donor"
+            color="gold"
+            :icon="mdiHandCoinOutline"
+            small
+          />
+          <PillTag
+            v-if="mainStore.discordRoles?.includes(RoleConstants.BLAHAJ)"
+            label="Blåhaj"
+            color="info"
+            :icon="mdiSharkFinOutline"
+            small
+          />
+          <PillTag
+            v-if="mainStore.discordRoles?.includes(RoleConstants.RHYTHM_RIOT)"
+            label="Rhythm Riot"
+            color="sakura"
+            :icon="mdiFlowerPoppy"
             small
           />
           <!-- <PillTag

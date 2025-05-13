@@ -15,6 +15,7 @@ export const useMainStore = defineStore("main", {
     userAdmin: false,
     userCardStyle: null,
     userData: null,
+    discordRoles: null,
     userProfiles: [],
     userArcades: [],
     profiles: {},
@@ -59,6 +60,9 @@ export const useMainStore = defineStore("main", {
       }
       if (payload.data) {
         this.userData = payload.data;
+      }
+      if (payload.discordRoles) {
+        this.discordRoles = payload.discordRoles;
       }
       if (payload.cardStyle) {
         this.userCardStyle = payload.cardStyle;
@@ -254,6 +258,7 @@ export const useMainStore = defineStore("main", {
               avatar: user.avatar,
               admin: user.admin,
               data: user.data,
+              discordRoles: user.discordRoles,
               cardStyle: "time",
               profiles: user.profiles,
               arcades: user.arcades,
