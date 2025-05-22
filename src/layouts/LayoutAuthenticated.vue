@@ -159,10 +159,6 @@ const menuAside = computed(() => {
       to: "/admin/arcades",
     },
     {
-      label: "Machines",
-      to: "/admin/machines",
-    },
-    {
       label: "Cards",
       to: "/admin/cards",
     },

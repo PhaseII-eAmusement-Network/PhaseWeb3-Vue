@@ -8,7 +8,7 @@ import LayoutAuthenticated from "@/layouts/LayoutAuthenticated.vue";
 import SectionTitleLine from "@/components/SectionTitleLine.vue";
 import GeneralTable from "@/components/GeneralTable.vue";
 import CardBox from "@/components/CardBox.vue";
-import BaseButton from "@/components/BaseButton.vue";
+import GameHeader from "@/components/Cards/GameHeader.vue";
 import { getGameInfo } from "@/constants";
 
 const $route = useRoute();
@@ -148,6 +148,8 @@ function formatScores(scores) {
 <template>
   <LayoutAuthenticated>
     <SectionMain>
+      <GameHeader :game="thisGame" />
+
       <SectionTitleLine
         :icon="mdiCounter"
         :title="`All ${
@@ -155,19 +157,6 @@ function formatScores(scores) {
         } Scores`"
         main
       />
-
-      <div
-        class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 2xl:grid-cols-5 gap-3 pb-6"
-      >
-        <BaseButton
-          :icon="mdiHome"
-          :href="`/#/games/${gameID}`"
-          color="info"
-          :label="`${
-            thisGame.shortName ? thisGame.shortName : thisGame.name
-          } Home`"
-        />
-      </div>
 
       <CardBox has-table>
         <GeneralTable :headers="headers" :items="scores" />

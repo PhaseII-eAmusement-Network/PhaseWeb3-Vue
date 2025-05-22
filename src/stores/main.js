@@ -208,6 +208,11 @@ export const useMainStore = defineStore("main", {
     },
 
     async deleteUserSession() {
+      if (!loadUserAuthKey()) {
+        this.userLoaded = false;
+        return null;
+      }
+
       const request = {
         sessionId: loadUserAuthKey(),
       };

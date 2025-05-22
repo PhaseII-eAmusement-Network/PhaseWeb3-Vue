@@ -50,6 +50,10 @@ defineProps({
     type: String,
     default: null,
   },
+  smallContent: {
+    type: Boolean,
+    default: false,
+  },
 });
 </script>
 
@@ -82,7 +86,9 @@ defineProps({
                 :prefix="prefix"
                 :suffix="suffix"
               />
-              <div :class="numColor">
+              <div
+                :class="numColor + (smallContent ? ` text-lg font-normal` : ``)"
+              >
                 <slot />
               </div>
             </h1>

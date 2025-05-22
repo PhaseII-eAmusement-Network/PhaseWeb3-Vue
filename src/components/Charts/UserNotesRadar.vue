@@ -26,7 +26,7 @@ ChartJS.register(
 
 const props = defineProps({
   profile: {
-    type: Number,
+    type: String,
     default: null,
   },
   game: {

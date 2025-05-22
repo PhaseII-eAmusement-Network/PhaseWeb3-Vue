@@ -2,13 +2,14 @@
 import { ref, onMounted } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { useMainStore } from "@/stores/main";
-import { mdiCounter, mdiBackburger, mdiHome } from "@mdi/js";
+import { mdiCounter, mdiAccountDetails } from "@mdi/js";
 import SectionMain from "@/components/SectionMain.vue";
 import LayoutAuthenticated from "@/layouts/LayoutAuthenticated.vue";
 import SectionTitleLine from "@/components/SectionTitleLine.vue";
+import BaseButton from "@/components/BaseButton.vue";
 import GeneralTable from "@/components/GeneralTable.vue";
 import CardBox from "@/components/CardBox.vue";
-import BaseButton from "@/components/BaseButton.vue";
+import GameHeader from "@/components/Cards/GameHeader.vue";
 
 import { APIGetProfile } from "@/stores/api/profile";
 import { getGameInfo } from "@/constants";
@@ -175,32 +176,22 @@ function formatScores(scores) {
   <LayoutAuthenticated>
     <SectionMain>
       <template v-if="myProfile">
+        <GameHeader :game="thisGame" :profile="myProfile" />
         <SectionTitleLine
           :icon="mdiCounter"
           :title="`${myProfile.username}'s ${
             thisGame.shortName ? thisGame.shortName : thisGame.name
           } Scores`"
           main
-        />
-        <div
-          class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 2xl:grid-cols-5 gap-3 pb-6"
         >
           <BaseButton
-            :icon="mdiBackburger"
-            :href="`/#/games/${gameID}/profiles/${myProfile.userId}`"
+            :icon="mdiAccountDetails"
+            :href="`/#/games/${thisGame.id}/profiles/${myProfile.userId}`"
+            :outline="false"
             color="info"
             :label="`${myProfile.username}'s Profile`"
           />
-
-          <BaseButton
-            :icon="mdiHome"
-            :href="`/#/games/${gameID}`"
-            color="info"
-            :label="`${
-              thisGame.shortName ? thisGame.shortName : thisGame.name
-            } Home`"
-          />
-        </div>
+        </SectionTitleLine>
 
         <CardBox has-table>
           <GeneralTable :headers="headers" :items="scores" />

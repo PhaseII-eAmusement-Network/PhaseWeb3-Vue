@@ -3,7 +3,6 @@ import { reactive, ref, onMounted, watch } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import {
   mdiAccountOutline,
-  mdiBackburger,
   mdiPlaylistMusicOutline,
   mdiFormatListText,
   mdiChartBarStacked,
@@ -16,6 +15,7 @@ import SectionMain from "@/components/SectionMain.vue";
 import CardBoxWidget from "@/components/CardBoxWidget.vue";
 import CardBox from "@/components/CardBox.vue";
 import BaseButton from "@/components/BaseButton.vue";
+import GameHeader from "@/components/Cards/GameHeader.vue";
 import ProfileCard from "@/components/Cards/ProfileCard.vue";
 import LayoutAuthenticated from "@/layouts/LayoutAuthenticated.vue";
 import SectionTitleLine from "@/components/SectionTitleLine.vue";
@@ -358,17 +358,8 @@ async function generateTimeline(myProfile) {
   <LayoutAuthenticated>
     <template v-if="myProfile">
       <SectionMain>
-        <div class="md:flex pb-6 md:justify-between md:items-center">
-          <BaseButton
-            :icon="mdiBackburger"
-            :href="`/#/games/${gameID}`"
-            class="w-full md:w-auto"
-            color="info"
-            :label="`${
-              thisGame.shortName ? thisGame.shortName : thisGame.name
-            } Home`"
-          />
-
+        <GameHeader :game="thisGame" />
+        <SectionTitleLine :icon="mdiAccountOutline" title="View Profile" main>
           <div
             v-if="thisGame.versions && myProfile"
             class="mt-2 md:mt-0 md:w-1/3 md:text-right"
@@ -381,8 +372,7 @@ async function generateTimeline(myProfile) {
               :options="filterVersions(myProfile.versions)"
             />
           </div>
-        </div>
-        <SectionTitleLine :icon="mdiAccountOutline" title="View Profile" main />
+        </SectionTitleLine>
         <div
           v-if="versionForm.currentVersion && myProfile"
           :style="getCardStyle()"
@@ -406,7 +396,10 @@ async function generateTimeline(myProfile) {
                 :version="versionForm.currentVersion"
                 :profile="myProfile"
               >
-                <div class="md:w-1/3 grid grid-cols-1 md:grid-cols-2 gap-3">
+                <div
+                  v-if="!thisGame.noScores"
+                  class="md:w-1/3 grid grid-cols-1 md:grid-cols-2 gap-3"
+                >
                   <BaseButton
                     :href="`/#/games/${gameID}/scores/${myProfile.userId}`"
                     :icon="mdiPlaylistMusicOutline"

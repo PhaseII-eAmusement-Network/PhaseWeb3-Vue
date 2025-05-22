@@ -10,6 +10,16 @@ export async function APIAdminDashboard() {
   }
 }
 
+export async function APIAdminArcades() {
+  try {
+    const data = await mainStore.callApi(`/admin/arcades`);
+    return data.data;
+  } catch (error) {
+    console.log("Error loading arcades:", error);
+    throw error;
+  }
+}
+
 export async function checkArcadeName(arcadeName) {
   try {
     const data = await mainStore.callApi(

@@ -27,3 +27,15 @@ export function getCardStyle(game, version) {
       `;
   }
 }
+
+export function customStyle(src) {
+  if (!src) {
+    return null;
+  } else {
+    return `
+        background-image: url('${src}');
+        background-size: cover;
+        background-repeat: no-repeat;
+      `;
+  }
+}

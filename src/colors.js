@@ -95,7 +95,7 @@ export const getButtonColor = (
       lightDark: "border-gray-100 dark:border-slate-800",
       contrast: "border-gray-800 dark:border-white",
       success: "border-emerald-600 dark:border-emerald-800",
-      danger: "border-red-600 dark:border-ruby-950",
+      danger: "border-red-600 dark:border-red-950",
       warning: "border-yellow-600 dark:border-yellow-950",
       info: "border-blue-600 dark:border-blue-950",
     },

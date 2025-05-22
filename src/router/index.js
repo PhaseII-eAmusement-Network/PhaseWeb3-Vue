@@ -175,14 +175,6 @@ const routes = [
   },
   {
     meta: {
-      title: "Machines",
-    },
-    path: "/admin/machines",
-    name: "admin_machines",
-    component: () => import("@/views/Admin/MachinesView.vue"),
-  },
-  {
-    meta: {
       title: "Cards",
     },
     path: "/admin/cards",
@@ -321,6 +313,17 @@ const routes = [
     path: "/games/:game/rivals",
     name: "game_rivals",
     component: () => import("@/views/Game/RivalsView.vue"),
+    options: {
+      hotReload: true, // disables Hot Reload
+    },
+  },
+  {
+    meta: {
+      title: "Song Overview",
+    },
+    path: "/games/:game/song/:songId",
+    name: "song_overview",
+    component: () => import("@/views/Game/SongView.vue"),
     options: {
       hotReload: true, // disables Hot Reload
     },

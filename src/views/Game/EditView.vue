@@ -1,10 +1,11 @@
 <script setup>
 import { reactive, onMounted, watch, ref } from "vue";
 import { useRoute, useRouter } from "vue-router";
-import { mdiAccountTieHat, mdiBackburger } from "@mdi/js";
+import { mdiAccountTieHat } from "@mdi/js";
 import SectionMain from "@/components/SectionMain.vue";
 import CardBox from "@/components/CardBox.vue";
 import BaseButton from "@/components/BaseButton.vue";
+import GameHeader from "@/components/Cards/GameHeader.vue";
 import ProfileCard from "@/components/Cards/ProfileCard.vue";
 import LayoutAuthenticated from "@/layouts/LayoutAuthenticated.vue";
 import SectionTitleLine from "@/components/SectionTitleLine.vue";
@@ -25,7 +26,6 @@ import {
   transformUnicode,
 } from "@/constants/values";
 import { getGameInfo } from "@/constants";
-import { getVideoSource, getCardStyle } from "@/constants/sources";
 import { getGameOptions } from "@/constants/options";
 
 const $route = useRoute();
@@ -120,61 +120,39 @@ async function updateProfile() {
 <template>
   <LayoutAuthenticated>
     <SectionMain>
-      <div class="md:flex pb-6 md:justify-between md:items-center">
-        <BaseButton
-          :icon="mdiBackburger"
-          :href="`/#/games/${gameID}`"
-          class="w-full md:w-auto"
-          color="info"
-          label="Go Back"
-        />
+      <GameHeader :game="thisGame" :version="versionForm.currentVersion">
         <div
           v-if="thisGame.versions && myProfile"
-          class="mt-2 md:mt-0 md:w-1/3 md:text-right"
+          class="w-full md:flex md:-mt-[75px] mb-4 place-content-end"
         >
-          <h2 class="text-md sm:text-lg md:text-xl font-bold p-2">
-            Select Version
-          </h2>
-          <FormControl
-            v-model="versionForm.currentVersion"
-            :options="filterVersions(myProfile.versions)"
-          />
+          <div class="md:w-1/3 md:text-right">
+            <h2 class="text-md sm:text-lg md:text-xl font-bold p-2">
+              Select Version
+            </h2>
+            <FormControl
+              v-model="versionForm.currentVersion"
+              :options="filterVersions(myProfile.versions)"
+            />
+          </div>
         </div>
-      </div>
+
+        <div v-if="myProfile" class="w-full">
+          <ProfileCard
+            :game="gameID"
+            :version="versionForm.currentVersion"
+            :profile="myProfile"
+            use-small
+          >
+          </ProfileCard>
+        </div>
+      </GameHeader>
+
       <SectionTitleLine
         v-if="versionForm.currentVersion"
         :icon="mdiAccountTieHat"
         title="Profile Customizations"
         main
       />
-      <div
-        v-if="versionForm.currentVersion && myProfile"
-        :style="getCardStyle(thisGame, versionForm.currentVersion)"
-        class="rounded-2xl mb-6 card-container"
-      >
-        <video
-          autoplay
-          muted
-          loop
-          playsinline
-          :src="getVideoSource(thisGame, versionForm.currentVersion)"
-          class="background-video"
-        ></video>
-        <div
-          class="bg-white dark:bg-slate-900/90 rounded-2xl pt-6 p-3 card-content"
-        >
-          <div class="w-full">
-            <ProfileCard
-              v-if="myProfile"
-              use-small
-              :game="gameID"
-              :profile="myProfile"
-              :version="versionForm.currentVersion"
-            />
-          </div>
-        </div>
-      </div>
-
       <div v-if="versionForm.currentVersion && myProfile">
         <CardBox is-form>
           <form @submit.prevent="updateProfile()">

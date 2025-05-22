@@ -5,16 +5,15 @@ import { mdiSwordCross, mdiPlus } from "@mdi/js";
 import SectionMain from "@/components/SectionMain.vue";
 import CardBox from "@/components/CardBox.vue";
 import BaseButton from "@/components/BaseButton.vue";
+import GameHeader from "@/components/Cards/GameHeader.vue";
 import ProfileCard from "@/components/Cards/ProfileCard.vue";
 import LayoutAuthenticated from "@/layouts/LayoutAuthenticated.vue";
 import SectionTitleLine from "@/components/SectionTitleLine.vue";
-import GameTitleLine from "@/components/GameTitleLine.vue";
-import FormField from "@/components/FormField.vue";
 import FormControl from "@/components/FormControl.vue";
+import FormField from "@/components/FormField.vue";
 
 import { APIGetProfile, APIGetAllProfiles } from "@/stores/api/profile";
 import { getGameInfo } from "@/constants";
-import { getVideoSource, getCardStyle } from "@/constants/sources";
 import { dashCode } from "@/constants/userData";
 
 const $route = useRoute();
@@ -113,51 +112,32 @@ function filterProfiles() {
 <template>
   <LayoutAuthenticated>
     <SectionMain>
-      <div
-        :style="getCardStyle(thisGame, versionForm.currentVersion)"
-        class="rounded-2xl mb-6 card-container"
-      >
-        <video
-          autoplay
-          muted
-          loop
-          playsinline
-          :src="getVideoSource(thisGame, versionForm.currentVersion)"
-          class="background-video"
-        ></video>
+      <GameHeader :game="thisGame" :version="versionForm.currentVersion">
         <div
-          class="bg-white dark:bg-slate-900/90 rounded-2xl pt-6 p-3 card-content"
+          v-if="thisGame.versions && profile"
+          class="w-full md:flex md:-mt-[75px] mb-4 place-content-end"
         >
-          <div class="w-full">
-            <div
-              class="md:flex md:px-5 md:space-x-10 md:justify-between md:items-center"
-            >
-              <GameTitleLine :path="thisGame.icon" :title="thisGame.name" />
-              <div
-                v-if="thisGame.versions && profile"
-                class="md:w-1/3 md:text-right"
-              >
-                <h2 class="text-md sm:text-lg md:text-xl font-bold p-2">
-                  Select Version
-                </h2>
-                <FormControl
-                  v-model="versionForm.currentVersion"
-                  :options="filterVersions(profile.versions)"
-                />
-              </div>
-            </div>
-          </div>
-          <div v-if="profile" class="w-full">
-            <ProfileCard
-              :game="gameID"
-              :version="versionForm.currentVersion"
-              :profile="profile"
-              use-small
-            >
-            </ProfileCard>
+          <div class="md:w-1/3 md:text-right">
+            <h2 class="text-md sm:text-lg md:text-xl font-bold p-2">
+              Select Version
+            </h2>
+            <FormControl
+              v-model="versionForm.currentVersion"
+              :options="filterVersions(profile.versions)"
+            />
           </div>
         </div>
-      </div>
+
+        <div v-if="profile" class="w-full">
+          <ProfileCard
+            :game="gameID"
+            :version="versionForm.currentVersion"
+            :profile="profile"
+            use-small
+          >
+          </ProfileCard>
+        </div>
+      </GameHeader>
 
       <SectionTitleLine :icon="mdiPlus" title="Add a Rival" main />
       <CardBox v-if="versionForm.currentVersion" class="mb-6">
