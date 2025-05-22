@@ -480,8 +480,8 @@ export const gameData = [
       VersionConstants.DDR_A3,
     ],
     scoreHeaders: [
-      { text: "Combos", value: "data.combo" },
-      { text: "Halo", value: "data.halo" },
+      { text: "Combos", value: "data.combo", width: 80 },
+      { text: "Halo", value: "data.halo", width: 80 },
     ],
     chartTable: {
       0: "SP BEGINNER",
@@ -673,8 +673,8 @@ export const gameData = [
     gameOptions: DDROptions,
     videoTable: [VersionConstants.DDR_A20_PLUS],
     scoreHeaders: [
-      { text: "Combos", value: "data.combo" },
-      { text: "Halo", value: "data.halo" },
+      { text: "Combos", value: "data.combo", width: 80 },
+      { text: "Halo", value: "data.halo", width: 80 },
     ],
     chartTable: {
       0: "SP BEGINNER",
@@ -814,7 +814,7 @@ export const gameData = [
       },
     ],
     scoreHeaders: [
-      { text: "Combos", value: "data.combo" },
+      { text: "Combos", value: "data.combo", width: 80 },
       { text: "Medal", value: "medal", width: 100 },
       { text: "SKILL %", value: "data.skill_perc", width: 90 },
       { text: "SKILL POINT", value: "data.skill_points", width: 140 },
@@ -958,6 +958,7 @@ export const gameData = [
   {
     id: GameConstants.GITADORA_DM,
     name: "GITADORA (Drums)",
+    shortName: "GITADORA (DM)",
     icon: null,
     cardBG: null,
     videoTable: [
@@ -981,7 +982,7 @@ export const gameData = [
       },
     ],
     scoreHeaders: [
-      { text: "Combos", value: "data.combo" },
+      { text: "Combos", value: "data.combo", width: 80 },
       { text: "Medal", value: "medal", width: 140 },
       { text: "SKILL %", value: "data.perc", width: 90 },
       { text: "SKILL POINT", value: "data.new_skill", width: 140 },
@@ -1007,6 +1008,7 @@ export const gameData = [
   {
     id: GameConstants.GITADORA_GF,
     name: "GITADORA (Guitar)",
+    shortName: "GITADORA (GF)",
     icon: null,
     cardBG: null,
     videoTable: [
@@ -1030,7 +1032,7 @@ export const gameData = [
       },
     ],
     scoreHeaders: [
-      { text: "Combos", value: "data.combo" },
+      { text: "Combos", value: "data.combo", width: 80 },
       { text: "Medal", value: "medal", width: 140 },
       { text: "SKILL %", value: "data.perc", width: 90 },
       { text: "SKILL POINT", value: "data.new_skill", width: 140 },
@@ -1060,7 +1062,7 @@ export const gameData = [
     cardBG: null,
     gameOptions: GFDMOptions,
     scoreHeaders: [
-      { text: "Combos", value: "data.combo" },
+      { text: "Combos", value: "data.combo", width: 80 },
       { text: "Medal", value: "medal", width: 100 },
       { text: "SKILL %", value: "data.skill_perc", width: 90 },
       { text: "SKILL POINT", value: "data.skill_points", width: 140 },
@@ -1211,8 +1213,8 @@ export const gameData = [
       VersionConstants.IIDX_EPOLIS,
     ],
     scoreHeaders: [
-      { text: "Misses", value: "data.misses" },
-      { text: "Clear Status", value: "data.medal" },
+      { text: "Misses", value: "data.misses", width: 100 },
+      { text: "Clear Status", value: "data.medal", width: 100 },
     ],
     chartTable: {
       0: "SP NORMAL",
@@ -1650,9 +1652,14 @@ export const gameData = [
     icon: null,
     cardBG: null,
     gameOptions: MusecaOptions,
+    chartTable: {
+      0: "GREEN",
+      1: "ORANGE",
+      2: "RED",
+    },
     scoreHeaders: [
-      { text: "Combos", value: "combo" },
-      { text: "Halo", value: "halo" },
+      { text: "Combos", value: "combo", width: 80 },
+      { text: "Halo", value: "halo", width: 80 },
     ],
     versions: [
       {
@@ -1671,9 +1678,15 @@ export const gameData = [
     icon: null,
     cardBG: null,
     gameOptions: NostalgiaOptions,
+    chartTable: {
+      0: "NORMAL",
+      1: "HARD",
+      2: "EXPERT",
+      3: "REAL",
+    },
     scoreHeaders: [
-      { text: "Combos", value: "combo" },
-      { text: "Halo", value: "halo" },
+      { text: "Combos", value: "combo", width: 80 },
+      { text: "Halo", value: "halo", width: 80 },
     ],
     versions: [
       {
@@ -1744,9 +1757,15 @@ export const gameData = [
     useUnicode: true,
     maxLength: 6,
     gameOptions: PopnMusicOptions,
+    chartTable: {
+      0: "EASY",
+      1: "NORMAL",
+      2: "HYPER",
+      3: "EX",
+    },
     scoreHeaders: [
-      { text: "Combos", value: "combo" },
-      { text: "Halo", value: "halo" },
+      { text: "Combos", value: "combo", width: 80 },
+      { text: "Halo", value: "halo", width: 80 },
     ],
     versions: [
       {
@@ -1885,10 +1904,16 @@ export const gameData = [
     cardBG: null,
     useUnicode: true,
     gameOptions: ReflecBeatOptions,
+    chartTable: {
+      0: "BASIC",
+      1: "MEDIUM",
+      2: "HARD",
+      3: "SPECIAL",
+    },
     scoreHeaders: [
-      { text: "Combos", value: "combo" },
-      { text: "Misses", value: "misses" },
-      { text: "Halo", value: "halo" },
+      { text: "Combos", value: "combo", width: 80 },
+      { text: "Misses", value: "misses", width: 80 },
+      { text: "Halo", value: "halo", width: 80 },
     ],
     versions: [
       {
@@ -1940,9 +1965,16 @@ export const gameData = [
     icon: null,
     cardBG: null,
     gameOptions: SDVXOptions,
+    chartTable: {
+      0: "NOVICE",
+      1: "ADVANCED",
+      2: "EXHAUST",
+      3: "INFINITE",
+      4: "MAXIMUM",
+    },
     scoreHeaders: [
-      { text: "Combos", value: "combo" },
-      { text: "Halo", value: "halo" },
+      { text: "Combos", value: "combo", width: 80 },
+      { text: "Halo", value: "halo", width: 80 },
     ],
     playerHeaders: [
       { text: "Skill Level", value: "skill_level", sortable: true, width: 100 },
@@ -1990,6 +2022,9 @@ export const gameData = [
     noScores: false,
     noRecords: true,
     useUnicode: true,
+    chartTable: {
+      0: "Game Mode",
+    },
   },
   {
     id: GameConstants.WINNING_ELEVEN,

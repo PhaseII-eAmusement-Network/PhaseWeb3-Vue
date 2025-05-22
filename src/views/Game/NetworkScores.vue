@@ -139,10 +139,25 @@ function formatScores(scores) {
       item.data.music_rate = item.data?.music_rate / 10;
     }
 
+    if (item.data?.excellent) {
+      item.medal = "EX FC";
+    } else if (item.data?.fullcombo) {
+      item.medal = "FC";
+    } else if (item.data?.clear) {
+      item.medal = "CLEARED";
+    } else {
+      item.medal = "FAILED";
+    }
+
     formattedItems.push(item);
   }
   return formattedItems;
 }
+
+const navigateToSong = (item) => {
+  const songId = item.song.id;
+  $router.push(`/games/${gameID}/song/${songId}`);
+};
 </script>
 
 <template>
@@ -159,7 +174,11 @@ function formatScores(scores) {
       />
 
       <CardBox has-table>
-        <GeneralTable :headers="headers" :items="scores" />
+        <GeneralTable
+          :headers="headers"
+          :items="scores"
+          @row-clicked="navigateToSong"
+        />
       </CardBox>
     </SectionMain>
   </LayoutAuthenticated>

@@ -170,6 +170,11 @@ function formatScores(scores) {
   }
   return formattedItems;
 }
+
+const navigateToSong = (item) => {
+  const songId = item.song.id;
+  $router.push(`/games/${gameID}/song/${songId}`);
+};
 </script>
 
 <template>
@@ -194,7 +199,11 @@ function formatScores(scores) {
         </SectionTitleLine>
 
         <CardBox has-table>
-          <GeneralTable :headers="headers" :items="scores" />
+          <GeneralTable
+            :headers="headers"
+            :items="scores"
+            @row-clicked="navigateToSong"
+          />
         </CardBox>
       </template>
     </SectionMain>

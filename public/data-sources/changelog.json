@@ -4,5 +4,6 @@
     "3.0.3": ["- (Feature) Discord avatars are now reactive!", "- (Feature) New profile badges! I'll be working on a backend for these soon™️", "- (Optimization) Fix this box's formatting on mobile."],
     "3.0.4": ["- (Feature) Add performance event flag settings for SOUND VOLTEX EXCEED GEAR"],
     "3.0.5": ["- (Feature) Add profile badges based on Discord server roles. Expands Discord linking capabilities."],
-    "3.0.6": ["- (Major) Replace non-standard game cards with a standardized and new header card. May break some layouts so PLEASE REPORT BUGS!", "- (Feature) Create song detail page, not yet completed or reactive.", "- (Bugfix) Fix issue where deleteSession fails if the session has already been deleted.", "- (Minor) Edit ring color on red buttons", "- (Admin) Add Arcades admin page", "- (Bugfix) Fix incorrect prop types for Notes Radar"]
+    "3.0.6": ["- (Major) Replace non-standard game cards with a standardized and new header card. May break some layouts so PLEASE REPORT BUGS!", "- (Feature) Create song detail page, not yet completed or reactive.", "- (Bugfix) Fix issue where deleteSession fails if the session has already been deleted.", "- (Minor) Edit ring color on red buttons", "- (Admin) Add Arcades admin page", "- (Bugfix) Fix incorrect prop types for Notes Radar"],
+    "3.0.7": ["- (Major) Song data page now loads data. This data is quite broken for a few games so EXPECT BUGS!", "- (Optimization) Add in table data for games, still missing some data but the basics are complete now."] 
 }

@@ -35,3 +35,17 @@ export async function getAttemptData(game, userId = null) {
     throw error;
   }
 }
+
+export async function APIGetTopScore(game, songId = null) {
+  try {
+    const data = await mainStore.callApi(
+      `/topscore/${game}/${songId}`,
+      "GET",
+      null
+    );
+    return data.data;
+  } catch (error) {
+    console.log("Error fetching score data:", error);
+    throw error;
+  }
+}
