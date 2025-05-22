@@ -3,5 +3,6 @@
     "3.0.2": ["- (Feature) Added new greetings", "- (Feature) Added new user background", "- (Feature) Added toggle for disabling/enabling this popup", "- (Feature) Added version info to footer", "- (Feature) Fill in more profile data on personal profile view", "- (Fix) DDR stats now work again", "- (Fix) DDR player weight can now be set (kinda)"],
     "3.0.3": ["- (Feature) Discord avatars are now reactive!", "- (Feature) New profile badges! I'll be working on a backend for these soon™️", "- (Optimization) Fix this box's formatting on mobile."],
     "3.0.4": ["- (Feature) Add performance event flag settings for SOUND VOLTEX EXCEED GEAR"],
-    "3.0.5": ["- (Feature) Add profile badges based on Discord server roles. Expands Discord linking capabilities."]
+    "3.0.5": ["- (Feature) Add profile badges based on Discord server roles. Expands Discord linking capabilities."],
+    "3.0.6": ["- (Major) Replace non-standard game cards with a standardized and new header card. May break some layouts so PLEASE REPORT BUGS!", "- (Feature) Create song detail page, not yet completed or reactive.", "- (Bugfix) Fix issue where deleteSession fails if the session has already been deleted.", "- (Minor) Edit ring color on red buttons", "- (Admin) Add Arcades admin page", "- (Bugfix) Fix incorrect prop types for Notes Radar"]
 }
