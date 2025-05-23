@@ -4,6 +4,7 @@ import { DDRClassOptions } from "@/constants/gameOptions/ddrclassOptions";
 import { DDROptions } from "@/constants/gameOptions/ddrOptions";
 import { GFDMOptions } from "@/constants/gameOptions/gfdmOptions";
 import { IIDXOptions } from "@/constants/gameOptions/iidxOptions";
+import { IIDXClassOptions } from "@/constants/gameOptions/iidxClassOptions";
 import { LovePlusOptions } from "@/constants/gameOptions/lovePlusOptions";
 import { MusecaOptions } from "@/constants/gameOptions/musecaOptions";
 import { NostalgiaOptions } from "@/constants/gameOptions/nostalgiaOptions";
@@ -1409,6 +1410,7 @@ export const gameData = [
     icon: `${ASSET_PATH}/icon/iidx.webp`,
     cardBG: `${ASSET_PATH}/card/iidx.webp`,
     assetId: "iidx",
+    gameOptions: IIDXClassOptions,
     noRivals: true,
     noScores: true,
     noRecords: true,
