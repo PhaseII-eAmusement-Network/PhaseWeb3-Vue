@@ -3,6 +3,7 @@ import { computed } from "vue";
 import { RouterLink } from "vue-router";
 import { getButtonColor } from "@/colors.js";
 import BaseIcon from "@/components/BaseIcon.vue";
+import { useMainStore } from "@/stores/main";
 
 const props = defineProps({
   label: {
@@ -103,7 +104,12 @@ const componentClass = computed(() => {
     "hover:scale-[1.02] hover:shadow-xl",
     props.disabled ? "cursor-not-allowed" : "cursor-pointer",
     props.roundedFull ? "rounded-lg" : "rounded",
-    getButtonColor(props.color, props.outline, !props.disabled, props.active),
+    getButtonColor(
+      mainStore.userCustomize.shrimpLinks ? "sakura" : props.color,
+      props.outline,
+      !props.disabled,
+      props.active
+    ),
   ];
 
   if (!props.label && props.icon) {
@@ -120,6 +126,8 @@ const componentClass = computed(() => {
 
   return base;
 });
+
+const mainStore = useMainStore();
 </script>
 
 <template>
@@ -139,6 +147,8 @@ const componentClass = computed(() => {
       {{ tooltip }}
     </div>
     <BaseIcon v-if="icon" :path="icon" :size="iconSize" />
-    <span v-if="label" :class="labelClass">{{ label }}</span>
+    <span v-if="label" :class="labelClass">{{
+      mainStore.userCustomize.shrimpLinks ? "Shrimp" : label
+    }}</span>
   </component>
 </template>

@@ -107,6 +107,19 @@ async function revert() {
               />
             </FormField>
 
+            <FormField
+              label="Shrimp Links"
+              help="Allow my mind to be probed by shrimps"
+              class="text-pink-300"
+            >
+              <FormCheckRadio
+                v-model="userCustomize.shrimpLinks"
+                type="switch"
+                :input-value="userCustomize.shrimpLinks ?? false"
+                name="shrimpLinks"
+              />
+            </FormField>
+
             <div class="space-x-2">
               <BaseButton type="submit" color="success" label="Save" />
               <BaseButton

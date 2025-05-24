@@ -14,6 +14,7 @@ import {
   mdiAccountTie,
   mdiHeartMultipleOutline,
   mdiCheckDecagramOutline,
+  mdiLinkBoxVariantOutline,
   // mdiAccountCheck,
 } from "@mdi/js";
 import BaseLevel from "@/components/BaseLevel.vue";
@@ -162,6 +163,13 @@ function getCardStyle() {
             label="Rhythm Riot"
             color="sakura"
             :icon="mdiFlowerPoppy"
+            small
+          />
+          <PillTag
+            v-if="mainStore.userCustomize.shrimpLinks"
+            label="Shrimp Links"
+            color="sakura"
+            :icon="mdiLinkBoxVariantOutline"
             small
           />
           <!-- <PillTag

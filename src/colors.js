@@ -55,6 +55,8 @@ export const getButtonColor = (
       danger: "ring-red-300 dark:ring-red-900",
       warning: "ring-yellow-300 dark:ring-yellow-700",
       info: "ring-blue-300 dark:ring-blue-800",
+      sakura: "ring-pink-400",
+      gold: "ring-amber-300",
     },
     active: {
       white: "bg-gray-100",
@@ -65,6 +67,8 @@ export const getButtonColor = (
       danger: "bg-red-700 dark:bg-red-600",
       warning: "bg-yellow-700 dark:bg-yellow-600",
       info: "bg-blue-700 dark:bg-blue-600",
+      sakura: "ring-pink-400",
+      gold: "ring-amber-300",
     },
     bg: {
       white: "bg-white text-black",
@@ -75,6 +79,8 @@ export const getButtonColor = (
       danger: "bg-red-600 dark:bg-red-800 text-white",
       warning: "bg-yellow-600 dark:bg-yellow-700 text-white",
       info: "bg-blue-600 dark:bg-blue-900 text-white",
+      sakura: "bg-pink-500",
+      gold: "bg-amber-400",
     },
     bgHover: {
       white: "hover:bg-gray-100",
@@ -98,6 +104,8 @@ export const getButtonColor = (
       danger: "border-red-600 dark:border-red-950",
       warning: "border-yellow-600 dark:border-yellow-950",
       info: "border-blue-600 dark:border-blue-950",
+      sakura: "border-pink-500",
+      gold: "border-amber-400",
     },
     text: {
       contrast: "dark:text-slate-100",
