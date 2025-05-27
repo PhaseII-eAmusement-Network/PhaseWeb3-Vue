@@ -1,5 +1,5 @@
 <script setup>
-import { computed, ref, onMounted, watch } from "vue";
+import { computed, ref, onMounted } from "vue";
 import {
   mdiGamepad,
   mdiNewspaperVariant,
@@ -41,13 +41,8 @@ function humanReadableTime(timestamp) {
   return date.toLocaleString();
 }
 
-const userProfiles = ref(mainStore.userProfiles);
-watch(
-  () => mainStore.userProfiles,
-  (newValue) => {
-    userProfiles.value = newValue;
-  }
-);
+const userProfiles = computed(() => mainStore.userProfiles);
+const userScoreStats = computed(() => mainStore.userScoreStats);
 
 const cumulativePlays = computed(() => {
   return userProfiles.value.reduce(
@@ -104,6 +99,60 @@ function filterUserProfiles(userProfiles) {
 
   return filteredProfiles;
 }
+
+const today = new Date().toISOString().split("T")[0];
+
+const totalAttempts = computed(() => {
+  return userScoreStats.value?.attempts?.length || 0;
+});
+
+const totalRecords = computed(() => {
+  return userScoreStats.value?.records?.length || 0;
+});
+
+const todayAttempts = computed(() => {
+  return (
+    userScoreStats.value?.attempts?.filter((a) => {
+      const attemptDate = new Date(a.timestamp * 1000)
+        .toISOString()
+        .split("T")[0];
+      return attemptDate === today;
+    }).length || 0
+  );
+});
+
+const todayRecords = computed(() => {
+  return (
+    userScoreStats.value?.records?.filter((r) => {
+      const recordDate = new Date(r.timestamp * 1000)
+        .toISOString()
+        .split("T")[0];
+      return recordDate === today;
+    }).length || 0
+  );
+});
+
+const todayPlays = computed(() => {
+  const todayStr = new Date().toISOString().split("T")[0];
+  let total = 0;
+
+  userProfiles.value.forEach((profile) => {
+    const arcadeHistory = profile.data?.arcade_history || {};
+
+    Object.values(arcadeHistory).forEach((machines) => {
+      Object.values(machines).forEach((timestamps) => {
+        timestamps.forEach((ts) => {
+          const dateStr = new Date(ts * 1000).toISOString().split("T")[0];
+          if (dateStr === todayStr) {
+            total++;
+          }
+        });
+      });
+    });
+  });
+
+  return total;
+});
 </script>
 
 <template>
@@ -153,11 +202,49 @@ function filterUserProfiles(userProfiles) {
           icon-color="text-sky-300"
         />
         <CardBoxWidget
+          v-if="todayPlays"
+          :icon="mdiGamepadOutline"
+          :number="todayPlays"
+          label="Plays Today"
+          suffix="games"
+          icon-color="text-sky-300"
+        />
+        <CardBoxWidget
           :icon="mdiFire"
           :number="longestStreak"
           label="Longest Play Streak"
           suffix="plays"
           icon-color="text-red-600"
+        />
+        <CardBoxWidget
+          :icon="mdiGamepadOutline"
+          :number="totalRecords"
+          label="Total Records"
+          suffix="records"
+          icon-color="text-sky-300"
+        />
+        <CardBoxWidget
+          :icon="mdiGamepadOutline"
+          :number="totalAttempts"
+          label="Total Attempts"
+          suffix="attempts"
+          icon-color="text-sky-300"
+        />
+        <CardBoxWidget
+          v-if="todayRecords"
+          :icon="mdiGamepadOutline"
+          :number="todayRecords"
+          label="Records Today"
+          suffix="records"
+          icon-color="text-sky-300"
+        />
+        <CardBoxWidget
+          v-if="todayAttempts"
+          :icon="mdiGamepadOutline"
+          :number="todayAttempts"
+          label="Attempts Today"
+          suffix="attempts"
+          icon-color="text-sky-300"
         />
       </div>
 
@@ -178,7 +265,10 @@ function filterUserProfiles(userProfiles) {
       <SectionTitleLine :icon="mdiTrendingUp" title="Play Trends" main />
       <CardBox class="mb-6">
         <div v-if="userProfiles">
-          <LineChart :data="generateChartData(userProfiles)" class="h-96" />
+          <LineChart
+            :data="generateChartData(userProfiles, userScoreStats)"
+            class="h-96"
+          />
         </div>
       </CardBox>
     </SectionMain>

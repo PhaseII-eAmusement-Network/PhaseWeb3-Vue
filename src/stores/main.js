@@ -20,6 +20,7 @@ export const useMainStore = defineStore("main", {
     userArcades: [],
     profiles: {},
     userCustomize: {},
+    userScoreStats: {},
 
     /* Field focus with ctrl+k (to register only once) */
     isFieldFocusRegistered: false,
@@ -75,6 +76,9 @@ export const useMainStore = defineStore("main", {
       }
       if (payload.customize) {
         this.userCustomize = payload.customize;
+      }
+      if (payload.userScoreStats) {
+        this.userScoreStats = payload.userScoreStats;
       }
     },
 
@@ -268,6 +272,7 @@ export const useMainStore = defineStore("main", {
               profiles: user.profiles,
               arcades: user.arcades,
               customize: user.data?.customize,
+              userScoreStats: user.scoreStats,
             });
             this.userLoaded = true;
             return true;

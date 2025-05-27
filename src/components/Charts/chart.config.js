@@ -27,6 +27,48 @@ const datasetObject = (color, points) => {
   };
 };
 
+const datasetRecordObject = (color, points) => {
+  return {
+    fill: false,
+    borderColor: chartColors.default[color],
+    borderWidth: 2,
+    borderDash: [],
+    borderDashOffset: 0.0,
+    pointBackgroundColor: chartColors.default[color],
+    pointBorderColor: "rgba(255,255,255,0)",
+    pointHoverBackgroundColor: chartColors.default[color],
+    pointBorderWidth: 20,
+    pointHoverRadius: 4,
+    pointHoverBorderWidth: 15,
+    pointRadius: 4,
+    data: points,
+    tension: 0.5,
+    cubicInterpolationMode: "default",
+    label: "Records",
+  };
+};
+
+const datasetAttemptObject = (color, points) => {
+  return {
+    fill: false,
+    borderColor: chartColors.default[color],
+    borderWidth: 2,
+    borderDash: [],
+    borderDashOffset: 0.0,
+    pointBackgroundColor: chartColors.default[color],
+    pointBorderColor: "rgba(255,255,255,0)",
+    pointHoverBackgroundColor: chartColors.default[color],
+    pointBorderWidth: 20,
+    pointHoverRadius: 4,
+    pointHoverBorderWidth: 15,
+    pointRadius: 4,
+    data: points,
+    tension: 0.5,
+    cubicInterpolationMode: "default",
+    label: "Attempts",
+  };
+};
+
 const parseArcadeHistory = (users) => {
   const groupByDay = (timestamps) => {
     const dayMap = {};
@@ -67,7 +109,7 @@ const parseArcadeHistory = (users) => {
   return { labels: last14Days, data: playCounts };
 };
 
-export const generateChartData = (users) => {
+export const generateChartData = (users, scoreStats = null) => {
   if (!Array.isArray(users) || users.length === 0) {
     return {
       labels: [],
@@ -76,9 +118,39 @@ export const generateChartData = (users) => {
   }
 
   const { labels, data } = parseArcadeHistory(users);
+  const baseLabels = labels;
+
+  const groupByDay = (timestamps) => {
+    const dayMap = {};
+    timestamps.forEach((timestamp) => {
+      const day = new Date(timestamp * 1000).toISOString().split("T")[0];
+      dayMap[day] = (dayMap[day] || 0) + 1;
+    });
+    return dayMap;
+  };
+
+  const recordsData = [];
+  const attemptsData = [];
+
+  if (scoreStats?.records && scoreStats?.attempts) {
+    const recordTimestamps = scoreStats.records.map((r) => r.timestamp);
+    const attemptTimestamps = scoreStats.attempts.map((a) => a.timestamp);
+
+    const recordCountsByDay = groupByDay(recordTimestamps);
+    const attemptCountsByDay = groupByDay(attemptTimestamps);
+
+    baseLabels.forEach((day) => {
+      recordsData.push(recordCountsByDay[day] || 0);
+      attemptsData.push(attemptCountsByDay[day] || 0);
+    });
+  }
 
   return {
-    labels,
-    datasets: [datasetObject("info", data)],
+    labels: baseLabels,
+    datasets: [
+      datasetObject("info", data),
+      datasetRecordObject("primary", recordsData),
+      datasetAttemptObject("danger", attemptsData),
+    ],
   };
 };
