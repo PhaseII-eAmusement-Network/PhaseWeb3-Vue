@@ -358,6 +358,36 @@ const routes = [
     name: "ErrorPage",
     component: () => import("@/views/ErrorView.vue"),
   },
+  {
+    meta: {
+      title: "View Records",
+    },
+    path: "/games/:game/records/:userId",
+    name: "personal_records",
+    component: () => import("@/views/Game/PersonalRecords.vue"),
+    options: {
+      hotReload: true, // disables Hot Reload
+    },
+  },
+  {
+    meta: {
+      title: "Network Records",
+    },
+    path: "/games/:game/records",
+    name: "all_records",
+    component: () => import("@/views/Game/NetworkRecords.vue"),
+    options: {
+      hotReload: true, // disables Hot Reload
+    },
+  },
+  {
+    meta: {
+      title: "Error",
+    },
+    path: "/:catchAll(.*)",
+    name: "ErrorPage",
+    component: () => import("@/views/ErrorView.vue"),
+  },
 ];
 
 const router = createRouter({

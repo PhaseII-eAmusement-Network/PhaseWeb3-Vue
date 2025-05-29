@@ -206,7 +206,7 @@ const todayPlays = computed(() => {
           :icon="mdiGamepadOutline"
           :number="todayPlays"
           label="Plays Today"
-          suffix="games"
+          suffix="plays"
           icon-color="text-sky-300"
         />
         <CardBoxWidget

@@ -8,5 +8,6 @@
     "3.0.7": ["- (Major) Song data page now loads data. This data is quite broken for a few games so EXPECT BUGS!", "- (Optimization) Add in table data for games, still missing some data but the basics are complete now."],
     "3.0.8": ["- (Minor) Added game event options for Classic IIDX versions"],
     "3.0.8-shrimplinks": ["- (Bugfix) Fix broken session."],
-    "3.0.9": ["- (Minor) Add additional data to the dashboard, including today stats and score stats. Add score stats to chart."]
+    "3.0.9": ["- (Minor) Add additional data to the dashboard, including today stats and score stats. Add score stats to chart."],
+    "3.0.10": ["- (Major) Add experimental records pages, work on score processing.", "- (Bugfix) Clean up new dashboard data"]
 }

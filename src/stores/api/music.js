@@ -36,6 +36,20 @@ export async function getAttemptData(game, userId = null) {
   }
 }
 
+export async function APIGetRecordData(game, userId = null) {
+  try {
+    const data = await mainStore.callApi(
+      `/records/${game}` + (userId ? `?userId=${userId}` : ""),
+      "GET",
+      null
+    );
+    return data.data;
+  } catch (error) {
+    console.log("Error fetching record data:", error);
+    throw error;
+  }
+}
+
 export async function APIGetTopScore(game, songId = null) {
   try {
     const data = await mainStore.callApi(

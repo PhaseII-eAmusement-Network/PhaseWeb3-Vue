@@ -7,6 +7,7 @@ import {
   mdiAccountDetails,
   mdiPlaylistMusicOutline,
   mdiSwordCross,
+  mdiFormatListText,
 } from "@mdi/js";
 import BaseButton from "@/components/BaseButton.vue";
 import GameTitleLine from "@/components/GameTitleLine.vue";
@@ -45,13 +46,6 @@ function loadRoutes() {
       route: "game_page",
       color: "success",
     },
-    // {
-    //   label: "Network Records",
-    //   icon: mdiFormatListText,
-    //   path: `/#/games/${props.game.id}/records`,
-    //   route: "",
-    //   color: "success",
-    // },
   ];
 
   if (userProfiles.value.some((profile) => profile.game === props.game.id)) {
@@ -90,23 +84,32 @@ function loadRoutes() {
       });
     }
 
-    // navigationData.push({
-    //   label: "My Records",
-    //   icon: mdiFormatListText,
-    //   path: `/#/games/${props.game.id}/`,
-    //   route: "game_page",
-    //   color: "success",
-    // });
+    navigationData.push({
+      label: "My Records",
+      icon: mdiFormatListText,
+      path: `/#/games/${props.game.id}/records/${mainStore.userId}`,
+      route: "personal_records",
+      color: "success",
+    });
   }
 
   if (!props.game.noScores) {
-    navigationData.push({
-      label: "Network Scores",
-      icon: mdiPlaylistMusicOutline,
-      path: `/#/games/${props.game.id}/scores`,
-      route: "all_scores",
-      color: "info",
-    });
+    navigationData.push(
+      {
+        label: "Network Scores",
+        icon: mdiPlaylistMusicOutline,
+        path: `/#/games/${props.game.id}/scores`,
+        route: "all_scores",
+        color: "info",
+      },
+      {
+        label: "Network Records",
+        icon: mdiFormatListText,
+        path: `/#/games/${props.game.id}/records`,
+        route: "all_records",
+        color: "success",
+      }
+    );
   }
 
   return navigationData;
