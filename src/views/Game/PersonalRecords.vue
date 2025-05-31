@@ -89,7 +89,7 @@ const filteredSongs = computed(() => {
     <SectionMain v-if="songData">
       <template v-if="myProfile">
         <GameHeader :game="thisGame" :profile="myProfile" />
-        <div class="flex gap-2">
+        <div class="flex gap-2 mb-2 md:mb-0">
           <BaseButton
             :icon="mdiAccountDetails"
             :href="`/#/games/${thisGame.id}/profiles/${myProfile.userId}`"

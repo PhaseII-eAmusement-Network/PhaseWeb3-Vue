@@ -62,16 +62,20 @@ const chartSelector = reactive({
 
 const chartOptions = computed(() => {
   if (!songData.value.charts) return [];
-  return songData.value.charts
-    .filter(
-      (chart) => chart.data?.difficulty !== 0 && chart.data?.difficulty != null
-    )
-    .map((chart, index) => {
-      const label = `${thisGame.chartTable[chart.chart]} - ${
-        chart.data?.difficulty ?? "?"
-      }`;
-      return { id: index, label };
-    });
+  return (
+    songData.value.charts
+      .filter(
+        (chart) =>
+          chart.data?.difficulty !== 0 && chart.data?.difficulty != null
+      )
+      // eslint-disable-next-line no-unused-vars
+      .map((chart, index) => {
+        const label = `${thisGame.chartTable[chart.chart]} - ${
+          chart.data?.difficulty ?? "?"
+        }`;
+        return { id: chart.chart, label };
+      })
+  );
 });
 
 const selectedChartRecords = computed(() => {

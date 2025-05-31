@@ -9,5 +9,6 @@
     "3.0.8": ["- (Minor) Added game event options for Classic IIDX versions"],
     "3.0.8-shrimplinks": ["- (Bugfix) Fix broken session."],
     "3.0.9": ["- (Minor) Add additional data to the dashboard, including today stats and score stats. Add score stats to chart."],
-    "3.0.10": ["- (Major) Add experimental records pages, work on score processing.", "- (Bugfix) Clean up new dashboard data"]
+    "3.0.10": ["- (Major) Add experimental records pages, work on score processing.", "- (Bugfix) Clean up new dashboard data"],
+    "3.0.11": ["- (Bugfix) Fix broken chart sorting for certain games.", "- (Bugfix) Add spacing on mobile for personal records user buttons."]
 }
