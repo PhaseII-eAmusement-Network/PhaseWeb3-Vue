@@ -13,6 +13,7 @@ import { PopnMusicOptions } from "@/constants/gameOptions/popnOptions";
 import { ReflecBeatOptions } from "@/constants/gameOptions/reflecOptions";
 import { SDVXOptions } from "@/constants/gameOptions/sdvxOptions";
 import { WinningElevenOptions } from "@/constants/gameOptions/weOptions";
+import { SilentScopeOptions } from "@/constants/gameOptions/silentScopeOptions";
 const ASSET_PATH = import.meta.env.VITE_ASSET_PATH;
 
 export class GameConstants {
@@ -2015,6 +2016,16 @@ export const gameData = [
         maxRivals: 3,
       },
     ],
+  },
+  {
+    id: GameConstants.SILENT_SCOPE,
+    name: "SILENT SCOPE: BONE EATER",
+    skip: false,
+    noRivals: true,
+    noScores: false,
+    noRecords: true,
+    useUnicode: true,
+    gameOptions: SilentScopeOptions,
   },
   {
     id: GameConstants.TSUMTSUM,

@@ -373,6 +373,19 @@ export const IIDXOptions = {
       type: "Boolean",
     },
     {
+      id: "event_phase",
+      name: "Game Event Phase",
+      help: "Enable different boss events",
+      type: "Array",
+      options: [
+        { id: 0, label: "No Event" },
+        { id: 1, label: "MY POLIS DESIGNER (MAP 1)" },
+        { id: 2, label: "MY POLIS DESIGNER (MAP 2)" },
+        { id: 3, label: "MY POLIS DESIGNER (MAP 3)" },
+        { id: 4, label: "MY POLIS DESIGNER (MAP FINAL)" },
+      ],
+    },
+    {
       id: "system_season_voice",
       name: "System Season Voice",
       help: "Enable different season voice in Game",
@@ -384,6 +397,12 @@ export const IIDXOptions = {
         { id: 3, label: "Summer" },
         { id: 4, label: "Autumn" },
       ],
+    },
+    {
+      id: "license",
+      name: "License Message",
+      help: "A server sent license.",
+      type: "String",
     },
   ],
 };
