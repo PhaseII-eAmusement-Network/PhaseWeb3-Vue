@@ -383,6 +383,10 @@ export const IIDXOptions = {
         { id: 2, label: "MY POLIS DESIGNER (MAP 2)" },
         { id: 3, label: "MY POLIS DESIGNER (MAP 3)" },
         { id: 4, label: "MY POLIS DESIGNER (MAP FINAL)" },
+        { id: 5, label: "EPOLIS RESTORATION (SYSTEM A)" },
+        { id: 6, label: "EPOLIS RESTORATION (SYSTEM B)" },
+        { id: 7, label: "EPOLIS RESTORATION (SYSTEM C)" },
+        { id: 8, label: "EPOLIS RESTORATION (SYSTEM D + X)" },
       ],
     },
     {
