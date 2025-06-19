@@ -113,7 +113,7 @@ const componentClass = computed(() => {
   ];
 
   if (!props.label && props.icon) {
-    base.push("p-1");
+    base.push("p-0");
   } else if (props.small) {
     base.push("text-sm", props.roundedFull ? "px-3 py-1" : "p-1");
   } else {

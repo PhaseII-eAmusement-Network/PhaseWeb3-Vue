@@ -188,7 +188,6 @@ const navigateToProfile = (item) => {
             <GeneralTable
               :headers="headers"
               :items="profiles"
-              :path="`/#/${gameID}/profiles/`"
               @row-clicked="navigateToProfile"
             />
           </div>
