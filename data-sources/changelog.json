@@ -9,9 +9,10 @@
     "3.0.8": ["- (Minor) Added game event options for Classic IIDX versions"],
     "3.0.8-shrimplinks": ["- (Bugfix) Fix broken session."],
     "3.0.9": ["- (Minor) Add additional data to the dashboard, including today stats and score stats. Add score stats to chart."],
-    "3.0.10": ["- (Major) Add experimental records pages, work on score processing.", "- (Bugfix) Clean up new dashboard data"],
+    "3.0.10": ["- (Major) Add experimental records pages, work on score processing.", "- (Bugfix) Clean up new dashboard data."],
     "3.0.11": ["- (Bugfix) Fix broken chart sorting for certain games.", "- (Bugfix) Add spacing on mobile for personal records user buttons."],
     "3.0.12": ["- (Feature) Add new game event settings to SILENT SCOPE: BONE EATER and beatmaniaIIDX EPOLIS."],
     "3.0.13": ["- (Feature) Add new game event settings to beatmaniaIIDX EPOLIS."],
-    "3.0.14": ["- (Minor) Fix footer buttons on tables, add generic export table button for every table."]
+    "3.0.14": ["- (Minor) Fix footer buttons on tables, add generic export table button for every table."],
+    "3.0.15": ["- (Minor) Add beta support for Pinky Crush, clean up gameDB a little.", "- (Optimization) Convert dashboard to a more modular backend.", "- (Bugfix) Fix warnings on auth pages."]
 }
