@@ -51,6 +51,10 @@ const cumulativePlays = computed(() => {
   );
 });
 
+const uniqueProfiles = computed(() => {
+  return userProfiles.value.length;
+});
+
 const longestStreak = computed(() => {
   const groupByDay = (timestamps) => {
     const dayMap = {};
@@ -153,6 +157,65 @@ const todayPlays = computed(() => {
 
   return total;
 });
+
+const cardBoxes = ref([
+  {
+    label: "Cumulative Plays",
+    icon: mdiCounter,
+    iconColor: "text-emerald-600",
+    suffix: "play",
+    number: cumulativePlays,
+  },
+  {
+    label: "Games Played",
+    icon: mdiGamepadOutline,
+    iconColor: "text-sky-300",
+    suffix: "game",
+    number: uniqueProfiles,
+  },
+  {
+    label: "Plays Today",
+    icon: mdiCounter,
+    iconColor: "text-sky-300",
+    suffix: "play",
+    number: todayPlays,
+  },
+  {
+    label: "Longest Play Streak",
+    icon: mdiFire,
+    iconColor: "text-red-500",
+    suffix: "play",
+    number: longestStreak,
+  },
+  {
+    label: "Total Records",
+    icon: mdiGamepadOutline,
+    iconColor: "text-sky-300",
+    suffix: "record",
+    number: totalRecords,
+  },
+  {
+    label: "Total Attempts",
+    icon: mdiGamepadOutline,
+    iconColor: "text-sky-300",
+    suffix: "attempt",
+    number: totalAttempts,
+  },
+  {
+    label: "Records Today",
+    icon: mdiGamepadOutline,
+    iconColor: "text-sky-300",
+    suffix: "record",
+    number: todayRecords,
+  },
+  {
+    label: "Attempts Today",
+    icon: mdiGamepadOutline,
+    iconColor: "text-sky-300",
+    suffix: "attempt",
+    number: todayAttempts,
+  },
+]);
 </script>
 
 <template>
@@ -187,65 +250,16 @@ const todayPlays = computed(() => {
       <div
         class="grid grid-cols-2 sm:grid-cols-3 gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 3xl:grid-cols-5 mb-6"
       >
-        <CardBoxWidget
-          :icon="mdiCounter"
-          :number="cumulativePlays"
-          label="Cumulative Plays"
-          suffix="plays"
-          icon-color="text-emerald-600"
-        />
-        <CardBoxWidget
-          :icon="mdiGamepadOutline"
-          :number="userProfiles.length"
-          label="Games Played"
-          suffix="games"
-          icon-color="text-sky-300"
-        />
-        <CardBoxWidget
-          v-if="todayPlays"
-          :icon="mdiGamepadOutline"
-          :number="todayPlays"
-          label="Plays Today"
-          suffix="plays"
-          icon-color="text-sky-300"
-        />
-        <CardBoxWidget
-          :icon="mdiFire"
-          :number="longestStreak"
-          label="Longest Play Streak"
-          suffix="plays"
-          icon-color="text-red-600"
-        />
-        <CardBoxWidget
-          :icon="mdiGamepadOutline"
-          :number="totalRecords"
-          label="Total Records"
-          suffix="records"
-          icon-color="text-sky-300"
-        />
-        <CardBoxWidget
-          :icon="mdiGamepadOutline"
-          :number="totalAttempts"
-          label="Total Attempts"
-          suffix="attempts"
-          icon-color="text-sky-300"
-        />
-        <CardBoxWidget
-          v-if="todayRecords"
-          :icon="mdiGamepadOutline"
-          :number="todayRecords"
-          label="Records Today"
-          suffix="records"
-          icon-color="text-sky-300"
-        />
-        <CardBoxWidget
-          v-if="todayAttempts"
-          :icon="mdiGamepadOutline"
-          :number="todayAttempts"
-          label="Attempts Today"
-          suffix="attempts"
-          icon-color="text-sky-300"
-        />
+        <template v-for="box of cardBoxes" :key="box.label">
+          <CardBoxWidget
+            v-if="box.number"
+            :icon="box.icon"
+            :number="box.number"
+            :label="box.label"
+            :suffix="`${box.suffix}${box.number == 1 ? '' : 's'}`"
+            :icon-color="box.iconColor"
+          />
+        </template>
       </div>
 
       <SectionTitleLine :icon="mdiGamepad" title="Showcase" main />

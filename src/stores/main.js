@@ -99,7 +99,7 @@ export const useMainStore = defineStore("main", {
       const apiServer = import.meta.env.VITE_API_URL;
       const apiKey = import.meta.env.VITE_API_KEY;
       let loadingTimeout;
-      this.errorCode = ""; // We want to reset the network error.
+      this.errorCode = "";
 
       const startLoading = () => {
         loadingTimeout = setTimeout(() => {
@@ -243,7 +243,7 @@ export const useMainStore = defineStore("main", {
           saveUserAuthKey(data.sessionId, remember ? 30 : 1);
           return true;
         } else {
-          alert(this.errorCode);
+          alert("Incorrect username or password!");
           return false;
         }
       } catch (error) {

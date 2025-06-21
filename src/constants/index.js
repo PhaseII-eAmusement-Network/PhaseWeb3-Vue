@@ -171,6 +171,7 @@ export class VersionConstants {
   static IIDX_CASTHOUR = 29;
   static IIDX_RESIDENT = 30;
   static IIDX_EPOLIS = 31;
+  static IIDX_PINKY_CRUSH = 32;
 
   static JUBEAT = 1;
   static JUBEAT_RIPPLES = 2;
@@ -1213,6 +1214,7 @@ export const gameData = [
       VersionConstants.IIDX_CASTHOUR,
       VersionConstants.IIDX_RESIDENT,
       VersionConstants.IIDX_EPOLIS,
+      VersionConstants.IIDX_PINKY_CRUSH,
     ],
     scoreHeaders: [
       { text: "Misses", value: "data.misses", width: 100 },
@@ -1401,6 +1403,11 @@ export const gameData = [
       {
         id: VersionConstants.IIDX_EPOLIS,
         label: "EPOLIS",
+        maxRivals: 5,
+      },
+      {
+        id: VersionConstants.IIDX_PINKY_CRUSH,
+        label: "PINKY CRUSH",
         maxRivals: 5,
       },
     ],
@@ -2020,7 +2027,7 @@ export const gameData = [
   {
     id: GameConstants.SILENT_SCOPE,
     name: "SILENT SCOPE: BONE EATER",
-    skip: false,
+    skip: true,
     noRivals: true,
     noScores: false,
     noRecords: true,

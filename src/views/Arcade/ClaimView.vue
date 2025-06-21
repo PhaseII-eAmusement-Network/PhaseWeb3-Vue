@@ -63,8 +63,8 @@ async function saveSettings() {
           @submit.prevent="submitPCBID()"
         >
           <h2 class="text-xl mb-6 lg:w-1/2">
-            Claim an arcade using a PCBID. If the account already has an owner,
-            you may not claim the arcade.
+            Claim an arcade using a PCBID.<br />
+            You cannot claim the arcade if it has an owner.
           </h2>
 
           <FormField
