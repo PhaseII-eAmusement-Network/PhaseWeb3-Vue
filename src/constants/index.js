@@ -1407,7 +1407,7 @@ export const gameData = [
       },
       {
         id: VersionConstants.IIDX_PINKY_CRUSH,
-        label: "PINKY CRUSH",
+        label: "Pinky Crush",
         maxRivals: 5,
       },
     ],

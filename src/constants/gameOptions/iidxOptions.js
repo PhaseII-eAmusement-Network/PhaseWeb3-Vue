@@ -423,14 +423,9 @@ export const IIDXOptions = {
       type: "Array",
       options: [
         { id: 0, label: "No Event" },
-        { id: 1, label: "MY POLIS DESIGNER (MAP 1)" },
-        { id: 2, label: "MY POLIS DESIGNER (MAP 2)" },
-        { id: 3, label: "MY POLIS DESIGNER (MAP 3)" },
-        { id: 4, label: "MY POLIS DESIGNER (MAP FINAL)" },
-        { id: 5, label: "EPOLIS RESTORATION (SYSTEM A)" },
-        { id: 6, label: "EPOLIS RESTORATION (SYSTEM B)" },
-        { id: 7, label: "EPOLIS RESTORATION (SYSTEM C)" },
-        { id: 8, label: "EPOLIS RESTORATION (SYSTEM D + X)" },
+        { id: 1, label: "Pinky Jump UP! (MAP 1)" },
+        { id: 2, label: "Pinky Jump UP! (MAP 2)" },
+        { id: 3, label: "Pinky Jump UP! (MAP 3)" },
       ],
     },
     {

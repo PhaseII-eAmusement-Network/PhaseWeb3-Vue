@@ -42,6 +42,20 @@ export async function checkPCBID(PCBID) {
   }
 }
 
+export async function APIAdminCreateMachine(arcadeId, newMachine) {
+  try {
+    const data = await mainStore.callApi(
+      `/admin/arcade/${arcadeId}/machine`,
+      "POST",
+      newMachine
+    );
+    return data;
+  } catch (error) {
+    console.log("Error adding machine:", error);
+    throw error;
+  }
+}
+
 export async function APIOnboardArcade(newArcade) {
   try {
     const data = await mainStore.callApi(
@@ -52,6 +66,20 @@ export async function APIOnboardArcade(newArcade) {
     return data;
   } catch (error) {
     console.log("Error onboarding arcade:", error);
+    throw error;
+  }
+}
+
+export async function APIAdminUpdateArcade(arcadeId, newArcade) {
+  try {
+    const data = await mainStore.callApi(
+      `/admin/arcade/${arcadeId}`,
+      "POST",
+      newArcade
+    );
+    return data;
+  } catch (error) {
+    console.log("Error updating arcade:", error);
     throw error;
   }
 }
@@ -92,6 +120,36 @@ export async function APIAdminCreateClient(newClient) {
     return data;
   } catch (error) {
     console.log("Error posting client:", error);
+    throw error;
+  }
+}
+
+export async function APIAdminUsers() {
+  try {
+    const data = await mainStore.callApi(`/admin/users`);
+    return data.data;
+  } catch (error) {
+    console.log("Error loading users:", error);
+    throw error;
+  }
+}
+
+export async function APIAdminNews() {
+  try {
+    const data = await mainStore.callApi(`/admin/news`);
+    return data.data;
+  } catch (error) {
+    console.log("Error loading news:", error);
+    throw error;
+  }
+}
+
+export async function APIAdminCreateNews(newNews) {
+  try {
+    const data = await mainStore.callApi(`/admin/news`, "POST", newNews);
+    return data;
+  } catch (error) {
+    console.log("Error posting news:", error);
     throw error;
   }
 }

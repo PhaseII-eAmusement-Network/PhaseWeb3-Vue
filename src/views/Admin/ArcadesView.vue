@@ -94,6 +94,10 @@ function filterArcades() {
   if (filterForm.filter) {
     return arcadeData.value.filter(
       (arcade) =>
+        arcade.id
+          .toString()
+          .toLowerCase()
+          .includes(filterForm.filter.toLowerCase()) ||
         arcade.name.toLowerCase().includes(filterForm.filter.toLowerCase()) ||
         arcade.description
           .toLowerCase()
@@ -113,30 +117,6 @@ function filterArcades() {
       </CardBox>
 
       <SectionTitleLine
-        :icon="mdiStoreOutline"
-        title="All Arcades"
-        color="text-blue-400"
-        main
-      />
-
-      <CardBox has-table class="mb-6">
-        <div
-          class="bg-white dark:bg-slate-900/95 rounded-2xl lg:flex lg:justify-between"
-        >
-          <div class="w-full">
-            <GeneralTable
-              :headers="headers"
-              :items="arcadeData"
-              @row-clicked="openArcade"
-            />
-            <h1 class="mx-4 mt-1 mb-2 text-md lg:text-lg">
-              Click row to open arcade
-            </h1>
-          </div>
-        </div>
-      </CardBox>
-
-      <SectionTitleLine
         :icon="mdiStoreEditOutline"
         title="Search Arcades"
         color="text-amber-600"
@@ -145,7 +125,7 @@ function filterArcades() {
       <CardBox class="mb-6">
         <FormField
           label="Search"
-          help="Search by name, description, or owner."
+          help="Search by ID, name, description, or owner."
           class="w-full md:w-1/3"
         >
           <FormControl
@@ -167,9 +147,16 @@ function filterArcades() {
                   {{ arcade.description }}
                 </h2>
                 <h2 class="text-md">Managed by {{ arcade.owners }}</h2>
+                <div
+                  class="bg-slate-900 p-2 rounded-md mt-2 w-12 max-w-14 text-center"
+                >
+                  <h2 class="text-lg font-mono text-pink-700">
+                    {{ arcade.id }}
+                  </h2>
+                </div>
               </div>
 
-              <div class="flex align-middle mt-2 md:mt-0">
+              <div class="flex align-middle mt-2 md:mt-0 max-h-12">
                 <BaseButton
                   label="Open Arcade"
                   color="info"
@@ -177,6 +164,29 @@ function filterArcades() {
                 />
               </div>
             </div>
+          </div>
+        </div>
+      </CardBox>
+
+      <SectionTitleLine
+        :icon="mdiStoreOutline"
+        title="All Arcades"
+        color="text-blue-400"
+        main
+      />
+      <CardBox has-table class="mb-6">
+        <div
+          class="bg-white dark:bg-slate-900/95 rounded-2xl lg:flex lg:justify-between"
+        >
+          <div class="w-full">
+            <GeneralTable
+              :headers="headers"
+              :items="arcadeData"
+              @row-clicked="openArcade"
+            />
+            <h1 class="mx-4 mt-1 mb-2 text-md lg:text-lg">
+              Click row to open arcade
+            </h1>
           </div>
         </div>
       </CardBox>

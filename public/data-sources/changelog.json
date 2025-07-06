@@ -14,5 +14,6 @@
     "3.0.12": ["- (Feature) Add new game event settings to SILENT SCOPE: BONE EATER and beatmaniaIIDX EPOLIS."],
     "3.0.13": ["- (Feature) Add new game event settings to beatmaniaIIDX EPOLIS."],
     "3.0.14": ["- (Minor) Fix footer buttons on tables, add generic export table button for every table."],
-    "3.0.15": ["- (Minor) Add beta support for Pinky Crush, clean up gameDB a little.", "- (Optimization) Convert dashboard to a more modular backend.", "- (Bugfix) Fix warnings on auth pages."]
+    "3.0.15": ["- (Minor) Add beta support for Pinky Crush, clean up gameDB a little.", "- (Optimization) Convert dashboard to a more modular backend.", "- (Bugfix) Fix warnings on auth pages."],
+    "3.0.16": ["- (Major) Add multiple new admin features for network management.", "- (Optimization) Optimize backend for arcade operations.", "- (Bugfix) Fix possible backend issues with better type enforcing.", "- (Bugfix) Fix event data and game data for IIDX Pinky Crush.", "- (Minor) Add assets for Nostalgia."]
 }
