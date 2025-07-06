@@ -9,6 +9,7 @@ import CardBox from "@/components/CardBox.vue";
 import BaseDivider from "@/components/BaseDivider.vue";
 import FormField from "@/components/FormField.vue";
 import FormControl from "@/components/FormControl.vue";
+import FormCheckRadio from "@/components/FormCheckRadio.vue";
 import BaseButton from "@/components/BaseButton.vue";
 import BaseIcon from "@/components/BaseIcon.vue";
 import UserCard from "@/components/UserCard.vue";
@@ -23,12 +24,14 @@ const currentProfile = reactive({
   username: JSON.parse(JSON.stringify(mainStore.userName)),
   email: JSON.parse(JSON.stringify(mainStore.userEmail)),
   pin: null,
+  public: mainStore.userPublic ?? false,
 });
 
 const profileForm = reactive({
   username: JSON.parse(JSON.stringify(mainStore.userName)),
   email: JSON.parse(JSON.stringify(mainStore.userEmail)),
   pin: null,
+  public: mainStore.userPublic ?? false,
 });
 
 const passwordForm = reactive({
@@ -53,6 +56,14 @@ watch(
   (newValue) => {
     profileForm.email = JSON.parse(JSON.stringify(newValue));
     currentProfile.email = JSON.parse(JSON.stringify(newValue));
+  }
+);
+
+watch(
+  () => mainStore.userPublic,
+  (newValue) => {
+    profileForm.public = newValue;
+    currentProfile.public = newValue;
   }
 );
 
@@ -136,6 +147,19 @@ function userChanged(oldProfile, newProfile) {
               pattern="\d{4}"
               autocomplete="pin"
               @input="pinInput"
+            />
+          </FormField>
+
+          <FormField
+            label="Public Profile"
+            help="Show my profile publicly. If disabled, only game profiles and scores will be visible."
+          >
+            <FormCheckRadio
+              v-model="profileForm.public"
+              name="public"
+              :model-value="profileForm.public"
+              :input-value="profileForm.public"
+              type="switch"
             />
           </FormField>
 

@@ -1,70 +1,284 @@
 <script setup>
+import { computed, ref, onMounted } from "vue";
+import { useRoute } from "vue-router";
 import {
   mdiAccount,
-  mdiAccountPlusOutline,
-  mdiAccountMinusOutline,
   mdiGamepad,
+  mdiChartTimelineVariant,
+  mdiCounter,
+  mdiGamepadOutline,
+  mdiFire,
+  mdiTrendingUp,
 } from "@mdi/js";
 import SectionMain from "@/components/SectionMain.vue";
 import CardBox from "@/components/CardBox.vue";
+import CardBoxWidget from "@/components/CardBoxWidget.vue";
 import CardBoxGameStat from "@/components/CardBoxGameStat.vue";
 import UserCard from "@/components/UserCard.vue";
 import LayoutAuthenticated from "@/layouts/LayoutAuthenticated.vue";
 import SectionTitleLine from "@/components/SectionTitleLine.vue";
-import BaseButton from "@/components/BaseButton.vue";
-import { GameConstants } from "@/constants";
+import LineChart from "@/components/Charts/LineChart.vue";
+import { getGameInfo } from "@/constants";
+import { APIGetUser } from "@/stores/api/account";
+
+const $route = useRoute();
+const reqUserId = $route.params.id;
+const userProfile = ref({});
+
+async function loadUser() {
+  try {
+    userProfile.value = {};
+    var data = await APIGetUser(reqUserId);
+    if (!data.name) {
+      data.name = "Unclaimed Account";
+    }
+    userProfile.value = data;
+  } catch (error) {
+    console.error("Failed to fetch user profile data:", error);
+  }
+}
+
+onMounted(async () => {
+  loadUser();
+  console.log(userProfile.value);
+});
+
+const userProfiles = computed(() => userProfile.value.userProfiles);
+const userScoreStats = computed(() => userProfile.value.userScoreStats);
+
+const cumulativePlays = computed(() => {
+  return userProfiles.value?.reduce(
+    (total, user) => total + user.data.total_plays,
+    0
+  );
+});
+
+const uniqueProfiles = computed(() => {
+  return userProfiles.value?.length;
+});
+
+const longestStreak = computed(() => {
+  const groupByDay = (timestamps) => {
+    const dayMap = {};
+    timestamps.forEach((timestamp) => {
+      const day = new Date(timestamp * 1000).toISOString().split("T")[0];
+      dayMap[day] = (dayMap[day] || 0) + 1;
+    });
+    return dayMap;
+  };
+
+  var maxStreak = 0;
+
+  userProfiles.value?.forEach((user) => {
+    const arcadeHistory = user.data?.arcade_history
+      ? user.data?.arcade_history
+      : {};
+    const allTimestamps = [];
+
+    Object.values(arcadeHistory).forEach((machines) => {
+      Object.values(machines).forEach((timestamps) => {
+        allTimestamps.push(...timestamps);
+      });
+    });
+
+    const playsByDay = groupByDay(allTimestamps);
+
+    const longestStreakForUser = Math.max(...Object.values(playsByDay));
+    maxStreak = Math.max(maxStreak, longestStreakForUser);
+  });
+
+  return maxStreak;
+});
+
+function filterUserProfiles(userProfiles) {
+  if (!userProfiles) {
+    return;
+  }
+
+  var filteredProfiles = [];
+  for (const profile of userProfiles) {
+    const game = getGameInfo(profile.game);
+    if (game && !game.skip) {
+      filteredProfiles.push(profile);
+    }
+  }
+
+  filteredProfiles.sort(function (x, y) {
+    return y.data.last_play_timestamp - x.data.last_play_timestamp;
+  });
+
+  return filteredProfiles;
+}
+
+const today = new Date().toISOString().split("T")[0];
+
+const totalAttempts = computed(() => {
+  return userScoreStats.value?.attempts?.length || 0;
+});
+
+const totalRecords = computed(() => {
+  return userScoreStats.value?.records?.length || 0;
+});
+
+const todayAttempts = computed(() => {
+  return (
+    userScoreStats.value?.attempts?.filter((a) => {
+      const attemptDate = new Date(a.timestamp * 1000)
+        .toISOString()
+        .split("T")[0];
+      return attemptDate === today;
+    }).length || 0
+  );
+});
+
+const todayRecords = computed(() => {
+  return (
+    userScoreStats.value?.records?.filter((r) => {
+      const recordDate = new Date(r.timestamp * 1000)
+        .toISOString()
+        .split("T")[0];
+      return recordDate === today;
+    }).length || 0
+  );
+});
+
+const todayPlays = computed(() => {
+  const todayStr = new Date().toISOString().split("T")[0];
+  let total = 0;
+
+  userProfiles.value?.forEach((profile) => {
+    const arcadeHistory = profile.data?.arcade_history || {};
+
+    Object.values(arcadeHistory).forEach((machines) => {
+      Object.values(machines).forEach((timestamps) => {
+        timestamps.forEach((ts) => {
+          const dateStr = new Date(ts * 1000).toISOString().split("T")[0];
+          if (dateStr === todayStr) {
+            total++;
+          }
+        });
+      });
+    });
+  });
+
+  return total;
+});
+
+const cardBoxes = ref([
+  {
+    label: "Cumulative Plays",
+    icon: mdiCounter,
+    iconColor: "text-emerald-600",
+    suffix: "play",
+    number: cumulativePlays,
+  },
+  {
+    label: "Games Played",
+    icon: mdiGamepadOutline,
+    iconColor: "text-sky-300",
+    suffix: "game",
+    number: uniqueProfiles,
+  },
+  {
+    label: "Plays Today",
+    icon: mdiCounter,
+    iconColor: "text-sky-300",
+    suffix: "play",
+    number: todayPlays,
+  },
+  {
+    label: "Longest Play Streak",
+    icon: mdiFire,
+    iconColor: "text-red-500",
+    suffix: "play",
+    number: longestStreak,
+  },
+  {
+    label: "Total Records",
+    icon: mdiGamepadOutline,
+    iconColor: "text-sky-300",
+    suffix: "record",
+    number: totalRecords,
+  },
+  {
+    label: "Total Attempts",
+    icon: mdiGamepadOutline,
+    iconColor: "text-sky-300",
+    suffix: "attempt",
+    number: totalAttempts,
+  },
+  {
+    label: "Records Today",
+    icon: mdiGamepadOutline,
+    iconColor: "text-sky-300",
+    suffix: "record",
+    number: todayRecords,
+  },
+  {
+    label: "Attempts Today",
+    icon: mdiGamepadOutline,
+    iconColor: "text-sky-300",
+    suffix: "attempt",
+    number: todayAttempts,
+  },
+]);
 </script>
 
 <template>
   <LayoutAuthenticated>
     <SectionMain>
-      <SectionTitleLine :icon="mdiAccount" title="Trmazi's Profile" main />
-      <UserCard class="mb-6" use-small />
+      <template v-if="userProfile != null">
+        <SectionTitleLine
+          :icon="mdiAccount"
+          :title="`${userProfile.name}'s Profile`"
+          main
+        />
+        <UserCard class="mb-6" :override-profile="userProfile" use-small />
 
-      <CardBox is-form class="mb-6">
-        <div class="flex gap-4">
-          <BaseButton
-            color="success"
-            label="Add Friend"
-            :icon="mdiAccountPlusOutline"
-          />
-          <BaseButton
-            color="danger"
-            label="Remove Friend"
-            :icon="mdiAccountMinusOutline"
+        <SectionTitleLine
+          :icon="mdiChartTimelineVariant"
+          title="Quick Stats"
+          main
+        />
+        <div
+          class="grid grid-cols-2 sm:grid-cols-3 gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 3xl:grid-cols-5 mb-6"
+        >
+          <template v-for="box of cardBoxes" :key="box.label">
+            <CardBoxWidget
+              v-if="box.number"
+              :icon="box.icon"
+              :number="box.number"
+              :label="box.label"
+              :suffix="`${box.suffix}${box.number == 1 ? '' : 's'}`"
+              :icon-color="box.iconColor"
+            />
+          </template>
+        </div>
+
+        <SectionTitleLine :icon="mdiGamepad" title="Showcase" main />
+        <div
+          class="grid grid-flow-row auto-rows-auto grid-cols-2 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-3 3xl:grid-cols-4 4xl:grid-cols-6 gap-5 mb-5"
+        >
+          <CardBoxGameStat
+            v-for="profile of filterUserProfiles(userProfiles)"
+            :key="profile.game"
+            :game="profile.game"
+            :value="profile.data.total_plays"
+            profile-name=""
+            type="plays"
           />
         </div>
-      </CardBox>
 
-      <SectionTitleLine :icon="mdiGamepad" title="Game Stats" main />
-      <div
-        class="grid grid-flow-row auto-rows-auto grid-cols-1 md:grid-cols-2 gap-5 mb-5"
-      >
-        <CardBoxGameStat
-          :game="GameConstants.DDR"
-          value="#10 out of 132"
-          profile-name="DJ. TRMAZI"
-          type="ranking"
-        />
-        <CardBoxGameStat
-          :game="GameConstants.POPN_MUSIC"
-          :value="300"
-          profile-name="TRMAZI"
-          type="plays"
-        />
-        <CardBoxGameStat
-          :game="GameConstants.JUBEAT"
-          :value="392"
-          profile-name="TRMAZI"
-          type="scores"
-        />
-        <CardBoxGameStat
-          :game="GameConstants.SDVX"
-          value="#15 out of 200"
-          profile-name="TRMAZI"
-          type="ranking"
-        />
-      </div>
+        <SectionTitleLine :icon="mdiTrendingUp" title="Play Trends" main />
+        <CardBox class="mb-6">
+          <div v-if="userProfiles">
+            <LineChart
+              :data="generateChartData(userProfiles, userScoreStats)"
+              class="h-96"
+            />
+          </div>
+        </CardBox>
+      </template>
     </SectionMain>
   </LayoutAuthenticated>
 </template>

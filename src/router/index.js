@@ -116,7 +116,7 @@ const routes = [
   },
   {
     meta: {
-      title: "View Profile",
+      title: "View User",
     },
     path: "/profiles/:id",
     name: "profile_viewer",
@@ -172,14 +172,6 @@ const routes = [
     path: "/admin/arcades",
     name: "admin_arcades",
     component: () => import("@/views/Admin/ArcadesView.vue"),
-  },
-  {
-    meta: {
-      title: "Cards",
-    },
-    path: "/admin/cards",
-    name: "admin_cards",
-    component: () => import("@/views/Admin/CardsView.vue"),
   },
   {
     meta: {

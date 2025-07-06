@@ -21,6 +21,7 @@ export const useMainStore = defineStore("main", {
     profiles: {},
     userCustomize: {},
     userScoreStats: {},
+    userPublic: false,
 
     /* Field focus with ctrl+k (to register only once) */
     isFieldFocusRegistered: false,
@@ -58,6 +59,9 @@ export const useMainStore = defineStore("main", {
       }
       if (payload.admin) {
         this.userAdmin = payload.admin;
+      }
+      if (payload.public) {
+        this.userPublic = payload.public;
       }
       if (payload.data) {
         this.userData = payload.data;
@@ -258,8 +262,8 @@ export const useMainStore = defineStore("main", {
         if (validSession && validSession.activeSession && !this.userLoaded) {
           const userId = validSession.userId;
           if (userId) {
-            const response = await this.callApi(`/user?userId=${userId}`);
-            var user = response.user;
+            const response = await this.callApi(`/user`);
+            var user = response.data;
             this.setUser({
               id: userId,
               name: user.name,
@@ -268,11 +272,11 @@ export const useMainStore = defineStore("main", {
               admin: user.admin,
               data: user.data,
               discordRoles: user.discordRoles,
-              cardStyle: "time",
               profiles: user.profiles,
               arcades: user.arcades,
               customize: user.data?.customize,
               userScoreStats: user.scoreStats,
+              public: user.public,
             });
             this.userLoaded = true;
             return true;

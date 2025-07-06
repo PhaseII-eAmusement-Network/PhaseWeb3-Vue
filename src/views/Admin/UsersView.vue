@@ -78,7 +78,7 @@ async function loadData() {
 
 const openUser = (item) => {
   const userId = item.id;
-  $router.push(`/user/${userId}`);
+  $router.push(`/profiles/${userId}`);
 };
 
 const filterForm = reactive({
@@ -173,7 +173,7 @@ function filterUsers() {
             <GeneralTable
               :headers="headers"
               :items="userData"
-              @row-clicked="openUser(user)"
+              @row-clicked="openUser"
             />
           </div>
         </div>
