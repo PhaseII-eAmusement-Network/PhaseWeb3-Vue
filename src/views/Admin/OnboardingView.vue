@@ -1,6 +1,6 @@
 <script setup>
 import { reactive, ref } from "vue";
-import { useRouter } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
 import {
   mdiInformationOutline,
   mdiCogOutline,
@@ -25,11 +25,73 @@ import {
   APIOnboardArcade,
 } from "@/stores/api/admin";
 import { onboardArcadeDiscord, exportVPNDiscord } from "@/stores/api/discord";
+import { getGameInfo } from "@/constants";
 import { generatePCBID } from "@/constants/pcbid.js";
 import { useMainStore } from "@/stores/main";
 
+const $route = useRoute();
 const $router = useRouter();
 const mainStore = useMainStore();
+
+// Autofill a Base64 encoded object.
+const inputData = $route.params.data;
+const autofillData = ref(null);
+
+function base64ToJson(base64) {
+  try {
+    const binary = Uint8Array.from(atob(base64), (c) => c.charCodeAt(0));
+    const jsonString = new TextDecoder().decode(binary);
+
+    return JSON.parse(jsonString);
+  } catch (e) {
+    console.error("Invalid base64 input or JSON parse error:", e);
+    return null;
+  }
+}
+
+function validateOnboardingData(data) {
+  const errors = [];
+  if (typeof data !== "object" || data === null) {
+    return ["data is not an object"];
+  }
+
+  if (typeof data.userId !== "string") errors.push("userId must be a string");
+  if (typeof data.type !== "string") errors.push("type must be a string");
+  if (typeof data.arcadeName !== "string")
+    errors.push("arcadeName must be a string");
+  if (typeof data.cabinetCount !== "number")
+    errors.push("cabinetCount must be a number");
+  if (!Array.isArray(data.games)) {
+    errors.push("games must be an array");
+  } else if (!data.games.every((g) => typeof g === "string")) {
+    errors.push("games must be an array of strings");
+  }
+
+  return errors;
+}
+
+async function autofillArcade() {
+  const data = autofillData.value;
+  newArcade.useDiscord = true;
+  newArcade.discordId = data.userId;
+  newArcade.name = data.arcadeName;
+  await checkName();
+
+  for (const game of data.games) {
+    if (game === "main") {
+      newMachine.name = `${newArcade.name} Main`;
+    } else {
+      const gameData = getGameInfo(game);
+      if (gameData) {
+        newMachine.name = `${newArcade.name} ${
+          gameData.shortName ? gameData.shortName : gameData.name
+        }`;
+      }
+    }
+
+    await addMachine();
+  }
+}
 
 const initArcade = {
   name: "",
@@ -61,6 +123,21 @@ const newMachine = reactive({
 });
 
 const arcadeCheck = ref(undefined);
+
+if (inputData) {
+  try {
+    const decodedData = base64ToJson(inputData);
+    const errorState = validateOnboardingData(decodedData);
+    if (errorState.length) {
+      console.error(errorState);
+    } else {
+      autofillData.value = JSON.parse(JSON.stringify(decodedData));
+      autofillArcade();
+    }
+  } catch (error) {
+    console.error(error);
+  }
+}
 
 async function addMachine() {
   if (newMachine.generatePCBID) {

@@ -143,6 +143,14 @@ const routes = [
   },
   {
     meta: {
+      title: "Auto-Onboarding",
+    },
+    path: "/admin/onboarding/:data",
+    name: "auto-onboarding",
+    component: () => import("@/views/Admin/OnboardingView.vue"),
+  },
+  {
+    meta: {
       title: "Network Maintenance",
     },
     path: "/admin/maint",
