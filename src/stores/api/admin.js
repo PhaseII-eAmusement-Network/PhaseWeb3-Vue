@@ -84,6 +84,38 @@ export async function APIAdminUpdateArcade(arcadeId, newArcade) {
   }
 }
 
+export async function APIAdminAddArcadeOwner(arcadeId, ownerId) {
+  try {
+    const data = await mainStore.callApi(
+      `/admin/arcade/${arcadeId}/owner`,
+      "PUT",
+      { ownerId: ownerId }
+    );
+    return data;
+  } catch (error) {
+    console.log("Error updating arcade owner:", error);
+    throw error;
+  }
+}
+
+export async function APIAdminRemoveArcadeOwner(arcadeId, ownerId) {
+  try {
+    const confirmed = window.confirm("Are you really?");
+    if (confirmed) {
+      const data = await mainStore.callApi(
+        `/admin/arcade/${arcadeId}/owner`,
+        "DELETE",
+        { ownerId: ownerId }
+      );
+      return data;
+    }
+    return {};
+  } catch (error) {
+    console.log("Error removing arcade owner:", error);
+    throw error;
+  }
+}
+
 export async function APIAdminMaintenancePeriods() {
   try {
     const data = await mainStore.callApi(`/admin/maint`);
@@ -124,9 +156,9 @@ export async function APIAdminCreateClient(newClient) {
   }
 }
 
-export async function APIAdminUsers() {
+export async function APIAdminUsers(noData = false) {
   try {
-    const data = await mainStore.callApi(`/admin/users`);
+    const data = await mainStore.callApi(`/admin/users?noData=${noData}`);
     return data.data;
   } catch (error) {
     console.log("Error loading users:", error);

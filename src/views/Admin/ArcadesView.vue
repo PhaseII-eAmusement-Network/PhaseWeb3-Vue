@@ -35,16 +35,19 @@ const headers = [
     text: "Owners",
     value: "owners",
     width: 150,
+    sortable: true,
   },
   {
     text: "PASELI Enabled",
     value: "data.paseli_enabled",
     width: 50,
+    sortable: true,
   },
   {
     text: "Infinite PASELI",
     value: "data.paseli_infinite",
     width: 50,
+    sortable: true,
   },
   {
     text: "Beta Enabled",

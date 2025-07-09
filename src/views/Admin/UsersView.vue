@@ -19,7 +19,7 @@ const headers = [
   {
     text: "User ID",
     value: "id",
-    width: 50,
+    width: 20,
     sortable: true,
   },
   {
@@ -173,6 +173,7 @@ function filterUsers() {
             <GeneralTable
               :headers="headers"
               :items="userData"
+              :has-avatar="true"
               @row-clicked="openUser"
             />
           </div>

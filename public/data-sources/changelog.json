@@ -16,5 +16,6 @@
     "3.0.14": ["- (Minor) Fix footer buttons on tables, add generic export table button for every table."],
     "3.0.15": ["- (Minor) Add beta support for Pinky Crush, clean up gameDB a little.", "- (Optimization) Convert dashboard to a more modular backend.", "- (Bugfix) Fix warnings on auth pages."],
     "3.0.16": ["- (Major) Add multiple new admin features for network management.", "- (Optimization) Optimize backend for arcade operations.", "- (Bugfix) Fix possible backend issues with better type enforcing.", "- (Bugfix) Fix event data and game data for IIDX Pinky Crush.", "- (Minor) Add assets for Nostalgia."],
-    "3.0.17": ["- (Major) Add initial public profile support.", "- (Minor) Lay groundwork for public profile page", "- (Optimization) Clean up admin pages", "- (Bugfix) Clean up random 500 errors."]
+    "3.0.17": ["- (Major) Add initial public profile support.", "- (Minor) Lay groundwork for public profile page", "- (Optimization) Clean up admin pages", "- (Bugfix) Clean up random 500 errors."],
+    "3.0.18": ["- (Admin) Adds the ability to add and remove managers from an arcade.", "- (Minor) Lay groundwork for avatars in tables.", "- (Minor) Add new profile customizations."]
 }

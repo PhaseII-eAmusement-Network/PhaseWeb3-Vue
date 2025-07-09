@@ -1,6 +1,6 @@
 <script setup>
 import { useRoute } from "vue-router";
-import { ref, onMounted } from "vue";
+import { ref, onMounted, watch } from "vue";
 import {
   mdiStore,
   mdiStoreCog,
@@ -21,14 +21,22 @@ import FormControl from "@/components/FormControl.vue";
 import PillTag from "@/components/PillTag.vue";
 import BaseIcon from "@/components/BaseIcon.vue";
 import BaseButton from "@/components/BaseButton.vue";
+import BaseDivider from "@/components/BaseDivider.vue";
 import CardBoxWidget from "@/components/CardBoxWidget.vue";
+import UserAvatar from "@/components/UserAvatar.vue";
 import { getNestedValue, setNestedValue } from "@/constants/values";
 import {
   APIGetArcade,
   APIUpdateArcade,
   APIGetArcadeVPN,
 } from "@/stores/api/arcade";
-import { checkArcadeName, APIAdminUpdateArcade } from "@/stores/api/admin";
+import {
+  checkArcadeName,
+  APIAdminUpdateArcade,
+  APIAdminUsers,
+  APIAdminAddArcadeOwner,
+  APIAdminRemoveArcadeOwner,
+} from "@/stores/api/admin";
 import { useMainStore } from "@/stores/main";
 
 const mainStore = useMainStore();
@@ -38,6 +46,8 @@ const arcadeData = ref(null);
 const loading = ref(true);
 const arcadeCheck = ref(null);
 const newArcade = ref(null);
+const newManager = ref(null);
+const userData = ref(null);
 
 const $route = useRoute();
 const arcadeId = parseInt($route.params.id);
@@ -89,6 +99,36 @@ async function loadArcade() {
   }
 }
 
+async function loadUsers() {
+  if (mainStore.userAdmin) {
+    try {
+      const data = await APIAdminUsers(true);
+      const filteredData = [];
+
+      for (const user of data) {
+        if (user.username != undefined) {
+          filteredData.push({
+            id: user.id,
+            label: user.username,
+          });
+        }
+      }
+      filteredData.sort((a, b) => a.label.localeCompare(b.label));
+
+      userData.value = filteredData;
+    } catch (error) {
+      console.error("Failed to fetch admin user data:", error);
+    }
+  }
+}
+
+watch(
+  () => mainStore.userAdmin,
+  () => {
+    loadUsers();
+  }
+);
+
 async function updateArcade() {
   const response = await APIUpdateArcade(arcadeId, optionForm.value);
 
@@ -99,6 +139,7 @@ async function updateArcade() {
 
 onMounted(() => {
   loadArcade();
+  loadUsers();
 });
 
 function formatName(inputString, replaceWith = "NA_") {
@@ -156,6 +197,31 @@ async function adminUpdateArcade() {
     await loadArcade();
   }
 }
+
+async function addManager() {
+  if (newManager.value == null) {
+    return;
+  }
+
+  const response = await APIAdminAddArcadeOwner(arcadeId, newManager.value);
+
+  if (response.status != "error") {
+    newManager.value = null;
+    loadArcade();
+  }
+}
+
+async function removeManager(ownerId) {
+  if (!ownerId) {
+    return;
+  }
+
+  const response = await APIAdminRemoveArcadeOwner(arcadeId, ownerId);
+
+  if (response.status != "error") {
+    loadArcade();
+  }
+}
 </script>
 
 <template>
@@ -170,67 +236,136 @@ async function adminUpdateArcade() {
             title="Arcade Administration"
             main
           />
-          <CardBox is-form class="mb-6" @submit.prevent="adminUpdateArcade">
-            <PillTag
-              color="info"
-              label="General Information"
-              :icon="mdiInformationOutline"
-              class="mb-2"
-            />
-            <FormField label="Arcade Name">
-              <FormControl
-                v-model="newArcade.name"
-                :input-value="newArcade.name"
-                name="arcadeName"
-                required
-              />
-            </FormField>
-
-            <div class="mb-4 flex gap-2 items-stretch">
-              <BaseButton
-                color="info"
-                label="Check Name"
-                @click="checkName()"
-              />
-              <BaseIcon
-                v-if="arcadeCheck == true"
-                :path="mdiCheckOutline"
-                color="text-green-400"
-                size="25"
-              />
-              <BaseIcon
-                v-else-if="arcadeCheck == false"
-                :path="mdiCloseOutline"
-                color="text-red-400"
-                size="25"
-              />
-            </div>
-
-            <FormField label="Description">
-              <FormControl
-                v-model="newArcade.description"
-                name="description"
-                required
-              />
-            </FormField>
-
-            <FormField label="Beta Enabled">
-              <FormCheckRadio
-                v-model="newArcade.data.is_beta"
-                name="beta"
-                :model-value="newArcade.data.is_beta"
-                :input-value="newArcade.data.is_beta"
-                type="switch"
-              />
-            </FormField>
-            <div
-              v-if="JSON.stringify(arcadeData) !== JSON.stringify(newArcade)"
-              class="space-x-2 mt-6"
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <CardBox
+              is-form
+              class="lg:mb-6"
+              @submit.prevent="adminUpdateArcade"
             >
-              <BaseButton color="success" label="Save" type="submit" />
-              <BaseButton color="danger" label="Revert" @click="loadArcade()" />
-            </div>
-          </CardBox>
+              <PillTag
+                color="info"
+                label="General Information"
+                :icon="mdiInformationOutline"
+                class="mb-2"
+              />
+              <FormField label="Arcade Name">
+                <FormControl
+                  v-model="newArcade.name"
+                  :input-value="newArcade.name"
+                  name="arcadeName"
+                  required
+                />
+              </FormField>
+
+              <div class="mb-4 flex gap-2 items-stretch">
+                <BaseButton
+                  color="info"
+                  label="Check Name"
+                  @click="checkName()"
+                />
+                <BaseIcon
+                  v-if="arcadeCheck == true"
+                  :path="mdiCheckOutline"
+                  color="text-green-400"
+                  size="25"
+                />
+                <BaseIcon
+                  v-else-if="arcadeCheck == false"
+                  :path="mdiCloseOutline"
+                  color="text-red-400"
+                  size="25"
+                />
+              </div>
+
+              <FormField label="Description">
+                <FormControl
+                  v-model="newArcade.description"
+                  name="description"
+                  required
+                />
+              </FormField>
+
+              <FormField label="Beta Enabled">
+                <FormCheckRadio
+                  v-model="newArcade.data.is_beta"
+                  name="beta"
+                  :model-value="newArcade.data.is_beta"
+                  :input-value="newArcade.data.is_beta"
+                  type="switch"
+                />
+              </FormField>
+              <div
+                v-if="JSON.stringify(arcadeData) !== JSON.stringify(newArcade)"
+                class="space-x-2 mt-6"
+              >
+                <BaseButton color="success" label="Save" type="submit" />
+                <BaseButton
+                  color="danger"
+                  label="Revert"
+                  @click="loadArcade()"
+                />
+              </div>
+            </CardBox>
+
+            <CardBox class="mb-6">
+              <div class="mb-4">
+                <PillTag
+                  color="info"
+                  label="Add Manager"
+                  :icon="mdiInformationOutline"
+                  class="mb-2"
+                />
+                <form class="h-full" @submit.prevent="addManager">
+                  <FormField label="Username">
+                    <FormControl
+                      v-model="newManager"
+                      name="username"
+                      :options="userData"
+                      required
+                    />
+                  </FormField>
+
+                  <BaseButton
+                    color="success"
+                    type="submit"
+                    label="Add Manager"
+                  />
+                </form>
+              </div>
+
+              <BaseDivider />
+
+              <div class="mb-4">
+                <PillTag color="warning" label="Managers" class="mb-4" />
+                <div class="grid gap-4">
+                  <CardBox
+                    v-for="owner of arcadeData.owners"
+                    :key="owner"
+                    color-prop="bg-slate-800 dark:bg-slate-800"
+                  >
+                    <div class="flex justify-between items-center">
+                      <div class="m-[-5px] md:flex items-center gap-2">
+                        <div class="w-8 md:w-12">
+                          <UserAvatar
+                            :username="owner.username"
+                            :avatar="owner.avatar"
+                          />
+                        </div>
+                        <h1 class="text-lg lg:text-xl font-bold">
+                          {{ owner.username }}
+                        </h1>
+                      </div>
+                      <BaseButton
+                        color="danger"
+                        label="Remove"
+                        @click="removeManager(owner.id)"
+                      />
+                    </div>
+                  </CardBox>
+                </div>
+              </div>
+            </CardBox>
+          </div>
         </template>
 
         <SectionTitleLine :icon="mdiStoreCog" title="Arcade Management" main />

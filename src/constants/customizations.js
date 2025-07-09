@@ -7,6 +7,8 @@ export class ProfileCustomizations {
     { id: "gradient", label: "Pink/Purple Gradient" },
     { id: "pride", label: "Pride Flag" },
     { id: "trans", label: "Trans Flag" },
+    { id: "nonbinary", label: "Non-Binary Flag" },
+    { id: "lesbian", label: "Lesbian Flag" },
     { id: "loveplus", label: "LovePlus" },
     { id: "paint", label: "i eat paint" },
   ];
@@ -29,6 +31,7 @@ export class ProfileCustomizations {
     { id: "pride", label: "Pride Flag" },
     { id: "trans", label: "Trans Flag" },
     { id: "nonbinary", label: "Non-Binary Flag" },
+    { id: "lesbian", label: "Lesbian Flag" },
     { id: "leaves", label: "Leaves" },
   ];
 }

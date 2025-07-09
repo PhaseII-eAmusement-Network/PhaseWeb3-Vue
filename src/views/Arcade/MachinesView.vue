@@ -42,16 +42,24 @@ const headers = [
   {
     text: "PCBID",
     value: "pcbId",
+    sortable: true,
     width: 200,
   },
   {
     text: "Name",
     value: "description",
+    sortable: true,
     width: 200,
   },
   {
     text: "Port",
     value: "port",
+    sortable: true,
+    width: 120,
+  },
+  {
+    text: "Arcade Machine",
+    value: "data.cabinet",
     sortable: true,
     width: 120,
   },

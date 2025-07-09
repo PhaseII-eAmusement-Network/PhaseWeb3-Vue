@@ -1,13 +1,14 @@
 <script setup>
 import { mdiDownload, mdiChevronLeft, mdiChevronRight } from "@mdi/js";
 import BaseButton from "@/components/BaseButton.vue";
+import UserAvatar from "@/components/UserAvatar.vue";
 import DownloadJS from "downloadjs";
 import { useRoute } from "vue-router";
 
 const $route = useRoute();
 
 // eslint-disable-next-line vue/require-prop-types
-const props = defineProps(["headers", "items"]);
+const props = defineProps(["headers", "items", "hasAvatar"]);
 const emits = defineEmits(["row-clicked"]);
 
 const handleRowClick = (item) => {
@@ -78,6 +79,23 @@ function downloadJSON() {
         />
       </div>
     </template>
+
+    <template v-if="props.hasAvatar" #item-username="{ username, data }">
+      <div class="username-wrapper flex items-center gap-2">
+        <div class="w-6">
+          <UserAvatar
+            :avatar="
+              data?.discord
+                ? `https://cdn.discordapp.com/avatars/${data?.discord?.id}/${data?.discord?.avatar}`
+                : null
+            "
+          />
+        </div>
+        <span>{{ username }}</span>
+      </div>
+    </template>
+
+    <slot />
   </EasyDataTable>
   <div class="p-2 w-full flex md:justify-end">
     <BaseButton
