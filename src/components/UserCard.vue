@@ -43,6 +43,21 @@ const props = defineProps({
 
 import { GetRandomMessage } from "@/constants";
 
+function swapRandomChars(str) {
+  if (str.length < 2) return str;
+
+  const arr = str.split("");
+  var i = Math.floor(Math.random() * str.length);
+  var j;
+
+  do {
+    j = Math.floor(Math.random() * str.length);
+  } while (j === i);
+  [arr[i], arr[j]] = [arr[j], arr[i]];
+
+  return arr.join("");
+}
+
 const cardData = ref({
   userId: null,
   userName: "",
@@ -108,7 +123,13 @@ function getCardStyle() {
             v-if="!useSmall && !cardData.userCustomize?.disableGreeting"
             class="text-2xl md:text-xl lg:text-2xl"
           >
-            {{ greeting.header[0] }}<b>{{ cardData.userName }} </b
+            {{ greeting.header[0]
+            }}<b
+              >{{
+                greeting.misInput
+                  ? swapRandomChars(cardData.userName)
+                  : cardData.userName
+              }} </b
             >{{ greeting.header[1] }}
           </h1>
           <h1

@@ -1,5 +1,5 @@
 <script setup>
-import { useRoute } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
 import { ref, onMounted, watch } from "vue";
 import {
   mdiStore,
@@ -33,6 +33,7 @@ import {
 import {
   checkArcadeName,
   APIAdminUpdateArcade,
+  APIAdminDeleteArcade,
   APIAdminUsers,
   APIAdminAddArcadeOwner,
   APIAdminRemoveArcadeOwner,
@@ -50,6 +51,7 @@ const newManager = ref(null);
 const userData = ref(null);
 
 const $route = useRoute();
+const $router = useRouter();
 const arcadeId = parseInt($route.params.id);
 
 var arcadeOptions = [
@@ -222,6 +224,21 @@ async function removeManager(ownerId) {
     loadArcade();
   }
 }
+
+async function adminDeleteArcade() {
+  const confirmed = window.confirm(
+    "Are you really?\nThis will remove all owners, machines, and arcade data."
+  );
+  if (confirmed) {
+    const response = await APIAdminDeleteArcade(arcadeId);
+
+    if (response.status != "error") {
+      await $router.push({
+        name: "admin_arcades",
+      });
+    }
+  }
+}
 </script>
 
 <template>
@@ -296,13 +313,20 @@ async function removeManager(ownerId) {
               </FormField>
               <div
                 v-if="JSON.stringify(arcadeData) !== JSON.stringify(newArcade)"
-                class="space-x-2 mt-6"
+                class="space-x-2 mt-6 mb-4"
               >
                 <BaseButton color="success" label="Save" type="submit" />
                 <BaseButton
-                  color="danger"
+                  color="warning"
                   label="Revert"
                   @click="loadArcade()"
+                />
+              </div>
+              <div>
+                <BaseButton
+                  color="danger"
+                  label="Delete Arcade"
+                  @click="adminDeleteArcade()"
                 />
               </div>
             </CardBox>

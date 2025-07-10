@@ -46,10 +46,41 @@ export async function APIAdminCreateMachine(arcadeId, newMachine) {
   try {
     const data = await mainStore.callApi(
       `/admin/arcade/${arcadeId}/machine`,
+      "PUT",
+      newMachine
+    );
+    return data;
+  } catch (error) {
+    console.log("Error adding machine:", error);
+    throw error;
+  }
+}
+
+export async function APIAdminUpdateMachine(arcadeId, newMachine) {
+  try {
+    const data = await mainStore.callApi(
+      `/admin/arcade/${arcadeId}/machine`,
       "POST",
       newMachine
     );
     return data;
+  } catch (error) {
+    console.log("Error adding machine:", error);
+    throw error;
+  }
+}
+
+export async function APIAdminDeleteMachine(arcadeId, pcbId) {
+  try {
+    const confirmed = window.confirm("Are you really?");
+    if (confirmed) {
+      const data = await mainStore.callApi(
+        `/admin/arcade/${arcadeId}/machine`,
+        "DELETE",
+        { PCBID: pcbId }
+      );
+      return data;
+    }
   } catch (error) {
     console.log("Error adding machine:", error);
     throw error;
@@ -81,6 +112,22 @@ export async function APIAdminUpdateArcade(arcadeId, newArcade) {
   } catch (error) {
     console.log("Error updating arcade:", error);
     throw error;
+  }
+}
+
+export async function APIAdminDeleteArcade(arcadeId) {
+  const confirmed = window.confirm("Let me ask again...\nAre you really?");
+  if (confirmed) {
+    try {
+      const data = await mainStore.callApi(
+        `/admin/arcade/${arcadeId}`,
+        "DELETE"
+      );
+      return data;
+    } catch (error) {
+      console.log("Error deleting arcade:", error);
+      throw error;
+    }
   }
 }
 

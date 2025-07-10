@@ -401,7 +401,7 @@
     },
     {
         "author": "Yonokid",
-        "header": "⠀⠀<span style=margin: auto;\"><username></style>",
+        "header": "⠀⠀<span style=margin: auto;\"><username></span>",
         "comment": "⠀⠀⠀⠀⠀How do I center it"
     },
     {
@@ -443,5 +443,51 @@
         "author": "Ryuto Setsujin",
         "header": "Up Loving your Plus, <username>?",
         "comment": ""
+    },
+    {
+        "author": "azui.573",
+        "header": "Welcome to the arena, <username>!",
+        "comment": "Show the crowd your guts!"
+    },
+    {
+        "author": "Anonymous",
+        "header": "Knock knock. Who's there? It's <username>!",
+        "comment": ""
+    },
+    {
+        "author": "Azui",
+        "header": "Got MFC, <username>?",
+        "comment": "9 out of 10 doctors nationwide recommend one MFC a day!"
+    },
+    {
+        "author": "Azui",
+        "header": "<username>, an error has occurred!",
+        "comment": "Did you set off an alarm again?"
+    },
+    {
+        "author": "timeripple",
+        "header": "Why don't you just get up and dance <username>!?",
+        "comment": ""
+    },
+    {
+        "author": "timeripple",
+        "header": "Are you on fire <username>?",
+        "comment": "Because your scores sure are!"
+    },
+    {
+        "author": "DoctorDoofus",
+        "header": "Welcome <username> - there are no easy choices in this mode!",
+        "comment": "Check out SSR in DDR 3rdMIX for an unexpected challenge!"
+    },
+    {
+        "author": "FluffyOMC",
+        "header": "We can skip the sign-off, <username>",
+        "comment": "This is how it should be! This is how it should be! This is how it should be! This is how it should be!"
+    },
+    {
+        "author": "FluffyOMC",
+        "header": "Welcome to PhaseII, <username>!",
+        "comment": "MISINPUT!! MISINPUT!! YOU CALM TF DOWN!",
+        "misInput": true
     }
 ]
