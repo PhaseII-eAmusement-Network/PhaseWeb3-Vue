@@ -7,22 +7,29 @@ import LayoutAuthenticated from "@/layouts/LayoutAuthenticated.vue";
 import CardBox from "@/components/CardBox.vue";
 import BaseButtons from "@/components/BaseButtons.vue";
 import BaseButton from "@/components/BaseButton.vue";
-import { useMainStore } from "@/stores/main";
+import { APIGetNewsPost } from "@/stores/api/news";
+import { APIUserReadNews } from "@/stores/api/account";
+
 const $route = useRoute();
 const $router = useRouter();
 const newsID = parseInt($route.params.id);
 
-const mainStore = useMainStore();
 var thisNews = ref({ data: {} });
 var newsBody = ref("");
 
 onMounted(async () => {
   try {
-    const data = await mainStore.fetchNews(newsID);
+    const data = await APIGetNewsPost(newsID);
     thisNews.value = data.news;
     newsBody.value = data.news.body.split("\n");
   } catch (error) {
     console.error("Failed to fetch news data:", error);
+  }
+
+  try {
+    await APIUserReadNews(newsID);
+  } catch (error) {
+    console.error("Failed to set news as read:", error);
   }
 });
 

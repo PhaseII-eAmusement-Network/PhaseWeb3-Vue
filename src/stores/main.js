@@ -186,21 +186,6 @@ export const useMainStore = defineStore("main", {
       }
     },
 
-    async fetchNews(newsID) {
-      if (!this.loadedArticles[newsID]) {
-        try {
-          const data = await this.callApi(`/news/${newsID}`);
-          this.loadedArticles[newsID] = data;
-          return data;
-        } catch (error) {
-          console.log("Error fetching news:", error);
-          throw error;
-        }
-      } else {
-        return this.loadedArticles[newsID];
-      }
-    },
-
     async checkUserSession() {
       const request = {
         sessionId: loadUserAuthKey(),

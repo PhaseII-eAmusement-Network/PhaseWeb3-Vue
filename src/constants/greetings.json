@@ -489,5 +489,35 @@
         "header": "Welcome to PhaseII, <username>!",
         "comment": "MISINPUT!! MISINPUT!! YOU CALM TF DOWN!",
         "misInput": true
+    },
+    {
+        "author": "Trmazi",
+        "header": "DanceDanceRevolution <username>MIX",
+        "comment": "There are no easy choices in this mode."
+    },
+    {
+        "author": "Anonymous",
+        "header": "Hey <username>, keep it 100!",
+        "comment": "No misses, only MFCs today."
+    },
+    {
+        "author": "Anonymous",
+        "header": "Hey <username>, feeling the rhythm?",
+        "comment": "Or are you just here for the neon lights?"
+    },
+    {
+        "author": "Anonymous",
+        "header": "What's the vibe, <username>?",
+        "comment": "Ready to clear that 18 or what?"
+    },
+    {
+        "author": "Anonymous",
+        "header": "Step up, <username>!",
+        "comment": "Time to sync those feet to the beat!"
+    },
+    {
+        "author": "Anonymous",
+        "header": "<username> just spawned in!",
+        "comment": "Time to glitch the leaderboard."
     }
 ]

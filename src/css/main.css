@@ -62,3 +62,21 @@ img {
   }
 }
 
+.animated-text {
+    background-size: 200%;
+
+    -webkit-animation: text-animation 3s ease infinite;
+    -moz-animation: text-animation 3s ease infinite;
+    animation: text-animation 3s ease infinite;
+}
+
+@keyframes text-animation {
+    0%,
+    100% {
+        background-position: 0% 50%;
+    }
+    
+    50% {
+        background-position: 100% 50%;
+    }
+}

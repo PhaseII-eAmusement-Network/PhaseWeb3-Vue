@@ -44,12 +44,16 @@ const services = [
     name: "Discord",
     icon: mdiMessage,
     oAuth: DISCORD_OAUTH_URL,
+    description:
+      "Linking your Discord account to PhaseII gives you an avatar, enables push notifications, and more via our Discord bot, BadManiac.\n\nPhaseII *does not* use Discord's API aside from the initial linkage. All data PhaseII uses is sent via our bot.\n\nNo data aside from your avatar, User ID, and name is saved.\n\nWe do not save a token nor a cookie.",
   },
   {
     id: "tachi",
     name: "Kamaitachi",
     icon: mdiScoreboard,
     oAuth: TACHI_OAUTH_URL,
+    description:
+      "Kamaitachi is an open source score tracker using standardized schemas.\n\nLinking Kamaitachi to PhaseII will enable the uploading of all supported scores to Kamaitachi directly, with no user intervention.\n\nYou must follow all rules of Kamaitachi. Failure to adhere to rules will not only put your Kamaitachi account at risk, but also your PhaseII account.\n\nCurrently supported games:\n- DDR\n- IIDX\n- SDVX\n- pop'n (some versions)\n- jubeat",
   },
 ];
 
@@ -101,6 +105,10 @@ async function integrateWith(service, code) {
             :label="service.name"
             class="mb-2"
           />
+
+          <pre class="font-sans text-wrap mb-6">{{
+            service.description ?? ""
+          }}</pre>
 
           <h1
             v-if="userData[service.id] && userData[service.id]?.linked"

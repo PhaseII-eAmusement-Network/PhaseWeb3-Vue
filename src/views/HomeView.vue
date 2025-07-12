@@ -17,14 +17,12 @@ import CardBoxGameStat from "@/components/CardBoxGameStat.vue";
 import LayoutAuthenticated from "@/layouts/LayoutAuthenticated.vue";
 import SectionTitleLine from "@/components/SectionTitleLine.vue";
 import LineChart from "@/components/Charts/LineChart.vue";
-
-import { useMainStore } from "@/stores/main";
-const mainStore = useMainStore();
-
 import CardBoxNews from "@/components/Cards/CardBoxNews.vue";
 import CardBoxComponentEmpty from "@/components/CardBoxComponentEmpty.vue";
+import { useMainStore } from "@/stores/main";
 import { getGameInfo } from "@/constants";
 import { generateChartData } from "@/components/Charts/chart.config";
+const mainStore = useMainStore();
 var newsData = ref([]);
 
 onMounted(async () => {
@@ -237,6 +235,7 @@ const cardBoxes = ref([
           :content="news.body"
           :date="humanReadableTime(news.timestamp)"
           :cover="news.data.img"
+          :read="mainStore?.userData?.seen_news[news.id] ?? false"
           class="w-full h-full"
         />
       </div>

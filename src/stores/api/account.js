@@ -264,3 +264,44 @@ export async function APIUserAppUpdate(version = null, disable = false) {
     throw error;
   }
 }
+
+export async function APIUserReadNews(newsId) {
+  const mainStore = useMainStore();
+
+  try {
+    const data = await mainStore.callApi(`/user/readNews`, "POST", {
+      newsId: newsId,
+    });
+
+    mainStore.userLoaded = false;
+    await mainStore.loadUser();
+    return data;
+  } catch (error) {
+    console.log(`Error saving user!`, error);
+    throw error;
+  }
+}
+
+export async function APIGetUserSessions() {
+  const mainStore = useMainStore();
+
+  try {
+    const data = await mainStore.callApi(`/user/sessions`);
+    return data.data;
+  } catch (error) {
+    console.log("Error fetching sessions:", error);
+    throw error;
+  }
+}
+
+export async function APIDeleteUserSessions() {
+  const mainStore = useMainStore();
+
+  try {
+    const data = await mainStore.callApi(`/user/sessions`, "DELETE");
+    return data;
+  } catch (error) {
+    console.log("Error fetching content:", error);
+    throw error;
+  }
+}

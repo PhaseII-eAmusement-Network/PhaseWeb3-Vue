@@ -1,8 +1,12 @@
 <script setup>
-import { reactive, ref, watch } from "vue";
+import { reactive, ref, watch, onMounted } from "vue";
 import { useRouter } from "vue-router";
 import { useMainStore } from "@/stores/main";
-import { APIUpdatePassword } from "@/stores/api/account";
+import {
+  APIUpdatePassword,
+  APIGetUserSessions,
+  APIDeleteUserSessions,
+} from "@/stores/api/account";
 import { mdiAccount, mdiMail, mdiAsterisk, mdiLoading } from "@mdi/js";
 import SectionMain from "@/components/SectionMain.vue";
 import CardBox from "@/components/CardBox.vue";
@@ -43,6 +47,8 @@ const passwordForm = reactive({
 const profileLoading = ref(false);
 const passwordLoading = ref(false);
 
+const sessionData = ref(null);
+
 watch(
   () => mainStore.userName,
   (newValue) => {
@@ -67,6 +73,10 @@ watch(
   }
 );
 
+onMounted(() => {
+  loadSessions();
+});
+
 async function submitProfile() {
   profileLoading.value = true;
   const response = await mainStore.putUser(profileForm);
@@ -90,6 +100,23 @@ async function submitPassword() {
     passwordLoading.value = false;
     await mainStore.loadUser();
     $router.go();
+  }
+}
+
+async function loadSessions() {
+  const data = await APIGetUserSessions();
+  sessionData.value = data;
+}
+
+async function deleteSessions() {
+  const confirmed = window.confirm(
+    "Are you really?\nThis will log out every session."
+  );
+  if (confirmed) {
+    const data = await APIDeleteUserSessions();
+    sessionData.value = data;
+    mainStore.userLoaded = false;
+    mainStore.loadUser();
   }
 }
 
@@ -179,7 +206,7 @@ function userChanged(oldProfile, newProfile) {
           </template>
         </CardBox>
 
-        <CardBox is-form class="row-span-2" @submit.prevent="submitPassword()">
+        <CardBox is-form class="row-span-1" @submit.prevent="submitPassword()">
           <PillTag color="info" label="Change Password" class="mb-2" />
           <FormField label="Current Password">
             <FormControl
@@ -221,6 +248,30 @@ function userChanged(oldProfile, newProfile) {
               class="animate animate-spin"
             />
           </template>
+        </CardBox>
+
+        <CardBox is-form class="row-span-1" @submit.prevent="submitPassword()">
+          <PillTag color="info" label="Sessions" class="mb-2" />
+          <div class="my-4">
+            <h1 class="text-xl">
+              You currently have {{ sessionData?.length }} saved session(s).
+            </h1>
+            <p>
+              Most of them are likely expired.<br />
+
+              Sadly, due to the fact that PhaseII stores no information on your
+              Session ID for location or IP, we cannot provide select deletion.
+            </p>
+          </div>
+
+          <h1 class="text-xl mb-2">Log out of all sessions</h1>
+          <div>
+            <BaseButton
+              color="danger"
+              label="Delete Sessions"
+              @click="deleteSessions()"
+            />
+          </div>
         </CardBox>
       </div>
     </SectionMain>
