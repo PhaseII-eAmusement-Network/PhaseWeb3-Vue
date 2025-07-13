@@ -19,15 +19,17 @@ import LayoutAuthenticated from "@/layouts/LayoutAuthenticated.vue";
 import SectionTitleLine from "@/components/SectionTitleLine.vue";
 import LineChart from "@/components/Charts/LineChart.vue";
 import { getGameInfo } from "@/constants";
+import { generateChartData } from "@/components/Charts/chart.config";
 import { APIGetUser } from "@/stores/api/account";
 
 const $route = useRoute();
 const reqUserId = $route.params.id;
-const userProfile = ref({});
+const userProfile = ref(null);
+const userProfiles = ref(null);
+const userScoreStats = ref(null);
 
 async function loadUser() {
   try {
-    userProfile.value = {};
     var data = await APIGetUser(reqUserId);
     if (!data.name) {
       data.name = "Unclaimed Account";
@@ -39,12 +41,10 @@ async function loadUser() {
 }
 
 onMounted(async () => {
-  loadUser();
-  console.log(userProfile.value);
+  await loadUser();
+  userProfiles.value = userProfile.value.profiles;
+  userScoreStats.value = userProfile.value.userScoreStats;
 });
-
-const userProfiles = computed(() => userProfile.value.userProfiles);
-const userScoreStats = computed(() => userProfile.value.userScoreStats);
 
 const cumulativePlays = computed(() => {
   return userProfiles.value?.reduce(
@@ -227,7 +227,7 @@ const cardBoxes = ref([
 <template>
   <LayoutAuthenticated>
     <SectionMain>
-      <template v-if="userProfile != null">
+      <template v-if="userProfile !== null">
         <SectionTitleLine
           :icon="mdiAccount"
           :title="`${userProfile.name}'s Profile`"

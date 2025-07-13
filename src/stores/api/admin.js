@@ -42,6 +42,16 @@ export async function checkPCBID(PCBID) {
   }
 }
 
+export async function APIAdminMachineFromPCBID(PCBID) {
+  try {
+    const data = await mainStore.callApi(`/admin/machine/${PCBID}`);
+    return data.data;
+  } catch (error) {
+    console.log("Error testing machine:", error);
+    throw error;
+  }
+}
+
 export async function APIAdminCreateMachine(arcadeId, newMachine) {
   try {
     const data = await mainStore.callApi(
@@ -213,6 +223,16 @@ export async function APIAdminUsers(noData = false) {
   }
 }
 
+export async function APIAdminUserFromCardId(cardId) {
+  try {
+    const data = await mainStore.callApi(`/admin/user/card/${cardId}`);
+    return data.data;
+  } catch (error) {
+    console.log("Error getting user:", error);
+    throw error;
+  }
+}
+
 export async function APIAdminNews() {
   try {
     const data = await mainStore.callApi(`/admin/news`);
@@ -226,6 +246,30 @@ export async function APIAdminNews() {
 export async function APIAdminCreateNews(newNews) {
   try {
     const data = await mainStore.callApi(`/admin/news`, "POST", newNews);
+    return data;
+  } catch (error) {
+    console.log("Error posting news:", error);
+    throw error;
+  }
+}
+
+export async function APIAdminUpdateNews(newsId, newNews) {
+  try {
+    const data = await mainStore.callApi(
+      `/admin/news/${newsId}`,
+      "POST",
+      newNews
+    );
+    return data;
+  } catch (error) {
+    console.log("Error posting news:", error);
+    throw error;
+  }
+}
+
+export async function APIAdminDeleteNews(newsId) {
+  try {
+    const data = await mainStore.callApi(`/admin/news/${newsId}`, "DELETE");
     return data;
   } catch (error) {
     console.log("Error posting news:", error);

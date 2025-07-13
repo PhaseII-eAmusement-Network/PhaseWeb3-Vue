@@ -12,10 +12,11 @@ import GeneralTable from "@/components/GeneralTable.vue";
 import LayoutAuthenticated from "@/layouts/LayoutAuthenticated.vue";
 import SectionTitleLine from "@/components/SectionTitleLine.vue";
 import BaseButton from "@/components/BaseButton.vue";
+import PillTag from "@/components/PillTag.vue";
 import FormField from "@/components/FormField.vue";
 import FormControl from "@/components/FormControl.vue";
 
-import { APIAdminArcades } from "@/stores/api/admin";
+import { APIAdminArcades, APIAdminMachineFromPCBID } from "@/stores/api/admin";
 
 const $router = useRouter();
 const arcadeData = ref([]);
@@ -109,6 +110,18 @@ function filterArcades() {
     );
   }
 }
+
+const PCBIDForm = ref(null);
+
+async function findMachine() {
+  const machine = await APIAdminMachineFromPCBID(PCBIDForm.value);
+  if (!machine) {
+    window.alert("Couldn't find machine.");
+    return;
+  } else {
+    openArcade({ id: machine?.arcadeId });
+  }
+}
 </script>
 
 <template>
@@ -125,51 +138,73 @@ function filterArcades() {
         color="text-amber-600"
         main
       />
-      <CardBox class="mb-6">
-        <FormField
-          label="Search"
-          help="Search by ID, name, description, or owner."
-          class="w-full md:w-1/3"
-        >
-          <FormControl
-            v-model="filterForm.filter"
-            :model-value="filterForm.filter"
-          />
-        </FormField>
-
-        <div class="grid gap-4">
-          <div
-            v-for="arcade of filterArcades()"
-            :key="arcade.id"
-            class="bg-slate-800 p-4 rounded-xl"
+      <div class="grid md:grid-cols-2 gap-6">
+        <CardBox class="mb-6">
+          <PillTag color="info" label="Search" class="mb-2" />
+          <FormField
+            label="Search"
+            help="Search by ID, name, description, or owner."
+            class="w-full"
           >
-            <div class="md:flex w-full place-content-between">
-              <div>
-                <h1 class="text-lg md:text-xl">{{ arcade.name }}</h1>
-                <h2 class="text-md md:text-lg">
-                  {{ arcade.description }}
-                </h2>
-                <h2 class="text-md">Managed by {{ arcade.owners }}</h2>
-                <div
-                  class="bg-slate-900 p-2 rounded-md mt-2 w-12 max-w-14 text-center"
-                >
-                  <h2 class="text-lg font-mono text-pink-700">
-                    {{ arcade.id }}
-                  </h2>
-                </div>
-              </div>
+            <FormControl
+              v-model="filterForm.filter"
+              :model-value="filterForm.filter"
+            />
+          </FormField>
 
-              <div class="flex align-middle mt-2 md:mt-0 max-h-12">
-                <BaseButton
-                  label="Open Arcade"
-                  color="info"
-                  @click="openArcade(arcade)"
-                />
+          <div class="grid gap-4">
+            <div
+              v-for="arcade of filterArcades()"
+              :key="arcade.id"
+              class="bg-slate-800 p-4 rounded-xl"
+            >
+              <div class="md:flex w-full place-content-between">
+                <div>
+                  <h1 class="text-lg md:text-xl">{{ arcade.name }}</h1>
+                  <h2 class="text-md md:text-lg">
+                    {{ arcade.description }}
+                  </h2>
+                  <h2 class="text-md">Managed by {{ arcade.owners }}</h2>
+                  <div
+                    class="bg-slate-900 p-2 rounded-md mt-2 w-12 max-w-14 text-center"
+                  >
+                    <h2 class="text-lg font-mono text-pink-700">
+                      {{ arcade.id }}
+                    </h2>
+                  </div>
+                </div>
+
+                <div class="flex align-middle mt-2 md:mt-0 max-h-12">
+                  <BaseButton
+                    label="Open Arcade"
+                    color="info"
+                    @click="openArcade(arcade)"
+                  />
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      </CardBox>
+        </CardBox>
+        <CardBox class="mb-6" is-form @submit.prevent="findMachine">
+          <PillTag color="warning" label="From PCBID" class="mb-2" />
+          <FormField
+            label="PCBID"
+            help="20 character ID for a machine."
+            class="w-full"
+          >
+            <FormControl
+              v-model="PCBIDForm"
+              name="PCBID"
+              required
+              :model-value="PCBIDForm"
+              :minlength="20"
+              :maxlength="20"
+            />
+          </FormField>
+
+          <BaseButton color="success" type="submit" label="Open Arcade" />
+        </CardBox>
+      </div>
 
       <SectionTitleLine
         :icon="mdiStoreOutline"

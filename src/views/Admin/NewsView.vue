@@ -1,20 +1,35 @@
 <script setup>
 import { ref, reactive, onMounted } from "vue";
 import { useRouter } from "vue-router";
-import { mdiNewspaper, mdiNewspaperPlus } from "@mdi/js";
+import {
+  mdiNewspaper,
+  mdiNewspaperVariantMultipleOutline,
+  mdiNewspaperMinus,
+  mdiNewspaperPlus,
+} from "@mdi/js";
 import SectionMain from "@/components/SectionMain.vue";
 import CardBox from "@/components/CardBox.vue";
 import GeneralTable from "@/components/GeneralTable.vue";
 import LayoutAuthenticated from "@/layouts/LayoutAuthenticated.vue";
 import SectionTitleLine from "@/components/SectionTitleLine.vue";
+import BaseDivider from "@/components/BaseDivider.vue";
 import BaseButton from "@/components/BaseButton.vue";
+import PillTag from "@/components/PillTag.vue";
 import FormField from "@/components/FormField.vue";
 import FormControl from "@/components/FormControl.vue";
 
-import { APIAdminNews, APIAdminCreateNews } from "@/stores/api/admin";
+import {
+  APIAdminNews,
+  APIAdminCreateNews,
+  APIAdminUpdateNews,
+  APIAdminDeleteNews,
+} from "@/stores/api/admin";
+import BaseButtons from "@/components/BaseButtons.vue";
 
 const $router = useRouter();
 const newsData = ref([]);
+const selectedNewsId = ref(null);
+const selectedNews = ref(null);
 const headers = [
   {
     text: "Title",
@@ -83,6 +98,42 @@ async function createNews() {
   Object.assign(newNews, initNews);
   loadData();
 }
+
+async function updateNews() {
+  if (!selectedNews.value) {
+    return;
+  }
+
+  await APIAdminUpdateNews(selectedNewsId.value, selectedNews.value);
+  selectedNews.value = null;
+  selectedNewsId.value = null;
+  loadData();
+}
+
+async function deleteNews() {
+  if (!selectedNews.value) {
+    return;
+  }
+
+  await APIAdminDeleteNews(selectedNews.value.id);
+  selectedNews.value = null;
+  selectedNewsId.value = null;
+  loadData();
+}
+
+function formatNewsSelect(newsData) {
+  var formattedNews = [];
+  for (const news of newsData) {
+    formattedNews.push({ id: news.id, label: news.title });
+  }
+  return formattedNews;
+}
+
+function getSelectedNews(newsId) {
+  if (!newsId || !newsData.value) return null;
+  selectedNews.value = newsData.value?.find((news) => news.id === newsId);
+  return true;
+}
 </script>
 
 <template>
@@ -94,34 +145,95 @@ async function createNews() {
       </CardBox>
 
       <SectionTitleLine
-        :icon="mdiNewspaperPlus"
-        title="Create News"
+        :icon="mdiNewspaper"
+        title="Post Management"
         color="text-emerald-600"
         main
       />
-      <CardBox is-form class="row-span-1 mb-6" @submit.prevent="createNews()">
-        <FormField label="Title" help="News headline.">
-          <FormControl v-model="newNews.title" required />
-        </FormField>
-        <FormField label="Body" help="News body.">
-          <FormControl v-model="newNews.body" required type="textarea" />
-        </FormField>
-        <FormField label="Image URL" help="News image URL.">
-          <FormControl v-model="newNews.data.img" required />
-        </FormField>
 
-        <div>
-          <BaseButton
-            type="submit"
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <CardBox is-form class="row-span-1 mb-6" @submit.prevent="createNews()">
+          <PillTag
             color="success"
-            label="Create"
-            :small="false"
+            label="Create Post"
+            :icon="mdiNewspaperPlus"
+            class="mb-2"
           />
-        </div>
-      </CardBox>
+
+          <FormField label="Title" help="News headline.">
+            <FormControl v-model="newNews.title" required />
+          </FormField>
+          <FormField label="Body" help="News body.">
+            <FormControl v-model="newNews.body" required type="textarea" />
+          </FormField>
+          <FormField label="Image URL" help="News image URL.">
+            <FormControl v-model="newNews.data.img" required />
+          </FormField>
+
+          <div>
+            <BaseButton
+              type="submit"
+              color="success"
+              label="Create"
+              :small="false"
+            />
+          </div>
+        </CardBox>
+
+        <CardBox is-form class="row-span-1 mb-6">
+          <PillTag
+            color="warning"
+            label="Edit Post"
+            :icon="mdiNewspaperMinus"
+            class="mb-2"
+          />
+          <FormField label="Post">
+            <FormControl
+              v-model="selectedNewsId"
+              name="news"
+              :options="formatNewsSelect(newsData)"
+              required
+            />
+          </FormField>
+          <BaseDivider />
+          <template v-if="getSelectedNews(selectedNewsId)">
+            <FormField label="Title" help="News headline.">
+              <FormControl v-model="selectedNews.title" required />
+            </FormField>
+            <FormField label="Body" help="News body.">
+              <FormControl
+                v-model="selectedNews.body"
+                required
+                type="textarea"
+              />
+            </FormField>
+            <FormField label="Image URL" help="News image URL.">
+              <FormControl v-model="selectedNews.data.img" required />
+            </FormField>
+
+            <BaseButtons>
+              <BaseButton
+                color="info"
+                label="Update"
+                :small="false"
+                :icon="mdiNewspaper"
+                @click="updateNews()"
+              />
+
+              <BaseButton
+                color="danger"
+                label="Delete Post"
+                :small="false"
+                :icon="mdiNewspaperMinus"
+                @click="deleteNews()"
+              />
+            </BaseButtons>
+          </template>
+        </CardBox>
+      </div>
 
       <SectionTitleLine
-        :icon="mdiNewspaper"
+        :icon="mdiNewspaperVariantMultipleOutline"
         title="All News"
         color="text-blue-400"
         main

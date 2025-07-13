@@ -7,14 +7,17 @@ import CardBox from "@/components/CardBox.vue";
 import GeneralTable from "@/components/GeneralTable.vue";
 import FormField from "@/components/FormField.vue";
 import FormControl from "@/components/FormControl.vue";
+import PillTag from "@/components/PillTag.vue";
 import LayoutAuthenticated from "@/layouts/LayoutAuthenticated.vue";
 import SectionTitleLine from "@/components/SectionTitleLine.vue";
 import BaseButton from "@/components/BaseButton.vue";
 
-import { APIAdminUsers } from "@/stores/api/admin";
+import { APIAdminUsers, APIAdminUserFromCardId } from "@/stores/api/admin";
 
 const $router = useRouter();
 const userData = ref([]);
+const cardIdForm = ref(null);
+
 const headers = [
   {
     text: "User ID",
@@ -26,6 +29,12 @@ const headers = [
     text: "Username",
     value: "username",
     width: 150,
+    sortable: true,
+  },
+  {
+    text: "Public",
+    value: "public",
+    width: 120,
     sortable: true,
   },
   {
@@ -100,6 +109,16 @@ function filterUsers() {
   }
   return [];
 }
+
+async function findUser() {
+  const user = await APIAdminUserFromCardId(cardIdForm.value);
+  if (!user) {
+    window.alert("Couldn't find user.");
+    return;
+  } else {
+    openUser({ id: user?.id });
+  }
+}
 </script>
 
 <template>
@@ -110,54 +129,76 @@ function filterUsers() {
         <p class="text-sm text-gray-400">Click a row to open User</p>
       </CardBox>
 
-      <CardBox class="mb-6">
-        <FormField
-          label="Search"
-          help="Search by ID or username."
-          class="w-full md:w-1/3"
-        >
-          <FormControl
-            v-model="filterForm.filter"
-            :model-value="filterForm.filter"
-          />
-        </FormField>
-
-        <div class="grid gap-4">
-          <div
-            v-for="user of filterUsers()"
-            :key="user.id"
-            class="bg-slate-800 p-4 rounded-xl"
+      <div class="grid md:grid-cols-2 gap-6">
+        <CardBox class="mb-6">
+          <PillTag color="info" label="Search" class="mb-2" />
+          <FormField
+            label="Search"
+            help="Search by ID or username."
+            class="w-full"
           >
-            <div class="md:flex w-full place-content-between">
-              <div>
-                <h1 class="text-lg md:text-xl">{{ user.username }}</h1>
-                <h2 class="text-md md:text-lg">
-                  User {{ user.banned ? "is" : "isn't" }} banned.
-                </h2>
-                <h2 class="text-md">
-                  Discord
-                  {{ user.data?.discord?.linked ? "is" : "isn't" }} linked.
-                </h2>
-                <div
-                  class="bg-slate-900 p-2 rounded-md mt-2 w-14 max-w-16 text-center"
-                >
-                  <h2 class="text-lg font-mono text-pink-700">
-                    {{ user.id }}
-                  </h2>
-                </div>
-              </div>
+            <FormControl
+              v-model="filterForm.filter"
+              :model-value="filterForm.filter"
+            />
+          </FormField>
 
-              <div class="flex align-middle mt-2 md:mt-0 max-h-16">
-                <BaseButton
-                  label="Open User"
-                  color="info"
-                  @click="openUser(user)"
-                />
+          <div class="grid gap-4">
+            <div
+              v-for="user of filterUsers()"
+              :key="user.id"
+              class="bg-slate-800 p-4 rounded-xl"
+            >
+              <div class="md:flex w-full place-content-between">
+                <div>
+                  <h1 class="text-lg md:text-xl">{{ user.username }}</h1>
+                  <h2 class="text-md md:text-lg">
+                    User {{ user.banned ? "is" : "isn't" }} banned.
+                  </h2>
+                  <h2 class="text-md">
+                    Discord
+                    {{ user.data?.discord?.linked ? "is" : "isn't" }} linked.
+                  </h2>
+                  <div
+                    class="bg-slate-900 p-2 rounded-md mt-2 w-14 max-w-16 text-center"
+                  >
+                    <h2 class="text-lg font-mono text-pink-700">
+                      {{ user.id }}
+                    </h2>
+                  </div>
+                </div>
+
+                <div class="flex align-middle mt-2 md:mt-0 max-h-16">
+                  <BaseButton
+                    label="Open User"
+                    color="info"
+                    @click="openUser(user)"
+                  />
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      </CardBox>
+        </CardBox>
+        <CardBox class="mb-6" is-form @submit.prevent="findUser">
+          <PillTag color="warning" label="From CardID" class="mb-2" />
+          <FormField
+            label="Card ID"
+            help="16 character ID for a user's card."
+            class="w-full"
+          >
+            <FormControl
+              v-model="cardIdForm"
+              name="Card ID"
+              required
+              :model-value="cardIdForm"
+              :minlength="16"
+              :maxlength="16"
+            />
+          </FormField>
+
+          <BaseButton color="success" type="submit" label="Open User" />
+        </CardBox>
+      </div>
 
       <SectionTitleLine
         :icon="mdiAccountBadgeOutline"

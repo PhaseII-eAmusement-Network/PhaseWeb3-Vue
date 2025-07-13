@@ -32,6 +32,7 @@ function downloadJSON() {
     table-class-name="customize-table"
     header-text-direction="left"
     body-text-direction="left"
+    :prevent-context-menu-row="false"
     @click-row="handleRowClick"
   >
     <template #loading>
@@ -89,6 +90,7 @@ function downloadJSON() {
                 ? `https://cdn.discordapp.com/avatars/${data?.discord?.id}/${data?.discord?.avatar}`
                 : null
             "
+            username=""
           />
         </div>
         <span>{{ username }}</span>
