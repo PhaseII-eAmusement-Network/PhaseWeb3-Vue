@@ -223,6 +223,43 @@ export async function APIAdminUsers(noData = false) {
   }
 }
 
+export async function APIAdminPutUser(userId, newUser) {
+  try {
+    const data = await mainStore.callApi(
+      `/admin/user/${userId}`,
+      "POST",
+      newUser
+    );
+    return data;
+  } catch (error) {
+    console.log("Error updating user:", error);
+    throw error;
+  }
+}
+
+export async function APIAdminUpdatePassword(
+  userId,
+  newPassword,
+  confirmPassword
+) {
+  const mainStore = useMainStore();
+
+  try {
+    const data = await mainStore.callApi(
+      `/admin/user/${userId}/updatePassword`,
+      "POST",
+      {
+        newPassword: newPassword,
+        confirmPassword: confirmPassword,
+      }
+    );
+    return data;
+  } catch (error) {
+    console.log("Error updating password:", error);
+    throw error;
+  }
+}
+
 export async function APIAdminUserFromCardId(cardId) {
   try {
     const data = await mainStore.callApi(`/admin/user/card/${cardId}`);

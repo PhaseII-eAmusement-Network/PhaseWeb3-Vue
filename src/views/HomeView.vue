@@ -270,7 +270,7 @@ const cardBoxes = ref([
           :key="profile.game"
           :game="profile.game"
           :value="profile.data.total_plays"
-          profile-name=""
+          :profile-name="profile?.username"
           type="plays"
         />
       </div>

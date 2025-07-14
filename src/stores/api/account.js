@@ -20,6 +20,7 @@ export async function APIGetUser(userId) {
       customize: userData.data?.customize,
       userScoreStats: userData.scoreStats,
       public: userData.public,
+      banned: userData.banned,
     };
     return data;
   } catch (error) {

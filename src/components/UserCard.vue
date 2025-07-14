@@ -16,6 +16,7 @@ import {
   mdiCheckDecagramOutline,
   mdiLinkBoxVariantOutline,
   mdiAccountCheck,
+  mdiGavel,
 } from "@mdi/js";
 import BaseLevel from "@/components/BaseLevel.vue";
 import UserAvatar from "@/components/UserAvatar.vue";
@@ -64,6 +65,7 @@ const cardData = ref({
   userAvatar: "",
   userAdmin: false,
   userPublic: false,
+  userBanned: false,
   discordRoles: null,
   userCustomize: null,
 });
@@ -75,6 +77,7 @@ if (props.overrideProfile) {
     userName: overrideProfile.name,
     userAvatar: overrideProfile.avatar,
     userAdmin: overrideProfile.admin,
+    userBanned: overrideProfile.banned,
     userPublic: overrideProfile.public,
     discordRoles: overrideProfile.discordRoles,
     userCustomize: overrideProfile.customize,
@@ -87,6 +90,7 @@ if (props.overrideProfile) {
     userAvatar: mainStore.userAvatar,
     userAdmin: mainStore.userAdmin,
     userPublic: mainStore.userPublic,
+    userBanned: mainStore.userBanned,
     discordRoles: mainStore.discordRoles,
     userCustomize: mainStore.userCustomize,
   };
@@ -148,6 +152,13 @@ function getCardStyle() {
             label="System Admin"
             color="danger"
             :icon="mdiSecurity"
+            small
+          />
+          <PillTag
+            v-if="cardData.userBanned"
+            label="Banned"
+            color="danger"
+            :icon="mdiGavel"
             small
           />
           <PillTag

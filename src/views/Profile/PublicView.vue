@@ -1,6 +1,6 @@
 <script setup>
-import { computed, ref, onMounted } from "vue";
-import { useRoute } from "vue-router";
+import { computed, ref, reactive, onMounted } from "vue";
+import { useRoute, useRouter } from "vue-router";
 import {
   mdiAccount,
   mdiGamepad,
@@ -9,6 +9,10 @@ import {
   mdiGamepadOutline,
   mdiFire,
   mdiTrendingUp,
+  mdiShieldEditOutline,
+  mdiInformationOutline,
+  mdiMail,
+  mdiAsterisk,
 } from "@mdi/js";
 import SectionMain from "@/components/SectionMain.vue";
 import CardBox from "@/components/CardBox.vue";
@@ -18,23 +22,35 @@ import UserCard from "@/components/UserCard.vue";
 import LayoutAuthenticated from "@/layouts/LayoutAuthenticated.vue";
 import SectionTitleLine from "@/components/SectionTitleLine.vue";
 import LineChart from "@/components/Charts/LineChart.vue";
+import PillTag from "@/components/PillTag.vue";
+import FormField from "@/components/FormField.vue";
+import FormControl from "@/components/FormControl.vue";
+import FormCheckRadio from "@/components/FormCheckRadio.vue";
+import BaseButton from "@/components/BaseButton.vue";
 import { getGameInfo } from "@/constants";
 import { generateChartData } from "@/components/Charts/chart.config";
+import { useMainStore } from "@/stores/main";
 import { APIGetUser } from "@/stores/api/account";
+import { APIAdminPutUser, APIAdminUpdatePassword } from "@/stores/api/admin";
 
+const mainStore = useMainStore();
 const $route = useRoute();
+const $router = useRouter();
 const reqUserId = $route.params.id;
+const newUser = ref(null);
 const userProfile = ref(null);
 const userProfiles = ref(null);
 const userScoreStats = ref(null);
 
 async function loadUser() {
   try {
+    userProfile.value = null;
     var data = await APIGetUser(reqUserId);
     if (!data.name) {
       data.name = "Unclaimed Account";
     }
     userProfile.value = data;
+    newUser.value = JSON.parse(JSON.stringify(data));
   } catch (error) {
     console.error("Failed to fetch user profile data:", error);
   }
@@ -222,6 +238,45 @@ const cardBoxes = ref([
     number: todayAttempts,
   },
 ]);
+
+function pinInput(event) {
+  event.target.value = event.target.value.replace(/\D/g, "");
+}
+
+async function adminUpdateUser() {
+  const response = await APIAdminPutUser(reqUserId, newUser.value);
+  if (response.status !== "success") {
+    window.alert("Failed to update user!");
+  } else {
+    loadUser();
+  }
+}
+
+const passwordForm = reactive({
+  newPassword: "",
+  confirmPassword: "",
+});
+
+async function adminSubmitPassword() {
+  const response = await APIAdminUpdatePassword(
+    reqUserId,
+    passwordForm.newPassword,
+    passwordForm.confirmPassword
+  );
+  if (response.status == "success") {
+    alert("Password changed.");
+    passwordForm.newPassword = null;
+    passwordForm.confirmPassword = null;
+    await loadUser();
+  } else {
+    alert("Failed to update password. Check that both passwords match.");
+  }
+}
+
+const openArcade = (item) => {
+  const arcadeId = item.id;
+  $router.push(`/arcade/${arcadeId}`);
+};
 </script>
 
 <template>
@@ -234,6 +289,149 @@ const cardBoxes = ref([
           main
         />
         <UserCard class="mb-6" :override-profile="userProfile" use-small />
+
+        <template v-if="mainStore.userAdmin">
+          <SectionTitleLine
+            :icon="mdiShieldEditOutline"
+            title="User Administration"
+            main
+          />
+          <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+            <CardBox is-form class="" @submit.prevent="adminUpdateUser">
+              <PillTag
+                color="info"
+                label="General Information"
+                :icon="mdiInformationOutline"
+                class="mb-2"
+              />
+              <div class="grid md:grid-cols-2 gap-x-4 mb-6">
+                <FormField label="Username">
+                  <FormControl
+                    v-model="newUser.name"
+                    :input-value="newUser.name"
+                    name="username"
+                    required
+                  />
+                </FormField>
+
+                <FormField
+                  label="E-mail"
+                  help="Used for password resetting and 2FA"
+                >
+                  <FormControl
+                    v-model="newUser.email"
+                    :icon="mdiMail"
+                    type="email"
+                    name="email"
+                    required
+                  />
+                </FormField>
+
+                <FormField label="PIN" help="Used when logging into a game">
+                  <FormControl
+                    v-model="newUser.pin"
+                    :icon="mdiAsterisk"
+                    type="password"
+                    name="pin"
+                    :minlength="4"
+                    :maxlength="4"
+                    inputmode="numeric"
+                    pattern="\d{4}"
+                    @input="pinInput"
+                  />
+                </FormField>
+              </div>
+
+              <FormField
+                label="Public Profile"
+                help="Show this profile publicly. If disabled, only game profiles and scores will be visible."
+              >
+                <FormCheckRadio
+                  v-model="newUser.public"
+                  name="public"
+                  :model-value="newUser.public"
+                  :input-value="newUser.public"
+                  type="switch"
+                />
+              </FormField>
+
+              <FormField
+                label="Ban Profile"
+                help="Ban this profile. Locks out all arcades that this user manages."
+              >
+                <FormCheckRadio
+                  v-model="newUser.banned"
+                  name="banned"
+                  :model-value="newUser.banned"
+                  :input-value="newUser.banned"
+                  type="switch"
+                />
+              </FormField>
+
+              <div
+                v-if="JSON.stringify(userProfile) !== JSON.stringify(newUser)"
+                class="space-x-2 mt-6 mb-4"
+              >
+                <BaseButton color="success" label="Save" type="submit" />
+                <BaseButton
+                  color="warning"
+                  label="Revert"
+                  @click="loadUser()"
+                />
+              </div>
+            </CardBox>
+            <CardBox is-form @submit.prevent="adminSubmitPassword()">
+              <PillTag color="info" label="Change Password" class="mb-2" />
+              <FormField label="New Password">
+                <FormControl
+                  v-model="passwordForm.newPassword"
+                  :icon="mdiAsterisk"
+                  name="newPassword"
+                  type="password"
+                  required
+                />
+              </FormField>
+
+              <FormField label="Confirm Password">
+                <FormControl
+                  v-model="passwordForm.confirmPassword"
+                  :icon="mdiAsterisk"
+                  name="confirmPassword"
+                  type="password"
+                  required
+                />
+              </FormField>
+
+              <template #footer>
+                <BaseButton type="submit" color="success" label="Update" />
+              </template>
+            </CardBox>
+            <CardBox v-if="userProfile?.arcades?.length" class="mb-6">
+              <PillTag color="info" label="Arcades" class="mb-2" />
+              <div class="grid gap-4 md:grid-cols-2">
+                <div
+                  v-for="arcade of userProfile.arcades"
+                  :key="arcade.id"
+                  class="bg-slate-800 p-4 rounded-xl"
+                >
+                  <div class="md:flex w-full place-content-between">
+                    <div>
+                      <h1 class="text-md md:text-lg">{{ arcade.name }}</h1>
+                    </div>
+
+                    <div class="flex align-middle mt-2 md:mt-0 max-h-12">
+                      <BaseButton
+                        label="Open Arcade"
+                        color="info"
+                        @click="openArcade(arcade)"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </CardBox>
+          </div>
+        </template>
 
         <SectionTitleLine
           :icon="mdiChartTimelineVariant"
@@ -264,7 +462,8 @@ const cardBoxes = ref([
             :key="profile.game"
             :game="profile.game"
             :value="profile.data.total_plays"
-            profile-name=""
+            :user-id="reqUserId"
+            :profile-name="profile?.username"
             type="plays"
           />
         </div>

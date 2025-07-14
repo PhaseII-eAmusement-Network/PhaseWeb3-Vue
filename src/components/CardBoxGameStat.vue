@@ -3,7 +3,6 @@ import { computed } from "vue";
 import { useRouter } from "vue-router";
 import CardBoxComponentBody from "@/components/CardBoxComponentBody.vue";
 import BaseLevel from "@/components/BaseLevel.vue";
-import PillTag from "@/components/PillTag.vue";
 import GameIcon from "@/components/GameIcon.vue";
 import { getGameInfo } from "@/constants";
 
@@ -16,6 +15,11 @@ const props = defineProps({
   value: {
     type: [String, Number],
     required: true,
+  },
+  userId: {
+    type: String,
+    required: false,
+    default: null,
   },
   profileName: {
     type: String,
@@ -34,15 +38,15 @@ const props = defineProps({
 const tag = computed(() => {
   if (props.type === "plays") {
     return {
-      type: "success",
+      type: "text-emerald-600",
     };
   } else if (props.type === "scores") {
     return {
-      type: "danger",
+      type: "text-red-500",
     };
   } else if (props.type === "ranking") {
     return {
-      type: "warning",
+      type: "text-amber-400",
     };
   }
 
@@ -53,7 +57,11 @@ const tag = computed(() => {
 
 function loadGamePage() {
   if (!props.disableLocalClick) {
-    router.push(`/games/${props.game}`);
+    if (!props.userId) {
+      router.push(`/games/${props.game}`);
+    } else {
+      router.push(`/games/${props.game}/profiles/${props.userId}`);
+    }
   }
 }
 
@@ -82,30 +90,34 @@ const cardStyle = `
               class="md:mr-6 scale-110 md:scale-100"
               :path="selectedGame.icon"
             />
-            <div class="text-center space-y-1 md:text-left md:mr-6">
-              <h2 class="text-xl sr-only sm:not-sr-only">
-                {{ selectedGame.name }}
-              </h2>
-              <h2 class="text-xl font-semibold not-sr-only sm:sr-only -my-2">
+            <div class="text-center space-y-1 md:text-left md:mr-6 w-full">
+              <h2 class="text-xl font-semibold not-sr-only sm:sr-only">
                 {{
                   selectedGame.shortName
                     ? selectedGame.shortName
                     : selectedGame.name
                 }}
               </h2>
+              <div class="grid">
+                <h2 class="text-xl sr-only sm:not-sr-only">
+                  {{ selectedGame.name }}
+                </h2>
+                <hr class="my-1 text-gray-500" />
+                <div>
+                  <p class="text-sm md:text-md text-gray-300">
+                    {{ profileName }}
+                  </p>
+                </div>
+              </div>
               <div
                 class="flex space-x-2 justify-center md:justify-start pt-2 md:pt-0"
               >
-                <PillTag :color="tag.type" :label="type" small />
-                <h4 class="text-lg">{{ value }}</h4>
+                <h4 class="text-lg drop-shadow-xl">
+                  {{ value }} <span :class="tag.type">{{ type }}</span>
+                </h4>
               </div>
             </div>
           </BaseLevel>
-          <div class="text-center md:text-right">
-            <p class="text-sm text-gray-400">
-              {{ profileName }}
-            </p>
-          </div>
         </BaseLevel>
       </CardBoxComponentBody>
     </div>

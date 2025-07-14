@@ -22,6 +22,7 @@ export const useMainStore = defineStore("main", {
     userCustomize: {},
     userScoreStats: {},
     userPublic: false,
+    userBanned: false,
 
     /* Field focus with ctrl+k (to register only once) */
     isFieldFocusRegistered: false,
@@ -62,6 +63,9 @@ export const useMainStore = defineStore("main", {
       }
       if (payload.public) {
         this.userPublic = payload.public;
+      }
+      if (payload.banned) {
+        this.userBanned = payload.banned;
       }
       if (payload.data) {
         this.userData = payload.data;
