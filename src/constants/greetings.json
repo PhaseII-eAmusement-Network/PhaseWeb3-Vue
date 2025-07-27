@@ -335,7 +335,7 @@
         "comment": "You're so close to Kaiden!"
     },
     {
-        "author": "FluffyOMC",
+        "author": "SoftieTechCat",
         "header": "I curse you, <username>",
         "comment": "1-miss FC attempts upon ye!"
     },
@@ -345,7 +345,7 @@
         "comment": "Or don't I'm not your mom"
     },
     {
-        "author": "FluffyOMC",
+        "author": "SoftieTechCat",
         "header": "Welcome to os- PhaseII, <username>",
         "comment": "Tap the buttons, to the beat!"
     },
@@ -365,7 +365,7 @@
         "comment": ""
     },
     {
-        "author": "FluffyOMC",
+        "author": "SoftieTechCat",
         "header": "What if you wanted an FC, <username>",
         "comment": "But god said: \"1 miss\""
     },
@@ -375,7 +375,7 @@
         "comment": "No Regerts!"
     },
     {
-        "author": "FluffyOMC",
+        "author": "SoftieTechCat",
         "header": "NullReferenceException {<username>}",
         "comment": "And this, kids, is why you don't use Java"
     },
@@ -480,12 +480,12 @@
         "comment": "Check out SSR in DDR 3rdMIX for an unexpected challenge!"
     },
     {
-        "author": "FluffyOMC",
+        "author": "SoftieTechCat",
         "header": "We can skip the sign-off, <username>",
         "comment": "Old familiar scene repeating \"This is how it should be!\""
     },
     {
-        "author": "FluffyOMC",
+        "author": "SoftieTechCat",
         "header": "Welcome to PhaseII, <username>!",
         "comment": "MISINPUT!! MISINPUT!! YOU CALM TF DOWN!",
         "misInput": true
@@ -519,5 +519,10 @@
         "author": "Anonymous",
         "header": "<username> just spawned in!",
         "comment": "Time to glitch the leaderboard."
+    },
+    {
+        "author": "SoftieTechCat",
+        "header": "My name is <username>, yo.",
+        "comment": "I'm the GOAT of PhaseII, yo. Uhuh."
     }
 ]
