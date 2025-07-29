@@ -64,7 +64,7 @@ watch(
     } else {
       loadProfile();
     }
-  }
+  },
 );
 
 const myProfile = ref(null);
@@ -83,7 +83,7 @@ async function loadProfile() {
     var data = await APIGetProfile(
       gameID,
       versionForm.currentVersion,
-      profileUserId
+      profileUserId,
     );
     data.timeline = await generateTimeline(data);
 
@@ -349,7 +349,7 @@ async function generateTimeline(myProfile) {
 
   // Sort plays by timestamp
   return plays.sort(
-    (a, b) => new Date(a.timestamp).getTime() - new Date(b.timestamp).getTime()
+    (a, b) => new Date(a.timestamp).getTime() - new Date(b.timestamp).getTime(),
   );
 }
 </script>
@@ -742,10 +742,10 @@ async function generateTimeline(myProfile) {
               >
                 <li
                   v-for="playHistory of JSON.parse(
-                    JSON.stringify(myProfile?.timeline)
+                    JSON.stringify(myProfile?.timeline),
                   ).reverse()"
                   :key="playHistory.timestamp"
-                  class="md:inline-block flex-shrink-0"
+                  class="md:inline-block shrink-0"
                 >
                   <div
                     class="flex-start flex items-center pt-2 md:block md:pt-4"

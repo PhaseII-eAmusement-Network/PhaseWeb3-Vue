@@ -22,7 +22,7 @@ const styleStore = useStyleStore();
 const hasColor = computed(() => props.item && props.item.color);
 
 const asideMenuItemActiveStyle = computed(() =>
-  hasColor.value ? "" : styleStore.asideMenuItemActiveStyle
+  hasColor.value ? "" : styleStore.asideMenuItemActiveStyle,
 );
 
 const isDropdownActive = ref(false);

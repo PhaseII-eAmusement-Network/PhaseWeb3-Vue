@@ -25,14 +25,14 @@ watch(
   () => {
     userProfile.value = props.profile;
     userProfile.value.emblem = formatEmblem(userProfile.value.last?.emblem);
-  }
+  },
 );
 
 watch(
   () => props.version,
   () => {
     version.value = props.version;
-  }
+  },
 );
 
 const valid_emblem_options = [

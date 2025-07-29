@@ -39,7 +39,7 @@ const styleStore = useStyleStore();
       leave-to-class="opacity-0"
     >
       <div
-        class="absolute inset-0 bg-gradient-to-tr dark:from-gray-700 dark:via-gray-900 dark:to-gray-700 h-screen"
+        class="absolute inset-0 bg-linear-to-tr dark:from-gray-700 dark:via-gray-900 dark:to-gray-700 h-screen"
         :class="`${styleStore.overlayStyle} ${
           transparent ? 'opacity-90' : 'opacity-100'
         }`"

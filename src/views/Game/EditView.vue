@@ -41,7 +41,7 @@ watch(
   () => versionForm.currentVersion,
   () => {
     loadProfile();
-  }
+  },
 );
 
 gameID = $route.params.game;
@@ -89,7 +89,7 @@ async function loadProfile() {
     // Deep clone nested values from myProfile to optionForm using paths
     for (const setting of getGameOptions(
       thisGame,
-      versionForm.currentVersion
+      versionForm.currentVersion,
     )) {
       const value = getNestedValue(myProfile.value, setting.id);
       setNestedValue(optionForm.value, setting.id, value);
@@ -108,7 +108,7 @@ async function updateProfile() {
   const response = await APIUpdateProfile(
     thisGame.id,
     versionForm.currentVersion,
-    optionForm.value
+    optionForm.value,
   );
 
   if (response.status != "error") {
@@ -160,7 +160,7 @@ async function updateProfile() {
             <FormField
               v-for="setting of getGameOptions(
                 thisGame,
-                versionForm.currentVersion
+                versionForm.currentVersion,
               )"
               :key="setting.id"
               :label="setting.name"
@@ -178,7 +178,7 @@ async function updateProfile() {
                       setting.id,
                       setting.useUnicode
                         ? transformUnicode(value, setting.maxLength)
-                        : transformNonUnicode(value, setting.maxLength)
+                        : transformNonUnicode(value, setting.maxLength),
                     )
                 "
               />

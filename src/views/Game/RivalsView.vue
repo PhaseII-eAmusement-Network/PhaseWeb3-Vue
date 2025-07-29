@@ -35,7 +35,7 @@ watch(
   () => {
     loadProfile();
     loadAllProfiles();
-  }
+  },
 );
 
 onMounted(async () => {
@@ -103,7 +103,7 @@ function filterProfiles() {
         rival.extid
           .toString()
           .toLowerCase()
-          .includes(filterForm.filter.toLowerCase())
+          .includes(filterForm.filter.toLowerCase()),
     );
   }
 }

@@ -54,7 +54,7 @@ async function loadSettings() {
     const data = await APIGetArcadeSettings(
       arcadeId,
       filterForm.game,
-      filterForm.version
+      filterForm.version,
     );
     optionForm.value = JSON.parse(JSON.stringify(data));
     bareForm.value = data;
@@ -132,7 +132,7 @@ async function updateSettings() {
     arcadeId,
     filterForm.game,
     filterForm.version,
-    optionForm.value
+    optionForm.value,
   );
 
   if (response.status != "error") {
@@ -145,7 +145,7 @@ watch(
   () => {
     filterForm.version = null;
     optionForm.value = {};
-  }
+  },
 );
 
 watch(
@@ -154,7 +154,7 @@ watch(
     if (filterForm.version) {
       loadSettings();
     }
-  }
+  },
 );
 </script>
 

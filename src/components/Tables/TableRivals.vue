@@ -16,8 +16,8 @@ const currentPage = ref(0);
 const itemsPaginated = computed(() =>
   items.value.slice(
     perPage.value * currentPage.value,
-    perPage.value * (currentPage.value + 1)
-  )
+    perPage.value * (currentPage.value + 1),
+  ),
 );
 
 const numPages = computed(() => Math.ceil(items.value.length / perPage.value));

@@ -106,7 +106,7 @@ function filterArcades() {
         arcade.description
           .toLowerCase()
           .includes(filterForm.filter.toLowerCase()) ||
-        arcade.owners.toLowerCase().includes(filterForm.filter.toLowerCase())
+        arcade.owners.toLowerCase().includes(filterForm.filter.toLowerCase()),
     );
   }
 }

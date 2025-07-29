@@ -25,24 +25,6 @@ module.exports = {
         position: "right, left, top, bottom, margin, padding",
         textColor: "color",
       },
-      keyframes: {
-        "fade-out": {
-          from: { opacity: 1 },
-          to: { opacity: 0 },
-        },
-        "fade-in": {
-          from: { opacity: 0 },
-          to: { opacity: 1 },
-        },
-      },
-      animation: {
-        "fade-out": "fade-out 250ms ease-in-out",
-        "fade-in": "fade-in 250ms ease-in-out",
-      },
-      screens: {
-        "3xl": "1900px",
-        "4xl": "2400px",
-      },
     },
   },
   plugins: [
@@ -58,7 +40,7 @@ module.exports = {
             return {
               scrollbarWidth: "thin",
               scrollbarColor: `${theme(`colors.${color}.${thumb}`)} ${theme(
-                `colors.${color}.${track}`
+                `colors.${color}.${track}`,
               )}`,
               "&::-webkit-scrollbar": {
                 width: "8px",
@@ -74,7 +56,7 @@ module.exports = {
             };
           },
         },
-        { values: theme("asideScrollbars") }
+        { values: theme("asideScrollbars") },
       );
     }),
   ],

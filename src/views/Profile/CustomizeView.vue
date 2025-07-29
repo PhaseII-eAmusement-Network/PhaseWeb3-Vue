@@ -26,7 +26,7 @@ watch(
   (newValue) => {
     userCustomize.value = newValue;
     originalData = JSON.parse(JSON.stringify(newValue));
-  }
+  },
 );
 
 async function updateCustomize() {

@@ -128,7 +128,7 @@ watch(
   () => mainStore.userAdmin,
   () => {
     loadUsers();
-  }
+  },
 );
 
 async function updateArcade() {
@@ -153,7 +153,7 @@ function formatName(inputString, replaceWith = "NA_") {
 
   asciiFriendly = asciiFriendly.replace(
     /[!"#$%&'()*+,-./:;<=>?@[\\\]^_`{|}~]/g,
-    ""
+    "",
   );
 
   asciiFriendly = asciiFriendly.replace(/\s+/g, "_");
@@ -167,7 +167,7 @@ async function exportVPN() {
     const link = document.createElement("a");
     link.href = URL.createObjectURL(blob);
     link.download = `gradius-${formatName(
-      arcadeData.value.name
+      arcadeData.value.name,
     )}-phaseii-config.ovpn`;
     document.body.appendChild(link);
     link.click();
@@ -227,7 +227,7 @@ async function removeManager(ownerId) {
 
 async function adminDeleteArcade() {
   const confirmed = window.confirm(
-    "Are you really?\nThis will remove all owners, machines, and arcade data."
+    "Are you really?\nThis will remove all owners, machines, and arcade data.",
   );
   if (confirmed) {
     const response = await APIAdminDeleteArcade(arcadeId);

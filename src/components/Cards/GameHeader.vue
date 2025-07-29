@@ -21,7 +21,7 @@ watch(
   () => mainStore.userProfiles,
   (newValue) => {
     userProfiles.value = newValue;
-  }
+  },
 );
 
 const props = defineProps({
@@ -108,7 +108,7 @@ function loadRoutes() {
         path: `/#/games/${props.game.id}/records`,
         route: "all_records",
         color: "success",
-      }
+      },
     );
   }
 

@@ -11,7 +11,7 @@ import App from "./App.vue";
 import router from "./router";
 import { useMainStore } from "@/stores/main.js";
 
-import "./css/main.css";
+import "./css/_base.css";
 
 const pinia = createPinia();
 

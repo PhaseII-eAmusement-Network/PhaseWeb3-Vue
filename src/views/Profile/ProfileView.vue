@@ -54,7 +54,7 @@ watch(
   (newValue) => {
     profileForm.username = JSON.parse(JSON.stringify(newValue));
     currentProfile.username = JSON.parse(JSON.stringify(newValue));
-  }
+  },
 );
 
 watch(
@@ -62,7 +62,7 @@ watch(
   (newValue) => {
     profileForm.email = JSON.parse(JSON.stringify(newValue));
     currentProfile.email = JSON.parse(JSON.stringify(newValue));
-  }
+  },
 );
 
 watch(
@@ -70,7 +70,7 @@ watch(
   (newValue) => {
     profileForm.public = newValue;
     currentProfile.public = newValue;
-  }
+  },
 );
 
 onMounted(() => {
@@ -93,7 +93,7 @@ async function submitPassword() {
   const response = await APIUpdatePassword(
     passwordForm.currentPassword,
     passwordForm.newPassword,
-    passwordForm.confirmPassword
+    passwordForm.confirmPassword,
   );
   if (response.status == "success") {
     alert("Password changed.");
@@ -110,7 +110,7 @@ async function loadSessions() {
 
 async function deleteSessions() {
   const confirmed = window.confirm(
-    "Are you really?\nThis will log out every session."
+    "Are you really?\nThis will log out every session.",
   );
   if (confirmed) {
     const data = await APIDeleteUserSessions();

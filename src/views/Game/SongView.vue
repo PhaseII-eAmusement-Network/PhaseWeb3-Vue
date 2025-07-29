@@ -66,7 +66,7 @@ const chartOptions = computed(() => {
     songData.value.charts
       .filter(
         (chart) =>
-          chart.data?.difficulty !== 0 && chart.data?.difficulty != null
+          chart.data?.difficulty !== 0 && chart.data?.difficulty != null,
       )
       // eslint-disable-next-line no-unused-vars
       .map((chart, index) => {
@@ -81,7 +81,7 @@ const chartOptions = computed(() => {
 const selectedChartRecords = computed(() => {
   if (!songData.value.charts || songData.value.charts.length === 0) return [];
   const chart = JSON.parse(
-    JSON.stringify(songData.value.charts[chartSelector.currentChart])
+    JSON.stringify(songData.value.charts[chartSelector.currentChart]),
   );
   return formatScores(chart?.records ?? []);
 });

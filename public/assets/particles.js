@@ -9,7 +9,7 @@
 
 var pJS = function (tag_id, params) {
   var canvas_el = document.querySelector(
-    "#" + tag_id + " > .particles-js-canvas-el"
+    "#" + tag_id + " > .particles-js-canvas-el",
   );
 
   /* particles.js variables with default values */
@@ -454,7 +454,7 @@ var pJS = function (tag_id, params) {
           p.y + radius / 1.66,
           radius * 2,
           3,
-          2
+          2,
         );
         break;
 
@@ -465,7 +465,7 @@ var pJS = function (tag_id, params) {
           p.y - radius / (2.66 / 3.5), // startY
           (radius * 2.66) / (pJS.particles.shape.polygon.nb_sides / 3), // sideLength
           pJS.particles.shape.polygon.nb_sides, // sideCountNumerator
-          1 // sideCountDenominator
+          1, // sideCountDenominator
         );
         break;
 
@@ -476,7 +476,7 @@ var pJS = function (tag_id, params) {
           p.y - radius / ((2 * 2.66) / 3.5), // startY
           (radius * 2 * 2.66) / (pJS.particles.shape.polygon.nb_sides / 3), // sideLength
           pJS.particles.shape.polygon.nb_sides, // sideCountNumerator
-          2 // sideCountDenominator
+          2, // sideCountDenominator
         );
         break;
 
@@ -487,7 +487,7 @@ var pJS = function (tag_id, params) {
             p.x - radius,
             p.y - radius,
             radius * 2,
-            (radius * 2) / p.img.ratio
+            (radius * 2) / p.img.ratio,
           );
         }
 
@@ -518,7 +518,7 @@ var pJS = function (tag_id, params) {
   pJS.fn.particlesCreate = function () {
     for (var i = 0; i < pJS.particles.number.value; i++) {
       pJS.particles.array.push(
-        new pJS.fn.particle(pJS.particles.color, pJS.particles.opacity.value)
+        new pJS.fn.particle(pJS.particles.color, pJS.particles.opacity.value),
       );
     }
   };
@@ -774,7 +774,7 @@ var pJS = function (tag_id, params) {
         new pJS.fn.particle(pJS.particles.color, pJS.particles.opacity.value, {
           x: pos ? pos.pos_x : Math.random() * pJS.canvas.w,
           y: pos ? pos.pos_y : Math.random() * pJS.canvas.h,
-        })
+        }),
       );
       if (i == nb - 1) {
         if (!pJS.particles.move.enable) {
@@ -932,7 +932,7 @@ var pJS = function (tag_id, params) {
           pJS.particles.size.value,
           p.radius_bubble,
           p.radius,
-          "size"
+          "size",
         );
         /* opacity */
         process(
@@ -940,7 +940,7 @@ var pJS = function (tag_id, params) {
           pJS.particles.opacity.value,
           p.opacity_bubble,
           p.opacity,
-          "opacity"
+          "opacity",
         );
       }
     }
@@ -965,7 +965,7 @@ var pJS = function (tag_id, params) {
             repulseRadius *
             velocity,
           0,
-          50
+          50,
         );
 
       var pos = {
@@ -996,7 +996,7 @@ var pJS = function (tag_id, params) {
       if (pJS.tmp.repulse_clicking) {
         var repulseRadius = Math.pow(
           pJS.interactivity.modes.repulse.distance / 6,
-          3
+          3,
         );
 
         var dx = pJS.interactivity.mouse.click_pos_x - p.x,
@@ -1082,7 +1082,7 @@ var pJS = function (tag_id, params) {
           pJS.canvas.ctx.moveTo(p.x, p.y);
           pJS.canvas.ctx.lineTo(
             pJS.interactivity.mouse.pos_x,
-            pJS.interactivity.mouse.pos_y
+            pJS.interactivity.mouse.pos_y,
           );
           pJS.canvas.ctx.stroke();
           pJS.canvas.ctx.closePath();
@@ -1148,17 +1148,17 @@ var pJS = function (tag_id, params) {
               if (pJS.particles.move.enable) {
                 pJS.fn.modes.pushParticles(
                   pJS.interactivity.modes.push.particles_nb,
-                  pJS.interactivity.mouse
+                  pJS.interactivity.mouse,
                 );
               } else {
                 if (pJS.interactivity.modes.push.particles_nb == 1) {
                   pJS.fn.modes.pushParticles(
                     pJS.interactivity.modes.push.particles_nb,
-                    pJS.interactivity.mouse
+                    pJS.interactivity.mouse,
                   );
                 } else if (pJS.interactivity.modes.push.particles_nb > 1) {
                   pJS.fn.modes.pushParticles(
-                    pJS.interactivity.modes.push.particles_nb
+                    pJS.interactivity.modes.push.particles_nb,
                   );
                 }
               }
@@ -1166,7 +1166,7 @@ var pJS = function (tag_id, params) {
 
             case "remove":
               pJS.fn.modes.removeParticles(
-                pJS.interactivity.modes.remove.particles_nb
+                pJS.interactivity.modes.remove.particles_nb,
               );
               break;
 
@@ -1286,7 +1286,7 @@ var pJS = function (tag_id, params) {
     startY,
     sideLength,
     sideCountNumerator,
-    sideCountDenominator
+    sideCountDenominator,
   ) {
     // By Programming Thomas - https://programmingthomas.wordpress.com/2013/04/03/n-sided-shapes/
     var sideCount = sideCountNumerator * sideCountDenominator;
@@ -1406,14 +1406,14 @@ var pJS = function (tag_id, params) {
 
     /* particles.line_linked - convert hex colors to rgb */
     pJS.particles.line_linked.color_rgb_line = hexToRgb(
-      pJS.particles.line_linked.color
+      pJS.particles.line_linked.color,
     );
   };
 
   pJS.fn.vendors.start = function () {
     if (isInArray("image", pJS.particles.shape.type)) {
       pJS.tmp.img_type = pJS.particles.shape.image.src.substr(
-        pJS.particles.shape.image.src.length - 3
+        pJS.particles.shape.image.src.length - 3,
       );
       pJS.fn.vendors.loadImg(pJS.tmp.img_type);
     } else {

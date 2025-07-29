@@ -41,14 +41,14 @@ watch(
     loadAkanameSettings();
     newAkaname.value = userProfile.value?.akaname;
     isModified.value = false;
-  }
+  },
 );
 
 watch(
   () => props.version,
   () => {
     version.value = props.version;
-  }
+  },
 );
 
 watch(
@@ -57,7 +57,7 @@ watch(
     AkanameKey.value++;
     isModified.value = !akanameEquals(newAkaname.value, props.profile.akaname);
   },
-  { deep: true }
+  { deep: true },
 );
 
 loadAkanameSettings();
@@ -86,7 +86,7 @@ async function updateProfile() {
   const profileStatus = await APIUpdateProfile(
     GameConstants.SDVX,
     props.version,
-    { akaname: newAkaname.value }
+    { akaname: newAkaname.value },
   );
   if (profileStatus.status != "error") {
     router.go();

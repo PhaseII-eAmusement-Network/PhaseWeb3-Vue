@@ -14,21 +14,21 @@ watch(
   () => mainStore.isLoading,
   (newValue) => {
     loading.value = newValue;
-  }
+  },
 );
 
 watch(
   () => mainStore.isSaving,
   (newValue) => {
     saving.value = newValue;
-  }
+  },
 );
 
 watch(
   () => mainStore.errorCode,
   (newValue) => {
     errorCode.value = newValue;
-  }
+  },
 );
 </script>
 

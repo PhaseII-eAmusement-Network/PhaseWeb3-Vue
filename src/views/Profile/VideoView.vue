@@ -71,11 +71,11 @@ async function loadVideos() {
         "iidx",
         data[0].version,
         uniqueMusicIds,
-        true
+        true,
       );
 
       const songMap = Object.fromEntries(
-        songData.map((song) => [song.id, song])
+        songData.map((song) => [song.id, song]),
       );
 
       videoData.value = videoData.value.map((video) => ({

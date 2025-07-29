@@ -164,7 +164,7 @@ async function addMachine() {
 
 function removeMachine(machinePCBID) {
   newArcade.machineList = newArcade.machineList.filter(
-    (machine) => machine.PCBID !== machinePCBID
+    (machine) => machine.PCBID !== machinePCBID,
   );
 }
 
@@ -186,7 +186,7 @@ function formatName(inputString, replaceWith = "NA_") {
 
   asciiFriendly = asciiFriendly.replace(
     /[!"#$%&'()*+,-./:;<=>?@[\\\]^_`{|}~]/g,
-    ""
+    "",
   );
 
   asciiFriendly = asciiFriendly.replace(/\s+/g, "_");
@@ -200,7 +200,7 @@ async function exportVPN(arcadeId, arcadeData) {
     const link = document.createElement("a");
     link.href = URL.createObjectURL(blob);
     link.download = `gradius-${formatName(
-      arcadeData.name
+      arcadeData.name,
     )}-phaseii-config.ovpn`;
     document.body.appendChild(link);
     link.click();

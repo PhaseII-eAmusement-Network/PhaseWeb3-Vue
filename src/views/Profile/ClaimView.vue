@@ -64,7 +64,7 @@ async function submitCard() {
 
   takeoverData.value = await APIStartTakeover(
     profileForm.cardId,
-    profileForm.pin
+    profileForm.pin,
   );
 
   cardLoading.value = false;
@@ -110,7 +110,7 @@ async function saveSettings() {
   const saveResult = await APISaveTakeover(
     profileForm.cardId,
     profileForm.pin,
-    mergeSettings
+    mergeSettings,
   );
   confirmModalActive.value = false;
   if (!saveResult) {

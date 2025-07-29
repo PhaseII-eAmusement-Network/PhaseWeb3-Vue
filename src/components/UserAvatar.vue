@@ -19,7 +19,7 @@ const props = defineProps({
 });
 
 const avatar = computed(
-  () => props.avatar ?? `https://i.imgur.com/nkx5ufe.jpg`
+  () => props.avatar ?? `https://i.imgur.com/nkx5ufe.jpg`,
 );
 
 const username = computed(() => props.username);

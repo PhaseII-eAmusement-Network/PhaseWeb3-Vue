@@ -67,35 +67,35 @@ watch(
   () => mainStore.loadingPool.length !== 0,
   (newValue) => {
     loading.value = newValue;
-  }
+  },
 );
 
 watch(
   () => mainStore.savingPool.length !== 0,
   (newValue) => {
     saving.value = newValue;
-  }
+  },
 );
 
 watch(
   () => mainStore.errorCode,
   (newValue) => {
     errorCode.value = newValue;
-  }
+  },
 );
 
 watch(
   () => mainStore.userLoaded,
   (newValue) => {
     userLoaded.value = newValue;
-  }
+  },
 );
 
 watch(
   () => mainStore.userArcades,
   (newValue) => {
     userArcades.value = newValue;
-  }
+  },
 );
 
 const layoutAsidePadding = "xl:pl-60";

@@ -14,7 +14,7 @@ export async function APIGetArcade(arcadeId) {
 export async function APIGetArcadeSettings(arcadeId, game, version) {
   try {
     const data = await mainStore.callApi(
-      `/arcade/${arcadeId}/settings?game=${game}&version=${version}`
+      `/arcade/${arcadeId}/settings?game=${game}&version=${version}`,
     );
     return data.data;
   } catch (error) {
@@ -27,7 +27,7 @@ export async function APIUpdateArcadeSettings(
   arcadeId,
   game,
   version,
-  newSettings
+  newSettings,
 ) {
   try {
     while (!mainStore.userId) {
@@ -37,7 +37,7 @@ export async function APIUpdateArcadeSettings(
     const data = await mainStore.callApi(
       `/arcade/${arcadeId}/settings?game=${game}&version=${version}`,
       "POST",
-      newSettings
+      newSettings,
     );
     return data;
   } catch (error) {
@@ -61,7 +61,7 @@ export async function APIUpdateArcade(arcadeId, newArcade) {
     const data = await mainStore.callApi(
       `/arcade/${arcadeId}`,
       "POST",
-      newArcade
+      newArcade,
     );
     return data;
   } catch (error) {

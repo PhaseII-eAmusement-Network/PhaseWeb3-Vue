@@ -43,7 +43,7 @@ watch(
     loadEmblemSettings();
     newEmblem.value = formatEmblem(userProfile.value.last?.emblem);
     isModified.value = false;
-  }
+  },
 );
 
 watch(
@@ -52,7 +52,7 @@ watch(
     emblemKey.value++;
     isModified.value = !emblemEquals(newEmblem, userProfile.value.last?.emblem);
   },
-  { deep: true }
+  { deep: true },
 );
 
 loadEmblemSettings();
@@ -117,7 +117,7 @@ async function updateProfile() {
   const profileStatus = await APIUpdateProfile(
     GameConstants.JUBEAT,
     props.version,
-    newProfile
+    newProfile,
   );
   if (profileStatus.status != "error") {
     router.go();

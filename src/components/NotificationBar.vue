@@ -22,7 +22,7 @@ const props = defineProps({
 });
 
 const componentClass = computed(() =>
-  props.outline ? colorsOutline[props.color] : colorsBgLight[props.color]
+  props.outline ? colorsOutline[props.color] : colorsBgLight[props.color],
 );
 
 const isDismissed = ref(false);

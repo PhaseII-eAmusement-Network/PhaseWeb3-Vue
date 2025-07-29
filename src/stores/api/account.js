@@ -76,7 +76,7 @@ export async function APIResetPassword(key, newPassword, confirmPassword) {
 export async function APIUpdatePassword(
   currentPassword,
   newPassword,
-  confirmPassword
+  confirmPassword,
 ) {
   const mainStore = useMainStore();
 
@@ -153,7 +153,7 @@ export async function APIStartTakeover(cardId, pin) {
 
   try {
     const data = await mainStore.callApi(
-      `/user/takeover?cardId=${cardId}&pin=${pin}`
+      `/user/takeover?cardId=${cardId}&pin=${pin}`,
     );
     if (data.status == "warn") {
       window.alert(data.error_code);
@@ -213,7 +213,7 @@ export async function APIRemoveIntegration(service) {
     if (confirmed) {
       const data = await mainStore.callApi(
         `/user/integrate/${service}`,
-        "DELETE"
+        "DELETE",
       );
       return data;
     }

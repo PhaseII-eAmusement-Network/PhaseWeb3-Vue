@@ -45,7 +45,7 @@ const userScoreStats = computed(() => mainStore.userScoreStats);
 const cumulativePlays = computed(() => {
   return userProfiles.value.reduce(
     (total, user) => total + user.data.total_plays,
-    0
+    0,
   );
 });
 

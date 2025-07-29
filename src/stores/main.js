@@ -308,7 +308,7 @@ export const useMainStore = defineStore("main", {
             (oneChart ? "&oneChart=true" : ""),
           "GET",
           null,
-          { songIds: songIds.toString() }
+          { songIds: songIds.toString() },
         );
         return data.data;
       } catch (error) {
@@ -322,7 +322,7 @@ export const useMainStore = defineStore("main", {
         const data = await this.callApi(
           `/attempts/${game}` + (userId ? `?userId=${userId}` : ""),
           "GET",
-          null
+          null,
         );
         return data.data;
       } catch (error) {

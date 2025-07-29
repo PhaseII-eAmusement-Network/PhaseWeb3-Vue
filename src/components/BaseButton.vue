@@ -87,7 +87,7 @@ const computedType = computed(() => {
 });
 
 const labelClass = computed(() =>
-  props.small && props.icon ? "px-1" : "px-2"
+  props.small && props.icon ? "px-1" : "px-2",
 );
 
 const componentClass = computed(() => {
@@ -96,19 +96,19 @@ const componentClass = computed(() => {
     "justify-center",
     "items-center",
     "whitespace-nowrap",
-    "focus:outline-none",
+    "focus:outline-hidden",
     "transition-colors",
     "focus:ring",
     "duration-50",
     "border",
     "hover:scale-[1.02] hover:shadow-xl",
     props.disabled ? "cursor-not-allowed" : "cursor-pointer",
-    props.roundedFull ? "rounded-lg" : "rounded",
+    props.roundedFull ? "rounded-lg" : "rounded-sm",
     getButtonColor(
       mainStore.userCustomize.shrimpLinks ? "sakura" : props.color,
       props.outline,
       !props.disabled,
-      props.active
+      props.active,
     ),
   ];
 
@@ -142,7 +142,7 @@ const mainStore = useMainStore();
   >
     <div
       v-if="tooltip"
-      class="absolute bottom-full left-1/2 mb-1 -translate-x-1/2 whitespace-nowrap rounded bg-black px-2 py-1 text-xs text-white opacity-0 group-hover:opacity-100 transition-opacity duration-200 z-10"
+      class="absolute bottom-full left-1/2 mb-1 -translate-x-1/2 whitespace-nowrap rounded-sm bg-black px-2 py-1 text-xs text-white opacity-0 group-hover:opacity-100 transition-opacity duration-200 z-10"
     >
       {{ tooltip }}
     </div>

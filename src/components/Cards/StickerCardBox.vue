@@ -35,13 +35,13 @@ const version = ref(props.version);
 const emblemKey = ref(0);
 
 const newTrbitem = reactive(
-  JSON.parse(JSON.stringify(userProfile.value?.trbitem ?? {}))
+  JSON.parse(JSON.stringify(userProfile.value?.trbitem ?? {})),
 );
 const trbitemSettings = ref([]);
 const isModified = ref(false);
 const loading = ref(false);
 const collapsedStickers = ref(
-  Array.isArray(newTrbitem.stickers) ? newTrbitem.stickers.map(() => true) : []
+  Array.isArray(newTrbitem.stickers) ? newTrbitem.stickers.map(() => true) : [],
 );
 
 if (!newTrbitem.stickers) {
@@ -55,7 +55,7 @@ watch(
     version.value = props.version;
     loadTrbitemSettings();
     const newProfileData = JSON.parse(
-      JSON.stringify(userProfile.value?.trbitem ?? {})
+      JSON.stringify(userProfile.value?.trbitem ?? {}),
     );
     Object.assign(newTrbitem, newProfileData);
     if (!newTrbitem.stickers) {
@@ -67,7 +67,7 @@ watch(
       ? newTrbitem.stickers.map(() => true)
       : [];
     isModified.value = false;
-  }
+  },
 );
 
 watch(
@@ -76,10 +76,10 @@ watch(
     emblemKey.value++;
     isModified.value = !emblemEquals(
       newTrbitem,
-      userProfile.value?.trbitem ?? {}
+      userProfile.value?.trbitem ?? {},
     );
   },
-  { deep: true }
+  { deep: true },
 );
 
 loadTrbitemSettings();
@@ -110,7 +110,7 @@ async function updateProfile() {
   const profileStatus = await APIUpdateProfile(
     props.game,
     props.version,
-    newProfile
+    newProfile,
   );
   if (profileStatus.status != "error") {
     router.go();
@@ -120,7 +120,7 @@ async function updateProfile() {
 function revert() {
   Object.assign(
     newTrbitem,
-    JSON.parse(JSON.stringify(userProfile.value?.trbitem ?? {}))
+    JSON.parse(JSON.stringify(userProfile.value?.trbitem ?? {})),
   );
   isModified.value = false;
 }

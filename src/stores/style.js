@@ -45,11 +45,11 @@ export const useStyleStore = defineStore("style", {
 
       if (typeof document !== "undefined") {
         document.body.classList[this.darkMode ? "add" : "remove"](
-          "dark-scrollbars"
+          "dark-scrollbars",
         );
 
         document.documentElement.classList[this.darkMode ? "add" : "remove"](
-          "dark-scrollbars-compat"
+          "dark-scrollbars-compat",
         );
       }
     },

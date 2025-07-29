@@ -65,7 +65,7 @@ onMounted(async () => {
 const cumulativePlays = computed(() => {
   return userProfiles.value?.reduce(
     (total, user) => total + user.data.total_plays,
-    0
+    0,
   );
 });
 
@@ -261,7 +261,7 @@ async function adminSubmitPassword() {
   const response = await APIAdminUpdatePassword(
     reqUserId,
     passwordForm.newPassword,
-    passwordForm.confirmPassword
+    passwordForm.confirmPassword,
   );
   if (response.status == "success") {
     alert("Password changed.");

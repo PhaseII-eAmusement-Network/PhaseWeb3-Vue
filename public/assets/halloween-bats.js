@@ -85,7 +85,7 @@
     this._x = Math.max(0, Math.min(this._x, innerWidth - this._options.width));
     this._y = Math.max(
       0,
-      Math.min(this._y, innerHeight - this._options.height)
+      Math.min(this._y, innerHeight - this._options.height),
     );
 
     this.applyPosition();
@@ -119,7 +119,7 @@
 
     this._$bat.css(
       "backgroundPosition",
-      "0 " + frame * -this._options.height + "px"
+      "0 " + frame * -this._options.height + "px",
     );
   };
 

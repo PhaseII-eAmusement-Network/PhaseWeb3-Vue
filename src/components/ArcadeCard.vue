@@ -49,7 +49,7 @@ function getCardStyle(path) {
       type="justify-center"
       class="bg-white dark:bg-slate-900/90 rounded-2xl p-6 w-full"
     >
-      <div class="space-y-3 text-center w-full">
+      <div class="flex flex-col gap-y-3 text-center w-full">
         <h1 class="text-2xl lg:text-3xl font-bold">{{ arcade.name }}</h1>
         <div class="flex gap-2 justify-center items-center">
           <!-- <h2 class="text-2xl md:text-3xl font-bold lg:hidden">
@@ -69,7 +69,7 @@ function getCardStyle(path) {
           <PillTag label="Private Arcade" color="info" :icon="mdiHomeOutline" />
         </div>
 
-        <hr class="border-t border-1 w-full" />
+        <hr class="border-t border w-full" />
         <p v-if="arcade.owners && arcade.owners.length" class="text-lg">
           Managed by
           <span

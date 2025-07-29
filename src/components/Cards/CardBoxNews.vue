@@ -63,7 +63,7 @@ function openNewsView() {
           <p class="text-sm">{{ props.date }}</p>
           <p
             v-if="!read"
-            class="animated-text bg-gradient-to-r from-teal-400 to-yellow-200 bg-clip-text text-transparent"
+            class="animated-text bg-linear-to-r from-teal-400 to-yellow-200 bg-clip-text text-transparent"
           >
             Unread
           </p>

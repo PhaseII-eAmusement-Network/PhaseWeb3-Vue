@@ -101,8 +101,8 @@ const greeting = GetRandomMessage();
 function getCardStyle() {
   return `
     background-image: url('${ASSET_PATH}/card/${
-    cardData.value.userCustomize?.card ?? "time"
-  }.webp');
+      cardData.value.userCustomize?.card ?? "time"
+    }.webp');
     background-size: cover;
     background-repeat: no-repeat;
   `;

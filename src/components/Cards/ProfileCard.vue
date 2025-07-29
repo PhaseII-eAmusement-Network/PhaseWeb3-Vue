@@ -50,7 +50,7 @@ const fullyLoaded = ref(false);
 async function loadAkanameSettings() {
   try {
     const response = await axios.get(
-      `/data-sources/sdvx/akaname/${version.value}.json`
+      `/data-sources/sdvx/akaname/${version.value}.json`,
     );
     if (response.data) {
       AkanameSettings.value = response.data;

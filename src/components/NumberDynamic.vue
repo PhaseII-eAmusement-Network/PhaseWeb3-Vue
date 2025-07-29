@@ -24,7 +24,9 @@ const props = defineProps({
 const newValue = ref(0);
 
 const newValueFormatted = computed(() =>
-  newValue.value < 1000 ? newValue.value : numeral(newValue.value).format("0,0")
+  newValue.value < 1000
+    ? newValue.value
+    : numeral(newValue.value).format("0,0"),
 );
 
 const value = computed(() => props.value);
