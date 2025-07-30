@@ -19,7 +19,7 @@ import LayoutGuest from "@/layouts/LayoutGuest.vue";
             <p class="text-sm text-gray-700 dark:text-white/75">
               Broken since 2021
             </p>
-            <hr class="border-t border-1 my-1 w-full" />
+            <hr class="border-t border my-1 w-full" />
             <p class="text-lg relative bottom-0">404 - File not found</p>
           </div>
           <div>

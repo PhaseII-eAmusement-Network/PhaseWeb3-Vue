@@ -57,7 +57,7 @@ function verifyLater() {
             Please verify your email address to ensure that your password can be
             reset in the future.
           </h1>
-          <hr class="border-t border-1 mt-3 w-full" />
+          <hr class="border-t border mt-3 w-full" />
           <div class="flex gap-2">
             <BaseButton label="Verify" color="success" />
             <BaseButton

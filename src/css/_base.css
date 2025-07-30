@@ -1,10 +1,34 @@
-@import "tailwind/_base.css";
-@import "tailwind/_components.css";
-@import "tailwind/_utilities.css";
+@import "tailwindcss";
+@plugin '@tailwindcss/forms';
 
-@import "_checkbox-radio-switch.css";
-@import "_progress.css";
-@import "_scrollbars.css";
+@import './_checkbox-radio-switch.css';
+@import './_progress.css';
+@import './_scrollbars.css';
+
+@theme {
+  --breakpoint-3xl: 119rem;
+  --breakpoint-4xl: 150rem;
+  
+  --animate-fade-in: fade-in 250ms ease-in-out;
+  --animate-fade-out: fade-out 250ms ease-in-out;
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes fade-out {
+    from {
+      opacity: 1;
+    }
+    to {
+      opacity: 0;
+    }
+  }
+}
 
 .scale-enter-active,
 .scale-leave-active {

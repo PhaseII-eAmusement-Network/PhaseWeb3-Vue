@@ -30,7 +30,7 @@ const submit = async () => {
   const response = await mainStore.createUserSession(
     form.login,
     form.pass,
-    form.remember
+    form.remember,
   );
   if (response) {
     router.push("/");
@@ -59,7 +59,7 @@ const submit = async () => {
             >
               Spinnin' since 2021
             </button>
-            <hr class="border-r-1 my-1 w-full" />
+            <hr class="border-r my-1 w-full" />
             <p class="text-lg relative bottom-0">Please log in.</p>
           </div>
           <div class="md:border-r" />

@@ -4,7 +4,7 @@ const mainStore = useMainStore();
 export async function APIGetAllProfiles(game, version = null) {
   try {
     const data = await mainStore.callApi(
-      `/game/${game}/profiles?version=${version}`
+      `/game/${game}/profiles?version=${version}`,
     );
     return data.data;
   } catch (error) {
@@ -23,7 +23,7 @@ export async function APIGetProfile(game, version, userId = null) {
 
   try {
     const data = await mainStore.callApi(
-      `/profile/${game}?version=${version}&userId=${userId}`
+      `/profile/${game}?version=${version}&userId=${userId}`,
     );
     return data.data;
   } catch (error) {
@@ -42,7 +42,7 @@ export async function APIUpdateProfile(game, version, newProfile) {
     const data = await mainStore.callApi(
       `/profile/${game}?version=${version}&userId=${userId}`,
       "POST",
-      newProfile
+      newProfile,
     );
     return data;
   } catch (error) {
@@ -55,7 +55,7 @@ export async function APIGetAchievements(
   game,
   version,
   userId = null,
-  achievements = []
+  achievements = [],
 ) {
   if (!userId) {
     while (!mainStore.userId) {
@@ -79,9 +79,9 @@ export async function APIGetAchievements(
       {
         achievements: formattedAchievements.substring(
           0,
-          formattedAchievements.length - 1
+          formattedAchievements.length - 1,
         ),
-      }
+      },
     );
     return data.data;
   } catch (error) {

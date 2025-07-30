@@ -62,7 +62,7 @@ async function resetPassword() {
   const resetStatus = await APIResetPassword(
     form.authKey,
     form.newPassword,
-    form.confirmPassword
+    form.confirmPassword,
   );
   if (resetStatus.status == "success") {
     alert("Password changed!");
@@ -88,10 +88,10 @@ async function resetPassword() {
             <p class="text-sm text-gray-700 dark:text-white/75">
               Spinnin' since 2021
             </p>
-            <hr class="border-t border-1 my-1 w-full" />
+            <hr class="border-t border my-1 w-full" />
             <p class="text-lg relative bottom-0">Password Reset</p>
           </div>
-          <div class="md:border-r md:border-1"></div>
+          <div class="md:border-r md:border"></div>
 
           <div class="grid grid-cols-1 gap-2">
             <form v-if="!form.emailSent" @submit.prevent="submitEmail()">
@@ -179,7 +179,7 @@ async function resetPassword() {
               />
             </form>
 
-            <hr v-if="!form.authValid" class="border-t border-1 mt-3 w-full" />
+            <hr v-if="!form.authValid" class="border-t border mt-3 w-full" />
             <div v-if="!form.authValid" class="flex flex-col gap-2 my-1">
               <h2>Remember it?</h2>
               <BaseButton label="Log In" color="success" href="/#/auth/login" />

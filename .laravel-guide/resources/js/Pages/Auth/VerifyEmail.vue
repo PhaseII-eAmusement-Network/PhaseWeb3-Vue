@@ -21,7 +21,7 @@ const props = defineProps({
 const form = useForm();
 
 const verificationLinkSent = computed(
-  () => props.status === "verification-link-sent"
+  () => props.status === "verification-link-sent",
 );
 
 const submit = () => {

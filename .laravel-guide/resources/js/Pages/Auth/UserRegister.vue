@@ -22,7 +22,7 @@ const form = useForm({
 });
 
 const hasTermsAndPrivacyPolicyFeature = computed(
-  () => usePage().props.jetstream?.hasTermsAndPrivacyPolicyFeature
+  () => usePage().props.jetstream?.hasTermsAndPrivacyPolicyFeature,
 );
 
 const submit = () => {
@@ -52,8 +52,8 @@ const submit = () => {
 
         <FormField label="Name" label-for="name" help="Please enter your name">
           <FormControl
-            v-model="form.name"
             id="name"
+            v-model="form.name"
             :icon="mdiAccount"
             autocomplete="name"
             type="text"
@@ -67,8 +67,8 @@ const submit = () => {
           help="Please enter your email"
         >
           <FormControl
-            v-model="form.email"
             id="email"
+            v-model="form.email"
             :icon="mdiEmail"
             autocomplete="email"
             type="email"
@@ -82,8 +82,8 @@ const submit = () => {
           help="Please enter new password"
         >
           <FormControl
-            v-model="form.password"
             id="password"
+            v-model="form.password"
             :icon="mdiFormTextboxPassword"
             type="password"
             autocomplete="new-password"
@@ -97,8 +97,8 @@ const submit = () => {
           help="Please confirm your password"
         >
           <FormControl
-            v-model="form.password_confirmation"
             id="password_confirmation"
+            v-model="form.password_confirmation"
             :icon="mdiFormTextboxPassword"
             type="password"
             autocomplete="new-password"

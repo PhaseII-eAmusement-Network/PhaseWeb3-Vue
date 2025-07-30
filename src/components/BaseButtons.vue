@@ -47,13 +47,13 @@ export default defineComponent({
                 {},
                 element.children.map((child) => {
                   return h(child, { class: [this.classAddon] });
-                })
+                }),
               );
             }
 
             return h(element, { class: [this.classAddon] });
           })
-        : null
+        : null,
     );
   },
 });

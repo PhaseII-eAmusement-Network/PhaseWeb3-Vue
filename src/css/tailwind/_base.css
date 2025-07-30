@@ -1,1 +1,2 @@
-@tailwind base;
+@import 'tailwindcss/theme' layer(theme);
+@import 'tailwindcss/preflight' layer(base);

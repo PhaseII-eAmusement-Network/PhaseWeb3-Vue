@@ -24,7 +24,7 @@ export default {
       return this.arcadeData.filter(
         (arcade) =>
           arcade.name.toLowerCase().includes(filterForm.filter.toLowerCase()) &&
-          arcade.public
+          arcade.public,
       );
     },
   },

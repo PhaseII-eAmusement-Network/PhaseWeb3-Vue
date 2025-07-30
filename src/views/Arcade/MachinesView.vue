@@ -124,7 +124,7 @@ function formatMachines(machines) {
 function getSelectedMachine(pcbId) {
   if (!pcbId || !arcadeData.value.machines) return null;
   selectedMachine.value = arcadeData.value?.machines?.find(
-    (machine) => machine.pcbId === pcbId
+    (machine) => machine.pcbId === pcbId,
   );
   selectedMachine.value.cabinet = selectedMachine.value.data.cabinet ?? false;
   return true;
@@ -177,7 +177,7 @@ async function deleteMachine() {
 
   await APIAdminDeleteMachine(
     arcadeData.value.id,
-    selectedMachine.value?.pcbId ?? ""
+    selectedMachine.value?.pcbId ?? "",
   );
   selectedMachine.value = null;
   selectedPCBID.value = null;

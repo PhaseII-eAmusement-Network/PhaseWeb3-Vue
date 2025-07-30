@@ -4,7 +4,7 @@ const mainStore = useMainStore();
 export async function exportVPNDiscord(arcadeId, discordId) {
   try {
     const data = await mainStore.callApi(
-      `/discord/exportVPN/${arcadeId}?discordId=${discordId}`
+      `/discord/exportVPN/${arcadeId}?discordId=${discordId}`,
     );
     return data;
   } catch (error) {
@@ -16,7 +16,7 @@ export async function exportVPNDiscord(arcadeId, discordId) {
 export async function onboardArcadeDiscord(arcadeId, discordId) {
   try {
     const data = await mainStore.callApi(
-      `/discord/onboardArcade/${arcadeId}?discordId=${discordId}`
+      `/discord/onboardArcade/${arcadeId}?discordId=${discordId}`,
     );
     return data;
   } catch (error) {

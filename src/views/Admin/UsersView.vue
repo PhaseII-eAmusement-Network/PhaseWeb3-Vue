@@ -103,7 +103,7 @@ function filterUsers() {
             .toString()
             .toLowerCase()
             .includes(filterForm.filter.toLowerCase()) ||
-          user.username.toLowerCase().includes(filterForm.filter.toLowerCase())
+          user.username.toLowerCase().includes(filterForm.filter.toLowerCase()),
       )
       .slice(0, 25); // Cap results to 25
   }

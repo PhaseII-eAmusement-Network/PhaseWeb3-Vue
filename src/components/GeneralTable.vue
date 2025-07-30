@@ -7,7 +7,6 @@ import { useRoute } from "vue-router";
 
 const $route = useRoute();
 
-// eslint-disable-next-line vue/require-prop-types
 const props = defineProps(["headers", "items", "hasAvatar"]);
 const emits = defineEmits(["row-clicked"]);
 
@@ -19,7 +18,7 @@ function downloadJSON() {
   DownloadJS(
     JSON.stringify({ headers: props.headers, data: props.items }),
     `export${$route.fullPath}_data.json`,
-    "text/plain"
+    "text/plain",
   );
 }
 </script>

@@ -21,7 +21,7 @@ export class SkillColors {
       min: 850000,
       max: 999999,
       color:
-        "text-transparent bg-clip-text bg-gradient-to-bl from-green-300 via-blue-500 to-purple-600",
+        "text-transparent bg-clip-text bg-linear-to-bl from-green-300 via-blue-500 to-purple-600",
     },
   ];
 
@@ -41,14 +41,14 @@ export class SkillColors {
 
 export function getGitadoraColor(skillPoints) {
   var val = SkillColors.gitadoraSkill.find(
-    (x) => skillPoints >= x.min && x.max >= skillPoints
+    (x) => skillPoints >= x.min && x.max >= skillPoints,
   );
   return val.color;
 }
 
 export function getJubilityColor(jubility) {
   var val = SkillColors.jubilitySkill.find(
-    (x) => jubility >= x.min && x.max >= jubility
+    (x) => jubility >= x.min && x.max >= jubility,
   );
   return val.color;
 }

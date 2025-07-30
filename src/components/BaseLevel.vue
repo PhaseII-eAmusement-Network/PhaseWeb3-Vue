@@ -23,7 +23,7 @@ export default defineComponent({
       "div",
       {
         class: parentClass.concat(
-          this.mobile ? parentMobileClass : parentBaseClass
+          this.mobile ? parentMobileClass : parentBaseClass,
         ),
       },
       this.$slots.default().map((element, index) => {
@@ -33,7 +33,7 @@ export default defineComponent({
             : childBaseClass;
 
         return h("div", { class: childClass }, [element]);
-      })
+      }),
     );
   },
 });

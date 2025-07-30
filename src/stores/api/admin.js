@@ -23,7 +23,7 @@ export async function APIAdminArcades() {
 export async function checkArcadeName(arcadeName) {
   try {
     const data = await mainStore.callApi(
-      `/arcade/checkName?name=${arcadeName}`
+      `/arcade/checkName?name=${arcadeName}`,
     );
     return data;
   } catch (error) {
@@ -57,7 +57,7 @@ export async function APIAdminCreateMachine(arcadeId, newMachine) {
     const data = await mainStore.callApi(
       `/admin/arcade/${arcadeId}/machine`,
       "PUT",
-      newMachine
+      newMachine,
     );
     return data;
   } catch (error) {
@@ -71,7 +71,7 @@ export async function APIAdminUpdateMachine(arcadeId, newMachine) {
     const data = await mainStore.callApi(
       `/admin/arcade/${arcadeId}/machine`,
       "POST",
-      newMachine
+      newMachine,
     );
     return data;
   } catch (error) {
@@ -87,7 +87,7 @@ export async function APIAdminDeleteMachine(arcadeId, pcbId) {
       const data = await mainStore.callApi(
         `/admin/arcade/${arcadeId}/machine`,
         "DELETE",
-        { PCBID: pcbId }
+        { PCBID: pcbId },
       );
       return data;
     }
@@ -102,7 +102,7 @@ export async function APIOnboardArcade(newArcade) {
     const data = await mainStore.callApi(
       "/admin/onboardArcade",
       "POST",
-      newArcade
+      newArcade,
     );
     return data;
   } catch (error) {
@@ -116,7 +116,7 @@ export async function APIAdminUpdateArcade(arcadeId, newArcade) {
     const data = await mainStore.callApi(
       `/admin/arcade/${arcadeId}`,
       "POST",
-      newArcade
+      newArcade,
     );
     return data;
   } catch (error) {
@@ -131,7 +131,7 @@ export async function APIAdminDeleteArcade(arcadeId) {
     try {
       const data = await mainStore.callApi(
         `/admin/arcade/${arcadeId}`,
-        "DELETE"
+        "DELETE",
       );
       return data;
     } catch (error) {
@@ -146,7 +146,7 @@ export async function APIAdminAddArcadeOwner(arcadeId, ownerId) {
     const data = await mainStore.callApi(
       `/admin/arcade/${arcadeId}/owner`,
       "PUT",
-      { ownerId: ownerId }
+      { ownerId: ownerId },
     );
     return data;
   } catch (error) {
@@ -162,7 +162,7 @@ export async function APIAdminRemoveArcadeOwner(arcadeId, ownerId) {
       const data = await mainStore.callApi(
         `/admin/arcade/${arcadeId}/owner`,
         "DELETE",
-        { ownerId: ownerId }
+        { ownerId: ownerId },
       );
       return data;
     }
@@ -228,7 +228,7 @@ export async function APIAdminPutUser(userId, newUser) {
     const data = await mainStore.callApi(
       `/admin/user/${userId}`,
       "POST",
-      newUser
+      newUser,
     );
     return data;
   } catch (error) {
@@ -240,7 +240,7 @@ export async function APIAdminPutUser(userId, newUser) {
 export async function APIAdminUpdatePassword(
   userId,
   newPassword,
-  confirmPassword
+  confirmPassword,
 ) {
   const mainStore = useMainStore();
 
@@ -251,7 +251,7 @@ export async function APIAdminUpdatePassword(
       {
         newPassword: newPassword,
         confirmPassword: confirmPassword,
-      }
+      },
     );
     return data;
   } catch (error) {
@@ -295,7 +295,7 @@ export async function APIAdminUpdateNews(newsId, newNews) {
     const data = await mainStore.callApi(
       `/admin/news/${newsId}`,
       "POST",
-      newNews
+      newNews,
     );
     return data;
   } catch (error) {

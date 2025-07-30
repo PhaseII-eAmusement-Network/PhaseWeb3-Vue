@@ -40,14 +40,14 @@ onMounted(async () => {
     const fetchedData = await mainStore.getMusicData(
       "jubeat",
       props.version,
-      songIds
+      songIds,
     );
 
     // Combine the fetched data with jubilityData
     const combinedData = props.jubilityData.map((jubilityItem) => {
       const matchingSong = fetchedData.find(
         (song) =>
-          song.id === jubilityItem.song_id && song.chart === jubilityItem.chart
+          song.id === jubilityItem.song_id && song.chart === jubilityItem.chart,
       );
       return {
         ...jubilityItem,

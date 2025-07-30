@@ -27,7 +27,7 @@ Chart.register(
   LineController,
   LinearScale,
   CategoryScale,
-  Tooltip
+  Tooltip,
 );
 
 onMounted(() => {

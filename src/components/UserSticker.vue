@@ -24,7 +24,7 @@ watch(
   () => {
     userProfile.value = props.profile;
     version.value = props.version;
-  }
+  },
 );
 
 const ASSET_PATH = import.meta.env.VITE_GAME_ASSET_PATH;

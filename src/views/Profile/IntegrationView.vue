@@ -35,7 +35,7 @@ watch(
   () => mainStore.userData,
   (newValue) => {
     userData.value = newValue;
-  }
+  },
 );
 
 const services = [

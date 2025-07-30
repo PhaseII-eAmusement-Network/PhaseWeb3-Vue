@@ -94,7 +94,7 @@ async function updateUserData(disable = false) {
             </h1>
           </div>
 
-          <hr class="border-t border-1 mt-3 w-full" />
+          <hr class="border-t border mt-3 w-full" />
 
           <div
             v-if="changelog"

@@ -79,10 +79,10 @@ async function registerProfile() {
             <p class="text-sm text-gray-700 dark:text-white/75">
               Spinnin' since 2021
             </p>
-            <hr class="border-t border-1 my-1 w-full" />
+            <hr class="border-t border my-1 w-full" />
             <p class="text-lg relative bottom-0">Account Registration</p>
           </div>
-          <div class="md:border-r md:border-1" />
+          <div class="md:border-r md:border" />
 
           <div>
             <form
@@ -182,7 +182,7 @@ async function registerProfile() {
               </div>
             </form>
             <div class="col-span-2">
-              <hr class="border-t border-1 my-4 w-full" />
+              <hr class="border-t border my-4 w-full" />
 
               <div class="flex flex-col gap-2 my-4">
                 <h2>Have an Account?</h2>

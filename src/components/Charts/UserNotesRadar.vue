@@ -21,7 +21,7 @@ ChartJS.register(
   LineElement,
   Filler,
   Tooltip,
-  Legend
+  Legend,
 );
 
 const props = defineProps({
@@ -75,7 +75,7 @@ watch(
     userProfile.value = props.profile;
     version.value = props.version;
     loadData();
-  }
+  },
 );
 
 async function loadData() {
@@ -87,7 +87,7 @@ async function loadData() {
       [
         ["notes_radar", 0],
         ["notes_radar", 1],
-      ]
+      ],
     );
 
     const reorderData = (originalData) => {
