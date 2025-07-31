@@ -8,11 +8,11 @@
   }
 
   .checkbox input[type=checkbox]+.check, .radio input[type=radio]+.check, .switch input[type=checkbox]+.check {
-    @apply border-gray-700 border transition-colors duration-200 dark:bg-slate-800;
+    @apply border-gray-700 border transition-colors duration-200 bg-slate-800;
   }
 
   .checkbox input[type=checkbox]:focus+.check, .radio input[type=radio]:focus+.check, .switch input[type=checkbox]:focus+.check {
-    @apply ring-3 ring-blue-700;
+    @apply ring-2 ring-blue-700;
   }
 
   .checkbox input[type=checkbox]+.check, .radio input[type=radio]+.check {
@@ -24,7 +24,7 @@
   }
 
   .switch input[type=checkbox]+.check {
-    @apply flex items-center shrink-0 w-12 h-6 p-0.5 bg-gray-200;
+    @apply flex items-center shrink-0 w-12 h-6 p-0.5 bg-slate-800;
   }
 
   .radio input[type=radio]+.check, .switch input[type=checkbox]+.check, .switch input[type=checkbox]+.check:before {
