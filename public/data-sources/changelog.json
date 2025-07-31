@@ -22,5 +22,5 @@
     "3.0.20": ["- (Major) Add read state to network news.", "- (Minor) Add new greetings.", "- (Minor) Add information to linked services", "- (Minor) Add session info and button to remove all sessions", "- (Minor) Add text gradient animation backend, needs ported to text once finished."],
     "3.0.21": ["- (Admin) Finish admin machine/arcade pages", "- (Major) Finish initial public profile page", "- (Minor) Change table right-click behavior", "- (Admin) Finish admin News pages", "- (Admin) Add search for user via card ID"],
     "3.0.22": ["- (Major) Finish first implementation of the public profile page", "- (Minor) Clean up dashboard game stat box", "- (Minor) Load profile name in game stat box"],
-    "3.0.23": ["- (Major) Moved to Tailwind V4 (SoftieTechCat)", "- (Major) Updated all dependencies (SoftieTechCat)", "- (Bugfix) Fix bug if user has no read news", "- (Backend) Insane optimization with user loading, data loading, cache parsing.", "- (Minor) Add new greetings."]
+    "3.0.23": ["- (Major) Moved to Tailwind V4 (SoftieTechCat)", "- (Major) Updated all dependencies (SoftieTechCat)", "- (Bugfix) Fix bug if user has no read news", "- (Backend) Insane optimization with user loading, data loading, cache parsing. (SoftieTechCat)", "- (Minor) Add new greetings."]
 }
