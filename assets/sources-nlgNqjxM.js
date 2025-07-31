@@ -1,5 +1,0 @@
-import{al as l,bF as n,j as r,d as i,i as s,e as c,a8 as o,t as d,bG as u,f as p}from"./index-DpUG9nZw.js";const f={class:"mb-2"},h={class:"text-center lg:text-left items-center justify-center lg:justify-start gap-2"},_={class:"flex items-center justify-start"},m={class:"text-2xl md:text-3xl leading-tight"},g={class:"w-full flex gap-1 mb-4"},$={__name:"GameTitleLine",props:{path:{type:String,default:null},title:{type:String,required:!0}},setup(e){const t=l(()=>n().default);return(a,x)=>(i(),r("section",f,[s("div",h,[s("div",_,[c(o,{path:e.path,class:"w-12 h-12 p-1 drop-shadow-md"},null,8,["path"]),s("h1",m,d(e.title),1)]),s("div",g,[t.value?u(a.$slots,"default",{key:0}):p("",!0)])])]))}},S="https://cdn.phaseii.network/file/PhaseII/web-assets";function b(e,t){return t?`${S}/games/${e.id}/card/${t}.webp`:e?.cardBG}function k(e,t){return t&&e.videoTable?.includes(t)?`https://cdn.phaseii.network/file/PhaseII/game-assets/video/${e.id}/${t}.mp4`:null}function y(e,t){return e.videoTable?.includes(t)?null:`
-        background-image: url('${b(e,t)}');
-        background-size: cover;
-        background-repeat: no-repeat;
-      `}export{$ as _,k as a,y as g};
