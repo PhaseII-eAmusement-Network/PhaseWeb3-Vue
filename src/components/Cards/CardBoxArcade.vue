@@ -35,7 +35,7 @@ const areaData = getArea(arcadeData.area);
   <button class="text-left h-full" @click="openArcadeView">
     <CardBox class="mb-2 h-full" :style="getCardStyle()" has-table>
       <div
-        class="outline outline-slate-800/75 hover:scale-[1.01] hover:shadow-xl hover:outline hover:outline-blue-500/50 hover:bg-slate-500 hover:dark:bg-slate-950/90 bg-white dark:bg-slate-900/90 rounded-xl p-4 h-full w-full transition-all duration-10"
+        class="outline outline-slate-800/75 hover:scale-[1.01] hover:shadow-xl hover:outline hover:outline-blue-500/50 hover:bg-slate-500 hover:dark:bg-slate-950/90 bg-white dark:bg-slate-900/90 rounded-xl p-4 h-full w-full transition-all duration-100"
       >
         <h1 class="text-xl font-bold">{{ arcadeData.name }}</h1>
         <p class="text-lg">

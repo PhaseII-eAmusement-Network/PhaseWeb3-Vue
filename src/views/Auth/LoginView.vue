@@ -54,7 +54,7 @@ const submit = async () => {
             <img src="/favicon.png" class="rounded-full shadow-lg mb-2" />
             <h1 class="text-xl"><samp>PhaseII</samp></h1>
             <button
-              class="text-sm text-gray-700 dark:text-white/75"
+              class="text-sm text-gray-700 dark:text-white/75 hover:cursor-pointer"
               @click="form.spinin = !form.spinin"
             >
               Spinnin' since 2021

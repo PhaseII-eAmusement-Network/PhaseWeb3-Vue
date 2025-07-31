@@ -249,7 +249,7 @@ const menuAside = computed(() => {
     <div
       v-if="userLoaded"
       :class="[layoutAsidePadding, { 'ml-60 lg:ml-0': isAsideMobileExpanded }]"
-      class="pt-14 min-h-screen w-screen lg:w-auto bg-slate-800 dark:text-slate-100"
+      class="pt-14 min-h-screen w-screen lg:w-auto bg-slate-800 dark:text-slate-100 transition-position duration-150 ease-in-out"
     >
       <NavBar
         :menu="menuNavBar"

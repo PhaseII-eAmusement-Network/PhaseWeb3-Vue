@@ -564,5 +564,10 @@
         "author": "DDR X",
         "header": "You gotta step quick, <username>",
         "comment": "Watch out for the shock arrow!"
+    },
+    {
+        "author": "Trmazi",
+        "header": "What'cha gonna do, <username>?",
+        "comment": "Cry about it? Womp Womp."
     }
 ]

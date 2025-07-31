@@ -5,6 +5,8 @@
 @import './_progress.css';
 @import './_scrollbars.css';
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 @theme {
   --breakpoint-3xl: 119rem;
   --breakpoint-4xl: 150rem;

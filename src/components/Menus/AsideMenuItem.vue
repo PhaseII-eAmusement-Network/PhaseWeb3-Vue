@@ -81,14 +81,23 @@ const menuClick = (event) => {
         w="w-12"
       />
     </component>
-    <AsideMenuList
-      v-if="hasDropdown"
-      :menu="item.menu"
-      :class="[
-        styleStore.asideMenuDropdownStyle,
-        isDropdownActive ? 'block dark:bg-slate-800/50' : 'hidden',
-      ]"
-      is-dropdown-list
-    />
+    <Transition
+      enter-active-class="transition-position duration-50 ease-linear"
+      enter-from-class="opacity-0 -translate-y-1"
+      enter-to-class="opacity-100 translate-y-0"
+      leave-active-class="transition-position duration-50 ease-linear"
+      leave-from-class="opacity-100 translate-y-0"
+      leave-to-class="opacity-0 -translate-y-1"
+    >
+      <AsideMenuList
+        v-show="isDropdownActive"
+        :menu="item.menu"
+        :class="[
+          styleStore.asideMenuDropdownStyle,
+          'dark:bg-slate-800/50',
+        ]"
+        is-dropdown-list
+      />
+    </Transition>
   </li>
 </template>
