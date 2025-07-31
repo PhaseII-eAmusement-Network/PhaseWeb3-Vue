@@ -38,15 +38,6 @@ export default [
       },
     ],
   },
-  // {
-  //   to: "/goals",
-  //   icon: mdiFlagCheckered,
-  //   label: "Goals",
-  // },
-  // {
-  //   icon: mdiCogs,
-  //   label: "Edit Dashboard",
-  // },
   {
     icon: mdiLogout,
     label: "Log out",

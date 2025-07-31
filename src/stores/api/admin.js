@@ -10,6 +10,16 @@ export async function APIAdminDashboard() {
   }
 }
 
+export async function APIAdminAudit() {
+  try {
+    const data = await mainStore.callApi(`/admin/audit`);
+    return data.data;
+  } catch (error) {
+    console.log("Error loading admin audit:", error);
+    throw error;
+  }
+}
+
 export async function APIAdminArcades() {
   try {
     const data = await mainStore.callApi(`/admin/arcades`);

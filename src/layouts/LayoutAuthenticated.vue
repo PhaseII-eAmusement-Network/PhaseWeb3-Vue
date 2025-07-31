@@ -25,6 +25,7 @@ import AsideMenu from "@/components/Menus/AsideMenu.vue";
 import FooterBar from "@/components/FooterBar.vue";
 import { loadUserAuthKey, deleteUserAuthKey } from "@/stores/auth";
 import { gameData } from "@/constants";
+// import BaseButton from "@/components/BaseButton.vue";
 
 const router = useRouter();
 const route = useRoute();
@@ -274,7 +275,15 @@ const menuAside = computed(() => {
         >
           <BaseIcon :path="mdiMenu" size="24" />
         </NavBarItemPlain>
-        <NavBarItemPlain use-margin> </NavBarItemPlain>
+
+        <div class="h-full flex place-items-center ml-4 gap-4">
+          <!-- <span>You can add up to 4 buttons here</span>
+          <BaseButton small label="QuickNav" color="info" />
+          <BaseButton small label="QuickNav" color="success" />
+          <BaseButton small label="QuickNav" color="warning" />
+          <BaseButton small label="QuickNav" color="danger" />
+          <span>They're sticky!</span> -->
+        </div>
       </NavBar>
       <AsideMenu
         :is-aside-mobile-expanded="isAsideMobileExpanded"

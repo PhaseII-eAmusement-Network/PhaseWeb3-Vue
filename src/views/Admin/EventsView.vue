@@ -1,20 +1,20 @@
 <script setup>
 import { ref, onMounted } from "vue";
-import { mdiFlagCheckered, mdiCashEdit } from "@mdi/js";
+import { mdiFlagCheckered, mdiCashEdit, mdiExclamationThick } from "@mdi/js";
 import SectionMain from "@/components/SectionMain.vue";
 import CardBox from "@/components/CardBox.vue";
 import LayoutAuthenticated from "@/layouts/LayoutAuthenticated.vue";
 import SectionTitleLine from "@/components/SectionTitleLine.vue";
 import GeneralTable from "@/components/GeneralTable.vue";
 
-import { APIAdminDashboard } from "@/stores/api/admin";
-const dashboardData = ref({});
+import { APIAdminAudit } from "@/stores/api/admin";
+const auditData = ref({});
 const loading = ref(true);
 
 onMounted(async () => {
   try {
-    const data = await APIAdminDashboard();
-    dashboardData.value = data;
+    const data = await APIAdminAudit();
+    auditData.value = data;
     loading.value = false;
   } catch (error) {
     console.log("Failed to fetch admin data:", error);
@@ -82,36 +82,116 @@ const transactionHeaders = [
   },
 ];
 
-function formatTransactions(events) {
-  var formattedItems = [];
-  for (var item of events) {
-    if (item.type == "paseli_transaction") {
-      if (item.timestamp) {
-        const date = new Date(item.timestamp * 1000);
-        item.date = date.toLocaleString();
-      }
+const updaterHeaders = [
+  {
+    text: "Timestamp",
+    value: "date",
+    width: 120,
+  },
+  {
+    text: "PCBID",
+    value: "data.pcbid",
+    width: 120,
+  },
+  {
+    text: "Name",
+    value: "data.name",
+    width: 120,
+  },
+  {
+    text: "Value",
+    value: "data.value",
+    width: 120,
+  },
+  {
+    text: "Model",
+    value: "data.model",
+    width: 120,
+  },
+];
 
-      formattedItems.push(item);
+const exceptionHeaders = [
+  {
+    text: "Timestamp",
+    value: "date",
+    width: 120,
+  },
+  {
+    text: "Service",
+    value: "data.service",
+    width: 120,
+  },
+  {
+    text: "PCBID",
+    value: "data.pcbid",
+    width: 120,
+  },
+  {
+    text: "Model",
+    value: "data.model",
+    width: 120,
+  },
+  {
+    text: "Request",
+    value: "data.requestName",
+    width: 120,
+  },
+  {
+    text: "Method",
+    value: "data.method",
+    width: 120,
+  },
+  {
+    text: "Traceback",
+    value: "data.traceback",
+    width: 120,
+  },
+];
+
+const unhandledHeaders = [
+  {
+    text: "Timestamp",
+    value: "date",
+    width: 120,
+  },
+  {
+    text: "Request",
+    value: "data.request",
+    width: 120,
+  },
+];
+
+function formatData(events) {
+  return events.map((item) => {
+    if (item.timestamp) {
+      const date = new Date(item.timestamp * 1000);
+      item.date = date.toLocaleString();
     }
-  }
 
-  return formattedItems;
+    if (item?.data?.service === "xrpc" && item?.data?.request) {
+      const extracted = extractExceptionData(item.data.request);
+      item.data.pcbid = extracted.pcbid;
+      item.data.model = extracted.model;
+      item.data.requestName = extracted.requestName;
+      item.data.method = extracted.method;
+    }
+
+    return item;
+  });
 }
 
-function formatEvents(events) {
-  var formattedItems = [];
-  for (var item of events) {
-    if (item.type == "pcbevent") {
-      if (item.timestamp) {
-        const date = new Date(item.timestamp * 1000);
-        item.date = date.toLocaleString();
-      }
+function extractExceptionData(xmlString) {
+  const modelMatch = xmlString.match(/<call[^>]*model="([^"]+)"/);
+  const pcbidMatch = xmlString.match(/<call[^>]*srcid="([^"]+)"/);
+  const methodMatch = xmlString.match(/<([^ >]+)[^>]*method="([^"]+)"/);
+  const requestNameMatch = xmlString.match(/<call[^>]*>\s*<([^ >]+)/);
 
-      formattedItems.push(item);
-    }
-  }
-
-  return formattedItems;
+  return {
+    model: modelMatch?.[1] || null,
+    pcbid: pcbidMatch?.[1] || null,
+    requestName: requestNameMatch?.[1] || null,
+    method: methodMatch?.[2] || null,
+  };
 }
 </script>
 
@@ -121,6 +201,25 @@ function formatEvents(events) {
       <template v-if="!loading">
         <CardBox class="mb-6 p-1">
           <h1 class="text-3xl">Service Logs</h1>
+        </CardBox>
+
+        <SectionTitleLine
+          :icon="mdiExclamationThick"
+          title="Recent Tracebacks"
+          color="text-red-400"
+          main
+        />
+        <CardBox has-table class="mb-4">
+          <div
+            class="bg-white dark:bg-slate-900/95 rounded-2xl lg:flex lg:justify-between"
+          >
+            <div class="w-full">
+              <GeneralTable
+                :headers="exceptionHeaders"
+                :items="formatData(auditData?.exception)"
+              />
+            </div>
+          </div>
         </CardBox>
 
         <SectionTitleLine
@@ -136,7 +235,7 @@ function formatEvents(events) {
             <div class="w-full">
               <GeneralTable
                 :headers="eventHeaders"
-                :items="formatEvents(dashboardData?.audit)"
+                :items="formatData(auditData?.pcbevent)"
               />
             </div>
           </div>
@@ -155,7 +254,7 @@ function formatEvents(events) {
             <div class="w-full">
               <GeneralTable
                 :headers="transactionHeaders"
-                :items="formatTransactions(dashboardData?.audit)"
+                :items="formatData(auditData?.paseli_transaction)"
               />
             </div>
           </div>

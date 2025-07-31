@@ -497,8 +497,8 @@
     },
     {
         "author": "Anonymous",
-        "header": "Hey <username>, keep it 100!",
-        "comment": "No misses, only MFCs today."
+        "header": "Hey <username>, keep it 1,000,000!",
+        "comment": "No perfects, only MFCs today."
     },
     {
         "author": "Anonymous",
@@ -524,5 +524,45 @@
         "author": "SoftieTechCat",
         "header": "My name is <username>, yo.",
         "comment": "I'm the GOAT of PhaseII, yo. Uhuh."
+    },
+    {
+        "author": "DDR X",
+        "header": "All this waiting around, <username>",
+        "comment": "What is this, a golf tournament? FOUR."
+    },
+    {
+        "author": "DDR X",
+        "header": "We're not playing cards here, <username>",
+        "comment": "We're dancing. Come on."
+    },
+    {
+        "author": "DDR X",
+        "header": "Fresh, <username>.",
+        "comment": "Straight up fresh."
+    },
+    {
+        "author": "DDR X",
+        "header": "I don't know, <username>",
+        "comment": "Have you got the stamina?"
+    },
+    {
+        "author": "DDR X",
+        "header": "Come on, <username>",
+        "comment": "Let's dance already."
+    },
+    {
+        "author": "DDR X",
+        "header": "So what, <username>?",
+        "comment": "We gonna dance or what?"
+    },
+    {
+        "author": "DDR X",
+        "header": "Sure, <username>",
+        "comment": "I guess we can take a break..."
+    },
+    {
+        "author": "DDR X",
+        "header": "You gotta step quick, <username>",
+        "comment": "Watch out for the shock arrow!"
     }
 ]

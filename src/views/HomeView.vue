@@ -235,7 +235,11 @@ const cardBoxes = ref([
           :content="news.body"
           :date="humanReadableTime(news.timestamp)"
           :cover="news.data.img"
-          :read="mainStore?.userData?.seen_news[news.id] ?? false"
+          :read="
+            mainStore?.userData?.seen_news
+              ? mainStore?.userData?.seen_news[news.id]
+              : false
+          "
           class="w-full h-full"
         />
       </div>
