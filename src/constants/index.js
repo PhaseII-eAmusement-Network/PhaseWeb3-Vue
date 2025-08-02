@@ -287,7 +287,7 @@ export class VersionConstants {
 export function GetRandomMessage() {
   const greetings = Greetings; // Assuming Greetings is a promise
 
-  const key = Math.floor(Math.random() * greetings.length);
+  const key = crypto.getRandomValues(new Uint32Array(1))[0] % greetings.length; // "How random do you want it?" Yes.
   const selected = greetings[key];
 
   if (typeof selected.header !== "string") {
