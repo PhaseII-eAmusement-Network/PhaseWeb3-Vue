@@ -2,15 +2,15 @@
 import { reactive, ref, onMounted, watch } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import {
-  mdiAccountOutline,
-  mdiPlaylistMusicOutline,
-  mdiFormatListText,
-  mdiChartBarStacked,
-  mdiChartAreasplineVariant,
-  mdiChartTimeline,
-  mdiStickerOutline,
-  mdiChartDonutVariant,
-} from "@mdi/js";
+  PhUser,
+  PhCalendarDots,
+  PhChartLine,
+  PhRanking,
+  PhMedal,
+  PhChartPieSlice,
+  PhSticker,
+  PhTarget,
+} from "@phosphor-icons/vue";
 import SectionMain from "@/components/SectionMain.vue";
 import CardBoxWidget from "@/components/CardBoxWidget.vue";
 import CardBox from "@/components/CardBox.vue";
@@ -359,7 +359,7 @@ async function generateTimeline(myProfile) {
     <template v-if="myProfile">
       <SectionMain>
         <GameHeader :game="thisGame" />
-        <SectionTitleLine :icon="mdiAccountOutline" title="View Profile" main>
+        <SectionTitleLine :icon="PhUser" title="View Profile" main>
           <div
             v-if="thisGame.versions && myProfile"
             class="mt-2 md:mt-0 md:w-1/3 md:text-right"
@@ -391,18 +391,17 @@ async function generateTimeline(myProfile) {
           >
             <div class="w-full">
               <ProfileCard
-                use-small
                 :game="gameID"
                 :version="versionForm.currentVersion"
                 :profile="myProfile"
               >
                 <div
                   v-if="!thisGame.noScores"
-                  class="md:w-1/3 grid grid-cols-1 md:grid-cols-2 gap-3"
+                  class="md:w-1/3 grid grid-cols-1 md:grid-cols-2 gap-3 mt-4"
                 >
                   <BaseButton
                     :href="`/#/games/${gameID}/scores/${myProfile.userId}`"
-                    :icon="mdiPlaylistMusicOutline"
+                    :icon="PhMedal"
                     class="w-full md:w-auto"
                     color="info"
                     label="View Scores"
@@ -410,7 +409,7 @@ async function generateTimeline(myProfile) {
 
                   <BaseButton
                     :href="`/#/games/${gameID}/records/${myProfile.userId}`"
-                    :icon="mdiFormatListText"
+                    :icon="PhRanking"
                     class="w-full md:w-auto"
                     color="info"
                     label="View Records"
@@ -525,11 +524,7 @@ async function generateTimeline(myProfile) {
             myProfile.battle_data
           "
         >
-          <SectionTitleLine
-            :icon="mdiChartAreasplineVariant"
-            title="Stats"
-            main
-          />
+          <SectionTitleLine :icon="PhChartLine" title="Stats" main />
           <div
             class="my-6 grid grid-cols-2 md:grid-cols-5 xl:grid-cols-6 gap-6"
           >
@@ -671,11 +666,10 @@ async function generateTimeline(myProfile) {
 
         <template v-if="myProfile.jubility">
           <SectionTitleLine
-            :icon="mdiChartBarStacked"
+            :icon="PhChartPieSlice"
             title="Jubility Breakdown"
             main
           />
-
           <div class="my-6 grid grid-cols-1 md:grid-cols-2 gap-6">
             <CardBox v-if="myProfile.pick_up_breakdown">
               <PillTag label="Pick-Up" color="info" />
@@ -697,12 +691,7 @@ async function generateTimeline(myProfile) {
         </template>
 
         <template v-if="myProfile?.trbitem">
-          <SectionTitleLine
-            :icon="mdiStickerOutline"
-            title="Sticker Board"
-            main
-          />
-
+          <SectionTitleLine :icon="PhSticker" title="Sticker Board" main />
           <div class="my-6">
             <CardBox class="w-full grid place-content-center">
               <UserSticker
@@ -720,11 +709,7 @@ async function generateTimeline(myProfile) {
             versionForm.currentVersion >= 29
           "
         >
-          <SectionTitleLine
-            :icon="mdiChartDonutVariant"
-            title="Notes Radar"
-            main
-          />
+          <SectionTitleLine :icon="PhTarget" title="Notes Radar" main />
           <UserNotesRadar
             :game="thisGame.id"
             :version="versionForm.currentVersion"
@@ -733,8 +718,7 @@ async function generateTimeline(myProfile) {
         </template>
 
         <template v-if="myProfile?.timeline">
-          <SectionTitleLine :icon="mdiChartTimeline" title="Timeline" main />
-
+          <SectionTitleLine :icon="PhCalendarDots" title="Timeline" main />
           <div class="my-6">
             <CardBox>
               <ol

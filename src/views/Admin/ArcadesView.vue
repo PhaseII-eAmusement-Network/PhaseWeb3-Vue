@@ -2,10 +2,10 @@
 import { ref, reactive, onMounted } from "vue";
 import { useRouter } from "vue-router";
 import {
-  mdiStoreOutline,
-  mdiStoreEditOutline,
-  mdiStorePlusOutline,
-} from "@mdi/js";
+  PhStorefront,
+  PhMagnifyingGlass,
+  PhPlusCircle,
+} from "@phosphor-icons/vue";
 import SectionMain from "@/components/SectionMain.vue";
 import CardBox from "@/components/CardBox.vue";
 import GeneralTable from "@/components/GeneralTable.vue";
@@ -133,7 +133,7 @@ async function findMachine() {
       </CardBox>
 
       <SectionTitleLine
-        :icon="mdiStoreEditOutline"
+        :icon="PhMagnifyingGlass"
         title="Search Arcades"
         color="text-amber-600"
         main
@@ -207,7 +207,7 @@ async function findMachine() {
       </div>
 
       <SectionTitleLine
-        :icon="mdiStoreOutline"
+        :icon="PhStorefront"
         title="All Arcades"
         color="text-blue-400"
         main
@@ -230,7 +230,7 @@ async function findMachine() {
       </CardBox>
 
       <SectionTitleLine
-        :icon="mdiStorePlusOutline"
+        :icon="PhPlusCircle"
         title="Create Arcade"
         color="text-emerald-600"
         main

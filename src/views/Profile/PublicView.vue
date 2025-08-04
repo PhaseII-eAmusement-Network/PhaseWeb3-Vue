@@ -2,18 +2,18 @@
 import { computed, ref, reactive, onMounted } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import {
-  mdiAccount,
-  mdiGamepad,
-  mdiChartTimelineVariant,
-  mdiCounter,
-  mdiGamepadOutline,
-  mdiFire,
-  mdiTrendingUp,
-  mdiShieldEditOutline,
-  mdiInformationOutline,
-  mdiMail,
-  mdiAsterisk,
-} from "@mdi/js";
+  PhUser,
+  PhJoystick,
+  PhTrendUp,
+  PhPlay,
+  PhFire,
+  PhMedal,
+  PhRanking,
+  PhUserGear,
+  PhInfo,
+  PhAt,
+  PhPassword,
+} from "@phosphor-icons/vue";
 import SectionMain from "@/components/SectionMain.vue";
 import CardBox from "@/components/CardBox.vue";
 import CardBoxWidget from "@/components/CardBoxWidget.vue";
@@ -183,56 +183,56 @@ const todayPlays = computed(() => {
 const cardBoxes = ref([
   {
     label: "Cumulative Plays",
-    icon: mdiCounter,
+    icon: PhPlay,
     iconColor: "text-emerald-600",
     suffix: "play",
     number: cumulativePlays,
   },
   {
     label: "Games Played",
-    icon: mdiGamepadOutline,
+    icon: PhJoystick,
     iconColor: "text-sky-300",
     suffix: "game",
     number: uniqueProfiles,
   },
   {
     label: "Plays Today",
-    icon: mdiCounter,
+    icon: PhPlay,
     iconColor: "text-sky-300",
     suffix: "play",
     number: todayPlays,
   },
   {
     label: "Longest Play Streak",
-    icon: mdiFire,
+    icon: PhFire,
     iconColor: "text-red-500",
     suffix: "play",
     number: longestStreak,
   },
   {
     label: "Total Records",
-    icon: mdiGamepadOutline,
-    iconColor: "text-sky-300",
+    icon: PhRanking,
+    iconColor: "text-amber-400",
     suffix: "record",
     number: totalRecords,
   },
   {
     label: "Total Attempts",
-    icon: mdiGamepadOutline,
-    iconColor: "text-sky-300",
+    icon: PhMedal,
+    iconColor: "text-pink-300",
     suffix: "attempt",
     number: totalAttempts,
   },
   {
     label: "Records Today",
-    icon: mdiGamepadOutline,
-    iconColor: "text-sky-300",
+    icon: PhRanking,
+    iconColor: "text-amber-400",
     suffix: "record",
     number: todayRecords,
   },
   {
     label: "Attempts Today",
-    icon: mdiGamepadOutline,
+    icon: PhMedal,
     iconColor: "text-sky-300",
     suffix: "attempt",
     number: todayAttempts,
@@ -284,7 +284,7 @@ const openArcade = (item) => {
     <SectionMain>
       <template v-if="userProfile !== null">
         <SectionTitleLine
-          :icon="mdiAccount"
+          :icon="PhUser"
           :title="`${userProfile.name}'s Profile`"
           main
         />
@@ -292,7 +292,7 @@ const openArcade = (item) => {
 
         <template v-if="mainStore.userAdmin">
           <SectionTitleLine
-            :icon="mdiShieldEditOutline"
+            :icon="PhUserGear"
             title="User Administration"
             main
           />
@@ -301,7 +301,7 @@ const openArcade = (item) => {
               <PillTag
                 color="info"
                 label="General Information"
-                :icon="mdiInformationOutline"
+                :icon="PhInfo"
                 class="mb-2"
               />
               <div class="grid md:grid-cols-2 gap-x-4 mb-6">
@@ -320,7 +320,7 @@ const openArcade = (item) => {
                 >
                   <FormControl
                     v-model="newUser.email"
-                    :icon="mdiMail"
+                    :icon="PhAt"
                     type="email"
                     name="email"
                     required
@@ -330,7 +330,7 @@ const openArcade = (item) => {
                 <FormField label="PIN" help="Used when logging into a game">
                   <FormControl
                     v-model="newUser.pin"
-                    :icon="mdiAsterisk"
+                    :icon="PhPassword"
                     type="password"
                     name="pin"
                     :minlength="4"
@@ -385,7 +385,7 @@ const openArcade = (item) => {
               <FormField label="New Password">
                 <FormControl
                   v-model="passwordForm.newPassword"
-                  :icon="mdiAsterisk"
+                  :icon="PhPassword"
                   name="newPassword"
                   type="password"
                   required
@@ -395,7 +395,7 @@ const openArcade = (item) => {
               <FormField label="Confirm Password">
                 <FormControl
                   v-model="passwordForm.confirmPassword"
-                  :icon="mdiAsterisk"
+                  :icon="PhPassword"
                   name="confirmPassword"
                   type="password"
                   required
@@ -414,7 +414,9 @@ const openArcade = (item) => {
                   :key="arcade.id"
                   class="bg-slate-800 p-4 rounded-xl"
                 >
-                  <div class="md:flex w-full place-content-between">
+                  <div
+                    class="grid grid-cols-1 gap-4 xl:flex w-full place-content-between"
+                  >
                     <div>
                       <h1 class="text-md md:text-lg">{{ arcade.name }}</h1>
                     </div>
@@ -433,11 +435,7 @@ const openArcade = (item) => {
           </div>
         </template>
 
-        <SectionTitleLine
-          :icon="mdiChartTimelineVariant"
-          title="Quick Stats"
-          main
-        />
+        <SectionTitleLine :icon="PhTrendUp" title="Quick Stats" main />
         <div
           class="grid grid-cols-2 sm:grid-cols-3 gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 3xl:grid-cols-5 mb-6"
         >
@@ -453,7 +451,7 @@ const openArcade = (item) => {
           </template>
         </div>
 
-        <SectionTitleLine :icon="mdiGamepad" title="Showcase" main />
+        <SectionTitleLine :icon="PhJoystick" title="Showcase" main />
         <div
           class="grid grid-flow-row auto-rows-auto grid-cols-2 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-3 3xl:grid-cols-4 4xl:grid-cols-6 gap-5 mb-5"
         >
@@ -468,7 +466,7 @@ const openArcade = (item) => {
           />
         </div>
 
-        <SectionTitleLine :icon="mdiTrendingUp" title="Play Trends" main />
+        <SectionTitleLine :icon="PhTrendUp" title="Play Trends" main />
         <CardBox class="mb-6">
           <div v-if="userProfiles">
             <LineChart

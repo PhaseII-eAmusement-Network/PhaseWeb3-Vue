@@ -1,6 +1,6 @@
 <script setup>
 import { reactive } from "vue";
-import { mdiStorefront } from "@mdi/js";
+import { PhStorefront } from "@phosphor-icons/vue";
 import SectionMain from "@/components/SectionMain.vue";
 import LayoutAuthenticated from "@/layouts/LayoutAuthenticated.vue";
 import SectionTitleLine from "@/components/SectionTitleLine.vue";
@@ -34,7 +34,7 @@ export default {
 <template>
   <LayoutAuthenticated>
     <SectionMain>
-      <SectionTitleLine :icon="mdiStorefront" title="Public Arcades" main />
+      <SectionTitleLine :icon="PhStorefront" title="Public Arcades" main />
 
       <FormField label="Search" class="md:w-1/2 lg:w-1/3">
         <FormControl v-model="filterForm.filter" name="search" />

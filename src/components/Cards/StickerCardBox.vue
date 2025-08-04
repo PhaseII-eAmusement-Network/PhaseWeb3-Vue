@@ -2,7 +2,7 @@
 import axios from "axios";
 import { watch, ref, reactive } from "vue";
 import { useRouter } from "vue-router";
-import { mdiLoading, mdiChevronDown, mdiChevronUp } from "@mdi/js";
+import { PhSpinnerBall, PhCaretDown, PhCaretUp } from "@phosphor-icons/vue";
 import BaseButton from "@/components/BaseButton.vue";
 import BaseIcon from "@/components/BaseIcon.vue";
 import CardBox from "@/components/CardBox.vue";
@@ -170,7 +170,7 @@ function toggleStickerCollapse(index) {
             <div class="flex justify-between items-center">
               <span class="text-lg">Sticker {{ index + 1 }}</span>
               <BaseButton
-                :icon="collapsedStickers[index] ? mdiChevronDown : mdiChevronUp"
+                :icon="collapsedStickers[index] ? PhCaretDown : PhCaretUp"
                 color="info"
                 @click="toggleStickerCollapse(index)"
               />
@@ -264,7 +264,7 @@ function toggleStickerCollapse(index) {
         />
         <BaseIcon
           v-if="loading"
-          :path="mdiLoading"
+          :icon="PhSpinnerBall"
           color="text-yellow-500"
           class="animate animate-spin"
         />

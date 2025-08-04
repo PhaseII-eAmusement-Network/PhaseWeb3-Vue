@@ -1,6 +1,6 @@
 <script setup>
 import { ref, reactive, onMounted } from "vue";
-import { mdiCloudKeyOutline, mdiKeyPlus } from "@mdi/js";
+import { PhDatabase, PhKey } from "@phosphor-icons/vue";
 import SectionMain from "@/components/SectionMain.vue";
 import CardBox from "@/components/CardBox.vue";
 import GeneralTable from "@/components/GeneralTable.vue";
@@ -89,7 +89,7 @@ const copyToClipboard = (item) => {
       </CardBox>
 
       <SectionTitleLine
-        :icon="mdiCloudKeyOutline"
+        :icon="PhDatabase"
         title="All Active Clients"
         color="text-blue-400"
         main
@@ -113,7 +113,7 @@ const copyToClipboard = (item) => {
       </CardBox>
 
       <SectionTitleLine
-        :icon="mdiKeyPlus"
+        :icon="PhKey"
         title="Create New Client"
         color="text-emerald-600"
         main

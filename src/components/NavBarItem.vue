@@ -1,5 +1,5 @@
 <script setup>
-import { mdiChevronUp, mdiChevronDown } from "@mdi/js";
+import { PhCaretUp } from "@phosphor-icons/vue";
 import { RouterLink } from "vue-router";
 import { computed, ref, onMounted, onBeforeUnmount } from "vue";
 import { useStyleStore } from "@/stores/style.js";
@@ -110,7 +110,12 @@ onBeforeUnmount(() => {
         v-if="item.isCurrentUser"
         class="w-6 h-6 mr-3 inline-flex"
       />
-      <BaseIcon v-if="item.icon" :path="item.icon" class="transition-colors" />
+      <BaseIcon
+        v-if="item.icon"
+        :icon="item.icon"
+        :fill="item.fill ?? 'duotone'"
+        class="transition-colors"
+      />
       <span
         class="px-2 transition-colors"
         :class="{ 'lg:hidden': item.isDesktopNoLabel && item.icon }"
@@ -118,8 +123,11 @@ onBeforeUnmount(() => {
       >
       <BaseIcon
         v-if="item.menu"
-        :path="isDropdownActive ? mdiChevronUp : mdiChevronDown"
-        class="hidden lg:inline-flex transition-colors"
+        :icon="PhCaretUp"
+        :size="18"
+        fill="regular"
+        class="flex-none transition-transform duration-150 ease-in-out invisible lg:visible"
+        :class="[isDropdownActive ? 'rotate-0' : 'rotate-180']"
       />
     </div>
     <div

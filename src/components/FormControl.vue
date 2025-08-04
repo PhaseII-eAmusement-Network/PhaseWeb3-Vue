@@ -41,7 +41,7 @@ const props = defineProps({
     default: null,
   },
   icon: {
-    type: String,
+    type: Object,
     default: null,
   },
   options: {

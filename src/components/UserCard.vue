@@ -3,21 +3,21 @@ import { ref } from "vue";
 import { useMainStore } from "@/stores/main";
 import { RoleConstants } from "@/constants/discordRoles";
 import {
-  mdiSecurity,
-  mdiTestTube,
-  mdiAccountStar,
-  mdiAccountOff,
-  mdiFlowerPoppy,
-  mdiSharkFinOutline,
-  mdiHandCoinOutline,
-  mdiAccountTieHat,
-  mdiAccountTie,
-  mdiHeartMultipleOutline,
-  mdiCheckDecagramOutline,
-  mdiLinkBoxVariantOutline,
-  mdiAccountCheck,
-  mdiGavel,
-} from "@mdi/js";
+  PhCrown,
+  PhTestTube,
+  PhShieldStar,
+  PhEyeSlash,
+  PhFlower,
+  PhFish,
+  PhHandCoins,
+  PhShieldChevron,
+  PhBracketsCurly,
+  PhHandHeart,
+  PhSealCheck,
+  PhShrimp,
+  PhUserCheck,
+  PhGavel,
+} from "@phosphor-icons/vue";
 import BaseLevel from "@/components/BaseLevel.vue";
 import UserAvatar from "@/components/UserAvatar.vue";
 import CardBox from "@/components/CardBox.vue";
@@ -151,105 +151,100 @@ function getCardStyle() {
             v-if="cardData.userAdmin"
             label="System Admin"
             color="danger"
-            :icon="mdiSecurity"
+            :icon="PhCrown"
             small
           />
           <PillTag
             v-if="cardData.userBanned"
             label="Banned"
             color="danger"
-            :icon="mdiGavel"
+            :icon="PhGavel"
             small
           />
           <PillTag
             v-if="cardData.userId < 300"
             label="Veteran"
             color="success"
-            :icon="mdiAccountStar"
+            :icon="PhShieldStar"
             small
           />
           <PillTag
             v-if="!cardData.userPublic"
             label="Private Profile"
             color="info"
-            :icon="mdiAccountOff"
+            :icon="PhEyeSlash"
             small
           />
           <PillTag
             v-if="cardData.userPublic"
             label="Public Profile"
             color="success"
-            :icon="mdiAccountCheck"
+            :icon="PhUserCheck"
             small
           />
           <PillTag
             v-if="cardData.discordRoles?.includes(RoleConstants.PLAYER)"
             label="Verified"
             color="success"
-            :icon="mdiCheckDecagramOutline"
+            :icon="PhSealCheck"
             small
           />
           <PillTag
             v-if="cardData.discordRoles?.includes(RoleConstants.JACKASS)"
             label="Jackass"
             color="slight_danger"
-            :icon="mdiHeartMultipleOutline"
+            :icon="PhHandHeart"
             small
           />
           <PillTag
             v-if="cardData.discordRoles?.includes(RoleConstants.DEVELOPER)"
             label="Developer"
             color="success"
-            :icon="mdiAccountTie"
+            :icon="PhBracketsCurly"
             small
           />
           <PillTag
             v-if="cardData.discordRoles?.includes(RoleConstants.MODERATOR)"
             label="Moderator"
             color="slight_danger"
-            :icon="mdiAccountTieHat"
+            :icon="PhShieldChevron"
             small
           />
           <PillTag
             v-if="cardData.discordRoles?.includes(RoleConstants.BETA_TESTER)"
             label="Beta Tester"
             color="warning"
-            :icon="mdiTestTube"
+            :icon="PhTestTube"
             small
           />
           <PillTag
             v-if="cardData.discordRoles?.includes(RoleConstants.DONOR)"
             label="Donor"
             color="gold"
-            :icon="mdiHandCoinOutline"
+            :icon="PhHandCoins"
             small
           />
           <PillTag
             v-if="cardData.discordRoles?.includes(RoleConstants.BLAHAJ)"
             label="Blåhaj"
             color="info"
-            :icon="mdiSharkFinOutline"
+            :icon="PhFish"
             small
           />
           <PillTag
             v-if="cardData.discordRoles?.includes(RoleConstants.RHYTHM_RIOT)"
             label="Rhythm Riot"
             color="sakura"
-            :icon="mdiFlowerPoppy"
+            :icon="PhFlower"
             small
           />
           <PillTag
             v-if="cardData.userCustomize?.shrimpLinks"
             label="Shrimp Links"
             color="sakura"
-            :icon="mdiLinkBoxVariantOutline"
+            :icon="PhShrimp"
             small
           />
-          <!-- <PillTag
-            label="Public Profile"
-            color="success"
-            :icon="mdiAccountCheck"
-          /> -->
         </div>
       </div>
       <div

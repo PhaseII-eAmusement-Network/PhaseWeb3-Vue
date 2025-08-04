@@ -1,6 +1,6 @@
 <script setup>
 import { computed } from "vue";
-import { mdiClose } from "@mdi/js";
+import { PhXSquare } from "@phosphor-icons/vue";
 import BaseButton from "@/components/BaseButton.vue";
 import BaseButtons from "@/components/BaseButtons.vue";
 import CardBox from "@/components/CardBox.vue";
@@ -60,7 +60,7 @@ window.addEventListener("keydown", (e) => {
       <CardBoxComponentTitle :title="title">
         <BaseButton
           v-if="hasCancel"
-          :icon="mdiClose"
+          :icon="PhXSquare"
           color="whiteDark"
           small
           rounded-full

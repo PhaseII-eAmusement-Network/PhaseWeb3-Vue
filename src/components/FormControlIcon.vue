@@ -3,7 +3,7 @@ import BaseIcon from "@/components/BaseIcon.vue";
 
 defineProps({
   icon: {
-    type: String,
+    type: Object,
     default: null,
   },
   h: {
@@ -15,7 +15,7 @@ defineProps({
 
 <template>
   <BaseIcon
-    :path="icon"
+    :icon="icon"
     w="w-10"
     :h="h"
     class="absolute top-0 left-0 z-10 pointer-events-none text-gray-500 dark:text-slate-400"

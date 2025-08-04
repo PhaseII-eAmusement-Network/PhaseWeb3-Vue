@@ -1,7 +1,7 @@
 <script setup>
 import { reactive, onMounted, watch, ref } from "vue";
 import { useRoute, useRouter } from "vue-router";
-import { mdiAccountTieHat } from "@mdi/js";
+import { PhUserGear } from "@phosphor-icons/vue";
 import SectionMain from "@/components/SectionMain.vue";
 import CardBox from "@/components/CardBox.vue";
 import BaseButton from "@/components/BaseButton.vue";
@@ -141,7 +141,6 @@ async function updateProfile() {
             :game="gameID"
             :version="versionForm.currentVersion"
             :profile="myProfile"
-            use-small
           >
           </ProfileCard>
         </div>
@@ -149,7 +148,7 @@ async function updateProfile() {
 
       <SectionTitleLine
         v-if="versionForm.currentVersion"
-        :icon="mdiAccountTieHat"
+        :icon="PhUserGear"
         title="Profile Customizations"
         main
       />

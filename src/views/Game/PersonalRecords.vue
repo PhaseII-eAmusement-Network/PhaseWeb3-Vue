@@ -1,7 +1,7 @@
 <script setup>
 import { ref, onMounted, reactive, computed } from "vue";
 import { useRoute, useRouter } from "vue-router";
-import { mdiFormatListNumbered } from "@mdi/js";
+import { PhRanking, PhUser, PhMedal } from "@phosphor-icons/vue";
 import SectionMain from "@/components/SectionMain.vue";
 import LayoutAuthenticated from "@/layouts/LayoutAuthenticated.vue";
 import SectionTitleLine from "@/components/SectionTitleLine.vue";
@@ -89,16 +89,16 @@ const filteredSongs = computed(() => {
     <SectionMain v-if="songData">
       <template v-if="myProfile">
         <GameHeader :game="thisGame" :profile="myProfile" />
-        <div class="flex gap-2 mb-2 md:mb-0">
+        <div class="flex gap-2 mb-6 md:mb-0">
           <BaseButton
-            :icon="mdiAccountDetails"
+            :icon="PhUser"
             :href="`/#/games/${thisGame.id}/profiles/${myProfile.userId}`"
             :outline="false"
             color="info"
             :label="`${myProfile.username}'s Profile`"
           />
           <BaseButton
-            :icon="mdiAccountDetails"
+            :icon="PhMedal"
             :href="`/#/games/${thisGame.id}/scores/${myProfile.userId}`"
             :outline="false"
             color="info"
@@ -106,7 +106,7 @@ const filteredSongs = computed(() => {
           />
         </div>
         <SectionTitleLine
-          :icon="mdiFormatListNumbered"
+          :icon="PhRanking"
           :title="`${myProfile.username}'s ${
             thisGame.shortName ? thisGame.shortName : thisGame.name
           } Records`"

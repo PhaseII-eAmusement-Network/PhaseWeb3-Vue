@@ -2,11 +2,12 @@
 import { ref, reactive, onMounted } from "vue";
 import { useRouter } from "vue-router";
 import {
-  mdiNewspaper,
-  mdiNewspaperVariantMultipleOutline,
-  mdiNewspaperMinus,
-  mdiNewspaperPlus,
-} from "@mdi/js";
+  PhNewspaperClipping,
+  PhNewspaper,
+  PhPlusCircle,
+  PhMinusCircle,
+  PhPencilCircle,
+} from "@phosphor-icons/vue";
 import SectionMain from "@/components/SectionMain.vue";
 import CardBox from "@/components/CardBox.vue";
 import GeneralTable from "@/components/GeneralTable.vue";
@@ -145,7 +146,7 @@ function getSelectedNews(newsId) {
       </CardBox>
 
       <SectionTitleLine
-        :icon="mdiNewspaper"
+        :icon="PhNewspaperClipping"
         title="Post Management"
         color="text-emerald-600"
         main
@@ -156,7 +157,7 @@ function getSelectedNews(newsId) {
           <PillTag
             color="success"
             label="Create Post"
-            :icon="mdiNewspaperPlus"
+            :icon="PhPlusCircle"
             class="mb-2"
           />
 
@@ -176,6 +177,7 @@ function getSelectedNews(newsId) {
               color="success"
               label="Create"
               :small="false"
+              :icon="PhPlusCircle"
             />
           </div>
         </CardBox>
@@ -184,7 +186,7 @@ function getSelectedNews(newsId) {
           <PillTag
             color="warning"
             label="Edit Post"
-            :icon="mdiNewspaperMinus"
+            :icon="PhMinusCircle"
             class="mb-2"
           />
           <FormField label="Post">
@@ -216,7 +218,7 @@ function getSelectedNews(newsId) {
                 color="info"
                 label="Update"
                 :small="false"
-                :icon="mdiNewspaper"
+                :icon="PhPencilCircle"
                 @click="updateNews()"
               />
 
@@ -224,7 +226,7 @@ function getSelectedNews(newsId) {
                 color="danger"
                 label="Delete Post"
                 :small="false"
-                :icon="mdiNewspaperMinus"
+                :icon="PhMinusCircle"
                 @click="deleteNews()"
               />
             </BaseButtons>
@@ -233,7 +235,7 @@ function getSelectedNews(newsId) {
       </div>
 
       <SectionTitleLine
-        :icon="mdiNewspaperVariantMultipleOutline"
+        :icon="PhNewspaper"
         title="All News"
         color="text-blue-400"
         main

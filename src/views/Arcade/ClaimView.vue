@@ -1,11 +1,12 @@
 <script setup>
 import { ref, reactive } from "vue";
 import {
-  mdiStorePlus,
-  mdiScriptTextKeyOutline,
-  mdiLoading,
-  mdiAccountConvertOutline,
-} from "@mdi/js";
+  PhSpinnerBall,
+  PhUnite,
+  PhTextbox,
+  PhStorefront,
+  PhQuestion,
+} from "@phosphor-icons/vue";
 import SectionMain from "@/components/SectionMain.vue";
 import BaseButton from "@/components/BaseButton.vue";
 import BaseIcon from "@/components/BaseIcon.vue";
@@ -56,7 +57,7 @@ async function saveSettings() {
       <UserCard class="mb-6" use-small even-smaller />
 
       <template v-if="!takeoverData">
-        <SectionTitleLine :icon="mdiStorePlus" title="Claim an Arcade" main />
+        <SectionTitleLine :icon="PhStorefront" title="Claim an Arcade" main />
         <CardBox
           is-form
           class="row-span-2 mb-6"
@@ -73,7 +74,7 @@ async function saveSettings() {
           >
             <FormControl
               v-model="arcadeForm.PCBID"
-              :icon="mdiScriptTextKeyOutline"
+              :icon="PhTextbox"
               name="cardId"
               type="pcbid"
               placeholder="XXXXXXXXXXXXXXXXX"
@@ -87,7 +88,7 @@ async function saveSettings() {
             <BaseButton type="submit" color="success" label="Start Claim" />
             <BaseIcon
               v-if="cardLoading"
-              :path="mdiLoading"
+              :icon="PhSpinnerBall"
               color="text-yellow-500"
               class="animate animate-spin"
             />
@@ -96,7 +97,7 @@ async function saveSettings() {
       </template>
 
       <div v-if="takeoverData && saveState == null">
-        <SectionTitleLine :icon="mdiStorePlus" title="Confirm Merge" main />
+        <SectionTitleLine :icon="PhQuestion" title="Confirm Merge" main />
         <CardBox>
           <h2 class="text-2xl font-bold">
             {{ takeoverData?.arcade?.name }}
@@ -120,11 +121,7 @@ async function saveSettings() {
       </div>
 
       <div v-if="saveState == true">
-        <SectionTitleLine
-          :icon="mdiAccountConvertOutline"
-          title="Takeover Results"
-          main
-        />
+        <SectionTitleLine :icon="PhUnite" title="Takeover Results" main />
 
         <CardBox>
           <h2 class="text-xl mb-6">
@@ -142,14 +139,10 @@ async function saveSettings() {
       </div>
 
       <div v-if="saveState == false">
-        <SectionTitleLine
-          :icon="mdiAccountConvertOutline"
-          title="Merge Results"
-          main
-        />
+        <SectionTitleLine :icon="PhUnite" title="Takeover Results" main />
 
         <CardBox>
-          <h2 class="text-xl mb-6">❌ Failed to merge. Please try again.</h2>
+          <h2 class="text-xl mb-6">❌ Failed to takeover. Please try again.</h2>
 
           <div class="mt-4">
             <BaseButton color="warning" label="Retry" @click="saveSettings" />

@@ -7,7 +7,7 @@ defineProps({
     required: true,
   },
   icon: {
-    type: String,
+    type: Object,
     default: null,
   },
   small: Boolean,
@@ -21,7 +21,7 @@ defineProps({
   >
     <BaseIcon
       v-if="icon"
-      :path="icon"
+      :icon="icon"
       h="h-4"
       w="w-4"
       :class="small ? 'mr-1' : 'mr-2'"

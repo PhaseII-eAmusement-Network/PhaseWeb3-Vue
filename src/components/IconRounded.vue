@@ -4,7 +4,7 @@ import BaseIcon from "@/components/BaseIcon.vue";
 
 const props = defineProps({
   icon: {
-    type: String,
+    type: Object,
     required: true,
   },
   iconColor: {
@@ -34,7 +34,7 @@ const spanColor = computed(() => props.iconColor);
 
 <template>
   <BaseIcon
-    :path="icon"
+    :icon="icon"
     :w="w"
     :h="h"
     :color="spanColor"

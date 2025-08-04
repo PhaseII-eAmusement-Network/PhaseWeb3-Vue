@@ -2,14 +2,12 @@
 import { useRoute, useRouter } from "vue-router";
 import { ref, onMounted, watch } from "vue";
 import {
-  mdiStore,
-  mdiStoreCog,
-  mdiCogOutline,
-  mdiShieldEditOutline,
-  mdiCheckOutline,
-  mdiCloseOutline,
-  mdiInformationOutline,
-} from "@mdi/js";
+  PhStorefront,
+  PhGear,
+  PhCheckCircle,
+  PhXCircle,
+  PhInfo,
+} from "@phosphor-icons/vue";
 import SectionMain from "@/components/SectionMain.vue";
 import LayoutAuthenticated from "@/layouts/LayoutAuthenticated.vue";
 import SectionTitleLine from "@/components/SectionTitleLine.vue";
@@ -248,11 +246,7 @@ async function adminDeleteArcade() {
         <ArcadeCard class="mb-6" :arcade="arcadeData" />
 
         <template v-if="mainStore.userAdmin">
-          <SectionTitleLine
-            :icon="mdiShieldEditOutline"
-            title="Arcade Administration"
-            main
-          />
+          <SectionTitleLine :icon="PhGear" title="Arcade Administration" main />
           <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
             <CardBox
               is-form
@@ -262,7 +256,7 @@ async function adminDeleteArcade() {
               <PillTag
                 color="info"
                 label="General Information"
-                :icon="mdiInformationOutline"
+                :icon="PhInfo"
                 class="mb-2"
               />
               <FormField label="Arcade Name">
@@ -282,13 +276,13 @@ async function adminDeleteArcade() {
                 />
                 <BaseIcon
                   v-if="arcadeCheck == true"
-                  :path="mdiCheckOutline"
+                  :icon="PhCheckCircle"
                   color="text-green-400"
                   size="25"
                 />
                 <BaseIcon
                   v-else-if="arcadeCheck == false"
-                  :path="mdiCloseOutline"
+                  :icon="PhXCircle"
                   color="text-red-400"
                   size="25"
                 />
@@ -336,7 +330,7 @@ async function adminDeleteArcade() {
                 <PillTag
                   color="info"
                   label="Add Manager"
-                  :icon="mdiInformationOutline"
+                  :icon="PhInfo"
                   class="mb-2"
                 />
                 <form class="h-full" @submit.prevent="addManager">
@@ -392,14 +386,9 @@ async function adminDeleteArcade() {
           </div>
         </template>
 
-        <SectionTitleLine :icon="mdiStoreCog" title="Arcade Management" main />
+        <SectionTitleLine :icon="PhGear" title="Arcade Management" main />
         <CardBox is-form class="mb-6" @submit.prevent="updateArcade">
-          <PillTag
-            color="info"
-            label="Settings"
-            :icon="mdiCogOutline"
-            class="mb-2"
-          />
+          <PillTag color="info" label="Settings" :icon="PhGear" class="mb-2" />
           <div
             class="grid grid-cols-1 w-full gap-2 md:gap-6 md:flex md:place-content-stretch"
           >
@@ -447,7 +436,7 @@ async function adminDeleteArcade() {
           />
         </CardBox>
 
-        <SectionTitleLine :icon="mdiStore" title="Arcade Overview" main />
+        <SectionTitleLine :icon="PhStorefront" title="Arcade Overview" main />
 
         <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 mb-6">
           <CardBoxWidget

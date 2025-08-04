@@ -1,5 +1,5 @@
 <script setup>
-import { mdiUpload } from "@mdi/js";
+import { PhUpload } from "@phosphor-icons/vue";
 import { computed, ref, watch } from "vue";
 import BaseButton from "@/components/BaseButton.vue";
 
@@ -13,8 +13,8 @@ const props = defineProps({
     default: null,
   },
   icon: {
-    type: String,
-    default: mdiUpload,
+    type: Object,
+    default: PhUpload,
   },
   accept: {
     type: String,

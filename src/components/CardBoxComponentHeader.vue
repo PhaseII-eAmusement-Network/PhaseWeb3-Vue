@@ -7,11 +7,11 @@ defineProps({
     required: true,
   },
   icon: {
-    type: String,
+    type: Object,
     default: null,
   },
   buttonIcon: {
-    type: String,
+    type: Object,
     default: null,
   },
 });
@@ -31,7 +31,7 @@ const buttonClick = (event) => {
       class="flex items-center py-3 grow font-bold"
       :class="[icon ? 'px-4' : 'px-6']"
     >
-      <BaseIcon v-if="icon" :path="icon" class="mr-3" />
+      <BaseIcon v-if="icon" :icon="icon" class="mr-3" />
       {{ title }}
     </div>
     <button
@@ -39,7 +39,7 @@ const buttonClick = (event) => {
       class="flex items-center p-2 justify-center ring-blue-700 focus:ring"
       @click="buttonClick"
     >
-      <BaseIcon :path="buttonIcon" />
+      <BaseIcon :icon="buttonIcon" />
     </button>
   </header>
 </template>

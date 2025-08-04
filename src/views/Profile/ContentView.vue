@@ -1,6 +1,6 @@
 <script setup>
 import { ref, onMounted } from "vue";
-import { mdiFileUploadOutline } from "@mdi/js";
+import { PhFileImage } from "@phosphor-icons/vue";
 import SectionMain from "@/components/SectionMain.vue";
 import CardBox from "@/components/CardBox.vue";
 import GameIcon from "@/components/GameIcon.vue";
@@ -57,11 +57,7 @@ function filterContent(data) {
       <UserCard class="mb-6" use-small even-smaller />
 
       <template v-if="contentData">
-        <SectionTitleLine
-          :icon="mdiFileUploadOutline"
-          title="Your Uploads"
-          main
-        />
+        <SectionTitleLine :icon="PhFileImage" title="Your Uploads" main />
         <CardBox
           v-for="content of contentData"
           :key="content.timestamp"

@@ -2,7 +2,7 @@
 import { useMainStore } from "@/stores/main";
 import { ref, watch } from "vue";
 import { useRoute, useRouter } from "vue-router";
-import { mdiServerNetwork, mdiMessage, mdiScoreboard } from "@mdi/js";
+import { PhCloud, PhDiscordLogo, PhRanking } from "@phosphor-icons/vue";
 import SectionMain from "@/components/SectionMain.vue";
 import CardBox from "@/components/CardBox.vue";
 import BaseButton from "@/components/BaseButton.vue";
@@ -42,7 +42,7 @@ const services = [
   {
     id: "discord",
     name: "Discord",
-    icon: mdiMessage,
+    icon: PhDiscordLogo,
     oAuth: DISCORD_OAUTH_URL,
     description:
       "Linking your Discord account to PhaseII gives you an avatar, enables push notifications, and more via our Discord bot, BadManiac.\n\nPhaseII *does not* use Discord's API aside from the initial linkage. All data PhaseII uses is sent via our bot.\n\nNo data aside from your avatar, User ID, and name is saved.\n\nWe do not save a token nor a cookie.",
@@ -50,7 +50,7 @@ const services = [
   {
     id: "tachi",
     name: "Kamaitachi",
-    icon: mdiScoreboard,
+    icon: PhRanking,
     oAuth: TACHI_OAUTH_URL,
     description:
       "Kamaitachi is an open source score tracker using standardized schemas.\n\nLinking Kamaitachi to PhaseII will enable the uploading of all supported scores to Kamaitachi directly, with no user intervention.\n\nYou must follow all rules of Kamaitachi. Failure to adhere to rules will not only put your Kamaitachi account at risk, but also your PhaseII account.\n\nCurrently supported games:\n- DDR\n- IIDX\n- SDVX\n- pop'n (some versions)\n- jubeat",
@@ -91,12 +91,8 @@ async function integrateWith(service, code) {
   <LayoutAuthenticated>
     <SectionMain>
       <UserCard class="mb-6" use-small even-smaller />
-      <SectionTitleLine
-        :icon="mdiServerNetwork"
-        title="Server Integrations"
-        main
-      />
 
+      <SectionTitleLine :icon="PhCloud" title="Service Integrations" main />
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
         <CardBox v-for="service of services" :key="service.id">
           <PillTag

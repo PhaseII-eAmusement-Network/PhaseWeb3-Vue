@@ -1,6 +1,6 @@
 <script setup>
 import { computed } from "vue";
-import { mdiChevronUp, mdiChevronDown, mdiAlertCircleOutline } from "@mdi/js";
+import { PhCaretUp, PhCaretDown, PhWarningCircle } from "@phosphor-icons/vue";
 import PillTag from "@/components/PillTag.vue";
 
 const props = defineProps({
@@ -18,21 +18,21 @@ const props = defineProps({
 const trendStyle = computed(() => {
   if (props.trendType === "up") {
     return {
-      icon: mdiChevronUp,
+      icon: PhCaretUp,
       style: "success",
     };
   }
 
   if (props.trendType === "down") {
     return {
-      icon: mdiChevronDown,
+      icon: PhCaretDown,
       style: "danger",
     };
   }
 
   if (props.trendType === "alert") {
     return {
-      icon: mdiAlertCircleOutline,
+      icon: PhWarningCircle,
       style: "warning",
     };
   }

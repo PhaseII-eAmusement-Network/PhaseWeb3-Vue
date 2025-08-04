@@ -1,6 +1,6 @@
 <script setup>
 import { ref, reactive, onMounted } from "vue";
-import { mdiWrenchCogOutline, mdiWrenchClock } from "@mdi/js";
+import { PhWrench, PhClockCountdown } from "@phosphor-icons/vue";
 import SectionMain from "@/components/SectionMain.vue";
 import CardBox from "@/components/CardBox.vue";
 import GeneralTable from "@/components/GeneralTable.vue";
@@ -92,7 +92,7 @@ async function enterMaintenance() {
       </CardBox>
 
       <SectionTitleLine
-        :icon="mdiWrenchCogOutline"
+        :icon="PhWrench"
         title="Recent Maintenance Periods"
         color="text-blue-400"
         main
@@ -109,7 +109,7 @@ async function enterMaintenance() {
       </CardBox>
 
       <SectionTitleLine
-        :icon="mdiWrenchClock"
+        :icon="PhClockCountdown"
         title="Create Maintenance Period"
         color="text-yellow-600"
         main

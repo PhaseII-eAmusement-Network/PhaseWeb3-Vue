@@ -1,7 +1,7 @@
 <script setup>
 import { reactive, ref, onMounted, watch } from "vue";
 import { useRoute, useRouter } from "vue-router";
-import { mdiAccountMultiple } from "@mdi/js";
+import { PhUsersThree } from "@phosphor-icons/vue";
 import SectionMain from "@/components/SectionMain.vue";
 import GameHeader from "@/components/Cards/GameHeader.vue";
 import SectionTitleLine from "@/components/SectionTitleLine.vue";
@@ -173,13 +173,12 @@ const navigateToProfile = (item) => {
             :game="gameID"
             :version="versionForm.currentVersion"
             :profile="myProfile"
-            use-small
           >
           </ProfileCard>
         </div>
       </GameHeader>
 
-      <SectionTitleLine :icon="mdiAccountMultiple" title="All Players" main />
+      <SectionTitleLine :icon="PhUsersThree" title="All Players" main />
       <CardBox has-table>
         <div
           class="bg-white dark:bg-slate-900/95 rounded-2xl lg:flex lg:justify-between"

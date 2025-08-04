@@ -2,7 +2,7 @@
 import axios from "axios";
 import { watch, ref, reactive } from "vue";
 import { useRouter } from "vue-router";
-import { mdiLoading } from "@mdi/js";
+import { PhSpinnerBall } from "@phosphor-icons/vue";
 import BaseButton from "@/components/BaseButton.vue";
 import BaseIcon from "@/components/BaseIcon.vue";
 import CardBox from "@/components/CardBox.vue";
@@ -160,7 +160,7 @@ function revert() {
         />
         <BaseIcon
           v-if="loading"
-          :path="mdiLoading"
+          :icon="PhSpinnerBall"
           color="text-yellow-500"
           class="animate animate-spin"
         />

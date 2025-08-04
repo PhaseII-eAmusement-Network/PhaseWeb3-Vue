@@ -1,7 +1,7 @@
 <script setup>
 import { ref, onMounted, reactive, computed } from "vue";
 import { useRoute, useRouter } from "vue-router";
-import { mdiFormatListNumbered } from "@mdi/js";
+import { PhRanking } from "@phosphor-icons/vue";
 import SectionMain from "@/components/SectionMain.vue";
 import LayoutAuthenticated from "@/layouts/LayoutAuthenticated.vue";
 import SectionTitleLine from "@/components/SectionTitleLine.vue";
@@ -64,7 +64,7 @@ const filteredSongs = computed(() => {
   <LayoutAuthenticated>
     <SectionMain v-if="songData">
       <GameHeader :game="thisGame" />
-      <SectionTitleLine :icon="mdiFormatListNumbered" title="Top Records" main>
+      <SectionTitleLine :icon="PhRanking" title="Top Records" main>
         <template v-if="thisGame.versions">
           <div class="md:w-1/3 md:text-right">
             <h2 class="text-md sm:text-lg md:text-xl font-bold p-2">

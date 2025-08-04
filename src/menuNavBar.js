@@ -1,45 +1,46 @@
 import {
-  mdiAccount,
-  mdiLogout,
-  mdiBrushVariant,
-  mdiServerNetwork,
-  mdiCardAccountDetailsOutline,
-  mdiAccountArrowLeftOutline,
-} from "@mdi/js";
+  PhUser,
+  PhSignOut,
+  PhPaintBrushBroad,
+  PhCloud,
+  PhIdentificationCard,
+  PhUserSwitch,
+} from "@phosphor-icons/vue";
 
 export default [
   {
     isCurrentUser: true,
     menu: [
       {
-        icon: mdiAccount,
+        icon: PhUser,
         label: "Settings",
         to: "/profile",
       },
       {
-        icon: mdiBrushVariant,
+        icon: PhPaintBrushBroad,
         label: "Customize",
         to: "/profile/customize",
       },
       {
-        icon: mdiServerNetwork,
+        icon: PhCloud,
         label: "Integrations",
         to: "/profile/integrate",
       },
       {
-        icon: mdiCardAccountDetailsOutline,
+        icon: PhIdentificationCard,
         label: "Login Cards",
         to: "/profile/cards",
       },
       {
-        icon: mdiAccountArrowLeftOutline,
+        icon: PhUserSwitch,
         label: "Claim Profile",
         to: "/profile/claim",
       },
     ],
   },
   {
-    icon: mdiLogout,
+    icon: PhSignOut,
+    fill: "regular",
     label: "Log out",
     isLogout: true,
   },

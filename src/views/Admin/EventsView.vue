@@ -1,6 +1,6 @@
 <script setup>
 import { ref, onMounted } from "vue";
-import { mdiFlagCheckered, mdiCashEdit, mdiExclamationThick } from "@mdi/js";
+import { PhFlagCheckered, PhCashRegister, PhSiren } from "@phosphor-icons/vue";
 import SectionMain from "@/components/SectionMain.vue";
 import CardBox from "@/components/CardBox.vue";
 import LayoutAuthenticated from "@/layouts/LayoutAuthenticated.vue";
@@ -204,7 +204,7 @@ function extractExceptionData(xmlString) {
         </CardBox>
 
         <SectionTitleLine
-          :icon="mdiExclamationThick"
+          :icon="PhSiren"
           title="Recent Tracebacks"
           color="text-red-400"
           main
@@ -223,7 +223,7 @@ function extractExceptionData(xmlString) {
         </CardBox>
 
         <SectionTitleLine
-          :icon="mdiFlagCheckered"
+          :icon="PhFlagCheckered"
           title="Recent PCB Events"
           color="text-amber-400"
           main
@@ -242,7 +242,7 @@ function extractExceptionData(xmlString) {
         </CardBox>
 
         <SectionTitleLine
-          :icon="mdiCashEdit"
+          :icon="PhCashRegister"
           title="Recent PASELI Transactions"
           color="text-emerald-400"
           main

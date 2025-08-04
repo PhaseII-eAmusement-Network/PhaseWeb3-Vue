@@ -5,7 +5,7 @@ import CardBox from "@/components/CardBox.vue";
 import OverlayLayer from "@/components/OverlayLayer.vue";
 import BaseButton from "@/components/BaseButton.vue";
 import BaseIcon from "@/components/BaseIcon.vue";
-import { mdiSourceBranchRefresh } from "@mdi/js";
+import { PhSparkle } from "@phosphor-icons/vue";
 import { APIUserAppUpdate, APIUserCustomize } from "@/stores/api/account";
 
 import { useMainStore } from "@/stores/main.js";
@@ -80,7 +80,7 @@ async function updateUserData(disable = false) {
         <div class="grid text-center justify-center grid-cols-1 gap-3">
           <div class="place-self-center">
             <BaseIcon
-              :path="mdiSourceBranchRefresh"
+              :icon="PhSparkle"
               class="text-emerald-600"
               w="w-20"
               :size="45"

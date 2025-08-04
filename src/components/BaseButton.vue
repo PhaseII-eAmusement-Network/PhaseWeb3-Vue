@@ -4,6 +4,7 @@ import { RouterLink } from "vue-router";
 import { getButtonColor } from "@/colors.js";
 import BaseIcon from "@/components/BaseIcon.vue";
 import { useMainStore } from "@/stores/main";
+import { PhShrimp } from "@phosphor-icons/vue";
 
 const props = defineProps({
   label: {
@@ -11,7 +12,7 @@ const props = defineProps({
     default: null,
   },
   icon: {
-    type: String,
+    type: Object,
     default: null,
   },
   iconSize: {
@@ -146,7 +147,13 @@ const mainStore = useMainStore();
     >
       {{ tooltip }}
     </div>
-    <BaseIcon v-if="icon" :path="icon" :size="iconSize" />
+
+    <template v-if="mainStore?.userCustomize?.shrimpLinks">
+      <BaseIcon :icon="PhShrimp" :size="iconSize" />
+    </template>
+    <template v-else>
+      <BaseIcon v-if="icon" :icon="icon" :size="iconSize" />
+    </template>
     <span v-if="label" :class="labelClass">{{
       mainStore.userCustomize.shrimpLinks ? "Shrimp" : label
     }}</span>

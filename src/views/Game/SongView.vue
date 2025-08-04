@@ -1,11 +1,7 @@
 <script setup>
 import { reactive, ref, onMounted, computed } from "vue";
 import { useRoute, useRouter } from "vue-router";
-import {
-  mdiPlaylistMusic,
-  mdiFormatListBulleted,
-  mdiFormatListNumbered,
-} from "@mdi/js";
+import { PhMusicNote, PhRanking, PhMedal } from "@phosphor-icons/vue";
 import SectionMain from "@/components/SectionMain.vue";
 import LayoutAuthenticated from "@/layouts/LayoutAuthenticated.vue";
 import SectionTitleLine from "@/components/SectionTitleLine.vue";
@@ -185,7 +181,7 @@ const navigateToProfile = (item) => {
   <LayoutAuthenticated>
     <SectionMain v-if="songData">
       <GameHeader :game="thisGame" />
-      <SectionTitleLine :icon="mdiPlaylistMusic" title="Song Overview" main />
+      <SectionTitleLine :icon="PhMusicNote" title="Song Overview" main />
       <CardBox class="mb-6" has-table>
         <div class="grid gap-4 bg-slate-900/90 card-content">
           <div>
@@ -208,11 +204,7 @@ const navigateToProfile = (item) => {
         </div>
       </CardBox>
 
-      <SectionTitleLine
-        :icon="mdiFormatListNumbered"
-        title="Top Records"
-        main
-      />
+      <SectionTitleLine :icon="PhRanking" title="Top Records" main />
       <div class="grid grid-cols-2 lg:grid-cols-5 gap-4 mb-6">
         <template v-for="chart of songData.charts" :key="chart.db_id">
           <CardBoxWidget
@@ -231,11 +223,7 @@ const navigateToProfile = (item) => {
       </div>
 
       <div class="flex place-content-between mb-2">
-        <SectionTitleLine
-          :icon="mdiFormatListBulleted"
-          title="All Scores"
-          main
-        />
+        <SectionTitleLine :icon="PhMedal" title="All Scores" main />
         <div class="md:w-1/3 md:text-right">
           <h2 class="text-md sm:text-lg md:text-xl font-bold p-2">
             Select Chart

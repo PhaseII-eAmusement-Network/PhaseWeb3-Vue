@@ -5,7 +5,7 @@ import IconRounded from "@/components/IconRounded.vue";
 
 defineProps({
   icon: {
-    type: String,
+    type: Object,
     default: null,
   },
   color: {
@@ -38,7 +38,7 @@ const hasSlot = computed(() => useSlots().default);
       />
       <BaseIcon
         v-else-if="icon"
-        :path="icon"
+        :icon="icon"
         :color="color"
         class="mr-2"
         size="20"

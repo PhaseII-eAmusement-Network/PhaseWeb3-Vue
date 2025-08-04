@@ -4,7 +4,7 @@ import CardBox from "@/components/CardBox.vue";
 import OverlayLayer from "@/components/OverlayLayer.vue";
 import BaseIcon from "@/components/BaseIcon.vue";
 import BaseButton from "@/components/BaseButton.vue";
-import { mdiCheckOutline, mdiCloseOutline } from "@mdi/js";
+import { PhCloudCheck, PhCloudX } from "@phosphor-icons/vue";
 
 const $router = useRouter();
 
@@ -59,7 +59,7 @@ function hotReload() {
       >
         <div class="place-self-center">
           <BaseIcon
-            :path="mdiCheckOutline"
+            :icon="PhCloudCheck"
             class="text-green-700"
             w="w-20"
             :size="45"
@@ -73,12 +73,7 @@ function hotReload() {
         class="grid text-center justify-center grid-cols-1 gap-3"
       >
         <div class="place-self-center">
-          <BaseIcon
-            :path="mdiCloseOutline"
-            class="text-red-500"
-            w="w-20"
-            :size="45"
-          />
+          <BaseIcon :icon="PhCloudX" class="text-red-500" w="w-20" :size="45" />
         </div>
         <h1 class="text-xl md:text-2xl">Uh Oh!</h1>
         <h1 class="text-lg md:text-xl">

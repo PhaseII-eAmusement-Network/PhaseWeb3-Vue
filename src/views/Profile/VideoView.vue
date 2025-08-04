@@ -1,6 +1,6 @@
 <script setup>
 import { ref, onMounted } from "vue";
-import { mdiVideoOutline, mdiVideoWirelessOutline } from "@mdi/js";
+import { PhFilmReel, PhVideo } from "@phosphor-icons/vue";
 import SectionMain from "@/components/SectionMain.vue";
 import CardBox from "@/components/CardBox.vue";
 import BaseButton from "@/components/BaseButton.vue";
@@ -140,11 +140,7 @@ function openInNewTab(url) {
       <UserCard class="mb-6" use-small even-smaller />
 
       <template v-if="videoData[0]">
-        <SectionTitleLine
-          :icon="mdiVideoWirelessOutline"
-          title="Your Latest Upload"
-          main
-        />
+        <SectionTitleLine :icon="PhVideo" title="Your Latest Video" main />
         <CardBox class="mb-6">
           <div
             v-if="videoData[0]?.data?.status == 'uploaded'"
@@ -201,8 +197,7 @@ function openInNewTab(url) {
         </CardBox>
       </template>
 
-      <SectionTitleLine :icon="mdiVideoOutline" title="All Play Videos" main />
-
+      <SectionTitleLine :icon="PhFilmReel" title="All Play Videos" main />
       <CardBox has-table>
         <div
           class="bg-white dark:bg-slate-900/95 rounded-2xl lg:flex lg:justify-between"

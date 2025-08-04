@@ -1,6 +1,6 @@
 <script setup>
 import { containerMaxW } from "@/config.js";
-import { mdiCash, mdiGithub } from "@mdi/js";
+import { PhPaypalLogo, PhGithubLogo } from "@phosphor-icons/vue";
 import BaseLevel from "@/components/BaseLevel.vue";
 import BaseButton from "@/components/BaseButton.vue";
 
@@ -29,7 +29,7 @@ const appVersion = import.meta.env.VITE_APP_VERSION;
           color="warning"
           href="https://paypal.me/trmazi"
           label="Donate"
-          :icon="mdiCash"
+          :icon="PhPaypalLogo"
           icon-size="24"
         />
         <BaseButton
@@ -37,7 +37,7 @@ const appVersion = import.meta.env.VITE_APP_VERSION;
           href="https://github.com/PhaseII-eAmusement-Network/PhaseWeb3-Vue"
           target="_blank"
           label="View on GitHub"
-          :icon="mdiGithub"
+          :icon="PhGithubLogo"
           icon-size="24"
         />
       </div>

@@ -1,5 +1,5 @@
 <script setup>
-import { mdiFlagCheckered, mdiFlagOff, mdiFlagOutline } from "@mdi/js";
+import { PhFlag, PhFlagBannerFold, PhFlagCheckered } from "@phosphor-icons/vue";
 import { reactive } from "vue";
 import SectionMain from "@/components/SectionMain.vue";
 import CardBox from "@/components/CardBox.vue";
@@ -94,7 +94,7 @@ const setGoals = [
 <template>
   <LayoutAuthenticated>
     <SectionMain>
-      <SectionTitleLine :icon="mdiFlagOutline" title="Your Goals" main />
+      <SectionTitleLine :icon="PhFlag" title="Your Goals" main />
 
       <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 mb-6">
         <CardBoxWidget
@@ -114,14 +114,14 @@ const setGoals = [
         />
       </div>
 
-      <SectionTitleLine :icon="mdiFlagCheckered" title="Active Goals" />
+      <SectionTitleLine :icon="PhFlagCheckered" title="Active Goals" />
       <div class="mb-6">
         <CardBox has-table>
           <TableGoals :goals="setGoals" />
         </CardBox>
       </div>
 
-      <SectionTitleLine :icon="mdiFlagOff" title="Past Goals" />
+      <SectionTitleLine :icon="PhFlagBannerFold" title="Past Goals" />
       <div class="mb-12">
         <CardBox has-table>
           <TableGoals :goals="setGoals" is-past />

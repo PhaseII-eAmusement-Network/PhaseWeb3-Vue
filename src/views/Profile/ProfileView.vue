@@ -7,7 +7,7 @@ import {
   APIGetUserSessions,
   APIDeleteUserSessions,
 } from "@/stores/api/account";
-import { mdiAccount, mdiMail, mdiAsterisk, mdiLoading } from "@mdi/js";
+import { PhUser, PhAt, PhPassword, PhSpinnerBall } from "@phosphor-icons/vue";
 import SectionMain from "@/components/SectionMain.vue";
 import CardBox from "@/components/CardBox.vue";
 import BaseDivider from "@/components/BaseDivider.vue";
@@ -137,7 +137,7 @@ function userChanged(oldProfile, newProfile) {
   <LayoutAuthenticated>
     <SectionMain>
       <UserCard class="mb-6" use-small even-smaller />
-      <SectionTitleLine :icon="mdiAccount" title="Profile Settings" main />
+      <SectionTitleLine :icon="PhUser" title="Profile Settings" main />
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
         <CardBox is-form class="row-span-1" @submit.prevent="submitProfile">
@@ -145,7 +145,7 @@ function userChanged(oldProfile, newProfile) {
           <FormField label="Username">
             <FormControl
               v-model="profileForm.username"
-              :icon="mdiAccount"
+              :icon="PhUser"
               name="username"
               required
               autocomplete="username"
@@ -154,7 +154,7 @@ function userChanged(oldProfile, newProfile) {
           <FormField label="E-mail" help="Used for password resetting and 2FA">
             <FormControl
               v-model="profileForm.email"
-              :icon="mdiMail"
+              :icon="PhAt"
               type="email"
               name="email"
               required
@@ -165,7 +165,7 @@ function userChanged(oldProfile, newProfile) {
           <FormField label="PIN" help="Used when logging into a game">
             <FormControl
               v-model="profileForm.pin"
-              :icon="mdiAsterisk"
+              :icon="PhPassword"
               type="password"
               name="pin"
               :minlength="4"
@@ -199,7 +199,7 @@ function userChanged(oldProfile, newProfile) {
             />
             <BaseIcon
               v-if="profileLoading"
-              :path="mdiLoading"
+              :icon="PhSpinnerBall"
               color="text-yellow-500"
               class="animate animate-spin"
             />
@@ -211,7 +211,7 @@ function userChanged(oldProfile, newProfile) {
           <FormField label="Current Password">
             <FormControl
               v-model="passwordForm.currentPassword"
-              :icon="mdiAsterisk"
+              :icon="PhPassword"
               name="currentPassword"
               type="password"
               required
@@ -222,7 +222,7 @@ function userChanged(oldProfile, newProfile) {
           <FormField label="New Password">
             <FormControl
               v-model="passwordForm.newPassword"
-              :icon="mdiAsterisk"
+              :icon="PhPassword"
               name="newPassword"
               type="password"
               required
@@ -232,7 +232,7 @@ function userChanged(oldProfile, newProfile) {
           <FormField label="Confirm Password">
             <FormControl
               v-model="passwordForm.confirmPassword"
-              :icon="mdiAsterisk"
+              :icon="PhPassword"
               name="confirmPassword"
               type="password"
               required
@@ -243,7 +243,7 @@ function userChanged(oldProfile, newProfile) {
             <BaseButton type="submit" color="success" label="Update" />
             <BaseIcon
               v-if="passwordLoading"
-              :path="mdiLoading"
+              :icon="PhSpinnerBall"
               color="text-yellow-500"
               class="animate animate-spin"
             />

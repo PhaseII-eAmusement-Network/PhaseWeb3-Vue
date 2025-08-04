@@ -1,7 +1,7 @@
 <script setup>
 import { ref, reactive, onMounted } from "vue";
 import { useRouter } from "vue-router";
-import { mdiAccountBadgeOutline } from "@mdi/js";
+import { PhUsersThree, PhMagnifyingGlass } from "@phosphor-icons/vue";
 import SectionMain from "@/components/SectionMain.vue";
 import CardBox from "@/components/CardBox.vue";
 import GeneralTable from "@/components/GeneralTable.vue";
@@ -129,6 +129,12 @@ async function findUser() {
         <p class="text-sm text-gray-400">Click a row to open User</p>
       </CardBox>
 
+      <SectionTitleLine
+        :icon="PhMagnifyingGlass"
+        title="Search"
+        color="text-amber-500"
+        main
+      />
       <div class="grid md:grid-cols-2 gap-6">
         <CardBox class="mb-6">
           <PillTag color="info" label="Search" class="mb-2" />
@@ -201,7 +207,7 @@ async function findUser() {
       </div>
 
       <SectionTitleLine
-        :icon="mdiAccountBadgeOutline"
+        :icon="PhUsersThree"
         title="All Users"
         color="text-blue-400"
         main

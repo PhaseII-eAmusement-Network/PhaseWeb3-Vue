@@ -1,15 +1,14 @@
 <script setup>
 import {
-  mdiForwardburger,
-  mdiBackburger,
-  mdiMenu,
-  mdiMonitor,
-  mdiStoreCog,
-  mdiStorePlus,
-  mdiGamepad,
-  mdiSecurity,
-  mdiMultimedia,
-} from "@mdi/js";
+  PhCaretDoubleLeft,
+  PhDotsThreeCircle,
+  PhMonitor,
+  PhStorefront,
+  PhStackPlus,
+  PhJoystick,
+  PhCrown,
+  PhFilmSlate,
+} from "@phosphor-icons/vue";
 import { ref, watch, onMounted, computed } from "vue";
 import { useRouter, useRoute } from "vue-router";
 import menuNavBar from "@/menuNavBar.js";
@@ -173,12 +172,12 @@ const menuAside = computed(() => {
     },
   ];
 
-  var sideMenu = [{ to: "/", icon: mdiMonitor, label: "Dashboard" }];
+  var sideMenu = [{ to: "/", icon: PhMonitor, label: "Dashboard" }];
 
   if (mainStore.userAdmin) {
     sideMenu.push({
       label: "Admin",
-      icon: mdiSecurity,
+      icon: PhCrown,
       menu: adminMenu,
     });
   }
@@ -186,14 +185,14 @@ const menuAside = computed(() => {
   if (sortedGames.length) {
     sideMenu.push({
       label: "Games",
-      icon: mdiGamepad,
+      icon: PhJoystick,
       menu: sortedGames,
     });
   }
 
   sideMenu.push({
     label: "My Content",
-    icon: mdiMultimedia,
+    icon: PhFilmSlate,
     menu: [
       {
         label: "Play Videos",
@@ -209,14 +208,14 @@ const menuAside = computed(() => {
   if (sortedArcades.length) {
     sideMenu.push({
       label: "My Arcades",
-      icon: mdiStoreCog,
+      icon: PhStorefront,
       menu: sortedArcades,
     });
   }
 
   sideMenu.push({
     label: "Claim Arcade",
-    icon: mdiStorePlus,
+    icon: PhStackPlus,
     to: `/arcade/claim`,
   });
 
@@ -265,15 +264,18 @@ const menuAside = computed(() => {
           @click.prevent="isAsideMobileExpanded = !isAsideMobileExpanded"
         >
           <BaseIcon
-            :path="isAsideMobileExpanded ? mdiBackburger : mdiForwardburger"
-            size="24"
+            :icon="PhCaretDoubleLeft"
+            :size="24"
+            fill="bold"
+            class="flex-none transition-transform duration-150 ease-in-out"
+            :class="[isAsideMobileExpanded ? 'rotate-0' : 'rotate-180']"
           />
         </NavBarItemPlain>
         <NavBarItemPlain
           display="hidden lg:flex xl:hidden"
           @click.prevent="isAsideLgActive = true"
         >
-          <BaseIcon :path="mdiMenu" size="24" />
+          <BaseIcon :icon="PhDotsThreeCircle" size="24" />
         </NavBarItemPlain>
 
         <div class="h-full flex place-items-center ml-4 gap-4">

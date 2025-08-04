@@ -2,7 +2,7 @@
 import { useMainStore } from "@/stores/main";
 import { useRouter } from "vue-router";
 import { ref, watch } from "vue";
-import { mdiAccountTieHat } from "@mdi/js";
+import { PhPaintBrushBroad } from "@phosphor-icons/vue";
 
 import SectionMain from "@/components/SectionMain.vue";
 import CardBox from "@/components/CardBox.vue";
@@ -63,7 +63,7 @@ async function revert() {
     <SectionMain>
       <UserCard class="mb-6" />
       <SectionTitleLine
-        :icon="mdiAccountTieHat"
+        :icon="PhPaintBrushBroad"
         title="Profile Customizations"
         main
       />

@@ -1,7 +1,7 @@
 <script setup>
 import { reactive, watch, ref, onMounted } from "vue";
 import { useRoute, useRouter } from "vue-router";
-import { mdiSwordCross, mdiPlus } from "@mdi/js";
+import { PhSword, PhPlusCircle } from "@phosphor-icons/vue";
 import SectionMain from "@/components/SectionMain.vue";
 import CardBox from "@/components/CardBox.vue";
 import BaseButton from "@/components/BaseButton.vue";
@@ -133,13 +133,12 @@ function filterProfiles() {
             :game="gameID"
             :version="versionForm.currentVersion"
             :profile="profile"
-            use-small
           >
           </ProfileCard>
         </div>
       </GameHeader>
 
-      <SectionTitleLine :icon="mdiPlus" title="Add a Rival" main />
+      <SectionTitleLine :icon="PhPlusCircle" title="Add a Rival" main />
       <CardBox v-if="versionForm.currentVersion" class="mb-6">
         <FormField
           label="Search"
@@ -180,7 +179,7 @@ function filterProfiles() {
         </div>
       </CardBox>
 
-      <SectionTitleLine :icon="mdiSwordCross" title="Rivals" main />
+      <SectionTitleLine :icon="PhSword" title="Rivals" main />
       <CardBox v-if="versionForm.currentVersion" class="mb-6">
         <div class="grid gap-3">
           <CardBox v-for="rival of profile?.rivals" :key="rival.id">

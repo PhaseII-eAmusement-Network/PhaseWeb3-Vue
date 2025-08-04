@@ -1,13 +1,13 @@
 <script setup>
 import { ref, reactive } from "vue";
 import {
-  mdiAccountArrowLeftOutline,
-  mdiCreditCardEditOutline,
-  mdiAsterisk,
-  mdiCardAccountDetails,
-  mdiLoading,
-  mdiAccountConvertOutline,
-} from "@mdi/js";
+  PhUserCircleDashed,
+  PhCreditCard,
+  PhPassword,
+  PhUserSwitch,
+  PhSpinnerBall,
+  PhUnite,
+} from "@phosphor-icons/vue";
 import SectionMain from "@/components/SectionMain.vue";
 import BaseButton from "@/components/BaseButton.vue";
 import BaseIcon from "@/components/BaseIcon.vue";
@@ -132,11 +132,7 @@ async function saveSettings() {
       <UserCard class="mb-6" use-small even-smaller />
 
       <template v-if="!takeoverData">
-        <SectionTitleLine
-          :icon="mdiAccountArrowLeftOutline"
-          title="Claim a Profile"
-          main
-        />
+        <SectionTitleLine :icon="PhUserSwitch" title="Claim a Profile" main />
         <CardBox is-form class="row-span-2 mb-6" @submit.prevent="submitCard()">
           <h2 class="text-xl mb-6 lg:w-1/2">
             If you registered a card in game and need to claim it, you may do so
@@ -149,7 +145,7 @@ async function saveSettings() {
           >
             <FormControl
               v-model="profileForm.cardId"
-              :icon="mdiCreditCardEditOutline"
+              :icon="PhCreditCard"
               name="cardId"
               type="card"
               placeholder="XXXX-XXXX-XXXX-XXXX"
@@ -163,7 +159,7 @@ async function saveSettings() {
           <FormField label="PIN" help="Used when logging into a game">
             <FormControl
               v-model="profileForm.pin"
-              :icon="mdiAsterisk"
+              :icon="PhPassword"
               type="password"
               name="pin"
               :minlength="4"
@@ -179,7 +175,7 @@ async function saveSettings() {
             <BaseButton type="submit" color="success" label="Start Claim" />
             <BaseIcon
               v-if="cardLoading"
-              :path="mdiLoading"
+              :icon="PhSpinnerBall"
               color="text-yellow-500"
               class="animate animate-spin"
             />
@@ -189,7 +185,7 @@ async function saveSettings() {
 
       <div v-if="takeoverData && saveState == null">
         <SectionTitleLine
-          :icon="mdiAccountArrowLeftOutline"
+          :icon="PhUserCircleDashed"
           title="Select Profiles to Merge"
           main
         />
@@ -227,7 +223,7 @@ async function saveSettings() {
             <FormCheckRadio
               v-model="mergeSettings.card"
               :input-value="mergeSettings.card"
-              :icon="mdiCardAccountDetails"
+              :icon="PhCreditCard"
               type="switch"
               name="card"
             />
@@ -245,12 +241,7 @@ async function saveSettings() {
       </div>
 
       <div v-if="saveState == true">
-        <SectionTitleLine
-          :icon="mdiAccountConvertOutline"
-          title="Merge Results"
-          main
-        />
-
+        <SectionTitleLine :icon="PhUnite" title="Merge Results" main />
         <CardBox>
           <h2 class="text-xl mb-6">
             ✅ Successfully merged {{ recordCount }} records. Yippie!
@@ -263,12 +254,7 @@ async function saveSettings() {
       </div>
 
       <div v-if="saveState == false">
-        <SectionTitleLine
-          :icon="mdiAccountConvertOutline"
-          title="Merge Results"
-          main
-        />
-
+        <SectionTitleLine :icon="PhUnite" title="Merge Results" main />
         <CardBox>
           <h2 class="text-xl mb-6">❌ Failed to merge. Please try again.</h2>
 

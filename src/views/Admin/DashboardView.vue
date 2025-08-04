@@ -1,6 +1,6 @@
 <script setup>
 import { ref, onMounted } from "vue";
-import { mdiFlagCheckered, mdiSecurity } from "@mdi/js";
+import { PhFlagCheckered, PhCrown } from "@phosphor-icons/vue";
 import SectionMain from "@/components/SectionMain.vue";
 import CardBox from "@/components/CardBox.vue";
 import CardBoxWidget from "@/components/CardBoxWidget.vue";
@@ -126,7 +126,7 @@ function formatEvents(events) {
         </CardBox>
 
         <SectionTitleLine
-          :icon="mdiSecurity"
+          :icon="PhCrown"
           title="Admin Dashboard"
           color="text-red-600"
           main
@@ -173,8 +173,12 @@ function formatEvents(events) {
           />
         </div>
 
-        <SectionTitleLine :icon="mdiFlagCheckered" title="Recent PCB Events" />
-        <CardBox has-table>
+        <SectionTitleLine
+          :icon="PhFlagCheckered"
+          main
+          title="Recent PCB Events"
+        />
+        <CardBox has-table class="mb-6">
           <div
             class="bg-white dark:bg-slate-900/95 rounded-2xl lg:flex lg:justify-between"
           >
@@ -188,7 +192,8 @@ function formatEvents(events) {
         </CardBox>
 
         <SectionTitleLine
-          :icon="mdiFlagCheckered"
+          :icon="PhFlagCheckered"
+          main
           title="Recent PASELI Transactions"
         />
         <CardBox has-table>

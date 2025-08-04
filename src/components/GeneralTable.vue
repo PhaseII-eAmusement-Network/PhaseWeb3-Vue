@@ -1,5 +1,5 @@
 <script setup>
-import { mdiDownload, mdiChevronLeft, mdiChevronRight } from "@mdi/js";
+import { PhDownload, PhCaretLeft, PhCaretRight } from "@phosphor-icons/vue";
 import BaseButton from "@/components/BaseButton.vue";
 import UserAvatar from "@/components/UserAvatar.vue";
 import DownloadJS from "downloadjs";
@@ -60,7 +60,7 @@ function downloadJSON() {
     >
       <div class="flex items-center">
         <BaseButton
-          :icon="mdiChevronLeft"
+          :icon="PhCaretLeft"
           color="info"
           very-small
           :disabled="isFirstPage"
@@ -70,7 +70,7 @@ function downloadJSON() {
           currentPaginationNumber
         }}</span>
         <BaseButton
-          :icon="mdiChevronRight"
+          :icon="PhCaretRight"
           color="info"
           very-small
           small
@@ -101,7 +101,7 @@ function downloadJSON() {
   <div class="p-2 w-full flex md:justify-end">
     <BaseButton
       label="Export Table"
-      :icon="mdiDownload"
+      :icon="PhDownload"
       color="info"
       @click="downloadJSON"
     />

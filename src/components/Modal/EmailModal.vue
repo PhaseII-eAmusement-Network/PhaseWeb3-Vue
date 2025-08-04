@@ -4,7 +4,7 @@ import CardBox from "@/components/CardBox.vue";
 import OverlayLayer from "@/components/OverlayLayer.vue";
 import BaseButton from "@/components/BaseButton.vue";
 import BaseIcon from "@/components/BaseIcon.vue";
-import { mdiEmailAlertOutline } from "@mdi/js";
+import { PhEnvelopeOpen } from "@phosphor-icons/vue";
 
 import { useMainStore } from "@/stores/main.js";
 import { loadCookie, saveCookie } from "@/stores/cookies";
@@ -47,7 +47,7 @@ function verifyLater() {
         <div class="grid text-center justify-center grid-cols-1 gap-3">
           <div class="place-self-center">
             <BaseIcon
-              :path="mdiEmailAlertOutline"
+              :icon="PhEnvelopeOpen"
               class="text-yellow-600"
               w="w-20"
               :size="45"

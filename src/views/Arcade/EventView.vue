@@ -1,7 +1,7 @@
 <script setup>
 import { reactive, ref, watch, onMounted } from "vue";
 import { useRoute } from "vue-router";
-import { mdiNewspaperVariantMultiple } from "@mdi/js";
+import { PhNewspaper } from "@phosphor-icons/vue";
 import SectionMain from "@/components/SectionMain.vue";
 import CardBox from "@/components/CardBox.vue";
 import LayoutAuthenticated from "@/layouts/LayoutAuthenticated.vue";
@@ -164,7 +164,7 @@ watch(
       <template v-if="!loading">
         <ArcadeCard class="mb-6" :arcade="arcadeData" :use-small="true" />
         <SectionTitleLine
-          :icon="mdiNewspaperVariantMultiple"
+          :icon="PhNewspaper"
           title="Game Event Settings"
           main
         />

@@ -1,6 +1,6 @@
 <script setup>
 import { ref } from "vue";
-import { mdiClose, mdiDotsVertical } from "@mdi/js";
+import { PhCaretDoubleUp } from "@phosphor-icons/vue";
 import { containerMaxW } from "@/config.js";
 import BaseIcon from "@/components/BaseIcon.vue";
 import NavBarMenuList from "@/components/NavBarMenuList.vue";
@@ -35,8 +35,11 @@ const isMenuNavBarActive = ref(false);
           @click.prevent="isMenuNavBarActive = !isMenuNavBarActive"
         >
           <BaseIcon
-            :path="isMenuNavBarActive ? mdiClose : mdiDotsVertical"
-            size="24"
+            :icon="PhCaretDoubleUp"
+            :size="24"
+            fill="bold"
+            class="flex-none transition-transform duration-150 ease-in-out"
+            :class="[isMenuNavBarActive ? 'rotate-0' : 'rotate-180']"
           />
         </NavBarItemPlain>
       </div>

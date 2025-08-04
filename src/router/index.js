@@ -275,17 +275,6 @@ const routes = [
   },
   {
     meta: {
-      title: "All Players",
-    },
-    path: "/games/:id/players/",
-    name: "players_page",
-    component: () => import("@/views/Game/PlayersView.vue"),
-    options: {
-      hotReload: true, // disables Hot Reload
-    },
-  },
-  {
-    meta: {
       title: "View Profile",
     },
     path: "/games/:game/profiles/:userId/",

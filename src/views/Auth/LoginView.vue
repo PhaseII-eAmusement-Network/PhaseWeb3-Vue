@@ -1,6 +1,6 @@
 <script setup>
 import { useRouter } from "vue-router";
-import { mdiAccount, mdiAsterisk } from "@mdi/js";
+import { PhUser, PhPassword } from "@phosphor-icons/vue";
 import { reactive } from "vue";
 import { useMainStore } from "@/stores/main.js";
 import CardBox from "@/components/CardBox.vue";
@@ -67,7 +67,7 @@ const submit = async () => {
             <FormField label="Username">
               <FormControl
                 v-model="form.login"
-                :icon="mdiAccount"
+                :icon="PhUser"
                 name="login"
                 autocomplete="username"
                 required
@@ -77,7 +77,7 @@ const submit = async () => {
             <FormField label="Password">
               <FormControl
                 v-model="form.pass"
-                :icon="mdiAsterisk"
+                :icon="PhPassword"
                 type="password"
                 name="password"
                 autocomplete="current-password"

@@ -2,13 +2,13 @@
 import { ref, watch } from "vue";
 import { useRoute } from "vue-router";
 import {
-  mdiHome,
-  mdiCog,
-  mdiAccountDetails,
-  mdiPlaylistMusicOutline,
-  mdiSwordCross,
-  mdiFormatListText,
-} from "@mdi/js";
+  PhHouse,
+  PhGear,
+  PhUserList,
+  PhPlaylist,
+  PhSword,
+  PhListStar,
+} from "@phosphor-icons/vue";
 import BaseButton from "@/components/BaseButton.vue";
 import GameTitleLine from "@/components/GameTitleLine.vue";
 import { getVideoSource, getCardStyle } from "@/constants/sources";
@@ -41,7 +41,7 @@ function loadRoutes() {
       label: `${
         props.game.shortName ? props.game.shortName : props.game.name
       } Home`,
-      icon: mdiHome,
+      icon: PhHouse,
       path: `/#/games/${props.game.id}/`,
       route: "game_page",
       color: "success",
@@ -51,7 +51,7 @@ function loadRoutes() {
   if (userProfiles.value.some((profile) => profile.game === props.game.id)) {
     navigationData.push({
       label: "My Profile",
-      icon: mdiAccountDetails,
+      icon: PhUserList,
       path: `/#/games/${props.game.id}/profiles/${mainStore.userId}`,
       route: "game_profile",
       color: "info",
@@ -59,7 +59,7 @@ function loadRoutes() {
 
     navigationData.push({
       label: "Edit Profile",
-      icon: mdiCog,
+      icon: PhGear,
       path: `/#/games/${props.game.id}/edit`,
       route: "edit_profile",
       color: "warning",
@@ -68,7 +68,7 @@ function loadRoutes() {
     if (!props.game.noRivals) {
       navigationData.push({
         label: "Rivals",
-        icon: mdiSwordCross,
+        icon: PhSword,
         path: `/#/games/${props.game.id}/rivals`,
         route: "game_rivals",
         color: "danger",
@@ -78,7 +78,7 @@ function loadRoutes() {
     if (!props.game.noScores) {
       navigationData.push({
         label: "My Scores",
-        icon: mdiPlaylistMusicOutline,
+        icon: PhPlaylist,
         path: `/#/games/${props.game.id}/scores/${mainStore.userId}`,
         color: "info",
       });
@@ -86,7 +86,7 @@ function loadRoutes() {
 
     navigationData.push({
       label: "My Records",
-      icon: mdiFormatListText,
+      icon: PhListStar,
       path: `/#/games/${props.game.id}/records/${mainStore.userId}`,
       route: "personal_records",
       color: "success",
@@ -97,14 +97,14 @@ function loadRoutes() {
     navigationData.push(
       {
         label: "Network Scores",
-        icon: mdiPlaylistMusicOutline,
+        icon: PhPlaylist,
         path: `/#/games/${props.game.id}/scores`,
         route: "all_scores",
         color: "info",
       },
       {
         label: "Network Records",
-        icon: mdiFormatListText,
+        icon: PhListStar,
         path: `/#/games/${props.game.id}/records`,
         route: "all_records",
         color: "success",
@@ -133,11 +133,11 @@ function loadRoutes() {
     <div class="bg-white dark:bg-slate-900/90 rounded-2xl card-content">
       <GameTitleLine :path="game.icon" :title="game.name">
         <div class="w-full">
-          <div class="w-full">
+          <div class="w-full mb-4">
             <slot />
           </div>
           <div
-            class="w-full grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:flex gap-3"
+            class="w-full grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-6 2xl:flex gap-3"
           >
             <template v-for="item of loadRoutes()" :key="item.path">
               <BaseButton

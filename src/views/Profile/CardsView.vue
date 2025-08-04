@@ -1,10 +1,11 @@
 <script setup>
 import { ref, onMounted, reactive } from "vue";
 import {
-  mdiCardAccountDetailsOutline,
-  mdiCreditCardPlusOutline,
-  mdiCreditCardEditOutline,
-} from "@mdi/js";
+  PhIdentificationCard,
+  PhPlusCircle,
+  PhCreditCard,
+  PhSpinnerBall,
+} from "@phosphor-icons/vue";
 import { dashCode } from "@/constants/userData.js";
 import SectionMain from "@/components/SectionMain.vue";
 import BaseButton from "@/components/BaseButton.vue";
@@ -86,11 +87,7 @@ const copyToClipboard = (text) => {
     <SectionMain>
       <UserCard class="mb-6" use-small even-smaller />
 
-      <SectionTitleLine
-        :icon="mdiCreditCardPlusOutline"
-        title="Add a Card"
-        main
-      />
+      <SectionTitleLine :icon="PhPlusCircle" title="Add a Card" main />
       <CardBox is-form class="row-span-2 mb-6" @submit.prevent="submitCard()">
         <FormField
           label="Card ID"
@@ -98,7 +95,7 @@ const copyToClipboard = (text) => {
         >
           <FormControl
             v-model="cardForm.newCard"
-            :icon="mdiCreditCardEditOutline"
+            :icon="PhCreditCard"
             name="cardId"
             type="card"
             placeholder="XXXX-XXXX-XXXX-XXXX"
@@ -113,7 +110,7 @@ const copyToClipboard = (text) => {
           <BaseButton type="submit" color="success" label="Add" />
           <BaseIcon
             v-if="cardLoading"
-            :path="mdiLoading"
+            :icon="PhSpinnerBall"
             color="text-yellow-500"
             class="animate animate-spin"
           />
@@ -122,7 +119,7 @@ const copyToClipboard = (text) => {
 
       <div class="grid md:grid-cols-2 mb-2">
         <SectionTitleLine
-          :icon="mdiCardAccountDetailsOutline"
+          :icon="PhIdentificationCard"
           title="Login Cards"
           main
         />

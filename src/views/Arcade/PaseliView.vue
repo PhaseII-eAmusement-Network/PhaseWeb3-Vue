@@ -1,7 +1,7 @@
 <script setup>
 import { ref, onMounted } from "vue";
 import { useRoute } from "vue-router";
-import { mdiCashRegister, mdiAccountCash } from "@mdi/js";
+import { PhCashRegister, PhCurrencyJpy } from "@phosphor-icons/vue";
 import SectionMain from "@/components/SectionMain.vue";
 import GeneralTable from "@/components/GeneralTable.vue";
 import CardBox from "@/components/CardBox.vue";
@@ -99,7 +99,7 @@ function filterTransactions(transactions) {
       <template v-if="!loading && arcadeData">
         <ArcadeCard class="mb-6" :arcade="arcadeData" :use-small="true" />
         <SectionTitleLine
-          :icon="mdiAccountCash"
+          :icon="PhCurrencyJpy"
           title="Player PASELI Balances"
           main
         />
@@ -117,7 +117,7 @@ function filterTransactions(transactions) {
         </CardBox>
 
         <SectionTitleLine
-          :icon="mdiCashRegister"
+          :icon="PhCashRegister"
           title="PASELI Transaction History"
           main
           class="pt-6"

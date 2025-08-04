@@ -1,6 +1,6 @@
 <script setup>
 import { ref, onMounted } from "vue";
-import { mdiNewspaperVariant } from "@mdi/js";
+import { PhNewspaper } from "@phosphor-icons/vue";
 import SectionMain from "@/components/SectionMain.vue";
 import LayoutAuthenticated from "@/layouts/LayoutAuthenticated.vue";
 import SectionTitleLine from "@/components/SectionTitleLine.vue";
@@ -29,7 +29,7 @@ function humanReadableTime(timestamp) {
 <template>
   <LayoutAuthenticated>
     <SectionMain>
-      <SectionTitleLine :icon="mdiNewspaperVariant" title="Network News" main />
+      <SectionTitleLine :icon="PhNewspaper" title="Network News" main />
 
       <div class="grid gap-4 grid-cols-1 w-full">
         <CardBoxNews

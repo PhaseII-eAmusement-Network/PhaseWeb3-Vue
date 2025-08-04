@@ -1,5 +1,5 @@
 <script setup>
-import { mdiLogout, mdiClose } from "@mdi/js";
+import { PhSignOut, PhXCircle } from "@phosphor-icons/vue";
 import { computed } from "vue";
 import { useStyleStore } from "@/stores/style.js";
 import AsideMenuList from "@/components/Menus/AsideMenuList.vue";
@@ -18,14 +18,15 @@ const styleStore = useStyleStore();
 
 const logoutItem = computed(() => ({
   label: "Log out",
-  icon: mdiLogout,
+  icon: PhSignOut,
   color: "info",
   isLogout: true,
+  fill: "regular",
 }));
 
 const closeItem = computed(() => ({
   label: "Close",
-  icon: mdiClose,
+  icon: PhXCircle,
   color: "danger",
 }));
 

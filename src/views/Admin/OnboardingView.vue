@@ -2,12 +2,12 @@
 import { reactive, ref } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import {
-  mdiInformationOutline,
-  mdiCogOutline,
-  mdiSailBoat,
-  mdiCheckOutline,
-  mdiCloseOutline,
-} from "@mdi/js";
+  PhInfo,
+  PhGear,
+  PhSailboat,
+  PhCheckCircle,
+  PhXCircle,
+} from "@phosphor-icons/vue";
 import SectionMain from "@/components/SectionMain.vue";
 import CardBox from "@/components/CardBox.vue";
 import FormField from "@/components/FormField.vue";
@@ -262,7 +262,7 @@ async function onboardArcade(exportArcade) {
   <LayoutAuthenticated>
     <SectionMain>
       <SectionTitleLine
-        :icon="mdiSailBoat"
+        :icon="PhSailboat"
         title="Arcade Onboarding"
         color="text-green-400"
         main
@@ -273,7 +273,7 @@ async function onboardArcade(exportArcade) {
           <PillTag
             color="info"
             label="General Information"
-            :icon="mdiInformationOutline"
+            :icon="PhInfo"
             class="mb-2"
           />
           <FormField label="Arcade Name">
@@ -289,13 +289,13 @@ async function onboardArcade(exportArcade) {
             <BaseButton color="info" label="Check Name" @click="checkName()" />
             <BaseIcon
               v-if="arcadeCheck == true"
-              :path="mdiCheckOutline"
+              :icon="PhCheckCircle"
               color="text-green-400"
               size="25"
             />
             <BaseIcon
               v-else-if="arcadeCheck == false"
-              :path="mdiCloseOutline"
+              :icon="PhXCircle"
               color="text-red-400"
               size="25"
             />
@@ -338,12 +338,7 @@ async function onboardArcade(exportArcade) {
         </CardBox>
 
         <CardBox is-form class="row-span-1">
-          <PillTag
-            color="info"
-            label="Settings"
-            :icon="mdiCogOutline"
-            class="mb-2"
-          />
+          <PillTag color="info" label="Settings" :icon="PhGear" class="mb-2" />
           <div
             class="grid grid-cols-1 w-full gap-2 md:gap-6 md:flex md:place-content-stretch"
           >
@@ -406,13 +401,7 @@ async function onboardArcade(exportArcade) {
         </CardBox>
 
         <CardBox class="row-span-1">
-          <PillTag
-            color="info"
-            label="Machines"
-            :icon="mdiInformationOutline"
-            class="mb-2"
-          />
-
+          <PillTag color="info" label="Machines" :icon="PhInfo" class="mb-2" />
           <div class="grid md:grid-cols-2 gap-6">
             <form class="h-full" @submit.prevent="addMachine()">
               <FormField

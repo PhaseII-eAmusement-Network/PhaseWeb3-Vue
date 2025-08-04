@@ -1,7 +1,7 @@
 <script setup>
 import { ref, onMounted } from "vue";
 import { useRoute, useRouter } from "vue-router";
-import { mdiBackburger } from "@mdi/js";
+import { PhCaretDoubleLeft } from "@phosphor-icons/vue";
 import SectionMain from "@/components/SectionMain.vue";
 import LayoutAuthenticated from "@/layouts/LayoutAuthenticated.vue";
 import CardBox from "@/components/CardBox.vue";
@@ -71,7 +71,7 @@ function goBack() {
               <BaseButton
                 label="Home"
                 color="info"
-                :icon="mdiBackburger"
+                :icon="PhCaretDoubleLeft"
                 icon-size="20"
                 @click="goBack"
               />

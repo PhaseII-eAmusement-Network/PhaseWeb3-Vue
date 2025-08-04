@@ -2,7 +2,7 @@
 import { ref, onMounted } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { useMainStore } from "@/stores/main";
-import { mdiCounter, mdiAccountDetails } from "@mdi/js";
+import { PhRanking, PhUser, PhMedal } from "@phosphor-icons/vue";
 import SectionMain from "@/components/SectionMain.vue";
 import LayoutAuthenticated from "@/layouts/LayoutAuthenticated.vue";
 import SectionTitleLine from "@/components/SectionTitleLine.vue";
@@ -182,21 +182,29 @@ const navigateToSong = (item) => {
     <SectionMain>
       <template v-if="myProfile">
         <GameHeader :game="thisGame" :profile="myProfile" />
-        <SectionTitleLine
-          :icon="mdiCounter"
-          :title="`${myProfile.username}'s ${
-            thisGame.shortName ? thisGame.shortName : thisGame.name
-          } Scores`"
-          main
-        >
+        <div class="flex gap-2 mb-6">
           <BaseButton
-            :icon="mdiAccountDetails"
+            :icon="PhUser"
             :href="`/#/games/${thisGame.id}/profiles/${myProfile.userId}`"
             :outline="false"
             color="info"
             :label="`${myProfile.username}'s Profile`"
           />
-        </SectionTitleLine>
+          <BaseButton
+            :icon="PhRanking"
+            :href="`/#/games/${thisGame.id}/records/${myProfile.userId}`"
+            :outline="false"
+            color="info"
+            :label="`${myProfile.username}'s Records`"
+          />
+        </div>
+        <SectionTitleLine
+          :icon="PhMedal"
+          :title="`${myProfile.username}'s ${
+            thisGame.shortName ? thisGame.shortName : thisGame.name
+          } Scores`"
+          main
+        />
 
         <CardBox has-table>
           <GeneralTable

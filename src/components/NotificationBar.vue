@@ -1,6 +1,6 @@
 <script setup>
 import { ref, computed, useSlots } from "vue";
-import { mdiClose } from "@mdi/js";
+import { PhX } from "@phosphor-icons/vue";
 import { colorsBgLight, colorsOutline } from "@/colors.js";
 import BaseLevel from "@/components/BaseLevel.vue";
 import BaseIcon from "@/components/BaseIcon.vue";
@@ -8,7 +8,7 @@ import BaseButton from "@/components/BaseButton.vue";
 
 const props = defineProps({
   icon: {
-    type: String,
+    type: Object,
     default: null,
   },
   outline: {
@@ -46,7 +46,7 @@ const hasRightSlot = computed(() => slots.right);
       <div class="flex flex-col md:flex-row items-center">
         <BaseIcon
           v-if="icon"
-          :path="icon"
+          :icon="icon"
           w="w-10 md:w-5"
           h="h-10 md:h-5"
           size="24"
@@ -57,7 +57,7 @@ const hasRightSlot = computed(() => slots.right);
       <slot v-if="hasRightSlot" name="right" />
       <BaseButton
         v-else
-        :icon="mdiClose"
+        :icon="PhX"
         small
         rounded-full
         color="white"

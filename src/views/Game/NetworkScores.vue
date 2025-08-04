@@ -2,7 +2,7 @@
 import { ref, onMounted } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import { useMainStore } from "@/stores/main";
-import { mdiCounter } from "@mdi/js";
+import { PhMedal } from "@phosphor-icons/vue";
 import SectionMain from "@/components/SectionMain.vue";
 import LayoutAuthenticated from "@/layouts/LayoutAuthenticated.vue";
 import SectionTitleLine from "@/components/SectionTitleLine.vue";
@@ -166,7 +166,7 @@ const navigateToSong = (item) => {
       <GameHeader :game="thisGame" />
 
       <SectionTitleLine
-        :icon="mdiCounter"
+        :icon="PhMedal"
         :title="`All ${
           thisGame.shortName ? thisGame.shortName : thisGame.name
         } Scores`"

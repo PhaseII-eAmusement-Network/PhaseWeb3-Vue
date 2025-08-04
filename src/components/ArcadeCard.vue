@@ -1,12 +1,12 @@
 <script setup>
 import {
-  mdiTestTube,
-  mdiHomeOutline,
-  mdiNewspaperVariantMultiple,
-  mdiGamepad,
-  mdiCashRegister,
-  mdiHome,
-} from "@mdi/js";
+  PhTestTube,
+  PhHouseLine,
+  PhNewspaper,
+  PhJoystick,
+  PhCashRegister,
+  PhHouse,
+} from "@phosphor-icons/vue";
 import { ref } from "vue";
 // import { getArea } from "@/constants/area";
 import BaseLevel from "@/components/BaseLevel.vue";
@@ -64,9 +64,9 @@ function getCardStyle(path) {
             v-if="arcadeData.is_beta"
             label="Beta Enabled"
             color="warning"
-            :icon="mdiTestTube"
+            :icon="PhTestTube"
           />
-          <PillTag label="Private Arcade" color="info" :icon="mdiHomeOutline" />
+          <PillTag label="Private Arcade" color="info" :icon="PhHouseLine" />
         </div>
 
         <hr class="border-t border w-full" />
@@ -96,26 +96,26 @@ function getCardStyle(path) {
         <div class="md:w-full grid grid-cols-1 md:grid-cols-4 gap-3">
           <BaseButton
             :href="`/#/arcade/${arcade.id}`"
-            :icon="mdiHome"
+            :icon="PhHouse"
             color="info"
             label="Arcade Home"
             class="w-full md:w-[150px]"
           />
           <BaseButton
             :href="`/#/arcade/${arcade.id}/events`"
-            :icon="mdiNewspaperVariantMultiple"
+            :icon="PhNewspaper"
             color="info"
             label="Event Settings"
           />
           <BaseButton
             :href="`/#/arcade/${arcade.id}/machines`"
-            :icon="mdiGamepad"
+            :icon="PhJoystick"
             color="info"
             label="Machine List"
           />
           <BaseButton
             :href="`/#/arcade/${arcade.id}/paseli`"
-            :icon="mdiCashRegister"
+            :icon="PhCashRegister"
             color="info"
             label="PASELI"
           />

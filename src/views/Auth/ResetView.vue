@@ -1,12 +1,7 @@
 <script setup>
 import { reactive } from "vue";
 import { useRouter } from "vue-router";
-import {
-  mdiEmailOutline,
-  mdiShieldKeyOutline,
-  mdiAsterisk,
-  mdiLoading,
-} from "@mdi/js";
+import { PhAt, PhKey, PhPassword, PhSpinnerBall } from "@phosphor-icons/vue";
 import CardBox from "@/components/CardBox.vue";
 import FormField from "@/components/FormField.vue";
 import FormControl from "@/components/FormControl.vue";
@@ -98,7 +93,7 @@ async function resetPassword() {
               <FormField label="Email Address">
                 <FormControl
                   v-model="form.email"
-                  :icon="mdiEmailOutline"
+                  :icon="PhAt"
                   type="email"
                   autocomplete="email"
                   required
@@ -107,7 +102,7 @@ async function resetPassword() {
               <BaseButton label="Check" type="submit" color="info" />
               <BaseIcon
                 v-if="form.loading"
-                :path="mdiLoading"
+                :icon="PhSpinnerBall"
                 color="text-yellow-500"
                 class="animate animate-spin"
               />
@@ -119,7 +114,7 @@ async function resetPassword() {
               <FormField label="Auth Key">
                 <FormControl
                   v-model="form.authKey"
-                  :icon="mdiShieldKeyOutline"
+                  :icon="PhKey"
                   type="text"
                   name="token"
                   inputmode="numeric"
@@ -131,7 +126,7 @@ async function resetPassword() {
               <BaseButton label="Unlock" type="submit" color="info" />
               <BaseIcon
                 v-if="form.loading"
-                :path="mdiLoading"
+                :icon="PhSpinnerBall"
                 color="text-yellow-500"
                 class="animate animate-spin"
               />
@@ -151,7 +146,7 @@ async function resetPassword() {
               <FormField label="New Password">
                 <FormControl
                   v-model="form.newPassword"
-                  :icon="mdiAsterisk"
+                  :icon="PhPassword"
                   type="password"
                   required
                   minlength="8"
@@ -160,7 +155,7 @@ async function resetPassword() {
               <FormField label="Confirm Password">
                 <FormControl
                   v-model="form.confirmPassword"
-                  :icon="mdiAsterisk"
+                  :icon="PhPassword"
                   type="password"
                   required
                   minlength="8"
@@ -173,7 +168,7 @@ async function resetPassword() {
               />
               <BaseIcon
                 v-if="form.loading"
-                :path="mdiLoading"
+                :icon="PhSpinnerBall"
                 color="text-yellow-500"
                 class="animate animate-spin"
               />

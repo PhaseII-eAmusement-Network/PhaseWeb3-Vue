@@ -1,16 +1,8 @@
 <script setup>
 import axios from "axios";
-import {
-  mdiCog,
-  mdiAccountDetails,
-  mdiPlaylistMusicOutline,
-  mdiFormatListText,
-  mdiAxeBattle,
-} from "@mdi/js";
 import { ref, onMounted } from "vue";
 import { dashCode } from "@/constants/userData";
-import { GameConstants, getGameInfo, getRivalInfo } from "@/constants";
-import BaseButton from "@/components/BaseButton.vue";
+import { GameConstants, getGameInfo } from "@/constants";
 import UserEmblem from "@/components/UserEmblem.vue";
 import UserQpro from "@/components/UserQpro.vue";
 import { getGitadoraColor, getJubilityColor } from "@/constants/skillColor.js";
@@ -27,10 +19,6 @@ const props = defineProps({
   profile: {
     type: Object,
     required: true,
-  },
-  useSmall: {
-    type: Boolean,
-    default: false,
   },
 });
 
@@ -110,68 +98,6 @@ onMounted(async () => {
           </p>
         </template>
         <p class="text-xl font-mono">{{ dashCode(profile.extid) }}</p>
-      </div>
-    </div>
-    <div class="space-y-2 text-center md:text-left lg:mx-12 p-2">
-      <div
-        class="pt-6 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 2xl:grid-cols-5 gap-3"
-      >
-        <BaseButton
-          v-if="!useSmall && game"
-          :icon="mdiAccountDetails"
-          :href="`/#/games/${game}/profiles/${profile.userId}`"
-          :outline="false"
-          color="info"
-          label="View Profile"
-        />
-        <BaseButton
-          v-if="!useSmall && game"
-          :icon="mdiCog"
-          :href="`/#/games/${game}/edit`"
-          :outline="false"
-          color="info"
-          label="Edit Profile"
-        />
-        <BaseButton
-          v-if="!useSmall && game && getRivalInfo(game, version)"
-          :icon="mdiAxeBattle"
-          :href="`/#/games/${game}/rivals`"
-          :outline="false"
-          color="info"
-          label="Rivals"
-        />
-        <BaseButton
-          v-if="!useSmall && !thisGame.noScores"
-          :href="`/#/games/${game}/scores/${profile.userId}`"
-          :icon="mdiPlaylistMusicOutline"
-          :outline="false"
-          color="info"
-          label="My Scores"
-        />
-        <BaseButton
-          v-if="!useSmall && !thisGame.noRecords"
-          :href="`/#/games/${game}/records/${profile.userId}`"
-          :icon="mdiFormatListText"
-          :outline="false"
-          color="info"
-          label="My Records"
-        />
-        <BaseButton
-          v-if="!useSmall && !thisGame.noScores"
-          :href="`/#/games/${game}/scores`"
-          :icon="mdiPlaylistMusicOutline"
-          :outline="false"
-          color="info"
-          label="Network Scores"
-        />
-        <BaseButton
-          v-if="!useSmall && !thisGame.noRecords"
-          :href="`/#/games/${game}/records`"
-          :icon="mdiFormatListText"
-          :outline="false"
-          color="info"
-          label="Network Records"
-        />
       </div>
     </div>
   </div>

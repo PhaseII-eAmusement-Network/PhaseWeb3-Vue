@@ -2,12 +2,12 @@
 import { reactive, ref } from "vue";
 import { useRouter } from "vue-router";
 import {
-  mdiAccount,
-  mdiMail,
-  mdiAsterisk,
-  mdiCardAccountDetailsOutline,
-  mdiLoading,
-} from "@mdi/js";
+  PhUser,
+  PhAt,
+  PhPassword,
+  PhCreditCard,
+  PhSpinnerBall,
+} from "@phosphor-icons/vue";
 import CardBox from "@/components/CardBox.vue";
 import FormCheckRadio from "@/components/FormCheckRadio.vue";
 import FormField from "@/components/FormField.vue";
@@ -92,7 +92,7 @@ async function registerProfile() {
               <FormField label="Desired Username">
                 <FormControl
                   v-model="profileForm.username"
-                  :icon="mdiAccount"
+                  :icon="PhUser"
                   name="username"
                   required
                   autocomplete="username"
@@ -102,7 +102,7 @@ async function registerProfile() {
               <FormField label="Email Address">
                 <FormControl
                   v-model="profileForm.email"
-                  :icon="mdiMail"
+                  :icon="PhAt"
                   type="email"
                   name="email"
                   required
@@ -113,7 +113,7 @@ async function registerProfile() {
               <FormField label="Password">
                 <FormControl
                   v-model="profileForm.newPassword"
-                  :icon="mdiAsterisk"
+                  :icon="PhPassword"
                   name="newPassword"
                   type="password"
                   required
@@ -123,7 +123,7 @@ async function registerProfile() {
               <FormField label="Password Confirmation">
                 <FormControl
                   v-model="profileForm.confirmPassword"
-                  :icon="mdiAsterisk"
+                  :icon="PhPassword"
                   name="confirmPassword"
                   type="password"
                   required
@@ -136,7 +136,7 @@ async function registerProfile() {
               >
                 <FormControl
                   v-model="profileForm.cardId"
-                  :icon="mdiCardAccountDetailsOutline"
+                  :icon="PhCreditCard"
                   name="cardId"
                   type="card"
                   placeholder="XXXX-XXXX-XXXX-XXXX"
@@ -150,7 +150,7 @@ async function registerProfile() {
               <FormField label="Game PIN">
                 <FormControl
                   v-model="profileForm.pin"
-                  :icon="mdiAsterisk"
+                  :icon="PhPassword"
                   type="password"
                   name="pin"
                   required
@@ -175,7 +175,7 @@ async function registerProfile() {
                 <BaseButton type="submit" label="Register" color="success" />
                 <BaseIcon
                   v-if="registerLoading"
-                  :path="mdiLoading"
+                  :icon="PhSpinnerBall"
                   color="text-yellow-500"
                   class="animate animate-spin"
                 />

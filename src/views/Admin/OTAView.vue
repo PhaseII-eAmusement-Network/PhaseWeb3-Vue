@@ -1,6 +1,6 @@
 <script setup>
 import { reactive } from "vue";
-import { mdiUpdate, mdiCloudUploadOutline } from "@mdi/js";
+import { PhCloudArrowDown, PhCloudArrowUp } from "@phosphor-icons/vue";
 import SectionMain from "@/components/SectionMain.vue";
 import CardBox from "@/components/CardBox.vue";
 import CardBoxWidget from "@/components/CardBoxWidget.vue";
@@ -30,9 +30,9 @@ const newUpdate = reactive({
   <LayoutAuthenticated>
     <SectionMain>
       <SectionTitleLine
-        :icon="mdiUpdate"
+        :icon="PhCloudArrowDown"
         title="OTA Update Administration"
-        color="text-red-600"
+        color="text-sky-500"
         main
       />
 
@@ -41,8 +41,9 @@ const newUpdate = reactive({
       </div>
 
       <SectionTitleLine
-        :icon="mdiCloudUploadOutline"
+        :icon="PhCloudArrowUp"
         title="Add an Update"
+        color="text-emerald-500"
         main
       />
       <CardBox is-form class="row-span-1">

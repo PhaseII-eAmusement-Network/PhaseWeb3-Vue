@@ -2,11 +2,11 @@
 import { ref, reactive, onMounted } from "vue";
 import { useRoute } from "vue-router";
 import {
-  mdiDatabasePlusOutline,
-  mdiDatabaseEditOutline,
-  mdiGamepad,
-  mdiShieldEditOutline,
-} from "@mdi/js";
+  PhPlusCircle,
+  PhPencilCircle,
+  PhJoystick,
+  PhGear,
+} from "@phosphor-icons/vue";
 import { useMainStore } from "@/stores/main";
 import SectionMain from "@/components/SectionMain.vue";
 import CardBox from "@/components/CardBox.vue";
@@ -193,7 +193,7 @@ async function deleteMachine() {
 
         <template v-if="mainStore.userAdmin">
           <SectionTitleLine
-            :icon="mdiShieldEditOutline"
+            :icon="PhGear"
             title="Machine Administration"
             main
           />
@@ -202,7 +202,7 @@ async function deleteMachine() {
               <PillTag
                 color="success"
                 label="Add Machine"
-                :icon="mdiDatabasePlusOutline"
+                :icon="PhPlusCircle"
                 class="mb-2"
               />
               <form class="h-full" @submit.prevent="addMachine()">
@@ -265,7 +265,7 @@ async function deleteMachine() {
               <PillTag
                 color="warning"
                 label="Edit Machine"
-                :icon="mdiDatabaseEditOutline"
+                :icon="PhPencilCircle"
                 class="mb-2"
               />
               <FormField label="Machine">
@@ -330,7 +330,7 @@ async function deleteMachine() {
           </div>
         </template>
 
-        <SectionTitleLine :icon="mdiGamepad" title="Machines" main />
+        <SectionTitleLine :icon="PhJoystick" title="Machines" main />
         <CardBox has-table>
           <div
             class="bg-white dark:bg-slate-900/95 rounded-2xl lg:flex lg:justify-between"

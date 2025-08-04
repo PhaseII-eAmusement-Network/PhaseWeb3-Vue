@@ -2,7 +2,7 @@
 import { ref, computed } from "vue";
 import { RouterLink } from "vue-router";
 import { useStyleStore } from "@/stores/style.js";
-import { mdiMinus, mdiPlus } from "@mdi/js";
+import { PhCaretUp } from "@phosphor-icons/vue";
 import { getButtonColor } from "@/colors.js";
 import BaseIcon from "@/components/BaseIcon.vue";
 import AsideMenuList from "@/components/Menus/AsideMenuList.vue";
@@ -59,7 +59,8 @@ const menuClick = (event) => {
     >
       <BaseIcon
         v-if="item.icon"
-        :path="item.icon"
+        :icon="item.icon"
+        :fill="item.fill ? item.fill : 'regular'"
         class="flex-none"
         :class="[vSlot && vSlot.isExactActive ? asideMenuItemActiveStyle : '']"
         w="w-16"
@@ -75,10 +76,15 @@ const menuClick = (event) => {
       >
       <BaseIcon
         v-if="hasDropdown"
-        :path="isDropdownActive ? mdiMinus : mdiPlus"
-        class="flex-none"
-        :class="[vSlot && vSlot.isExactActive ? asideMenuItemActiveStyle : '']"
-        w="w-12"
+        :icon="PhCaretUp"
+        :size="18"
+        :fill="item.fill ? item.fill : 'regular'"
+        class="flex-none transition-transform duration-150 ease-in-out"
+        :class="[
+          isDropdownActive ? 'rotate-0' : 'rotate-180',
+          vSlot && vSlot.isExactActive ? asideMenuItemActiveStyle : '',
+        ]"
+        w="w-10"
       />
     </component>
     <Transition
@@ -92,10 +98,7 @@ const menuClick = (event) => {
       <AsideMenuList
         v-show="isDropdownActive"
         :menu="item.menu"
-        :class="[
-          styleStore.asideMenuDropdownStyle,
-          'dark:bg-slate-800/50',
-        ]"
+        :class="[styleStore.asideMenuDropdownStyle, 'dark:bg-slate-800/50']"
         is-dropdown-list
       />
     </Transition>
