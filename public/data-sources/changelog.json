@@ -24,5 +24,5 @@
     "3.0.22": ["- (Major) Finish first implementation of the public profile page", "- (Minor) Clean up dashboard game stat box", "- (Minor) Load profile name in game stat box"],
     "3.0.23": ["- (Major) Moved to Tailwind V4 (SoftieTechCat)", "- (Major) Updated all dependencies (SoftieTechCat)", "- (Bugfix) Fix bug if user has no read news", "- (Backend) Insane optimization with user loading, data loading, cache parsing. (SoftieTechCat)", "- (Minor) Add new greetings."],
     "3.0.24": ["- (Bugfix) Fix theme forcing for dark mode", "- (Bugfix) Fix animations across entire app", "- (Bugfix) Fix cursor on login screen easter egg", "- (Minor) Add new greeting"],
-    "3.0.25": ["- (Major ++) Move from Material Design Icons to Phosphor Icons. Icons are currently set to their initial picks, but may change (suggest a change!)", "- (Major) Add initial icon animations, start work on icon color standards", "- (Minor) Fix ESlint config"]
+    "3.0.25-oMini": ["- (Major ++) Move from Material Design Icons to Phosphor Icons. Icons are currently set to their initial picks, but may change (suggest a change!)", "- (Major) Add initial icon animations, start work on icon color standards", "- (Optimization) Improve random greeting selection (SoftieTechCat) ", "- (Minor) Fix ESlint config"]
 }
