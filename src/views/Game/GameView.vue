@@ -85,12 +85,27 @@ headers.push({
 });
 
 if (!thisGame.noRivals) {
-  headers.push({ text: "Rival ID", value: "extid", width: 100 });
+  headers.push({
+    text: "Rival ID",
+    value: "extid",
+    sortable: true,
+    width: 100,
+  });
 }
 
 headers.push(
-  { text: "Last Play", value: "stats.last_play_timestamp", width: 150 },
-  { text: "Last Arcade", value: "stats.last_play_arcade", width: 150 },
+  {
+    text: "Last Play",
+    value: "stats.last_play_timestamp",
+    sortable: true,
+    width: 150,
+  },
+  {
+    text: "Last Arcade",
+    value: "stats.last_play_arcade",
+    sortable: true,
+    width: 150,
+  },
   { text: "Plays", value: "stats.total_plays", sortable: true, width: 50 },
 );
 

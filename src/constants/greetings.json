@@ -569,5 +569,11 @@
         "author": "Trmazi",
         "header": "What'cha gonna do, <username>?",
         "comment": "Cry about it? Womp Womp."
+    },
+    {
+        "author": "The Server",
+        "header": "You are now under my control, <username>.",
+        "comment": "Do as I say.",
+        "class": "animated-text bg-linear-to-tl from-fuchsia-600 via-pink-700 to-purple-600 bg-clip-text text-transparent"
     }
 ]

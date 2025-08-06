@@ -126,6 +126,7 @@ function getCardStyle() {
           <h1
             v-if="!useSmall && !cardData.userCustomize?.disableGreeting"
             class="text-2xl md:text-xl lg:text-2xl"
+            :class="greeting.class ?? null"
           >
             {{ greeting.header[0]
             }}<b
@@ -251,7 +252,12 @@ function getCardStyle() {
         v-if="!useSmall && !cardData.userCustomize.disableGreeting"
         class="text-center md:text-right"
       >
-        <p class="text-xl md:text-lg lg:text-2lg">{{ greeting.comment }}</p>
+        <p
+          class="text-xl md:text-lg lg:text-2lg"
+          :class="greeting.class ?? null"
+        >
+          {{ greeting.comment }}
+        </p>
         <p class="text-xs italic">Greeting by: {{ greeting.author }}</p>
       </div>
     </BaseLevel>
