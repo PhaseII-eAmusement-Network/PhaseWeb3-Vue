@@ -2029,7 +2029,7 @@ export const gameData = [
     name: "SILENT SCOPE: BONE EATER",
     skip: true,
     noRivals: true,
-    noScores: false,
+    noScores: true,
     noRecords: true,
     useUnicode: true,
     gameOptions: SilentScopeOptions,

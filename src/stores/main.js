@@ -36,6 +36,7 @@ export const useMainStore = defineStore("main", {
     loadingPool: [],
     savingPool: [],
     errorCode: null,
+    continueLoad: false,
 
     /* User Loaded state */
     userLoaded: false,
@@ -160,10 +161,12 @@ export const useMainStore = defineStore("main", {
           this.savingPool = this.savingPool.filter((e) => e !== endpoint);
           return null;
         }
-        this.isLoading = false; // reset flags
-        this.isSaving = false;
-        this.loadingPool = this.loadingPool.filter((e) => e !== endpoint);
-        this.savingPool = this.savingPool.filter((e) => e !== endpoint);
+        if (!this.continueLoad) {
+          this.isLoading = false; // reset flags
+          this.isSaving = false;
+          this.loadingPool = this.loadingPool.filter((e) => e !== endpoint);
+          this.savingPool = this.savingPool.filter((e) => e !== endpoint);
+        }
         return response.data;
       } catch (error) {
         this.errorCode = error.message;

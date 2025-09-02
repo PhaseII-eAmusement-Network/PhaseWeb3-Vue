@@ -8,6 +8,7 @@ import {
   PhJoystick,
   PhCrown,
   PhFilmSlate,
+  PhArchive,
 } from "@phosphor-icons/vue";
 import { ref, watch, onMounted, computed } from "vue";
 import { useRouter, useRoute } from "vue-router";
@@ -212,6 +213,12 @@ const menuAside = computed(() => {
       menu: sortedArcades,
     });
   }
+
+  sideMenu.push({
+    to: "/profile/export",
+    icon: PhArchive,
+    label: "Data Export",
+  });
 
   sideMenu.push({
     label: "Claim Arcade",

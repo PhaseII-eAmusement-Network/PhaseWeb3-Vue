@@ -89,3 +89,20 @@ export async function APIGetAchievements(
     throw error;
   }
 }
+
+export async function APIGetLinks(game, version) {
+  while (!mainStore.userId) {
+    await new Promise((resolve) => setTimeout(resolve, 200));
+  }
+  const userId = mainStore.userId;
+
+  try {
+    const data = await mainStore.callApi(
+      `/profile/${game}/links?version=${version}&userId=${userId}`,
+    );
+    return data?.data;
+  } catch (error) {
+    console.log("Error fetching profile links:", error);
+    throw error;
+  }
+}

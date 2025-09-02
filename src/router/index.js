@@ -90,6 +90,14 @@ const routes = [
     name: "profile_claim",
     component: () => import("@/views/Profile/ClaimView.vue"),
   },
+  {
+    meta: {
+      title: "Data Export",
+    },
+    path: "/profile/export",
+    name: "data_export",
+    component: () => import("@/views/Profile/ExportView.vue"),
+  },
   // {
   //   meta: {
   //     title: "Goals",

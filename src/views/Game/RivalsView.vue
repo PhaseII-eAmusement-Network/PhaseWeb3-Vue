@@ -12,7 +12,11 @@ import SectionTitleLine from "@/components/SectionTitleLine.vue";
 import FormControl from "@/components/FormControl.vue";
 import FormField from "@/components/FormField.vue";
 
-import { APIGetProfile, APIGetAllProfiles } from "@/stores/api/profile";
+import {
+  APIGetProfile,
+  APIGetAllProfiles,
+  APIGetLinks,
+} from "@/stores/api/profile";
 import { getGameInfo } from "@/constants";
 import { dashCode } from "@/constants/userData";
 
@@ -25,6 +29,7 @@ gameID = $route.params.game;
 thisGame = getGameInfo(gameID);
 
 const profile = ref(null);
+const links = ref(null);
 const allProfiles = ref([]);
 const versionForm = reactive({
   currentVersion: null,
@@ -34,13 +39,15 @@ watch(
   () => versionForm.currentVersion,
   () => {
     loadProfile();
+    loadLinks();
     loadAllProfiles();
   },
 );
 
 onMounted(async () => {
   loadAllProfiles();
-  loadProfile();
+  await loadProfile();
+  loadLinks();
 });
 
 if (!thisGame.versions) {
@@ -58,6 +65,16 @@ async function loadProfile() {
     }
   } catch (error) {
     console.error("Failed to fetch user profile data:", error);
+  }
+}
+
+async function loadLinks() {
+  try {
+    links.value = null;
+    const linkData = await APIGetLinks(gameID, versionForm.currentVersion);
+    links.value = linkData;
+  } catch (error) {
+    console.error("Failed to fetch user link data:", error);
   }
 }
 
@@ -194,7 +211,7 @@ function filterProfiles() {
             </div>
           </CardBox>
           <CardBox v-if="!profile?.rivals">
-            <h1 class="text-2xl">You have no rivals!</h1>
+            <h1 class="text-2xl">{{ links }}</h1>
           </CardBox>
         </div>
       </CardBox>

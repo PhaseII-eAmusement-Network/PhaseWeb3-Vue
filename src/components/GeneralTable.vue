@@ -2,8 +2,8 @@
 import { PhDownload, PhCaretLeft, PhCaretRight } from "@phosphor-icons/vue";
 import BaseButton from "@/components/BaseButton.vue";
 import UserAvatar from "@/components/UserAvatar.vue";
-import DownloadJS from "downloadjs";
 import { useRoute } from "vue-router";
+import { exportJSON } from "@/helpers/contentExport";
 
 const $route = useRoute();
 
@@ -15,11 +15,10 @@ const handleRowClick = (item) => {
 };
 
 function downloadJSON() {
-  DownloadJS(
-    JSON.stringify({ headers: props.headers, data: props.items }),
-    `export${$route.fullPath}_data.json`,
-    "text/plain",
-  );
+  exportJSON($route.fullPath, {
+    headers: props.headers,
+    data: props.items,
+  });
 }
 </script>
 
