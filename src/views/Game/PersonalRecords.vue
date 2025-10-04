@@ -92,14 +92,14 @@ const filteredSongs = computed(() => {
         <div class="flex gap-2 mb-6 md:mb-0">
           <BaseButton
             :icon="PhUser"
-            :href="`/#/games/${thisGame.id}/profiles/${myProfile.userId}`"
+            :to="`/games/${thisGame.id}/profiles/${myProfile.userId}`"
             :outline="false"
             color="info"
             :label="`${myProfile.username}'s Profile`"
           />
           <BaseButton
             :icon="PhMedal"
-            :href="`/#/games/${thisGame.id}/scores/${myProfile.userId}`"
+            :to="`/games/${thisGame.id}/scores/${myProfile.userId}`"
             :outline="false"
             color="info"
             :label="`${myProfile.username}'s Scores`"
@@ -134,7 +134,7 @@ const filteredSongs = computed(() => {
               <BaseButton
                 label="View Song"
                 color="info"
-                :href="`/#/games/${gameId}/song/${song.id}`"
+                :to="`/games/${gameId}/song/${song.id}`"
               />
             </div>
 

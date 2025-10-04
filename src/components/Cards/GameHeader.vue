@@ -42,7 +42,7 @@ function loadRoutes() {
         props.game.shortName ? props.game.shortName : props.game.name
       } Home`,
       icon: PhHouse,
-      path: `/#/games/${props.game.id}/`,
+      path: `/games/${props.game.id}/`,
       route: "game_page",
       color: "success",
     },
@@ -52,7 +52,7 @@ function loadRoutes() {
     navigationData.push({
       label: "My Profile",
       icon: PhUserList,
-      path: `/#/games/${props.game.id}/profiles/${mainStore.userId}`,
+      path: `/games/${props.game.id}/profiles/${mainStore.userId}`,
       route: "game_profile",
       color: "info",
     });
@@ -60,7 +60,7 @@ function loadRoutes() {
     navigationData.push({
       label: "Edit Profile",
       icon: PhGear,
-      path: `/#/games/${props.game.id}/edit`,
+      path: `/games/${props.game.id}/edit`,
       route: "edit_profile",
       color: "warning",
     });
@@ -69,7 +69,7 @@ function loadRoutes() {
       navigationData.push({
         label: "Rivals",
         icon: PhSword,
-        path: `/#/games/${props.game.id}/rivals`,
+        path: `/games/${props.game.id}/rivals`,
         route: "game_rivals",
         color: "danger",
       });
@@ -79,7 +79,7 @@ function loadRoutes() {
       navigationData.push({
         label: "My Scores",
         icon: PhPlaylist,
-        path: `/#/games/${props.game.id}/scores/${mainStore.userId}`,
+        path: `/games/${props.game.id}/scores/${mainStore.userId}`,
         color: "info",
       });
     }
@@ -87,7 +87,7 @@ function loadRoutes() {
     navigationData.push({
       label: "My Records",
       icon: PhListStar,
-      path: `/#/games/${props.game.id}/records/${mainStore.userId}`,
+      path: `/games/${props.game.id}/records/${mainStore.userId}`,
       route: "personal_records",
       color: "success",
     });
@@ -98,14 +98,14 @@ function loadRoutes() {
       {
         label: "Network Scores",
         icon: PhPlaylist,
-        path: `/#/games/${props.game.id}/scores`,
+        path: `/games/${props.game.id}/scores`,
         route: "all_scores",
         color: "info",
       },
       {
         label: "Network Records",
         icon: PhListStar,
-        path: `/#/games/${props.game.id}/records`,
+        path: `/games/${props.game.id}/records`,
         route: "all_records",
         color: "success",
       },
@@ -142,7 +142,7 @@ function loadRoutes() {
             <template v-for="item of loadRoutes()" :key="item.path">
               <BaseButton
                 v-if="item.route != $route.name"
-                :href="item.path"
+                :to="item.path"
                 :icon="item.icon"
                 :label="item.label"
                 :color="item.color"

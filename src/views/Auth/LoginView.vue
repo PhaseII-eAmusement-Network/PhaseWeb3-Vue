@@ -100,18 +100,10 @@ const submit = async () => {
 
             <div class="flex flex-col gap-2 my-4">
               <h2>Not Registered?</h2>
-              <BaseButton
-                label="Register"
-                color="info"
-                href="/#/auth/register"
-              />
+              <BaseButton label="Register" color="info" to="/auth/register" />
 
               <h2>Forgot Password?</h2>
-              <BaseButton
-                label="i forgor"
-                color="warning"
-                href="/#/auth/reset"
-              />
+              <BaseButton label="i forgor" color="warning" to="/auth/reset" />
             </div>
           </form>
         </div>

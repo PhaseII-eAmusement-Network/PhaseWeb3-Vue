@@ -87,7 +87,7 @@ const filteredSongs = computed(() => {
             <BaseButton
               label="View Song"
               color="info"
-              :href="`/#/games/${gameId}/song/${song.id}`"
+              :to="`/games/${gameId}/song/${song.id}`"
             />
           </div>
 

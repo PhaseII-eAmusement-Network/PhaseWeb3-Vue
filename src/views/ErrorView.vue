@@ -26,7 +26,7 @@ import LayoutGuest from "@/layouts/LayoutGuest.vue";
             <h2 class="mb-2">
               The server was unable to locate the page you're trying to go to.
             </h2>
-            <BaseButton label="Home" color="info" href="/" />
+            <BaseButton label="Home" color="info" to="/" />
           </div>
         </div>
       </CardBox>

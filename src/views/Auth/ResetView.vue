@@ -177,7 +177,7 @@ async function resetPassword() {
             <hr v-if="!form.authValid" class="border-t border mt-3 w-full" />
             <div v-if="!form.authValid" class="flex flex-col gap-2 my-1">
               <h2>Remember it?</h2>
-              <BaseButton label="Log In" color="success" href="/#/auth/login" />
+              <BaseButton label="Log In" color="success" to="/auth/login" />
             </div>
           </div>
         </div>

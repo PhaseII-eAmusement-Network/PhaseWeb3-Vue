@@ -106,3 +106,48 @@ export async function APIGetLinks(game, version) {
     throw error;
   }
 }
+
+export async function APIPutLink(game, version, otherUserId, type) {
+  while (!mainStore.userId) {
+    await new Promise((resolve) => setTimeout(resolve, 200));
+  }
+  const userId = mainStore.userId;
+
+  try {
+    await mainStore.callApi(`/profile/${game}/link`, "PUT", {
+      version: version,
+      userId: userId,
+      otherUserId: otherUserId,
+      type: type,
+    });
+    return true;
+  } catch (error) {
+    console.log("Error putting profile link:", error);
+    throw error;
+  }
+}
+
+export async function APIDeleteLink(game, version, otherUserId, type) {
+  while (!mainStore.userId) {
+    await new Promise((resolve) => setTimeout(resolve, 200));
+  }
+  const userId = mainStore.userId;
+
+  const confirmed = window.confirm("Are you really?");
+  if (confirmed) {
+    try {
+      await mainStore.callApi(`/profile/${game}/link`, "DELETE", {
+        version: version,
+        userId: userId,
+        otherUserId: otherUserId,
+        type: type,
+      });
+      return true;
+    } catch (error) {
+      console.log("Error deleting profile link:", error);
+      throw error;
+    }
+  } else {
+    return false;
+  }
+}

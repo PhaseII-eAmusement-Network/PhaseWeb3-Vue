@@ -185,14 +185,14 @@ const navigateToSong = (item) => {
         <div class="flex gap-2 mb-6">
           <BaseButton
             :icon="PhUser"
-            :href="`/#/games/${thisGame.id}/profiles/${myProfile.userId}`"
+            :to="`/games/${thisGame.id}/profiles/${myProfile.userId}`"
             :outline="false"
             color="info"
             :label="`${myProfile.username}'s Profile`"
           />
           <BaseButton
             :icon="PhRanking"
-            :href="`/#/games/${thisGame.id}/records/${myProfile.userId}`"
+            :to="`/games/${thisGame.id}/records/${myProfile.userId}`"
             :outline="false"
             color="info"
             :label="`${myProfile.username}'s Records`"

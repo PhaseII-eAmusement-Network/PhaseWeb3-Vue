@@ -1,6 +1,5 @@
 <script setup>
 import { useMainStore } from "@/stores/main";
-import { useRouter } from "vue-router";
 import { ref, watch } from "vue";
 import { PhPaintBrushBroad } from "@phosphor-icons/vue";
 
@@ -16,7 +15,6 @@ import FormCheckRadio from "@/components/FormCheckRadio.vue";
 import { ProfileCustomizations } from "@/constants/customizations";
 import { APIUserCustomize } from "@/stores/api/account";
 
-const $router = useRouter();
 const mainStore = useMainStore();
 const userCustomize = ref(mainStore.userCustomize);
 var originalData = JSON.parse(JSON.stringify(mainStore.userCustomize));
@@ -40,7 +38,8 @@ async function updateCustomize() {
 
   if (data?.status === "success") {
     mainStore.userLoaded = false;
-    $router.go();
+    await mainStore.loadUser();
+    location.reload();
   }
 }
 
@@ -54,7 +53,8 @@ function userChanged() {
 
 async function revert() {
   mainStore.userLoaded = false;
-  $router.go();
+  await mainStore.loadUser();
+  location.reload();
 }
 </script>
 

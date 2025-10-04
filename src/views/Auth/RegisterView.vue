@@ -186,7 +186,7 @@ async function registerProfile() {
 
               <div class="flex flex-col gap-2 my-4">
                 <h2>Have an Account?</h2>
-                <BaseButton label="Log In" color="info" href="/#/auth/login" />
+                <BaseButton label="Log In" color="info" to="/auth/login" />
               </div>
             </div>
           </div>

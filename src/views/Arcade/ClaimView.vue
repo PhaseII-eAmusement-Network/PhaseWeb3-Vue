@@ -132,7 +132,7 @@ async function saveSettings() {
             <BaseButton
               color="success"
               label="Go to Arcade"
-              :href="`#/arcade/${takeoverData?.arcade?.id}`"
+              :to="`/arcade/${takeoverData?.arcade?.id}`"
             />
           </div>
         </CardBox>

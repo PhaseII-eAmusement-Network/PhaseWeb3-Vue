@@ -400,7 +400,7 @@ async function generateTimeline(myProfile) {
                   class="md:w-1/3 grid grid-cols-1 md:grid-cols-2 gap-3 mt-4"
                 >
                   <BaseButton
-                    :href="`/#/games/${gameID}/scores/${myProfile.userId}`"
+                    :to="`/games/${gameID}/scores/${myProfile.userId}`"
                     :icon="PhMedal"
                     class="w-full md:w-auto"
                     color="info"
@@ -408,7 +408,7 @@ async function generateTimeline(myProfile) {
                   />
 
                   <BaseButton
-                    :href="`/#/games/${gameID}/records/${myProfile.userId}`"
+                    :to="`/games/${gameID}/records/${myProfile.userId}`"
                     :icon="PhRanking"
                     class="w-full md:w-auto"
                     color="info"

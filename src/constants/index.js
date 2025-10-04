@@ -84,6 +84,7 @@ export class VersionConstants {
   static DDR_A20 = 17;
   static DDR_A20_PLUS = 18;
   static DDR_A3 = 19;
+  static DDR_WORLD = 20;
 
   static DRUMMANIA_1ST = 1;
   static DRUMMANIA_2ND = 2;
@@ -476,6 +477,7 @@ export const gameData = [
     icon: null,
     cardBG: null,
     gameOptions: DDROptions,
+    useActiveRival: true,
     videoTable: [
       VersionConstants.DDR_ACE,
       VersionConstants.DDR_A20,
@@ -571,46 +573,62 @@ export const gameData = [
       {
         id: VersionConstants.DDR_X,
         label: "X",
+        maxRivals: 10,
+        maxActiveRivals: 1,
       },
       {
         id: VersionConstants.DDR_X2,
         label: "X2",
-        maxRivals: 1,
+        maxRivals: 10,
+        maxActiveRivals: 1,
       },
       {
         id: VersionConstants.DDR_X3_VS_2ND_MIX,
         label: "X3 vs. 2ND MIX",
-        maxRivals: 3,
+        maxRivals: 10,
+        maxActiveRivals: 3,
       },
       {
         id: VersionConstants.DDR_2013,
         label: "(2013)",
-        maxRivals: 3,
+        maxRivals: 10,
+        maxActiveRivals: 3,
       },
       {
         id: VersionConstants.DDR_2014,
         label: "(2014)",
-        maxRivals: 3,
+        maxRivals: 10,
+        maxActiveRivals: 3,
       },
       {
         id: VersionConstants.DDR_ACE,
         label: "Ace",
-        maxRivals: 3,
+        maxRivals: 10,
+        maxActiveRivals: 3,
       },
       {
         id: VersionConstants.DDR_A20,
         label: "A20",
-        maxRivals: 3,
+        maxRivals: 10,
+        maxActiveRivals: 3,
       },
       {
         id: VersionConstants.DDR_A20_PLUS,
         label: "A20 PLUS",
-        maxRivals: 3,
+        maxRivals: 10,
+        maxActiveRivals: 3,
       },
       {
         id: VersionConstants.DDR_A3,
         label: "A3",
-        maxRivals: 3,
+        maxRivals: 10,
+        maxActiveRivals: 3,
+      },
+      {
+        id: VersionConstants.DDR_WORLD,
+        label: "WORLD",
+        maxRivals: 10,
+        maxActiveRivals: 3,
       },
     ],
   },
@@ -674,6 +692,7 @@ export const gameData = [
     cardBG: `${ASSET_PATH}/card/ddr.webp`,
     assetId: "ddr",
     gameOptions: DDROptions,
+    useActiveRival: true,
     videoTable: [VersionConstants.DDR_A20_PLUS],
     scoreHeaders: [
       { text: "Combos", value: "data.combo", width: 80 },
@@ -792,7 +811,8 @@ export const gameData = [
       {
         id: VersionConstants.DDR_A20_PLUS,
         label: "OmniMIX (A20 PLUS)",
-        maxRivals: 3,
+        maxRivals: 10,
+        maxActiveRivals: 3,
       },
     ],
   },

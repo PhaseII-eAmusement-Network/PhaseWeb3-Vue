@@ -95,26 +95,26 @@ function getCardStyle(path) {
 
         <div class="md:w-full grid grid-cols-1 md:grid-cols-4 gap-3">
           <BaseButton
-            :href="`/#/arcade/${arcade.id}`"
+            :to="`/arcade/${arcade.id}`"
             :icon="PhHouse"
             color="info"
             label="Arcade Home"
             class="w-full md:w-[150px]"
           />
           <BaseButton
-            :href="`/#/arcade/${arcade.id}/events`"
+            :to="`/arcade/${arcade.id}/events`"
             :icon="PhNewspaper"
             color="info"
             label="Event Settings"
           />
           <BaseButton
-            :href="`/#/arcade/${arcade.id}/machines`"
+            :to="`/arcade/${arcade.id}/machines`"
             :icon="PhJoystick"
             color="info"
             label="Machine List"
           />
           <BaseButton
-            :href="`/#/arcade/${arcade.id}/paseli`"
+            :to="`/arcade/${arcade.id}/paseli`"
             :icon="PhCashRegister"
             color="info"
             label="PASELI"

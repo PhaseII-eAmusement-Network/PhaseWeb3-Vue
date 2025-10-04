@@ -248,7 +248,7 @@ async function saveSettings() {
           </h2>
 
           <div class="mt-4">
-            <BaseButton color="success" label="Return to Dashboard" href="#/" />
+            <BaseButton color="success" label="Return to Dashboard" to="/" />
           </div>
         </CardBox>
       </div>
