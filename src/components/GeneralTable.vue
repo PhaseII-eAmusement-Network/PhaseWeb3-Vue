@@ -31,6 +31,7 @@ function downloadJSON() {
     header-text-direction="left"
     body-text-direction="left"
     :prevent-context-menu-row="false"
+    class="pt-2"
     @click-row="handleRowClick"
   >
     <template #loading>

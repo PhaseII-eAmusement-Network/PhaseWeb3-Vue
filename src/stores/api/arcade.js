@@ -80,6 +80,20 @@ export async function APIGetArcadePASELI(arcadeId) {
   }
 }
 
+export async function APICreditUserPASELI(arcadeId, userId, cardId, credit) {
+  try {
+    const data = await mainStore.callApi(`/arcade/${arcadeId}/paseli`, "POST", {
+      userId: userId,
+      cardId: cardId,
+      credit: credit,
+    });
+    return data.data;
+  } catch (error) {
+    console.log("Error fetching arcade PASELI data:", error);
+    throw error;
+  }
+}
+
 export async function APIStartTakeover(PCBID) {
   try {
     const data = await mainStore.callApi(`/arcade/takeover?PCBID=${PCBID}`);

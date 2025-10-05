@@ -19,6 +19,7 @@ import FormControl from "@/components/FormControl.vue";
 import PillTag from "@/components/PillTag.vue";
 import BaseIcon from "@/components/BaseIcon.vue";
 import BaseButton from "@/components/BaseButton.vue";
+import BaseButtons from "@/components/BaseButtons.vue";
 import BaseDivider from "@/components/BaseDivider.vue";
 import CardBoxWidget from "@/components/CardBoxWidget.vue";
 import UserAvatar from "@/components/UserAvatar.vue";
@@ -237,6 +238,10 @@ async function adminDeleteArcade() {
     }
   }
 }
+
+const navigateToProfile = (userID) => {
+  $router.push(`/profiles/${userID}`);
+};
 </script>
 
 <template>
@@ -373,11 +378,18 @@ async function adminDeleteArcade() {
                           {{ owner.username }}
                         </h1>
                       </div>
-                      <BaseButton
-                        color="danger"
-                        label="Remove"
-                        @click="removeManager(owner.id)"
-                      />
+                      <BaseButtons>
+                        <BaseButton
+                          label="Open Profile"
+                          color="info"
+                          @click="navigateToProfile(owner.id)"
+                        />
+                        <BaseButton
+                          color="danger"
+                          label="Remove"
+                          @click="removeManager(owner.id)"
+                        />
+                      </BaseButtons>
                     </div>
                   </CardBox>
                 </div>
