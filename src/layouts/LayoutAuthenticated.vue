@@ -23,19 +23,18 @@ import NavBar from "@/components/NavBar.vue";
 import NavBarItemPlain from "@/components/NavBarItemPlain.vue";
 import AsideMenu from "@/components/Menus/AsideMenu.vue";
 import FooterBar from "@/components/FooterBar.vue";
-import { loadUserAuthKey, deleteUserAuthKey } from "@/stores/auth";
 import { gameData } from "@/constants";
 // import BaseButton from "@/components/BaseButton.vue";
 
 const router = useRouter();
 const route = useRoute();
-const userKey = loadUserAuthKey();
 
-if (!userKey) {
-  router.push({
-    name: "login",
-  });
-}
+// need to reimplement this...
+// if (!userKey) {
+//   router.push({
+//     name: "login",
+//   });
+// }
 
 const mainStore = useMainStore();
 onMounted(async () => {
@@ -43,7 +42,6 @@ onMounted(async () => {
     const validSession = await mainStore.loadUser();
     if (!validSession) {
       mainStore.deleteUserSession();
-      deleteUserAuthKey();
       router.push({
         name: "login",
       });
@@ -51,7 +49,6 @@ onMounted(async () => {
   } catch (error) {
     console.error("Failed to check SessionID:", error);
     mainStore.deleteUserSession();
-    deleteUserAuthKey();
     router.push({
       name: "login",
     });
@@ -114,7 +111,6 @@ router.beforeEach(() => {
 const menuClick = (event, item) => {
   if (item.isLogout) {
     mainStore.deleteUserSession();
-    deleteUserAuthKey();
     router.push({
       name: "login",
     });

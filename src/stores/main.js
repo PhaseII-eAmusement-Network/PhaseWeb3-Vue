@@ -1,6 +1,5 @@
 import { defineStore } from "pinia";
 import axios from "axios";
-import { loadUserAuthKey, saveUserAuthKey } from "@/stores/auth";
 
 export const useMainStore = defineStore("main", {
   state: () => ({
@@ -26,9 +25,6 @@ export const useMainStore = defineStore("main", {
 
     /* Field focus with ctrl+k (to register only once) */
     isFieldFocusRegistered: false,
-
-    /* Authentication keys */
-    userAuthKey: null, // Will be loaded and decrypted from cookies
 
     /* Loading state */
     isLoading: false,
@@ -135,8 +131,8 @@ export const useMainStore = defineStore("main", {
 
       const baseHeaders = {
         "App-Auth-Key": apiKey,
-        "User-Auth-Key": loadUserAuthKey(),
       };
+      axios.defaults.withCredentials = true;
 
       const headers = { ...baseHeaders, ...extraHeaders };
 
@@ -180,6 +176,10 @@ export const useMainStore = defineStore("main", {
 
     async fetchAllNews() {
       if (!this.loadedNews) {
+        while (!this.userId) {
+          await new Promise((resolve) => setTimeout(resolve, 200));
+        }
+
         try {
           const data = await this.callApi("/news");
           this.loadedNews = data.slice(0, 2);
@@ -194,12 +194,8 @@ export const useMainStore = defineStore("main", {
     },
 
     async checkUserSession() {
-      const request = {
-        sessionId: loadUserAuthKey(),
-      };
-
       try {
-        const data = await this.callApi(`/auth/session`, "GET", request);
+        const data = await this.callApi(`/auth/session`, "GET");
         return data;
       } catch (error) {
         console.log("Error checking session:", error);
@@ -208,17 +204,8 @@ export const useMainStore = defineStore("main", {
     },
 
     async deleteUserSession() {
-      if (!loadUserAuthKey()) {
-        this.userLoaded = false;
-        return null;
-      }
-
-      const request = {
-        sessionId: loadUserAuthKey(),
-      };
-
       try {
-        const data = await this.callApi(`/auth/session`, "DELETE", request);
+        const data = await this.callApi(`/auth/session`, "DELETE");
         this.userLoaded = false;
         return data;
       } catch (error) {
@@ -231,12 +218,12 @@ export const useMainStore = defineStore("main", {
       const request = {
         username: username,
         password: password,
+        remember: remember, // the 5th of November
       };
 
       try {
         const data = await this.callApi(`/auth/session`, "POST", request);
         if (data && data.status === "success") {
-          saveUserAuthKey(data.sessionId, remember ? 30 : 1);
           return true;
         } else {
           alert("Incorrect username or password!");

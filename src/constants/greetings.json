@@ -575,5 +575,30 @@
         "header": "You are now under my control, <username>.",
         "comment": "Do as I say.",
         "class": "animated-text bg-linear-to-tl from-fuchsia-600 via-pink-700 to-purple-600 bg-clip-text text-transparent"
+    },
+    {
+        "author": "Azui",
+        "header": "We'll meet again, <username>.",
+        "comment": "Challenge the next GALAXY BRAVE!"
+    },
+    {
+        "author": "cameron44251",
+        "header": "Hey, <username>",
+        "comment": "Did you know that the low taper fade meme is still massive?"
+    },
+    {
+        "author": "PopDaCorn",
+        "header": "Welcome home, <username>!",
+        "comment": "Remember to drink water <3. Stay hydrated!"
+    },
+    {
+        "author": "BELOVED",
+        "header": "You'll be okay, <username>.",
+        "comment": "Take care of yourself."
+    },
+    {
+        "author": "RyogAkari",
+        "header": "Greetings, <username>.",
+        "comment": "You tawt you taw a PASELI Cat."
     }
 ]
