@@ -15,6 +15,7 @@ import { APIGetProfile, APIGetAllProfiles } from "@/stores/api/profile";
 import { getGameInfo } from "@/constants";
 import { dashCode } from "@/constants/userData";
 import { getIIDXDan } from "@/constants/danClass";
+import { formatSortableDate } from "@/constants/date";
 
 const $route = useRoute();
 const $router = useRouter();
@@ -124,8 +125,9 @@ function formatProfiles(profiles) {
 
     if (item.stats) {
       if (item.stats.last_play_timestamp) {
-        const date = new Date(item.stats.last_play_timestamp * 1000);
-        item.stats.last_play_timestamp = date.toLocaleString();
+        item.stats.last_play_timestamp = formatSortableDate(
+          item.stats.last_play_timestamp,
+        );
       }
 
       if (item.sgrade) {

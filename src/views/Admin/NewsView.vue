@@ -18,6 +18,7 @@ import BaseButton from "@/components/BaseButton.vue";
 import PillTag from "@/components/PillTag.vue";
 import FormField from "@/components/FormField.vue";
 import FormControl from "@/components/FormControl.vue";
+import { formatSortableDate } from "@/constants/date";
 
 import {
   APIAdminNews,
@@ -32,6 +33,12 @@ const newsData = ref([]);
 const selectedNewsId = ref(null);
 const selectedNews = ref(null);
 const headers = [
+  {
+    text: "Timestamp",
+    value: "timestamp",
+    width: 150,
+    sortable: true,
+  },
   {
     text: "Title",
     value: "title",
@@ -60,8 +67,7 @@ async function loadData() {
     var formattedItems = [];
     for (var item of data) {
       if (item.timestamp) {
-        const date = new Date(item.timestamp * 1000);
-        item.timestamp = date.toLocaleString();
+        item.timestamp = formatSortableDate(item.timestamp);
       }
 
       formattedItems.push(item);

@@ -15,6 +15,7 @@ import BaseButton from "@/components/BaseButton.vue";
 import PillTag from "@/components/PillTag.vue";
 import FormField from "@/components/FormField.vue";
 import FormControl from "@/components/FormControl.vue";
+import { formatSortableDate } from "@/constants/date";
 
 import { APIAdminArcades, APIAdminMachineFromPCBID } from "@/stores/api/admin";
 
@@ -68,8 +69,7 @@ async function loadData() {
     var formattedItems = [];
     for (var item of data) {
       if (item.timestamp) {
-        const date = new Date(item.timestamp * 1000);
-        item.timestamp = date.toLocaleString();
+        item.timestamp = formatSortableDate(item.timestamp);
       }
 
       if (item.owners) {

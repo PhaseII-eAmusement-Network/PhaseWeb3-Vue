@@ -10,6 +10,7 @@ import "@vuepic/vue-datepicker/dist/main.css";
 import App from "./App.vue";
 import router from "./router";
 import { useMainStore } from "@/stores/main.js";
+import { formatSortableDate } from "@/constants/date";
 
 import "./css/_base.css";
 
@@ -22,6 +23,8 @@ app.use(pinia);
 
 app.component("EasyDataTable", Vue3EasyDataTable);
 app.component("VueDatePicker", VueDatePicker);
+
+app.config.globalProperties.$formatSortableDate = formatSortableDate;
 
 app.mount("#app");
 

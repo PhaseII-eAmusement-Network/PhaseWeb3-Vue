@@ -22,22 +22,18 @@ import CardBoxComponentEmpty from "@/components/CardBoxComponentEmpty.vue";
 import { useMainStore } from "@/stores/main";
 import { getGameInfo } from "@/constants";
 import { generateChartData } from "@/components/Charts/chart.config";
+import { formatSortableDate } from "@/constants/date";
 const mainStore = useMainStore();
 var newsData = ref([]);
 
 onMounted(async () => {
   try {
-    const data = await mainStore.fetchAllNews();
+    const data = await mainStore.fetchAllNews(2);
     newsData.value = data;
   } catch (error) {
     console.error("Failed to fetch news data:", error);
   }
 });
-
-function humanReadableTime(timestamp) {
-  const date = new Date(timestamp * 1000);
-  return date.toLocaleString();
-}
 
 const userProfiles = computed(() => mainStore.userProfiles);
 const userScoreStats = computed(() => mainStore.userScoreStats);
@@ -232,7 +228,7 @@ const cardBoxes = ref([
           :key="news.id"
           :title="news.title"
           :content="news.body"
-          :date="humanReadableTime(news.timestamp)"
+          :date="formatSortableDate(news.timestamp)"
           :cover="news.data.img"
           :read="
             mainStore?.userData?.seen_news

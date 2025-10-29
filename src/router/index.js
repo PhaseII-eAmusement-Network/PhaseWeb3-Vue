@@ -12,6 +12,14 @@ const routes = [
   },
   {
     meta: {
+      title: "All News",
+    },
+    path: "/news",
+    name: "news_board",
+    component: () => import("@/views/NewsView.vue"),
+  },
+  {
+    meta: {
       title: "News Post",
     },
     path: "/news/:id",

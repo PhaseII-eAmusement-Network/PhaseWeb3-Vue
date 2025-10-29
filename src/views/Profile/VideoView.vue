@@ -9,6 +9,7 @@ import LayoutAuthenticated from "@/layouts/LayoutAuthenticated.vue";
 import SectionTitleLine from "@/components/SectionTitleLine.vue";
 import GeneralTable from "@/components/GeneralTable.vue";
 import { getGameInfo } from "@/constants";
+import { formatSortableDate } from "@/constants/date";
 
 import { APIGetPlayVideos } from "@/stores/api/account";
 import { APIGetMusicData } from "@/stores/api/music";
@@ -57,7 +58,6 @@ const headers = [
 ];
 
 async function loadVideos() {
-  videoData.value = null;
   try {
     const data = await APIGetPlayVideos();
     videoData.value = filterVideos(JSON.parse(JSON.stringify(data)));
@@ -106,8 +106,7 @@ function filterVideos(playVideos) {
     video.version = game.versions.find((x) => x.id == video.version).label ?? 0;
 
     if (video.timestamp) {
-      const date = new Date(video.timestamp * 1000);
-      video.timestamp = date.toLocaleString();
+      video.timestamp = formatSortableDate(video.timestamp);
     }
   }
 

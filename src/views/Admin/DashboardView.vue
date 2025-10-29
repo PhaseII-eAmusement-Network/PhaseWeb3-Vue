@@ -7,6 +7,7 @@ import CardBoxWidget from "@/components/CardBoxWidget.vue";
 import LayoutAuthenticated from "@/layouts/LayoutAuthenticated.vue";
 import SectionTitleLine from "@/components/SectionTitleLine.vue";
 import GeneralTable from "@/components/GeneralTable.vue";
+import { formatSortableDate } from "@/constants/date";
 
 import { APIAdminDashboard } from "@/stores/api/admin";
 const dashboardData = ref({});
@@ -88,8 +89,7 @@ function formatTransactions(events) {
   for (var item of events) {
     if (item.type == "paseli_transaction") {
       if (item.timestamp) {
-        const date = new Date(item.timestamp * 1000);
-        item.date = date.toLocaleString();
+        item.date = formatSortableDate(item.timestamp);
       }
 
       formattedItems.push(item);
@@ -104,8 +104,7 @@ function formatEvents(events) {
   for (var item of events) {
     if (item.type == "pcbevent") {
       if (item.timestamp) {
-        const date = new Date(item.timestamp * 1000);
-        item.date = date.toLocaleString();
+        item.date = formatSortableDate(item.timestamp);
       }
 
       formattedItems.push(item);

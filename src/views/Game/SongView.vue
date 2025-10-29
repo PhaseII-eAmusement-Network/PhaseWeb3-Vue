@@ -14,6 +14,7 @@ import GameHeader from "@/components/Cards/GameHeader.vue";
 
 import { APIGetTopScore } from "@/stores/api/music";
 import { getGameInfo } from "@/constants";
+import { formatSortableDate } from "@/constants/date";
 const $route = useRoute();
 const $router = useRouter();
 var gameId = $route.params.game;
@@ -40,10 +41,10 @@ onMounted(async () => {
 });
 
 const headers = [
-  { text: "Player", value: "username", width: 120 },
-  { text: "Timestamp", value: "timestamp", width: 140 },
-  { text: "Grade", value: "data.rank", width: 80 },
-  { text: "Score", value: "points", width: 120 },
+  { text: "Player", value: "username", width: 120, sortable: true },
+  { text: "Timestamp", value: "timestamp", width: 140, sortable: true },
+  { text: "Grade", value: "data.rank", width: 80, sortable: true },
+  { text: "Score", value: "points", width: 120, sortable: true },
 ];
 
 if (thisGame.scoreHeaders) {
@@ -87,8 +88,7 @@ function formatScores(scores) {
   for (var rawItem of scores) {
     const item = { ...rawItem };
     if (item.timestamp) {
-      const date = new Date(item.timestamp * 1000);
-      item.timestamp = date.toLocaleString();
+      item.timestamp = formatSortableDate(item.timestamp);
     }
 
     if (item.points != undefined) {

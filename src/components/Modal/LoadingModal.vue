@@ -4,9 +4,11 @@ import CardBox from "@/components/CardBox.vue";
 import OverlayLayer from "@/components/OverlayLayer.vue";
 import BaseIcon from "@/components/BaseIcon.vue";
 import BaseButton from "@/components/BaseButton.vue";
-import { PhCloudCheck, PhCloudX } from "@phosphor-icons/vue";
+import { useMainStore } from "@/stores/main";
+import { PhCloudCheck, PhCloudX, PhShrimp } from "@phosphor-icons/vue";
 
 const $router = useRouter();
+const mainStore = useMainStore();
 
 defineProps({
   active: {
@@ -42,15 +44,40 @@ function hotReload() {
         v-if="!isFinished && !errorCode"
         class="grid text-center justify-center grid-cols-1 gap-3"
       >
-        <img
-          class="rounded-full place-self-center"
-          src="/icon.gif"
-          width="70"
-        />
+        <template v-if="!mainStore.userCustomize.shrimpLinks">
+          <img
+            class="rounded-full place-self-center"
+            src="/icon.gif"
+            width="70"
+          />
+        </template>
+        <template v-else>
+          <BaseIcon
+            :icon="PhShrimp"
+            size="70"
+            w="w-50"
+            color="text-pink-400"
+            class="m-5 animate animate-spin place-self-center"
+          />
+        </template>
         <h1 class="text-xl md:text-2xl">
-          {{ isSave ? `Submitting...` : `Loading...` }}
+          <template v-if="!mainStore.userCustomize.shrimpLinks">
+            {{ isSave ? `Submitting...` : `Loading...` }}
+          </template>
+          <template v-else>
+            <span class="text-pink-200">
+              {{ isSave ? `Shrimping...` : `Krilling...` }}
+            </span>
+          </template>
         </h1>
-        <p class="text-lg md:text-xl">Please wait</p>
+        <p class="text-lg md:text-xl">
+          <template v-if="!mainStore.userCustomize.shrimpLinks">
+            Please wait
+          </template>
+          <template v-else>
+            <span class="text-pink-400">Shrimply wait</span>
+          </template>
+        </p>
       </div>
 
       <div

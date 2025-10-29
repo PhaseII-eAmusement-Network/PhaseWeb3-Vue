@@ -9,6 +9,7 @@ import FormControl from "@/components/FormControl.vue";
 import LayoutAuthenticated from "@/layouts/LayoutAuthenticated.vue";
 import SectionTitleLine from "@/components/SectionTitleLine.vue";
 import BaseButton from "@/components/BaseButton.vue";
+import { formatSortableDate } from "@/constants/date";
 
 import {
   APIAdminMaintenancePeriods,
@@ -21,11 +22,13 @@ const maintHeaders = [
     text: "Start Timestamp",
     value: "timestamp",
     width: 120,
+    sortable: true,
   },
   {
     text: "End Timestamp",
     value: "data.endTimestamp",
     width: 120,
+    sortable: true,
   },
   {
     text: "Reason",
@@ -52,13 +55,11 @@ async function loadMaintenance() {
     var formattedItems = [];
     for (var item of data) {
       if (item.timestamp) {
-        const date = new Date(item.timestamp * 1000);
-        item.timestamp = date.toLocaleString();
+        item.timestamp = formatSortableDate(item.timestamp);
       }
 
       if (item.data.endTimestamp) {
-        const date = new Date(item.data.endTimestamp * 1000);
-        item.data.endTimestamp = date.toLocaleString();
+        item.data.endTimestamp = formatSortableDate(item.data.endTimestamp);
       }
 
       formattedItems.push(item);

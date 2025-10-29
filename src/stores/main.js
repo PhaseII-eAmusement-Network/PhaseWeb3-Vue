@@ -174,16 +174,23 @@ export const useMainStore = defineStore("main", {
       }
     },
 
-    async fetchAllNews() {
-      if (!this.loadedNews) {
+    async fetchAllNews(limit, noCache = false) {
+      if (noCache || !this.loadedNews) {
         while (!this.userId) {
           await new Promise((resolve) => setTimeout(resolve, 200));
         }
 
         try {
-          const data = await this.callApi("/news");
-          this.loadedNews = data.slice(0, 2);
-          return this.loadedNews;
+          const data = await this.callApi(
+            `/news${limit ? "?limit=" + limit : ""}`,
+          );
+
+          if (!noCache) {
+            this.loadedNews = data;
+            return this.loadedNews;
+          } else {
+            return data;
+          }
         } catch (error) {
           console.log("Error fetching news:", error);
           throw error;

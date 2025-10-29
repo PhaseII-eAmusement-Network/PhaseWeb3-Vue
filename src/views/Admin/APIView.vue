@@ -9,6 +9,7 @@ import FormControl from "@/components/FormControl.vue";
 import LayoutAuthenticated from "@/layouts/LayoutAuthenticated.vue";
 import SectionTitleLine from "@/components/SectionTitleLine.vue";
 import BaseButton from "@/components/BaseButton.vue";
+import { formatSortableDate } from "@/constants/date";
 
 import { APIAdminClients, APIAdminCreateClient } from "@/stores/api/admin";
 
@@ -18,11 +19,13 @@ const clientHeaders = [
     text: "Create Timestamp",
     value: "timestamp",
     width: 120,
+    sortable: true,
   },
   {
     text: "Name",
     value: "name",
     width: 120,
+    sortable: true,
   },
 ];
 
@@ -44,8 +47,7 @@ async function loadData() {
     var formattedItems = [];
     for (var item of data) {
       if (item.timestamp) {
-        const date = new Date(item.timestamp * 1000);
-        item.timestamp = date.toLocaleString();
+        item.timestamp = formatSortableDate(item.timestamp);
       }
 
       formattedItems.push(item);

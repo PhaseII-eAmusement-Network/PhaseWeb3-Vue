@@ -11,6 +11,7 @@ export class ProfileCustomizations {
     { id: "lesbian", label: "Lesbian Flag" },
     { id: "loveplus", label: "LovePlus" },
     { id: "paint", label: "i eat paint" },
+    { id: "shrimp", label: "Shrimp" },
   ];
 
   static get cardList() {

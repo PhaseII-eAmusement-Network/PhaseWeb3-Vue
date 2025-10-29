@@ -29,13 +29,6 @@ import { gameData } from "@/constants";
 const router = useRouter();
 const route = useRoute();
 
-// need to reimplement this...
-// if (!userKey) {
-//   router.push({
-//     name: "login",
-//   });
-// }
-
 const mainStore = useMainStore();
 onMounted(async () => {
   try {
@@ -221,6 +214,8 @@ const menuAside = computed(() => {
     icon: PhStackPlus,
     to: `/arcade/claim`,
   });
+
+  sideMenu.push({ to: "/news", icon: PhArchive, label: "News Archive" });
 
   return sideMenu;
 });

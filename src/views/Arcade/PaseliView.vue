@@ -23,6 +23,7 @@ import {
 } from "@/stores/api/arcade";
 import BaseButton from "@/components/BaseButton.vue";
 import CardBoxWidget from "@/components/CardBoxWidget.vue";
+import { formatSortableDate } from "@/constants/date";
 
 const arcadeData = ref({});
 const paseliData = ref({});
@@ -99,8 +100,7 @@ function filterTransactions(transactions) {
   var filteredTransactions = [];
   for (var transaction of JSON.parse(JSON.stringify(transactions))) {
     if (transaction.timestamp) {
-      const date = new Date(transaction.timestamp * 1000);
-      transaction.timestamp = date.toLocaleString();
+      transaction.timestamp = formatSortableDate(transaction.timestamp);
     }
 
     filteredTransactions.push(transaction);

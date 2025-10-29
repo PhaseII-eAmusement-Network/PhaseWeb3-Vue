@@ -6,6 +6,7 @@ import CardBox from "@/components/CardBox.vue";
 import LayoutAuthenticated from "@/layouts/LayoutAuthenticated.vue";
 import SectionTitleLine from "@/components/SectionTitleLine.vue";
 import GeneralTable from "@/components/GeneralTable.vue";
+import { formatSortableDate } from "@/constants/date";
 
 import { APIAdminAudit } from "@/stores/api/admin";
 const auditData = ref({});
@@ -164,8 +165,7 @@ const unhandledHeaders = [
 function formatData(events) {
   return events.map((item) => {
     if (item.timestamp) {
-      const date = new Date(item.timestamp * 1000);
-      item.date = date.toLocaleString();
+      item.date = formatSortableDate(item.timestamp);
     }
 
     if (item?.data?.service === "xrpc" && item?.data?.request) {

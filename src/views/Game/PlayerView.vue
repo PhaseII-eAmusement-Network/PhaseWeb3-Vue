@@ -30,6 +30,7 @@ import { APIGetArcade } from "@/stores/api/arcade";
 import { GameConstants, getGameInfo } from "@/constants";
 import { getIIDXDan } from "@/constants/danClass.js";
 import { getGitadoraColor, getJubilityColor } from "@/constants/skillColor";
+import { formatSortableDate } from "@/constants/date";
 const ASSET_PATH = import.meta.env.VITE_ASSET_PATH;
 
 const $route = useRoute();
@@ -229,13 +230,15 @@ function returnNumber(stat, profile) {
 function formatProfile(profile) {
   if (profile.stats) {
     if (profile.stats.first_play_timestamp) {
-      const date = new Date(profile.stats.first_play_timestamp * 1000);
-      profile.stats.first_play_timestamp = date.toLocaleString();
+      profile.stats.first_play_timestamp = formatSortableDate(
+        profile.stats.first_play_timestamp,
+      );
     }
 
     if (profile.stats.last_play_timestamp) {
-      const date = new Date(profile.stats.last_play_timestamp * 1000);
-      profile.stats.last_play_timestamp = date.toLocaleString();
+      profile.stats.last_play_timestamp = formatSortableDate(
+        profile.stats.last_play_timestamp,
+      );
     }
 
     if (profile.dp) {
@@ -312,7 +315,7 @@ async function generateTimeline(myProfile) {
   // Add the first play
   if (firstPlay) {
     plays.push({
-      timestamp: new Date(firstPlay * 1000).toLocaleString(),
+      timestamp: formatSortableDate(firstPlay),
       arcade: stats?.first_play_arcade,
       first_play: true,
     });
@@ -324,10 +327,9 @@ async function generateTimeline(myProfile) {
       const arcade = await loadArcade(arcadeId);
       for (const [machineId, timestamps] of Object.entries(machines)) {
         for (const timestamp of timestamps) {
-          const date = new Date(timestamp * 1000);
           if (![firstPlay, lastPlay].includes(timestamp)) {
             plays.push({
-              timestamp: date.toLocaleString(),
+              timestamp: formatSortableDate(timestamp),
               arcade: arcade.name,
               machineId: machineId,
               first_play: false,
@@ -341,7 +343,7 @@ async function generateTimeline(myProfile) {
   // Add the last play
   if (lastPlay) {
     plays.push({
-      timestamp: new Date(lastPlay * 1000).toLocaleString(),
+      timestamp: formatSortableDate(lastPlay),
       arcade: stats?.last_play_arcade,
       first_play: false,
     });

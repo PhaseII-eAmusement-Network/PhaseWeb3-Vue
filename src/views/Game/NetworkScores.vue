@@ -10,6 +10,7 @@ import GeneralTable from "@/components/GeneralTable.vue";
 import CardBox from "@/components/CardBox.vue";
 import GameHeader from "@/components/Cards/GameHeader.vue";
 import { getGameInfo } from "@/constants";
+import { formatSortableDate } from "@/constants/date";
 
 const $route = useRoute();
 const $router = useRouter();
@@ -70,8 +71,7 @@ function formatScores(scores) {
     }
 
     if (item.timestamp) {
-      const date = new Date(item.timestamp * 1000);
-      item.timestamp = date.toLocaleString();
+      item.timestamp = formatSortableDate(item.timestamp);
     }
 
     if (item.points != undefined) {
