@@ -29,5 +29,6 @@
     "3.0.27": ["- (Major) Profile data exporting added.", "- (Minor) More work for rivals."],
     "3.0.28": ["- (Major) Full support for rivals across applicable games", "- (Major) Move from Vue Hash routing to standard routing", "- (Bugfix) Fix issue when customizing on iOS"],
     "3.0.29": ["- (Major) Finish arcade PASELI support", "- (Minor) Clean up arcade page, add button for opening owner", "- (Bugfix) Fix table upper curved edges"],
-    "3.0.30": ["- (Major) Rewrite auth flow at backend and frontend", "- (Minor) Add auth to all api calls", "- (Bugfix) Fix bad user auth bug", "- (Minor) Add more greetings"]
+    "3.0.30": ["- (Major) Rewrite auth flow at backend and frontend", "- (Minor) Add auth to all api calls", "- (Bugfix) Fix bad user auth bug", "- (Minor) Add more greetings"],
+    "3.0.31": ["- (Major) Change all date formatting to a sortable format", "- (Minor) Add news archive page", "- (Bugfix) Add real news limiting", "- (Shrimp) Add more shrimp"]
 }

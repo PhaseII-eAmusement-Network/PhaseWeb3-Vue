@@ -1,0 +1,1 @@
+.card-hover{perspective:1000px}.card-hover img{transform:rotateY(0) rotateX(0) scale(1);transition:transform .4s ease,box-shadow .4s ease;transform-style:preserve-3d}.card-hover:hover img{transform:rotateY(8deg) rotateX(-5deg) scale(1.05);box-shadow:0 10px 25px #0000004d}
