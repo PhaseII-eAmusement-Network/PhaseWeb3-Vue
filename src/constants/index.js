@@ -1011,10 +1011,10 @@ export const gameData = [
       { text: "SKILL POINT", value: "data.new_skill", width: 140 },
     ],
     chartTable: {
-      1: "BASIC",
-      2: "ADVANCED",
-      3: "EXTREME",
-      12: "MASTER",
+      6: "BASIC",
+      7: "ADVANCED",
+      8: "EXTREME",
+      9: "MASTER",
     },
     rankTable: {
       100: "E",
@@ -1026,6 +1026,7 @@ export const gameData = [
       700: "SS",
       800: "EXC",
     },
+    difficultyDenom: 10,
     versions: GITADORA_VERSION_DATA,
   },
   {
@@ -1061,10 +1062,14 @@ export const gameData = [
       { text: "SKILL POINT", value: "data.new_skill", width: 140 },
     ],
     chartTable: {
-      1: "BASIC",
-      2: "ADVANCED",
-      3: "EXTREME",
-      12: "MASTER",
+      1: "GUITAR BASIC",
+      2: "GUITAR ADVANCED",
+      3: "GUITAR EXTREME",
+      4: "GUITAR MASTER",
+      11: "BASS BASIC",
+      12: "BASS ADVANCED",
+      13: "BASS EXTREME",
+      14: "BASS MASTER",
     },
     rankTable: {
       100: "E",
@@ -1076,6 +1081,7 @@ export const gameData = [
       700: "SS",
       800: "EXC",
     },
+    difficultyDenom: 10,
     versions: GITADORA_VERSION_DATA,
   },
   {
@@ -1798,6 +1804,10 @@ export const gameData = [
       { text: "Halo", value: "halo", width: 80 },
     ],
     versions: [
+      {
+        id: 0,
+        label: "CS and Licenses",
+      },
       {
         id: VersionConstants.POPN_MUSIC,
         label: "Original",

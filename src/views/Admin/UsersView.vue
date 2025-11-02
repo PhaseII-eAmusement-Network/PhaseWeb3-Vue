@@ -61,6 +61,12 @@ const headers = [
     width: 120,
     sortable: true,
   },
+  {
+    text: "Web3 Beta Used",
+    value: "data.webVersionsBool",
+    width: 120,
+    sortable: true,
+  },
 ];
 
 onMounted(async () => {
@@ -74,6 +80,10 @@ async function loadData() {
     for (var item of data) {
       if (!item.username) {
         item.username = "Unclaimed Account";
+      }
+
+      if (item.data.webVersions) {
+        item.data.webVersionsBool = item.data.webVersions ? true : false;
       }
 
       formattedItems.push(item);

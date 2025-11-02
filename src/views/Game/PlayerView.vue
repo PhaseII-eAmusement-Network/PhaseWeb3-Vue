@@ -442,7 +442,7 @@ async function generateTimeline(myProfile) {
           />
           <CardBoxWidget
             v-if="myProfile.stats?.count?.attempts"
-            label="Attempts"
+            label="Scores"
             :number="myProfile.stats?.count?.attempts"
           />
 

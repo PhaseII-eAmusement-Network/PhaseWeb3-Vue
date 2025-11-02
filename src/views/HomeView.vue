@@ -189,10 +189,10 @@ const cardBoxes = ref([
     number: totalRecords,
   },
   {
-    label: "Total Attempts",
+    label: "Total Scores",
     icon: PhMedal,
     iconColor: "text-pink-300",
-    suffix: "attempt",
+    suffix: "score",
     number: totalAttempts,
   },
   {
@@ -203,10 +203,10 @@ const cardBoxes = ref([
     number: todayRecords,
   },
   {
-    label: "Attempts Today",
+    label: "Scores Today",
     icon: PhMedal,
     iconColor: "text-sky-300",
-    suffix: "attempt",
+    suffix: "score",
     number: todayAttempts,
   },
 ]);

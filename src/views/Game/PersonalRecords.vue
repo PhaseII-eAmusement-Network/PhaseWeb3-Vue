@@ -82,6 +82,17 @@ const filteredSongs = computed(() => {
   if (!versionForm.currentVersion) return songData.value;
   return songData.value.filter((s) => s.version === versionForm.currentVersion);
 });
+
+const songsWithRecords = computed(() => {
+  return filteredSongs.value.filter((song) => {
+    return song.charts.some(
+      (chart) =>
+        chart.data?.difficulty != 0 &&
+        thisGame.chartTable[chart.chart] &&
+        chart.record,
+    );
+  });
+});
 </script>
 
 <template>
@@ -125,7 +136,7 @@ const filteredSongs = computed(() => {
           </template>
         </SectionTitleLine>
 
-        <CardBox v-for="song of filteredSongs" :key="song.id" class="mb-6">
+        <CardBox v-for="song of songsWithRecords" :key="song.id" class="mb-6">
           <div class="lg:flex w-full lg:place-content-between">
             <div class="mb-4 lg:mb-0 space-y-1">
               <h1 class="text-lg lg:text-xl">{{ song.name }}</h1>
@@ -142,22 +153,29 @@ const filteredSongs = computed(() => {
               class="grid md:grid-cols-2 lg:flex gap-2 lg:justify-end lg:place-content-end"
             >
               <template v-for="chart of song.charts" :key="chart.db_id">
-                <div
-                  v-if="chart.data?.difficulty != 0"
-                  class="bg-gray-900 dark:bg-gray-700 p-4 rounded-lg"
-                >
-                  <h2 class="text-md lg:text-lg">
-                    {{ thisGame.chartTable[chart.chart] }} -
-                    {{ chart.data?.difficulty }}
-                  </h2>
-                  {{
-                    chart.record
-                      ? `${
-                          chart.record?.username
-                        } - ${chart.record.points?.toLocaleString()}`
-                      : "Unclaimed"
-                  }}
-                </div>
+                <template v-if="chart.record">
+                  <div
+                    v-if="
+                      chart.data?.difficulty != 0 &&
+                      thisGame.chartTable[chart.chart]
+                    "
+                    class="bg-gray-900 dark:bg-gray-700 p-4 rounded-lg"
+                  >
+                    <h2 class="text-md lg:text-lg">
+                      {{ thisGame.chartTable[chart.chart] }} -
+                      {{
+                        chart.data?.difficulty / (thisGame.difficultyDenom ?? 1)
+                      }}
+                    </h2>
+                    {{
+                      chart.record
+                        ? `${
+                            chart.record?.username
+                          } - ${chart.record.points?.toLocaleString()}`
+                        : "Unclaimed"
+                    }}
+                  </div>
+                </template>
               </template>
             </div>
           </div>

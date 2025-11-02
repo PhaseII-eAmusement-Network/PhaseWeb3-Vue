@@ -50,13 +50,17 @@ onMounted(async () => {
 const filteredVersions = computed(() => {
   if (!thisGame.versions) return [];
 
-  const versionIdsWithSongs = new Set(songData.value.map((s) => s.version));
+  const versionIdsWithSongs = new Set(
+    songData.value.map((s) => parseInt(s.version)),
+  );
   return thisGame.versions.filter((v) => versionIdsWithSongs.has(v.id));
 });
 
 const filteredSongs = computed(() => {
   if (!versionForm.currentVersion) return songData.value;
-  return songData.value.filter((s) => s.version === versionForm.currentVersion);
+  return songData.value.filter(
+    (s) => parseInt(s.version) === versionForm.currentVersion,
+  );
 });
 </script>
 
@@ -94,12 +98,15 @@ const filteredSongs = computed(() => {
           <div class="grid md:flex gap-2 md:justify-end md:place-content-end">
             <template v-for="chart of song.charts" :key="chart.db_id">
               <div
-                v-if="chart.data?.difficulty != 0"
+                v-if="
+                  chart.data?.difficulty != 0 &&
+                  thisGame.chartTable[chart.chart]
+                "
                 class="bg-gray-900 dark:bg-gray-700 p-4 rounded-lg"
               >
                 <h2 class="text-md md:text-lg">
                   {{ thisGame.chartTable[chart.chart] }} -
-                  {{ chart.data?.difficulty }}
+                  {{ chart.data?.difficulty / (thisGame.difficultyDenom ?? 1) }}
                 </h2>
                 {{
                   chart.record

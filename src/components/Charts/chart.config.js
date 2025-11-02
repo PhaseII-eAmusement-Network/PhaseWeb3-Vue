@@ -65,7 +65,7 @@ const datasetAttemptObject = (color, points) => {
     data: points,
     tension: 0.5,
     cubicInterpolationMode: "default",
-    label: "Attempts",
+    label: "Scores",
   };
 };
 

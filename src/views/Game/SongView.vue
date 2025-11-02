@@ -63,12 +63,14 @@ const chartOptions = computed(() => {
     songData.value.charts
       .filter(
         (chart) =>
-          chart.data?.difficulty !== 0 && chart.data?.difficulty != null,
+          chart.data?.difficulty !== 0 &&
+          chart.data?.difficulty != null &&
+          thisGame.chartTable[chart.chart],
       )
       // eslint-disable-next-line no-unused-vars
       .map((chart, index) => {
         const label = `${thisGame.chartTable[chart.chart]} - ${
-          chart.data?.difficulty ?? "?"
+          chart.data?.difficulty / (thisGame.difficultyDenom ?? 1)
         }`;
         return { id: chart.chart, label };
       })
@@ -193,10 +195,13 @@ const navigateToProfile = (item) => {
           <div class="grid grid-cols-3 sm:flex gap-2">
             <template v-for="chart of songData.charts" :key="chart.db_id">
               <PillTag
-                v-if="chart.data?.difficulty != 0"
+                v-if="
+                  chart.data?.difficulty != 0 &&
+                  thisGame.chartTable[chart.chart]
+                "
                 color="info"
                 :label="`${thisGame.chartTable[chart.chart]} - ${
-                  chart.data?.difficulty
+                  chart.data?.difficulty / (thisGame.difficultyDenom ?? 1)
                 }`"
               />
             </template>
@@ -208,7 +213,9 @@ const navigateToProfile = (item) => {
       <div class="grid grid-cols-2 lg:grid-cols-5 gap-4 mb-6">
         <template v-for="chart of songData.charts" :key="chart.db_id">
           <CardBoxWidget
-            v-if="chart.data?.difficulty != 0"
+            v-if="
+              chart.data?.difficulty != 0 && thisGame.chartTable[chart.chart]
+            "
             :label="`${thisGame.chartTable[chart.chart]}`"
             small-content
             >{{

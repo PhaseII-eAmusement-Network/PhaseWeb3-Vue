@@ -160,7 +160,7 @@ function formatEvents(events) {
           />
           <CardBoxWidget
             :number="dashboardData?.statistics?.score_history"
-            label="Score Attempts"
+            label="Scores"
           />
           <CardBoxWidget
             :number="dashboardData?.statistics?.achievement"
