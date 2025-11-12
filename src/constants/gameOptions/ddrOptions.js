@@ -103,9 +103,15 @@ export const DDROptions = {
       type: "Boolean",
     },
   ],
-    20: [
+  20: [
     {
-      id: "1_0",
+      id: "weight",
+      name: "Weight (kg)",
+      help: "Set your weight for in-game calorie counting",
+      type: "Number",
+    },
+    {
+      id: "customize.1_0",
       name: "Appeal Board",
       help: "Choose your appeal board",
       type: "Array",
@@ -182,7 +188,7 @@ export const DDROptions = {
       ],
     },
     {
-      id: "3_1",
+      id: "customize.3_1",
       name: "Game Background (system)",
       help: "Choose your system background",
       type: "Array",
@@ -225,7 +231,7 @@ export const DDROptions = {
       ],
     },
     {
-      id: "3_2",
+      id: "customize.3_2",
       name: "Game Background (while playing music)",
       help: "Choose your in-game system background",
       type: "Array",
@@ -268,7 +274,7 @@ export const DDROptions = {
       ],
     },    
     {
-      id: "2_1",
+      id: "customize.2_1",
       name: "System Character (left side)",
       help: "Choose your system character for the left side",
       type: "Array",
@@ -306,7 +312,7 @@ export const DDROptions = {
       ],
     },
         {
-      id: "2_2",
+      id: "customize.2_2",
       name: "System Character (right side)",
       help: "Choose your system character for the right side",
       type: "Array",
@@ -345,7 +351,7 @@ export const DDROptions = {
       ],
     },
         {
-      id: "6_1",
+      id: "customize.6_1",
       name: "Lane Cover (SINGLE)",
       help: "Choose your lane cover for single play",
       type: "Array",
@@ -410,7 +416,7 @@ export const DDROptions = {
       ],
     },
     {
-      id: "7_1",
+      id: "customize.7_1",
       name: "Lane Cover (DOUBLE)",
       help: "Choose your lane cover for double play",
       type: "Array",
@@ -486,7 +492,7 @@ export const DDROptions = {
       ],
     },
         {
-      id: "4_1",
+      id: "customize.4_1",
       name: "Lane Background (SINGLE)",
       help: "Choose your lane background for single play",
       type: "Array",
@@ -536,7 +542,7 @@ export const DDROptions = {
       ],
     },
     {
-      id: "5_1",
+      id: "customize.5_1",
       name: "Lane Background (DOUBLE)",
       help: "Choose your lane background for double play",
       type: "Array",
@@ -597,7 +603,7 @@ export const DDROptions = {
       ],
     },
     {
-      id: "8_1",
+      id: "customize.8_1",
       name: "Background Video",
       help: "Choose your background video setting",
       type: "Array",
