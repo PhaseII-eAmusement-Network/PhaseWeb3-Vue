@@ -14,7 +14,8 @@ import GameHeader from "@/components/Cards/GameHeader.vue";
 
 import { APIGetTopScore } from "@/stores/api/music";
 import { getGameInfo } from "@/constants";
-import { formatSortableDate } from "@/constants/date";
+import { formatDifficulty } from "@/constants/scoreDataFilters";
+import { formatScoreTable } from "@/constants/table/scores";
 const $route = useRoute();
 const $router = useRouter();
 var gameId = $route.params.game;
@@ -69,9 +70,10 @@ const chartOptions = computed(() => {
       )
       // eslint-disable-next-line no-unused-vars
       .map((chart, index) => {
-        const label = `${thisGame.chartTable[chart.chart]} - ${
-          chart.data?.difficulty / (thisGame.difficultyDenom ?? 1)
-        }`;
+        const label = `${thisGame.chartTable[chart.chart]} - ${formatDifficulty(
+          chart.data?.difficulty,
+          thisGame.difficultyDenom,
+        )}`;
         return { id: chart.chart, label };
       })
   );
@@ -82,96 +84,8 @@ const selectedChartRecords = computed(() => {
   const chart = JSON.parse(
     JSON.stringify(songData.value.charts[chartSelector.currentChart]),
   );
-  return formatScores(chart?.records ?? []);
+  return formatScoreTable(thisGame, chart?.records ?? []);
 });
-
-function formatScores(scores) {
-  var formattedItems = [];
-  for (var rawItem of scores) {
-    const item = { ...rawItem };
-    if (item.timestamp) {
-      item.timestamp = formatSortableDate(item.timestamp);
-    }
-
-    if (item.points != undefined) {
-      item.points = item.points
-        .toString()
-        .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
-    }
-
-    if (item.data?.stats?.score != undefined) {
-      item.exscore = item.points.toString();
-      item.points = item.data?.stats?.score
-        .toString()
-        .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
-    }
-
-    if (item.song?.chart != undefined && thisGame.chartTable) {
-      item.song.chart = thisGame.chartTable[item.song?.chart];
-    }
-
-    if (item.data?.halo != undefined && thisGame.haloTable) {
-      item.data.halo = thisGame.haloTable[item.data?.halo];
-    }
-
-    if (item.data?.medal != undefined && thisGame.medalTable) {
-      item.data.medal = thisGame.medalTable[item.data?.medal];
-    }
-
-    if (item.data?.clear_status != undefined && thisGame.medalTable) {
-      item.data.medal = thisGame.medalTable[item.data?.clear_status];
-    }
-
-    if (item.data?.rank != undefined && thisGame.rankTable) {
-      item.data.rank = thisGame.rankTable[item.data?.rank];
-    }
-
-    if (item.data?.result_rank != undefined && thisGame.rankTable) {
-      item.data.rank = thisGame.rankTable[item.data?.result_rank];
-    }
-
-    if (item.data?.grade != undefined && thisGame.rankTable) {
-      item.data.rank = thisGame.rankTable[item.data?.grade];
-    }
-
-    if (item.data?.skill_perc > 0) {
-      item.data.skill_perc = `${item.data?.skill_perc / 100}%`;
-    } else {
-      item.data.skill_perc = "0%";
-    }
-
-    if (item.data?.skill_points) {
-      item.data.skill_points = item.data?.skill_points / 10;
-    }
-
-    if (item.data?.perc > 0) {
-      item.data.perc = `${item.data?.perc / 100}%`;
-    } else {
-      item.data.perc = "0%";
-    }
-
-    if (item.data?.new_skill) {
-      item.data.new_skill = item.data?.new_skill / 10;
-    }
-
-    if (item.data?.music_rate) {
-      item.data.music_rate = item.data?.music_rate / 10;
-    }
-
-    if (item.data?.excellent) {
-      item.medal = "EX FC";
-    } else if (item.data?.fullcombo) {
-      item.medal = "FC";
-    } else if (item.data?.clear) {
-      item.medal = "CLEARED";
-    } else {
-      item.medal = "FAILED";
-    }
-
-    formattedItems.push(item);
-  }
-  return formattedItems;
-}
 
 const navigateToProfile = (item) => {
   const userId = item.userId;
@@ -200,9 +114,10 @@ const navigateToProfile = (item) => {
                   thisGame.chartTable[chart.chart]
                 "
                 color="info"
-                :label="`${thisGame.chartTable[chart.chart]} - ${
-                  chart.data?.difficulty / (thisGame.difficultyDenom ?? 1)
-                }`"
+                :label="`${thisGame.chartTable[chart.chart]} - ${formatDifficulty(
+                  chart.data?.difficulty,
+                  thisGame.difficultyDenom,
+                )}`"
               />
             </template>
           </div>

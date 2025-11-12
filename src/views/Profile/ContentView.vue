@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted } from "vue";
+import { ref, onMounted, onUnmounted } from "vue";
 import { PhFileImage } from "@phosphor-icons/vue";
 import SectionMain from "@/components/SectionMain.vue";
 import CardBox from "@/components/CardBox.vue";
@@ -29,6 +29,22 @@ async function loadVideos() {
 
 onMounted(async () => {
   await loadVideos();
+
+  // 🌐 Mobile tilt support
+  if (window.DeviceOrientationEvent) {
+    // Request permission on iOS
+    if (typeof DeviceOrientationEvent.requestPermission === "function") {
+      try {
+        const response = await DeviceOrientationEvent.requestPermission();
+        if (response !== "granted") return;
+      } catch (e) {
+        console.warn("Device orientation permission denied {1}", e);
+        return;
+      }
+    }
+
+    window.addEventListener("deviceorientation", handleDeviceTilt);
+  }
 });
 
 function filterContent(data) {
@@ -79,6 +95,24 @@ function resetTransform(id) {
     shine.style.opacity = "0";
   }
 }
+
+function handleDeviceTilt(event) {
+  const { beta, gamma } = event; // beta: x-axis (front/back), gamma: y-axis (left/right)
+  if (beta === null || gamma === null) return;
+
+  // Clamp values for smooth motion
+  const rotateX = Math.max(Math.min(beta - 45, 15), -15); // limit between -15° to +15°
+  const rotateY = Math.max(Math.min(gamma, 15), -15);
+
+  const cards = document.querySelectorAll(".tilt-card");
+  cards.forEach((card) => {
+    card.style.transform = `rotateX(${rotateX / 3}deg) rotateY(${rotateY / 3}deg) scale(1.02)`;
+  });
+}
+
+onUnmounted(() => {
+  window.removeEventListener("deviceorientation", handleDeviceTilt);
+});
 </script>
 
 <template>

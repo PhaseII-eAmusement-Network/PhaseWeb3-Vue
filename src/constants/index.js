@@ -361,8 +361,9 @@ export const gameData = [
     noRivals: true,
     useUnicode: true,
     scoreHeaders: [
-      { text: "Combos", value: "data.combo" },
-      { text: "Medal", value: "data.medal" },
+      { text: "Clear Gauge", value: "data.clear_gauge", width: 120 },
+      { text: "Combos", value: "data.combo", width: 120 },
+      { text: "Medal", value: "data.medal", width: 120 },
     ],
     chartTable: {
       0: "LIGHT",
@@ -441,7 +442,10 @@ export const gameData = [
     icon: null,
     cardBG: null,
     noRivals: true,
-    scoreHeaders: [{ text: "Combos", value: "data.combo" }],
+    scoreHeaders: [
+      { text: "Combos", value: "data.combo", width: 120 },
+      { text: "Halo", value: "data.param", width: 120 },
+    ],
     chartTable: {
       0: "1A",
       1: "2A",

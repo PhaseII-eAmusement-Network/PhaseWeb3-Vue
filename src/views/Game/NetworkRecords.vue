@@ -12,6 +12,11 @@ import GameHeader from "@/components/Cards/GameHeader.vue";
 
 import { APIGetRecordData } from "@/stores/api/music";
 import { getGameInfo } from "@/constants";
+import {
+  shouldRenderChart,
+  formatDifficulty,
+} from "@/constants/scoreDataFilters";
+
 const $route = useRoute();
 const $router = useRouter();
 var gameId = $route.params.game;
@@ -99,14 +104,22 @@ const filteredSongs = computed(() => {
             <template v-for="chart of song.charts" :key="chart.db_id">
               <div
                 v-if="
-                  chart.data?.difficulty != 0 &&
-                  thisGame.chartTable[chart.chart]
+                  shouldRenderChart(
+                    chart.data?.difficulty,
+                    thisGame.chartTable,
+                    chart.chart,
+                  )
                 "
                 class="bg-gray-900 dark:bg-gray-700 p-4 rounded-lg"
               >
                 <h2 class="text-md md:text-lg">
                   {{ thisGame.chartTable[chart.chart] }} -
-                  {{ chart.data?.difficulty / (thisGame.difficultyDenom ?? 1) }}
+                  {{
+                    formatDifficulty(
+                      chart.data?.difficulty,
+                      thisGame.difficultyDenom,
+                    )
+                  }}
                 </h2>
                 {{
                   chart.record

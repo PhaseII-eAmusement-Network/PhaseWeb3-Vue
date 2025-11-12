@@ -31,5 +31,6 @@
     "3.0.29": ["- (Major) Finish arcade PASELI support", "- (Minor) Clean up arcade page, add button for opening owner", "- (Bugfix) Fix table upper curved edges"],
     "3.0.30": ["- (Major) Rewrite auth flow at backend and frontend", "- (Minor) Add auth to all api calls", "- (Bugfix) Fix bad user auth bug", "- (Minor) Add more greetings"],
     "3.0.31": ["- (Major) Change all date formatting to a sortable format", "- (Minor) Add news archive page", "- (Bugfix) Add real news limiting", "- (Shrimp) Add more shrimp"],
-    "3.0.32": ["- (Major) Change phase \"Attempt\" to \"Score\"", "- (Bugfix) Fix pop'n music version sorting", "- (Bugfix) Fix Gitadora chart data formatting issues", "- (Bugfix) Filter personal records to songs with scores"]
+    "3.0.32": ["- (Major) Change phase \"Attempt\" to \"Score\"", "- (Bugfix) Fix pop'n music version sorting", "- (Bugfix) Fix Gitadora chart data formatting issues", "- (Bugfix) Filter personal records to songs with scores"],
+    "3.0.33": ["- (Major) Condense all score tables to one parser and format", "- (Major) Add more game metadata", "- (Bugfix) Fix difficulties showing as `NaN`", "- (Beta) Add a developmental device plugin for card effect"]
 }
