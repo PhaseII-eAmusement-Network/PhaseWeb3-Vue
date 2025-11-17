@@ -27,6 +27,7 @@ import {
 } from "@/constants/values";
 import { getGameInfo } from "@/constants";
 import { getGameOptions } from "@/constants/options";
+import TitlePartCardBox from "@/components/Cards/TitlePartCardBox.vue";
 
 const $route = useRoute();
 const $router = useRouter();
@@ -243,6 +244,11 @@ async function updateProfile() {
             versionForm.currentVersion >= 10 &&
             myProfile.last?.emblem
           "
+          :profile="myProfile"
+          :version="versionForm.currentVersion"
+        />
+        <TitlePartCardBox
+          v-if="gameID == 'jubeat' && versionForm.currentVersion >= 13"
           :profile="myProfile"
           :version="versionForm.currentVersion"
         />

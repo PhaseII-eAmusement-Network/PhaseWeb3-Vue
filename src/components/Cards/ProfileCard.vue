@@ -33,6 +33,7 @@ function colorText() {
 const thisGame = getGameInfo(props.game);
 const version = ref(props.version);
 const AkanameSettings = ref([]);
+const TitlePartSettings = ref([]);
 const fullyLoaded = ref(false);
 
 async function loadAkanameSettings() {
@@ -50,9 +51,26 @@ async function loadAkanameSettings() {
   }
 }
 
+async function loadTitlePartSettings() {
+  try {
+    const response = await axios.get(
+      `/data-sources/jubeat-title/${version.value}.json`,
+    );
+    if (response.data) {
+      TitlePartSettings.value = response.data;
+    }
+  } catch (error) {
+    console.error("Error loading TitleParts settings:", error.message);
+  } finally {
+    fullyLoaded.value = true;
+  }
+}
+
 onMounted(async () => {
   if (thisGame.id === GameConstants.SDVX) {
     await loadAkanameSettings();
+  } else if (thisGame.id === GameConstants.JUBEAT) {
+    await loadTitlePartSettings();
   } else {
     fullyLoaded.value = true;
   }
@@ -65,20 +83,22 @@ onMounted(async () => {
       class="md:flex md:space-x-12 md:justify-center md:items-center grid grid-cols-1 text-center"
     >
       <UserEmblem
-        v-if="game == 'jubeat' && version >= 10 && profile.last?.emblem"
+        v-if="
+          game == GameConstants.JUBEAT && version >= 10 && profile.last?.emblem
+        "
         :version="version"
         :profile="profile"
         class="place-self-center pb-6 md:pb-0"
       />
       <UserQpro
-        v-if="game == 'iidx' && version >= 20 && profile.qpro"
+        v-if="game == GameConstants.IIDX && version >= 20 && profile.qpro"
         :version="version"
         :profile="profile"
         class="place-self-center md:mt-10 mb-10 md:mb-0"
       />
       <div class="drop-shadow-2xl">
         <p
-          v-if="profile.title"
+          v-if="profile.title && game != GameConstants.JUBEAT"
           :class="colorText()"
           class="text-2xl tracking-widest font-light -mb-1"
         >
@@ -94,6 +114,17 @@ onMounted(async () => {
           >
             {{
               AkanameSettings.find((item) => item.id === profile.akaname)?.label
+            }}
+          </p>
+
+          <p
+            v-if="
+              (profile.title || profile.parts) && game == GameConstants.JUBEAT
+            "
+            class="text-2xl tracking-widest font-light my-1"
+          >
+            {{
+              TitlePartSettings.find((item) => item.id === profile.title)?.label
             }}
           </p>
         </template>

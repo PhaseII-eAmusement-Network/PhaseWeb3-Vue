@@ -188,6 +188,7 @@ export class VersionConstants {
   static JUBEAT_CLAN = 12;
   static JUBEAT_FESTO = 13;
   static JUBEAT_AVE = 14;
+  static JUBEAT_BEYOND = 15;
 
   static LOVEPLUS_ARCADE = 1;
   static LOVEPLUS_CC = 2;
@@ -1648,6 +1649,11 @@ export const gameData = [
       {
         id: VersionConstants.JUBEAT_AVE,
         label: "Avenue",
+        maxRivals: 3,
+      },
+      {
+        id: VersionConstants.JUBEAT_BEYOND,
+        label: "Beyond the Avenue",
         maxRivals: 3,
       },
     ],
