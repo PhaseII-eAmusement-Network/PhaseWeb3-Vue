@@ -417,6 +417,12 @@ export const IIDXOptions = {
       type: "Boolean",
     },
     {
+      id: "idol_ad",
+      name: "Attract Loop Idol Ad",
+      help: "Plays an ad for an idol group during the attract loop.",
+      type: "Boolean",
+    },
+    {
       id: "event_phase",
       name: "Game Event Phase",
       help: "Enable different boss events",

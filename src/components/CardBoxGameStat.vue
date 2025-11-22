@@ -76,7 +76,7 @@ const cardStyle = `
 
 <template>
   <button
-    class="flex rounded-2xl hover:scale-[1.01] hover:shadow-xl hover:outline outline-blue-500/50 hover:bg-slate-500 hover:dark:bg-slate-950 transition-all duration-100"
+    class="flex rounded-2xl hover:scale-[1.01] hover:shadow-xl hover:outline outline-blue-500/50 hover:bg-slate-500 hover:dark:bg-slate-950 hover:cursor-pointer transition-all duration-100"
     :style="cardStyle"
     @click="loadGamePage()"
   >

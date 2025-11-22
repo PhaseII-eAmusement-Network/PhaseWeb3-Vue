@@ -49,7 +49,7 @@ function openNewsView() {
 </script>
 
 <template>
-  <button class="text-left" @click="openNewsView">
+  <button class="text-left hover:cursor-pointer" @click="openNewsView">
     <CardBox class="mb-2" :style="getCardStyle(props.cover)" has-table>
       <div
         class="hover:scale-[1.01] hover:shadow-xl hover:bg-slate-500 hover:dark:bg-slate-950/90 bg-slate-900/90 rounded-xl p-4 h-full w-full transition-all duration-100"
