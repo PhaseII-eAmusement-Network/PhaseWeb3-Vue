@@ -1,5 +1,5 @@
 import { formatSortableDate } from "@/constants/date";
-import { formatDifficulty } from "@/constants/scoreDataFilters";
+import { formatDifficulty, rankFromScore } from "@/constants/scoreDataFilters";
 
 export function scoreHeaders(thisGame) {
   const headers = [
@@ -55,19 +55,6 @@ export function formatScoreTable(thisGame, scores) {
       item.timestamp = formatSortableDate(item.timestamp);
     }
 
-    if (item.points != undefined) {
-      item.points = item.points
-        .toString()
-        .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
-    }
-
-    if (item.data?.stats?.score != undefined) {
-      item.exscore = item.points.toString();
-      item.points = item.data?.stats?.score
-        .toString()
-        .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
-    }
-
     if (item.song?.chart != undefined && thisGame.chartTable) {
       item.song.chart = `${thisGame.chartTable[item.song?.chart]} - ${formatDifficulty(
         item.song.data?.difficulty,
@@ -85,6 +72,14 @@ export function formatScoreTable(thisGame, scores) {
 
     if (item.data?.clear_status != undefined && thisGame.medalTable) {
       item.data.medal = thisGame.medalTable[item.data?.clear_status];
+    }
+
+    if (item.data?.clear_type != undefined && thisGame.medalTable) {
+      item.data.clear_type = thisGame.medalTable[item.data?.clear_type];
+    }
+
+    if (!item.data?.rank && thisGame.ratingTable) {
+      item.data.rank = rankFromScore(thisGame.ratingTable, item.points);
     }
 
     if (item.data?.rank != undefined && thisGame.rankTable) {
@@ -135,6 +130,23 @@ export function formatScoreTable(thisGame, scores) {
 
     if (item.data?.clear_gauge !== undefined) {
       item.data.clear_gauge = `${item.data?.clear_gauge / 10}%`;
+    }
+
+    if (!item.data?.combo) {
+      item.data.combo = 0;
+    }
+
+    if (item.points != undefined) {
+      item.points = item.points
+        .toString()
+        .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+    }
+
+    if (item.data?.stats?.score != undefined) {
+      item.exscore = item.points.toString();
+      item.points = item.data?.stats?.score
+        .toString()
+        .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
     }
 
     formattedItems.push(item);

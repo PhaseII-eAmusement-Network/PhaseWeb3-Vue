@@ -34,5 +34,6 @@
     "3.0.32": ["- (Major) Change phase \"Attempt\" to \"Score\"", "- (Bugfix) Fix pop'n music version sorting", "- (Bugfix) Fix Gitadora chart data formatting issues", "- (Bugfix) Filter personal records to songs with scores"],
     "3.0.33": ["- (Major) Condense all score tables to one parser and format", "- (Major) Add more game metadata", "- (Bugfix) Fix difficulties showing as `NaN`", "- (Beta) Add a developmental device plugin for card effect"],
     "3.0.34": ["- (Major) Add support for Jubeat titles", "- (Major) Add base BTA support"],
-    "3.0.35": ["- (Bugfix) Fix cursor hover state on news card and profile card", "- (Minor) Update DDR game options", "- (Minor) Update IIDX event settings", "- (Minor) Add IIDX 32 basic QPro settings"]
+    "3.0.35": ["- (Bugfix) Fix cursor hover state on news card and profile card", "- (Minor) Update DDR game options", "- (Minor) Update IIDX event settings", "- (Minor) Add IIDX 32 basic QPro settings"],
+    "3.0.36": ["- (Major) Finish more game metadata (DRS, Museca, Nostalgia, pop'n, jubeat)"]
 }
