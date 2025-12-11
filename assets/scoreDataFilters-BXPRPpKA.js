@@ -1,1 +1,0 @@
-function o(r,e,t){const n=![0,-1,"-1",null].includes(r),s=!!e?.[t];return n&&s}function i(r,e=1){return isNaN(r/e)?r.difnum?r.difnum:r:r/e}function u(r,e){const t=Object.entries(r).map(([n,s])=>[Number(n),s]).sort((n,s)=>n[0]-s[0]);var a=100;for(const[n,s]of t)if(e>=n)a=s;else break;return a}export{i as f,u as r,o as s};
