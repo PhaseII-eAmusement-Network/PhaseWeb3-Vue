@@ -4,13 +4,12 @@ import { formatDifficulty, rankFromScore } from "@/constants/scoreDataFilters";
 export function scoreHeaders(thisGame) {
   const headers = [
     { text: "Player", value: "username", width: 120 },
-    { text: "New PB", value: "newRecord", width: 100 },
-    { text: "Timestamp", value: "timestamp", width: 140 },
+    { text: "New PB", value: "newRecord", width: 80 },
+    { text: "Timestamp", value: "timestamp", width: 120 },
     { text: "Song", value: "song.name", width: 180 },
     { text: "Artist", value: "song.artist", width: 150 },
     { text: "Chart", value: "song.chart", width: 100 },
-    { text: "Grade", value: "data.rank", width: 80 },
-    { text: "Score", value: "points", width: 120 },
+    { text: "Score", value: "points", width: 100 },
   ];
 
   if (thisGame.scoreHeaders) {
@@ -24,13 +23,12 @@ export function scoreHeaders(thisGame) {
 
 export function personalScoreHeaders(thisGame) {
   const headers = [
-    { text: "Timestamp", value: "timestamp", width: 140 },
-    { text: "New PB", value: "newRecord", width: 100 },
+    { text: "Timestamp", value: "timestamp", width: 120 },
+    { text: "New PB", value: "newRecord", width: 80 },
     { text: "Song", value: "song.name", width: 180 },
     { text: "Artist", value: "song.artist", width: 180 },
     { text: "Chart", value: "song.chart", width: 120 },
-    { text: "Grade", value: "data.rank", width: 80 },
-    { text: "Score", value: "points", width: 120 },
+    { text: "Score", value: "points", width: 100 },
   ];
 
   if (thisGame.scoreHeaders) {
@@ -40,6 +38,27 @@ export function personalScoreHeaders(thisGame) {
   }
 
   return headers;
+}
+
+export function topScoreHeaders(thisGame) {
+  const headers = [
+    { text: "Player", value: "username", width: 120, sortable: true },
+    { text: "Timestamp", value: "timestamp", width: 140, sortable: true },
+    { text: "Score", value: "points", width: 100, sortable: true },
+  ];
+
+  if (thisGame.scoreHeaders) {
+    for (var header of thisGame.scoreHeaders) {
+      header.sortable = true;
+      headers.push(header);
+    }
+  }
+
+  return headers;
+}
+
+export function formatScoreData(thisGame, data) {
+  return data;
 }
 
 export function formatScoreTable(thisGame, scores) {
@@ -78,8 +97,19 @@ export function formatScoreTable(thisGame, scores) {
       item.data.clear_type = thisGame.medalTable[item.data?.clear_type];
     }
 
+    if (item.data?.combo_type != undefined && thisGame.comboTable) {
+      item.data.combo_type = thisGame.comboTable[item.data?.combo_type];
+    }
+
     if (!item.data?.rank && thisGame.ratingTable) {
       item.data.rank = rankFromScore(thisGame.ratingTable, item.points);
+    }
+
+    if (!item.data?.rank && thisGame.percTable) {
+      item.data.rank = rankFromScore(
+        thisGame.percTable,
+        item.data?.achievement_rate,
+      );
     }
 
     if (item.data?.rank != undefined && thisGame.rankTable) {
@@ -118,6 +148,10 @@ export function formatScoreTable(thisGame, scores) {
       item.data.music_rate = item.data?.music_rate / 10;
     }
 
+    if (item.data?.achievement_rate) {
+      item.data.achievement_rate = `${item.data?.achievement_rate / 100}%`;
+    }
+
     if (item.data?.excellent) {
       item.medal = "EX FC";
     } else if (item.data?.fullcombo) {
@@ -134,6 +168,10 @@ export function formatScoreTable(thisGame, scores) {
 
     if (!item.data?.combo) {
       item.data.combo = 0;
+    }
+
+    if (item.data?.miss_count === -1) {
+      item.data.miss_count = 0;
     }
 
     if (item.points != undefined) {

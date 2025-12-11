@@ -7,7 +7,7 @@ export function shouldRenderChart(difficulty, chartTable, chartKey) {
 
 export function formatDifficulty(difficulty, difficultyDenom = 1) {
   if (isNaN(difficulty / difficultyDenom)) {
-    return difficulty.difnum ? difficulty.difnum : difficulty;
+    return difficulty?.difnum ? difficulty.difnum : difficulty;
   }
   return difficulty / difficultyDenom;
 }

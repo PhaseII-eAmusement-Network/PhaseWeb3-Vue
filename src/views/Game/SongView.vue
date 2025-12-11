@@ -15,7 +15,11 @@ import GameHeader from "@/components/Cards/GameHeader.vue";
 import { APIGetTopScore } from "@/stores/api/music";
 import { getGameInfo } from "@/constants";
 import { formatDifficulty } from "@/constants/scoreDataFilters";
-import { formatScoreTable } from "@/constants/table/scores";
+import {
+  topScoreHeaders,
+  formatScoreData,
+  formatScoreTable,
+} from "@/constants/table/scores";
 const $route = useRoute();
 const $router = useRouter();
 var gameId = $route.params.game;
@@ -35,24 +39,11 @@ if (!thisGame) {
 onMounted(async () => {
   try {
     const data = await APIGetTopScore(gameId, songId);
-    songData.value = data;
+    songData.value = formatScoreData(thisGame, data);
   } catch (error) {
     console.error("Failed to fetch score data:", error);
   }
 });
-
-const headers = [
-  { text: "Player", value: "username", width: 120, sortable: true },
-  { text: "Timestamp", value: "timestamp", width: 140, sortable: true },
-  { text: "Grade", value: "data.rank", width: 80, sortable: true },
-  { text: "Score", value: "points", width: 120, sortable: true },
-];
-
-if (thisGame.scoreHeaders) {
-  for (var header of thisGame.scoreHeaders) {
-    headers.push(header);
-  }
-}
 
 const chartSelector = reactive({
   currentChart: 0,
@@ -163,7 +154,7 @@ const navigateToProfile = (item) => {
         >
           <div class="w-full">
             <GeneralTable
-              :headers="headers"
+              :headers="topScoreHeaders(thisGame)"
               :items="selectedChartRecords"
               @row-clicked="navigateToProfile"
             />

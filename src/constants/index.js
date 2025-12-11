@@ -362,6 +362,7 @@ export const gameData = [
     noRivals: true,
     useUnicode: true,
     scoreHeaders: [
+      { text: "Grade", value: "data.rank", width: 80 },
       { text: "Clear Gauge", value: "data.clear_gauge", width: 120 },
       { text: "Combos", value: "data.combo", width: 120 },
       { text: "Medal", value: "data.medal", width: 120 },
@@ -444,6 +445,7 @@ export const gameData = [
     cardBG: null,
     noRivals: true,
     scoreHeaders: [
+      { text: "Grade", value: "data.rank", width: 80 },
       { text: "Combos", value: "data.combo", width: 120 },
       { text: "Halo", value: "data.param", width: 120 },
     ],
@@ -490,6 +492,7 @@ export const gameData = [
       VersionConstants.DDR_A3,
     ],
     scoreHeaders: [
+      { text: "Grade", value: "data.rank", width: 80 },
       { text: "Combos", value: "data.combo", width: 80 },
       { text: "Halo", value: "data.halo", width: 80 },
     ],
@@ -700,6 +703,7 @@ export const gameData = [
     useActiveRival: true,
     videoTable: [VersionConstants.DDR_A20_PLUS],
     scoreHeaders: [
+      { text: "Grade", value: "data.rank", width: 80 },
       { text: "Combos", value: "data.combo", width: 80 },
       { text: "Halo", value: "data.halo", width: 80 },
     ],
@@ -842,6 +846,7 @@ export const gameData = [
       },
     ],
     scoreHeaders: [
+      { text: "Grade", value: "data.rank", width: 80 },
       { text: "Combos", value: "data.combo", width: 80 },
       { text: "Medal", value: "medal", width: 100 },
       { text: "SKILL %", value: "data.skill_perc", width: 90 },
@@ -1010,6 +1015,7 @@ export const gameData = [
       },
     ],
     scoreHeaders: [
+      { text: "Grade", value: "data.rank", width: 80 },
       { text: "Combos", value: "data.combo", width: 80 },
       { text: "Medal", value: "medal", width: 140 },
       { text: "SKILL %", value: "data.perc", width: 90 },
@@ -1061,6 +1067,7 @@ export const gameData = [
       },
     ],
     scoreHeaders: [
+      { text: "Grade", value: "data.rank", width: 80 },
       { text: "Combos", value: "data.combo", width: 80 },
       { text: "Medal", value: "medal", width: 140 },
       { text: "SKILL %", value: "data.perc", width: 90 },
@@ -1096,6 +1103,7 @@ export const gameData = [
     cardBG: null,
     gameOptions: GFDMOptions,
     scoreHeaders: [
+      { text: "Grade", value: "data.rank", width: 80 },
       { text: "Combos", value: "data.combo", width: 80 },
       { text: "Medal", value: "medal", width: 100 },
       { text: "SKILL %", value: "data.skill_perc", width: 90 },
@@ -1232,6 +1240,7 @@ export const gameData = [
     assetId: "iidx",
     gameOptions: IIDXOptions,
     splitRivals: true,
+    maxLength: 6,
     videoTable: [
       VersionConstants.IIDX_TRICORO,
       VersionConstants.IIDX_SPADA,
@@ -1248,7 +1257,8 @@ export const gameData = [
       VersionConstants.IIDX_PINKY_CRUSH,
     ],
     scoreHeaders: [
-      { text: "Misses", value: "data.misses", width: 100 },
+      { text: "Grade", value: "data.rank", width: 80 },
+      { text: "Misses", value: "data.miss_count", width: 100 },
       { text: "Clear Status", value: "data.medal", width: 100 },
     ],
     chartTable: {
@@ -1264,14 +1274,24 @@ export const gameData = [
       9: "DP LEGGENDARIA",
     },
     rankTable: {
-      100: "E",
-      200: "D",
-      300: "C",
-      400: "B",
-      500: "A",
-      600: "S",
-      700: "SS",
-      800: "EXC",
+      100: "F",
+      200: "E",
+      300: "D",
+      400: "C",
+      500: "B",
+      600: "A",
+      700: "AA",
+      800: "AAA",
+    },
+    percTable: {
+      0: 100,
+      2222: 200,
+      3333: 300,
+      4444: 400,
+      5556: 500,
+      6667: 600,
+      7778: 700,
+      8889: 800,
     },
     medalTable: {
       50: "NO PLAY",
@@ -1554,6 +1574,7 @@ export const gameData = [
     icon: null,
     cardBG: null,
     scoreHeaders: [
+      { text: "Grade", value: "data.rank", width: 80 },
       { text: "Combos", value: "data.combo", width: 80 },
       { text: "Medal", value: "data.medal", width: 120 },
       { text: "Music Rate", value: "data.music_rate", width: 120 },
@@ -1732,6 +1753,7 @@ export const gameData = [
       300: "FULL COMBO",
     },
     scoreHeaders: [
+      { text: "Grade", value: "data.rank", width: 80 },
       { text: "Combos", value: "data.combo", width: 80 },
       { text: "Medal", value: "data.clear_type", width: 80 },
     ],
@@ -1871,6 +1893,7 @@ export const gameData = [
       1100: "PERFECT",
     },
     scoreHeaders: [
+      { text: "Grade", value: "data.rank", width: 80 },
       { text: "Combos", value: "data.combo", width: 80 },
       { text: "Medal", value: "data.medal", width: 120 },
     ],
@@ -2022,10 +2045,43 @@ export const gameData = [
       2: "HARD",
       3: "SPECIAL",
     },
+    rankTable: {
+      100: "C",
+      200: "B",
+      300: "A",
+      400: "AA",
+      500: "AAA",
+      600: "AAA+",
+      700: "S",
+    },
+    percTable: {
+      0: 100,
+      6000: 200,
+      7000: 300,
+      8000: 400,
+      9000: 500,
+      9500: 600,
+      9800: 700,
+    },
+    medalTable: {
+      100: "NO PLAY",
+      200: "FAILED",
+      300: "CLEARED",
+      400: "HARD CLEAR",
+      500: "S HARD CLEAR",
+    },
+    comboTable: {
+      100: "NONE",
+      200: "ALMOST FULL COMBO",
+      300: "FULL COMBO",
+      400: "ALL JUST FULL COMBO",
+    },
     scoreHeaders: [
-      { text: "Combos", value: "combo", width: 80 },
-      { text: "Misses", value: "misses", width: 80 },
-      { text: "Halo", value: "halo", width: 80 },
+      { text: "Grade", value: "data.rank", width: 80 },
+      { text: "Rate", value: "data.achievement_rate", width: 100 },
+      { text: "Misses", value: "data.miss_count", width: 80 },
+      { text: "Medal", value: "data.clear_type", width: 80 },
+      { text: "Combo Medal", value: "data.combo_type", width: 120 },
     ],
     versions: [
       {
@@ -2084,9 +2140,31 @@ export const gameData = [
       3: "INFINITE",
       4: "MAXIMUM",
     },
+    rankTable: {
+      100: "NO PLAY",
+      200: "D",
+      300: "C",
+      400: "B",
+      500: "A",
+      550: "A+",
+      600: "AA",
+      650: "AA+",
+      700: "AAA",
+      800: "AAA+",
+      900: "S",
+    },
+    medalTable: {
+      50: "NO PLAY",
+      100: "FAILED",
+      200: "CLEARED",
+      300: "HARD CLEAR",
+      400: "UC",
+      500: "PUC",
+    },
     scoreHeaders: [
-      { text: "Combos", value: "combo", width: 80 },
-      { text: "Halo", value: "halo", width: 80 },
+      { text: "Grade", value: "data.rank", width: 80 },
+      { text: "Combos", value: "data.combo", width: 80 },
+      { text: "Medal", value: "data.clear_type", width: 80 },
     ],
     playerHeaders: [
       { text: "Skill Level", value: "skill_level", sortable: true, width: 100 },

@@ -82,15 +82,15 @@ function loadRoutes() {
         path: `/games/${props.game.id}/scores/${mainStore.userId}`,
         color: "info",
       });
-    }
 
-    navigationData.push({
-      label: "My Records",
-      icon: PhListStar,
-      path: `/games/${props.game.id}/records/${mainStore.userId}`,
-      route: "personal_records",
-      color: "success",
-    });
+      navigationData.push({
+        label: "My Records",
+        icon: PhListStar,
+        path: `/games/${props.game.id}/records/${mainStore.userId}`,
+        route: "personal_records",
+        color: "success",
+      });
+    }
   }
 
   if (!props.game.noScores) {
