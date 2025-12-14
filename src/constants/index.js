@@ -1257,7 +1257,8 @@ export const gameData = [
       VersionConstants.IIDX_PINKY_CRUSH,
     ],
     scoreHeaders: [
-      { text: "Grade", value: "data.rank", width: 80 },
+      { text: "Grade", value: "data.rank", width: 60 },
+      { text: "Percent", value: "data.achievement_rate", width: 100 },
       { text: "Misses", value: "data.miss_count", width: 100 },
       { text: "Clear Status", value: "data.medal", width: 100 },
     ],

@@ -36,5 +36,6 @@
     "3.0.34": ["- (Major) Add support for Jubeat titles", "- (Major) Add base BTA support"],
     "3.0.35": ["- (Bugfix) Fix cursor hover state on news card and profile card", "- (Minor) Update DDR game options", "- (Minor) Update IIDX event settings", "- (Minor) Add IIDX 32 basic QPro settings"],
     "3.0.36": ["- (Major) Finish more game metadata (DRS, Museca, Nostalgia, pop'n, jubeat)"],
-    "3.0.37": ["- (Major) Finish more game metadata (RB, SDVX, FTT)", "- (Bugfix) Fix personal record button showing for games without scores."]
+    "3.0.37": ["- (Major) Finish more game metadata (RB, SDVX, FTT)", "- (Bugfix) Fix personal record button showing for games without scores."],
+    "3.0.38": ["- (Major) Finish IIDX base metadata", "- (Minor) Add new greeting"]
 }

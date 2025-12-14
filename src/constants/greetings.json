@@ -600,5 +600,10 @@
         "author": "RyogAkari",
         "header": "Greetings, <username>.",
         "comment": "You tawt you taw a PASELI Cat."
+    },
+    {
+        "author": "Metis",
+        "header": "Hey... come here often, <username>?",
+        "comment": ""
     }
 ]

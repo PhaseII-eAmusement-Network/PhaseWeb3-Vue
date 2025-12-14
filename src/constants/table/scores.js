@@ -1,5 +1,6 @@
 import { formatSortableDate } from "@/constants/date";
 import { formatDifficulty, rankFromScore } from "@/constants/scoreDataFilters";
+import { formatIIDXScore } from "@/helpers/score/iidx";
 
 export function scoreHeaders(thisGame) {
   const headers = [
@@ -57,13 +58,14 @@ export function topScoreHeaders(thisGame) {
   return headers;
 }
 
-export function formatScoreData(thisGame, data) {
-  return data;
-}
-
 export function formatScoreTable(thisGame, scores) {
   var formattedItems = [];
   for (var item of scores) {
+    if (item.song?.data?.notecount) {
+      const maxScore = item.song.data.notecount * 2;
+      item = formatIIDXScore(maxScore, item);
+    }
+
     if (item.newRecord) {
       item.newRecord = "✅";
     } else {

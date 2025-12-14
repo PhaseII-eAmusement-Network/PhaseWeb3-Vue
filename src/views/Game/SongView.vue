@@ -15,11 +15,8 @@ import GameHeader from "@/components/Cards/GameHeader.vue";
 import { APIGetTopScore } from "@/stores/api/music";
 import { getGameInfo } from "@/constants";
 import { formatDifficulty } from "@/constants/scoreDataFilters";
-import {
-  topScoreHeaders,
-  formatScoreData,
-  formatScoreTable,
-} from "@/constants/table/scores";
+import { hydrateScoreData } from "@/helpers/score";
+import { topScoreHeaders, formatScoreTable } from "@/constants/table/scores";
 const $route = useRoute();
 const $router = useRouter();
 var gameId = $route.params.game;
@@ -39,7 +36,7 @@ if (!thisGame) {
 onMounted(async () => {
   try {
     const data = await APIGetTopScore(gameId, songId);
-    songData.value = formatScoreData(thisGame, data);
+    songData.value = hydrateScoreData(thisGame, data);
   } catch (error) {
     console.error("Failed to fetch score data:", error);
   }
