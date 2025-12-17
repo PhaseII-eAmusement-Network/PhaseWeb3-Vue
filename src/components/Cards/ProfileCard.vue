@@ -2,7 +2,7 @@
 import axios from "axios";
 import { ref, onMounted } from "vue";
 import { dashCode } from "@/constants/userData";
-import { GameConstants, getGameInfo } from "@/constants";
+import { GameConstants, getGameInfo, VersionConstants } from "@/constants";
 import UserEmblem from "@/components/UserEmblem.vue";
 import UserQpro from "@/components/UserQpro.vue";
 import { getGitadoraColor, getJubilityColor } from "@/constants/skillColor.js";
@@ -119,7 +119,9 @@ onMounted(async () => {
 
           <p
             v-if="
-              (profile.title || profile.parts) && game == GameConstants.JUBEAT
+              (profile.title || profile.parts) &&
+              game == GameConstants.JUBEAT &&
+              version >= VersionConstants.JUBEAT_PROP
             "
             class="text-2xl tracking-widest font-light my-1"
           >
