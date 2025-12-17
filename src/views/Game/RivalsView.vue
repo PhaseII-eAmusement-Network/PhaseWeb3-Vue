@@ -15,7 +15,7 @@ import FormField from "@/components/FormField.vue";
 
 import {
   APIGetProfile,
-  APIGetAllProfiles,
+  APIGetGame,
   APIGetLinks,
   APIUpdateProfile,
   APIPutLink,
@@ -97,8 +97,8 @@ async function loadLinks() {
 
 async function loadAllProfiles() {
   try {
-    const data = await APIGetAllProfiles(gameID, versionForm.currentVersion);
-    allProfiles.value = data;
+    const data = await APIGetGame(gameID, versionForm.currentVersion);
+    allProfiles.value = data.profiles;
   } catch (error) {
     console.error("Failed to fetch profile data:", error);
   }

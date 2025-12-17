@@ -7,7 +7,24 @@ import { exportJSON } from "@/helpers/contentExport";
 
 const $route = useRoute();
 
-const props = defineProps(["headers", "items", "hasAvatar"]);
+const props = defineProps({
+  headers: {
+    type: Array,
+    required: true,
+  },
+  items: {
+    type: Array,
+    required: true,
+  },
+  hasAvatar: {
+    type: Boolean,
+    default: false,
+  },
+  rowsPerPage: {
+    type: Number,
+    default: 25,
+  },
+});
 const emits = defineEmits(["row-clicked"]);
 
 const handleRowClick = (item) => {
@@ -32,6 +49,7 @@ function downloadJSON() {
     body-text-direction="left"
     :prevent-context-menu-row="false"
     class="pt-2"
+    :rows-per-page="rowsPerPage"
     @click-row="handleRowClick"
   >
     <template #loading>

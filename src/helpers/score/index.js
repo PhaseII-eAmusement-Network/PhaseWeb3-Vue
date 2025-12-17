@@ -20,7 +20,6 @@ export function hydrateScoreData(thisGame, data) {
       songData.charts[chartId] = chart;
     }
   }
-  console.log(songData);
 
   return songData;
 }

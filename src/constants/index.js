@@ -14,6 +14,10 @@ import { ReflecBeatOptions } from "@/constants/gameOptions/reflecOptions";
 import { SDVXOptions } from "@/constants/gameOptions/sdvxOptions";
 import { WinningElevenOptions } from "@/constants/gameOptions/weOptions";
 import { SilentScopeOptions } from "@/constants/gameOptions/silentScopeOptions";
+
+import { DDREvents } from "@/constants/scheduledEvents/ddrEvents";
+import { IIDXEvents } from "@/constants/scheduledEvents/iidxEvents";
+import { JubeatEvents } from "@/constants/scheduledEvents/jubeatEvents";
 const ASSET_PATH = import.meta.env.VITE_ASSET_PATH;
 
 export class GameConstants {
@@ -408,7 +412,6 @@ export const gameData = [
     cardBG: null,
     noRivals: true,
     noScores: true,
-    noRecords: true,
     skip: true,
     useUnicode: true,
     gameOptions: BishiBashiOptions,
@@ -425,7 +428,6 @@ export const gameData = [
     skip: true,
     noRivals: true,
     noScores: true,
-    noRecords: true,
   },
   {
     id: GameConstants.DANCE_EVOLUTION,
@@ -434,7 +436,6 @@ export const gameData = [
     cardBG: null,
     noRivals: true,
     noScores: true,
-    noRecords: true,
     skip: true,
     useUnicode: true,
   },
@@ -484,6 +485,7 @@ export const gameData = [
     icon: null,
     cardBG: null,
     gameOptions: DDROptions,
+    scheduledEvents: DDREvents,
     useActiveRival: true,
     videoTable: [
       VersionConstants.DDR_ACE,
@@ -648,7 +650,6 @@ export const gameData = [
     assetId: "ddr",
     noRivals: true,
     noScores: true,
-    noRecords: true,
     gameOptions: DDRClassOptions,
     versions: [
       {
@@ -956,7 +957,6 @@ export const gameData = [
     skip: true,
     noRivals: true,
     noScores: true,
-    noRecords: true,
     versions: [
       {
         id: VersionConstants.EEMALL,
@@ -975,7 +975,6 @@ export const gameData = [
     cardBG: null,
     noRivals: true,
     noScores: true,
-    noRecords: true,
     useUnicode: true,
     versions: [
       {
@@ -1239,6 +1238,7 @@ export const gameData = [
     cardBG: `${ASSET_PATH}/card/iidx.webp`,
     assetId: "iidx",
     gameOptions: IIDXOptions,
+    scheduledEvents: IIDXEvents,
     splitRivals: true,
     maxLength: 6,
     videoTable: [
@@ -1473,7 +1473,6 @@ export const gameData = [
     gameOptions: IIDXClassOptions,
     noRivals: true,
     noScores: true,
-    noRecords: true,
     playerHeaders: [
       { text: "SP DAN", value: "sgrade", width: 100 },
       { text: "DP DAN", value: "dgrade", width: 100 },
@@ -1574,6 +1573,7 @@ export const gameData = [
     name: "jubeat",
     icon: null,
     cardBG: null,
+    scheduledEvents: JubeatEvents,
     scoreHeaders: [
       { text: "Grade", value: "data.rank", width: 80 },
       { text: "Combos", value: "data.combo", width: 80 },
@@ -1699,7 +1699,6 @@ export const gameData = [
     cardBG: null,
     noRivals: true,
     noScores: true,
-    noRecords: true,
     skip: true,
     playerHeaders: [
       { text: "Girlfriend", value: "gf", sortable: true, width: 100 },
@@ -1724,7 +1723,6 @@ export const gameData = [
     skip: true,
     noRivals: true,
     noScores: true,
-    noRecords: true,
   },
   {
     id: GameConstants.MUSECA,
@@ -1812,7 +1810,6 @@ export const gameData = [
     skip: true,
     noRivals: true,
     noScores: true,
-    noRecords: true,
   },
   {
     id: GameConstants.OTOCA,
@@ -1822,7 +1819,6 @@ export const gameData = [
     skip: true,
     noRivals: true,
     noScores: true,
-    noRecords: true,
   },
   {
     id: GameConstants.PASELI_CHARGE_MACHINE,
@@ -1830,7 +1826,6 @@ export const gameData = [
     skip: true,
     noRivals: true,
     noScores: true,
-    noRecords: true,
     gameOptions: PaseliChargeOptions,
   },
   {
@@ -1842,7 +1837,6 @@ export const gameData = [
     skip: true,
     noRivals: true,
     noScores: true,
-    noRecords: true,
   },
   {
     id: GameConstants.POPN_MUSIC,
@@ -2031,7 +2025,6 @@ export const gameData = [
     skip: true,
     noRivals: true,
     noScores: true,
-    noRecords: true,
   },
   {
     id: GameConstants.REFLEC_BEAT,
@@ -2125,7 +2118,6 @@ export const gameData = [
     skip: true,
     noRivals: true,
     noScores: true,
-    noRecords: true,
   },
   {
     id: GameConstants.SDVX,
@@ -2211,7 +2203,6 @@ export const gameData = [
     skip: true,
     noRivals: true,
     noScores: true,
-    noRecords: true,
     useUnicode: true,
     gameOptions: SilentScopeOptions,
   },
@@ -2221,7 +2212,6 @@ export const gameData = [
     skip: false,
     noRivals: true,
     noScores: false,
-    noRecords: true,
     useUnicode: true,
     chartTable: {
       0: "Game Mode",
@@ -2236,7 +2226,6 @@ export const gameData = [
     skip: false,
     noRivals: true,
     noScores: true,
-    noRecords: true,
     gameOptions: WinningElevenOptions,
     versions: [
       {

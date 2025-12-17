@@ -1,7 +1,11 @@
 <script setup>
 import { reactive, ref, onMounted, watch } from "vue";
 import { useRoute, useRouter } from "vue-router";
-import { PhUsersThree } from "@phosphor-icons/vue";
+import {
+  PhUsersThree,
+  PhCalendarDots,
+  PhArrowLineUpRight,
+} from "@phosphor-icons/vue";
 import SectionMain from "@/components/SectionMain.vue";
 import GameHeader from "@/components/Cards/GameHeader.vue";
 import SectionTitleLine from "@/components/SectionTitleLine.vue";
@@ -10,17 +14,30 @@ import CardBox from "@/components/CardBox.vue";
 import FormControl from "@/components/FormControl.vue";
 import ProfileCard from "@/components/Cards/ProfileCard.vue";
 import GeneralTable from "@/components/GeneralTable.vue";
+import PillTag from "@/components/PillTag.vue";
 
-import { APIGetProfile, APIGetAllProfiles } from "@/stores/api/profile";
+import { APIGetProfile, APIGetGame } from "@/stores/api/profile";
+import { APIGetMusicData } from "@/stores/api/music";
 import { getGameInfo } from "@/constants";
 import { dashCode } from "@/constants/userData";
 import { getIIDXDan } from "@/constants/danClass";
 import { formatSortableDate } from "@/constants/date";
+import { useMainStore } from "@/stores/main";
+import SongCardSmall from "@/components/Cards/SongCardSmall.vue";
 
+const mainStore = useMainStore();
 const $route = useRoute();
 const $router = useRouter();
 var gameID = null;
 var thisGame = null;
+
+const myProfile = ref(null);
+const profiles = ref([]);
+const hitchartData = ref(null);
+const timeSensitiveData = ref([]);
+const musicIds = ref([]);
+const musicData = ref(null);
+const versionEvents = ref(null);
 
 const versionForm = reactive({
   currentVersion: null,
@@ -29,7 +46,13 @@ const versionForm = reactive({
 watch(
   () => versionForm.currentVersion,
   () => {
+    mainStore.continueLoad = true;
+    loadGame(versionForm.currentVersion);
     loadProfile();
+    musicIds.value = [];
+    mainStore.continueLoad = false;
+    mainStore.isLoading = false;
+    mainStore.loadingPool.length = 0;
   },
 );
 
@@ -45,22 +68,34 @@ if (thisGame == null) {
   });
 }
 
-const myProfile = ref(null);
-const profiles = ref([]);
-
 onMounted(async () => {
-  try {
-    const data = await APIGetAllProfiles(gameID);
-    profiles.value = formatProfiles(data);
-  } catch (error) {
-    console.error("Failed to fetch profile data:", error);
-  }
-
-  loadProfile();
+  mainStore.continueLoad = true;
+  await loadProfile();
+  await loadGame();
+  mainStore.continueLoad = false;
+  mainStore.isLoading = false;
+  mainStore.loadingPool.length = 0;
 });
 
 if (!thisGame.versions) {
   versionForm.currentVersion = 1;
+}
+
+async function loadGame(version) {
+  try {
+    const data = await APIGetGame(gameID, version);
+    profiles.value = formatProfiles(data.profiles);
+    hitchartData.value = data.hitchart;
+    timeSensitiveData.value = data.scheduledEvents;
+    getVersionEvents();
+    musicIds.value = getHitchartIds(data.hitchart).concat(
+      getEventIds(data.scheduledEvents),
+    );
+    await getMusicData();
+    hitchartData.value = formatHitchart(data.hitchart);
+  } catch (error) {
+    console.error("Failed to fetch profile data:", error);
+  }
 }
 
 async function loadProfile() {
@@ -164,6 +199,109 @@ const navigateToProfile = (item) => {
   const userID = item.userId;
   $router.push(`/games/${gameID}/profiles/${userID}`);
 };
+
+const navigateToSong = (item) => {
+  const songId = item.songid;
+  $router.push(`/games/${gameID}/song/${songId}`);
+};
+
+function getVersionEvents() {
+  if (!thisGame.scheduledEvents) {
+    return null;
+  }
+  versionEvents.value =
+    thisGame.scheduledEvents[versionForm.currentVersion] ?? null;
+  return versionEvents.value;
+}
+
+async function getMusicData() {
+  if (musicIds.value.length) {
+    const data = await APIGetMusicData(
+      gameID,
+      versionForm.currentVersion,
+      musicIds.value,
+      true,
+    );
+    musicData.value = data;
+  }
+}
+
+function getMusic(id) {
+  if (!musicData.value) {
+    return null;
+  }
+  return musicData.value.find((x) => x.id == id);
+}
+
+function getEventSetting(eventId) {
+  const setting = timeSensitiveData.value.find((x) => x.id == eventId);
+  return setting;
+}
+
+const hitchartHeaders = [
+  { text: "Song", value: "name", width: 140, sortable: true },
+  { text: "Artist", value: "artist", width: 140, sortable: true },
+  { text: "Plays", value: "plays", width: 100, sortable: true },
+];
+
+function getHitchartIds(data) {
+  var hitchartIds = [];
+
+  for (const dataId in data) {
+    const songid = data[dataId][0];
+    hitchartIds.push(songid);
+  }
+
+  return hitchartIds;
+}
+
+function getEventIds(eventData) {
+  if (versionEvents.value == null) {
+    return [];
+  }
+
+  var eventIds = [];
+  for (const event of versionEvents.value) {
+    const setting = eventData.find((x) => x.id == event.id);
+
+    if (setting?.data?.music) {
+      if (Array.isArray(setting?.data.music)) {
+        for (const music of setting.data.music) {
+          eventIds.push(music);
+        }
+      } else {
+        eventIds.push(setting?.data.music);
+      }
+    }
+
+    if (setting?.data?.today) {
+      eventIds.push(setting?.data.today);
+    }
+
+    if (setting?.data?.whim) {
+      eventIds.push(setting?.data.whim);
+    }
+  }
+  return eventIds;
+}
+
+function formatHitchart(data) {
+  var formattedData = [];
+  for (const dataId in data) {
+    const songid = data[dataId][0];
+    const plays = data[dataId][1];
+    const song = getMusic(songid);
+
+    formattedData.push({
+      songid: songid,
+      plays: plays,
+      name: song?.name,
+      artist: song?.artist,
+    });
+  }
+
+  return formattedData;
+}
 </script>
 
 <template>
@@ -195,7 +333,129 @@ const navigateToProfile = (item) => {
         </div>
       </GameHeader>
 
-      <SectionTitleLine :icon="PhUsersThree" title="All Players" main />
+      <div
+        v-if="versionEvents || !thisGame.noScores"
+        class="grid lg:grid-cols-2 items-stretch w-full gap-6 mb-6"
+      >
+        <div
+          v-if="!thisGame.noScores && hitchartData"
+          :class="{
+            'md:col-span-2': !versionEvents,
+          }"
+        >
+          <SectionTitleLine
+            :icon="PhArrowLineUpRight"
+            color="text-yellow-400"
+            title="Hitchart"
+            main
+          />
+          <CardBox has-table>
+            <GeneralTable
+              :headers="hitchartHeaders"
+              :items="hitchartData"
+              :rows-per-page="5"
+              @row-clicked="navigateToSong"
+            />
+          </CardBox>
+        </div>
+
+        <div v-if="versionEvents != null">
+          <SectionTitleLine
+            :icon="PhCalendarDots"
+            color="text-emerald-400"
+            title="Scheduled Events"
+            main
+          />
+          <CardBox>
+            <div v-if="musicData" class="grid gap-6">
+              <template v-for="event of versionEvents" :key="event.id">
+                <template v-if="getEventSetting(event.id)">
+                  <div v-if="event.id">
+                    <PillTag color="info" :label="event.duration" />
+                    <h1 class="text-xl font-bold">
+                      {{ event.name }}
+                    </h1>
+
+                    <div class="text-md font-light flex gap-2">
+                      <h1>
+                        Started
+                        <span class="font-normal">
+                          {{
+                            formatSortableDate(
+                              getEventSetting(event.id)?.start_time,
+                            )
+                          }}
+                        </span>
+                      </h1>
+                      <span>|</span>
+                      <h1>
+                        Expires
+                        <span class="font-normal">
+                          {{
+                            formatSortableDate(
+                              getEventSetting(event.id)?.end_time,
+                            )
+                          }}
+                        </span>
+                      </h1>
+                    </div>
+                    <template
+                      v-if="
+                        Array.isArray(getEventSetting(event.id)?.data?.music) &&
+                        musicData
+                      "
+                    >
+                      <div class="flex gap-6 text-lg mt-3">
+                        <SongCardSmall
+                          v-for="musicId of getEventSetting(event.id).data
+                            .music"
+                          :game-id="gameID"
+                          :music-data="getMusic(musicId)"
+                        />
+                      </div>
+                    </template>
+                    <template
+                      v-else-if="getEventSetting(event.id)?.data?.music"
+                    >
+                      <div class="flex mt-3">
+                        <SongCardSmall
+                          :game-id="gameID"
+                          :music-data="
+                            getMusic(getEventSetting(event.id)?.data?.music)
+                          "
+                        />
+                      </div>
+                    </template>
+                    <template v-if="getEventSetting(event.id)?.data?.today">
+                      <SongCardSmall
+                        :game-id="gameID"
+                        :music-data="
+                          getMusic(getEventSetting(event.id)?.data?.today)
+                        "
+                      />
+                    </template>
+                    <template v-if="getEventSetting(event.id)?.data?.whim">
+                      <SongCardSmall
+                        :game-id="gameID"
+                        :music-data="
+                          getMusic(getEventSetting(event.id)?.data?.whim)
+                        "
+                      />
+                    </template>
+                  </div>
+                </template>
+              </template>
+            </div>
+          </CardBox>
+        </div>
+      </div>
+
+      <SectionTitleLine
+        :icon="PhUsersThree"
+        color="text-blue-400"
+        title="All Players"
+        main
+      />
       <CardBox has-table>
         <div
           class="bg-white dark:bg-slate-900/95 rounded-2xl lg:flex lg:justify-between"
