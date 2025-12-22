@@ -1,9 +1,11 @@
 import { useMainStore } from "@/stores/main";
 const mainStore = useMainStore();
 
-export async function APIGetGame(game, version = null) {
+export async function APIGetGame(game, version = null, noUsers = false) {
   try {
-    const data = await mainStore.callApi(`/game/${game}?version=${version}`);
+    const data = await mainStore.callApi(
+      `/game/${game}?version=${version}&noUsers=${noUsers}`,
+    );
     return data.data;
   } catch (error) {
     console.log("Error fetching game:", error);

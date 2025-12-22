@@ -27,10 +27,12 @@ import UserNotesRadar from "@/components/Charts/UserNotesRadar.vue";
 
 import { APIGetProfile } from "@/stores/api/profile";
 import { APIGetArcade } from "@/stores/api/arcade";
+import { APIGetMusicData } from "@/stores/api/music";
 import { GameConstants, getGameInfo } from "@/constants";
 import { getIIDXDan } from "@/constants/danClass.js";
 import { getGitadoraColor, getJubilityColor } from "@/constants/skillColor";
 import { formatSortableDate } from "@/constants/date";
+import HitchartCardBox from "@/components/Cards/HitchartCardBox.vue";
 const ASSET_PATH = import.meta.env.VITE_ASSET_PATH;
 
 const $route = useRoute();
@@ -69,6 +71,11 @@ watch(
 );
 
 const myProfile = ref(null);
+const myVersions = ref(null);
+const myStats = ref(null);
+const myHitChart = ref(null);
+const musicIds = ref([]);
+const musicData = ref(null);
 
 onMounted(async () => {
   loadProfile();
@@ -86,12 +93,21 @@ async function loadProfile() {
       versionForm.currentVersion,
       profileUserId,
     );
-    data.timeline = await generateTimeline(data);
+    data.timeline = await generateTimeline(data.stats);
 
-    myProfile.value = formatProfile(data);
+    const formatted = formatProfile(data.profile, data.stats);
+    myProfile.value = formatted[0];
+    myVersions.value = data.versions;
+    myStats.value = formatted[1];
 
     if (data && !versionForm.currentVersion) {
       versionForm.currentVersion = data.versions[data.versions.length - 1];
+    }
+
+    if (data.hitChart?.length) {
+      musicIds.value = getHitchartIds(data.hitChart);
+      await getMusicData();
+      myHitChart.value = formatHitchart(data.hitChart);
     }
   } catch (error) {
     console.error("Failed to fetch user profile data:", error);
@@ -217,42 +233,39 @@ function filterVersions(haveVersions) {
   return filtered;
 }
 
-function returnNumber(stat, profile) {
+function returnNumber(stat, stats) {
   if (stat.isSkill) {
-    return profile.stats[stat.key] / 100;
+    return stats[stat.key] / 100;
   } else if (stat.isJubility) {
-    return profile.stats[stat.key] / 10;
+    return stats[stat.key] / 10;
   }
 
-  return profile.stats[stat.key];
+  return stats[stat.key];
 }
 
-function formatProfile(profile) {
-  if (profile.stats) {
-    if (profile.stats.first_play_timestamp) {
-      profile.stats.first_play_timestamp = formatSortableDate(
-        profile.stats.first_play_timestamp,
+function formatProfile(profile, stats) {
+  if (stats) {
+    if (stats.first_play_timestamp) {
+      stats.first_play_timestamp = formatSortableDate(
+        stats.first_play_timestamp,
       );
     }
 
-    if (profile.stats.last_play_timestamp) {
-      profile.stats.last_play_timestamp = formatSortableDate(
-        profile.stats.last_play_timestamp,
-      );
+    if (stats.last_play_timestamp) {
+      stats.last_play_timestamp = formatSortableDate(stats.last_play_timestamp);
     }
-
-    if (profile.dp) {
-      if (profile.dp.dan !== undefined) {
-        profile.dp.dan = getIIDXDan(profile.dp.dan).short;
-      }
+  }
+  if (profile.dp) {
+    if (profile.dp.dan !== undefined) {
+      profile.dp.dan = getIIDXDan(profile.dp.dan).short;
     }
   }
 
-  return profile;
+  return [profile, stats];
 }
 
-function formatCounts(profile) {
-  const stats = profile.stats?.count;
+function formatCounts(inStats) {
+  const stats = inStats?.count;
   return stats
     ? [
         stats.mfc != null
@@ -304,8 +317,7 @@ function formatCounts(profile) {
     : [];
 }
 
-async function generateTimeline(myProfile) {
-  const stats = myProfile?.stats;
+async function generateTimeline(stats) {
   const firstPlay = stats?.first_play_timestamp;
   const lastPlay = stats?.last_play_timestamp;
   const arcadeHistory = stats?.arcade_history;
@@ -354,6 +366,54 @@ async function generateTimeline(myProfile) {
     (a, b) => new Date(a.timestamp).getTime() - new Date(b.timestamp).getTime(),
   );
 }
+
+async function getMusicData() {
+  if (musicIds.value.length) {
+    const data = await APIGetMusicData(
+      gameID,
+      versionForm.currentVersion,
+      musicIds.value,
+      true,
+    );
+    musicData.value = data;
+  }
+}
+
+function getMusic(id) {
+  if (!musicData.value) {
+    return null;
+  }
+  return musicData.value.find((x) => x.id == id);
+}
+
+function getHitchartIds(data) {
+  var hitchartIds = [];
+
+  for (const dataId in data) {
+    const songid = data[dataId][0];
+    hitchartIds.push(songid);
+  }
+
+  return hitchartIds;
+}
+
+function formatHitchart(data) {
+  var formattedData = [];
+  for (const dataId in data) {
+    const songid = data[dataId][0];
+    const plays = data[dataId][1];
+    const song = getMusic(songid);
+
+    formattedData.push({
+      songid: songid,
+      plays: plays,
+      name: song?.name,
+      artist: song?.artist,
+    });
+  }
+
+  return formattedData;
+}
 </script>
 
 <template>
@@ -371,7 +431,7 @@ async function generateTimeline(myProfile) {
             </h2>
             <FormControl
               v-model="versionForm.currentVersion"
-              :options="filterVersions(myProfile.versions)"
+              :options="filterVersions(myVersions)"
             />
           </div>
         </SectionTitleLine>
@@ -424,26 +484,24 @@ async function generateTimeline(myProfile) {
         <div class="my-6 grid grid-cols-1 md:grid-cols-4 gap-6">
           <template v-for="stat in loadStats" :key="stat">
             <CardBoxWidget
-              v-if="myProfile.stats[stat.key]"
+              v-if="myStats[stat.key]"
               :class="stat.span"
               :label="stat.label"
-              :number="
-                stat.type == Number ? returnNumber(stat, myProfile) : null
-              "
+              :number="stat.type == Number ? returnNumber(stat, myStats) : null"
               :num-color="colorText(stat)"
             >
-              {{ stat.type == String ? myProfile.stats[stat.key] : null }}
+              {{ stat.type == String ? myStats[stat.key] : null }}
             </CardBoxWidget>
           </template>
           <CardBoxWidget
-            v-if="myProfile.stats?.count?.records"
+            v-if="myStats?.count?.records"
             label="Records"
-            :number="myProfile.stats?.count?.records"
+            :number="myStats?.count?.records"
           />
           <CardBoxWidget
-            v-if="myProfile.stats?.count?.attempts"
+            v-if="myStats?.count?.attempts"
             label="Scores"
-            :number="myProfile.stats?.count?.attempts"
+            :number="myStats?.count?.attempts"
           />
 
           <!-- GFDM -->
@@ -520,7 +578,7 @@ async function generateTimeline(myProfile) {
 
         <template
           v-if="
-            myProfile.stats?.count ||
+            myStats?.count ||
             myProfile.tune_cnt ||
             myProfile.max_clear_diff ||
             myProfile.battle_data
@@ -530,7 +588,7 @@ async function generateTimeline(myProfile) {
           <div
             class="my-6 grid grid-cols-2 md:grid-cols-5 xl:grid-cols-6 gap-6"
           >
-            <template v-for="stat of formatCounts(myProfile)" :key="stat">
+            <template v-for="stat of formatCounts(myStats)" :key="stat">
               <CardBoxWidget
                 v-if="stat !== undefined"
                 :label="stat.label"
@@ -666,6 +724,10 @@ async function generateTimeline(myProfile) {
           </div>
         </template>
 
+        <div v-if="myHitChart && !thisGame.noScores" class="mb-6">
+          <HitchartCardBox :hitchart-data="myHitChart" :game-id="gameID" />
+        </div>
+
         <template v-if="myProfile.jubility">
           <SectionTitleLine
             :icon="PhChartPieSlice"
@@ -677,7 +739,6 @@ async function generateTimeline(myProfile) {
               <PillTag label="Pick-Up" color="info" />
               <JubilityTable
                 :jubility-data="myProfile.pick_up_breakdown"
-                ,
                 :version="versionForm.currentVersion"
               />
             </CardBox>
@@ -685,7 +746,6 @@ async function generateTimeline(myProfile) {
               <PillTag label="Common" color="info" />
               <JubilityTable
                 :jubility-data="myProfile.other_breakdown"
-                ,
                 :version="versionForm.currentVersion"
               />
             </CardBox>

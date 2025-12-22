@@ -32,7 +32,8 @@ var thisGame = null;
 gameID = $route.params.game;
 thisGame = getGameInfo(gameID);
 
-const profile = ref(null);
+const myProfile = ref(null);
+const myVersions = ref(null);
 const links = ref(null);
 const allProfiles = ref([]);
 const versionForm = reactive({
@@ -69,9 +70,10 @@ async function loadAll() {
 
 async function loadProfile() {
   try {
-    profile.value = null;
+    myProfile.value = null;
     const data = await APIGetProfile(gameID, versionForm.currentVersion);
-    profile.value = data;
+    myProfile.value = data.profile;
+    myVersions.value = data.versions;
 
     if (data && !versionForm.currentVersion) {
       versionForm.currentVersion = data.versions[data.versions.length - 1];
@@ -140,7 +142,7 @@ function filterProfiles() {
 }
 
 function checkDisabled(rivalId) {
-  if (rivalId == profile.value?.userId) {
+  if (rivalId == myProfile.value?.userId) {
     return true;
   }
 
@@ -165,7 +167,7 @@ function versionMaxRivals() {
 }
 
 function getActiveRivals() {
-  if (!profile.value?.last) {
+  if (!myProfile.value?.last) {
     activeRivals.value = [];
     return;
   }
@@ -173,7 +175,7 @@ function getActiveRivals() {
   var rivalList = [];
   const keys = ["fri", "rival1", "rival2", "rival3"];
   for (const key of keys) {
-    const rivalId = profile.value?.last[key];
+    const rivalId = myProfile.value?.last[key];
     if (rivalId >= 1) {
       rivalList.push(rivalId);
     }
@@ -239,7 +241,7 @@ async function deleteRival(otherUserId, type) {
 }
 
 async function setActive(type) {
-  var lastObject = profile.value?.last ?? {};
+  var lastObject = myProfile.value?.last ?? {};
   var rivalPosition = null;
   if (type.startsWith("friend_")) {
     rivalPosition = parseInt(type.replace("friend_", ""), 10);
@@ -272,7 +274,7 @@ async function setActive(type) {
 }
 
 async function setInactive(type) {
-  var lastObject = profile.value?.last ?? {};
+  var lastObject = myProfile.value?.last ?? {};
   var rivalPosition = null;
 
   if (type.startsWith("friend_")) {
@@ -325,7 +327,7 @@ const navigateToProfile = (userID) => {
     <SectionMain>
       <GameHeader :game="thisGame" :version="versionForm.currentVersion">
         <div
-          v-if="thisGame.versions && profile"
+          v-if="thisGame.versions && myProfile"
           class="w-full md:flex md:-mt-[75px] mb-4 place-content-end"
         >
           <div class="md:w-1/3 md:text-right">
@@ -334,16 +336,16 @@ const navigateToProfile = (userID) => {
             </h2>
             <FormControl
               v-model="versionForm.currentVersion"
-              :options="filterVersions(profile.versions)"
+              :options="filterVersions(myVersions)"
             />
           </div>
         </div>
 
-        <div v-if="profile" class="w-full">
+        <div v-if="myProfile" class="w-full">
           <ProfileCard
             :game="gameID"
             :version="versionForm.currentVersion"
-            :profile="profile"
+            :profile="myProfile"
           >
           </ProfileCard>
         </div>

@@ -12,7 +12,7 @@ const routes = [
   },
   {
     meta: {
-      title: "All News",
+      title: "News Archive",
     },
     path: "/news",
     name: "news_board",
@@ -25,6 +25,14 @@ const routes = [
     path: "/news/:id",
     name: "news_post",
     component: () => import("@/views/PostView.vue"),
+  },
+  {
+    meta: {
+      title: "WebUI Changelog",
+    },
+    path: "/changelog",
+    name: "changelog",
+    component: () => import("@/views/ChangelogView.vue"),
   },
   {
     meta: {

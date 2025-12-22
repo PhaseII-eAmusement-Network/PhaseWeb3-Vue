@@ -64,6 +64,7 @@ if (!thisGame.versions) {
 const optionForm = ref(null);
 const bareForm = ref(null);
 const myProfile = ref(null);
+const myVersions = ref(null);
 
 onMounted(() => {
   loadProfile();
@@ -85,7 +86,8 @@ async function loadProfile() {
     optionForm.value = {};
     bareForm.value = {};
     const data = await APIGetProfile(gameID, versionForm.currentVersion);
-    myProfile.value = data;
+    myProfile.value = data.profile;
+    myVersions.value = data.versions;
 
     // Deep clone nested values from myProfile to optionForm using paths
     for (const setting of getGameOptions(
@@ -132,7 +134,7 @@ async function updateProfile() {
             </h2>
             <FormControl
               v-model="versionForm.currentVersion"
-              :options="filterVersions(myProfile.versions)"
+              :options="filterVersions(myVersions)"
             />
           </div>
         </div>

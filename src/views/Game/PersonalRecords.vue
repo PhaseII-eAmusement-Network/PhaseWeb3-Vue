@@ -70,7 +70,7 @@ async function loadProfile() {
   try {
     myProfile.value = null;
     const data = await APIGetProfile(gameId, null, profileUserId);
-    myProfile.value = data;
+    myProfile.value = data.profile;
   } catch (error) {
     console.error("Failed to fetch user profile data:", error);
   }

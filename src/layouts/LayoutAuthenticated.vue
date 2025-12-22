@@ -9,6 +9,7 @@ import {
   PhCrown,
   PhFilmSlate,
   PhArchive,
+  PhGitMerge,
 } from "@phosphor-icons/vue";
 import { ref, watch, onMounted, computed } from "vue";
 import { useRouter, useRoute } from "vue-router";
@@ -216,6 +217,11 @@ const menuAside = computed(() => {
   });
 
   sideMenu.push({ to: "/news", icon: PhArchive, label: "News Archive" });
+  sideMenu.push({
+    to: "/changelog",
+    icon: PhGitMerge,
+    label: "Changelog Archive",
+  });
 
   return sideMenu;
 });

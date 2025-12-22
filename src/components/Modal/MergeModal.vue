@@ -32,7 +32,7 @@ const scoresSelected = ref(props.settings?.scores ?? false);
 
 onMounted(async () => {
   const data = await APIGetProfile(props.game, null, props.userId);
-  profileData.value = data;
+  profileData.value = data.profile;
 });
 
 function saveSettings() {

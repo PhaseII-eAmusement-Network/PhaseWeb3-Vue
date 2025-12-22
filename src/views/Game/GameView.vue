@@ -1,11 +1,7 @@
 <script setup>
 import { reactive, ref, onMounted, watch } from "vue";
 import { useRoute, useRouter } from "vue-router";
-import {
-  PhUsersThree,
-  PhCalendarDots,
-  PhArrowLineUpRight,
-} from "@phosphor-icons/vue";
+import { PhUsersThree, PhCalendarDots } from "@phosphor-icons/vue";
 import SectionMain from "@/components/SectionMain.vue";
 import GameHeader from "@/components/Cards/GameHeader.vue";
 import SectionTitleLine from "@/components/SectionTitleLine.vue";
@@ -15,6 +11,8 @@ import FormControl from "@/components/FormControl.vue";
 import ProfileCard from "@/components/Cards/ProfileCard.vue";
 import GeneralTable from "@/components/GeneralTable.vue";
 import PillTag from "@/components/PillTag.vue";
+import HitchartCardBox from "@/components/Cards/HitchartCardBox.vue";
+import SongCardSmall from "@/components/Cards/SongCardSmall.vue";
 
 import { APIGetProfile, APIGetGame } from "@/stores/api/profile";
 import { APIGetMusicData } from "@/stores/api/music";
@@ -23,7 +21,6 @@ import { dashCode } from "@/constants/userData";
 import { getIIDXDan } from "@/constants/danClass";
 import { formatSortableDate } from "@/constants/date";
 import { useMainStore } from "@/stores/main";
-import SongCardSmall from "@/components/Cards/SongCardSmall.vue";
 
 const mainStore = useMainStore();
 const $route = useRoute();
@@ -32,6 +29,7 @@ var gameID = null;
 var thisGame = null;
 
 const myProfile = ref(null);
+const myVersions = ref(null);
 const profiles = ref([]);
 const hitchartData = ref(null);
 const timeSensitiveData = ref([]);
@@ -47,7 +45,7 @@ watch(
   () => versionForm.currentVersion,
   () => {
     mainStore.continueLoad = true;
-    loadGame(versionForm.currentVersion);
+    loadGame(versionForm.currentVersion, profiles.length != 0);
     loadProfile();
     musicIds.value = [];
     mainStore.continueLoad = false;
@@ -71,7 +69,7 @@ if (thisGame == null) {
 onMounted(async () => {
   mainStore.continueLoad = true;
   await loadProfile();
-  await loadGame();
+  await loadGame(null, profiles.length == 0);
   mainStore.continueLoad = false;
   mainStore.isLoading = false;
   mainStore.loadingPool.length = 0;
@@ -81,10 +79,12 @@ if (!thisGame.versions) {
   versionForm.currentVersion = 1;
 }
 
-async function loadGame(version) {
+async function loadGame(version, noUsers) {
   try {
-    const data = await APIGetGame(gameID, version);
-    profiles.value = formatProfiles(data.profiles);
+    const data = await APIGetGame(gameID, version, noUsers);
+    if (profiles.value.length === 0 && !noUsers) {
+      profiles.value = formatProfiles(data.profiles);
+    }
     hitchartData.value = data.hitchart;
     timeSensitiveData.value = data.scheduledEvents;
     getVersionEvents();
@@ -102,7 +102,11 @@ async function loadProfile() {
   try {
     myProfile.value = null;
     const data = await APIGetProfile(gameID, versionForm.currentVersion);
-    myProfile.value = data;
+    if (!data) {
+      return;
+    }
+    myProfile.value = data.profile;
+    myVersions.value = data.versions;
 
     if (data && !versionForm.currentVersion) {
       versionForm.currentVersion = data.versions[data.versions.length - 1];
@@ -200,11 +204,6 @@ const navigateToProfile = (item) => {
   $router.push(`/games/${gameID}/profiles/${userID}`);
 };
 
-const navigateToSong = (item) => {
-  const songId = item.songid;
-  $router.push(`/games/${gameID}/song/${songId}`);
-};
-
 function getVersionEvents() {
   if (!thisGame.scheduledEvents) {
     return null;
@@ -237,12 +236,6 @@ function getEventSetting(eventId) {
   const setting = timeSensitiveData.value.find((x) => x.id == eventId);
   return setting;
 }
-
-const hitchartHeaders = [
-  { text: "Song", value: "name", width: 140, sortable: true },
-  { text: "Artist", value: "artist", width: 140, sortable: true },
-  { text: "Plays", value: "plays", width: 100, sortable: true },
-];
 
 function getHitchartIds(data) {
   var hitchartIds = [];
@@ -318,7 +311,7 @@ function formatHitchart(data) {
             </h2>
             <FormControl
               v-model="versionForm.currentVersion"
-              :options="filterVersions(myProfile.versions)"
+              :options="filterVersions(myVersions)"
             />
           </div>
         </div>
@@ -343,20 +336,7 @@ function formatHitchart(data) {
             'md:col-span-2': !versionEvents,
           }"
         >
-          <SectionTitleLine
-            :icon="PhArrowLineUpRight"
-            color="text-yellow-400"
-            title="Hitchart"
-            main
-          />
-          <CardBox has-table>
-            <GeneralTable
-              :headers="hitchartHeaders"
-              :items="hitchartData"
-              :rows-per-page="5"
-              @row-clicked="navigateToSong"
-            />
-          </CardBox>
+          <HitchartCardBox :hitchart-data="hitchartData" :game-id="gameID" />
         </div>
 
         <div v-if="versionEvents != null">
@@ -368,8 +348,8 @@ function formatHitchart(data) {
           />
           <CardBox>
             <div v-if="musicData" class="grid gap-6">
-              <template v-for="event of versionEvents" :key="event.id">
-                <template v-if="getEventSetting(event.id)">
+              <div v-for="event of versionEvents" :key="event.id">
+                <div v-if="getEventSetting(event.id)">
                   <div v-if="event.id">
                     <PillTag color="info" :label="event.duration" />
                     <h1 class="text-xl font-bold">
@@ -443,8 +423,8 @@ function formatHitchart(data) {
                       />
                     </template>
                   </div>
-                </template>
-              </template>
+                </div>
+              </div>
             </div>
           </CardBox>
         </div>
