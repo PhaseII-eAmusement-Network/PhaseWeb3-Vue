@@ -40,5 +40,6 @@
     "3.0.38": ["- (Major) Finish IIDX base metadata", "- (Minor) Add new greeting"],
     "3.0.39": ["- (Major) Add Hitchart and Event schedule to game homepage", "- (Bugfix) Fix breaking jubeat Copius title"],
     "3.0.40": ["- (Major) Add banned user filtering on profile lists (SoffiMeower optimized)", "- (Bugfix) Fix rivals loading from incorrect versions"],
-    "3.0.41": ["- (Major) Completely refactor user profile schema", "- (Major) Add Hitchart to player view", "- (Major) Add changelog archive view"]
+    "3.0.41": ["- (Major) Completely refactor user profile schema", "- (Major) Add Hitchart to player view", "- (Major) Add changelog archive view"],
+    "3.0.42": ["- (Major) Refactor loading state"]
 }

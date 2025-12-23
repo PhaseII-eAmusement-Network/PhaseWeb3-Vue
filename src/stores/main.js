@@ -29,8 +29,8 @@ export const useMainStore = defineStore("main", {
     /* Loading state */
     isLoading: false,
     isSaving: false,
-    loadingPool: [],
-    savingPool: [],
+    activeRequests: 0,
+    activeSavingRequests: 0,
     errorCode: null,
     continueLoad: false,
 
@@ -100,77 +100,71 @@ export const useMainStore = defineStore("main", {
         });
     },
 
+    incrementLoading() {
+      this.activeRequests++;
+      this.isLoading = true;
+      console.log(this.activeRequests);
+    },
+    decrementLoading() {
+      this.activeRequests = Math.max(0, this.activeRequests - 1);
+      if (this.activeRequests === 0) {
+        this.isLoading = false;
+      }
+    },
+    incrementSaving() {
+      this.activeSavingRequests++;
+      this.isSaving = true;
+      this.incrementLoading();
+    },
+    decrementSaving() {
+      this.activeSavingRequests = Math.max(0, this.activeSavingRequests - 1);
+      this.isSaving = this.activeSavingRequests > 0;
+      this.decrementLoading();
+    },
+
     async callApi(endpoint, method = "GET", data = null, extraHeaders = {}) {
       const apiServer = import.meta.env.VITE_API_URL;
       const apiKey = import.meta.env.VITE_API_KEY;
-      let loadingTimeout;
-      this.errorCode = "";
 
-      const startLoading = () => {
-        loadingTimeout = setTimeout(() => {
-          if (method === "GET") {
-            this.loadingPool.push(endpoint);
-            this.isLoading = true;
-            this.isSaving = false;
-          } else if (method === "POST") {
-            this.loadingPool.push(endpoint);
-            this.savingPool.push(endpoint);
-            this.isLoading = true;
-            this.isSaving = true;
-          } else if (method === "PUT") {
-            this.loadingPool.push(endpoint);
-            this.savingPool.push(endpoint);
-            this.isLoading = true;
-            this.isSaving = true;
-          }
-        }, 0); // Wait for .2 seconds before showing loading modal
-      };
-
-      // Start loading after the specified delay
-      startLoading();
+      if (method === "GET") {
+        this.incrementLoading();
+      } else if (["POST", "PUT", "PATCH", "DELETE"].includes(method)) {
+        this.incrementSaving();
+      }
 
       const baseHeaders = {
         "App-Auth-Key": apiKey,
       };
-      axios.defaults.withCredentials = true;
-
       const headers = { ...baseHeaders, ...extraHeaders };
-
       const url = `${apiServer}/v1${endpoint}`;
 
       const config = {
         method,
-        url: url,
+        url,
         headers,
+        withCredentials: true,
       };
-
-      if (data) {
-        config.data = data;
-      }
+      if (data) config.data = data;
 
       try {
         const response = await axios(config);
+
         if (response.data.status === "error") {
           this.errorCode = response.data.error_code;
-          this.isSaving = false;
-          this.isLoading = true;
-          this.savingPool = this.savingPool.filter((e) => e !== endpoint);
           return null;
         }
-        if (!this.continueLoad) {
-          this.isLoading = false; // reset flags
-          this.isSaving = false;
-          this.loadingPool = this.loadingPool.filter((e) => e !== endpoint);
-          this.savingPool = this.savingPool.filter((e) => e !== endpoint);
-        }
+
         return response.data;
       } catch (error) {
-        this.errorCode = error.message;
-        this.isSaving = false;
-        this.savingPool = this.savingPool.filter((e) => e !== endpoint);
+        this.errorCode = error.message || "Network Error";
         throw error;
       } finally {
-        clearTimeout(loadingTimeout);
+        // Always decrement in finally block
+        if (method === "GET") {
+          this.decrementLoading();
+        } else if (["POST", "PUT", "PATCH", "DELETE"].includes(method)) {
+          this.decrementSaving();
+        }
       }
     },
 

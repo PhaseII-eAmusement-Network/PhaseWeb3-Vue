@@ -83,8 +83,8 @@ async function exportProfiles(gameId) {
   mainStore.continueLoad = false;
   mainStore.isLoading = false;
   mainStore.isSaving = false;
-  mainStore.loadingPool = [];
-  mainStore.savingPool = [];
+  mainStore.activeRequests = 0;
+  mainStore.activeSavingRequests = 0;
 
   exportData[latestVersion] = sanitizeProfile(latestProfile);
 

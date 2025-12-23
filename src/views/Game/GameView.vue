@@ -50,7 +50,7 @@ watch(
     musicIds.value = [];
     mainStore.continueLoad = false;
     mainStore.isLoading = false;
-    mainStore.loadingPool.length = 0;
+    mainStore.activeRequests = 0;
   },
 );
 
@@ -72,7 +72,7 @@ onMounted(async () => {
   await loadGame(null, profiles.length == 0);
   mainStore.continueLoad = false;
   mainStore.isLoading = false;
-  mainStore.loadingPool.length = 0;
+  mainStore.activeRequests = 0;
 });
 
 if (!thisGame.versions) {
