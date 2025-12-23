@@ -103,7 +103,6 @@ export const useMainStore = defineStore("main", {
     incrementLoading() {
       this.activeRequests++;
       this.isLoading = true;
-      console.log(this.activeRequests);
     },
     decrementLoading() {
       this.activeRequests = Math.max(0, this.activeRequests - 1);

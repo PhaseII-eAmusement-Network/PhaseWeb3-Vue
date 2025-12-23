@@ -1,7 +1,10 @@
 <script setup>
 import { computed } from "vue";
+import { useMainStore } from "@/stores/main";
 import { colorsBgLight, colorsOutline } from "@/colors.js";
 import PillTagPlain from "@/components/PillTagPlain.vue";
+
+const mainStore = useMainStore();
 
 const props = defineProps({
   label: {
@@ -23,9 +26,19 @@ const props = defineProps({
   },
 });
 
+function isOutline(outlineProp, customize) {
+  if (customize === undefined) {
+    return outlineProp;
+  } else {
+    return customize;
+  }
+}
+
 const componentClass = computed(() => [
   props.small ? "py-1 px-3" : "py-1.5 px-4",
-  props.outline ? colorsOutline[props.color] : colorsBgLight[props.color],
+  isOutline(props.outline, mainStore.userCustomize.pillOutline)
+    ? colorsOutline[props.color]
+    : colorsBgLight[props.color],
 ]);
 </script>
 

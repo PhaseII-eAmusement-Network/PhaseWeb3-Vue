@@ -6,6 +6,8 @@ import BaseIcon from "@/components/BaseIcon.vue";
 import { useMainStore } from "@/stores/main";
 import { PhShrimp } from "@phosphor-icons/vue";
 
+const mainStore = useMainStore();
+
 const props = defineProps({
   label: {
     type: [String, Number],
@@ -91,6 +93,14 @@ const labelClass = computed(() =>
   props.small && props.icon ? "px-1" : "px-2",
 );
 
+function buttonOutline(outlineProp, customize) {
+  if (customize === undefined) {
+    return outlineProp;
+  } else {
+    return customize;
+  }
+}
+
 const componentClass = computed(() => {
   const base = [
     "inline-flex",
@@ -107,7 +117,7 @@ const componentClass = computed(() => {
     props.roundedFull ? "rounded-lg" : "rounded-sm",
     getButtonColor(
       mainStore.userCustomize.shrimpLinks ? "sakura" : props.color,
-      props.outline,
+      buttonOutline(props.outline, mainStore.userCustomize.buttonOutline),
       !props.disabled,
       props.active,
     ),
@@ -127,8 +137,6 @@ const componentClass = computed(() => {
 
   return base;
 });
-
-const mainStore = useMainStore();
 </script>
 
 <template>

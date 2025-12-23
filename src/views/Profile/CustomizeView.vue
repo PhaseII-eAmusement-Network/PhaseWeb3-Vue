@@ -120,6 +120,24 @@ async function revert() {
               />
             </FormField>
 
+            <FormField label="Outlined Buttons">
+              <FormCheckRadio
+                v-model="userCustomize.buttonOutline"
+                type="switch"
+                :input-value="userCustomize.buttonOutline ?? false"
+                name="buttonOutline"
+              />
+            </FormField>
+
+            <FormField label="Outlined Pill-Tags">
+              <FormCheckRadio
+                v-model="userCustomize.pillOutline"
+                type="switch"
+                :input-value="userCustomize.pillOutline ?? false"
+                name="pillOutline"
+              />
+            </FormField>
+
             <div class="space-x-2">
               <BaseButton type="submit" color="success" label="Save" />
               <BaseButton
