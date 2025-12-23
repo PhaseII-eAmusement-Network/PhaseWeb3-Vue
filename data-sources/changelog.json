@@ -41,5 +41,5 @@
     "3.0.39": ["- (Major) Add Hitchart and Event schedule to game homepage", "- (Bugfix) Fix breaking jubeat Copius title"],
     "3.0.40": ["- (Major) Add banned user filtering on profile lists (SoffiMeower optimized)", "- (Bugfix) Fix rivals loading from incorrect versions"],
     "3.0.41": ["- (Major) Completely refactor user profile schema", "- (Major) Add Hitchart to player view", "- (Major) Add changelog archive view"],
-    "3.0.42": ["- (Major) Refactor loading state"]
+    "3.0.42-oMini": ["- (Major) Refactor loading state", "- (Minor) Add two new customizations, filled/outlined PillTags and Buttons"]
 }
