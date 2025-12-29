@@ -242,6 +242,7 @@ export class VersionConstants {
   static POPN_MUSIC_PEACE = 25;
   static POPN_MUSIC_KAIMEI_RIDDLES = 26;
   static POPN_MUSIC_UNILAB = 27;
+  static POPN_MUSIC_JAMFIZZ = 28;
 
   static QMA = 1;
   static QMA_II = 2;
@@ -2013,6 +2014,11 @@ export const gameData = [
       {
         id: VersionConstants.POPN_MUSIC_UNILAB,
         label: "UniLab",
+        maxRivals: 4,
+      },
+      {
+        id: VersionConstants.POPN_MUSIC_JAMFIZZ,
+        label: "Jam&Fizz",
         maxRivals: 4,
       },
     ],
