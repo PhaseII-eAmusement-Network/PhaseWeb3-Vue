@@ -42,5 +42,6 @@
     "3.0.40": ["- (Major) Add banned user filtering on profile lists (SoffiMeower optimized)", "- (Bugfix) Fix rivals loading from incorrect versions"],
     "3.0.41": ["- (Major) Completely refactor user profile schema", "- (Major) Add Hitchart to player view", "- (Major) Add changelog archive view"],
     "3.0.42-oMini": ["- (Major) Refactor loading state", "- (Minor) Add two new customizations, filled/outlined PillTags and Buttons"],
-    "3.0.43": ["- (Major) Add pop'n music Jam&Fizz"]
+    "3.0.43": ["- (Major) Add pop'n music Jam&Fizz"],
+    "3.0.44": ["- (Bugfix) Fix broken race state on game page", "- (Major) Add customization options for BaseIcon fill type", "- (Major) Add pop'n music weekly course song"]
 }
