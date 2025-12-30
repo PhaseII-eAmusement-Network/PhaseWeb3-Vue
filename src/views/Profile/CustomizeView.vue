@@ -138,6 +138,15 @@ async function revert() {
               />
             </FormField>
 
+            <FormField label="Icon Fill">
+              <FormControl
+                v-model="userCustomize.iconFill"
+                :options="ProfileCustomizations.iconFillList"
+                :model-value="userCustomize.iconFill ?? 5"
+                name="iconFill"
+              />
+            </FormField>
+
             <div class="space-x-2">
               <BaseButton type="submit" color="success" label="Save" />
               <BaseButton

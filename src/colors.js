@@ -11,6 +11,8 @@ export const colorsBgLight = {
   danger: "bg-red-700 border-red-500 text-white",
   warning: "bg-yellow-700 border-yellow-500 text-white",
   info: "bg-blue-700 border-blue-500 text-white",
+  sakura: "bg-pink-700 border-pink-500 text-white",
+  gold: "bg-amber-700 border-amber-500 text-white",
 };
 
 export const colorsText = {

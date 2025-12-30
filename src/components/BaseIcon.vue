@@ -1,5 +1,8 @@
 <script setup>
 import { computed } from "vue";
+import { useMainStore } from "@/stores/main";
+
+const mainStore = useMainStore();
 
 const props = defineProps({
   path: {
@@ -34,6 +37,13 @@ const props = defineProps({
   },
 });
 
+const fillMap = ["regular", "thin", "light", "bold", "fill", "duotone"];
+const userFill = mainStore.userCustomize?.iconFill ?? -1;
+var fullFill = props.fill;
+if (userFill !== -1) {
+  fullFill = fillMap[userFill];
+}
+
 const spanClass = computed(
   () =>
     `inline-flex justify-center items-center ${props.w} ${props.h} ${props.color}`,
@@ -55,7 +65,7 @@ const iconSize = computed(() => props.size ?? (props.icon ? 20 : 18));
       </svg>
     </template>
     <template v-else-if="props.icon">
-      <icon :size="iconSize" :weight="props.fill" />
+      <icon :size="iconSize" :weight="fullFill" />
     </template>
     <slot />
   </span>

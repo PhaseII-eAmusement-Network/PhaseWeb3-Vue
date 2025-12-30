@@ -35,4 +35,13 @@ export class ProfileCustomizations {
     { id: "lesbian", label: "Lesbian Flag" },
     { id: "leaves", label: "Leaves" },
   ];
+
+  static iconFillList = [
+    { id: 0, label: "Regular" },
+    { id: 1, label: "Thin" },
+    { id: 2, label: "Light" },
+    { id: 3, label: "Bold" },
+    { id: 4, label: "Filled" },
+    { id: 5, label: "Duotone" },
+  ];
 }

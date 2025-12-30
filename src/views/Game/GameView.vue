@@ -45,6 +45,8 @@ watch(
   () => versionForm.currentVersion,
   () => {
     mainStore.continueLoad = true;
+    mainStore.isLoading = true;
+    mainStore.activeRequests = 1;
     loadGame(versionForm.currentVersion, profiles.length != 0);
     loadProfile();
     musicIds.value = [];
@@ -75,10 +77,6 @@ onMounted(async () => {
   mainStore.activeRequests = 0;
 });
 
-if (!thisGame.versions) {
-  versionForm.currentVersion = 1;
-}
-
 async function loadGame(version, noUsers) {
   try {
     const data = await APIGetGame(gameID, version, noUsers);
@@ -86,8 +84,11 @@ async function loadGame(version, noUsers) {
       profiles.value = formatProfiles(data.profiles);
     }
     hitchartData.value = data.hitchart;
-    timeSensitiveData.value = data.scheduledEvents;
-    getVersionEvents();
+
+    if (noUsers) {
+      timeSensitiveData.value = data.scheduledEvents;
+      getVersionEvents();
+    }
     musicIds.value = getHitchartIds(data.hitchart).concat(
       getEventIds(data.scheduledEvents),
     );
@@ -227,9 +228,9 @@ async function getMusicData() {
 
 function getMusic(id) {
   if (!musicData.value) {
-    return null;
+    return {};
   }
-  return musicData.value.find((x) => x.id == id);
+  return musicData.value.find((x) => x.id == id) || {};
 }
 
 function getEventSetting(eventId) {
@@ -327,11 +328,11 @@ function formatHitchart(data) {
       </GameHeader>
 
       <div
-        v-if="versionEvents || !thisGame.noScores"
+        v-if="versionEvents || (!thisGame.noScores && hitchartData?.length)"
         class="grid lg:grid-cols-2 items-stretch w-full gap-6 mb-6"
       >
         <div
-          v-if="!thisGame.noScores && hitchartData"
+          v-if="!thisGame.noScores && hitchartData?.length"
           :class="{
             'md:col-span-2': !versionEvents,
           }"
@@ -347,9 +348,9 @@ function formatHitchart(data) {
             main
           />
           <CardBox>
-            <div v-if="musicData" class="grid gap-6">
+            <template v-if="musicData && musicData?.length" class="grid gap-6">
               <div v-for="event of versionEvents" :key="event.id">
-                <div v-if="getEventSetting(event.id)">
+                <template v-if="getEventSetting(event.id)">
                   <div v-if="event.id">
                     <PillTag color="info" :label="event.duration" />
                     <h1 class="text-xl font-bold">
@@ -379,7 +380,7 @@ function formatHitchart(data) {
                         </span>
                       </h1>
                     </div>
-                    <template
+                    <div
                       v-if="
                         Array.isArray(getEventSetting(event.id)?.data?.music) &&
                         musicData
@@ -393,7 +394,7 @@ function formatHitchart(data) {
                           :music-data="getMusic(musicId)"
                         />
                       </div>
-                    </template>
+                    </div>
                     <template
                       v-else-if="getEventSetting(event.id)?.data?.music"
                     >
@@ -423,9 +424,9 @@ function formatHitchart(data) {
                       />
                     </template>
                   </div>
-                </div>
+                </template>
               </div>
-            </div>
+            </template>
           </CardBox>
         </div>
       </div>

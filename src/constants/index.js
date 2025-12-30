@@ -18,6 +18,7 @@ import { SilentScopeOptions } from "@/constants/gameOptions/silentScopeOptions";
 import { DDREvents } from "@/constants/scheduledEvents/ddrEvents";
 import { IIDXEvents } from "@/constants/scheduledEvents/iidxEvents";
 import { JubeatEvents } from "@/constants/scheduledEvents/jubeatEvents";
+import { PopnMusicEvents } from "@/constants/scheduledEvents/popnEvents";
 const ASSET_PATH = import.meta.env.VITE_ASSET_PATH;
 
 export class GameConstants {
@@ -1299,7 +1300,7 @@ export const gameData = [
       50: "NO PLAY",
       100: "FAILED",
       200: "ASSIST CLEAR",
-      300: "EAST CLEAR",
+      300: "EASY CLEAR",
       400: "CLEAR",
       500: "HARD CLEAR",
       600: "EX HARD CLEAR",
@@ -1849,6 +1850,7 @@ export const gameData = [
     useUnicode: true,
     maxLength: 6,
     gameOptions: PopnMusicOptions,
+    scheduledEvents: PopnMusicEvents,
     chartTable: {
       0: "EASY",
       1: "NORMAL",
