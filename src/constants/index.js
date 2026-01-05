@@ -2140,6 +2140,7 @@ export const gameData = [
       2: "EXHAUST",
       3: "INFINITE",
       4: "MAXIMUM",
+      5: "ULTIMATE",
     },
     rankTable: {
       100: "NO PLAY",

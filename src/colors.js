@@ -115,6 +115,8 @@ export const getButtonColor = (
       danger: "text-red-600 dark:text-red-500",
       warning: "text-yellow-600 dark:text-yellow-500",
       info: "text-blue-600 dark:text-blue-500",
+      sakura: "text-pink-300",
+      gold: "text-amber-400",
     },
     outlineHover: {
       contrast:

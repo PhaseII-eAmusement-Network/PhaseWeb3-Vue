@@ -1,3 +1,7 @@
+function isFloat(n) {
+  return Number(n) === n && n % 1 !== 0;
+}
+
 export function shouldRenderChart(difficulty, chartTable, chartKey) {
   const invalidDifficulties = [0, -1, "-1", null];
   const hasValidDifficulty = !invalidDifficulties.includes(difficulty);
@@ -6,6 +10,9 @@ export function shouldRenderChart(difficulty, chartTable, chartKey) {
 }
 
 export function formatDifficulty(difficulty, difficultyDenom = 1) {
+  if (isFloat(difficulty)) {
+    return difficulty;
+  }
   if (isNaN(difficulty / difficultyDenom)) {
     return difficulty?.difnum ? difficulty.difnum : difficulty;
   }

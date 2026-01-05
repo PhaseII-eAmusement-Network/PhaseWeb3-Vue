@@ -93,12 +93,13 @@ async function loadProfile() {
       versionForm.currentVersion,
       profileUserId,
     );
-    data.timeline = await generateTimeline(data.stats);
 
+    const baseTimeline = await generateTimeline(data.stats);
     const formatted = formatProfile(data.profile, data.stats);
     myProfile.value = formatted[0];
     myVersions.value = data.versions;
     myStats.value = formatted[1];
+    myStats.value.timeline = baseTimeline;
 
     if (data && !versionForm.currentVersion) {
       versionForm.currentVersion = data.versions[data.versions.length - 1];
@@ -779,7 +780,7 @@ function formatHitchart(data) {
           />
         </template>
 
-        <template v-if="myProfile?.timeline">
+        <template v-if="myStats?.timeline">
           <SectionTitleLine :icon="PhCalendarDots" title="Timeline" main />
           <div class="my-6">
             <CardBox>
@@ -788,7 +789,7 @@ function formatHitchart(data) {
               >
                 <li
                   v-for="playHistory of JSON.parse(
-                    JSON.stringify(myProfile?.timeline),
+                    JSON.stringify(myStats?.timeline),
                   ).reverse()"
                   :key="playHistory.timestamp"
                   class="md:inline-block shrink-0"
