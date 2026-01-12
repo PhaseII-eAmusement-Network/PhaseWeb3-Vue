@@ -44,5 +44,6 @@
     "3.0.42-oMini": ["- (Major) Refactor loading state", "- (Minor) Add two new customizations, filled/outlined PillTags and Buttons"],
     "3.0.43": ["- (Major) Add pop'n music Jam&Fizz"],
     "3.0.44": ["- (Bugfix) Fix broken race state on game page", "- (Major) Add customization options for BaseIcon fill type", "- (Major) Add pop'n music weekly course song"],
-    "3.0.45": ["- (Bugfix) Fix Timeline not loading", "- (Major) Add a filter to the data in the timeline for private profiles", "- (Game) Add SDVX 6th chart", "- (Bugfix) Fix floats for jubeat difficulties"]
+    "3.0.45": ["- (Bugfix) Fix Timeline not loading", "- (Major) Add a filter to the data in the timeline for private profiles", "- (Game) Add SDVX 6th chart", "- (Bugfix) Fix floats for jubeat difficulties"],
+    "3.1.0-RC": ["- (Feature) Add onboarding page", "- (Minor) Add BaseImage component", "- (Minor) Add BaseAccordion component, - (Admin) Finish admin event log page"]
 }

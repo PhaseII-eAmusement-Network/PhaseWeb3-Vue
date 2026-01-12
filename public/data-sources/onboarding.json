@@ -1,0 +1,50 @@
+[
+    {
+        "label": "Dashboard",
+        "body": [
+            "The dashboard is the main landing page of PhaseII.",
+            "You can view news, quick game stats, and play trend data."
+        ],
+        "image": "dashboard"
+    },
+    {
+        "label": "Game Showcase",
+        "body": [
+            "Cards for the games you've played.",
+            "Sorted by last play, click them and you'll go to the game!"
+        ],
+        "image": "showcase"
+    },
+    {
+        "label": "Dropdown Menu",
+        "body": [
+            "Here you can find all profile settings and customizations.",
+            "This collapses on mobile."
+        ],
+        "image": "dropdown"
+    },
+    {
+        "label": "Sidebar",
+        "body": [
+            "Here you can find all other pages in the WebUI.",
+            "This collapses on mobile."
+        ],
+        "image": "sidebar"
+    },
+    {
+        "label": "Profile Customization",
+        "body": [
+            "Make PhaseII WebUI V3 your own with UI tweaks!",
+            "This will be expanded in the future."
+        ],
+        "image": "customize"
+    },
+    {
+        "label": "Service Integrations",
+        "body": [
+            "Connect your PhaseII account to outside sources for data linking and special features!",
+            "Currently, we can link to Kamaitachi and Discord."
+        ],
+        "image": "integrate"
+    }
+]

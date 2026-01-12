@@ -266,6 +266,20 @@ export async function APIUserAppUpdate(version = null, disable = false) {
   }
 }
 
+export async function APIUserOnboard(version) {
+  const mainStore = useMainStore();
+
+  try {
+    const data = await mainStore.callApi(`/user/onboard`, "POST", {
+      version: version,
+    });
+    return data;
+  } catch (error) {
+    console.log(`Error saving user!`, error);
+    throw error;
+  }
+}
+
 export async function APIUserReadNews(newsId) {
   const mainStore = useMainStore();
 

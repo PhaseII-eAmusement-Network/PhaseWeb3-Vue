@@ -1,6 +1,13 @@
 <script setup>
 import { ref, onMounted } from "vue";
-import { PhFlagCheckered, PhCashRegister, PhSiren } from "@phosphor-icons/vue";
+import {
+  PhFlagCheckered,
+  PhCashRegister,
+  PhSiren,
+  PhGlobeX,
+  PhExclamationMark,
+  PhCloudArrowDown,
+} from "@phosphor-icons/vue";
 import SectionMain from "@/components/SectionMain.vue";
 import CardBox from "@/components/CardBox.vue";
 import LayoutAuthenticated from "@/layouts/LayoutAuthenticated.vue";
@@ -34,7 +41,7 @@ const eventHeaders = [
     width: 120,
   },
   {
-    text: "Game",
+    text: "Model",
     value: "data.model",
     width: 120,
   },
@@ -156,19 +163,55 @@ const unhandledHeaders = [
     width: 120,
   },
   {
+    text: "PCBID",
+    value: "data.pcbid",
+    width: 120,
+  },
+  {
+    text: "Model",
+    value: "data.model",
+    width: 120,
+  },
+  {
     text: "Request",
-    value: "data.request",
+    value: "data.requestName",
+    width: 120,
+  },
+  {
+    text: "Method",
+    value: "data.method",
+    width: 120,
+  },
+];
+
+const unauthorizedHeaders = [
+  {
+    text: "Timestamp",
+    value: "date",
+    width: 120,
+  },
+  {
+    text: "PCBID",
+    value: "data.pcbid",
+    width: 120,
+  },
+  {
+    text: "Model",
+    value: "data.model",
     width: 120,
   },
 ];
 
 function formatData(events) {
+  if (events === undefined) {
+    return [];
+  }
   return events.map((item) => {
     if (item.timestamp) {
       item.date = formatSortableDate(item.timestamp);
     }
 
-    if (item?.data?.service === "xrpc" && item?.data?.request) {
+    if (item?.data?.request) {
       const extracted = extractExceptionData(item.data.request);
       item.data.pcbid = extracted.pcbid;
       item.data.model = extracted.model;
@@ -217,6 +260,47 @@ function extractExceptionData(xmlString) {
               <GeneralTable
                 :headers="exceptionHeaders"
                 :items="formatData(auditData?.exception)"
+                :rows-per-page="2"
+              />
+            </div>
+          </div>
+        </CardBox>
+
+        <SectionTitleLine
+          :icon="PhGlobeX"
+          title="Recent Unhandled Packets"
+          color="text-amber-300"
+          main
+        />
+        <CardBox has-table class="mb-4">
+          <div
+            class="bg-white dark:bg-slate-900/95 rounded-2xl lg:flex lg:justify-between"
+          >
+            <div class="w-full">
+              <GeneralTable
+                :headers="unhandledHeaders"
+                :items="formatData(auditData?.unhandled_packet)"
+                :rows-per-page="10"
+              />
+            </div>
+          </div>
+        </CardBox>
+
+        <SectionTitleLine
+          :icon="PhExclamationMark"
+          title="Recent Unauthorized PCBIDs"
+          color="text-yellow-400"
+          main
+        />
+        <CardBox has-table class="mb-4">
+          <div
+            class="bg-white dark:bg-slate-900/95 rounded-2xl lg:flex lg:justify-between"
+          >
+            <div class="w-full">
+              <GeneralTable
+                :headers="unauthorizedHeaders"
+                :items="formatData(auditData?.unauthorized_pcbid)"
+                :rows-per-page="10"
               />
             </div>
           </div>
@@ -225,7 +309,7 @@ function extractExceptionData(xmlString) {
         <SectionTitleLine
           :icon="PhFlagCheckered"
           title="Recent PCB Events"
-          color="text-amber-400"
+          color="text-emerald-400"
           main
         />
         <CardBox has-table class="mb-4">
@@ -236,6 +320,27 @@ function extractExceptionData(xmlString) {
               <GeneralTable
                 :headers="eventHeaders"
                 :items="formatData(auditData?.pcbevent)"
+                :rows-per-page="10"
+              />
+            </div>
+          </div>
+        </CardBox>
+
+        <SectionTitleLine
+          :icon="PhCloudArrowDown"
+          title="Recent Updater Statuses"
+          color="text-sky-400"
+          main
+        />
+        <CardBox has-table class="mb-4">
+          <div
+            class="bg-white dark:bg-slate-900/95 rounded-2xl lg:flex lg:justify-between"
+          >
+            <div class="w-full">
+              <GeneralTable
+                :headers="updaterHeaders"
+                :items="formatData(auditData?.avs_updater)"
+                :rows-per-page="10"
               />
             </div>
           </div>
@@ -244,7 +349,7 @@ function extractExceptionData(xmlString) {
         <SectionTitleLine
           :icon="PhCashRegister"
           title="Recent PASELI Transactions"
-          color="text-emerald-400"
+          color="text-green-400"
           main
         />
         <CardBox has-table>
@@ -255,6 +360,7 @@ function extractExceptionData(xmlString) {
               <GeneralTable
                 :headers="transactionHeaders"
                 :items="formatData(auditData?.paseli_transaction)"
+                :rows-per-page="10"
               />
             </div>
           </div>

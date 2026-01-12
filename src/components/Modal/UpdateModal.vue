@@ -4,6 +4,7 @@ import { ref, onMounted } from "vue";
 import CardBox from "@/components/CardBox.vue";
 import OverlayLayer from "@/components/OverlayLayer.vue";
 import BaseButton from "@/components/BaseButton.vue";
+import BaseButtons from "@/components/BaseButtons.vue";
 import BaseIcon from "@/components/BaseIcon.vue";
 import { PhSparkle } from "@phosphor-icons/vue";
 import { APIUserAppUpdate, APIUserCustomize } from "@/stores/api/account";
@@ -111,7 +112,7 @@ async function updateUserData(disable = false) {
           </div>
           <h2 class="font-mono text-pink-500">Version: {{ appVersion }}</h2>
 
-          <div class="flex gap-2">
+          <BaseButtons>
             <BaseButton
               label="Close"
               color="success"
@@ -122,7 +123,7 @@ async function updateUserData(disable = false) {
               color="danger"
               @click="updateUserData(true)"
             />
-          </div>
+          </BaseButtons>
         </div>
       </CardBox>
     </OverlayLayer>
