@@ -1,6 +1,6 @@
 {
   "name": "phaseweb3",
-  "version": "3.1.0-RC",
+  "version": "3.1.0",
   "scripts": {
     "dev": "vite --host",
     "build": "vite build",
