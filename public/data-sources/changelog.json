@@ -46,5 +46,6 @@
     "3.0.44": ["- (Bugfix) Fix broken race state on game page", "- (Major) Add customization options for BaseIcon fill type", "- (Major) Add pop'n music weekly course song"],
     "3.0.45": ["- (Bugfix) Fix Timeline not loading", "- (Major) Add a filter to the data in the timeline for private profiles", "- (Game) Add SDVX 6th chart", "- (Bugfix) Fix floats for jubeat difficulties"],
     "3.1.0-RC": ["- (Feature) Add onboarding page", "- (Minor) Add BaseImage component", "- (Minor) Add BaseAccordion component, - (Admin) Finish admin event log page"],
-    "3.1.0": ["- (Major) WebUI V3 full release"]
+    "3.1.0": ["- (Major) WebUI V3 full release"],
+    "3.1.1": ["- (Admin) Add more admin stats for users", "- (Minor) Add new greetings"]
 }

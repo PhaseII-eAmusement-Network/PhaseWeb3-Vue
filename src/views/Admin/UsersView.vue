@@ -1,7 +1,16 @@
 <script setup>
-import { ref, reactive, onMounted } from "vue";
+import { ref, reactive, onMounted, computed } from "vue";
 import { useRouter } from "vue-router";
-import { PhUsersThree, PhMagnifyingGlass } from "@phosphor-icons/vue";
+import {
+  PhUsersThree,
+  PhMagnifyingGlass,
+  PhChartPie,
+  PhHammer,
+  PhCrown,
+  PhDiscordLogo,
+  PhGlobe,
+  PhHandWaving,
+} from "@phosphor-icons/vue";
 import SectionMain from "@/components/SectionMain.vue";
 import CardBox from "@/components/CardBox.vue";
 import GeneralTable from "@/components/GeneralTable.vue";
@@ -13,6 +22,7 @@ import SectionTitleLine from "@/components/SectionTitleLine.vue";
 import BaseButton from "@/components/BaseButton.vue";
 
 import { APIAdminUsers, APIAdminUserFromCardId } from "@/stores/api/admin";
+import CardBoxWidget from "@/components/CardBoxWidget.vue";
 
 const $router = useRouter();
 const userData = ref([]);
@@ -62,8 +72,14 @@ const headers = [
     sortable: true,
   },
   {
-    text: "Web3 Beta Used",
+    text: "Web3 Used",
     value: "data.webVersionsBool",
+    width: 120,
+    sortable: true,
+  },
+  {
+    text: "Web3 Onboarded",
+    value: "data.onboardingComplete",
     width: 120,
     sortable: true,
   },
@@ -129,6 +145,85 @@ async function findUser() {
     openUser({ id: user?.id });
   }
 }
+
+const userStats = computed(() => {
+  const total = userData.value.length || 1; // avoid div/0
+
+  const count = (fn) => userData.value.filter(fn).length;
+  const percent = (n) => Math.round((n / total) * 100);
+
+  const stats = {
+    total,
+
+    public: count((u) => u.public),
+    admin: count((u) => u.admin),
+    banned: count((u) => u.banned),
+
+    discordLinked: count((u) => u.data?.discord?.linked),
+    tachiLinked: count((u) => u.data?.tachi?.linked),
+
+    web3Used: count((u) => u.data?.webVersionsBool),
+    web3Onboarded: count((u) => u.data?.onboardingComplete),
+  };
+
+  return {
+    counts: stats,
+    percentages: {
+      public: percent(stats.public),
+      admin: percent(stats.admin),
+      banned: percent(stats.banned),
+      discordLinked: percent(stats.discordLinked),
+      tachiLinked: percent(stats.tachiLinked),
+      web3Used: percent(stats.web3Used),
+      web3Onboarded: percent(stats.web3Onboarded),
+    },
+  };
+});
+
+const quickStats = computed(() => [
+  {
+    label: "Total User",
+    number: userStats.value.counts.total,
+    suffix: "",
+    icon: PhUsersThree,
+    iconColor: "text-blue-400",
+  },
+  {
+    label: "Admin",
+    number: userStats.value.counts.admin,
+    suffix: ` (${userStats.value.percentages.admin}%)`,
+    icon: PhCrown,
+    iconColor: "text-red-400",
+  },
+  {
+    label: "Banned",
+    number: userStats.value.counts.banned,
+    suffix: ` (${userStats.value.percentages.banned}%)`,
+    icon: PhHammer,
+    iconColor: "text-red-500",
+  },
+  {
+    label: "Discord Linked",
+    number: userStats.value.counts.discordLinked,
+    suffix: ` (${userStats.value.percentages.discordLinked}%)`,
+    icon: PhDiscordLogo,
+    iconColor: "text-indigo-400",
+  },
+  {
+    label: "Web3 Used",
+    number: userStats.value.counts.web3Used,
+    suffix: ` (${userStats.value.percentages.web3Used}%)`,
+    icon: PhGlobe,
+    iconColor: "text-emerald-400",
+  },
+  {
+    label: "Web3 Onboarded",
+    number: userStats.value.counts.web3Onboarded,
+    suffix: ` (${userStats.value.percentages.web3Onboarded}%)`,
+    icon: PhHandWaving,
+    iconColor: "text-amber-400",
+  },
+]);
 </script>
 
 <template>
@@ -214,6 +309,26 @@ async function findUser() {
 
           <BaseButton color="success" type="submit" label="Open User" />
         </CardBox>
+      </div>
+
+      <SectionTitleLine
+        :icon="PhChartPie"
+        title="Quick Stats"
+        color="text-amber-300"
+        main
+      />
+      <div
+        class="grid grid-cols-2 sm:grid-cols-3 gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 3xl:grid-cols-5 mb-6"
+      >
+        <CardBoxWidget
+          v-for="box in quickStats"
+          :key="box.label"
+          :icon="box.icon"
+          :number="box.number"
+          :label="box.label"
+          :suffix="box.suffix"
+          :icon-color="box.iconColor"
+        />
       </div>
 
       <SectionTitleLine
