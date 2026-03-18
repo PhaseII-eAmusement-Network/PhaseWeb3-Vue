@@ -20,9 +20,7 @@ import { getGameInfo } from "@/constants";
 import { dashCode } from "@/constants/userData";
 import { getIIDXDan } from "@/constants/danClass";
 import { formatSortableDate } from "@/constants/date";
-import { useMainStore } from "@/stores/main";
 
-const mainStore = useMainStore();
 const $route = useRoute();
 const $router = useRouter();
 var gameID = null;
@@ -44,15 +42,9 @@ const versionForm = reactive({
 watch(
   () => versionForm.currentVersion,
   () => {
-    mainStore.continueLoad = true;
-    mainStore.isLoading = true;
-    mainStore.activeRequests = 1;
     loadGame(versionForm.currentVersion, profiles.length != 0);
     loadProfile();
     musicIds.value = [];
-    mainStore.continueLoad = false;
-    mainStore.isLoading = false;
-    mainStore.activeRequests = 0;
   },
 );
 
@@ -69,12 +61,8 @@ if (thisGame == null) {
 }
 
 onMounted(async () => {
-  mainStore.continueLoad = true;
   await loadProfile();
   await loadGame(null, profiles.length == 0);
-  mainStore.continueLoad = false;
-  mainStore.isLoading = false;
-  mainStore.activeRequests = 0;
 });
 
 async function loadGame(version, noUsers) {

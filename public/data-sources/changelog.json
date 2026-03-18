@@ -47,5 +47,6 @@
     "3.0.45": ["- (Bugfix) Fix Timeline not loading", "- (Major) Add a filter to the data in the timeline for private profiles", "- (Game) Add SDVX 6th chart", "- (Bugfix) Fix floats for jubeat difficulties"],
     "3.1.0-RC": ["- (Feature) Add onboarding page", "- (Minor) Add BaseImage component", "- (Minor) Add BaseAccordion component, - (Admin) Finish admin event log page"],
     "3.1.0": ["- (Major) WebUI V3 full release"],
-    "3.1.1": ["- (Admin) Add more admin stats for users", "- (Minor) Add new greetings"]
+    "3.1.1": ["- (Admin) Add more admin stats for users", "- (Minor) Add new greetings"],
+    "3.1.2": ["- (Major) Add initial code for oAuth pages", "- (Major) Add redirect to target page after login", "- (Minor) Add quick links to navbar", "- (Minor) Add new greetings", "- (Minor) Replace login page background", "- (Minor) Add animation to loading modal", "- (Bugfix) Refactor loading modal", "- (Bugfix) Refactor overlay layer", "- (Bugfix) Optimize main layouts", "- (Bugfix) Fix loading states around site", "- (Bugfix) Optimize news read api calls", "- (Minor) Add simple auth checkers to router, blocking access at webui level"]
 }

@@ -1,5 +1,5 @@
 <script setup>
-import { useRouter } from "vue-router";
+import { useRouter, useRoute } from "vue-router";
 import { PhUser, PhPassword } from "@phosphor-icons/vue";
 import { reactive } from "vue";
 import { useMainStore } from "@/stores/main.js";
@@ -11,7 +11,9 @@ import BaseButton from "@/components/BaseButton.vue";
 import LayoutGuest from "@/layouts/LayoutGuest.vue";
 
 const router = useRouter();
+const route = useRoute();
 const mainStore = useMainStore();
+const redirectPath = route.query.redirect || "/";
 
 // Reactive form data
 const form = reactive({
@@ -33,7 +35,7 @@ const submit = async () => {
     form.remember,
   );
   if (response) {
-    router.push("/");
+    router.push(redirectPath);
   }
 };
 </script>

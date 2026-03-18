@@ -288,8 +288,9 @@ export async function APIUserReadNews(newsId) {
       newsId: newsId,
     });
 
-    mainStore.userLoaded = false;
-    await mainStore.loadUser();
+    const seen_news = await mainStore.userData.seen_news;
+    seen_news[newsId] = true;
+
     return data;
   } catch (error) {
     console.log(`Error saving user!`, error);

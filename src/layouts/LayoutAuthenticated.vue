@@ -10,13 +10,14 @@ import {
   PhFilmSlate,
   PhArchive,
   PhGitMerge,
+  PhCode,
+  PhDiscordLogo,
+  PhTextAa,
 } from "@phosphor-icons/vue";
-import { ref, watch, onMounted, computed } from "vue";
+import { ref, computed } from "vue";
 import { useRouter, useRoute } from "vue-router";
 import menuNavBar from "@/menuNavBar.js";
 import { useMainStore } from "@/stores/main.js";
-import { useStyleStore } from "@/stores/style.js";
-import LoadingModal from "@/components/Modal/LoadingModal.vue";
 // import EmailModal from "@/components/Modal/EmailModal.vue";
 import UpdateModal from "@/components/Modal/UpdateModal.vue";
 import WelcomeModal from "@/components/Modal/WelcomeModal.vue";
@@ -26,74 +27,19 @@ import NavBarItemPlain from "@/components/NavBarItemPlain.vue";
 import AsideMenu from "@/components/Menus/AsideMenu.vue";
 import FooterBar from "@/components/FooterBar.vue";
 import { gameData } from "@/constants";
-// import BaseButton from "@/components/BaseButton.vue";
+import BaseButton from "@/components/BaseButton.vue";
+const DISCORD_URL = import.meta.env.VITE_DISCORD_URL;
+const DOCS_URL = import.meta.env.VITE_DOCS_URL;
 
 const router = useRouter();
 const route = useRoute();
 
 const mainStore = useMainStore();
-onMounted(async () => {
-  try {
-    const validSession = await mainStore.loadUser();
-    if (!validSession) {
-      mainStore.deleteUserSession();
-      router.push({
-        name: "login",
-      });
-    }
-  } catch (error) {
-    console.error("Failed to check SessionID:", error);
-    mainStore.deleteUserSession();
-    router.push({
-      name: "login",
-    });
-  }
-});
 
-const loading = ref(mainStore.activeRequests !== 0);
-const saving = ref(mainStore.activeSavingRequests !== 0);
-const errorCode = ref(mainStore.errorCode);
-const userLoaded = ref(mainStore.userLoaded);
-const userArcades = ref(mainStore.userArcades);
-
-watch(
-  () => mainStore.activeRequests !== 0,
-  (newValue) => {
-    loading.value = newValue;
-  },
-);
-
-watch(
-  () => mainStore.activeSavingRequests !== 0,
-  (newValue) => {
-    saving.value = newValue;
-  },
-);
-
-watch(
-  () => mainStore.errorCode,
-  (newValue) => {
-    errorCode.value = newValue;
-  },
-);
-
-watch(
-  () => mainStore.userLoaded,
-  (newValue) => {
-    userLoaded.value = newValue;
-  },
-);
-
-watch(
-  () => mainStore.userArcades,
-  (newValue) => {
-    userArcades.value = newValue;
-  },
-);
+const userLoaded = computed(() => mainStore.userLoaded);
+const userCustomize = computed(() => mainStore.userCustomize);
 
 const layoutAsidePadding = "xl:pl-60";
-
-const styleStore = useStyleStore();
 
 const isAsideMobileExpanded = ref(false);
 const isAsideLgActive = ref(false);
@@ -224,6 +170,14 @@ const menuAside = computed(() => {
     label: "Changelog Archive",
   });
 
+  if (mainStore.userAdmin) {
+    sideMenu.push({
+      label: "Developer Portal",
+      icon: PhCode,
+      to: "/developer",
+    });
+  }
+
   return sideMenu;
 });
 </script>
@@ -232,23 +186,12 @@ const menuAside = computed(() => {
   <div
     :key="route.fullPath"
     :class="{
-      dark: styleStore.darkMode,
       'overflow-hidden lg:overflow-visible': isAsideMobileExpanded,
     }"
   >
-    <LoadingModal
-      :active="loading || saving"
-      :is-save="saving"
-      :error-code="errorCode"
-      class="transition-opacity duration-300 ease-out"
-      :class="{
-        'opacity-100': loading || saving,
-        'opacity-0': !loading && !saving,
-      }"
-    />
     <template v-if="userLoaded">
-      <WelcomeModal class="transition-opacity duration-300 ease-out">
-        <UpdateModal class="transition-opacity duration-300 ease-out" />
+      <WelcomeModal>
+        <UpdateModal />
       </WelcomeModal>
       <!-- <EmailModal class="transition-opacity duration-300 ease-out" /> -->
     </template>
@@ -285,14 +228,26 @@ const menuAside = computed(() => {
           <BaseIcon :icon="PhDotsThreeCircle" size="24" />
         </NavBarItemPlain>
 
-        <div class="h-full flex place-items-center ml-4 gap-4">
-          <!-- <span>You can add up to 4 buttons here</span>
-          <BaseButton small label="QuickNav" color="info" />
-          <BaseButton small label="QuickNav" color="success" />
-          <BaseButton small label="QuickNav" color="warning" />
-          <BaseButton small label="QuickNav" color="danger" />
-          <span>They're sticky!</span> -->
-        </div>
+        <template v-if="!userCustomize.hideQuickLinks">
+          <div class="h-full flex place-items-center ml-4 gap-4">
+            <BaseButton
+              small
+              label="Discord"
+              :icon="PhDiscordLogo"
+              color="info"
+              :href="DISCORD_URL"
+              target="_blank"
+            />
+            <BaseButton
+              small
+              label="Docs"
+              :icon="PhTextAa"
+              color="info"
+              :href="DOCS_URL"
+              target="_blank"
+            />
+          </div>
+        </template>
       </NavBar>
       <AsideMenu
         :is-aside-mobile-expanded="isAsideMobileExpanded"

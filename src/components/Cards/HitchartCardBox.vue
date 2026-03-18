@@ -1,5 +1,4 @@
 <script setup>
-import { defineProps } from "vue";
 import { useRouter } from "vue-router";
 import { PhArrowLineUpRight } from "@phosphor-icons/vue";
 import CardBox from "@/components/CardBox.vue";

@@ -34,9 +34,10 @@ const computedValue = computed({
   },
 });
 
-const inputType = computed(() =>
-  props.type === "radio" ? "radio" : "checkbox",
-);
+const inputType = computed(() => {
+  if (props.type === "radio") return "radio";
+  return "checkbox";
+});
 </script>
 
 <template>

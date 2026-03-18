@@ -147,6 +147,18 @@ async function revert() {
               />
             </FormField>
 
+            <FormField
+              label="Hide QuickLinks"
+              help="Turns off the buttons in the navbar"
+            >
+              <FormCheckRadio
+                v-model="userCustomize.hideQuickLinks"
+                type="switch"
+                :input-value="userCustomize.hideQuickLinks ?? false"
+                name="hideQuickLinks"
+              />
+            </FormField>
+
             <div class="space-x-2">
               <BaseButton type="submit" color="success" label="Save" />
               <BaseButton

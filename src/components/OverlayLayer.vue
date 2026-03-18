@@ -14,6 +14,10 @@ defineProps({
     type: Boolean,
     default: false,
   },
+  active: {
+    type: Boolean,
+    default: true,
+  },
 });
 
 const emit = defineEmits(["overlay-click"]);
@@ -26,33 +30,20 @@ const styleStore = useStyleStore();
 </script>
 
 <template>
-  <div
-    :class="[type, zIndex]"
-    class="items-center flex-col justify-center md:h-full fixed inset-0"
-  >
-    <transition
-      enter-active-class="transition duration-150 ease-in"
-      enter-from-class="opacity-0"
-      enter-to-class="opacity-100"
-      leave-active-class="transition duration-150 ease-in"
-      leave-from-class="opacity-100"
-      leave-to-class="opacity-0"
+  <Transition name="overlay-fade">
+    <div
+      v-show="active"
+      :class="[type, zIndex]"
+      class="fixed inset-0 flex flex-col items-center justify-center bg-linear-to-tr dark:from-gray-700 dark:via-gray-900 dark:to-gray-700 transform"
     >
       <div
-        class="absolute inset-0 bg-linear-to-tr dark:from-gray-700 dark:via-gray-900 dark:to-gray-700 h-screen"
+        class="absolute inset-0"
         :class="`${styleStore.overlayStyle} ${
           transparent ? 'opacity-90' : 'opacity-100'
         }`"
         @click="overlayClick"
       />
-    </transition>
-    <transition
-      enter-active-class="transition duration-100 ease-out"
-      enter-from-class="transform scale-95 opacity-0"
-      enter-to-class="transform scale-100 opacity-100"
-      leave-active-class="animate-fade-out"
-    >
       <slot />
-    </transition>
-  </div>
+    </div>
+  </Transition>
 </template>

@@ -1,9 +1,11 @@
 import { createRouter, createWebHistory } from "vue-router";
+import { useMainStore } from "@/stores/main";
 import Home from "@/views/HomeView.vue";
 
 const routes = [
   {
     meta: {
+      requiresAuth: true,
       title: "Dashboard",
     },
     path: "/",
@@ -12,6 +14,7 @@ const routes = [
   },
   {
     meta: {
+      requiresAuth: true,
       title: "News Archive",
     },
     path: "/news",
@@ -20,6 +23,7 @@ const routes = [
   },
   {
     meta: {
+      requiresAuth: true,
       title: "News Post",
     },
     path: "/news/:id",
@@ -28,6 +32,7 @@ const routes = [
   },
   {
     meta: {
+      requiresAuth: true,
       title: "WebUI Changelog",
     },
     path: "/changelog",
@@ -60,6 +65,16 @@ const routes = [
   },
   {
     meta: {
+      requiresAuth: true,
+      title: "Authorize an App",
+    },
+    path: "/profile/authorize",
+    name: "authorize_service",
+    component: () => import("@/views/Auth/AuthorizeView.vue"),
+  },
+  {
+    meta: {
+      requiresAuth: true,
       title: "Profile",
     },
     path: "/profile",
@@ -68,6 +83,7 @@ const routes = [
   },
   {
     meta: {
+      requiresAuth: true,
       title: "Customizations",
     },
     path: "/profile/customize",
@@ -76,6 +92,7 @@ const routes = [
   },
   {
     meta: {
+      requiresAuth: true,
       title: "Integrations",
     },
     path: "/profile/integrate",
@@ -84,6 +101,7 @@ const routes = [
   },
   {
     meta: {
+      requiresAuth: true,
       title: "Integration Callback",
     },
     path: "/profile/integrate/:service",
@@ -92,6 +110,7 @@ const routes = [
   },
   {
     meta: {
+      requiresAuth: true,
       title: "Login Cards",
     },
     path: "/profile/cards",
@@ -100,6 +119,7 @@ const routes = [
   },
   {
     meta: {
+      requiresAuth: true,
       title: "Claim a Profile",
     },
     path: "/profile/claim",
@@ -108,6 +128,7 @@ const routes = [
   },
   {
     meta: {
+      requiresAuth: true,
       title: "Data Export",
     },
     path: "/profile/export",
@@ -124,6 +145,7 @@ const routes = [
   // },
   {
     meta: {
+      requiresAuth: true,
       title: "Play Videos",
     },
     path: "/profile/videos",
@@ -132,6 +154,7 @@ const routes = [
   },
   {
     meta: {
+      requiresAuth: true,
       title: "Game Images",
     },
     path: "/profile/content",
@@ -140,6 +163,7 @@ const routes = [
   },
   {
     meta: {
+      requiresAuth: true,
       title: "View User",
     },
     path: "/profiles/:id",
@@ -151,6 +175,8 @@ const routes = [
   },
   {
     meta: {
+      requiresAuth: true,
+      requiresAdmin: true,
       title: "Admin Dashboard",
     },
     path: "/admin",
@@ -159,6 +185,8 @@ const routes = [
   },
   {
     meta: {
+      requiresAuth: true,
+      requiresAdmin: true,
       title: "Onboarding",
     },
     path: "/admin/onboarding",
@@ -167,6 +195,8 @@ const routes = [
   },
   {
     meta: {
+      requiresAuth: true,
+      requiresAdmin: true,
       title: "Auto-Onboarding",
     },
     path: "/admin/onboarding/:data",
@@ -175,6 +205,8 @@ const routes = [
   },
   {
     meta: {
+      requiresAuth: true,
+      requiresAdmin: true,
       title: "Network Maintenance",
     },
     path: "/admin/maint",
@@ -183,6 +215,8 @@ const routes = [
   },
   {
     meta: {
+      requiresAuth: true,
+      requiresAdmin: true,
       title: "Events",
     },
     path: "/admin/events",
@@ -191,6 +225,8 @@ const routes = [
   },
   {
     meta: {
+      requiresAuth: true,
+      requiresAdmin: true,
       title: "Data API",
     },
     path: "/admin/api",
@@ -199,6 +235,8 @@ const routes = [
   },
   {
     meta: {
+      requiresAuth: true,
+      requiresAdmin: true,
       title: "Arcades",
     },
     path: "/admin/arcades",
@@ -207,6 +245,8 @@ const routes = [
   },
   {
     meta: {
+      requiresAuth: true,
+      requiresAdmin: true,
       title: "Users",
     },
     path: "/admin/users",
@@ -215,6 +255,8 @@ const routes = [
   },
   {
     meta: {
+      requiresAuth: true,
+      requiresAdmin: true,
       title: "News",
     },
     path: "/admin/news",
@@ -223,6 +265,8 @@ const routes = [
   },
   {
     meta: {
+      requiresAuth: true,
+      requiresAdmin: true,
       title: "OTA Updates",
     },
     path: "/admin/ota",
@@ -239,6 +283,7 @@ const routes = [
   // },
   {
     meta: {
+      requiresAuth: true,
       title: "Arcade Overview",
     },
     path: "/arcade/:id",
@@ -247,6 +292,7 @@ const routes = [
   },
   {
     meta: {
+      requiresAuth: true,
       title: "Event Settings",
     },
     path: "/arcade/:id/events",
@@ -258,6 +304,7 @@ const routes = [
   },
   {
     meta: {
+      requiresAuth: true,
       title: "Machine List",
     },
     path: "/arcade/:id/machines",
@@ -269,6 +316,7 @@ const routes = [
   },
   {
     meta: {
+      requiresAuth: true,
       title: "PASELI Transactions",
     },
     path: "/arcade/:id/paseli",
@@ -280,6 +328,7 @@ const routes = [
   },
   {
     meta: {
+      requiresAuth: true,
       title: "Claim an Arcade",
     },
     path: "/arcade/claim",
@@ -288,6 +337,7 @@ const routes = [
   },
   {
     meta: {
+      requiresAuth: true,
       title: "Game Overview",
     },
     path: "/games/:id/",
@@ -299,6 +349,7 @@ const routes = [
   },
   {
     meta: {
+      requiresAuth: true,
       title: "View Profile",
     },
     path: "/games/:game/profiles/:userId/",
@@ -310,6 +361,7 @@ const routes = [
   },
   {
     meta: {
+      requiresAuth: true,
       title: "Edit Profile",
     },
     path: "/games/:game/edit",
@@ -321,6 +373,7 @@ const routes = [
   },
   {
     meta: {
+      requiresAuth: true,
       title: "Rivals",
     },
     path: "/games/:game/rivals",
@@ -332,6 +385,7 @@ const routes = [
   },
   {
     meta: {
+      requiresAuth: true,
       title: "Song Overview",
     },
     path: "/games/:game/song/:songId",
@@ -343,6 +397,7 @@ const routes = [
   },
   {
     meta: {
+      requiresAuth: true,
       title: "View Scores",
     },
     path: "/games/:game/scores/:userId",
@@ -354,6 +409,7 @@ const routes = [
   },
   {
     meta: {
+      requiresAuth: true,
       title: "Network Scores",
     },
     path: "/games/:game/scores",
@@ -365,6 +421,7 @@ const routes = [
   },
   {
     meta: {
+      requiresAuth: true,
       title: "Error",
     },
     path: "/:catchAll(.*)",
@@ -373,6 +430,7 @@ const routes = [
   },
   {
     meta: {
+      requiresAuth: true,
       title: "View Records",
     },
     path: "/games/:game/records/:userId",
@@ -384,6 +442,7 @@ const routes = [
   },
   {
     meta: {
+      requiresAuth: true,
       title: "Network Records",
     },
     path: "/games/:game/records",
@@ -395,11 +454,23 @@ const routes = [
   },
   {
     meta: {
-      title: "Error",
+      requiresAuth: true,
+      requiresDev: true,
+      title: "Developer Portal",
     },
-    path: "/:catchAll(.*)",
-    name: "ErrorPage",
-    component: () => import("@/views/ErrorView.vue"),
+    path: "/developer",
+    name: "Developer Portal",
+    component: () => import("@/views/Developer/PortalView.vue"),
+  },
+  {
+    meta: {
+      requiresAuth: true,
+      requiresDev: true,
+      title: "App Registration",
+    },
+    path: "/developer/register",
+    name: "App Registration",
+    component: () => import("@/views/Developer/RegisterView.vue"),
   },
 ];
 
@@ -409,6 +480,50 @@ const router = createRouter({
   scrollBehavior(to, from, savedPosition) {
     return savedPosition || { top: 0 };
   },
+});
+
+router.beforeEach(async (to) => {
+  const mainStore = useMainStore();
+  mainStore.errorCode = null;
+
+  if (to.meta.requiresAuth) {
+    const validSession = await mainStore.loadUser();
+
+    if (!validSession) {
+      mainStore.deleteUserSession();
+
+      return {
+        name: "login",
+        query: { redirect: to.fullPath },
+      };
+    }
+  }
+
+  if (to.meta.requiresAdmin) {
+    const validSession = await mainStore.loadUser();
+
+    if (!validSession || !mainStore.userAdmin) {
+      console.log("You're not an admin!");
+      window.alert("You're not an admin!");
+      return {
+        name: "dashboard",
+      };
+    }
+  }
+
+  if (to.meta.requiresDev) {
+    const validSession = await mainStore.loadUser();
+
+    if (!validSession || !mainStore.userAdmin) {
+      console.log("You're not a dev!");
+      window.alert("You're not a dev!");
+      return {
+        name: "dashboard",
+      };
+    }
+  }
+
+  return true;
 });
 
 export default router;
