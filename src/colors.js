@@ -13,6 +13,7 @@ export const colorsBgLight = {
   info: "bg-blue-700 border-blue-500 text-white",
   sakura: "bg-pink-700 border-pink-500 text-white",
   gold: "bg-amber-700 border-amber-500 text-white",
+  slight_danger: "bg-red-600 border-red-500",
 };
 
 export const colorsText = {

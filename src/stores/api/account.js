@@ -321,3 +321,27 @@ export async function APIDeleteUserSessions() {
     throw error;
   }
 }
+
+export async function APIGetAuthClient(clientId) {
+  const mainStore = useMainStore();
+
+  try {
+    const data = await mainStore.callApi(`/oauth/client/${clientId}`);
+    return data?.data;
+  } catch (error) {
+    console.log("Error fetching client:", error);
+    throw error;
+  }
+}
+
+export async function APIPostAuthClient(clientId) {
+  const mainStore = useMainStore();
+
+  try {
+    const data = await mainStore.callApi(`/oauth/client/${clientId}`, "POST");
+    return data?.data;
+  } catch (error) {
+    console.log("Error posting client:", error);
+    throw error;
+  }
+}

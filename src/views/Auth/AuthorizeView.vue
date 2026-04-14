@@ -1,34 +1,56 @@
 <script setup>
-import { useRouter } from "vue-router";
-import { reactive } from "vue";
-import { useMainStore } from "@/stores/main.js";
+import { onMounted, ref } from "vue";
+import { useRoute } from "vue-router";
 import CardBox from "@/components/CardBox.vue";
 import BaseButton from "@/components/BaseButton.vue";
 import LayoutGuest from "@/layouts/LayoutGuest.vue";
+import { APIGetAuthClient, APIPostAuthClient } from "@/stores/api/account.js";
+import { InternalApps } from "@/constants/developer/apps.js";
 
-const router = useRouter();
-const mainStore = useMainStore();
+const route = useRoute();
+const clientId = route.query.client_id;
+const clientData = ref(null);
 
-const form = reactive({
-  spinin: false,
+onMounted(async () => {
+  if (clientId) {
+    await getClient(clientId);
+  } else {
+    console.error("No client_id provided in query parameters.");
+  }
 });
 
-const submit = async () => {
-  const response = await mainStore.createUserSession();
-  if (response) {
-    router.push("/");
+async function getClient(id) {
+  try {
+    const data = await APIGetAuthClient(id);
+    if (data.internal && InternalApps[id]) {
+      clientData.value = InternalApps[id];
+      clientData.value.internal = true;
+      clientData.value.callbackUrl = data.callbackUrl;
+    }
+  } catch (error) {
+    console.error("Failed to fetch client data:", error);
   }
+}
+
+const submit = async () => {
+  const response = await APIPostAuthClient(clientId);
+  if (!response.code) {
+    console.error("Authorization failed");
+  }
+
+  window.location.href =
+    clientData.value.callbackUrl + "?code=" + response.code;
 };
 
-const appInfo = {
-  name: "Edi",
-  image: "/edi512x512_2.png",
-  manager: "Lumen",
-  about:
-    "Edi is a DDR score tracking app that offers a direct connection to your PhaseII account.",
-  intents: ["user", "account", "webhook_scores"],
-  internal: false,
-};
+// const appInfo = {
+//   name: "Edi",
+//   image: "/edi512x512_2.png",
+//   manager: "Lumen",
+//   about:
+//     "Edi is a DDR score tracking app that offers a direct connection to your PhaseII account.",
+//   intents: ["user", "account", "webhook_scores"],
+//   internal: false,
+// };
 </script>
 
 <template>
@@ -36,7 +58,6 @@ const appInfo = {
     <div class="flex md:min-h-screen md:items-center md:justify-center">
       <CardBox
         class="w-full md:w-auto rounded-none md:rounded-xl md:drop-shadow-xl"
-        :class="form.spinin ? 'animate-spin' : 'animate-none'"
         has-table
         is-auth
       >
@@ -47,10 +68,7 @@ const appInfo = {
             <div class="flex flex-col items-center text-wrap">
               <img src="/favicon.png" class="rounded-full shadow-lg mb-2" />
               <h1 class="text-xl"><samp>PhaseII</samp></h1>
-              <button
-                class="text-sm text-gray-700 dark:text-white/75 hover:cursor-pointer"
-                @click="form.spinin = !form.spinin"
-              >
+              <button class="text-sm text-gray-700 dark:text-white/75">
                 Spinnin' since 2021
               </button>
             </div>
@@ -60,50 +78,67 @@ const appInfo = {
           <div class="md:border-r" />
           <form @submit.prevent="submit()">
             <div class="flex flex-col items-center text-wrap">
-              <h1 class="text-lg md:text-xl mb-2">
-                Integrate with <span class="font-bold">{{ appInfo.name }}</span>
-              </h1>
+              <template v-if="!clientData?.internal">
+                <h1 class="text-lg md:text-xl mb-2">
+                  Integrate with
+                  <span class="font-bold">{{ clientData?.name }}</span>
+                </h1>
+              </template>
+              <template v-else>
+                <h1 class="text-lg md:text-xl mb-2">
+                  Log in to
+                  <span class="font-bold">{{ clientData?.name }}</span>
+                </h1>
+              </template>
               <img
-                :src="appInfo.image"
+                :src="clientData?.image"
                 width="75"
                 class="rounded-full shadow-lg mb-2"
               />
               <p class="text-md max-w-md wrap-break-word text-center">
-                {{ appInfo.about }}
+                {{ clientData?.about }}
               </p>
 
               <hr class="border-r my-2 w-full" />
 
-              <h2 class="text-md md:text-lg">
-                <span class="font-bold">{{ appInfo.name }}</span> will have
-                access to:
-              </h2>
-              <ul class="text-sm md:text-md text-center">
-                <li v-for="intent of appInfo.intents" :v-key="intent">
-                  - {{ intent }}
-                </li>
-              </ul>
+              <template v-if="!clientData?.internal">
+                <h2 class="text-md md:text-lg">
+                  <span class="font-bold">{{ clientData?.name }}</span> will
+                  have access to:
+                </h2>
+                <ul class="text-sm md:text-md text-center">
+                  <li v-for="intent of clientData?.intents" :v-key="intent">
+                    - {{ intent }}
+                  </li>
+                </ul>
+              </template>
             </div>
 
-            <div class="flex flex-col gap-2 mt-4">
+            <div class="flex flex-col gap-2 mt-2">
               <BaseButton label="Authorize" color="success" type="submit" />
             </div>
             <hr class="border-t my-4 w-full" />
 
             <div class="flex flex-col items-center">
-              <p
-                v-if="!appInfo.internal"
-                class="text-sm max-w-md wrap-break-word text-center mb-2"
-              >
-                Please note that
-                <span class="font-bold">{{ appInfo.name }}</span> is not a
-                <samp>PhaseII</samp> provided service, and that any issues
-                should be directed to the appropriate channels.
-              </p>
-              <p class="text-sm max-w-md wrap-break-word text-center">
-                <span class="font-bold">{{ appInfo.name }}</span> is managed by
-                <span class="font-bold">{{ appInfo.manager }}</span>
-              </p>
+              <template v-if="!clientData?.internal">
+                <p class="text-sm max-w-md wrap-break-word text-center mb-2">
+                  Please note that
+                  <span class="font-bold">{{ clientData?.name }}</span> is not a
+                  <samp>PhaseII</samp> provided service, and that any issues
+                  should be directed to the appropriate channels.
+                </p>
+                <p class="text-sm max-w-md wrap-break-word text-center">
+                  <span class="font-bold">{{ clientData?.name }}</span> is
+                  managed by
+                  <span class="font-bold">{{ clientData?.manager }}</span>
+                </p>
+              </template>
+              <template v-else>
+                <p class="text-sm max-w-md wrap-break-word text-center">
+                  This is an internal application provided by
+                  <samp>PhaseII</samp>
+                </p>
+              </template>
             </div>
 
             <hr class="border-t my-4 w-full" />

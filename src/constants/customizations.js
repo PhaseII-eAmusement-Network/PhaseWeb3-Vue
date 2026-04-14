@@ -12,6 +12,7 @@ export class ProfileCustomizations {
     { id: "loveplus", label: "LovePlus" },
     { id: "paint", label: "i eat paint" },
     { id: "shrimp", label: "Shrimp" },
+    { id: "unity", label: "Unity" },
   ];
 
   static get cardList() {

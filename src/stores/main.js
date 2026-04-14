@@ -131,6 +131,8 @@ export const useMainStore = defineStore("main", {
         this.incrementSaving();
       }
 
+      this.errorCode = null;
+
       const baseHeaders = {
         "App-Auth-Key": apiKey,
       };
@@ -158,11 +160,12 @@ export const useMainStore = defineStore("main", {
         this.errorCode = error.message || "Network Error";
         throw error;
       } finally {
-        // Always decrement in finally block
-        if (method === "GET") {
-          this.decrementLoading();
-        } else if (["POST", "PUT", "PATCH", "DELETE"].includes(method)) {
-          this.decrementSaving();
+        if (this.errorCode === null) {
+          if (method === "GET") {
+            this.decrementLoading();
+          } else if (["POST", "PUT", "PATCH", "DELETE"].includes(method)) {
+            this.decrementSaving();
+          }
         }
       }
     },

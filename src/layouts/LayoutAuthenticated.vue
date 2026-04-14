@@ -30,6 +30,7 @@ import { gameData } from "@/constants";
 import BaseButton from "@/components/BaseButton.vue";
 const DISCORD_URL = import.meta.env.VITE_DISCORD_URL;
 const DOCS_URL = import.meta.env.VITE_DOCS_URL;
+const UNITY_URL = import.meta.env.VITE_UNITY_URL;
 
 const router = useRouter();
 const route = useRoute();
@@ -174,7 +175,8 @@ const menuAside = computed(() => {
     sideMenu.push({
       label: "Developer Portal",
       icon: PhCode,
-      to: "/developer",
+      href: UNITY_URL,
+      target: "blank",
     });
   }
 

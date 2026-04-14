@@ -24,7 +24,19 @@ watch(isActive, (val) => {
       if (!isActive.value) {
         showModal.value = false;
       }
-    }, 250);
+    }, 150);
+  }
+});
+
+watch(errorCode, (val) => {
+  if (val) {
+    showModal.value = true;
+  } else {
+    setTimeout(() => {
+      if (!errorCode.value) {
+        showModal.value = false;
+      }
+    }, 150);
   }
 });
 </script>

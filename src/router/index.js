@@ -452,26 +452,6 @@ const routes = [
       hotReload: true, // disables Hot Reload
     },
   },
-  {
-    meta: {
-      requiresAuth: true,
-      requiresDev: true,
-      title: "Developer Portal",
-    },
-    path: "/developer",
-    name: "Developer Portal",
-    component: () => import("@/views/Developer/PortalView.vue"),
-  },
-  {
-    meta: {
-      requiresAuth: true,
-      requiresDev: true,
-      title: "App Registration",
-    },
-    path: "/developer/register",
-    name: "App Registration",
-    component: () => import("@/views/Developer/RegisterView.vue"),
-  },
 ];
 
 const router = createRouter({

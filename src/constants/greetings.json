@@ -655,5 +655,25 @@
         "author": "superaustin7",
         "header": "Welcome to jubeat, <username>",
         "comment": "THAT WON'T MAKE IT IN TIME FOR THIS SCHEDULE."
+    },
+    {
+        "author": "Anonymous",
+        "header": "Explore Every Avenue, <username>.",
+        "comment": ""
+    },
+    {
+        "author": "Anonymous",
+        "header": "Welcome to PhaseII Web Solutions, <username>.",
+        "comment": "Now offering a 99% SLA. Excludes pickaxe related incidents."
+    },
+    {
+        "author": "yonokid",
+        "header": "Something might happen, <username>",
+        "comment": "If you would please consult the graph."
+    },
+    {
+        "author": "superaustin7",
+        "header": "THE <username> HAS AWAKENED",
+        "comment": "BE VERY SCARED"
     }
 ]
