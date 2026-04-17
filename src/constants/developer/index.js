@@ -41,10 +41,14 @@ export const applicationIntents = [
   },
   {
     id: "webhook",
-    label: "Webhooks",
-    tip: "Allows this app to add and remove webhooks for a user that has authenticated through it",
+    label: "Webhook Registrations",
+    tip: "Allows this app to add and remove webhook registrations for a user that has authenticated through it",
   },
 ];
+
+export const getIntentById = (id) => {
+  return applicationIntents.find((intent) => intent.id === id) || null;
+};
 
 export const applicationWebhooks = [
   {

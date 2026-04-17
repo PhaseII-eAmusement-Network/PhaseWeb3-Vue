@@ -5,8 +5,10 @@ import CardBox from "@/components/CardBox.vue";
 import BaseButton from "@/components/BaseButton.vue";
 import LayoutGuest from "@/layouts/LayoutGuest.vue";
 import { APIGetAuthClient, APIPostAuthClient } from "@/stores/api/account.js";
+import { getIntentById } from "@/constants/developer";
 import { InternalApps } from "@/constants/developer/apps.js";
 
+const CDN_URL = import.meta.env.VITE_CDN_URL;
 const route = useRoute();
 const clientId = route.query.client_id;
 const clientData = ref(null);
@@ -26,6 +28,8 @@ async function getClient(id) {
       clientData.value = InternalApps[id];
       clientData.value.internal = true;
       clientData.value.callbackUrl = data.callbackUrl;
+    } else {
+      clientData.value = data;
     }
   } catch (error) {
     console.error("Failed to fetch client data:", error);
@@ -41,22 +45,13 @@ const submit = async () => {
   window.location.href =
     clientData.value.callbackUrl + "?code=" + response.code;
 };
-
-// const appInfo = {
-//   name: "Edi",
-//   image: "/edi512x512_2.png",
-//   manager: "Lumen",
-//   about:
-//     "Edi is a DDR score tracking app that offers a direct connection to your PhaseII account.",
-//   intents: ["user", "account", "webhook_scores"],
-//   internal: false,
-// };
 </script>
 
 <template>
   <LayoutGuest>
     <div class="flex md:min-h-screen md:items-center md:justify-center">
       <CardBox
+        v-if="clientData !== null"
         class="w-full md:w-auto rounded-none md:rounded-xl md:drop-shadow-xl"
         has-table
         is-auth
@@ -91,7 +86,7 @@ const submit = async () => {
                 </h1>
               </template>
               <img
-                :src="clientData?.image"
+                :src="clientData.image ?? `${CDN_URL}/${clientData?.data?.img}`"
                 width="75"
                 class="rounded-full shadow-lg mb-2"
               />
@@ -101,15 +96,22 @@ const submit = async () => {
 
               <hr class="border-r my-2 w-full" />
 
-              <template v-if="!clientData?.internal">
+              <template
+                v-if="!clientData?.internal && clientData?.data?.intents"
+              >
                 <h2 class="text-md md:text-lg">
                   <span class="font-bold">{{ clientData?.name }}</span> will
                   have access to:
                 </h2>
                 <ul class="text-sm md:text-md text-center">
-                  <li v-for="intent of clientData?.intents" :v-key="intent">
-                    - {{ intent }}
-                  </li>
+                  <template
+                    v-for="(value, key) in clientData?.data?.intents"
+                    :key="key"
+                  >
+                    <li v-if="value">
+                      - {{ getIntentById(key)?.label ?? "Unknown Intent" }}
+                    </li>
+                  </template>
                 </ul>
               </template>
             </div>
@@ -130,7 +132,7 @@ const submit = async () => {
                 <p class="text-sm max-w-md wrap-break-word text-center">
                   <span class="font-bold">{{ clientData?.name }}</span> is
                   managed by
-                  <span class="font-bold">{{ clientData?.manager }}</span>
+                  <span class="font-bold">{{ clientData?.team?.name }}</span>
                 </p>
               </template>
               <template v-else>
