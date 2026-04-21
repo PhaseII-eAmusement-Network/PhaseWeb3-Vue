@@ -11,6 +11,7 @@ import { InternalApps } from "@/constants/developer/apps.js";
 const CDN_URL = import.meta.env.VITE_CDN_URL;
 const route = useRoute();
 const clientId = route.query.client_id;
+const stateData = route.query.state;
 const clientData = ref(null);
 
 onMounted(async () => {
@@ -42,8 +43,12 @@ const submit = async () => {
     console.error("Authorization failed");
   }
 
-  window.location.href =
-    clientData.value.callbackUrl + "?code=" + response.code;
+  var path = `${clientData.value.callbackUrl}?code=${response.code}`;
+  if (stateData) {
+    path = path.concat([`&state=${stateData}`]);
+  }
+
+  window.location.href = path;
 };
 </script>
 
