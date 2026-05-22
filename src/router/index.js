@@ -75,6 +75,15 @@ const routes = [
   {
     meta: {
       requiresAuth: true,
+      title: "Contactless Login",
+    },
+    path: "/profile/authorize_game",
+    name: "authorize_game",
+    component: () => import("@/views/Auth/AuthorizeGameView.vue"),
+  },
+  {
+    meta: {
+      requiresAuth: true,
       title: "Profile",
     },
     path: "/profile",

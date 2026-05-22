@@ -14,6 +14,7 @@ import { ReflecBeatOptions } from "@/constants/gameOptions/reflecOptions";
 import { SDVXOptions } from "@/constants/gameOptions/sdvxOptions";
 import { WinningElevenOptions } from "@/constants/gameOptions/weOptions";
 import { SilentScopeOptions } from "@/constants/gameOptions/silentScopeOptions";
+import { CCJOptions } from "@/constants/gameOptions/ccjOptions";
 
 import { DDREvents } from "@/constants/scheduledEvents/ddrEvents";
 import { IIDXEvents } from "@/constants/scheduledEvents/iidxEvents";
@@ -30,6 +31,7 @@ export class GameConstants {
   static DDR = "ddr";
   static DDRCLASS = "ddrclass";
   static DDROMNI = "ddromni";
+  static CCJ = "ccj";
   static DRUMMANIA = "dm";
   static EEMALL = "eemall";
   static FUTURETOMTOM = "ftt";
@@ -64,6 +66,8 @@ export class VersionConstants {
 
   static THE_STAR_BISHI_BASHI = 1;
   static BISHI_BASHI_CHANNEL = 1;
+
+  static CCJ = 1;
 
   static DANCE_EVOLUTION = 1;
 
@@ -430,6 +434,16 @@ export const gameData = [
     skip: true,
     noRivals: true,
     noScores: true,
+  },
+  {
+    id: GameConstants.CCJ,
+    name: "Chase Chase Jokers",
+    icon: null,
+    cardBG: null,
+    skip: true,
+    noRivals: true,
+    noScores: true,
+    gameOptions: CCJOptions,
   },
   {
     id: GameConstants.DANCE_EVOLUTION,

@@ -345,3 +345,27 @@ export async function APIPostAuthClient(clientId) {
     throw error;
   }
 }
+
+export async function APIGetContactless(token) {
+  const mainStore = useMainStore();
+
+  try {
+    const data = await mainStore.callApi(`/user/contactless/${token}`);
+    return data?.data;
+  } catch (error) {
+    console.log("Error fetching client:", error);
+    throw error;
+  }
+}
+
+export async function APIPostContactless(token) {
+  const mainStore = useMainStore();
+
+  try {
+    const data = await mainStore.callApi(`/user/contactless/${token}`, "POST");
+    return data?.data;
+  } catch (error) {
+    console.log("Error posting client:", error);
+    throw error;
+  }
+}
