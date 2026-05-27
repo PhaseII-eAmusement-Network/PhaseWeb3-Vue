@@ -48,10 +48,22 @@ export const DDRClassOptions = {
       ],
     },
     {
-      id: "info_text",
-      name: "Information Message",
-      help: "An announcement displayed on the bulletin board.",
+      id: "news_title",
+      name: "News Title",
+      help: "Title of your news post",
+      type: "String",
+    },
+    {
+      id: "news_body",
+      name: "News Body",
+      help: "Body of your news post. Newlines must have a space if you're doing double newlines.",
       type: "LargeText",
+    },
+    {
+      id: "info_msg",
+      name: "Information Message",
+      help: "An announcement on the demo play screen.",
+      type: "String",
     },
   ],
 };
