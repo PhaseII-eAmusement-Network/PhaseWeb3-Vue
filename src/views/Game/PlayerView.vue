@@ -1,5 +1,5 @@
 <script setup>
-import { reactive, ref, onMounted, watch } from "vue";
+import { reactive, ref, onMounted, watch, computed } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import {
   PhUser,
@@ -415,6 +415,33 @@ function formatHitchart(data) {
 
   return formattedData;
 }
+
+const groupedTimeline = computed(() => {
+  const timeline = [...(myStats.value?.timeline || [])];
+
+  const groups = [];
+
+  for (const play of timeline) {
+    const day = play.timestamp.slice(0, 10); // YYYY-MM-DD
+
+    const last = groups[groups.length - 1];
+
+    if (last && last.arcade === play.arcade && last.day === day) {
+      last.count++;
+      last.end = play.timestamp;
+    } else {
+      groups.push({
+        arcade: play.arcade,
+        day,
+        count: 1,
+        start: play.timestamp,
+        end: play.timestamp,
+      });
+    }
+  }
+
+  return groups.reverse();
+});
 </script>
 
 <template>
@@ -784,30 +811,39 @@ function formatHitchart(data) {
           <SectionTitleLine :icon="PhCalendarDots" title="Timeline" main />
           <div class="my-6">
             <CardBox>
-              <ol
-                class="border-s border-neutral-300 md:flex md:justify-start md:gap-10 md:border-s-0 md:border-t md:overflow-x-auto overflow-y-visible md:whitespace-nowrap scrollbar"
-              >
+              <ol class="flex gap-6 overflow-x-auto py-4 scrollbar">
                 <li
-                  v-for="playHistory of JSON.parse(
-                    JSON.stringify(myStats?.timeline),
-                  ).reverse()"
-                  :key="playHistory.timestamp"
-                  class="md:inline-block shrink-0"
+                  v-for="session in groupedTimeline"
+                  :key="`${session.start}-${session.arcade}`"
+                  class="relative shrink-0"
                 >
-                  <div
-                    class="flex-start flex items-center pt-2 md:block md:pt-4"
-                  >
+                  <div class="w-56 rounded-xl bg-slate-800 p-4 shadow-sm">
+                    <div class="flex items-center gap-3">
+                      <div>
+                        <h4 class="font-semibold text-base">
+                          {{ session.arcade }}
+                        </h4>
+
+                        <p class="text-xs text-neutral-500">
+                          {{ session.day }}
+                        </p>
+                      </div>
+                    </div>
+
                     <div
-                      class="-ms-[6px] me-3 h-[12px] w-[12px] md:w-0.5 md:h-4 rounded-full md:rounded-none bg-gray-300 md:-mt-6 md:me-0 md:ms-0"
-                    ></div>
-                    <p class="mt-2 text-sm font-light">
-                      {{ playHistory.timestamp }}
-                    </p>
-                  </div>
-                  <div class="ms-4 pb-6 md:ms-0">
-                    <h4 class="text-lg font-semibold">
-                      {{ playHistory.arcade }}
-                    </h4>
+                      class="mt-4 flex items-center justify-between space-x-2"
+                    >
+                      <span class="text-xs font-medium text-primary-700">
+                        {{ session.count }}
+                        {{ session.count === 1 ? "play" : "plays" }}
+                      </span>
+
+                      <div class="text-xs text-neutral-500">
+                        <span> Start: {{ session.start }}</span>
+                        <br />
+                        <span> End: {{ session.end }}</span>
+                      </div>
+                    </div>
                   </div>
                 </li>
               </ol>
