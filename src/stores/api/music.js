@@ -1,4 +1,5 @@
 import { useMainStore } from "@/stores/main";
+
 const mainStore = useMainStore();
 
 export async function APIGetMusicData(
@@ -8,13 +9,25 @@ export async function APIGetMusicData(
   oneChart = false,
 ) {
   try {
+    const params = new URLSearchParams({
+      game,
+      version,
+    });
+
+    if (oneChart) {
+      params.append("oneChart", "true");
+    }
+
+    if (songIds?.length) {
+      params.append("songIds", songIds.join(","));
+    }
+
     const data = await mainStore.callApi(
-      `/music?game=${game}&version=${version}` +
-        (oneChart ? "&oneChart=true" : ""),
+      `/music?${params.toString()}`,
       "GET",
       null,
-      { songIds: songIds.toString() },
     );
+
     return data.data;
   } catch (error) {
     console.log("Error fetching music data:", error);
@@ -24,11 +37,20 @@ export async function APIGetMusicData(
 
 export async function getAttemptData(game, userId = null) {
   try {
+    const params = new URLSearchParams();
+
+    if (userId) {
+      params.append("userId", userId);
+    }
+
+    const query = params.toString();
+
     const data = await mainStore.callApi(
-      `/attempts/${game}` + (userId ? `?userId=${userId}` : ""),
+      `/attempts/${game}${query ? `?${query}` : ""}`,
       "GET",
       null,
     );
+
     return data.data;
   } catch (error) {
     console.log("Error fetching attempt data:", error);
@@ -36,13 +58,26 @@ export async function getAttemptData(game, userId = null) {
   }
 }
 
-export async function APIGetRecordData(game, userId = null) {
+export async function APIGetRecordData(game, userId = null, songId = null) {
   try {
+    const params = new URLSearchParams();
+
+    if (userId) {
+      params.append("userId", userId);
+    }
+
+    if (songId) {
+      params.append("songId", songId);
+    }
+
+    const query = params.toString();
+
     const data = await mainStore.callApi(
-      `/records/${game}` + (userId ? `?userId=${userId}` : ""),
+      `/records/${game}${query ? `?${query}` : ""}`,
       "GET",
       null,
     );
+
     return data.data;
   } catch (error) {
     console.log("Error fetching record data:", error);
