@@ -830,9 +830,7 @@ const groupedTimeline = computed(() => {
                       </div>
                     </div>
 
-                    <div
-                      class="mt-4 flex items-center justify-between space-x-2"
-                    >
+                    <div class="mt-4 flex items-center justify-between gap-2">
                       <span class="text-xs font-medium text-primary-700">
                         {{ session.count }}
                         {{ session.count === 1 ? "play" : "plays" }}

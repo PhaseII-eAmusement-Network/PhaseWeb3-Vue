@@ -15,12 +15,12 @@ import CardBoxWidget from "@/components/CardBoxWidget.vue";
 import GeneralTable from "@/components/GeneralTable.vue";
 import FormControl from "@/components/FormControl.vue";
 import GameHeader from "@/components/Cards/GameHeader.vue";
+import RecordCardBox from "@/components/Cards/RecordCardBox.vue";
 
 import { useMainStore } from "@/stores/main.js";
 import { APIGetTopScore, APIGetRecordData } from "@/stores/api/music";
 import { getGameInfo, GameConstants } from "@/constants";
 import { formatDifficulty } from "@/constants/scoreDataFilters";
-import { getNestedValue } from "@/constants/values";
 import { hydrateScoreData } from "@/helpers/score";
 import { formatIIDXScore } from "@/helpers/score/iidx";
 import { topScoreHeaders, formatScoreTable } from "@/constants/table/scores";
@@ -30,7 +30,7 @@ const $router = useRouter();
 var gameId = $route.params.game;
 var songId = $route.params.songId;
 const thisGame = getGameInfo(gameId);
-var songData = ref({});
+var songData = ref(null);
 var anyRecords = ref(false);
 var personalRecords = ref({});
 
@@ -118,6 +118,21 @@ const selectedChartRecords = computed(() => {
   return formatScoreTable(thisGame, chart?.records ?? []);
 });
 
+const chartDifficulties = computed(() => {
+  return songData.value.charts
+    .filter(
+      (chart) =>
+        chart.data?.difficulty !== 0 && thisGame.chartTable[chart.chart],
+    )
+    .map(
+      (chart) =>
+        `${thisGame.chartTable[chart.chart]} - ${formatDifficulty(
+          chart.data.difficulty,
+          thisGame.difficultyDenom,
+        )}`,
+    );
+});
+
 const navigateToProfile = (item) => {
   const userId = item.userId;
   $router.push(`/games/${gameId}/profiles/${userId}`);
@@ -126,7 +141,7 @@ const navigateToProfile = (item) => {
 
 <template>
   <LayoutAuthenticated>
-    <SectionMain v-if="songData">
+    <SectionMain v-if="songData != null">
       <GameHeader :game="thisGame" />
       <SectionTitleLine :icon="PhMusicNote" title="Song Overview" main />
       <CardBox class="mb-6" has-table>
@@ -137,24 +152,13 @@ const navigateToProfile = (item) => {
             <h2 class="text-xl font-light italic">{{ songData.genre }}</h2>
           </div>
 
-          <div class="grid grid-cols-3 sm:flex gap-2">
-            <template v-for="chart of songData.charts" :key="chart.db_id">
-              <span
-                v-if="
-                  chart.data?.difficulty != 0 &&
-                  thisGame.chartTable[chart.chart]
-                "
-              >
-                {{ thisGame.chartTable[chart.chart] }} -
-                {{
-                  formatDifficulty(
-                    chart.data?.difficulty,
-                    thisGame.difficultyDenom,
-                  )
-                }}
-                /
-              </span>
-            </template>
+          <div class="hidden lg:block">
+            {{ chartDifficulties?.join("  /  ") }}
+          </div>
+          <div class="lg:hidden grid grid-cols-1 md:grid-cols-3">
+            <span v-for="diff of chartDifficulties">
+              {{ diff }}
+            </span>
           </div>
         </div>
       </CardBox>
@@ -167,59 +171,16 @@ const navigateToProfile = (item) => {
       />
       <div class="grid grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
         <template v-for="chart of songData.charts" :key="chart.db_id">
-          <CardBox
+          <RecordCardBox
             v-if="
               chart.data?.difficulty != 0 &&
               thisGame.chartTable[chart.chart] &&
               personalRecords[chart.chart]
             "
-            has-table
-          >
-            <div v-if="record = personalRecords[chart.chart]" class="py-6 px-4">
-              <span
-                v-if="
-                  chart.data?.difficulty != 0 &&
-                  thisGame.chartTable[chart.chart]
-                "
-                class="text-lg p-2 text-slate-400"
-              >
-                {{ thisGame.chartTable[chart.chart] }} -
-                {{
-                  formatDifficulty(
-                    chart.data?.difficulty,
-                    thisGame.difficultyDenom,
-                  )
-                }}
-              </span>
-              <div
-                class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-6 justify-items-center-safe place-items-center text-center"
-              >
-                <div>
-                  <h1 class="font-light text-sm">Points</h1>
-                  <p class="text-2xl font-bold text-white">
-                    {{ record?.points.toLocaleString() }}
-                  </p>
-                </div>
-
-                <template
-                  v-for="header of thisGame?.scoreHeaders"
-                  :key="header"
-                >
-                  <div>
-                    <h1 class="font-light text-sm">
-                      {{ header.text }}
-                    </h1>
-                    <p class="text-xl font-bold text-white">
-                      {{ getNestedValue(record, header.value) ?? "0" }}
-                    </p>
-                  </div>
-                </template>
-              </div>
-              <span class="p-2 font-light text-slate-300">
-                Updated {{ record.timestamp }}
-              </span>
-            </div>
-          </CardBox>
+            :this-game="thisGame"
+            :chart="chart"
+            :record="personalRecords[chart.chart]"
+          />
         </template>
       </div>
 
