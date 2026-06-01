@@ -26,7 +26,7 @@ defineProps({
 
 <template>
   <CardBox has-table>
-    <div class="py-6 px-4">
+    <div class="pt-4 px-4">
       <span
         v-if="chart.data?.difficulty != 0 && thisGame.chartTable[chart.chart]"
         class="text-md md:text-lg p-2 text-slate-400"
@@ -36,7 +36,7 @@ defineProps({
       </span>
       <span v-if="showUser">{{ record.username }}</span>
       <div
-        class="pt-4 grid grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-6 justify-items-center-safe place-items-center text-center"
+        class="pt-4 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-6 justify-items-center-safe place-items-center text-center"
       >
         <div>
           <h1 class="font-light text-sm">Points</h1>
@@ -46,23 +46,19 @@ defineProps({
         </div>
 
         <template v-for="header of thisGame?.scoreHeaders" :key="header">
-          <div>
+          <div v-if="getNestedValue(record, header.value)">
             <h1 class="font-light text-sm">
               {{ header.text }}
             </h1>
             <p class="text-md lg:text-lg font-bold text-white">
-              {{ getNestedValue(record, header.value) ?? "0" }}
+              {{ getNestedValue(record, header.value) }}
             </p>
           </div>
         </template>
       </div>
-      <span class="px-2 font-light text-slate-300">
-        <span class="hidden md:block">Updated {{ record.timestamp }}</span>
-        <div class="block md:hidden text-sm">
-          Updated<br />
-          {{ record.timestamp }}
-        </div>
-      </span>
+      <div class="p-2 pb-4 font-light text-slate-300">
+        <span>Updated {{ record.timestamp }}</span>
+      </div>
     </div>
   </CardBox>
 </template>

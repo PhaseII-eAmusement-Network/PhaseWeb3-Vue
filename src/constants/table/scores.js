@@ -187,6 +187,10 @@ export function formatScoreTable(thisGame, scores) {
       item.points = item.data?.stats?.score
         .toString()
         .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
+    } else if (item.data?.exscore) {
+      item.exscore = item.data.exscore
+        .toString()
+        .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
     }
 
     formattedItems.push(item);
