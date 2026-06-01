@@ -1,5 +1,5 @@
 <script setup>
-import { reactive, ref, onMounted, computed } from "vue";
+import { reactive, ref, onMounted, computed, watch } from "vue";
 import { useRoute, useRouter } from "vue-router";
 import {
   PhMusicNote,
@@ -16,7 +16,6 @@ import GeneralTable from "@/components/GeneralTable.vue";
 import FormControl from "@/components/FormControl.vue";
 import GameHeader from "@/components/Cards/GameHeader.vue";
 import RecordCardBox from "@/components/Cards/RecordCardBox.vue";
-
 import { useMainStore } from "@/stores/main.js";
 import { APIGetTopScore, APIGetRecordData } from "@/stores/api/music";
 import { getGameInfo, GameConstants } from "@/constants";
@@ -24,15 +23,19 @@ import { formatDifficulty } from "@/constants/scoreDataFilters";
 import { hydrateScoreData } from "@/helpers/score";
 import { formatIIDXScore } from "@/helpers/score/iidx";
 import { topScoreHeaders, formatScoreTable } from "@/constants/table/scores";
+
 const mainStore = useMainStore();
 const $route = useRoute();
 const $router = useRouter();
-var gameId = $route.params.game;
-var songId = $route.params.songId;
+
+const gameId = $route.params.game;
+const songId = $route.params.songId;
+
 const thisGame = getGameInfo(gameId);
-var songData = ref(null);
-var anyRecords = ref(false);
-var personalRecords = ref({});
+
+const songData = ref(null);
+const anyRecords = ref(false);
+const personalRecords = ref({});
 
 if (!thisGame) {
   $router.push({
@@ -43,9 +46,14 @@ if (!thisGame) {
   });
 }
 
+const chartSelector = reactive({
+  currentChart: null,
+});
+
 onMounted(async () => {
   try {
     const data = await APIGetTopScore(gameId, songId);
+
     songData.value = hydrateScoreData(thisGame, data);
 
     const personalData = await APIGetRecordData(
@@ -55,70 +63,101 @@ onMounted(async () => {
     );
 
     personalRecords.value = formatPersonalRecords(personalData[0]);
+
+    const firstChart = songData.value.charts.find(
+      (chart) =>
+        chart.data?.difficulty !== 0 &&
+        chart.data?.difficulty != null &&
+        thisGame.chartTable[chart.chart],
+    );
+
+    if (firstChart) {
+      chartSelector.currentChart = firstChart.chart;
+    }
   } catch (error) {
     console.error("Failed to fetch score data:", error);
   }
 });
 
 function formatPersonalRecords(data) {
-  let filtered = [];
+  const filtered = [];
 
-  for (var chart of data.charts) {
+  for (const chart of data.charts) {
     if (!chart.record) {
-      filtered.push(null);
-    } else {
-      if (thisGame?.id == GameConstants.IIDX) {
-        for (const chartId in filtered) {
-          const maxScore = (chart.data?.notecount ?? 5730) * 2;
-          var record = chart.record;
-          record = formatIIDXScore(maxScore, record);
-          chart.record = record;
-          songData[chartId] = chart;
-        }
-      }
-
-      filtered.push(formatScoreTable(thisGame, [chart.record])[0]);
-      anyRecords.value = true;
+      filtered[chart.chart] = null;
+      continue;
     }
+
+    if (thisGame?.id === GameConstants.IIDX) {
+      const maxScore = (chart.data?.notecount ?? 5730) * 2;
+
+      let record = chart.record;
+      record = formatIIDXScore(maxScore, record);
+
+      chart.record = record;
+    }
+
+    filtered[chart.chart] = formatScoreTable(thisGame, [chart.record])[0];
+    anyRecords.value = true;
   }
 
   return filtered;
 }
 
-const chartSelector = reactive({
-  currentChart: 0,
+const chartOptions = computed(() => {
+  if (!songData.value?.charts) return [];
+
+  return songData.value.charts
+    .filter(
+      (chart) =>
+        chart.data?.difficulty !== 0 &&
+        chart.data?.difficulty != null &&
+        thisGame.chartTable[chart.chart],
+    )
+    .map((chart) => ({
+      id: chart.chart,
+      label: `${thisGame.chartTable[chart.chart]} - ${formatDifficulty(
+        chart.data?.difficulty,
+        thisGame.difficultyDenom,
+      )}`,
+    }));
 });
 
-const chartOptions = computed(() => {
-  if (!songData.value.charts) return [];
+watch(
+  chartOptions,
+  (options) => {
+    if (
+      options.length &&
+      !options.some((x) => x.id === chartSelector.currentChart)
+    ) {
+      chartSelector.currentChart = options[0].id;
+    }
+  },
+  { immediate: true },
+);
+
+const selectedChart = computed(() => {
+  if (!songData.value?.charts) return null;
+
   return (
-    songData.value.charts
-      .filter(
-        (chart) =>
-          chart.data?.difficulty !== 0 &&
-          chart.data?.difficulty != null &&
-          thisGame.chartTable[chart.chart],
-      )
-      // eslint-disable-next-line no-unused-vars
-      .map((chart, index) => {
-        const label = `${thisGame.chartTable[chart.chart]} - ${formatDifficulty(
-          chart.data?.difficulty,
-          thisGame.difficultyDenom,
-        )}`;
-        return { id: chart.chart, label };
-      })
+    songData.value.charts.find(
+      (chart) => chart.chart === chartSelector.currentChart,
+    ) ?? null
   );
 });
 
 const selectedChartRecords = computed(() => {
-  if (!songData.value.charts || songData.value.charts.length === 0) return [];
-  const chart = JSON.parse(
-    JSON.stringify(songData.value.charts[chartSelector.currentChart]),
+  if (!selectedChart.value) return [];
+
+  return formatScoreTable(
+    thisGame,
+    JSON.parse(JSON.stringify(selectedChart.value.records ?? [])),
   );
-  return formatScoreTable(thisGame, chart?.records ?? []);
 });
 
 const chartDifficulties = computed(() => {
+  if (!songData.value?.charts) return [];
+
   return songData.value.charts
     .filter(
       (chart) =>
