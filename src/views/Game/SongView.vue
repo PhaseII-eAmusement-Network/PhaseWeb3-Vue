@@ -14,7 +14,6 @@ import CardBox from "@/components/CardBox.vue";
 import CardBoxWidget from "@/components/CardBoxWidget.vue";
 import GeneralTable from "@/components/GeneralTable.vue";
 import FormControl from "@/components/FormControl.vue";
-import PillTag from "@/components/PillTag.vue";
 import GameHeader from "@/components/Cards/GameHeader.vue";
 
 import { useMainStore } from "@/stores/main.js";
@@ -140,17 +139,21 @@ const navigateToProfile = (item) => {
 
           <div class="grid grid-cols-3 sm:flex gap-2">
             <template v-for="chart of songData.charts" :key="chart.db_id">
-              <PillTag
+              <span
                 v-if="
                   chart.data?.difficulty != 0 &&
                   thisGame.chartTable[chart.chart]
                 "
-                color="info"
-                :label="`${thisGame.chartTable[chart.chart]} - ${formatDifficulty(
-                  chart.data?.difficulty,
-                  thisGame.difficultyDenom,
-                )}`"
-              />
+              >
+                {{ thisGame.chartTable[chart.chart] }} -
+                {{
+                  formatDifficulty(
+                    chart.data?.difficulty,
+                    thisGame.difficultyDenom,
+                  )
+                }}
+                /
+              </span>
             </template>
           </div>
         </div>
@@ -164,38 +167,59 @@ const navigateToProfile = (item) => {
       />
       <div class="grid grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
         <template v-for="chart of songData.charts" :key="chart.db_id">
-          <CardBoxWidget
+          <CardBox
             v-if="
               chart.data?.difficulty != 0 &&
               thisGame.chartTable[chart.chart] &&
               personalRecords[chart.chart]
             "
-            :label="`${thisGame.chartTable[chart.chart]} - ${formatDifficulty(
-              chart.data?.difficulty,
-              thisGame.difficultyDenom,
-            )}`"
-            small-content
+            has-table
           >
-            <div v-if="record = personalRecords[chart.chart]">
-              <div class="space-x-2">
-                <span class="text-2xl font-bold">
-                  {{ record?.points.toLocaleString() }}
-                </span>
-                <span>Points</span>
-              </div>
-
-              <div
-                v-for="header of thisGame?.scoreHeaders"
-                :key="header"
-                class="space-x-2"
+            <div v-if="record = personalRecords[chart.chart]" class="py-6 px-4">
+              <span
+                v-if="
+                  chart.data?.difficulty != 0 &&
+                  thisGame.chartTable[chart.chart]
+                "
+                class="text-lg p-2 text-slate-400"
               >
-                <span class="text-2xl font-bold">
-                  {{ getNestedValue(record, header.value) ?? "0" }}
-                </span>
-                <span>{{ header.text }}</span>
+                {{ thisGame.chartTable[chart.chart] }} -
+                {{
+                  formatDifficulty(
+                    chart.data?.difficulty,
+                    thisGame.difficultyDenom,
+                  )
+                }}
+              </span>
+              <div
+                class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-6 justify-items-center-safe place-items-center text-center"
+              >
+                <div>
+                  <h1 class="font-light text-sm">Points</h1>
+                  <p class="text-2xl font-bold text-white">
+                    {{ record?.points.toLocaleString() }}
+                  </p>
+                </div>
+
+                <template
+                  v-for="header of thisGame?.scoreHeaders"
+                  :key="header"
+                >
+                  <div>
+                    <h1 class="font-light text-sm">
+                      {{ header.text }}
+                    </h1>
+                    <p class="text-xl font-bold text-white">
+                      {{ getNestedValue(record, header.value) ?? "0" }}
+                    </p>
+                  </div>
+                </template>
               </div>
+              <span class="p-2 font-light text-slate-300">
+                Updated {{ record.timestamp }}
+              </span>
             </div>
-          </CardBoxWidget>
+          </CardBox>
         </template>
       </div>
 
