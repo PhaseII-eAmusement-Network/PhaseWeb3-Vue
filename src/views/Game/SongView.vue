@@ -53,7 +53,6 @@ const chartSelector = reactive({
 onMounted(async () => {
   try {
     const data = await APIGetTopScore(gameId, songId);
-
     songData.value = hydrateScoreData(thisGame, data);
 
     const personalData = await APIGetRecordData(

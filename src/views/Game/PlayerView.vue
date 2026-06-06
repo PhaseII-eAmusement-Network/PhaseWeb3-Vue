@@ -817,29 +817,28 @@ const groupedTimeline = computed(() => {
                   :key="`${session.start}-${session.arcade}`"
                   class="relative shrink-0"
                 >
-                  <div class="w-56 rounded-xl bg-slate-800 p-4 shadow-sm">
-                    <div class="flex items-center gap-3">
-                      <div>
-                        <h4 class="font-semibold text-base">
-                          {{ session.arcade }}
-                        </h4>
+                  <div
+                    class="w-full rounded-xl bg-slate-800 p-4 shadow-sm space-y-4"
+                  >
+                    <div>
+                      <h4 class="font-semibold text-base">
+                        {{ session.arcade }}
+                      </h4>
 
-                        <p class="text-xs text-neutral-500">
-                          {{ session.day }}
-                        </p>
-                      </div>
+                      <p class="text-xs text-neutral-500">
+                        {{ session.day }}
+                      </p>
                     </div>
 
-                    <div class="mt-4 flex items-center justify-between gap-2">
+                    <div class="flex items-center justify-between gap-2">
                       <span class="text-xs font-medium text-primary-700">
                         {{ session.count }}
                         {{ session.count === 1 ? "play" : "plays" }}
                       </span>
 
                       <div class="text-xs text-neutral-500">
-                        <span> Start: {{ session.start }}</span>
-                        <br />
-                        <span> End: {{ session.end }}</span>
+                        <p>Start: {{ session.start }}</p>
+                        <p>End: {{ session.end }}</p>
                       </div>
                     </div>
                   </div>

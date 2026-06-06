@@ -75,10 +75,10 @@ defineProps({
         </BaseLevel>
         <BaseLevel mobile>
           <div>
-            <h3 :class="color" class="text-lg leading-tight mb-1.5">
+            <h3 :class="color" class="text-md md:text-lg leading-tight mb-1.5">
               {{ label }}
             </h3>
-            <h1 class="text-3xl leading-tight font-semibold">
+            <h1 class="text-2xl md:text-3xl leading-tight font-semibold">
               <NumberDynamic
                 v-if="number"
                 :class="numColor"
