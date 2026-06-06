@@ -51,5 +51,6 @@
     "3.1.2": ["- (Major) Add initial code for oAuth pages", "- (Major) Add redirect to target page after login", "- (Minor) Add quick links to navbar", "- (Minor) Add new greetings", "- (Minor) Replace login page background", "- (Minor) Add animation to loading modal", "- (Bugfix) Refactor loading modal", "- (Bugfix) Refactor overlay layer", "- (Bugfix) Optimize main layouts", "- (Bugfix) Fix loading states around site", "- (Bugfix) Optimize news read api calls", "- (Minor) Add simple auth checkers to router, blocking access at webui level"],
     "3.1.3": ["- (Major) Add better error popups, add new buttons on errors", "- (Major) Finish initial authorization page for internal apps", "- (Minor) Add more greetings", "- (Bugfix) Fix overlay layer transparency when saving", "- (Bugfix) Fix remaining missing colors"],
     "3.1.4": ["- (Major) Add QR game login support", "- (Minor) Add initial CCJ support and events"],
-    "3.1.5": ["- (Minor) Add DDR SN2 information message support"]
+    "3.1.5": ["- (Minor) Add DDR SN2 information message support"],
+    "3.1.6": ["- (Major) Add Song Record Cards for all games that support scores", "- (Major) Update layout and design of a core component, CardBoxStat", "- (Major) Overhaul the game timeline", "- (Bugfix) Various fixes over the past week", "- (Greetings) Add new greetings from superaustin7"]
 }
