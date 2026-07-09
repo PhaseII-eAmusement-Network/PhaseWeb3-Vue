@@ -508,6 +508,7 @@ export const gameData = [
       VersionConstants.DDR_A20,
       VersionConstants.DDR_A20_PLUS,
       VersionConstants.DDR_A3,
+      VersionConstants.DDR_WORLD,
     ],
     scoreHeaders: [
       { text: "EX Score", value: "exscore", width: 80 },
