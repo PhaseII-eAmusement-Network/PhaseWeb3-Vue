@@ -1867,7 +1867,14 @@ export const gameData = [
     maxLength: 6,
     gameOptions: PopnMusicOptions,
     scheduledEvents: PopnMusicEvents,
-    videoTable: [VersionConstants.POPN_MUSIC_JAMFIZZ],
+    videoTable: [
+      VersionConstants.POPN_MUSIC_ECLALE,
+      VersionConstants.POPN_MUSIC_USANEKO,
+      VersionConstants.POPN_MUSIC_PEACE,
+      VersionConstants.POPN_MUSIC_KAIMEI_RIDDLES,
+      VersionConstants.POPN_MUSIC_UNILAB,
+      VersionConstants.POPN_MUSIC_ECLALE,
+    ],
     chartTable: {
       0: "EASY",
       1: "NORMAL",
