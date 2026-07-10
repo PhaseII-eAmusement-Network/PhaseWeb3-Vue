@@ -1868,6 +1868,7 @@ export const gameData = [
     gameOptions: PopnMusicOptions,
     scheduledEvents: PopnMusicEvents,
     videoTable: [
+      VersionConstants.POPN_MUSIC_SUNNY_PARK,
       VersionConstants.POPN_MUSIC_ECLALE,
       VersionConstants.POPN_MUSIC_USANEKO,
       VersionConstants.POPN_MUSIC_PEACE,
