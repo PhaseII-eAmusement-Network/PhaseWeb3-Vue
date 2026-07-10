@@ -1873,7 +1873,7 @@ export const gameData = [
       VersionConstants.POPN_MUSIC_PEACE,
       VersionConstants.POPN_MUSIC_KAIMEI_RIDDLES,
       VersionConstants.POPN_MUSIC_UNILAB,
-      VersionConstants.POPN_MUSIC_ECLALE,
+      VersionConstants.POPN_MUSIC_JAMFIZZ,
     ],
     chartTable: {
       0: "EASY",
