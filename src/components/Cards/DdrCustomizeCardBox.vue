@@ -64,7 +64,7 @@ const ingameType = ref("");
 loadCustomizations();
 function loadCustomizations() {
   axios
-    .get(`/data-sources/ddr/customizations/gameplay_${version.value}.json`)
+    .get(`/data-sources/customizations/ddr/${version.value}/gameplay.json`)
     .then((r) => {
       if (r.data) {
         customizations.value = r.data;
@@ -105,8 +105,7 @@ function setPreviewType(type, laneType) {
   if (type === "Song Select") {
     ingameType.value = "";
   } else if (type === "Ingame") {
-    laneType = laneType || ingameType.value || "Singles";
-    ingameType.value = laneType;
+    ingameType.value = laneType || ingameType.value || "Singles";
   }
 }
 

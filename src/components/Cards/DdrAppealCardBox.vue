@@ -39,7 +39,7 @@ const APPEAL_ID = "customize.1_0";
 loadCustomizations();
 function loadCustomizations() {
   axios
-    .get(`/data-sources/ddr/customizations/appeal_${version.value}.json`)
+    .get(`/data-sources/customizations/ddr/${version.value}/appeal.json`)
     .then((r) => {
       if (r.data) {
         customizations.value = r.data;
