@@ -1867,6 +1867,7 @@ export const gameData = [
     maxLength: 6,
     gameOptions: PopnMusicOptions,
     scheduledEvents: PopnMusicEvents,
+    videoTable: [VersionConstants.POPN_MUSIC_JAMFIZZ],
     chartTable: {
       0: "EASY",
       1: "NORMAL",
@@ -2150,6 +2151,14 @@ export const gameData = [
     icon: null,
     cardBG: null,
     gameOptions: SDVXOptions,
+    videoTable: [
+      VersionConstants.SDVX_BOOTH,
+      VersionConstants.SDVX_INFINITE_INFECTION,
+      VersionConstants.SDVX_GRAVITY_WARS,
+      VersionConstants.SDVX_HEAVENLY_HAVEN,
+      VersionConstants.SDVX_VIVID_WAVE,
+      VersionConstants.SDVX_EXCEED_GEAR,
+    ],
     chartTable: {
       0: "NOVICE",
       1: "ADVANCED",
