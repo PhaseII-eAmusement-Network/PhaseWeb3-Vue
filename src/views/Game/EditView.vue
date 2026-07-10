@@ -16,6 +16,9 @@ import EmblemCardBox from "@/components/Cards/EmblemCardBox.vue";
 import QproCardBox from "@/components/Cards/QproCardBox.vue";
 import AkanameCardBox from "@/components/Cards/AkanameCardBox.vue";
 import StickerCardBox from "@/components/Cards/StickerCardBox.vue";
+import TitlePartCardBox from "@/components/Cards/TitlePartCardBox.vue";
+import DdrCustomizeCardBox from "@/components/Cards/DdrCustomizeCardBox.vue";
+import DdrAppealCardBox from "@/components/Cards/DdrAppealCardBox.vue";
 import PillTag from "@/components/PillTag.vue";
 
 import { APIGetProfile, APIUpdateProfile } from "@/stores/api/profile";
@@ -27,7 +30,6 @@ import {
 } from "@/constants/values";
 import { getGameInfo } from "@/constants";
 import { getGameOptions } from "@/constants/options";
-import TitlePartCardBox from "@/components/Cards/TitlePartCardBox.vue";
 
 const $route = useRoute();
 const $router = useRouter();
@@ -274,6 +276,16 @@ async function updateProfile() {
           "
           :profile="myProfile"
           :game="gameID"
+          :version="versionForm.currentVersion"
+        />
+        <DdrAppealCardBox
+          v-if="gameID == 'ddr' && versionForm.currentVersion >= 20"
+          :profile="myProfile"
+          :version="versionForm.currentVersion"
+        />
+        <DdrCustomizeCardBox
+          v-if="gameID == 'ddr' && versionForm.currentVersion >= 20"
+          :profile="myProfile"
           :version="versionForm.currentVersion"
         />
       </div>
