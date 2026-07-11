@@ -371,6 +371,7 @@ export const gameData = [
     cardBG: null,
     noRivals: true,
     useUnicode: true,
+    videoTable: [VersionConstants.BEATSTREAM, VersionConstants.BEATSTREAM_2],
     scoreHeaders: [
       { text: "Grade", value: "data.rank", width: 80 },
       { text: "Clear Gauge", value: "data.clear_gauge", width: 120 },
