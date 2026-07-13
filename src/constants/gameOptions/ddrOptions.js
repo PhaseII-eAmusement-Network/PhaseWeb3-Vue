@@ -86,6 +86,26 @@ export const DDROptions = {
       help: "Fully unlocks the game.",
       type: "Boolean",
     },
+    {
+      id: "gameover_select",
+      name: 'Gameover "Thank You" Message',
+      help: 'Select the "Thank You" message for the game over screen',
+      type: "Array",
+      options: [
+        { id: 0, label: "Default Game Over" },
+        { id: 1, label: "Diagonal Game Over Text" },
+        { id: 2, label: "Ryusei" },
+        { id: 3, label: "Yuni 6th KAC" },
+      ],
+    },
+  ],
+  17: [
+    {
+      id: "disableunlock",
+      name: "Disable Force Unlock",
+      help: "Does not unlock the game.",
+      type: "Boolean",
+    },
   ],
   18: [
     {
