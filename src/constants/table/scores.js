@@ -176,6 +176,14 @@ export function formatScoreTable(thisGame, scores) {
       item.data.miss_count = 0;
     }
 
+    if (item.data?.flare !== undefined && thisGame.flareTable !== undefined) {
+      if (item.data.flare <= 0) {
+        item.data.flare = "";
+      } else {
+        item.data.flare = thisGame.flareTable[item.data.flare];
+      }
+    }
+
     if (item.points != undefined) {
       item.points = item.points
         .toString()
