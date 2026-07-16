@@ -11,6 +11,6 @@ export function getFlareLevel(score) {
   return {
     label: level?.label,
     color: level?.gradient ? level.gradient : level?.color,
-    textColor: level?.gradient ? level.gradient : `text-${level?.color}`,
+    textColor: level?.gradient ? level.gradient : `text-[${level?.color}]`,
   };
 }

@@ -543,7 +543,7 @@ const groupedTimeline = computed(() => {
           </CardBoxWidget>
           <CardBoxWidget
             v-if="myProfile.flare_double"
-            label="SP Flare"
+            label="DP Flare"
             :num-color="getFlareLevel(myProfile.flare_double).textColor"
           >
             {{ getFlareLevel(myProfile.flare_double).label }}
