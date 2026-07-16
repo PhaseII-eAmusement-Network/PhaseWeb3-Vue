@@ -166,10 +166,10 @@ function formatProfiles(profiles) {
         item.dgrade = getIIDXDan(item.dgrade).short;
       }
 
-      if (item.flare_single) {
+      if (item.flare_single !== undefined) {
         item.flare_single = getFlareLevel(item.flare_single).label;
       }
-      if (item.flare_double) {
+      if (item.flare_double !== undefined) {
         item.flare_double = getFlareLevel(item.flare_double).label;
       }
     }
