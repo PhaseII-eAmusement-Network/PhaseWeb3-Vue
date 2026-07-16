@@ -55,7 +55,10 @@
         { "id": 49, "label": "pop'n music (Shutter Type.B)" },
         { "id": 50, "label": "秋のコナステ大感謝祭2024" },
         { "id": 51, "label": "キャラクタースライドショー (秋のコナステ大感謝祭2024)" },
-        { "id": 52, "label": "不知火フレア (立ち絵)" }
+        { "id": 52, "label": "不知火フレア (立ち絵)" },
+        { "id": 53, "label": "ACE FOR ACES" },
+        { "id": 54, "label": "Superior MAXXX" },
+        { "id": 55, "label": "キャラクタースライドショー (RINON)" }
       ]
     },
     {
@@ -114,7 +117,10 @@
         { "id": 49, "label": "pop'n music (Shutter Type.B)" },
         { "id": 50, "label": "秋のコナステ大感謝祭2024" },
         { "id": 51, "label": "キャラクタースライドショー (秋のコナステ大感謝祭2024)" },
-        { "id": 52, "label": "不知火フレア (立ち絵)" }
+        { "id": 52, "label": "不知火フレア (立ち絵)" },
+        { "id": 53, "label": "ACE FOR ACES" },
+        { "id": 54, "label": "Superior MAXXX" },
+        { "id": 55, "label": "キャラクタースライドショー (RINON)" }
       ]
     },
     {
@@ -182,7 +188,12 @@
         { "id": 58, "label": "わたこ (秋のコナステ大感謝祭2024)" },
         { "id": 59, "label": "不知火フレア" },
         { "id": 60, "label": "不知火フレア (ルミナス)" },
-        { "id": 61, "label": "不知火フレア (清楚少女風)" }
+        { "id": 61, "label": "不知火フレア (清楚少女風)" },
+        { "id": 62, "label": "RINON" },
+        { "id": 63, "label": "RINON (Superior MAXXX)" },
+        { "id": 64, "label": "RINON Ace Style LEVEL1" },
+        { "id": 65, "label": "RINON Ace Style LEVEL2" },
+        { "id": 66, "label": "RINON Ace Style LEVEL3" }
       ]
     },
     {
@@ -250,7 +261,12 @@
         { "id": 58, "label": "わたこ (秋のコナステ大感謝祭2024)" },
         { "id": 59, "label": "不知火フレア" },
         { "id": 60, "label": "不知火フレア (ルミナス)" },
-        { "id": 61, "label": "不知火フレア (清楚少女風)" }
+        { "id": 61, "label": "不知火フレア (清楚少女風)" },
+        { "id": 62, "label": "RINON" },
+        { "id": 63, "label": "RINON (Superior MAXXX)" },
+        { "id": 64, "label": "RINON Ace Style LEVEL1" },
+        { "id": 65, "label": "RINON Ace Style LEVEL2" },
+        { "id": 66, "label": "RINON Ace Style LEVEL3" }
       ]
     },
     {
@@ -351,7 +367,15 @@
         { "id": 91, "label": "僕の飛行機 (covered by 不知火フレア)" },
         { "id": 92, "label": "Homesick Pt.2&3 (covered by 不知火フレア)" },
         { "id": 93, "label": "Silent Flame,Never Fade" },
-        { "id": 94, "label": "不知火フレア (アイキャッチ)" }
+        { "id": 94, "label": "不知火フレア (アイキャッチ)" },
+        { "id": 95, "label": "RINON" },
+        { "id": 96, "label": "RINON (Superior MAXXX)" },
+        { "id": 97, "label": "ACE FOR ACES" },
+        { "id": 98, "label": "Over The \"Period\"" },
+        { "id": 99, "label": "Superior MAXXX" },
+        { "id": 100, "label": "RINON Ace Style LEVEL1" },
+        { "id": 101, "label": "RINON Ace Style LEVEL2" },
+        { "id": 102, "label": "RINON Ace Style LEVEL3" }
       ]
     },
     {
@@ -382,15 +406,15 @@
         { "id": 21, "label": "ひなビタ♪ 肝試し" },
         { "id": 22, "label": "滅びに至るエランプシス" },
         { "id": 23, "label": "カタルシスの月" },
-				{ "id": 24, "label": "YUNI" },
-				{ "id": 25, "label": "AKIRA" },
-				{ "id": 26, "label": "YUNI & AKIRA" },
-				{ "id": 27, "label": "ALICE & YUNI" },
-				{ "id": 28, "label": "Destination" },
-				{ "id": 29, "label": "HyperTwist" },
-				{ "id": 30, "label": "Cosy Catastrophe" },
-				{ "id": 31, "label": "New York EVOLVED" },
-				{ "id": 32, "label": "bag (EXPERT譜面 x0.25 WAVE)" },
+        { "id": 24, "label": "YUNI" },
+        { "id": 25, "label": "AKIRA" },
+        { "id": 26, "label": "YUNI & AKIRA" },
+        { "id": 27, "label": "ALICE & YUNI" },
+        { "id": 28, "label": "Destination" },
+        { "id": 29, "label": "HyperTwist" },
+        { "id": 30, "label": "Cosy Catastrophe" },
+        { "id": 31, "label": "New York EVOLVED" },
+        { "id": 32, "label": "bag (EXPERT譜面 x0.25 WAVE)" },
         { "id": 33, "label": "天戸紺 (Amado Kon)" },
         { "id": 34, "label": "小舞桜 (Komai Sakura)" },
         { "id": 35, "label": "天戸紺 & 小舞桜 (Amado Kon & Komai Sakura)" },
@@ -470,7 +494,16 @@
         { "id": 109, "label": "僕の飛行機 (covered by 不知火フレア)" },
         { "id": 110, "label": "Homesick Pt.2&3 (covered by 不知火フレア)" },
         { "id": 111, "label": "Silent Flame,Never Fade" },
-        { "id": 112, "label": "不知火フレア (アイキャッチ)" }
+        { "id": 112, "label": "不知火フレア (アイキャッチ)" },
+        { "id": 113, "label": "RINON" },
+        { "id": 114, "label": "RINON (Superior MAXXX)" },
+        { "id": 115, "label": "RINON&RINON (Superior MAXXX)" },
+        { "id": 116, "label": "ACE FOR ACES" },
+        { "id": 117, "label": "Over The \"Period\"" },
+        { "id": 118, "label": "Superior MAXXX" },
+        { "id": 119, "label": "RINON Ace Style LEVEL1" },
+        { "id": 120, "label": "RINON Ace Style LEVEL2" },
+        { "id": 121, "label": "RINON Ace Style LEVEL3" }
       ]
     },
     {
@@ -554,7 +587,12 @@
         { "id": 74, "label": "わたこ (秋のコナステ大感謝祭2024)" },
         { "id": 75, "label": "不知火フレア" },
         { "id": 76, "label": "不知火フレア (ルミナス)" },
-        { "id": 77, "label": "不知火フレア (清楚少女風)" }
+        { "id": 77, "label": "不知火フレア (清楚少女風)" },
+        { "id": 78, "label": "RINON" },
+        { "id": 79, "label": "RINON (Superior MAXXX)" },
+        { "id": 80, "label": "RINON Ace Style LEVEL1" },
+        { "id": 81, "label": "RINON Ace Style LEVEL2" },
+        { "id": 82, "label": "RINON Ace Style LEVEL3" }
       ]
     },
     {
@@ -582,12 +620,12 @@
         { "id": 18, "label": "ひなビタ♪ 肝試し" },
         { "id": 19, "label": "滅びに至るエランプシス" },
         { "id": 20, "label": "カタルシスの月" },
-				{ "id": 21, "label": "YUNI" },
-				{ "id": 22, "label": "AKIRA" },
-				{ "id": 23, "label": "YUNI & AKIRA" },
-				{ "id": 24, "label": "ALICE & YUNI" },
-				{ "id": 25, "label": "HONEYCOMB" },
-				{ "id": 26, "label": "bag (EXPERT譜面 x0.25 WAVE)" },
+        { "id": 21, "label": "YUNI" },
+        { "id": 22, "label": "AKIRA" },
+        { "id": 23, "label": "YUNI & AKIRA" },
+        { "id": 24, "label": "ALICE & YUNI" },
+        { "id": 25, "label": "HONEYCOMB" },
+        { "id": 26, "label": "bag (EXPERT譜面 x0.25 WAVE)" },
         { "id": 27, "label": "天戸紺 (Amado Kon)" },
         { "id": 28, "label": "小舞桜 (Komai Sakura)" },
         { "id": 29, "label": "天戸紺 & 小舞桜 (Amado Kon & Komai Sakura)" },
@@ -654,7 +692,13 @@
         { "id": 90, "label": "わたこ (秋のコナステ大感謝祭2024)" },
         { "id": 91, "label": "不知火フレア" },
         { "id": 92, "label": "不知火フレア (ルミナス)" },
-        { "id": 93, "label": "不知火フレア (清楚少女風)" }
+        { "id": 93, "label": "不知火フレア (清楚少女風)" },
+        { "id": 94, "label": "RINON" },
+        { "id": 95, "label": "RINON (Superior MAXXX)" },
+        { "id": 96, "label": "RINON&RINON (Superior MAXXX)" },
+        { "id": 97, "label": "RINON Ace Style LEVEL1" },
+        { "id": 98, "label": "RINON Ace Style LEVEL2" },
+        { "id": 99, "label": "RINON Ace Style LEVEL3" }
       ]
     }
 ]
