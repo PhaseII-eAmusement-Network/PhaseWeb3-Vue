@@ -6,6 +6,7 @@ import { GameConstants, getGameInfo, VersionConstants } from "@/constants";
 import UserEmblem from "@/components/UserEmblem.vue";
 import UserQpro from "@/components/UserQpro.vue";
 import { getGitadoraColor, getJubilityColor } from "@/constants/skillColor.js";
+import { getFlareLevel } from "@/helpers/flare";
 
 const props = defineProps({
   game: {
@@ -27,6 +28,14 @@ function colorText() {
     return getJubilityColor(props.profile.jubility);
   } else if (props.profile.records) {
     return getGitadoraColor(props.profile.records.skill);
+  } else if (props.profile.flare_single || props.profile.flare_double) {
+    const flare_s = props.profile.flare_single;
+    const flare_d = props.profile.flare_double;
+    if (flare_s >= flare_d) {
+      return getFlareLevel(flare_s).textColor;
+    } else {
+      return getFlareLevel(flare_d).textColor;
+    }
   }
 }
 

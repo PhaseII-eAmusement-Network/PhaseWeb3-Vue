@@ -14,6 +14,7 @@ import {
 import SectionMain from "@/components/SectionMain.vue";
 import CardBoxWidget from "@/components/CardBoxWidget.vue";
 import CardBox from "@/components/CardBox.vue";
+import HitchartCardBox from "@/components/Cards/HitchartCardBox.vue";
 import BaseButton from "@/components/BaseButton.vue";
 import GameHeader from "@/components/Cards/GameHeader.vue";
 import ProfileCard from "@/components/Cards/ProfileCard.vue";
@@ -32,7 +33,7 @@ import { GameConstants, getGameInfo } from "@/constants";
 import { getIIDXDan } from "@/constants/danClass.js";
 import { getGitadoraColor, getJubilityColor } from "@/constants/skillColor";
 import { formatSortableDate } from "@/constants/date";
-import HitchartCardBox from "@/components/Cards/HitchartCardBox.vue";
+import { getFlareLevel } from "@/helpers/flare";
 const ASSET_PATH = import.meta.env.VITE_ASSET_PATH;
 
 const $route = useRoute();
@@ -531,6 +532,22 @@ const groupedTimeline = computed(() => {
             label="Scores"
             :number="myStats?.count?.attempts"
           />
+
+          <!-- DDR -->
+          <CardBoxWidget
+            v-if="myProfile.flare_single"
+            label="SP Flare"
+            :num-color="getFlareLevel(myProfile.flare_single).textColor"
+          >
+            {{ getFlareLevel(myProfile.flare_single).label }}
+          </CardBoxWidget>
+          <CardBoxWidget
+            v-if="myProfile.flare_double"
+            label="SP Flare"
+            :num-color="getFlareLevel(myProfile.flare_double).textColor"
+          >
+            {{ getFlareLevel(myProfile.flare_double).label }}
+          </CardBoxWidget>
 
           <!-- GFDM -->
           <CardBoxWidget

@@ -20,6 +20,7 @@ import { getGameInfo } from "@/constants";
 import { dashCode } from "@/constants/userData";
 import { getIIDXDan } from "@/constants/danClass";
 import { formatSortableDate } from "@/constants/date";
+import { getFlareLevel } from "@/helpers/flare";
 
 const $route = useRoute();
 const $router = useRouter();
@@ -161,9 +162,15 @@ function formatProfiles(profiles) {
       if (item.sgrade) {
         item.sgrade = getIIDXDan(item.sgrade).short;
       }
-
       if (item.dgrade) {
         item.dgrade = getIIDXDan(item.dgrade).short;
+      }
+
+      if (item.flare_single) {
+        item.flare_single = getFlareLevel(item.flare_single).label;
+      }
+      if (item.flare_double) {
+        item.flare_double = getFlareLevel(item.flare_double).label;
       }
     }
 
