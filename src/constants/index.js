@@ -1928,6 +1928,7 @@ export const gameData = [
     icon: `${ASSET_PATH}/icon/popn.webp`,
     cardBG: `${ASSET_PATH}/card/popn.webp`,
     assetId: "popn",
+    playerChara: true,
     useUnicode: true,
     maxLength: 6,
     gameOptions: PopnMusicOptions,

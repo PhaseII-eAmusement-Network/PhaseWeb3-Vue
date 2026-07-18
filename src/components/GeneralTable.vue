@@ -4,6 +4,7 @@ import BaseButton from "@/components/BaseButton.vue";
 import UserAvatar from "@/components/UserAvatar.vue";
 import { useRoute } from "vue-router";
 import { exportJSON } from "@/helpers/contentExport";
+const GAME_ASSET_PATH = import.meta.env.VITE_GAME_ASSET_PATH;
 
 const $route = useRoute();
 
@@ -111,6 +112,12 @@ function downloadJSON() {
           />
         </div>
         <span>{{ username }}</span>
+      </div>
+    </template>
+
+    <template #item-chara="{ chara }">
+      <div class="chara-wrapper w-[25px]">
+        <img :src="`${GAME_ASSET_PATH}/chara/popn/${chara}.png`" width="80" />
       </div>
     </template>
 

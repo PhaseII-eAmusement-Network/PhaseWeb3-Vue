@@ -7,6 +7,7 @@ import UserEmblem from "@/components/UserEmblem.vue";
 import UserQpro from "@/components/UserQpro.vue";
 import { getGitadoraColor, getJubilityColor } from "@/constants/skillColor.js";
 import { getFlareLevel } from "@/helpers/flare";
+const GAME_ASSET_PATH = import.meta.env.VITE_GAME_ASSET_PATH;
 
 const props = defineProps({
   game: {
@@ -89,7 +90,7 @@ onMounted(async () => {
 <template>
   <div class="content-center justify-center items-center">
     <div
-      class="md:flex md:space-x-12 md:justify-center md:items-center grid grid-cols-1 text-center"
+      class="md:flex md:space-x-2 md:justify-center md:items-center grid grid-cols-1 text-center"
     >
       <UserEmblem
         v-if="
@@ -103,8 +104,20 @@ onMounted(async () => {
         v-if="game == GameConstants.IIDX && version >= 20 && profile.qpro"
         :version="version"
         :profile="profile"
-        class="place-self-center md:mt-10 mb-10 md:mb-0"
+        class="place-self-center md:mt-10 mb-10 md:mb-0 md:mr-10"
       />
+      <div
+        v-if="
+          game == GameConstants.POPN_MUSIC && version >= 20 && profile.chara
+        "
+        class="place-self-center w-[80px]"
+      >
+        <img
+          :src="`${GAME_ASSET_PATH}/chara/popn/${profile.chara}.png`"
+          width="80"
+          height="80"
+        />
+      </div>
       <div class="drop-shadow-2xl">
         <p
           v-if="profile.title && game != GameConstants.JUBEAT"
