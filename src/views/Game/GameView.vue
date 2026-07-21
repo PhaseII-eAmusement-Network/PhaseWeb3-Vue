@@ -16,7 +16,7 @@ import SongCardSmall from "@/components/Cards/SongCardSmall.vue";
 
 import { APIGetProfile, APIGetGame } from "@/stores/api/profile";
 import { APIGetMusicData } from "@/stores/api/music";
-import { GameConstants, getGameInfo } from "@/constants";
+import { getGameInfo } from "@/constants";
 import { dashCode } from "@/constants/userData";
 import { getIIDXDan } from "@/constants/danClass";
 import { formatSortableDate } from "@/constants/date";
@@ -119,7 +119,7 @@ headers.push({
   text: "Player",
   value: "username",
   sortable: true,
-  width: 120,
+  width: 130,
 });
 
 if (!thisGame.noRivals) {
@@ -127,7 +127,7 @@ if (!thisGame.noRivals) {
     text: "Rival ID",
     value: "extid",
     sortable: true,
-    width: 100,
+    width: 120,
   });
 }
 
@@ -448,7 +448,6 @@ function formatHitchart(data) {
             <GeneralTable
               :headers="headers"
               :items="profiles"
-              :has-popn-chara="thisGame.id === GameConstants.POPN_MUSIC"
               @row-clicked="navigateToProfile"
             />
           </div>
