@@ -79,6 +79,11 @@ defineProps({
               {{ label }}
             </h3>
             <h1 class="text-2xl md:text-3xl leading-tight font-semibold">
+              <div
+                :class="numColor + (smallContent ? ` text-lg font-normal` : ``)"
+              >
+                <slot />
+              </div>
               <NumberDynamic
                 v-if="number"
                 :class="numColor"
@@ -86,11 +91,6 @@ defineProps({
                 :prefix="prefix"
                 :suffix="suffix"
               />
-              <div
-                :class="numColor + (smallContent ? ` text-lg font-normal` : ``)"
-              >
-                <slot />
-              </div>
             </h1>
           </div>
         </BaseLevel>

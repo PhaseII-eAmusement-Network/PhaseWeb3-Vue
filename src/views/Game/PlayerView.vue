@@ -538,6 +538,7 @@ const groupedTimeline = computed(() => {
             v-if="myProfile.flare_single"
             label="SP Flare"
             :num-color="getFlareLevel(myProfile.flare_single).textColor"
+            :number="myProfile.flare_single"
           >
             {{ getFlareLevel(myProfile.flare_single).label }}
           </CardBoxWidget>
@@ -545,6 +546,7 @@ const groupedTimeline = computed(() => {
             v-if="myProfile.flare_double"
             label="DP Flare"
             :num-color="getFlareLevel(myProfile.flare_double).textColor"
+            :number="myProfile.flare_double"
           >
             {{ getFlareLevel(myProfile.flare_double).label }}
           </CardBoxWidget>
