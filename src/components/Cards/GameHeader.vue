@@ -88,7 +88,7 @@ function loadRoutes() {
         icon: PhListStar,
         path: `/games/${props.game.id}/records/${mainStore.userId}`,
         route: "personal_records",
-        color: "success",
+        color: "info",
       });
     }
   }
@@ -100,7 +100,7 @@ function loadRoutes() {
         icon: PhPlaylist,
         path: `/games/${props.game.id}/scores`,
         route: "all_scores",
-        color: "info",
+        color: "success",
       },
       {
         label: "Network Records",
