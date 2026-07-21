@@ -123,4 +123,12 @@ export const DDROptions = {
       type: "Boolean",
     },
   ],
+  20: [
+    {
+      id: "disableunlock",
+      name: "Disable Force Unlock",
+      help: "Does not unlock the game.",
+      type: "Boolean",
+    },
+  ],
 };
