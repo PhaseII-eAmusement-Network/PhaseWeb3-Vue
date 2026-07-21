@@ -129,6 +129,7 @@ export class VersionConstants {
   static GITADORA_NEXTAGE = 7;
   static GITADORA_HIGH_VOLTAGE = 8;
   static GITADORA_FUZZUP = 9;
+  static GITADORA_GALAXY_WAVE = 10;
 
   static GUITARFREAKS_1ST = 0;
   static GUITARFREAKS_2ND = 1;
@@ -359,6 +360,11 @@ const GITADORA_VERSION_DATA = [
   {
     id: VersionConstants.GITADORA_FUZZUP,
     label: "FUZZUP",
+    maxRivals: 3,
+  },
+  {
+    id: VersionConstants.GITADORA_GALAXY_WAVE,
+    label: "GALAXY WAVE",
     maxRivals: 3,
   },
 ];
@@ -1086,6 +1092,7 @@ export const gameData = [
       VersionConstants.GITADORA_NEXTAGE,
       VersionConstants.GITADORA_HIGH_VOLTAGE,
       VersionConstants.GITADORA_FUZZUP,
+      VersionConstants.GITADORA_GALAXY_WAVE,
     ],
     noRivals: true,
     playerHeaders: [
@@ -1138,6 +1145,7 @@ export const gameData = [
       VersionConstants.GITADORA_NEXTAGE,
       VersionConstants.GITADORA_HIGH_VOLTAGE,
       VersionConstants.GITADORA_FUZZUP,
+      VersionConstants.GITADORA_GALAXY_WAVE,
     ],
     noRivals: true,
     playerHeaders: [

@@ -71,4 +71,12 @@ export const GITADORAOptions = {
       type: "String",
     },
   ],
+  10: [
+    {
+      id: "title",
+      name: "Player Title",
+      help: 'Defaults to "PhaseII Player"',
+      type: "String",
+    },
+  ],
 };
