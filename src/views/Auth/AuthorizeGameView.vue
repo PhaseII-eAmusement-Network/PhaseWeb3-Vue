@@ -55,7 +55,7 @@ async function submit() {
               </button>
             </div>
             <hr class="border-r my-1 w-full mb-4" />
-            <p class="text-lg relative bottom-0">Contactless Login</p>
+            <p class="text-lg relative bottom-0">Cardless Login</p>
           </div>
           <div class="md:border-r" />
           <form @submit.prevent="submit()">
@@ -65,8 +65,8 @@ async function submit() {
                 <span class="font-bold">{{ tokenData?.arcade }}</span>
               </h1>
               <p class="text-md max-w-md wrap-break-word text-center">
-                You scanned a Contactless Login QR code. Are you really trying
-                to log in?
+                You scanned a Cardless Login QR code. Are you really trying log
+                in?
               </p>
             </div>
 

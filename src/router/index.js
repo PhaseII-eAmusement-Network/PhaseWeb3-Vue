@@ -75,7 +75,7 @@ const routes = [
   {
     meta: {
       requiresAuth: true,
-      title: "Contactless Login",
+      title: "Cardless Login",
     },
     path: "/profile/authorize_game",
     name: "authorize_game",
