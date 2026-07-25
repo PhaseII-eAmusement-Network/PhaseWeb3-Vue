@@ -1,7 +1,7 @@
 <script setup>
 import { ref, onMounted, reactive, computed } from "vue";
 import { useRoute, useRouter } from "vue-router";
-import { PhRanking, PhUser, PhMedal } from "@phosphor-icons/vue";
+import { PhRanking, PhUser, PhMedal, PhChartBar } from "@phosphor-icons/vue";
 import SectionMain from "@/components/SectionMain.vue";
 import LayoutAuthenticated from "@/layouts/LayoutAuthenticated.vue";
 import SectionTitleLine from "@/components/SectionTitleLine.vue";
@@ -12,7 +12,8 @@ import GameHeader from "@/components/Cards/GameHeader.vue";
 
 import { APIGetRecordData } from "@/stores/api/music";
 import { APIGetProfile } from "@/stores/api/profile";
-import { getGameInfo } from "@/constants";
+import { GameConstants, getGameInfo } from "@/constants";
+import UserDdrStatistics from "@/components/Charts/UserDdrStatistics.vue";
 import {
   shouldRenderChart,
   formatDifficulty,
@@ -121,6 +122,24 @@ const songsWithRecords = computed(() => {
             :label="`${myProfile.username}'s Scores`"
           />
         </div>
+
+        <template v-if="thisGame.id == GameConstants.DDR && songData">
+          <SectionTitleLine
+            :icon="PhChartBar"
+            :title="`${myProfile.username}'s Overall ${
+              thisGame.shortName ? thisGame.shortName : thisGame.name
+            } Statistics`"
+            main
+            class="mt-6"
+          />
+          <UserDdrStatistics
+            :game="thisGame.id"
+            :version="versionForm.currentVersion"
+            :profile="profileUserId"
+            :scores="songData"
+          />
+        </template>
+
         <SectionTitleLine
           :icon="PhRanking"
           :title="`${myProfile.username}'s ${
