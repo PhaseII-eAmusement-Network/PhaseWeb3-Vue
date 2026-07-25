@@ -183,6 +183,7 @@ export class VersionConstants {
   static IIDX_RESIDENT = 30;
   static IIDX_EPOLIS = 31;
   static IIDX_PINKY_CRUSH = 32;
+  static IIDX_SPARKLE_SHOWER = 33;
 
   static JUBEAT = 1;
   static JUBEAT_RIPPLES = 2;
@@ -1346,6 +1347,7 @@ export const gameData = [
       VersionConstants.IIDX_RESIDENT,
       VersionConstants.IIDX_EPOLIS,
       VersionConstants.IIDX_PINKY_CRUSH,
+      VersionConstants.IIDX_SPARKLE_SHOWER,
     ],
     scoreHeaders: [
       { text: "Grade", value: "data.rank", width: 60 },
@@ -1551,6 +1553,11 @@ export const gameData = [
       {
         id: VersionConstants.IIDX_PINKY_CRUSH,
         label: "Pinky Crush",
+        maxRivals: 5,
+      },
+      {
+        id: VersionConstants.IIDX_SPARKLE_SHOWER,
+        label: "Sparkle Shower",
         maxRivals: 5,
       },
     ],

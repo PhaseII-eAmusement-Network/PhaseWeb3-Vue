@@ -454,4 +454,49 @@ export const IIDXOptions = {
       type: "String",
     },
   ],
+  33: [
+    {
+      id: "global_shop_ranking",
+      name: "Global Shop Ranking",
+      help: "Return network-wide ranking instead of shop ranking on results screen.",
+      type: "Boolean",
+    },
+    {
+      id: "idol_ad",
+      name: "Attract Loop Idol Ad",
+      help: "Plays an ad for an idol group during the attract loop.",
+      type: "Boolean",
+    },
+    {
+      id: "event_phase",
+      name: "Game Event Phase",
+      help: "Enable different boss events",
+      type: "Array",
+      options: [
+        { id: 0, label: "No Event" },
+        { id: 1, label: "Pinky Jump UP! (MAP 1)" },
+        { id: 2, label: "Pinky Jump UP! (MAP 2)" },
+        { id: 3, label: "Pinky Jump UP! (MAP 3)" },
+      ],
+    },
+    {
+      id: "system_season_voice",
+      name: "System Season Voice",
+      help: "Enable different season voice in Game",
+      type: "Array",
+      options: [
+        { id: 0, label: "Random" },
+        { id: 1, label: "Winter" },
+        { id: 2, label: "Spring" },
+        { id: 3, label: "Summer" },
+        { id: 4, label: "Autumn" },
+      ],
+    },
+    {
+      id: "license",
+      name: "License Message",
+      help: "A server sent license.",
+      type: "String",
+    },
+  ],
 };
