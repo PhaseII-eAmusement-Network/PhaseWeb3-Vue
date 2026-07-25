@@ -21552,6 +21552,10 @@ export const IIDXOptions = {
           id: 24,
           label: "Epolis",
         },
+        {
+          id: 25,
+          label: "Pinky Crush",
+        },
       ],
     },
     {
@@ -21811,6 +21815,10 @@ export const IIDXOptions = {
         {
           id: 43,
           label: "Epolis",
+        },
+        {
+          id: 44,
+          label: "Pinky Crush",
         },
       ],
     },
@@ -23060,6 +23068,138 @@ export const IIDXOptions = {
           id: 308,
           label: "Dj Ameto (Iidx30)",
         },
+        {
+          id: 309,
+          label: "BEMANI x Touhou Project ~Gensokyo ongakusai 2024~",
+        },
+        {
+          id: 310,
+          label: "BEMANI x Touhou Project Ultimate MasterPieces",
+        },
+        {
+          id: 311,
+          label: "CUE CUE RESCUE",
+        },
+        {
+          id: 312,
+          label: "Iris",
+        },
+        {
+          id: 313,
+          label: "SOLAR ECLIPSE",
+        },
+        {
+          id: 314,
+          label: "INHERITANCE",
+        },
+        {
+          id: 315,
+          label: "CADENZA",
+        },
+        {
+          id: 316,
+          label: "Cult Invitation",
+        },
+        {
+          id: 317,
+          label: "電子になりたい",
+        },
+        {
+          id: 318,
+          label: "MAXIMUM CHEAT GIRL",
+        },
+        {
+          id: 319,
+          label: "Out of Control",
+        },
+        {
+          id: 320,
+          label: "Glitch N Ride",
+        },
+        {
+          id: 321,
+          label: "惑星鉄道",
+        },
+        {
+          id: 322,
+          label: "COUNTING SHEEP",
+        },
+        {
+          id: 323,
+          label: "マイポリスデザイナー",
+        },
+        {
+          id: 324,
+          label: "Pinky Crush",
+        },
+        {
+          id: 325,
+          label: "PIT A PAT",
+        },
+        {
+          id: 326,
+          label: "最強頂戴girl",
+        },
+        {
+          id: 327,
+          label: "Vibing! Shake it!",
+        },
+        {
+          id: 328,
+          label: "FERMI PARADOX",
+        },
+        {
+          id: 329,
+          label: "灼熱 Lost Summer Dayz",
+        },
+        {
+          id: 330,
+          label: "get set mind",
+        },
+        {
+          id: 331,
+          label: "Raspberry Potion",
+        },
+        {
+          id: 332,
+          label: "Secret Rouge",
+        },
+        {
+          id: 333,
+          label: "u gotta beat",
+        },
+        {
+          id: 334,
+          label: "爆ぜりゃんせ",
+        },
+        {
+          id: 335,
+          label: "Secret Rouge",
+        },
+        {
+          id: 336,
+          label: "Mare Nectaris",
+        },
+        {
+          id: 337,
+          label: "PIT A PAT",
+        },
+        {
+          id: 338,
+          label: "きみのせかい",
+        },
+        {
+          id: 339,
+          label: "Pinky Crush",
+        },
+        {
+          id: 340,
+          label: "Submerge Serenade",
+        },
+        {
+          id: 341,
+          label: "ABSOLUTE EVIL",
+        },
       ],
     },
     {
@@ -23232,6 +23372,10 @@ export const IIDXOptions = {
           id: 22,
           label: "Epolis",
         },
+        {
+          id: 23,
+          label: "Pinky Crush",
+        },
       ],
     },
     {
@@ -23291,6 +23435,10 @@ export const IIDXOptions = {
         {
           id: 12,
           label: "Epolis",
+        },
+        {
+          id: 13,
+          label: "Pinky Crush",
         },
       ],
     },
@@ -23399,6 +23547,10 @@ export const IIDXOptions = {
         {
           id: 18,
           label: "Epolis",
+        },
+        {
+          id: 19,
+          label: "Pinky Crush",
         },
       ],
     },
@@ -23562,6 +23714,14 @@ export const IIDXOptions = {
           id: 24,
           label: "Epolis",
         },
+        {
+          id: 25,
+          label: "Pinky Crush",
+        },
+        {
+          id: 26,
+          label: "Sparkle Shower",
+        },
       ],
     },
     {
@@ -23821,6 +23981,14 @@ export const IIDXOptions = {
         {
           id: 43,
           label: "Epolis",
+        },
+        {
+          id: 44,
+          label: "Pinky Crush",
+        },
+        {
+          id: 45,
+          label: "Sparkle Shower",
         },
       ],
     },
@@ -25070,6 +25238,234 @@ export const IIDXOptions = {
           id: 308,
           label: "Dj Ameto (Iidx30)",
         },
+        {
+          id: 309,
+          label: "BEMANI x Touhou Project ~Gensokyo ongakusai 2024~",
+        },
+        {
+          id: 310,
+          label: "BEMANI x Touhou Project Ultimate MasterPieces",
+        },
+        {
+          id: 311,
+          label: "CUE CUE RESCUE",
+        },
+        {
+          id: 312,
+          label: "Iris",
+        },
+        {
+          id: 313,
+          label: "SOLAR ECLIPSE",
+        },
+        {
+          id: 314,
+          label: "INHERITANCE",
+        },
+        {
+          id: 315,
+          label: "CADENZA",
+        },
+        {
+          id: 316,
+          label: "Cult Invitation",
+        },
+        {
+          id: 317,
+          label: "電子になりたい",
+        },
+        {
+          id: 318,
+          label: "MAXIMUM CHEAT GIRL",
+        },
+        {
+          id: 319,
+          label: "Out of Control",
+        },
+        {
+          id: 320,
+          label: "Glitch N Ride",
+        },
+        {
+          id: 321,
+          label: "惑星鉄道",
+        },
+        {
+          id: 322,
+          label: "COUNTING SHEEP",
+        },
+        {
+          id: 323,
+          label: "マイポリスデザイナー",
+        },
+        {
+          id: 324,
+          label: "Pinky Crush",
+        },
+        {
+          id: 325,
+          label: "PIT A PAT",
+        },
+        {
+          id: 326,
+          label: "最強頂戴girl",
+        },
+        {
+          id: 327,
+          label: "Vibing! Shake it!",
+        },
+        {
+          id: 328,
+          label: "FERMI PARADOX",
+        },
+        {
+          id: 329,
+          label: "灼熱 Lost Summer Dayz",
+        },
+        {
+          id: 330,
+          label: "get set mind",
+        },
+        {
+          id: 331,
+          label: "Raspberry Potion",
+        },
+        {
+          id: 332,
+          label: "Secret Rouge",
+        },
+        {
+          id: 333,
+          label: "u gotta beat",
+        },
+        {
+          id: 334,
+          label: "爆ぜりゃんせ",
+        },
+        {
+          id: 335,
+          label: "Secret Rouge",
+        },
+        {
+          id: 336,
+          label: "Mare Nectaris",
+        },
+        {
+          id: 337,
+          label: "PIT A PAT",
+        },
+        {
+          id: 338,
+          label: "きみのせかい",
+        },
+        {
+          id: 339,
+          label: "Pinky Crush",
+        },
+        {
+          id: 340,
+          label: "Submerge Serenade",
+        },
+        {
+          id: 341,
+          label: "ABSOLUTE EVIL",
+        },
+        {
+          id: 342,
+          label: "Lisa-RICCIA",
+        },
+        {
+          id: 343,
+          label: "Flying beyond reason",
+        },
+        {
+          id: 344,
+          label: "kors k's Let's make an Image Song!",
+        },
+        {
+          id: 345,
+          label: "Nyan Nyan University",
+        },
+        {
+          id: 346,
+          label: "スキッテイエェエエェ!!!!",
+        },
+        {
+          id: 347,
+          label: "Galaxy Collapse",
+        },
+        {
+          id: 348,
+          label: "Bang-Boo Bumble",
+        },
+        {
+          id: 349,
+          label: "Aqvion",
+        },
+        {
+          id: 350,
+          label: "SμG@R RU$#",
+        },
+        {
+          id: 351,
+          label: "FlyAway",
+        },
+        {
+          id: 352,
+          label: "ドリムチウ",
+        },
+        {
+          id: 353,
+          label: "Skratch Education Lv-1",
+        },
+        {
+          id: 354,
+          label: "Uaigh Gealai",
+        },
+        {
+          id: 355,
+          label: "Without Heaven",
+        },
+        {
+          id: 356,
+          label: "Sparkle Shower",
+        },
+        {
+          id: 357,
+          label: "デラむぅのでらっくす☆どり～むぅ",
+        },
+        {
+          id: 358,
+          label: "Makin' It",
+        },
+        {
+          id: 359,
+          label: "ベラ・ベ・カラベラ",
+        },
+        {
+          id: 360,
+          label: "Bang Bang Dance",
+        },
+        {
+          id: 361,
+          label: "Nyan Nyan University",
+        },
+        {
+          id: 362,
+          label: "好吃来世deエレクトリック",
+        },
+        {
+          id: 363,
+          label: "Begin",
+        },
+        {
+          id: 364,
+          label: "BattleRoyal",
+        },
+        {
+          id: 365,
+          label: "Disco Killer Music Lover",
+        },
       ],
     },
     {
@@ -25117,6 +25513,10 @@ export const IIDXOptions = {
         {
           id: 9,
           label: "Bubble",
+        },
+        {
+          id: 10,
+          label: "Fruit",
         },
       ],
     },
@@ -25242,6 +25642,14 @@ export const IIDXOptions = {
           id: 22,
           label: "Epolis",
         },
+        {
+          id: 23,
+          label: "Pinky Crush",
+        },
+        {
+          id: 24,
+          label: "Sparkle Shower",
+        },
       ],
     },
     {
@@ -25301,6 +25709,14 @@ export const IIDXOptions = {
         {
           id: 12,
           label: "Epolis",
+        },
+        {
+          id: 13,
+          label: "Pinky Crush",
+        },
+        {
+          id: 14,
+          label: "Sparkle Shower",
         },
       ],
     },
@@ -25409,6 +25825,14 @@ export const IIDXOptions = {
         {
           id: 18,
           label: "Epolis",
+        },
+        {
+          id: 19,
+          label: "Pinky Crush",
+        },
+        {
+          id: 20,
+          label: "Sparkle Shower",
         },
       ],
     },
