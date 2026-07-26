@@ -462,10 +462,17 @@ export const IIDXOptions = {
       type: "Boolean",
     },
     {
-      id: "idol_ad",
-      name: "Attract Loop Idol Ad",
-      help: "Plays an ad for an idol group during the attract loop.",
+      id: "cyber_loader",
+      name: "Enable CYBER LOADER",
+      help: "Enables the CYBER LOADER Vocaloid Event.",
       type: "Boolean",
+    },
+    {
+      id: "demo_ad",
+      name: "Demo Loop Ad",
+      help: "Enable different ADs",
+      type: "Array",
+      options: [{ id: 0, label: "No Video" }],
     },
     {
       id: "event_phase",
@@ -474,9 +481,9 @@ export const IIDXOptions = {
       type: "Array",
       options: [
         { id: 0, label: "No Event" },
-        { id: 1, label: "Pinky Jump UP! (MAP 1)" },
-        { id: 2, label: "Pinky Jump UP! (MAP 2)" },
-        { id: 3, label: "Pinky Jump UP! (MAP 3)" },
+        { id: 1, label: "Sparkle Fruit Lab. レモンルーム (Lemon Room)" },
+        { id: 2, label: "Sparkle Fruit Lab. グレープルーム (Grape Room)" },
+        { id: 3, label: "Sparkle Fruit Lab. いちごルーム (Strawberry Room)" },
       ],
     },
     {

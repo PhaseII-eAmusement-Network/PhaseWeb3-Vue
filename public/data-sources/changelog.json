@@ -54,5 +54,6 @@
     "3.1.5": ["- (Minor) Add DDR SN2 information message support"],
     "3.1.6": ["- (Major) Add Song Record Cards for all games that support scores", "- (Major) Update layout and design of a core component, CardBoxStat", "- (Major) Overhaul the game timeline", "- (Bugfix) Various fixes over the past week", "- (Greetings) Add new greetings from superaustin7"],
     "3.1.7": ["- (Major) Update SDVX 6 customizations", "- (Major) Add new DDR customization cards (archibun)", "- (Minor) Add video backgrounds for pop'n 22 -> 28, SDVX 1-6 (archibun)"],
-    "3.1.8": ["- (Major) Add support for Gitadora GALAXY WAVE", "- (Feature) Add pop'n music characters to webui (archibun)", "- (Minor) Add flare skill calculation to DDR", "- (Minor) Update game event settings for DDR (archibun)"]
+    "3.1.8": ["- (Major) Add support for Gitadora GALAXY WAVE", "- (Feature) Add pop'n music characters to webui (archibun)", "- (Minor) Add flare skill calculation to DDR", "- (Minor) Update game event settings for DDR (archibun)"],
+    "3.1.9": ["- (Major) Add beta support for IIDX Sparkle Shower", "- (Feature) Add new DDR score statistics to records (archibun)"]
 }
