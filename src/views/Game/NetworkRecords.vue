@@ -1,7 +1,7 @@
 <script setup>
 import { ref, onMounted, reactive, computed } from "vue";
 import { useRoute, useRouter } from "vue-router";
-import { PhRanking } from "@phosphor-icons/vue";
+import { PhRanking, PhChartBar } from "@phosphor-icons/vue";
 import SectionMain from "@/components/SectionMain.vue";
 import LayoutAuthenticated from "@/layouts/LayoutAuthenticated.vue";
 import SectionTitleLine from "@/components/SectionTitleLine.vue";
@@ -11,7 +11,8 @@ import BaseButton from "@/components/BaseButton.vue";
 import GameHeader from "@/components/Cards/GameHeader.vue";
 
 import { APIGetRecordData } from "@/stores/api/music";
-import { getGameInfo } from "@/constants";
+import { GameConstants, getGameInfo } from "@/constants";
+import UserDdrStatistics from "@/components/Charts/UserDdrStatistics.vue";
 import {
   shouldRenderChart,
   formatDifficulty,
@@ -73,6 +74,28 @@ const filteredSongs = computed(() => {
   <LayoutAuthenticated>
     <SectionMain v-if="songData">
       <GameHeader :game="thisGame" />
+
+      <template
+        v-if="
+          [GameConstants.DDR, GameConstants.DDROMNI].includes(thisGame.id) &&
+          songData.length > 0
+        "
+      >
+        <SectionTitleLine
+          :icon="PhChartBar"
+          :title="`Overall Network ${
+            thisGame.shortName ? thisGame.shortName : thisGame.name
+          } Statistics`"
+          main
+          class="mt-6"
+        />
+        <UserDdrStatistics
+          :game="thisGame.id"
+          :version="versionForm.currentVersion"
+          :scores="songData"
+        />
+      </template>
+
       <SectionTitleLine :icon="PhRanking" title="Top Records" main>
         <template v-if="thisGame.versions">
           <div class="md:w-1/3 md:text-right">
