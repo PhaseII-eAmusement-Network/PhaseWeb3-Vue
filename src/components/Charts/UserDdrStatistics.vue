@@ -26,10 +26,6 @@ ChartJS.register(
 );
 
 const props = defineProps({
-  profile: {
-    type: String,
-    default: null,
-  },
   game: {
     type: String,
     default: null,
@@ -42,16 +38,6 @@ const props = defineProps({
     type: Object,
   },
 });
-
-const userProfile = ref(props.profile);
-const version = ref(props.version);
-watch(
-  () => props.version,
-  () => {
-    userProfile.value = props.profile;
-    version.value = props.version;
-  },
-);
 
 const groups = [
   0, 700_000, 800_000, 850_000, 900_000, 950_000, 970_000, 980_000, 990_000,
@@ -91,12 +77,20 @@ const chartData = ref({
       backgroundColor: colorGroups,
       borderColor: "rgba(22, 95, 250, 0.5)",
       data: [],
+      parsing: {
+        yAxisKey: "total",
+        xAxisKey: "total",
+      },
     },
     {
       label: "0",
       backgroundColor: colorGroups,
       borderColor: "rgba(250, 170, 22, 0.5)",
       data: [],
+      parsing: {
+        yAxisKey: "total",
+        xAxisKey: "total",
+      },
     },
   ],
 });
@@ -122,6 +116,17 @@ const chartOptions = {
         },
         label: function (ctx) {
           return `level ${ctx.dataset.label}: ${ctx.parsed.y} scores`;
+        },
+        footer: function (ctx) {
+          const best = ctx[0].raw.best;
+          if (best.length < 1) return "";
+
+          let list = `Top ${best.length}:`;
+          for (const [index, { song, chart }] of best.entries()) {
+            const chartType = gameInfo.shortChartTable[chart.chart];
+            list += `\n${index + 1}. ${song} (${chartType}${chart.data.difficulty} - ${chart.record.points.toLocaleString()})`;
+          }
+          return list;
         },
       },
     },
@@ -153,12 +158,15 @@ const statsTemplate = {
 };
 function onRangeUpdate(index, scores, stats) {
   return (value) => {
-    const data = new Array(groups.length).fill(0);
+    const data = Array.from({ length: groups.length }, () => ({
+      total: 0,
+      best: [],
+    }));
     const [min, max] = value;
     const allPoints = [];
     stats.value = { ...statsTemplate };
 
-    for (const { chart } of scores) {
+    for (const { song, chart } of scores) {
       const record = chart.record;
       const difficulty = chart.data.difficulty;
 
@@ -167,7 +175,8 @@ function onRangeUpdate(index, scores, stats) {
         for (const [index, minimum] of groups.entries()) {
           if (record.points >= minimum) targetIndex = index;
         }
-        data[targetIndex]++;
+        data[targetIndex].total++;
+        data[targetIndex].best.push({ song: song.name, chart });
         allPoints.push(record.points);
 
         const halo = gameInfo.haloTable[record.data.halo];
@@ -195,6 +204,16 @@ function onRangeUpdate(index, scores, stats) {
         allPoints.length % 2 !== 0
           ? allPoints[middle]
           : (allPoints[middle - 1] + allPoints[middle]) / 2;
+    }
+
+    for (const item of data) {
+      item.best = item.best
+        .sort((a, b) => {
+          const points = b.chart.record.points - a.chart.record.points;
+          if (points !== 0) return points;
+          return b.chart.data.difficulty - a.chart.data.difficulty;
+        })
+        .slice(0, 5);
     }
 
     chartData.value.datasets[index].data = data;

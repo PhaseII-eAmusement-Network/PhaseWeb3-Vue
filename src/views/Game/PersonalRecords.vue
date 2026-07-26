@@ -123,7 +123,12 @@ const songsWithRecords = computed(() => {
           />
         </div>
 
-        <template v-if="thisGame.id == GameConstants.DDR && songData">
+        <template
+          v-if="
+            [GameConstants.DDR, GameConstants.DDROMNI].includes(thisGame.id) &&
+            songData.length > 0
+          "
+        >
           <SectionTitleLine
             :icon="PhChartBar"
             :title="`${myProfile.username}'s Overall ${
