@@ -196,6 +196,9 @@ const menuAside = computed(() => {
         <UpdateModal />
       </WelcomeModal>
       <!-- <EmailModal class="transition-opacity duration-300 ease-out" /> -->
+
+      <div id="modal-root"></div>
+      <!-- Used to teleport modals here. -->
     </template>
     <div
       v-if="userLoaded"

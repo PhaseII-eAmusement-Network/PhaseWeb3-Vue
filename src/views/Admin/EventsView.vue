@@ -13,6 +13,7 @@ import CardBox from "@/components/CardBox.vue";
 import LayoutAuthenticated from "@/layouts/LayoutAuthenticated.vue";
 import SectionTitleLine from "@/components/SectionTitleLine.vue";
 import GeneralTable from "@/components/GeneralTable.vue";
+import AdminErrorModal from "@/components/Modal/AdminErrorModal.vue";
 import { formatSortableDate } from "@/constants/date";
 
 import { APIAdminAudit } from "@/stores/api/admin";
@@ -28,6 +29,14 @@ onMounted(async () => {
     console.log("Failed to fetch admin data:", error);
   }
 });
+
+const selectedException = ref(null);
+const exceptionModal = ref(false);
+
+function openException(row) {
+  selectedException.value = row;
+  exceptionModal.value = true;
+}
 
 const eventHeaders = [
   {
@@ -149,11 +158,6 @@ const exceptionHeaders = [
     value: "data.method",
     width: 120,
   },
-  {
-    text: "Traceback",
-    value: "data.traceback",
-    width: 120,
-  },
 ];
 
 const unhandledHeaders = [
@@ -260,7 +264,8 @@ function extractExceptionData(xmlString) {
               <GeneralTable
                 :headers="exceptionHeaders"
                 :items="formatData(auditData?.exception)"
-                :rows-per-page="2"
+                :rows-per-page="9"
+                @row-clicked="openException"
               />
             </div>
           </div>
@@ -365,6 +370,14 @@ function extractExceptionData(xmlString) {
             </div>
           </div>
         </CardBox>
+
+        <Teleport to="#modal-root">
+          <AdminErrorModal
+            :active="exceptionModal"
+            :event="selectedException"
+            @close="exceptionModal = false"
+          />
+        </Teleport>
       </template>
     </SectionMain>
   </LayoutAuthenticated>
