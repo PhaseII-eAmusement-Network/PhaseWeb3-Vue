@@ -95,7 +95,8 @@ function getUrl(type, defaultFile = 1) {
   let typePath = type;
   if (type == "background_music") typePath = "background";
 
-  const file = getNestedValue(optionForm.value, IDS[type]) ?? defaultFile;
+  let file = getNestedValue(optionForm.value, IDS[type]) ?? defaultFile;
+  if (file == 9000) file = defaultFile;
   return `${ASSET_PATH}/customizations/ddr/${version.value}/${typePath}/${file}.${extension}`;
 }
 

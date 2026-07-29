@@ -65,7 +65,8 @@ async function updateProfile() {
 
 function getUrl(type) {
   const ASSET_PATH = import.meta.env.VITE_GAME_ASSET_PATH;
-  const file = getNestedValue(optionForm.value, APPEAL_ID) ?? 1;
+  let file = getNestedValue(optionForm.value, APPEAL_ID) ?? 1;
+  if (file == 9000) file = 1;
   return `${ASSET_PATH}/customizations/ddr/${version.value}/${type}/${file}.avif`;
 }
 
