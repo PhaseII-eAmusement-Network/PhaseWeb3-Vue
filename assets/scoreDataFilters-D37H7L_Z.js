@@ -1,0 +1,1 @@
+function e(e){return Number(e)===e&&e%1!=0}function t(e,t,n){let r=![0,-1,`-1`,null].includes(e),i=!!t?.[n];return r&&i}function n(t,n=1){return e(t)?t:isNaN(t/n)?t?.difnum?t.difnum:t:t/n}function r(e,t){let n=Object.entries(e).map(([e,t])=>[Number(e),t]).sort((e,t)=>e[0]-t[0]);var r=100;for(let[e,i]of n)if(t>=e)r=i;else break;return r}export{r as n,t as r,n as t};

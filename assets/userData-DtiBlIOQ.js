@@ -1,0 +1,1 @@
+function e(e){return e=e.toString(),e.replace(/(.{4})(?!$)/g,`$1-`)}export{e as t};
