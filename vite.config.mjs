@@ -10,6 +10,9 @@ dotenv.config();
 // https://vitejs.dev/config/
 export default defineConfig({
   base: "/",
+  build: {
+    cssMinify: "esbuild",
+  },
   plugins: [vue(), tailwindcss()],
   resolve: {
     alias: {
