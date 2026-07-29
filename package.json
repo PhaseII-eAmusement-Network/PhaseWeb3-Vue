@@ -17,6 +17,7 @@
     "crypto-js": "^4.2.0",
     "dotenv": "^17.4.2",
     "downloadjs": "^1.4.7",
+    "esbuild": "^0.28.1",
     "globals": "^17.8.0",
     "js-cookie": "^3.0.8",
     "numeral": "^2.0.6",
