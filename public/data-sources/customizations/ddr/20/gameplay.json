@@ -4,6 +4,7 @@
       "name": "Game Background (system)",
       "help": "Choose your system background",
       "options": [
+        { "id": 9000, "label": "Blank" },
         { "id": 1, "label": "WORLD (パターン1)" },
         { "id": 2, "label": "WORLD (パターン2)" },
         { "id": 3, "label": "WORLD (パターン3)" },
@@ -66,6 +67,7 @@
       "name": "Game Background (while playing music)",
       "help": "Choose your in-game system background",
       "options": [
+        { "id": 9000, "label": "Blank" },
         { "id": 1, "label": "WORLD (パターン1)" },
         { "id": 2, "label": "WORLD (パターン2)" },
         { "id": 3, "label": "WORLD (パターン3)" },
@@ -128,6 +130,7 @@
       "name": "System Character (left side)",
       "help": "Choose your system character for the left side",
       "options": [
+        { "id": 9000, "label": "Blank" },
         { "id": 1, "label": "EMI" },
         { "id": 2, "label": "RAGE" },
         { "id": 3, "label": "ALICE" },
@@ -201,6 +204,7 @@
       "name": "System Character (right side)",
       "help": "Choose your system character for the right side",
       "options": [
+        { "id": 9000, "label": "Blank" },
         { "id": 1, "label": "EMI" },
         { "id": 2, "label": "RAGE" },
         { "id": 3, "label": "ALICE" },
@@ -274,6 +278,7 @@
       "name": "Lane Cover (SINGLE)",
       "help": "Choose your lane cover for single play",
       "options": [
+        { "id": 9000, "label": "Blank" },
         { "id": 1, "label": "WORLD" },
         { "id": 2, "label": "EMI" },
         { "id": 3, "label": "RAGE" },
@@ -383,6 +388,7 @@
       "name": "Lane Cover (DOUBLE)",
       "help": "Choose your lane cover for double play",
       "options": [
+        { "id": 9000, "label": "Blank" },
         { "id": 1, "label": "WORLD" },
         { "id": 2, "label": "EMI" },
         { "id": 3, "label": "RAGE" },
@@ -511,6 +517,7 @@
       "name": "Lane Background (SINGLE)",
       "help": "Choose your lane background for single play",
       "options": [
+        { "id": 9000, "label": "Blank" },
         { "id": 1, "label": "EMI" },
         { "id": 2, "label": "RAGE" },
         { "id": 3, "label": "ROCKET" },
@@ -600,6 +607,7 @@
       "name": "Lane Background (DOUBLE)",
       "help": "Choose your lane background for double play",
       "options": [
+        { "id": 9000, "label": "Blank" },
         { "id": 1, "label": "EMI&RAGE" },
         { "id": 2, "label": "EMI" },
         { "id": 3, "label": "RAGE" },

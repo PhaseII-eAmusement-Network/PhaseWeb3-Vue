@@ -4,6 +4,7 @@
       "name": "Appeal Board",
       "help": "Choose your appeal board",
       "options": [
+        { "id": 9000, "label": "Blank" },
         { "id": 1, "label": "プレーン (パターン1)" },
         { "id": 2, "label": "プレーン (パターン2)" },
         { "id": 3, "label": "プレーン (パターン3)" },
