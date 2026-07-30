@@ -48,10 +48,8 @@
     
   }
 
-  @supports not selector(::-webkit-scrollbar) {
-    .scrollbar {
-      scrollbar-color: var(--sb-thumb-color)
-                      var(--sb-track-color);
-    }
+  html,
+  body {
+    scrollbar-color: var(--sb-thumb-color) var(--sb-track-color);
   }
 }

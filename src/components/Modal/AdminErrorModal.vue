@@ -51,7 +51,7 @@ function formatXML(xml) {
 <template>
   <OverlayLayer v-if="active" :transparent="true">
     <CardBox
-      class="w-11/12 lg:w-5/6 xl:w-3/4 max-h-[90vh] shadow-lg z-50 text-white/90"
+      class="w-11/12 lg:w-5/6 xl:w-3/4 max-h-[90vh] shadow-lg z-50 text-white/90 overflow-scroll"
     >
       <div class="space-y-5">
         <div>
