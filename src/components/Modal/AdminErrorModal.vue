@@ -88,7 +88,7 @@ function formatXML(xml) {
         <div>
           <h2 class="font-semibold mb-2">Request</h2>
           <div
-            class="bg-slate-950 rounded-lg border border-slate-700 max-h-[260px] overflow-auto"
+            class="bg-slate-950 rounded-lg border border-slate-700 max-h-65 overflow-auto"
           >
             <pre
               class="p-4 text-xs text-emerald-300 whitespace-pre font-mono"
@@ -98,7 +98,7 @@ function formatXML(xml) {
         <div>
           <h2 class="font-semibold mb-2">Traceback</h2>
           <div
-            class="bg-black rounded-lg border border-slate-700 max-h-[320px] overflow-auto"
+            class="bg-black rounded-lg border border-slate-700 max-h-80 overflow-auto"
           >
             <pre
               class="p-4 text-xs text-red-300 whitespace-pre-wrap break-all font-mono"
