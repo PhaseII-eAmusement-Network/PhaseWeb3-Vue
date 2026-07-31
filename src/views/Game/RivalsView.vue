@@ -328,7 +328,7 @@ const navigateToProfile = (userID) => {
       <GameHeader :game="thisGame" :version="versionForm.currentVersion">
         <div
           v-if="thisGame.versions && myProfile"
-          class="w-full md:flex md:-mt-[75px] mb-4 place-content-end"
+          class="w-full md:flex md:-mt-18.75 mb-4 place-content-end"
         >
           <div class="md:w-1/3 md:text-right">
             <h2 class="text-md sm:text-lg md:text-xl font-bold p-2">

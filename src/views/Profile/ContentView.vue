@@ -144,13 +144,13 @@ onUnmounted(() => {
             <div
               v-for="image in content.data?.filelist"
               :key="image.filename"
-              class="relative group [perspective:1000px]"
+              class="relative group perspective-[1000px]"
               @mousemove="handleMouseMove($event, image.filename)"
               @mouseleave="resetTransform(image.filename)"
             >
               <div
                 :id="`card-${image.filename}`"
-                class="transition-transform duration-300 ease-out [transform-style:preserve-3d] md:hover:scale-[1.05]"
+                class="transition-transform duration-300 ease-out transform-3d md:hover:scale-[1.05]"
               >
                 <a
                   :href="`https://cdn.phaseii.network/file/PhaseII/${image.b2_path}`"
@@ -169,7 +169,7 @@ onUnmounted(() => {
                     "
                   />
                   <img
-                    class="w-[200px] shadow-xl"
+                    class="w-50 shadow-xl"
                     :src="`https://cdn.phaseii.network/file/PhaseII/${image.b2_path}`"
                   />
                 </a>

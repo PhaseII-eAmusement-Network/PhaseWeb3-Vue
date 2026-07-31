@@ -110,7 +110,7 @@ onMounted(async () => {
         v-if="
           game == GameConstants.POPN_MUSIC && version >= 20 && profile.chara
         "
-        class="place-self-center w-[80px]"
+        class="place-self-center w-20"
       >
         <img
           :src="`${GAME_ASSET_PATH}/chara/popn/${profile.chara}.png`"

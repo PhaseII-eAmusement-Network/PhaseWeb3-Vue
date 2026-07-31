@@ -66,14 +66,14 @@ function resetTransform() {
 
 <template>
   <div
-    class="relative inline-block [perspective:900px]"
+    class="relative inline-block perspective-[900px]"
     @mousemove="handleMouseMove"
     @mouseleave="resetTransform"
   >
     <a :href="url" target="_blank" rel="noopener noreferrer">
       <div
         ref="cardRef"
-        class="relative will-change-transform transition-transform duration-200 ease-out [transform-style:preserve-3d]"
+        class="relative will-change-transform transition-transform duration-200 ease-out transform-3d"
       >
         <div
           ref="shineRef"

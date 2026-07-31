@@ -99,7 +99,7 @@ async function updateUserData(disable = false) {
 
           <div
             v-if="changelog"
-            class="text-sm md:text-md space-y-2 text-left text-pink-500 bg-slate-950 p-2 max-h-[120px] overflow-scroll"
+            class="text-sm md:text-md space-y-2 text-left text-pink-500 bg-slate-950 p-2 max-h-30 overflow-scroll"
           >
             <h1>Changelog:</h1>
             <h2

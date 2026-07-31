@@ -116,7 +116,7 @@ function getCardStyle() {
       class="bg-white dark:bg-slate-900/90 rounded-2xl p-3"
     >
       <UserAvatar
-        class="w-28 md:w-30 lg:w-[128px] lg:mx-12 lg:m-2"
+        class="w-28 md:w-30 lg:w-32 lg:mx-12 lg:m-2"
         :username="cardData.userName"
         :avatar="cardData.userAvatar"
         :border="cardData.userCustomize?.border ?? null"
@@ -146,7 +146,7 @@ function getCardStyle() {
         </div>
         <div
           v-if="!evenSmaller"
-          class="flex flex-wrap gap-2 md:place-content-start place-content-center px-5 sm:px-0 py-2 sm:py-0 md:max-w-[400px]"
+          class="flex flex-wrap gap-2 md:place-content-start place-content-center px-5 sm:px-0 py-2 sm:py-0 md:max-w-100"
         >
           <PillTag
             v-if="cardData.userAdmin"

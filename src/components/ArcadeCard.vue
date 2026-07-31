@@ -99,7 +99,7 @@ function getCardStyle(path) {
             :icon="PhHouse"
             color="info"
             label="Arcade Home"
-            class="w-full md:w-[150px]"
+            class="w-full md:w-37.5"
           />
           <BaseButton
             :to="`/arcade/${arcade.id}/events`"

@@ -48,11 +48,11 @@ function getStickerStyle(sticker) {
 </script>
 
 <template>
-  <div class="relative overflow-hidden w-[320px] h-[554px] border">
+  <div class="relative overflow-hidden w-[320px] h-138.5 border">
     <!-- Base Image -->
     <img
       :src="getPath(userProfile.trbitem?.base ?? 0)"
-      class="absolute w-[320px] h-[554px] drop-shadow-lg"
+      class="absolute w-[320px] h-138.5 drop-shadow-lg"
     />
 
     <!-- Stickers -->
@@ -62,7 +62,7 @@ function getStickerStyle(sticker) {
       class="absolute"
       :style="getStickerStyle(sticker)"
     >
-      <img :src="getPath(sticker.sticker_id)" class="w-[300px] h-[300px]" />
+      <img :src="getPath(sticker.sticker_id)" class="w-75 h-75" />
     </div>
   </div>
 </template>

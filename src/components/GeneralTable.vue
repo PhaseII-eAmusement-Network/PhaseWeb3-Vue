@@ -116,7 +116,7 @@ function downloadJSON() {
     </template>
 
     <template #item-chara="{ chara }">
-      <div class="chara-wrapper w-[25px]">
+      <div class="chara-wrapper w-6.25">
         <img
           :src="`${GAME_ASSET_PATH}/chara/popn/${chara ? chara : 1}.png`"
           width="80"

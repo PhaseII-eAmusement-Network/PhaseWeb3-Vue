@@ -467,7 +467,7 @@ async function onboardArcade(exportArcade) {
                   color-prop="bg-slate-800 dark:bg-slate-800"
                 >
                   <div class="flex justify-between items-center">
-                    <div class="m-[-5px]">
+                    <div class="-m-1.25">
                       <h1 class="text-md font-bold">{{ machine.name }}</h1>
                       <h2 class="text-sm">
                         {{ machine.cabinet ? "Cabinet" : "Setup"

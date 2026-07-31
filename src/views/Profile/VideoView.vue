@@ -145,7 +145,7 @@ function openInNewTab(url) {
             v-if="videoData[0]?.data?.status == 'uploaded'"
             class="grid grid-cols-1 md:grid-cols-2 gap-4"
           >
-            <video controls class="mt-3 rounded-xl w-[640px] xl:w-[1280px]">
+            <video controls class="mt-3 rounded-xl w-160 xl:w-7xl">
               <source :src="videoData[0]?.data?.url" type="video/mp4" />
               Your browser does not support the video tag.
             </video>

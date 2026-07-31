@@ -367,7 +367,7 @@ const navigateToProfile = (userID) => {
                     color-prop="bg-slate-800 dark:bg-slate-800"
                   >
                     <div class="flex justify-between items-center">
-                      <div class="m-[-5px] md:flex items-center gap-2">
+                      <div class="-m-1.25 md:flex items-center gap-2">
                         <div class="w-8 md:w-12">
                           <UserAvatar
                             :username="owner.username"
