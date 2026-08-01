@@ -4,62 +4,147 @@
       "name": "Game Background (system)",
       "help": "Choose your system background",
       "options": [
-        { "id": 9000, "label": "Blank" },
+        { "id": 9000, "label": "Blank/Default" },
         { "id": 1, "label": "WORLD (パターン1)" },
         { "id": 2, "label": "WORLD (パターン2)" },
         { "id": 3, "label": "WORLD (パターン3)" },
-        { "id": 4, "label": "ヘキサグラム (パターン1)" },
-        { "id": 5, "label": "ヘキサグラム (パターン2)" },
-        { "id": 6, "label": "ヘキサグラム (パターン3)" },
-        { "id": 7, "label": "ヘキサグラム (パターン4)" },
-        { "id": 8, "label": "ヘキサグラム (パターン5)" },
-        { "id": 9, "label": "BPL S2" },
-        { "id": 10, "label": "BPL S4" },
-        { "id": 11, "label": "EMIまみれ (BPL S4)" },
-        { "id": 12, "label": "ちくわまつり2023" },
-        { "id": 13, "label": "ちくわまつり2025" },
-        { "id": 14, "label": "ひなビタ♪＆ここなつ ミニキャラ大集合" },
-        { "id": 15, "label": "ひなビタ♪＆ここなつ スライドショー" },
-        { "id": 16, "label": "ARROW (パターン1)" },
-        { "id": 17, "label": "ARROW (パターン2)" },
-        { "id": 18, "label": "ARROW (パターン3)" },
-        { "id": 19, "label": "ARROW (パターン4)" },
-        { "id": 20, "label": "ARROW (パターン5)" },
-        { "id": 21, "label": "WORLD (パターン4)" },
-        { "id": 22, "label": "ARROW (パターン6)" },
-        { "id": 23, "label": "ヘキサグラム (パターン6)" },
-        { "id": 24, "label": "WORLD (パターン5)" },
-        { "id": 25, "label": "春のコナステ大感謝祭2024" },
-        { "id": 26, "label": "ミニマスコット大集合 (春のコナステ大感謝祭2024)" },
-        { "id": 27, "label": "Character Slideshow (春のコナステ大感謝祭2024)" },
-        { "id": 28, "label": "OCEAN (パターン1)" },
-        { "id": 29, "label": "OCEAN (パターン2)" },
-        { "id": 30, "label": "OCEAN (パターン3)" },
-        { "id": 31, "label": "HYPER DISTORTION (パターン1)" },
-        { "id": 32, "label": "HYPER DISTORTION (パターン2)" },
-        { "id": 33, "label": "HYPER DISTORTION (パターン3)" },
-        { "id": 34, "label": "幻想郷音樂祭2024" },
-        { "id": 35, "label": "古明地 こいし&フランドール・スカーレット" },
-        { "id": 36, "label": "レイン・パターソン&山神カルタ&東堂コハク" },
-        { "id": 37, "label": "レイン・パターソン&山神カルタ&東堂コハク (DDR デフォルメ)" },
-        { "id": 38, "label": "レイン・パターソン&山神カルタ&東堂コハク (DDR)" },
-        { "id": 39, "label": "長尾景&倉持めると&セラフ・ダズルガーデン" },
-        { "id": 40, "label": "長尾景&倉持めると&セラフ・ダズルガーデン (DDR デフォルメ)" },
-        { "id": 41, "label": "長尾景&倉持めると&セラフ・ダズルガーデン (DDR)" },
-        { "id": 42, "label": "音戯探偵ひなビタ♫ 調査依頼:BEMANI" },
-        { "id": 43, "label": "キャラクタースライドショー (音戯探偵ひなビタ♫)" },
-        { "id": 44, "label": "GITADORA (TITLE)" },
-        { "id": 45, "label": "GITADORA (NORMAL)" },
-        { "id": 46, "label": "GITADORA (PREMIUM ENCORE)" },
-        { "id": 47, "label": "pop'n music (Title)" },
-        { "id": 48, "label": "pop'n music (Shutter Type.A)" },
-        { "id": 49, "label": "pop'n music (Shutter Type.B)" },
-        { "id": 50, "label": "秋のコナステ大感謝祭2024" },
-        { "id": 51, "label": "キャラクタースライドショー (秋のコナステ大感謝祭2024)" },
-        { "id": 52, "label": "不知火フレア (立ち絵)" },
-        { "id": 53, "label": "ACE FOR ACES" },
-        { "id": 54, "label": "Superior MAXXX" },
-        { "id": 55, "label": "キャラクタースライドショー (RINON)" }
+        { 
+          "label": "第1弾 (2024-12-23)", 
+          "options": [
+            { "id": 4, "label": "ヘキサグラム (パターン1)" },
+            { "id": 5, "label": "ヘキサグラム (パターン2)" },
+            { "id": 6, "label": "ヘキサグラム (パターン3)" },
+            { "id": 7, "label": "ヘキサグラム (パターン4)" },
+            { "id": 8, "label": "ヘキサグラム (パターン5)" }
+          ] 
+        },
+        {
+          "label": "BPL -SEASON 4- DanceDanceRevolution (2025-01-28)",
+          "options": [
+            { "id": 9, "label": "BPL S2" },
+            { "id": 10, "label": "BPL S4" },
+            { "id": 11, "label": "EMIまみれ (BPL S4)" }
+          ]
+        },
+        {
+          "label": "「ひなビタ♪」 第1弾 (2025-01-28)",
+          "options": [
+            { "id": 12, "label": "ちくわまつり2023" },
+            { "id": 13, "label": "ちくわまつり2025" },
+            { "id": 14, "label": "ひなビタ♪＆ここなつ ミニキャラ大集合" },
+            { "id": 15, "label": "ひなビタ♪＆ここなつ スライドショー" }
+          ]
+        },
+        {
+          "label": "第2弾 (2025-06-10)",
+          "options": [
+            { "id": 16, "label": "ARROW (パターン1)" },
+            { "id": 17, "label": "ARROW (パターン2)" },
+            { "id": 18, "label": "ARROW (パターン3)" },
+            { "id": 19, "label": "ARROW (パターン4)" },
+            { "id": 20, "label": "ARROW (パターン5)" },
+            { "id": 21, "label": "WORLD (パターン4)" }
+          ]
+        },
+        {
+          "label": "第3弾 (2025-06-10)",
+          "options": [
+            { "id": 22, "label": "ARROW (パターン6)" },
+            { "id": 23, "label": "ヘキサグラム (パターン6)" },
+            { "id": 24, "label": "WORLD (パターン5)" }
+          ]
+        },
+        {
+          "label": "春のコナステ大感謝祭2024 (2025-07-09)",
+          "options": [
+            { "id": 25, "label": "春のコナステ大感謝祭2024" },
+            { "id": 26, "label": "ミニマスコット大集合 (春のコナステ大感謝祭2024)" },
+            { "id": 27, "label": "キャラクタースライドショー (春のコナステ大感謝祭2024)" }
+          ]
+        },
+        {
+          "label": "第4弾 (2025-08-05)",
+          "options": [
+            { "id": 28, "label": "OCEAN (パターン1)" },
+            { "id": 29, "label": "OCEAN (パターン2)" },
+            { "id": 30, "label": "OCEAN (パターン3)" }
+          ]
+        },
+        {
+          "label": "第5弾 (2025-09-16)",
+          "options": [
+            { "id": 31, "label": "HYPER DISTORTION (パターン1)" },
+            { "id": 32, "label": "HYPER DISTORTION (パターン2)" },
+            { "id": 33, "label": "HYPER DISTORTION (パターン3)" }
+          ]
+        },
+        {
+          "label": "「東方Project」 第1弾 (2025-10-21)",
+          "options": [
+            { "id": 34, "label": "幻想郷音樂祭2024" },
+            { "id": 35, "label": "古明地 こいし&フランドール・スカーレット" }
+          ]
+        },
+        {
+          "label": "「にじさんじダンス部」 第1弾 (2025-11-18)",
+          "options": [
+            { "id": 36, "label": "レイン・パターソン&山神カルタ&東堂コハク" },
+            { "id": 37, "label": "レイン・パターソン&山神カルタ&東堂コハク (DDR デフォルメ)" },
+            { "id": 38, "label": "レイン・パターソン&山神カルタ&東堂コハク (DDR)" }
+          ]
+        },
+        {
+          "label": "「にじさんじダンス部」 第2弾 (2025-11-18)",
+          "options": [
+            { "id": 39, "label": "長尾景&倉持めると&セラフ・ダズルガーデン" },
+            { "id": 40, "label": "長尾景&倉持めると&セラフ・ダズルガーデン (DDR デフォルメ)" },
+            { "id": 41, "label": "長尾景&倉持めると&セラフ・ダズルガーデン (DDR)" }
+          ]
+        },     
+        {
+          "label": "音戯探偵ひなビタ♫ 調査依頼:BEMANI (2025-12-23)",
+          "options": [
+            { "id": 42, "label": "音戯探偵ひなビタ♫ 調査依頼:BEMANI" },
+            { "id": 43, "label": "キャラクタースライドショー (音戯探偵ひなビタ♫)" }
+          ]
+        },
+        {
+          "label": "「GITADORA」 第1弾 (2025-12-23)",
+          "options": [
+            { "id": 44, "label": "GITADORA (TITLE)" },
+            { "id": 45, "label": "GITADORA (NORMAL)" },
+            { "id": 46, "label": "GITADORA (PREMIUM ENCORE)" }
+          ]
+        },
+        {
+          "label": "「pop'n music」 第1弾 (2026-02-24)",
+          "options": [
+            { "id": 47, "label": "pop'n music (Title)" },
+            { "id": 48, "label": "pop'n music (Shutter Type.A)" },
+            { "id": 49, "label": "pop'n music (Shutter Type.B)" }
+          ]
+        },     
+        {
+          "label": "秋のコナステ大感謝祭2024 (2026-03-24)",
+          "options": [
+            { "id": 50, "label": "秋のコナステ大感謝祭2024" },
+            { "id": 51, "label": "キャラクタースライドショー (秋のコナステ大感謝祭2024)" }
+          ]
+        },
+        {
+          "label": "不知火フレア (2026-04-21)",
+          "options": [
+            { "id": 52, "label": "不知火フレア (立ち絵)" }
+          ]
+        },     
+        {
+          "label": "第6弾 (2026-06-16)",
+          "options": [
+            { "id": 53, "label": "ACE FOR ACES" },
+            { "id": 54, "label": "Superior MAXXX" },
+            { "id": 55, "label": "キャラクタースライドショー (RINON)" }
+          ]
+        }
       ]
     },
     {
@@ -67,62 +152,147 @@
       "name": "Game Background (while playing music)",
       "help": "Choose your in-game system background",
       "options": [
-        { "id": 9000, "label": "Blank" },
+        { "id": 9000, "label": "Blank/Default" },
         { "id": 1, "label": "WORLD (パターン1)" },
         { "id": 2, "label": "WORLD (パターン2)" },
         { "id": 3, "label": "WORLD (パターン3)" },
-        { "id": 4, "label": "ヘキサグラム (パターン1)" },
-        { "id": 5, "label": "ヘキサグラム (パターン2)" },
-        { "id": 6, "label": "ヘキサグラム (パターン3)" },
-        { "id": 7, "label": "ヘキサグラム (パターン4)" },
-        { "id": 8, "label": "ヘキサグラム (パターン5)" },
-        { "id": 9, "label": "BPL S2" },
-        { "id": 10, "label": "BPL S4" },
-        { "id": 11, "label": "EMIまみれ (BPL S4)" },
-        { "id": 12, "label": "ちくわまつり2023" },
-        { "id": 13, "label": "ちくわまつり2025" },
-        { "id": 14, "label": "ひなビタ♪＆ここなつ ミニキャラ大集合" },
-        { "id": 15, "label": "ひなビタ♪＆ここなつ スライドショー" },
-        { "id": 16, "label": "ARROW (パターン1)" },
-        { "id": 17, "label": "ARROW (パターン2)" },
-        { "id": 18, "label": "ARROW (パターン3)" },
-        { "id": 19, "label": "ARROW (パターン4)" },
-        { "id": 20, "label": "ARROW (パターン5)" },
-        { "id": 21, "label": "WORLD (パターン4)" },
-        { "id": 22, "label": "ARROW (パターン6)" },
-        { "id": 23, "label": "ヘキサグラム (パターン6)" },
-        { "id": 24, "label": "WORLD (パターン5)" },
-        { "id": 25, "label": "春のコナステ大感謝祭2024" },
-        { "id": 26, "label": "ミニマスコット大集合 (春のコナステ大感謝祭2024)" },
-        { "id": 27, "label": "Character Slideshow (春のコナステ大感謝祭2024)" },
-        { "id": 28, "label": "OCEAN (パターン1)" },
-        { "id": 29, "label": "OCEAN (パターン2)" },
-        { "id": 30, "label": "OCEAN (パターン3)" },
-        { "id": 31, "label": "HYPER DISTORTION (パターン1)" },
-        { "id": 32, "label": "HYPER DISTORTION (パターン2)" },
-        { "id": 33, "label": "HYPER DISTORTION (パターン3)" },
-        { "id": 34, "label": "幻想郷音樂祭2024" },
-        { "id": 35, "label": "古明地 こいし&フランドール・スカーレット" },
-        { "id": 36, "label": "レイン・パターソン&山神カルタ&東堂コハク" },
-        { "id": 37, "label": "レイン・パターソン&山神カルタ&東堂コハク (DDR デフォルメ)" },
-        { "id": 38, "label": "レイン・パターソン&山神カルタ&東堂コハク (DDR)" },
-        { "id": 39, "label": "長尾景&倉持めると&セラフ・ダズルガーデン" },
-        { "id": 40, "label": "長尾景&倉持めると&セラフ・ダズルガーデン (DDR デフォルメ)" },
-        { "id": 41, "label": "長尾景&倉持めると&セラフ・ダズルガーデン (DDR)" },
-        { "id": 42, "label": "音戯探偵ひなビタ♫ 調査依頼:BEMANI" },
-        { "id": 43, "label": "キャラクタースライドショー (音戯探偵ひなビタ♫)" },
-        { "id": 44, "label": "GITADORA (TITLE)" },
-        { "id": 45, "label": "GITADORA (NORMAL)" },
-        { "id": 46, "label": "GITADORA (PREMIUM ENCORE)" },
-        { "id": 47, "label": "pop'n music (Title)" },
-        { "id": 48, "label": "pop'n music (Shutter Type.A)" },
-        { "id": 49, "label": "pop'n music (Shutter Type.B)" },
-        { "id": 50, "label": "秋のコナステ大感謝祭2024" },
-        { "id": 51, "label": "キャラクタースライドショー (秋のコナステ大感謝祭2024)" },
-        { "id": 52, "label": "不知火フレア (立ち絵)" },
-        { "id": 53, "label": "ACE FOR ACES" },
-        { "id": 54, "label": "Superior MAXXX" },
-        { "id": 55, "label": "キャラクタースライドショー (RINON)" }
+        { 
+          "label": "第1弾 (2024-12-23)", 
+          "options": [
+            { "id": 4, "label": "ヘキサグラム (パターン1)" },
+            { "id": 5, "label": "ヘキサグラム (パターン2)" },
+            { "id": 6, "label": "ヘキサグラム (パターン3)" },
+            { "id": 7, "label": "ヘキサグラム (パターン4)" },
+            { "id": 8, "label": "ヘキサグラム (パターン5)" }
+          ] 
+        },
+        {
+          "label": "BPL -SEASON 4- DanceDanceRevolution (2025-01-28)",
+          "options": [
+            { "id": 9, "label": "BPL S2" },
+            { "id": 10, "label": "BPL S4" },
+            { "id": 11, "label": "EMIまみれ (BPL S4)" }
+          ]
+        },
+        {
+          "label": "「ひなビタ♪」 第1弾 (2025-01-28)",
+          "options": [
+            { "id": 12, "label": "ちくわまつり2023" },
+            { "id": 13, "label": "ちくわまつり2025" },
+            { "id": 14, "label": "ひなビタ♪＆ここなつ ミニキャラ大集合" },
+            { "id": 15, "label": "ひなビタ♪＆ここなつ スライドショー" }
+          ]
+        },
+        {
+          "label": "第2弾 (2025-06-10)",
+          "options": [
+            { "id": 16, "label": "ARROW (パターン1)" },
+            { "id": 17, "label": "ARROW (パターン2)" },
+            { "id": 18, "label": "ARROW (パターン3)" },
+            { "id": 19, "label": "ARROW (パターン4)" },
+            { "id": 20, "label": "ARROW (パターン5)" },
+            { "id": 21, "label": "WORLD (パターン4)" }
+          ]
+        },
+        {
+          "label": "第3弾 (2025-06-10)",
+          "options": [
+            { "id": 22, "label": "ARROW (パターン6)" },
+            { "id": 23, "label": "ヘキサグラム (パターン6)" },
+            { "id": 24, "label": "WORLD (パターン5)" }
+          ]
+        },
+        {
+          "label": "春のコナステ大感謝祭2024 (2025-07-09)",
+          "options": [
+            { "id": 25, "label": "春のコナステ大感謝祭2024" },
+            { "id": 26, "label": "ミニマスコット大集合 (春のコナステ大感謝祭2024)" },
+            { "id": 27, "label": "キャラクタースライドショー (春のコナステ大感謝祭2024)" }
+          ]
+        },
+        {
+          "label": "第4弾 (2025-08-05)",
+          "options": [
+            { "id": 28, "label": "OCEAN (パターン1)" },
+            { "id": 29, "label": "OCEAN (パターン2)" },
+            { "id": 30, "label": "OCEAN (パターン3)" }
+          ]
+        },
+        {
+          "label": "第5弾 (2025-09-16)",
+          "options": [
+            { "id": 31, "label": "HYPER DISTORTION (パターン1)" },
+            { "id": 32, "label": "HYPER DISTORTION (パターン2)" },
+            { "id": 33, "label": "HYPER DISTORTION (パターン3)" }
+          ]
+        },
+        {
+          "label": "「東方Project」 第1弾 (2025-10-21)",
+          "options": [
+            { "id": 34, "label": "幻想郷音樂祭2024" },
+            { "id": 35, "label": "古明地 こいし&フランドール・スカーレット" }
+          ]
+        },
+        {
+          "label": "「にじさんじダンス部」 第1弾 (2025-11-18)",
+          "options": [
+            { "id": 36, "label": "レイン・パターソン&山神カルタ&東堂コハク" },
+            { "id": 37, "label": "レイン・パターソン&山神カルタ&東堂コハク (DDR デフォルメ)" },
+            { "id": 38, "label": "レイン・パターソン&山神カルタ&東堂コハク (DDR)" }
+          ]
+        },
+        {
+          "label": "「にじさんじダンス部」 第2弾 (2025-11-18)",
+          "options": [
+            { "id": 39, "label": "長尾景&倉持めると&セラフ・ダズルガーデン" },
+            { "id": 40, "label": "長尾景&倉持めると&セラフ・ダズルガーデン (DDR デフォルメ)" },
+            { "id": 41, "label": "長尾景&倉持めると&セラフ・ダズルガーデン (DDR)" }
+          ]
+        },     
+        {
+          "label": "音戯探偵ひなビタ♫ 調査依頼:BEMANI (2025-12-23)",
+          "options": [
+            { "id": 42, "label": "音戯探偵ひなビタ♫ 調査依頼:BEMANI" },
+            { "id": 43, "label": "キャラクタースライドショー (音戯探偵ひなビタ♫)" }
+          ]
+        },
+        {
+          "label": "「GITADORA」 第1弾 (2025-12-23)",
+          "options": [
+            { "id": 44, "label": "GITADORA (TITLE)" },
+            { "id": 45, "label": "GITADORA (NORMAL)" },
+            { "id": 46, "label": "GITADORA (PREMIUM ENCORE)" }
+          ]
+        },
+        {
+          "label": "「pop'n music」 第1弾 (2026-02-24)",
+          "options": [
+            { "id": 47, "label": "pop'n music (Title)" },
+            { "id": 48, "label": "pop'n music (Shutter Type.A)" },
+            { "id": 49, "label": "pop'n music (Shutter Type.B)" }
+          ]
+        },     
+        {
+          "label": "秋のコナステ大感謝祭2024 (2026-03-24)",
+          "options": [
+            { "id": 50, "label": "秋のコナステ大感謝祭2024" },
+            { "id": 51, "label": "キャラクタースライドショー (秋のコナステ大感謝祭2024)" }
+          ]
+        },
+        {
+          "label": "不知火フレア (2026-04-21)",
+          "options": [
+            { "id": 52, "label": "不知火フレア (立ち絵)" }
+          ]
+        },     
+        {
+          "label": "第6弾 (2026-06-16)",
+          "options": [
+            { "id": 53, "label": "ACE FOR ACES" },
+            { "id": 54, "label": "Superior MAXXX" },
+            { "id": 55, "label": "キャラクタースライドショー (RINON)" }
+          ]
+        }
       ]
     },
     {
@@ -130,73 +300,158 @@
       "name": "System Character (left side)",
       "help": "Choose your system character for the left side",
       "options": [
-        { "id": 9000, "label": "Blank" },
+        { "id": 9000, "label": "Blank/Default" },
         { "id": 1, "label": "EMI" },
         { "id": 2, "label": "RAGE" },
-        { "id": 3, "label": "ALICE" },
-        { "id": 4, "label": "BABY-LON" },
-        { "id": 5, "label": "EMI (BPL S4)" },
-        { "id": 6, "label": "RAGE (BPL S4)" },
-        { "id": 7, "label": "山形まり花 (Marika Yamagata)" },
-        { "id": 8, "label": "和泉一舞 (Izumi Ibuki)" },
-        { "id": 9, "label": "春日咲子 (Sakiko Kasuga)" },
-        { "id": 10, "label": "芽兎めう (Meto Meu)" },
-        { "id": 11, "label": "霜月凛 (Rin Shimotsuki)" },
-        { "id": 12, "label": "東雲夏陽 (Shinonome Natsuhi)" },
-        { "id": 13, "label": "東雲心菜 (Shinonome Cocona)" },
-        { "id": 14, "label": "YUNI" },
-        { "id": 15, "label": "AKIRA" },
-        { "id": 16, "label": "天戸紺 (Amado Kon)" },
-        { "id": 17, "label": "小舞桜 (Komai Sakura)" },
-        { "id": 18, "label": "TSUGARU (春のコナステ大感謝祭2024)" },
-        { "id": 19, "label": "GRACE (春のコナステ大感謝祭2024)" },
-        { "id": 20, "label": "RINON (春のコナステ大感謝祭2024)" },
-        { "id": 21, "label": "MIMI (春のコナステ大感謝祭2024)" },
-        { "id": 22, "label": "RIO (春のコナステ大感謝祭2024)" },
-        { "id": 23, "label": "YUNI (SUMMER)" },
-        { "id": 24, "label": "ALICE (SUMMER)" },
-        { "id": 25, "label": "灰庭まよい" },
-        { "id": 26, "label": "ヒネリ" },
-        { "id": 27, "label": "博麗 霊夢" },
-        { "id": 28, "label": "東風谷 早苗" },
-        { "id": 29, "label": "古明地 こいし" },
-        { "id": 30, "label": "フランドール・スカーレット" },
-        { "id": 31, "label": "東堂コハク" },
-        { "id": 32, "label": "山神カルタ" },
-        { "id": 33, "label": "レイン・パターソン" },
-        { "id": 34, "label": "東堂コハク (DDR)" },
-        { "id": 35, "label": "山神カルタ (DDR)" },
-        { "id": 36, "label": "レイン・パターソン (DDR)" },
-        { "id": 37, "label": "倉持めると" },
-        { "id": 38, "label": "セラフ・ダズルガーデン" },
-        { "id": 39, "label": "長尾景" },
-        { "id": 40, "label": "倉持めると (DDR)" },
-        { "id": 41, "label": "セラフ・ダズルガーデン (DDR)" },
-        { "id": 42, "label": "長尾景 (DDR)" },
-        { "id": 43, "label": "山形まり花 (音戯探偵)" },
-        { "id": 44, "label": "和泉一舞 (音戯探偵)" },
-        { "id": 45, "label": "春日咲子 (音戯探偵)" },
-        { "id": 46, "label": "霜月凛 (音戯探偵)" },
-        { "id": 47, "label": "芽兎めう (音戯探偵)" },
-        { "id": 48, "label": "菫平すみれ (音戯探偵)" },
-        { "id": 49, "label": "璃音" },
-        { "id": 50, "label": "響香" },
-        { "id": 51, "label": "ミミ" },
-        { "id": 52, "label": "ニャミ" },
-        { "id": 53, "label": "エリカ (秋のコナステ大感謝祭2024)" },
-        { "id": 54, "label": "EMI (秋のコナステ大感謝祭2024)" },
-        { "id": 55, "label": "響香 (秋のコナステ大感謝祭2024)" },
-        { "id": 56, "label": "紅刃 (秋のコナステ大感謝祭2024)" },
-        { "id": 57, "label": "ニャミ (秋のコナステ大感謝祭2024)" },
-        { "id": 58, "label": "わたこ (秋のコナステ大感謝祭2024)" },
-        { "id": 59, "label": "不知火フレア" },
-        { "id": 60, "label": "不知火フレア (ルミナス)" },
-        { "id": 61, "label": "不知火フレア (清楚少女風)" },
-        { "id": 62, "label": "RINON" },
-        { "id": 63, "label": "RINON (Superior MAXXX)" },
-        { "id": 64, "label": "RINON Ace Style LEVEL1" },
-        { "id": 65, "label": "RINON Ace Style LEVEL2" },
-        { "id": 66, "label": "RINON Ace Style LEVEL3" }
+        { 
+          "label": "第1弾 (2024-12-23)", 
+          "options": [
+            { "id": 3, "label": "ALICE" },
+            { "id": 4, "label": "BABY-LON" }
+          ] 
+        },
+        {
+          "label": "BPL -SEASON 4- DanceDanceRevolution (2025-01-28)",
+          "options": [
+            { "id": 5, "label": "EMI (BPL S4)" },
+            { "id": 6, "label": "RAGE (BPL S4)" }
+          ]
+        },
+        {
+          "label": "「ひなビタ♪」 第1弾 (2025-01-28)",
+          "options": [
+            { "id": 7, "label": "山形まり花 (Marika Yamagata)" },
+            { "id": 8, "label": "和泉一舞 (Izumi Ibuki)" },
+            { "id": 9, "label": "春日咲子 (Sakiko Kasuga)" },
+            { "id": 10, "label": "芽兎めう (Meto Meu)" },
+            { "id": 11, "label": "霜月凛 (Rin Shimotsuki)" },
+            { "id": 12, "label": "東雲夏陽 (Shinonome Natsuhi)" },
+            { "id": 13, "label": "東雲心菜 (Shinonome Cocona)" }
+          ]
+        },
+        {
+          "label": "第2弾 (2025-06-10)",
+          "options": [
+            { "id": 14, "label": "YUNI" },
+            { "id": 15, "label": "AKIRA" }
+          ]
+        },
+        {
+          "label": "第3弾 (2025-06-10)",
+          "options": [
+            { "id": 16, "label": "天戸紺 (Amado Kon)" },
+            { "id": 17, "label": "小舞桜 (Komai Sakura)" }
+          ]
+        },
+        {
+          "label": "春のコナステ大感謝祭2024 (2025-07-09)",
+          "options": [
+            { "id": 18, "label": "TSUGARU (春のコナステ大感謝祭2024)" },
+            { "id": 19, "label": "GRACE (春のコナステ大感謝祭2024)" },
+            { "id": 20, "label": "RINON (春のコナステ大感謝祭2024)" },
+            { "id": 21, "label": "MIMI (春のコナステ大感謝祭2024)" },
+            { "id": 22, "label": "RIO (春のコナステ大感謝祭2024)" }
+          ]
+        },
+        {
+          "label": "第4弾 (2025-08-05)",
+          "options": [
+            { "id": 23, "label": "YUNI (SUMMER)" },
+            { "id": 24, "label": "ALICE (SUMMER)" }
+          ]
+        },
+        {
+          "label": "第5弾 (2025-09-16)",
+          "options": [
+            { "id": 25, "label": "灰庭まよい" },
+            { "id": 26, "label": "ヒネリ" }
+          ]
+        },                  
+        {
+          "label": "「東方Project」 第1弾 (2025-10-21)",
+          "options": [
+            { "id": 27, "label": "博麗 霊夢" },
+            { "id": 28, "label": "東風谷 早苗" },
+            { "id": 29, "label": "古明地 こいし" },
+            { "id": 30, "label": "フランドール・スカーレット" }
+          ]
+        },
+        {
+          "label": "「にじさんじダンス部」 第1弾 (2025-11-18)",
+          "options": [
+            { "id": 31, "label": "東堂コハク" },
+            { "id": 32, "label": "山神カルタ" },
+            { "id": 33, "label": "レイン・パターソン" },
+            { "id": 34, "label": "東堂コハク (DDR)" },
+            { "id": 35, "label": "山神カルタ (DDR)" },
+            { "id": 36, "label": "レイン・パターソン (DDR)" }
+          ]
+        },
+        {
+          "label": "「にじさんじダンス部」 第2弾 (2025-11-18)",
+          "options": [
+            { "id": 37, "label": "倉持めると" },
+            { "id": 38, "label": "セラフ・ダズルガーデン" },
+            { "id": 39, "label": "長尾景" },
+            { "id": 40, "label": "倉持めると (DDR)" },
+            { "id": 41, "label": "セラフ・ダズルガーデン (DDR)" },
+            { "id": 42, "label": "長尾景 (DDR)" }
+          ]
+        },     
+        {
+          "label": "音戯探偵ひなビタ♫ 調査依頼:BEMANI (2025-12-23)",
+          "options": [
+            { "id": 43, "label": "山形まり花 (音戯探偵)" },
+            { "id": 44, "label": "和泉一舞 (音戯探偵)" },
+            { "id": 45, "label": "春日咲子 (音戯探偵)" },
+            { "id": 46, "label": "霜月凛 (音戯探偵)" },
+            { "id": 47, "label": "芽兎めう (音戯探偵)" },
+            { "id": 48, "label": "菫平すみれ (音戯探偵)" }
+          ]
+        },
+        {
+          "label": "「GITADORA」 第1弾 (2025-12-23)",
+          "options": [
+            { "id": 49, "label": "璃音" },
+            { "id": 50, "label": "響香" }
+          ]
+        },
+        {
+          "label": "「pop'n music」 第1弾 (2026-02-24)",
+          "options": [
+            { "id": 51, "label": "ミミ" },
+            { "id": 52, "label": "ニャミ" }
+          ]
+        },     
+        {
+          "label": "秋のコナステ大感謝祭2024 (2026-03-24)",
+          "options": [
+            { "id": 53, "label": "エリカ (秋のコナステ大感謝祭2024)" },
+            { "id": 54, "label": "EMI (秋のコナステ大感謝祭2024)" },
+            { "id": 55, "label": "響香 (秋のコナステ大感謝祭2024)" },
+            { "id": 56, "label": "紅刃 (秋のコナステ大感謝祭2024)" },
+            { "id": 57, "label": "ニャミ (秋のコナステ大感謝祭2024)" },
+            { "id": 58, "label": "わたこ (秋のコナステ大感謝祭2024)" }
+          ]
+        },
+        {
+          "label": "不知火フレア (2026-04-21)",
+          "options": [
+            { "id": 59, "label": "不知火フレア" },
+            { "id": 60, "label": "不知火フレア (ルミナス)" },
+            { "id": 61, "label": "不知火フレア (清楚少女風)" }
+          ]
+        },     
+        {
+          "label": "第6弾 (2026-06-16)",
+          "options": [
+            { "id": 62, "label": "RINON" },
+            { "id": 63, "label": "RINON (Superior MAXXX)" },
+            { "id": 64, "label": "RINON Ace Style LEVEL1" },
+            { "id": 65, "label": "RINON Ace Style LEVEL2" },
+            { "id": 66, "label": "RINON Ace Style LEVEL3" }
+          ]
+        }
       ]
     },
     {
@@ -204,73 +459,158 @@
       "name": "System Character (right side)",
       "help": "Choose your system character for the right side",
       "options": [
-        { "id": 9000, "label": "Blank" },
+        { "id": 9000, "label": "Blank/Default" },
         { "id": 1, "label": "EMI" },
         { "id": 2, "label": "RAGE" },
-        { "id": 3, "label": "ALICE" },
-        { "id": 4, "label": "BABY-LON" },
-        { "id": 5, "label": "EMI (BPL S4)" },
-        { "id": 6, "label": "RAGE (BPL S4)" },
-        { "id": 7, "label": "山形まり花 (Marika Yamagata)" },
-        { "id": 8, "label": "和泉一舞 (Izumi Ibuki)" },
-        { "id": 9, "label": "春日咲子 (Sakiko Kasuga)" },
-        { "id": 10, "label": "芽兎めう (Meto Meu)" },
-        { "id": 11, "label": "霜月凛 (Rin Shimotsuki)" },
-        { "id": 12, "label": "東雲夏陽 (Shinonome Natsuhi)" },
-        { "id": 13, "label": "東雲心菜 (Shinonome Cocona)" },
-        { "id": 14, "label": "YUNI" },
-        { "id": 15, "label": "AKIRA" },
-        { "id": 16, "label": "天戸紺 (Amado Kon)" },
-        { "id": 17, "label": "小舞桜 (Komai Sakura)" },
-        { "id": 18, "label": "TSUGARU (春のコナステ大感謝祭2024)" },
-        { "id": 19, "label": "GRACE (春のコナステ大感謝祭2024)" },
-        { "id": 20, "label": "RINON (春のコナステ大感謝祭2024)" },
-        { "id": 21, "label": "MIMI (春のコナステ大感謝祭2024)" },
-        { "id": 22, "label": "RIO (春のコナステ大感謝祭2024)" },
-        { "id": 23, "label": "YUNI (SUMMER)" },
-        { "id": 24, "label": "ALICE (SUMMER)" },
-        { "id": 25, "label": "灰庭まよい" },
-        { "id": 26, "label": "ヒネリ" },
-        { "id": 27, "label": "博麗 霊夢" },
-        { "id": 28, "label": "東風谷 早苗" },
-        { "id": 29, "label": "古明地 こいし" },
-        { "id": 30, "label": "フランドール・スカーレット" },
-        { "id": 31, "label": "東堂コハク" },
-        { "id": 32, "label": "山神カルタ" },
-        { "id": 33, "label": "レイン・パターソン" },
-        { "id": 34, "label": "東堂コハク (DDR)" },
-        { "id": 35, "label": "山神カルタ (DDR)" },
-        { "id": 36, "label": "レイン・パターソン (DDR)" },
-        { "id": 37, "label": "倉持めると" },
-        { "id": 38, "label": "セラフ・ダズルガーデン" },
-        { "id": 39, "label": "長尾景" },
-        { "id": 40, "label": "倉持めると (DDR)" },
-        { "id": 41, "label": "セラフ・ダズルガーデン (DDR)" },
-        { "id": 42, "label": "長尾景 (DDR)" },
-        { "id": 43, "label": "山形まり花 (音戯探偵)" },
-        { "id": 44, "label": "和泉一舞 (音戯探偵)" },
-        { "id": 45, "label": "春日咲子 (音戯探偵)" },
-        { "id": 46, "label": "霜月凛 (音戯探偵)" },
-        { "id": 47, "label": "芽兎めう (音戯探偵)" },
-        { "id": 48, "label": "菫平すみれ (音戯探偵)" },
-        { "id": 49, "label": "璃音" },
-        { "id": 50, "label": "響香" },
-        { "id": 51, "label": "ミミ" },
-        { "id": 52, "label": "ニャミ" },
-        { "id": 53, "label": "エリカ (秋のコナステ大感謝祭2024)" },
-        { "id": 54, "label": "EMI (秋のコナステ大感謝祭2024)" },
-        { "id": 55, "label": "響香 (秋のコナステ大感謝祭2024)" },
-        { "id": 56, "label": "紅刃 (秋のコナステ大感謝祭2024)" },
-        { "id": 57, "label": "ニャミ (秋のコナステ大感謝祭2024)" },
-        { "id": 58, "label": "わたこ (秋のコナステ大感謝祭2024)" },
-        { "id": 59, "label": "不知火フレア" },
-        { "id": 60, "label": "不知火フレア (ルミナス)" },
-        { "id": 61, "label": "不知火フレア (清楚少女風)" },
-        { "id": 62, "label": "RINON" },
-        { "id": 63, "label": "RINON (Superior MAXXX)" },
-        { "id": 64, "label": "RINON Ace Style LEVEL1" },
-        { "id": 65, "label": "RINON Ace Style LEVEL2" },
-        { "id": 66, "label": "RINON Ace Style LEVEL3" }
+        { 
+          "label": "第1弾 (2024-12-23)", 
+          "options": [
+            { "id": 3, "label": "ALICE" },
+            { "id": 4, "label": "BABY-LON" }
+          ] 
+        },
+        {
+          "label": "BPL -SEASON 4- DanceDanceRevolution (2025-01-28)",
+          "options": [
+            { "id": 5, "label": "EMI (BPL S4)" },
+            { "id": 6, "label": "RAGE (BPL S4)" }
+          ]
+        },
+        {
+          "label": "「ひなビタ♪」 第1弾 (2025-01-28)",
+          "options": [
+            { "id": 7, "label": "山形まり花 (Marika Yamagata)" },
+            { "id": 8, "label": "和泉一舞 (Izumi Ibuki)" },
+            { "id": 9, "label": "春日咲子 (Sakiko Kasuga)" },
+            { "id": 10, "label": "芽兎めう (Meto Meu)" },
+            { "id": 11, "label": "霜月凛 (Rin Shimotsuki)" },
+            { "id": 12, "label": "東雲夏陽 (Shinonome Natsuhi)" },
+            { "id": 13, "label": "東雲心菜 (Shinonome Cocona)" }
+          ]
+        },
+        {
+          "label": "第2弾 (2025-06-10)",
+          "options": [
+            { "id": 14, "label": "YUNI" },
+            { "id": 15, "label": "AKIRA" }
+          ]
+        },
+        {
+          "label": "第3弾 (2025-06-10)",
+          "options": [
+            { "id": 16, "label": "天戸紺 (Amado Kon)" },
+            { "id": 17, "label": "小舞桜 (Komai Sakura)" }
+          ]
+        },
+        {
+          "label": "春のコナステ大感謝祭2024 (2025-07-09)",
+          "options": [
+            { "id": 18, "label": "TSUGARU (春のコナステ大感謝祭2024)" },
+            { "id": 19, "label": "GRACE (春のコナステ大感謝祭2024)" },
+            { "id": 20, "label": "RINON (春のコナステ大感謝祭2024)" },
+            { "id": 21, "label": "MIMI (春のコナステ大感謝祭2024)" },
+            { "id": 22, "label": "RIO (春のコナステ大感謝祭2024)" }
+          ]
+        },
+        {
+          "label": "第4弾 (2025-08-05)",
+          "options": [
+            { "id": 23, "label": "YUNI (SUMMER)" },
+            { "id": 24, "label": "ALICE (SUMMER)" }
+          ]
+        },
+        {
+          "label": "第5弾 (2025-09-16)",
+          "options": [
+            { "id": 25, "label": "灰庭まよい" },
+            { "id": 26, "label": "ヒネリ" }
+          ]
+        },                  
+        {
+          "label": "「東方Project」 第1弾 (2025-10-21)",
+          "options": [
+            { "id": 27, "label": "博麗 霊夢" },
+            { "id": 28, "label": "東風谷 早苗" },
+            { "id": 29, "label": "古明地 こいし" },
+            { "id": 30, "label": "フランドール・スカーレット" }
+          ]
+        },
+        {
+          "label": "「にじさんじダンス部」 第1弾 (2025-11-18)",
+          "options": [
+            { "id": 31, "label": "東堂コハク" },
+            { "id": 32, "label": "山神カルタ" },
+            { "id": 33, "label": "レイン・パターソン" },
+            { "id": 34, "label": "東堂コハク (DDR)" },
+            { "id": 35, "label": "山神カルタ (DDR)" },
+            { "id": 36, "label": "レイン・パターソン (DDR)" }
+          ]
+        },
+        {
+          "label": "「にじさんじダンス部」 第2弾 (2025-11-18)",
+          "options": [
+            { "id": 37, "label": "倉持めると" },
+            { "id": 38, "label": "セラフ・ダズルガーデン" },
+            { "id": 39, "label": "長尾景" },
+            { "id": 40, "label": "倉持めると (DDR)" },
+            { "id": 41, "label": "セラフ・ダズルガーデン (DDR)" },
+            { "id": 42, "label": "長尾景 (DDR)" }
+          ]
+        },     
+        {
+          "label": "音戯探偵ひなビタ♫ 調査依頼:BEMANI (2025-12-23)",
+          "options": [
+            { "id": 43, "label": "山形まり花 (音戯探偵)" },
+            { "id": 44, "label": "和泉一舞 (音戯探偵)" },
+            { "id": 45, "label": "春日咲子 (音戯探偵)" },
+            { "id": 46, "label": "霜月凛 (音戯探偵)" },
+            { "id": 47, "label": "芽兎めう (音戯探偵)" },
+            { "id": 48, "label": "菫平すみれ (音戯探偵)" }
+          ]
+        },
+        {
+          "label": "「GITADORA」 第1弾 (2025-12-23)",
+          "options": [
+            { "id": 49, "label": "璃音" },
+            { "id": 50, "label": "響香" }
+          ]
+        },
+        {
+          "label": "「pop'n music」 第1弾 (2026-02-24)",
+          "options": [
+            { "id": 51, "label": "ミミ" },
+            { "id": 52, "label": "ニャミ" }
+          ]
+        },     
+        {
+          "label": "秋のコナステ大感謝祭2024 (2026-03-24)",
+          "options": [
+            { "id": 53, "label": "エリカ (秋のコナステ大感謝祭2024)" },
+            { "id": 54, "label": "EMI (秋のコナステ大感謝祭2024)" },
+            { "id": 55, "label": "響香 (秋のコナステ大感謝祭2024)" },
+            { "id": 56, "label": "紅刃 (秋のコナステ大感謝祭2024)" },
+            { "id": 57, "label": "ニャミ (秋のコナステ大感謝祭2024)" },
+            { "id": 58, "label": "わたこ (秋のコナステ大感謝祭2024)" }
+          ]
+        },
+        {
+          "label": "不知火フレア (2026-04-21)",
+          "options": [
+            { "id": 59, "label": "不知火フレア" },
+            { "id": 60, "label": "不知火フレア (ルミナス)" },
+            { "id": 61, "label": "不知火フレア (清楚少女風)" }
+          ]
+        },     
+        {
+          "label": "第6弾 (2026-06-16)",
+          "options": [
+            { "id": 62, "label": "RINON" },
+            { "id": 63, "label": "RINON (Superior MAXXX)" },
+            { "id": 64, "label": "RINON Ace Style LEVEL1" },
+            { "id": 65, "label": "RINON Ace Style LEVEL2" },
+            { "id": 66, "label": "RINON Ace Style LEVEL3" }
+          ]
+        }
       ]
     },
     {
@@ -278,109 +618,195 @@
       "name": "Lane Cover (SINGLE)",
       "help": "Choose your lane cover for single play",
       "options": [
-        { "id": 9000, "label": "Blank" },
+        { "id": 9000, "label": "Blank/Default" },
         { "id": 1, "label": "WORLD" },
         { "id": 2, "label": "EMI" },
         { "id": 3, "label": "RAGE" },
         { "id": 4, "label": "ROCKET" },
-        { "id": 5, "label": "ALICE" },
-        { "id": 6, "label": "BABY-LON" },
-        { "id": 7, "label": "みゅ、みゅ、Müllる" },
-        { "id": 8, "label": "Astrogazer" },
-        { "id": 9, "label": "Don't Stop The HYPERCORE" },
-        { "id": 10, "label": "BPL S2" },
-        { "id": 11, "label": "BPL S4" },
-        { "id": 12, "label": "EMI (BPL S4)" },
-        { "id": 13, "label": "RAGE (BPL S4)" },
-        { "id": 14, "label": "ひなビタ♪ Chocolate Smile Girls!!" },
-        { "id": 15, "label": "ヒカリユリイカ" },
-        { "id": 16, "label": "ここなつ シンクロノーツ" },
-        { "id": 17, "label": "革命パッショネイト" },
-        { "id": 18, "label": "ひなビタ♪ SWEET SMILE PARADE" },
-        { "id": 19, "label": "ホーンテッド★メイドランチ (一舞＆咲子ver.)" },
-        { "id": 20, "label": "滅亡天使 † にこきゅっぴん" },
-        { "id": 21, "label": "YUNI" },
-        { "id": 22, "label": "AKIRA" },
-        { "id": 23, "label": "Destination" },
-        { "id": 24, "label": "HyperTwist" },
-        { "id": 25, "label": "Cosy Catastrophe" },
-        { "id": 26, "label": "New York EVOLVED" },
-        { "id": 27, "label": "bag (EXPERT譜面 x0.25 WAVE)" },
-        { "id": 28, "label": "天戸紺 (Amado Kon)" },
-        { "id": 29, "label": "小舞桜 (Komai Sakura)" },
-        { "id": 30, "label": "Deep tenDon Reflex" },
-        { "id": 31, "label": "ROCK THE PARTY" },
-        { "id": 32, "label": "エンドルフィン" },
-        { "id": 33, "label": "†渚の小悪魔ラヴリィ～レイディオ† (CHALLENGE譜面)" },
-        { "id": 34, "label": "TSUGARU (春のコナステ大感謝祭2024)" },
-        { "id": 35, "label": "GRACE (春のコナステ大感謝祭2024)" },
-        { "id": 36, "label": "RINON (春のコナステ大感謝祭2024)" },
-        { "id": 37, "label": "MIMI (春のコナステ大感謝祭2024)" },
-        { "id": 38, "label": "RIO (春のコナステ大感謝祭2024)" },
-        { "id": 39, "label": "DDR System Songs + Replicant Mix" },
-        { "id": 40, "label": "YUNI (SUMMER)" },
-        { "id": 41, "label": "ALICE (SUMMER)" },
-        { "id": 42, "label": "Reach the Sky, Without You" },
-        { "id": 43, "label": "†渚の小悪魔ラヴリィ～レイディオ†" },
-        { "id": 44, "label": "天空の華" },
-        { "id": 45, "label": "take me higher" },
-        { "id": 46, "label": "灰庭まよい" },
-        { "id": 47, "label": "ヒネリ" },
-        { "id": 48, "label": "Beluga" },
-        { "id": 49, "label": "Unreality" },
-        { "id": 50, "label": "Come Back to Me (Feel It)" },
-        { "id": 51, "label": "HYPER DRILL" },
-        { "id": 52, "label": "博麗 霊夢" },
-        { "id": 53, "label": "東風谷 早苗" },
-        { "id": 54, "label": "古明地 こいし" },
-        { "id": 55, "label": "フランドール・スカーレット" },
-        { "id": 56, "label": "残像ニ繋ガレタ追憶ノHIDEAWAY" },
-        { "id": 57, "label": "弾幕信仰" },
-        { "id": 58, "label": "東堂コハク (DDR)" },
-        { "id": 59, "label": "山神カルタ (DDR)" },
-        { "id": 60, "label": "レイン・パターソン (DDR)" },
-        { "id": 61, "label": "レイン・パターソン&山神カルタ&東堂コハク (DDR デフォルメ)" },
-        { "id": 62, "label": "倉持めると (DDR)" },
-        { "id": 63, "label": "セラフ・ダズルガーデン (DDR)" },
-        { "id": 64, "label": "長尾景 (DDR)" },
-        { "id": 65, "label": "長尾景&倉持めると&セラフ・ダズルガーデン (DDR デフォルメ)" },
-        { "id": 66, "label": "山形まり花 (音戯探偵)" },
-        { "id": 67, "label": "和泉一舞 (音戯探偵)" },
-        { "id": 68, "label": "春日咲子 (音戯探偵)" },
-        { "id": 69, "label": "霜月凛 (音戯探偵)" },
-        { "id": 70, "label": "芽兎めう (音戯探偵)" },
-        { "id": 71, "label": "菫平すみれ (音戯探偵)" },
-        { "id": 72, "label": "璃音" },
-        { "id": 73, "label": "響香" },
-        { "id": 74, "label": "キヤロラ衛星の軌跡" },
-        { "id": 75, "label": "MODEL FT2 Miracle Version" },
-        { "id": 76, "label": "Timepiece phase Ⅱ" },
-        { "id": 77, "label": "ミミ" },
-        { "id": 78, "label": "ニャミ" },
-        { "id": 79, "label": "ミミ (FEVER)" },
-        { "id": 80, "label": "ニャミ (FEVER)" },
-        { "id": 81, "label": "pop'n music (Shutter)" },
-        { "id": 82, "label": "エリカ (秋のコナステ大感謝祭2024)" },
-        { "id": 83, "label": "EMI (秋のコナステ大感謝祭2024)" },
-        { "id": 84, "label": "響香 (秋のコナステ大感謝祭2024)" },
-        { "id": 85, "label": "紅刃 (秋のコナステ大感謝祭2024)" },
-        { "id": 86, "label": "ニャミ (秋のコナステ大感謝祭2024)" },
-        { "id": 87, "label": "わたこ (秋のコナステ大感謝祭2024)" },
-        { "id": 88, "label": "不知火フレア" },
-        { "id": 89, "label": "不知火フレア (ルミナス)" },
-        { "id": 90, "label": "不知火フレア (清楚少女風)" },
-        { "id": 91, "label": "僕の飛行機 (covered by 不知火フレア)" },
-        { "id": 92, "label": "Homesick Pt.2&3 (covered by 不知火フレア)" },
-        { "id": 93, "label": "Silent Flame,Never Fade" },
-        { "id": 94, "label": "不知火フレア (アイキャッチ)" },
-        { "id": 95, "label": "RINON" },
-        { "id": 96, "label": "RINON (Superior MAXXX)" },
-        { "id": 97, "label": "ACE FOR ACES" },
-        { "id": 98, "label": "Over The \"Period\"" },
-        { "id": 99, "label": "Superior MAXXX" },
-        { "id": 100, "label": "RINON Ace Style LEVEL1" },
-        { "id": 101, "label": "RINON Ace Style LEVEL2" },
-        { "id": 102, "label": "RINON Ace Style LEVEL3" }
+
+        { 
+          "label": "第1弾 (2024-12-23)", 
+          "options": [
+            { "id": 5, "label": "ALICE" },
+            { "id": 6, "label": "BABY-LON" },
+            { "id": 7, "label": "みゅ、みゅ、Müllる" },
+            { "id": 8, "label": "Astrogazer" },
+            { "id": 9, "label": "Don't Stop The HYPERCORE" }
+          ] 
+        },
+        {
+          "label": "BPL -SEASON 4- DanceDanceRevolution (2025-01-28)",
+          "options": [
+            { "id": 10, "label": "BPL S2" },
+            { "id": 11, "label": "BPL S4" },
+            { "id": 12, "label": "EMI (BPL S4)" },
+            { "id": 13, "label": "RAGE (BPL S4)" }
+          ]
+        },
+        {
+          "label": "「ひなビタ♪」 第1弾 (2025-01-28)",
+          "options": [
+            { "id": 14, "label": "ひなビタ♪ Chocolate Smile Girls!!" },
+            { "id": 15, "label": "ヒカリユリイカ" },
+            { "id": 16, "label": "ここなつ シンクロノーツ" },
+            { "id": 17, "label": "革命パッショネイト" },
+            { "id": 18, "label": "ひなビタ♪ SWEET SMILE PARADE" },
+            { "id": 19, "label": "ホーンテッド★メイドランチ (一舞＆咲子ver.)" },
+            { "id": 20, "label": "滅亡天使 † にこきゅっぴん" }
+          ]
+        },
+        {
+          "label": "第2弾 (2025-06-10)",
+          "options": [
+            { "id": 21, "label": "YUNI" },
+            { "id": 22, "label": "AKIRA" },
+            { "id": 23, "label": "Destination" },
+            { "id": 24, "label": "HyperTwist" },
+            { "id": 25, "label": "Cosy Catastrophe" },
+            { "id": 26, "label": "New York EVOLVED" },
+            { "id": 27, "label": "bag (EXPERT譜面 x0.25 WAVE)" }
+          ]
+        },
+        {
+          "label": "第3弾 (2025-06-10)",
+          "options": [
+            { "id": 28, "label": "天戸紺 (Amado Kon)" },
+            { "id": 29, "label": "小舞桜 (Komai Sakura)" },
+            { "id": 30, "label": "Deep tenDon Reflex" },
+            { "id": 31, "label": "ROCK THE PARTY" },
+            { "id": 32, "label": "エンドルフィン" },
+            { "id": 33, "label": "†渚の小悪魔ラヴリィ～レイディオ† (CHALLENGE譜面)" }
+          ]
+        },
+        {
+          "label": "春のコナステ大感謝祭2024 (2025-07-09)",
+          "options": [
+            { "id": 34, "label": "TSUGARU (春のコナステ大感謝祭2024)" },
+            { "id": 35, "label": "GRACE (春のコナステ大感謝祭2024)" },
+            { "id": 36, "label": "RINON (春のコナステ大感謝祭2024)" },
+            { "id": 37, "label": "MIMI (春のコナステ大感謝祭2024)" },
+            { "id": 38, "label": "RIO (春のコナステ大感謝祭2024)" },
+            { "id": 39, "label": "DDR System Songs + Replicant Mix" }
+          ]
+        },
+        {
+          "label": "第4弾 (2025-08-05)",
+          "options": [
+            { "id": 40, "label": "YUNI (SUMMER)" },
+            { "id": 41, "label": "ALICE (SUMMER)" },
+            { "id": 42, "label": "Reach the Sky, Without You" },
+            { "id": 43, "label": "†渚の小悪魔ラヴリィ～レイディオ†" },
+            { "id": 44, "label": "天空の華" },
+            { "id": 45, "label": "take me higher" }
+          ]
+        },
+        {
+          "label": "第5弾 (2025-09-16)",
+          "options": [
+            { "id": 46, "label": "灰庭まよい" },
+            { "id": 47, "label": "ヒネリ" },
+            { "id": 48, "label": "Beluga" },
+            { "id": 49, "label": "Unreality" },
+            { "id": 50, "label": "Come Back to Me (Feel It)" },
+            { "id": 51, "label": "HYPER DRILL" }
+          ]
+        },                  
+        {
+          "label": "「東方Project」 第1弾 (2025-10-21)",
+          "options": [
+            { "id": 52, "label": "博麗 霊夢" },
+            { "id": 53, "label": "東風谷 早苗" },
+            { "id": 54, "label": "古明地 こいし" },
+            { "id": 55, "label": "フランドール・スカーレット" },
+            { "id": 56, "label": "残像ニ繋ガレタ追憶ノHIDEAWAY" },
+            { "id": 57, "label": "弾幕信仰" }
+          ]
+        },
+        {
+          "label": "「にじさんじダンス部」 第1弾 (2025-11-18)",
+          "options": [
+            { "id": 58, "label": "東堂コハク (DDR)" },
+            { "id": 59, "label": "山神カルタ (DDR)" },
+            { "id": 60, "label": "レイン・パターソン (DDR)" },
+            { "id": 61, "label": "レイン・パターソン&山神カルタ&東堂コハク (DDR デフォルメ)" }
+          ]
+        },
+        {
+          "label": "「にじさんじダンス部」 第2弾 (2025-11-18)",
+          "options": [
+            { "id": 62, "label": "倉持めると (DDR)" },
+            { "id": 63, "label": "セラフ・ダズルガーデン (DDR)" },
+            { "id": 64, "label": "長尾景 (DDR)" },
+            { "id": 65, "label": "長尾景&倉持めると&セラフ・ダズルガーデン (DDR デフォルメ)" }
+          ]
+        },     
+        {
+          "label": "音戯探偵ひなビタ♫ 調査依頼:BEMANI (2025-12-23)",
+          "options": [
+            { "id": 66, "label": "山形まり花 (音戯探偵)" },
+            { "id": 67, "label": "和泉一舞 (音戯探偵)" },
+            { "id": 68, "label": "春日咲子 (音戯探偵)" },
+            { "id": 69, "label": "霜月凛 (音戯探偵)" },
+            { "id": 70, "label": "芽兎めう (音戯探偵)" },
+            { "id": 71, "label": "菫平すみれ (音戯探偵)" }
+          ]
+        },
+        {
+          "label": "「GITADORA」 第1弾 (2025-12-23)",
+          "options": [
+            { "id": 72, "label": "璃音" },
+            { "id": 73, "label": "響香" },
+            { "id": 74, "label": "キヤロラ衛星の軌跡" },
+            { "id": 75, "label": "MODEL FT2 Miracle Version" },
+            { "id": 76, "label": "Timepiece phase Ⅱ" }
+          ]
+        },
+        {
+          "label": "「pop'n music」 第1弾 (2026-02-24)",
+          "options": [
+            { "id": 77, "label": "ミミ" },
+            { "id": 78, "label": "ニャミ" },
+            { "id": 79, "label": "ミミ (FEVER)" },
+            { "id": 80, "label": "ニャミ (FEVER)" },
+            { "id": 81, "label": "pop'n music (Shutter)" }
+          ]
+        },     
+        {
+          "label": "秋のコナステ大感謝祭2024 (2026-03-24)",
+          "options": [
+            { "id": 82, "label": "エリカ (秋のコナステ大感謝祭2024)" },
+            { "id": 83, "label": "EMI (秋のコナステ大感謝祭2024)" },
+            { "id": 84, "label": "響香 (秋のコナステ大感謝祭2024)" },
+            { "id": 85, "label": "紅刃 (秋のコナステ大感謝祭2024)" },
+            { "id": 86, "label": "ニャミ (秋のコナステ大感謝祭2024)" },
+            { "id": 87, "label": "わたこ (秋のコナステ大感謝祭2024)" }
+          ]
+        },
+        {
+          "label": "不知火フレア (2026-04-21)",
+          "options": [
+            { "id": 88, "label": "不知火フレア" },
+            { "id": 89, "label": "不知火フレア (ルミナス)" },
+            { "id": 90, "label": "不知火フレア (清楚少女風)" },
+            { "id": 91, "label": "僕の飛行機 (covered by 不知火フレア)" },
+            { "id": 92, "label": "Homesick Pt.2&3 (covered by 不知火フレア)" },
+            { "id": 93, "label": "Silent Flame,Never Fade" },
+            { "id": 94, "label": "不知火フレア (アイキャッチ)" }
+          ]
+        },     
+        {
+          "label": "第6弾 (2026-06-16)",
+          "options": [
+            { "id": 95, "label": "RINON" },
+            { "id": 96, "label": "RINON (Superior MAXXX)" },
+            { "id": 97, "label": "ACE FOR ACES" },
+            { "id": 98, "label": "Over The \"Period\"" },
+            { "id": 99, "label": "Superior MAXXX" },
+            { "id": 100, "label": "RINON Ace Style LEVEL1" },
+            { "id": 101, "label": "RINON Ace Style LEVEL2" },
+            { "id": 102, "label": "RINON Ace Style LEVEL3" }
+          ]
+        }
       ]
     },
     {
@@ -388,128 +814,213 @@
       "name": "Lane Cover (DOUBLE)",
       "help": "Choose your lane cover for double play",
       "options": [
-        { "id": 9000, "label": "Blank" },
+        { "id": 9000, "label": "Blank/Default" },
         { "id": 1, "label": "WORLD" },
         { "id": 2, "label": "EMI" },
         { "id": 3, "label": "RAGE" },
         { "id": 4, "label": "EMI&RAGE" },
         { "id": 5, "label": "ROCKET" },
-        { "id": 6, "label": "ALICE" },
-        { "id": 7, "label": "BABY-LON" },
-        { "id": 8, "label": "ALICE&EMI" },
-        { "id": 9, "label": "みゅ、みゅ、Müllる" },
-        { "id": 10, "label": "Astrogazer" },
-        { "id": 11, "label": "Don't Stop The HYPERCORE" },
-        { "id": 12, "label": "BPL S2" },
-        { "id": 13, "label": "BPL S4" },
-        { "id": 14, "label": "EMI & RAGE (BPL S4 パターン1)" },
-        { "id": 15, "label": "EMI & RAGE (BPL S4 パターン2)" },
-        { "id": 16, "label": "EMIまみれ (BPL S4)" },
-        { "id": 17, "label": "ナナイロライト" },
-        { "id": 18, "label": "じもとっこスイーツ♪" },
-        { "id": 19, "label": "ハレ トキドキ メランコリック" },
-        { "id": 20, "label": "ひなビタ♪ お花見ライブ" },
-        { "id": 21, "label": "ひなビタ♪ 肝試し" },
-        { "id": 22, "label": "滅びに至るエランプシス" },
-        { "id": 23, "label": "カタルシスの月" },
-        { "id": 24, "label": "YUNI" },
-        { "id": 25, "label": "AKIRA" },
-        { "id": 26, "label": "YUNI & AKIRA" },
-        { "id": 27, "label": "ALICE & YUNI" },
-        { "id": 28, "label": "Destination" },
-        { "id": 29, "label": "HyperTwist" },
-        { "id": 30, "label": "Cosy Catastrophe" },
-        { "id": 31, "label": "New York EVOLVED" },
-        { "id": 32, "label": "bag (EXPERT譜面 x0.25 WAVE)" },
-        { "id": 33, "label": "天戸紺 (Amado Kon)" },
-        { "id": 34, "label": "小舞桜 (Komai Sakura)" },
-        { "id": 35, "label": "天戸紺 & 小舞桜 (Amado Kon & Komai Sakura)" },
-        { "id": 36, "label": "Deep tenDon Reflex" },
-        { "id": 37, "label": "ROCK THE PARTY" },
-        { "id": 38, "label": "エンドルフィン" },
-        { "id": 39, "label": "†渚の小悪魔ラヴリィ～レイディオ† (CHALLENGE譜面)" },
-        { "id": 40, "label": "TSUGARU (春のコナステ大感謝祭2024)" },
-        { "id": 41, "label": "GRACE (春のコナステ大感謝祭2024)" },
-        { "id": 42, "label": "RINON (春のコナステ大感謝祭2024)" },
-        { "id": 43, "label": "MIMI (春のコナステ大感謝祭2024)" },
-        { "id": 44, "label": "RIO (春のコナステ大感謝祭2024)" },
-        { "id": 45, "label": "All Characters Assembly (春のコナステ大感謝祭2024)" },
-        { "id": 46, "label": "DDR System Songs + Replicant Mix" },
-        { "id": 47, "label": "YUNI (SUMMER)" },
-        { "id": 48, "label": "ALICE (SUMMER)" },
-        { "id": 49, "label": "YUNI (SUMMER) & ALICE (SUMMER)" },
-        { "id": 50, "label": "Reach the Sky, Without You" },
-        { "id": 51, "label": "†渚の小悪魔ラヴリィ～レイディオ†" },
-        { "id": 52, "label": "天空の華" },
-        { "id": 53, "label": "take me higher" },
-        { "id": 54, "label": "灰庭まよい" },
-        { "id": 55, "label": "ヒネリ" },
-        { "id": 56, "label": "灰庭まよい & ヒネリ" },
-        { "id": 57, "label": "Beluga" },
-        { "id": 58, "label": "Unreality" },
-        { "id": 59, "label": "Come Back to Me (Feel It)" },
-        { "id": 60, "label": "HYPER DRILL" },
-        { "id": 61, "label": "博麗 霊夢" },
-        { "id": 62, "label": "東風谷 早苗" },
-        { "id": 63, "label": "古明地 こいし" },
-        { "id": 64, "label": "フランドール・スカーレット" },
-        { "id": 65, "label": "残像ニ繋ガレタ追憶ノHIDEAWAY" },
-        { "id": 66, "label": "弾幕信仰" },
-        { "id": 67, "label": "博麗 霊夢&東風谷 早苗" },
-        { "id": 68, "label": "古明地 こいし&フランドール・スカーレット" },
-        { "id": 69, "label": "東堂コハク (DDR)" },
-        { "id": 70, "label": "山神カルタ (DDR)" },
-        { "id": 71, "label": "レイン・パターソン (DDR)" },
-        { "id": 72, "label": "レイン・パターソン&山神カルタ&東堂コハク (DDR)" },
-        { "id": 73, "label": "レイン・パターソン&山神カルタ&東堂コハク (DDR デフォルメ)" },
-        { "id": 74, "label": "倉持めると (DDR)" },
-        { "id": 75, "label": "セラフ・ダズルガーデン (DDR)" },
-        { "id": 76, "label": "長尾景 (DDR)" },
-        { "id": 77, "label": "長尾景&倉持めると&セラフ・ダズルガーデン (DDR)" },
-        { "id": 78, "label": "長尾景&倉持めると&セラフ・ダズルガーデン (DDR デフォルメ)" },
-        { "id": 79, "label": "山形まり花 (音戯探偵)" },
-        { "id": 80, "label": "和泉一舞 (音戯探偵)" },
-        { "id": 81, "label": "春日咲子 (音戯探偵)" },
-        { "id": 82, "label": "霜月凛 (音戯探偵)" },
-        { "id": 83, "label": "芽兎めう (音戯探偵)" },
-        { "id": 84, "label": "菫平すみれ (音戯探偵)" },
-        { "id": 85, "label": "音戯探偵ひなビタ♫ (パターン1)" },
-        { "id": 86, "label": "音戯探偵ひなビタ♫ (パターン2)" },
-        { "id": 87, "label": "璃音" },
-        { "id": 88, "label": "響香" },
-        { "id": 89, "label": "響香&璃音" },
-        { "id": 90, "label": "キヤロラ衛星の軌跡" },
-        { "id": 91, "label": "MODEL FT2 Miracle Version" },
-        { "id": 92, "label": "Timepiece phase Ⅱ" },
-        { "id": 93, "label": "ミミ" },
-        { "id": 94, "label": "ニャミ" },
-        { "id": 95, "label": "ミミ&ニャミ" },
-        { "id": 96, "label": "ミミ&ニャミ (Buddy)" },
-        { "id": 97, "label": "ミミ&ニャミ (Title)" },
-        { "id": 98, "label": "ミミ&ニャミ (Yeeeeee Hooooo)" },
-        { "id": 99, "label": "エリカ (秋のコナステ大感謝祭2024)" },
-        { "id": 100, "label": "EMI (秋のコナステ大感謝祭2024)" },
-        { "id": 101, "label": "響香 (秋のコナステ大感謝祭2024)" },
-        { "id": 102, "label": "紅刃 (秋のコナステ大感謝祭2024)" },
-        { "id": 103, "label": "ニャミ (秋のコナステ大感謝祭2024)" },
-        { "id": 104, "label": "BEMANIキャラ集合 (秋のコナステ大感謝祭2024)" },
-        { "id": 105, "label": "わたこ (秋のコナステ大感謝祭2024)" },
-        { "id": 106, "label": "不知火フレア" },
-        { "id": 107, "label": "不知火フレア (ルミナス)" },
-        { "id": 108, "label": "不知火フレア (清楚少女風)" },
-        { "id": 109, "label": "僕の飛行機 (covered by 不知火フレア)" },
-        { "id": 110, "label": "Homesick Pt.2&3 (covered by 不知火フレア)" },
-        { "id": 111, "label": "Silent Flame,Never Fade" },
-        { "id": 112, "label": "不知火フレア (アイキャッチ)" },
-        { "id": 113, "label": "RINON" },
-        { "id": 114, "label": "RINON (Superior MAXXX)" },
-        { "id": 115, "label": "RINON&RINON (Superior MAXXX)" },
-        { "id": 116, "label": "ACE FOR ACES" },
-        { "id": 117, "label": "Over The \"Period\"" },
-        { "id": 118, "label": "Superior MAXXX" },
-        { "id": 119, "label": "RINON Ace Style LEVEL1" },
-        { "id": 120, "label": "RINON Ace Style LEVEL2" },
-        { "id": 121, "label": "RINON Ace Style LEVEL3" }
+        { 
+          "label": "第1弾 (2024-12-23)", 
+          "options": [
+            { "id": 6, "label": "ALICE" },
+            { "id": 7, "label": "BABY-LON" },
+            { "id": 8, "label": "ALICE&EMI" },
+            { "id": 9, "label": "みゅ、みゅ、Müllる" },
+            { "id": 10, "label": "Astrogazer" },
+            { "id": 11, "label": "Don't Stop The HYPERCORE" }
+          ] 
+        },
+        {
+          "label": "BPL -SEASON 4- DanceDanceRevolution (2025-01-28)",
+          "options": [
+            { "id": 12, "label": "BPL S2" },
+            { "id": 13, "label": "BPL S4" },
+            { "id": 14, "label": "EMI & RAGE (BPL S4 パターン1)" },
+            { "id": 15, "label": "EMI & RAGE (BPL S4 パターン2)" },
+            { "id": 16, "label": "EMIまみれ (BPL S4)" }
+          ]
+        },
+        {
+          "label": "「ひなビタ♪」 第1弾 (2025-01-28)",
+          "options": [
+            { "id": 17, "label": "ナナイロライト" },
+            { "id": 18, "label": "じもとっこスイーツ♪" },
+            { "id": 19, "label": "ハレ トキドキ メランコリック" },
+            { "id": 20, "label": "ひなビタ♪ お花見ライブ" },
+            { "id": 21, "label": "ひなビタ♪ 肝試し" },
+            { "id": 22, "label": "滅びに至るエランプシス" },
+            { "id": 23, "label": "カタルシスの月" }
+          ]
+        },
+        {
+          "label": "第2弾 (2025-06-10)",
+          "options": [
+            { "id": 24, "label": "YUNI" },
+            { "id": 25, "label": "AKIRA" },
+            { "id": 26, "label": "YUNI & AKIRA" },
+            { "id": 27, "label": "ALICE & YUNI" },
+            { "id": 28, "label": "Destination" },
+            { "id": 29, "label": "HyperTwist" },
+            { "id": 30, "label": "Cosy Catastrophe" },
+            { "id": 31, "label": "New York EVOLVED" },
+            { "id": 32, "label": "bag (EXPERT譜面 x0.25 WAVE)" }
+          ]
+        },
+        {
+          "label": "第3弾 (2025-06-10)",
+          "options": [
+            { "id": 33, "label": "天戸紺 (Amado Kon)" },
+            { "id": 34, "label": "小舞桜 (Komai Sakura)" },
+            { "id": 35, "label": "天戸紺 & 小舞桜 (Amado Kon & Komai Sakura)" },
+            { "id": 36, "label": "Deep tenDon Reflex" },
+            { "id": 37, "label": "ROCK THE PARTY" },
+            { "id": 38, "label": "エンドルフィン" },
+            { "id": 39, "label": "†渚の小悪魔ラヴリィ～レイディオ† (CHALLENGE譜面)" }
+          ]
+        },
+        {
+          "label": "春のコナステ大感謝祭2024 (2025-07-09)",
+          "options": [
+            { "id": 40, "label": "TSUGARU (春のコナステ大感謝祭2024)" },
+            { "id": 41, "label": "GRACE (春のコナステ大感謝祭2024)" },
+            { "id": 42, "label": "RINON (春のコナステ大感謝祭2024)" },
+            { "id": 43, "label": "MIMI (春のコナステ大感謝祭2024)" },
+            { "id": 44, "label": "RIO (春のコナステ大感謝祭2024)" },
+            { "id": 45, "label": "All Characters Assembly (春のコナステ大感謝祭2024)" },
+            { "id": 46, "label": "DDR System Songs + Replicant Mix" }
+          ]
+        },
+        {
+          "label": "第4弾 (2025-08-05)",
+          "options": [
+            { "id": 47, "label": "YUNI (SUMMER)" },
+            { "id": 48, "label": "ALICE (SUMMER)" },
+            { "id": 49, "label": "YUNI (SUMMER) & ALICE (SUMMER)" },
+            { "id": 50, "label": "Reach the Sky, Without You" },
+            { "id": 51, "label": "†渚の小悪魔ラヴリィ～レイディオ†" },
+            { "id": 52, "label": "天空の華" },
+            { "id": 53, "label": "take me higher" }
+          ]
+        },
+        {
+          "label": "第5弾 (2025-09-16)",
+          "options": [
+            { "id": 54, "label": "灰庭まよい" },
+            { "id": 55, "label": "ヒネリ" },
+            { "id": 56, "label": "灰庭まよい & ヒネリ" },
+            { "id": 57, "label": "Beluga" },
+            { "id": 58, "label": "Unreality" },
+            { "id": 59, "label": "Come Back to Me (Feel It)" },
+            { "id": 60, "label": "HYPER DRILL" }
+          ]
+        },                  
+        {
+          "label": "「東方Project」 第1弾 (2025-10-21)",
+          "options": [
+            { "id": 61, "label": "博麗 霊夢" },
+            { "id": 62, "label": "東風谷 早苗" },
+            { "id": 63, "label": "古明地 こいし" },
+            { "id": 64, "label": "フランドール・スカーレット" },
+            { "id": 65, "label": "残像ニ繋ガレタ追憶ノHIDEAWAY" },
+            { "id": 66, "label": "弾幕信仰" },
+            { "id": 67, "label": "博麗 霊夢&東風谷 早苗" },
+            { "id": 68, "label": "古明地 こいし&フランドール・スカーレット" }
+          ]
+        },
+        {
+          "label": "「にじさんじダンス部」 第1弾 (2025-11-18)",
+          "options": [
+            { "id": 69, "label": "東堂コハク (DDR)" },
+            { "id": 70, "label": "山神カルタ (DDR)" },
+            { "id": 71, "label": "レイン・パターソン (DDR)" },
+            { "id": 72, "label": "レイン・パターソン&山神カルタ&東堂コハク (DDR)" },
+            { "id": 73, "label": "レイン・パターソン&山神カルタ&東堂コハク (DDR デフォルメ)" }
+          ]
+        },
+        {
+          "label": "「にじさんじダンス部」 第2弾 (2025-11-18)",
+          "options": [
+            { "id": 74, "label": "倉持めると (DDR)" },
+            { "id": 75, "label": "セラフ・ダズルガーデン (DDR)" },
+            { "id": 76, "label": "長尾景 (DDR)" },
+            { "id": 77, "label": "長尾景&倉持めると&セラフ・ダズルガーデン (DDR)" },
+            { "id": 78, "label": "長尾景&倉持めると&セラフ・ダズルガーデン (DDR デフォルメ)" }
+          ]
+        },     
+        {
+          "label": "音戯探偵ひなビタ♫ 調査依頼:BEMANI (2025-12-23)",
+          "options": [
+            { "id": 79, "label": "山形まり花 (音戯探偵)" },
+            { "id": 80, "label": "和泉一舞 (音戯探偵)" },
+            { "id": 81, "label": "春日咲子 (音戯探偵)" },
+            { "id": 82, "label": "霜月凛 (音戯探偵)" },
+            { "id": 83, "label": "芽兎めう (音戯探偵)" },
+            { "id": 84, "label": "菫平すみれ (音戯探偵)" },
+            { "id": 85, "label": "音戯探偵ひなビタ♫ (パターン1)" },
+            { "id": 86, "label": "音戯探偵ひなビタ♫ (パターン2)" }
+          ]
+        },
+        {
+          "label": "「GITADORA」 第1弾 (2025-12-23)",
+          "options": [
+            { "id": 87, "label": "璃音" },
+            { "id": 88, "label": "響香" },
+            { "id": 89, "label": "響香&璃音" },
+            { "id": 90, "label": "キヤロラ衛星の軌跡" },
+            { "id": 91, "label": "MODEL FT2 Miracle Version" },
+            { "id": 92, "label": "Timepiece phase Ⅱ" }
+          ]
+        },
+        {
+          "label": "「pop'n music」 第1弾 (2026-02-24)",
+          "options": [
+            { "id": 93, "label": "ミミ" },
+            { "id": 94, "label": "ニャミ" },
+            { "id": 95, "label": "ミミ&ニャミ" },
+            { "id": 96, "label": "ミミ&ニャミ (Buddy)" },
+            { "id": 97, "label": "ミミ&ニャミ (Title)" },
+            { "id": 98, "label": "ミミ&ニャミ (Yeeeeee Hooooo)" }
+          ]
+        },     
+        {
+          "label": "秋のコナステ大感謝祭2024 (2026-03-24)",
+          "options": [
+            { "id": 99, "label": "エリカ (秋のコナステ大感謝祭2024)" },
+            { "id": 100, "label": "EMI (秋のコナステ大感謝祭2024)" },
+            { "id": 101, "label": "響香 (秋のコナステ大感謝祭2024)" },
+            { "id": 102, "label": "紅刃 (秋のコナステ大感謝祭2024)" },
+            { "id": 103, "label": "ニャミ (秋のコナステ大感謝祭2024)" },
+            { "id": 104, "label": "BEMANIキャラ集合 (秋のコナステ大感謝祭2024)" },
+            { "id": 105, "label": "わたこ (秋のコナステ大感謝祭2024)" }
+          ]
+        },
+        {
+          "label": "不知火フレア (2026-04-21)",
+          "options": [
+            { "id": 106, "label": "不知火フレア" },
+            { "id": 107, "label": "不知火フレア (ルミナス)" },
+            { "id": 108, "label": "不知火フレア (清楚少女風)" },
+            { "id": 109, "label": "僕の飛行機 (covered by 不知火フレア)" },
+            { "id": 110, "label": "Homesick Pt.2&3 (covered by 不知火フレア)" },
+            { "id": 111, "label": "Silent Flame,Never Fade" },
+            { "id": 112, "label": "不知火フレア (アイキャッチ)" }
+          ]
+        },     
+        {
+          "label": "第6弾 (2026-06-16)",
+          "options": [
+            { "id": 113, "label": "RINON" },
+            { "id": 114, "label": "RINON (Superior MAXXX)" },
+            { "id": 115, "label": "RINON&RINON (Superior MAXXX)" },
+            { "id": 116, "label": "ACE FOR ACES" },
+            { "id": 117, "label": "Over The \"Period\"" },
+            { "id": 118, "label": "Superior MAXXX" },
+            { "id": 119, "label": "RINON Ace Style LEVEL1" },
+            { "id": 120, "label": "RINON Ace Style LEVEL2" },
+            { "id": 121, "label": "RINON Ace Style LEVEL3" }
+          ]
+        }
       ]
     },
     {
@@ -517,89 +1028,174 @@
       "name": "Lane Background (SINGLE)",
       "help": "Choose your lane background for single play",
       "options": [
-        { "id": 9000, "label": "Blank" },
+        { "id": 9000, "label": "Blank/Default" },
         { "id": 1, "label": "EMI" },
         { "id": 2, "label": "RAGE" },
         { "id": 3, "label": "ROCKET" },
-        { "id": 4, "label": "ALICE" },
-        { "id": 5, "label": "BABY-LON" },
-        { "id": 6, "label": "GRID" },
-        { "id": 7, "label": "BPL S2" },
-        { "id": 8, "label": "BPL S4" },
-        { "id": 9, "label": "EMI (BPL S4)" },
-        { "id": 10, "label": "RAGE (BPL S4)" },
-        { "id": 11, "label": "山形まり花 (Marika Yamagata)" },
-        { "id": 12, "label": "和泉一舞 (Izumi Ibuki)" },
-        { "id": 13, "label": "春日咲子 (Sakiko Kasuga)" },
-        { "id": 14, "label": "芽兎めう (Meto Meu)" },
-        { "id": 15, "label": "霜月凛 (Rin Shimotsuki)" },
-        { "id": 16, "label": "東雲夏陽 (Shinonome Natsuhi)" },
-        { "id": 17, "label": "東雲心菜 (Shinonome Cocona)" },
-        { "id": 18, "label": "YUNI" },
-        { "id": 19, "label": "AKIRA" },
-        { "id": 20, "label": "HONEYCOMB" },
-        { "id": 21, "label": "bag (EXPERT譜面 x0.25 WAVE)" },
-        { "id": 22, "label": "天戸紺 (Amado Kon)" },
-        { "id": 23, "label": "小舞桜 (Komai Sakura)" },
-        { "id": 24, "label": "†渚の小悪魔ラヴリィ～レイディオ† (CHALLENGE譜面)" },
-        { "id": 25, "label": "TSUGARU (春のコナステ大感謝祭2024)" },
-        { "id": 26, "label": "GRACE (春のコナステ大感謝祭2024)" },
-        { "id": 27, "label": "RINON (春のコナステ大感謝祭2024)" },
-        { "id": 28, "label": "MIMI (春のコナステ大感謝祭2024)" },
-        { "id": 29, "label": "RIO (春のコナステ大感謝祭2024)" },
-        { "id": 30, "label": "TRIANGLE" },
-        { "id": 31, "label": "YUNI (SUMMER)" },
-        { "id": 32, "label": "ALICE (SUMMER)" },
-        { "id": 33, "label": "SUNFLOWER" },
-        { "id": 34, "label": "灰庭まよい" },
-        { "id": 35, "label": "ヒネリ" },
-        { "id": 36, "label": "HYPER DRILL" },
-        { "id": 37, "label": "博麗 霊夢" },
-        { "id": 38, "label": "東風谷 早苗" },
-        { "id": 39, "label": "古明地 こいし" },
-        { "id": 40, "label": "フランドール・スカーレット" },
-        { "id": 41, "label": "残像ニ繋ガレタ追憶ノHIDEAWAY" },
-        { "id": 42, "label": "弾幕信仰" },
-        { "id": 43, "label": "東堂コハク" },
-        { "id": 44, "label": "山神カルタ" },
-        { "id": 45, "label": "レイン・パターソン" },
-        { "id": 46, "label": "東堂コハク (DDR)" },
-        { "id": 47, "label": "山神カルタ (DDR)" },
-        { "id": 48, "label": "レイン・パターソン (DDR)" },
-        { "id": 49, "label": "倉持めると" },
-        { "id": 50, "label": "セラフ・ダズルガーデン" },
-        { "id": 51, "label": "長尾景" },
-        { "id": 52, "label": "倉持めると (DDR)" },
-        { "id": 53, "label": "セラフ・ダズルガーデン (DDR)" },
-        { "id": 54, "label": "長尾景 (DDR)" },
-        { "id": 55, "label": "山形まり花 (音戯探偵)" },
-        { "id": 56, "label": "和泉一舞 (音戯探偵)" },
-        { "id": 57, "label": "春日咲子 (音戯探偵)" },
-        { "id": 58, "label": "霜月凛 (音戯探偵)" },
-        { "id": 59, "label": "芽兎めう (音戯探偵)" },
-        { "id": 60, "label": "菫平すみれ (音戯探偵)" },
-        { "id": 61, "label": "璃音" },
-        { "id": 62, "label": "響香" },
-        { "id": 63, "label": "GITADORA (TITLE)" },
-        { "id": 64, "label": "GITADORA (PREMIUM ENCORE)" },
-        { "id": 65, "label": "ミミ" },
-        { "id": 66, "label": "ニャミ" },
-        { "id": 67, "label": "ミミ (FEVER)" },
-        { "id": 68, "label": "ニャミ (FEVER)" },
-        { "id": 69, "label": "エリカ (秋のコナステ大感謝祭2024)" },
-        { "id": 70, "label": "EMI (秋のコナステ大感謝祭2024)" },
-        { "id": 71, "label": "響香 (秋のコナステ大感謝祭2024)" },
-        { "id": 72, "label": "紅刃 (秋のコナステ大感謝祭2024)" },
-        { "id": 73, "label": "ニャミ (秋のコナステ大感謝祭2024)" },
-        { "id": 74, "label": "わたこ (秋のコナステ大感謝祭2024)" },
-        { "id": 75, "label": "不知火フレア" },
-        { "id": 76, "label": "不知火フレア (ルミナス)" },
-        { "id": 77, "label": "不知火フレア (清楚少女風)" },
-        { "id": 78, "label": "RINON" },
-        { "id": 79, "label": "RINON (Superior MAXXX)" },
-        { "id": 80, "label": "RINON Ace Style LEVEL1" },
-        { "id": 81, "label": "RINON Ace Style LEVEL2" },
-        { "id": 82, "label": "RINON Ace Style LEVEL3" }
+        { 
+          "label": "第1弾 (2024-12-23)", 
+          "options": [
+            { "id": 4, "label": "ALICE" },
+            { "id": 5, "label": "BABY-LON" },
+            { "id": 6, "label": "GRID" }
+          ] 
+        },
+        {
+          "label": "BPL -SEASON 4- DanceDanceRevolution (2025-01-28)",
+          "options": [
+            { "id": 7, "label": "BPL S2" },
+            { "id": 8, "label": "BPL S4" },
+            { "id": 9, "label": "EMI (BPL S4)" },
+            { "id": 10, "label": "RAGE (BPL S4)" }
+          ]
+        },
+        {
+          "label": "「ひなビタ♪」 第1弾 (2025-01-28)",
+          "options": [
+            { "id": 11, "label": "山形まり花 (Marika Yamagata)" },
+            { "id": 12, "label": "和泉一舞 (Izumi Ibuki)" },
+            { "id": 13, "label": "春日咲子 (Sakiko Kasuga)" },
+            { "id": 14, "label": "芽兎めう (Meto Meu)" },
+            { "id": 15, "label": "霜月凛 (Rin Shimotsuki)" },
+            { "id": 16, "label": "東雲夏陽 (Shinonome Natsuhi)" },
+            { "id": 17, "label": "東雲心菜 (Shinonome Cocona)" }
+          ]
+        },
+        {
+          "label": "第2弾 (2025-06-10)",
+          "options": [
+            { "id": 18, "label": "YUNI" },
+            { "id": 19, "label": "AKIRA" },
+            { "id": 20, "label": "HONEYCOMB" },
+            { "id": 21, "label": "bag (EXPERT譜面 x0.25 WAVE)" }
+          ]
+        },
+        {
+          "label": "第3弾 (2025-06-10)",
+          "options": [
+            { "id": 22, "label": "天戸紺 (Amado Kon)" },
+            { "id": 23, "label": "小舞桜 (Komai Sakura)" },
+            { "id": 24, "label": "†渚の小悪魔ラヴリィ～レイディオ† (CHALLENGE譜面)" }
+          ]
+        },
+        {
+          "label": "春のコナステ大感謝祭2024 (2025-07-09)",
+          "options": [
+            { "id": 25, "label": "TSUGARU (春のコナステ大感謝祭2024)" },
+            { "id": 26, "label": "GRACE (春のコナステ大感謝祭2024)" },
+            { "id": 27, "label": "RINON (春のコナステ大感謝祭2024)" },
+            { "id": 28, "label": "MIMI (春のコナステ大感謝祭2024)" },
+            { "id": 29, "label": "RIO (春のコナステ大感謝祭2024)" },
+            { "id": 30, "label": "TRIANGLE" }
+          ]
+        },
+        {
+          "label": "第4弾 (2025-08-05)",
+          "options": [
+            { "id": 31, "label": "YUNI (SUMMER)" },
+            { "id": 32, "label": "ALICE (SUMMER)" },
+            { "id": 33, "label": "SUNFLOWER" }
+          ]
+        },
+        {
+          "label": "第5弾 (2025-09-16)",
+          "options": [
+            { "id": 34, "label": "灰庭まよい" },
+            { "id": 35, "label": "ヒネリ" },
+            { "id": 36, "label": "HYPER DRILL" }
+          ]
+        },                  
+        {
+          "label": "「東方Project」 第1弾 (2025-10-21)",
+          "options": [
+            { "id": 37, "label": "博麗 霊夢" },
+            { "id": 38, "label": "東風谷 早苗" },
+            { "id": 39, "label": "古明地 こいし" },
+            { "id": 40, "label": "フランドール・スカーレット" },
+            { "id": 41, "label": "残像ニ繋ガレタ追憶ノHIDEAWAY" },
+            { "id": 42, "label": "弾幕信仰" }
+          ]
+        },
+        {
+          "label": "「にじさんじダンス部」 第1弾 (2025-11-18)",
+          "options": [
+            { "id": 43, "label": "東堂コハク" },
+            { "id": 44, "label": "山神カルタ" },
+            { "id": 45, "label": "レイン・パターソン" },
+            { "id": 46, "label": "東堂コハク (DDR)" },
+            { "id": 47, "label": "山神カルタ (DDR)" },
+            { "id": 48, "label": "レイン・パターソン (DDR)" }
+          ]
+        },
+        {
+          "label": "「にじさんじダンス部」 第2弾 (2025-11-18)",
+          "options": [
+            { "id": 49, "label": "倉持めると" },
+            { "id": 50, "label": "セラフ・ダズルガーデン" },
+            { "id": 51, "label": "長尾景" },
+            { "id": 52, "label": "倉持めると (DDR)" },
+            { "id": 53, "label": "セラフ・ダズルガーデン (DDR)" },
+            { "id": 54, "label": "長尾景 (DDR)" }
+          ]
+        },     
+        {
+          "label": "音戯探偵ひなビタ♫ 調査依頼:BEMANI (2025-12-23)",
+          "options": [
+            { "id": 55, "label": "山形まり花 (音戯探偵)" },
+            { "id": 56, "label": "和泉一舞 (音戯探偵)" },
+            { "id": 57, "label": "春日咲子 (音戯探偵)" },
+            { "id": 58, "label": "霜月凛 (音戯探偵)" },
+            { "id": 59, "label": "芽兎めう (音戯探偵)" },
+            { "id": 60, "label": "菫平すみれ (音戯探偵)" }
+          ]
+        },
+        {
+          "label": "「GITADORA」 第1弾 (2025-12-23)",
+          "options": [
+            { "id": 61, "label": "璃音" },
+            { "id": 62, "label": "響香" },
+            { "id": 63, "label": "GITADORA (TITLE)" },
+            { "id": 64, "label": "GITADORA (PREMIUM ENCORE)" }
+          ]
+        },
+        {
+          "label": "「pop'n music」 第1弾 (2026-02-24)",
+          "options": [
+            { "id": 65, "label": "ミミ" },
+            { "id": 66, "label": "ニャミ" },
+            { "id": 67, "label": "ミミ (FEVER)" },
+            { "id": 68, "label": "ニャミ (FEVER)" }
+          ]
+        },     
+        {
+          "label": "秋のコナステ大感謝祭2024 (2026-03-24)",
+          "options": [
+            { "id": 69, "label": "エリカ (秋のコナステ大感謝祭2024)" },
+            { "id": 70, "label": "EMI (秋のコナステ大感謝祭2024)" },
+            { "id": 71, "label": "響香 (秋のコナステ大感謝祭2024)" },
+            { "id": 72, "label": "紅刃 (秋のコナステ大感謝祭2024)" },
+            { "id": 73, "label": "ニャミ (秋のコナステ大感謝祭2024)" },
+            { "id": 74, "label": "わたこ (秋のコナステ大感謝祭2024)" }
+          ]
+        },
+        {
+          "label": "不知火フレア (2026-04-21)",
+          "options": [
+            { "id": 75, "label": "不知火フレア" },
+            { "id": 76, "label": "不知火フレア (ルミナス)" },
+            { "id": 77, "label": "不知火フレア (清楚少女風)" }
+          ]
+        },     
+        {
+          "label": "第6弾 (2026-06-16)",
+          "options": [
+            { "id": 78, "label": "RINON" },
+            { "id": 79, "label": "RINON (Superior MAXXX)" },
+            { "id": 80, "label": "RINON Ace Style LEVEL1" },
+            { "id": 81, "label": "RINON Ace Style LEVEL2" },
+            { "id": 82, "label": "RINON Ace Style LEVEL3" }
+          ]
+        }
       ]
     },
     {
@@ -607,106 +1203,191 @@
       "name": "Lane Background (DOUBLE)",
       "help": "Choose your lane background for double play",
       "options": [
-        { "id": 9000, "label": "Blank" },
+        { "id": 9000, "label": "Blank/Default" },
         { "id": 1, "label": "EMI&RAGE" },
         { "id": 2, "label": "EMI" },
         { "id": 3, "label": "RAGE" },
         { "id": 4, "label": "ROCKET" },
-        { "id": 5, "label": "ALICE" },
-        { "id": 6, "label": "BABY-LON" },
-        { "id": 7, "label": "ALICE&EMI" },
-        { "id": 8, "label": "GRID" },
-        { "id": 9, "label": "BPL S2" },
-        { "id": 10, "label": "BPL S4" },
-        { "id": 11, "label": "EMI (BPL S4)" },
-        { "id": 12, "label": "RAGE (BPL S4)" },
-        { "id": 13, "label": "EMI & RAGE (BPL S4)" },
-        { "id": 14, "label": "ナナイロライト" },
-        { "id": 15, "label": "じもとっこスイーツ♪" },
-        { "id": 16, "label": "ハレ トキドキ メランコリック" },
-        { "id": 17, "label": "ひなビタ♪ お花見ライブ" },
-        { "id": 18, "label": "ひなビタ♪ 肝試し" },
-        { "id": 19, "label": "滅びに至るエランプシス" },
-        { "id": 20, "label": "カタルシスの月" },
-        { "id": 21, "label": "YUNI" },
-        { "id": 22, "label": "AKIRA" },
-        { "id": 23, "label": "YUNI & AKIRA" },
-        { "id": 24, "label": "ALICE & YUNI" },
-        { "id": 25, "label": "HONEYCOMB" },
-        { "id": 26, "label": "bag (EXPERT譜面 x0.25 WAVE)" },
-        { "id": 27, "label": "天戸紺 (Amado Kon)" },
-        { "id": 28, "label": "小舞桜 (Komai Sakura)" },
-        { "id": 29, "label": "天戸紺 & 小舞桜 (Amado Kon & Komai Sakura)" },
-        { "id": 30, "label": "†渚の小悪魔ラヴリィ～レイディオ† (CHALLENGE譜面)" },
-        { "id": 31, "label": "TSUGARU (春のコナステ大感謝祭2024)" },
-        { "id": 32, "label": "GRACE (春のコナステ大感謝祭2024)" },
-        { "id": 33, "label": "RINON (春のコナステ大感謝祭2024)" },
-        { "id": 34, "label": "MIMI (春のコナステ大感謝祭2024)" },
-        { "id": 35, "label": "RIO (春のコナステ大感謝祭2024)" },
-        { "id": 36, "label": "All Characters Assembly (春のコナステ大感謝祭2024)" },
-        { "id": 37, "label": "TRIANGLE" },
-        { "id": 38, "label": "YUNI (SUMMER)" },
-        { "id": 39, "label": "ALICE (SUMMER)" },
-        { "id": 40, "label": "YUNI (SUMMER) & ALICE (SUMMER)" },
-        { "id": 41, "label": "SUNFLOWER" },
-        { "id": 42, "label": "灰庭まよい" },
-        { "id": 43, "label": "ヒネリ" },
-        { "id": 44, "label": "灰庭まよい & ヒネリ" },
-        { "id": 45, "label": "HYPER DRILL" },
-        { "id": 46, "label": "博麗 霊夢" },
-        { "id": 47, "label": "東風谷 早苗" },
-        { "id": 48, "label": "古明地 こいし" },
-        { "id": 49, "label": "フランドール・スカーレット" },
-        { "id": 50, "label": "残像ニ繋ガレタ追憶ノHIDEAWAY" },
-        { "id": 51, "label": "弾幕信仰" },
-        { "id": 52, "label": "博麗 霊夢 & 東風谷 早苗" },
-        { "id": 53, "label": "古明地 こいし&フランドール・スカーレット" },
-        { "id": 54, "label": "東堂コハク" },
-        { "id": 55, "label": "山神カルタ" },
-        { "id": 56, "label": "レイン・パターソン" },
-        { "id": 57, "label": "東堂コハク (DDR)" },
-        { "id": 58, "label": "山神カルタ (DDR)" },
-        { "id": 59, "label": "レイン・パターソン (DDR)" },
-        { "id": 60, "label": "レイン・パターソン&山神カルタ&東堂コハク (DDR)" },
-        { "id": 61, "label": "倉持めると" },
-        { "id": 62, "label": "セラフ・ダズルガーデン" },
-        { "id": 63, "label": "長尾景" },
-        { "id": 64, "label": "倉持めると (DDR)" },
-        { "id": 65, "label": "セラフ・ダズルガーデン (DDR)" },
-        { "id": 66, "label": "長尾景 (DDR)" },
-        { "id": 67, "label": "長尾景&倉持めると&セラフ・ダズルガーデン (DDR)" },
-        { "id": 68, "label": "山形まり花 (音戯探偵)" },
-        { "id": 69, "label": "和泉一舞 (音戯探偵)" },
-        { "id": 70, "label": "春日咲子 (音戯探偵)" },
-        { "id": 71, "label": "芽兎めう (音戯探偵)" },
-        { "id": 72, "label": "音戯探偵ひなビタ♫ (パターン1)" },
-        { "id": 73, "label": "音戯探偵ひなビタ♫ (パターン2)" },
-        { "id": 74, "label": "璃音" },
-        { "id": 75, "label": "響香" },
-        { "id": 76, "label": "響香&璃音" },
-        { "id": 77, "label": "GITADORA (TITLE)" },
-        { "id": 78, "label": "GITADORA (PREMIUM ENCORE)" },
-        { "id": 79, "label": "ミミ" },
-        { "id": 80, "label": "ニャミ" },
-        { "id": 81, "label": "ミミ&ニャミ" },
-        { "id": 82, "label": "ミミ&ニャミ (Title)" },
-        { "id": 83, "label": "ミミ&ニャミ (Yeeeeee Hooooo)" },
-        { "id": 84, "label": "エリカ (秋のコナステ大感謝祭2024)" },
-        { "id": 85, "label": "EMI (秋のコナステ大感謝祭2024)" },
-        { "id": 86, "label": "響香 (秋のコナステ大感謝祭2024)" },
-        { "id": 87, "label": "紅刃 (秋のコナステ大感謝祭2024)" },
-        { "id": 88, "label": "ニャミ (秋のコナステ大感謝祭2024)" },
-        { "id": 89, "label": "BEMANIキャラ集合 (秋のコナステ大感謝祭2024)" },
-        { "id": 90, "label": "わたこ (秋のコナステ大感謝祭2024)" },
-        { "id": 91, "label": "不知火フレア" },
-        { "id": 92, "label": "不知火フレア (ルミナス)" },
-        { "id": 93, "label": "不知火フレア (清楚少女風)" },
-        { "id": 94, "label": "RINON" },
-        { "id": 95, "label": "RINON (Superior MAXXX)" },
-        { "id": 96, "label": "RINON&RINON (Superior MAXXX)" },
-        { "id": 97, "label": "RINON Ace Style LEVEL1" },
-        { "id": 98, "label": "RINON Ace Style LEVEL2" },
-        { "id": 99, "label": "RINON Ace Style LEVEL3" }
+        { 
+          "label": "第1弾 (2024-12-23)", 
+          "options": [
+            { "id": 5, "label": "ALICE" },
+            { "id": 6, "label": "BABY-LON" },
+            { "id": 7, "label": "ALICE&EMI" },
+            { "id": 8, "label": "GRID" }
+          ] 
+        },
+        {
+          "label": "BPL -SEASON 4- DanceDanceRevolution (2025-01-28)",
+          "options": [
+            { "id": 9, "label": "BPL S2" },
+            { "id": 10, "label": "BPL S4" },
+            { "id": 11, "label": "EMI (BPL S4)" },
+            { "id": 12, "label": "RAGE (BPL S4)" },
+            { "id": 13, "label": "EMI & RAGE (BPL S4)" }
+          ]
+        },
+        {
+          "label": "「ひなビタ♪」 第1弾 (2025-01-28)",
+          "options": [
+            { "id": 14, "label": "ナナイロライト" },
+            { "id": 15, "label": "じもとっこスイーツ♪" },
+            { "id": 16, "label": "ハレ トキドキ メランコリック" },
+            { "id": 17, "label": "ひなビタ♪ お花見ライブ" },
+            { "id": 18, "label": "ひなビタ♪ 肝試し" },
+            { "id": 19, "label": "滅びに至るエランプシス" },
+            { "id": 20, "label": "カタルシスの月" }
+          ]
+        },
+        {
+          "label": "第2弾 (2025-06-10)",
+          "options": [
+            { "id": 21, "label": "YUNI" },
+            { "id": 22, "label": "AKIRA" },
+            { "id": 23, "label": "YUNI & AKIRA" },
+            { "id": 24, "label": "ALICE & YUNI" },
+            { "id": 25, "label": "HONEYCOMB" },
+            { "id": 26, "label": "bag (EXPERT譜面 x0.25 WAVE)" }
+          ]
+        },
+        {
+          "label": "第3弾 (2025-06-10)",
+          "options": [
+            { "id": 27, "label": "天戸紺 (Amado Kon)" },
+            { "id": 28, "label": "小舞桜 (Komai Sakura)" },
+            { "id": 29, "label": "天戸紺 & 小舞桜 (Amado Kon & Komai Sakura)" },
+            { "id": 30, "label": "†渚の小悪魔ラヴリィ～レイディオ† (CHALLENGE譜面)" }
+          ]
+        },
+        {
+          "label": "春のコナステ大感謝祭2024 (2025-07-09)",
+          "options": [
+            { "id": 31, "label": "TSUGARU (春のコナステ大感謝祭2024)" },
+            { "id": 32, "label": "GRACE (春のコナステ大感謝祭2024)" },
+            { "id": 33, "label": "RINON (春のコナステ大感謝祭2024)" },
+            { "id": 34, "label": "MIMI (春のコナステ大感謝祭2024)" },
+            { "id": 35, "label": "RIO (春のコナステ大感謝祭2024)" },
+            { "id": 36, "label": "All Characters Assembly (春のコナステ大感謝祭2024)" },
+            { "id": 37, "label": "TRIANGLE" }
+          ]
+        },
+        {
+          "label": "第4弾 (2025-08-05)",
+          "options": [
+            { "id": 38, "label": "YUNI (SUMMER)" },
+            { "id": 39, "label": "ALICE (SUMMER)" },
+            { "id": 40, "label": "YUNI (SUMMER) & ALICE (SUMMER)" },
+            { "id": 41, "label": "SUNFLOWER" }
+          ]
+        },
+        {
+          "label": "第5弾 (2025-09-16)",
+          "options": [
+            { "id": 42, "label": "灰庭まよい" },
+            { "id": 43, "label": "ヒネリ" },
+            { "id": 44, "label": "灰庭まよい & ヒネリ" },
+            { "id": 45, "label": "HYPER DRILL" }
+          ]
+        },                  
+        {
+          "label": "「東方Project」 第1弾 (2025-10-21)",
+          "options": [
+            { "id": 46, "label": "博麗 霊夢" },
+            { "id": 47, "label": "東風谷 早苗" },
+            { "id": 48, "label": "古明地 こいし" },
+            { "id": 49, "label": "フランドール・スカーレット" },
+            { "id": 50, "label": "残像ニ繋ガレタ追憶ノHIDEAWAY" },
+            { "id": 51, "label": "弾幕信仰" },
+            { "id": 52, "label": "博麗 霊夢 & 東風谷 早苗" },
+            { "id": 53, "label": "古明地 こいし&フランドール・スカーレット" }
+          ]
+        },
+        {
+          "label": "「にじさんじダンス部」 第1弾 (2025-11-18)",
+          "options": [
+            { "id": 54, "label": "東堂コハク" },
+            { "id": 55, "label": "山神カルタ" },
+            { "id": 56, "label": "レイン・パターソン" },
+            { "id": 57, "label": "東堂コハク (DDR)" },
+            { "id": 58, "label": "山神カルタ (DDR)" },
+            { "id": 59, "label": "レイン・パターソン (DDR)" },
+            { "id": 60, "label": "レイン・パターソン&山神カルタ&東堂コハク (DDR)" }
+          ]
+        },
+        {
+          "label": "「にじさんじダンス部」 第2弾 (2025-11-18)",
+          "options": [
+            { "id": 61, "label": "倉持めると" },
+            { "id": 62, "label": "セラフ・ダズルガーデン" },
+            { "id": 63, "label": "長尾景" },
+            { "id": 64, "label": "倉持めると (DDR)" },
+            { "id": 65, "label": "セラフ・ダズルガーデン (DDR)" },
+            { "id": 66, "label": "長尾景 (DDR)" },
+            { "id": 67, "label": "長尾景&倉持めると&セラフ・ダズルガーデン (DDR)" }
+          ]
+        },     
+        {
+          "label": "音戯探偵ひなビタ♫ 調査依頼:BEMANI (2025-12-23)",
+          "options": [
+            { "id": 68, "label": "山形まり花 (音戯探偵)" },
+            { "id": 69, "label": "和泉一舞 (音戯探偵)" },
+            { "id": 70, "label": "春日咲子 (音戯探偵)" },
+            { "id": 71, "label": "芽兎めう (音戯探偵)" },
+            { "id": 72, "label": "音戯探偵ひなビタ♫ (パターン1)" },
+            { "id": 73, "label": "音戯探偵ひなビタ♫ (パターン2)" }
+          ]
+        },
+        {
+          "label": "「GITADORA」 第1弾 (2025-12-23)",
+          "options": [
+            { "id": 74, "label": "璃音" },
+            { "id": 75, "label": "響香" },
+            { "id": 76, "label": "響香&璃音" },
+            { "id": 77, "label": "GITADORA (TITLE)" },
+            { "id": 78, "label": "GITADORA (PREMIUM ENCORE)" }
+          ]
+        },
+        {
+          "label": "「pop'n music」 第1弾 (2026-02-24)",
+          "options": [
+            { "id": 79, "label": "ミミ" },
+            { "id": 80, "label": "ニャミ" },
+            { "id": 81, "label": "ミミ&ニャミ" },
+            { "id": 82, "label": "ミミ&ニャミ (Title)" },
+            { "id": 83, "label": "ミミ&ニャミ (Yeeeeee Hooooo)" }
+          ]
+        },     
+        {
+          "label": "秋のコナステ大感謝祭2024 (2026-03-24)",
+          "options": [
+            { "id": 84, "label": "エリカ (秋のコナステ大感謝祭2024)" },
+            { "id": 85, "label": "EMI (秋のコナステ大感謝祭2024)" },
+            { "id": 86, "label": "響香 (秋のコナステ大感謝祭2024)" },
+            { "id": 87, "label": "紅刃 (秋のコナステ大感謝祭2024)" },
+            { "id": 88, "label": "ニャミ (秋のコナステ大感謝祭2024)" },
+            { "id": 89, "label": "BEMANIキャラ集合 (秋のコナステ大感謝祭2024)" },
+            { "id": 90, "label": "わたこ (秋のコナステ大感謝祭2024)" }
+          ]
+        },
+        {
+          "label": "不知火フレア (2026-04-21)",
+          "options": [
+            { "id": 91, "label": "不知火フレア" },
+            { "id": 92, "label": "不知火フレア (ルミナス)" },
+            { "id": 93, "label": "不知火フレア (清楚少女風)" }
+          ]
+        },     
+        {
+          "label": "第6弾 (2026-06-16)",
+          "options": [
+            { "id": 94, "label": "RINON" },
+            { "id": 95, "label": "RINON (Superior MAXXX)" },
+            { "id": 96, "label": "RINON&RINON (Superior MAXXX)" },
+            { "id": 97, "label": "RINON Ace Style LEVEL1" },
+            { "id": 98, "label": "RINON Ace Style LEVEL2" },
+            { "id": 99, "label": "RINON Ace Style LEVEL3" }
+          ]
+        }
       ]
     }
 ]
