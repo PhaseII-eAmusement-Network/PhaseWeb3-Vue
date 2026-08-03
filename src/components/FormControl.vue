@@ -150,13 +150,20 @@ if (props.ctrlKFocus) {
       :name="name"
       :class="inputElClass"
     >
-      <option
-        v-for="option in options"
-        :key="option.id ?? option"
-        :value="option.id ?? option"
-      >
-        {{ option.label ?? option }}
-      </option>
+      <template v-for="option in options" :key="option.id ?? option">
+        <optgroup v-if="Array.isArray(option.options)" :label="option.label">
+          <option
+            v-for="child in option.options"
+            :key="child.id ?? child"
+            :value="child.id ?? child"
+          >
+            {{ child.label ?? child }}
+          </option>
+        </optgroup>
+        <option v-else :value="option.id ?? option">
+          {{ option.label ?? option }}
+        </option>
+      </template>
     </select>
     <textarea
       v-else-if="computedType === 'textarea'"
