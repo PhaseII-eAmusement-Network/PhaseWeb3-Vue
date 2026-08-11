@@ -27,7 +27,7 @@ onMounted(() => {
 
 <template>
   <div class="relative flex h-full flex-col px-4 py-8 max-w-3xl md:min-w-lg">
-    <div class="absolute left-4 top-4">
+    <div class="absolute left-4 top-4 px-4 md:px-0">
       <RerunLogo small :year="data.year" />
     </div>
 
@@ -36,7 +36,7 @@ onMounted(() => {
       enter-from-class="opacity-0 translate-y-4"
       enter-to-class="opacity-100 translate-y-0"
     >
-      <div v-if="show" class="mt-12 -mb-6">
+      <div v-if="show" class="mt-12 -mb-6 px-4 md:px-0">
         <SectionTitleLine
           :icon="PhCalendar"
           color="text-orange-300"
@@ -46,7 +46,7 @@ onMounted(() => {
       </div>
     </Transition>
 
-    <div class="mt-6 grid w-full gap-5">
+    <div class="mt-6 grid w-full px-4 md:px-0 gap-5">
       <Transition
         enter-active-class="transition-all duration-700 delay-[200ms]"
         enter-from-class="opacity-0 translate-y-6"
@@ -117,7 +117,7 @@ onMounted(() => {
       enter-from-class="opacity-0 translate-y-4"
       enter-to-class="opacity-100 translate-y-0"
     >
-      <div v-if="show" class="mt-6">
+      <div v-if="show" class="mt-6 px-4 md:px-0">
         <SectionTitleLine
           :icon="PhChartLine"
           color="text-sky-300"
@@ -132,7 +132,7 @@ onMounted(() => {
       enter-from-class="opacity-0 translate-y-4"
       enter-to-class="opacity-100 translate-y-0"
     >
-      <div v-if="show">
+      <div v-if="show" class="max-w-screen md:max-w-auto px-4 md:px-0">
         <CardBox>
           <LineChart :data="chartData" class="h-50" />
         </CardBox>
