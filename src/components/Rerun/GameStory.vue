@@ -49,12 +49,14 @@ onMounted(() => {
     >
       <div v-if="show">
         <div class="text-center">
-          <div class="">
-            <p class="mb-4 text-lg text-slate-300">Your #1 game this year</p>
+          <div>
+            <p class="mb-4 text-lg text-slate-300">
+              Your #{{ profile.personalRank }} game this year
+            </p>
             <h1 class="text-2xl">You had...</h1>
             <NumberDynamic
               class="text-8xl mb-2 font-black text-emerald-600"
-              :value="1000"
+              :value="profile.data.total_plays"
             />
             <h1 class="text-3xl font-bold">plays</h1>
           </div>
@@ -65,7 +67,7 @@ onMounted(() => {
             <div>
               <NumberDynamic
                 class="text-4xl mb-2 font-black text-pink-300"
-                :value="4000"
+                :value="profile.data.attempts"
               />
               <h1 class="text-3xl font-bold">scores</h1>
             </div>
@@ -73,7 +75,7 @@ onMounted(() => {
             <div>
               <NumberDynamic
                 class="text-4xl mb-2 font-black text-amber-400"
-                :value="1000"
+                :value="profile.data.records"
               />
               <h1 class="text-3xl font-bold">records</h1>
             </div>

@@ -15,45 +15,63 @@ const current = ref(0);
 const profiles = [
   {
     game: GameConstants.DDR,
+    personalRank: 1,
     username: "TRMAZI",
     data: {
       new: true,
       total_plays: 100,
+      attempts: 100,
+      records: 100,
     },
   },
   {
     game: GameConstants.DDROMNI,
+    personalRank: 2,
     username: "TRMAZI",
     data: {
       total_plays: 100,
+      attempts: 100,
+      records: 100,
     },
   },
   {
     game: GameConstants.IIDX,
+    personalRank: 3,
     username: "TRMAZI",
     data: {
       total_plays: 100,
+      attempts: 100,
+      records: 100,
     },
   },
   {
     game: GameConstants.SDVX,
+    personalRank: 4,
     username: "TRMAZI",
     data: {
       total_plays: 100,
+      attempts: 100,
+      records: 100,
     },
   },
   {
     game: GameConstants.TSUMTSUM,
+    personalRank: 5,
     username: "TRMAZI",
     data: {
       total_plays: 100,
+      attempts: 100,
+      records: 100,
     },
   },
   {
     game: GameConstants.REFLEC_BEAT,
+    personalRank: 6,
     username: "TRMAZI",
     data: {
       total_plays: 100,
+      attempts: 100,
+      records: 100,
     },
   },
 ];
