@@ -3,6 +3,34 @@ import CardBox from "@/components/CardBox.vue";
 import OverlayLayer from "@/components/OverlayLayer.vue";
 import BaseButton from "@/components/BaseButton.vue";
 import BaseButtons from "@/components/BaseButtons.vue";
+import { getNestedValue } from "@/constants/values";
+
+const errorTypes = [
+  {
+    label: "Timestamp",
+    id: "date",
+  },
+  {
+    label: "Service",
+    id: "data.service",
+  },
+  {
+    label: "PCBID",
+    id: "data.pcbid",
+  },
+  {
+    label: "Model",
+    id: "data.model",
+  },
+  {
+    label: "Request",
+    id: "data.requestName",
+  },
+  {
+    label: "Method",
+    id: "data.method",
+  },
+];
 
 defineProps({
   active: {
@@ -49,46 +77,30 @@ function formatXML(xml) {
 </script>
 
 <template>
-  <OverlayLayer v-if="active" :transparent="true">
+  <OverlayLayer v-if="active" :transparent="true" @overlay-click="close">
     <CardBox
-      class="w-11/12 lg:w-5/6 xl:w-3/4 max-h-[90vh] shadow-lg z-50 text-white/90 overflow-scroll"
+      class="w-11/12 lg:w-5/6 xl:w-3/4 max-h-screen shadow-lg z-50 text-white/90 overflow-scroll"
     >
       <div class="space-y-5">
         <div>
           <h1 class="text-2xl font-bold">Exception Details</h1>
           <p>u should fix this 💯</p>
         </div>
-        <div class="grid grid-cols-2 gap-4 text-sm">
-          <div>
-            <span class="font-semibold">Timestamp</span>
-            <p>{{ event?.date }}</p>
-          </div>
-          <div>
-            <span class="font-semibold">Service</span>
-            <p>{{ event?.data?.service }}</p>
-          </div>
-          <div>
-            <span class="font-semibold">PCBID</span>
-            <p>{{ event?.data?.pcbid }}</p>
-          </div>
-          <div>
-            <span class="font-semibold">Model</span>
-            <p>{{ event?.data?.model }}</p>
-          </div>
-          <div>
-            <span class="font-semibold">Request</span>
-            <p>{{ event?.data?.requestName }}</p>
-          </div>
-          <div>
-            <span class="font-semibold">Method</span>
-            <p>{{ event?.data?.method }}</p>
-          </div>
+        <div
+          class="grid grid-cols-3 lg:grid-cols-4 2xl:grid-cols-6 gap-4 text-sm"
+        >
+          <template v-for="type of errorTypes">
+            <div v-if="getNestedValue(event, type.id)">
+              <span class="font-semibold">{{ type.label }}</span>
+              <p>{{ getNestedValue(event, type.id) }}</p>
+            </div>
+          </template>
         </div>
 
         <div>
           <h2 class="font-semibold mb-2">Request</h2>
           <div
-            class="bg-slate-950 rounded-lg border border-slate-700 max-h-65 overflow-auto"
+            class="bg-slate-950 rounded-lg border border-slate-700 max-h-65 overflow-scroll"
           >
             <pre
               class="p-4 text-xs text-emerald-300 whitespace-pre font-mono"
@@ -98,7 +110,7 @@ function formatXML(xml) {
         <div>
           <h2 class="font-semibold mb-2">Traceback</h2>
           <div
-            class="bg-black rounded-lg border border-slate-700 max-h-80 overflow-auto"
+            class="bg-black rounded-lg border border-slate-700 max-h-80 overflow-scroll"
           >
             <pre
               class="p-4 text-xs text-red-300 whitespace-pre-wrap break-all font-mono"
