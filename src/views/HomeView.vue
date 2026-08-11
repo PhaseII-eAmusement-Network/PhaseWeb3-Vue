@@ -240,7 +240,12 @@ const cardBoxes = ref([
       </div>
       <CardBoxComponentEmpty v-if="!newsData || !newsData.length" />
 
-      <SectionTitleLine :icon="PhTrendUp" title="Quick Stats" main />
+      <SectionTitleLine
+        :icon="PhTrendUp"
+        title="Quick Stats"
+        color="text-emerald-300"
+        main
+      />
       <div
         class="grid grid-cols-2 sm:grid-cols-3 gap-6 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 3xl:grid-cols-5 mb-6"
       >

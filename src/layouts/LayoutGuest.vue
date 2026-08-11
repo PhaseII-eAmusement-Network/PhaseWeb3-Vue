@@ -1,11 +1,14 @@
 <script setup></script>
 
 <template>
-  <div class="bg-gray-950 dark:text-slate-100">
+  <div
+    class="relative min-h-screen bg-slate-800 md:bg-slate-950 dark:text-slate-100"
+  >
     <div
-      class="hidden md:block absolute inset-0 z-0 bg-[radial-gradient(125%_125%_at_50%_10%,#000000_40%,#0d1a36_100%)]"
+      class="pointer-events-none absolute inset-0 hidden md:block z-0 md:bg-[radial-gradient(125%_125%_at_50%_10%,#000000_40%,#0d1a36_100%)]"
     />
-    <div class="animated animatedFadeInUp fadeInUp">
+
+    <div class="relative z-10 animated animatedFadeInUp fadeInUp">
       <slot />
     </div>
   </div>

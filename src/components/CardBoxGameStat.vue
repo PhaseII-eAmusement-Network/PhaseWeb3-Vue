@@ -33,6 +33,10 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  disableHover: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 const tag = computed(() => {
@@ -72,11 +76,16 @@ const cardStyle = `
   background-size: cover;
   background-repeat: no-repeat;
 `;
+
+const hoverClass = props.disableHover
+  ? null
+  : "hover:cursor-pointer hover:outline outline-blue-500/50";
 </script>
 
 <template>
   <button
-    class="flex rounded-2xl hover:scale-[1.01] hover:shadow-xl hover:outline outline-blue-500/50 hover:bg-slate-500 hover:dark:bg-slate-950 hover:cursor-pointer transition-all duration-100"
+    class="flex rounded-2xl hover:scale-[1.01] hover:shadow-xl hover:bg-slate-500 hover:dark:bg-slate-950 transition-all duration-100"
+    :class="hoverClass"
     :style="cardStyle"
     @click="loadGamePage()"
   >

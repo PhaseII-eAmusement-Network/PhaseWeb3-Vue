@@ -41,6 +41,7 @@ const routes = [
   },
   {
     meta: {
+      requiresGuest: true,
       title: "Login",
     },
     path: "/auth/login",
@@ -49,6 +50,7 @@ const routes = [
   },
   {
     meta: {
+      requiresGuest: true,
       title: "Register",
     },
     path: "/auth/register",
@@ -57,6 +59,7 @@ const routes = [
   },
   {
     meta: {
+      requiresGuest: true,
       title: "Reset Password",
     },
     path: "/auth/reset",
@@ -178,6 +181,19 @@ const routes = [
     path: "/profiles/:id",
     name: "profile_viewer",
     component: () => import("@/views/Profile/PublicView.vue"),
+    options: {
+      hotReload: true, // disables Hot Reload
+    },
+  },
+  {
+    meta: {
+      requiresAuth: true,
+      requiresAdmin: true,
+      title: "Profile Rerun",
+    },
+    path: "/profile/rerun",
+    name: "profile_rerun",
+    component: () => import("@/views/Profile/RerunView.vue"),
     options: {
       hotReload: true, // disables Hot Reload
     },
@@ -484,6 +500,16 @@ router.beforeEach(async (to) => {
       return {
         name: "login",
         query: { redirect: to.fullPath },
+      };
+    }
+  }
+
+  if (to.meta.requiresGuest) {
+    const validSession = await mainStore.loadUser();
+
+    if (validSession) {
+      return {
+        name: "dashboard",
       };
     }
   }
