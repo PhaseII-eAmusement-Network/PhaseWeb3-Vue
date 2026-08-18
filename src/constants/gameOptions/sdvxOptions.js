@@ -244,6 +244,12 @@ export const SDVXOptions = {
       type: "Boolean",
     },
     {
+      id: "force_unlock_skill",
+      name: "Force Unlock Skill Analyzer Courses",
+      help: "Force unlock all Skill Analyzer courses.",
+      type: "Boolean",
+    },
+    {
       id: "active_stamp_event",
       name: "Active Stamp Event",
       help: "Select the active stamp event.\nRefer to bemaniwiki for details on each event: https://bemaniwiki.com/?SOUND+VOLTEX+EXCEED+GEAR/解禁要素#stamp_event_end",
