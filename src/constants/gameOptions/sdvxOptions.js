@@ -284,6 +284,21 @@ export const SDVXOptions = {
       ],
     },
     {
+      id: "forced_event",
+      name: "Force Enable Event",
+      help: "Select a scheduled event to force enable.",
+      type: "Array",
+      options: [
+        { id: 0, label: "None" },
+        { id: 1, label: "Valentine's Day 2024" },
+        { id: 2, label: "White Day 2024" },
+        { id: 3, label: "April Fools 2025" },
+        { id: 4, label: "Halloween" },
+        { id: 5, label: "Christmas 2023" },
+        { id: 6, label: "New Years" },
+      ],
+    },
+    {
       id: "disable_omega",
       name: "Disable OMEGA DIMENSION",
       help: "Disables all OMEGA DIMENSION events (1 through 8)",
@@ -308,47 +323,12 @@ export const SDVXOptions = {
       type: "Boolean",
     },
     {
-      id: "enable_valentines",
-      name: "Enable Valentine's Day 2024 Event",
-      help: "Force enable the Valentine's Day 2024 Event",
-      type: "Boolean",
-    },
-    {
-      id: "enable_whiteday",
-      name: "Enable White Day 2024 Event",
-      help: "Force enable the White Day 2024 Event",
-      type: "Boolean",
-    },
-    {
-      id: "enable_aprilfools",
-      name: "Enable April Fools 2025 Event",
-      help: "Force enable the April Fools 2025 Event",
-      type: "Boolean",
-    },
-    {
-      id: "enable_halloween",
-      name: "Enable Halloween Event",
-      help: "Force enable the Halloween Event",
-      type: "Boolean",
-    },
-    {
-      id: "enable_christmas",
-      name: "Enable Christmas 2023 Event",
-      help: "Force enable the Christmas 2023 Event",
-      type: "Boolean",
-    },
-    {
-      id: "enable_newyear",
-      name: "Enable New Years Event",
-      help: "Force enable the New Years Event",
-      type: "Boolean",
-    },
-    {
       id: "chara_go1",
       name: "Game Over Character #1",
       help: "Sets a character on the Game Over screen.",
       type: "Array",
       options: [
+        { id: 10000, label: "Random" },
         { id: 0, label: "Rasis" },
         { id: 1, label: "Grace" },
         { id: 2, label: "Right" },
@@ -490,6 +470,7 @@ export const SDVXOptions = {
       help: "Sets a character on the Game Over screen.",
       type: "Array",
       options: [
+        { id: 10000, label: "Random" },
         { id: 0, label: "Rasis" },
         { id: 1, label: "Grace" },
         { id: 2, label: "Right" },
@@ -631,6 +612,7 @@ export const SDVXOptions = {
       help: "Sets a character on the Game Over screen.",
       type: "Array",
       options: [
+        { id: 10000, label: "Random" },
         { id: 0, label: "Rasis" },
         { id: 1, label: "Grace" },
         { id: 2, label: "Right" },
