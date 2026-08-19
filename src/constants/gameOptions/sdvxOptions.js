@@ -328,6 +328,7 @@ export const SDVXOptions = {
       help: "Sets a character on the Game Over screen.",
       type: "Array",
       options: [
+        { id: 10000, label: "Random" },
         { id: 0, label: "Rasis" },
         { id: 1, label: "Grace" },
         { id: 2, label: "Right" },
@@ -469,6 +470,7 @@ export const SDVXOptions = {
       help: "Sets a character on the Game Over screen.",
       type: "Array",
       options: [
+        { id: 10000, label: "Random" },
         { id: 0, label: "Rasis" },
         { id: 1, label: "Grace" },
         { id: 2, label: "Right" },
@@ -610,6 +612,7 @@ export const SDVXOptions = {
       help: "Sets a character on the Game Over screen.",
       type: "Array",
       options: [
+        { id: 10000, label: "Random" },
         { id: 0, label: "Rasis" },
         { id: 1, label: "Grace" },
         { id: 2, label: "Right" },
