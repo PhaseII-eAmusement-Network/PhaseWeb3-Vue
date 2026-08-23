@@ -87,6 +87,15 @@ const routes = [
   {
     meta: {
       requiresAuth: true,
+      title: "Machine Setup",
+    },
+    path: "/profile/setup_machine",
+    name: "setup_machine",
+    component: () => import("@/views/Auth/SetupMachineView.vue"),
+  },
+  {
+    meta: {
+      requiresAuth: true,
       title: "Profile",
     },
     path: "/profile",
