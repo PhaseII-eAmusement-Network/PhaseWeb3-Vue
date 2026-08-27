@@ -424,9 +424,9 @@ export const DDROptions = {
       help: "Choose your background video setting",
       type: "Array",
       options: [
-        { id: 0, label: "Fullscreen Video" },
-        { id: 1, label: "Small Video" },
-        { id: 2, label: "Off" },
+        { id: 1, label: "Fullscreen Video" },
+        { id: 2, label: "Small Video" },
+        { id: 3, label: "Off" },
       ],
     },
   ],

@@ -144,6 +144,28 @@
             { "id": 54, "label": "Superior MAXXX" },
             { "id": 55, "label": "キャラクタースライドショー (RINON)" }
           ]
+        },
+        {
+          "label": "「BEMANI納涼祭2026」 第1弾 (2026-07-21)",
+          "options": [
+            { "id": 56, "label": "EMI&BABY-LON&レイシス&タイマー (BEMANI納涼祭2026)" },
+            { "id": 57, "label": "EMI (BEMANI納涼祭2026)" },
+            { "id": 58, "label": "BABY-LON (BEMANI納涼祭2026)" },
+            { "id": 59, "label": "レイシス (BEMANI納涼祭2026)" },
+            { "id": 60, "label": "タイマー (BEMANI納涼祭2026)" },
+            { "id": 61, "label": "BEMANI納涼祭2026 (パターン1)" }
+          ]
+        },
+        {
+          "label": "「BEMANI納涼祭2026」 第2弾 (2026-07-21)",
+          "options": [
+            { "id": 62, "label": "理々奈&璃音&モード (BEMANI納涼祭2026)" },
+            { "id": 63, "label": "理々奈 (BEMANI納涼祭2026)" },
+            { "id": 64, "label": "璃音 (BEMANI納涼祭2026)" },
+            { "id": 65, "label": "モード (BEMANI納涼祭2026)" },
+            { "id": 66, "label": "犬JU&えびめ&ハムCHU (BEMANI納涼祭2026)" },
+            { "id": 67, "label": "BEMANI納涼祭2026 (パターン2)" }
+          ]
         }
       ]
     },
@@ -291,6 +313,28 @@
             { "id": 53, "label": "ACE FOR ACES" },
             { "id": 54, "label": "Superior MAXXX" },
             { "id": 55, "label": "キャラクタースライドショー (RINON)" }
+          ]
+        },
+        {
+          "label": "「BEMANI納涼祭2026」 第1弾 (2026-07-21)",
+          "options": [
+            { "id": 56, "label": "EMI&BABY-LON&レイシス&タイマー (BEMANI納涼祭2026)" },
+            { "id": 57, "label": "EMI (BEMANI納涼祭2026)" },
+            { "id": 58, "label": "BABY-LON (BEMANI納涼祭2026)" },
+            { "id": 59, "label": "レイシス (BEMANI納涼祭2026)" },
+            { "id": 60, "label": "タイマー (BEMANI納涼祭2026)" },
+            { "id": 61, "label": "BEMANI納涼祭2026 (パターン1)" }
+          ]
+        },
+        {
+          "label": "「BEMANI納涼祭2026」 第2弾 (2026-07-21)",
+          "options": [
+            { "id": 62, "label": "理々奈&璃音&モード (BEMANI納涼祭2026)" },
+            { "id": 63, "label": "理々奈 (BEMANI納涼祭2026)" },
+            { "id": 64, "label": "璃音 (BEMANI納涼祭2026)" },
+            { "id": 65, "label": "モード (BEMANI納涼祭2026)" },
+            { "id": 66, "label": "犬JU&えびめ&ハムCHU (BEMANI納涼祭2026)" },
+            { "id": 67, "label": "BEMANI納涼祭2026 (パターン2)" }
           ]
         }
       ]
@@ -451,6 +495,23 @@
             { "id": 65, "label": "RINON Ace Style LEVEL2" },
             { "id": 66, "label": "RINON Ace Style LEVEL3" }
           ]
+        },
+        {
+          "label": "「BEMANI納涼祭2026」 第1弾 (2026-07-21)",
+          "options": [
+            { "id": 67, "label": "EMI (BEMANI納涼祭2026)" },
+            { "id": 68, "label": "BABY-LON (BEMANI納涼祭2026)" },
+            { "id": 69, "label": "レイシス (BEMANI納涼祭2026)" },
+            { "id": 70, "label": "タイマー (BEMANI納涼祭2026)" }
+          ]
+        },
+        {
+          "label": "「BEMANI納涼祭2026」 第2弾 (2026-07-21)",
+          "options": [
+            { "id": 71, "label": "理々奈 (BEMANI納涼祭2026)" },
+            { "id": 72, "label": "璃音 (BEMANI納涼祭2026)" },
+            { "id": 73, "label": "モード (BEMANI納涼祭2026)" }
+          ]
         }
       ]
     },
@@ -609,6 +670,23 @@
             { "id": 64, "label": "RINON Ace Style LEVEL1" },
             { "id": 65, "label": "RINON Ace Style LEVEL2" },
             { "id": 66, "label": "RINON Ace Style LEVEL3" }
+          ]
+        },
+        {
+          "label": "「BEMANI納涼祭2026」 第1弾 (2026-07-21)",
+          "options": [
+            { "id": 67, "label": "EMI (BEMANI納涼祭2026)" },
+            { "id": 68, "label": "BABY-LON (BEMANI納涼祭2026)" },
+            { "id": 69, "label": "レイシス (BEMANI納涼祭2026)" },
+            { "id": 70, "label": "タイマー (BEMANI納涼祭2026)" }
+          ]
+        },
+        {
+          "label": "「BEMANI納涼祭2026」 第2弾 (2026-07-21)",
+          "options": [
+            { "id": 71, "label": "理々奈 (BEMANI納涼祭2026)" },
+            { "id": 72, "label": "璃音 (BEMANI納涼祭2026)" },
+            { "id": 73, "label": "モード (BEMANI納涼祭2026)" }
           ]
         }
       ]
@@ -805,6 +883,30 @@
             { "id": 100, "label": "RINON Ace Style LEVEL1" },
             { "id": 101, "label": "RINON Ace Style LEVEL2" },
             { "id": 102, "label": "RINON Ace Style LEVEL3" }
+          ]
+        },
+        {
+          "label": "「BEMANI納涼祭2026」 第1弾 (2026-07-21)",
+          "options": [
+            { "id": 103, "label": "EMI (BEMANI納涼祭2026)" },
+            { "id": 104, "label": "BABY-LON (BEMANI納涼祭2026)" },
+            { "id": 105, "label": "レイシス (BEMANI納涼祭2026)" },
+            { "id": 106, "label": "タイマー (BEMANI納涼祭2026)" },
+            { "id": 107, "label": "Amabie" },
+            { "id": 108, "label": "Bloody Iron Maiden" },
+            { "id": 109, "label": "霖が哭く" }
+          ]
+        },
+        {
+          "label": "「BEMANI納涼祭2026」 第2弾 (2026-07-21)",
+          "options": [
+            { "id": 110, "label": "理々奈 (BEMANI納涼祭2026)" },
+            { "id": 111, "label": "璃音 (BEMANI納涼祭2026)" },
+            { "id": 112, "label": "モード (BEMANI納涼祭2026)" },
+            { "id": 113, "label": "犬JU&えびめ&ハムCHU (BEMANI納涼祭2026)" },
+            { "id": 114, "label": "Smintheus" },
+            { "id": 115, "label": "断罪のミメシス" },
+            { "id": 116, "label": "Any%" }
           ]
         }
       ]
@@ -1020,6 +1122,30 @@
             { "id": 120, "label": "RINON Ace Style LEVEL2" },
             { "id": 121, "label": "RINON Ace Style LEVEL3" }
           ]
+        },
+        {
+          "label": "「BEMANI納涼祭2026」 第1弾 (2026-07-21)",
+          "options": [
+            { "id": 122, "label": "EMI (BEMANI納涼祭2026)" },
+            { "id": 123, "label": "BABY-LON (BEMANI納涼祭2026)" },
+            { "id": 124, "label": "レイシス (BEMANI納涼祭2026)" },
+            { "id": 125, "label": "タイマー (BEMANI納涼祭2026)" },
+            { "id": 126, "label": "Amabie" },
+            { "id": 127, "label": "Bloody Iron Maiden" },
+            { "id": 128, "label": "霖が哭く" }
+          ]
+        },
+        {
+          "label": "「BEMANI納涼祭2026」 第2弾 (2026-07-21)",
+          "options": [
+            { "id": 129, "label": "理々奈 (BEMANI納涼祭2026)" },
+            { "id": 130, "label": "璃音 (BEMANI納涼祭2026)" },
+            { "id": 131, "label": "モード (BEMANI納涼祭2026)" },
+            { "id": 132, "label": "犬JU&えびめ&ハムCHU (BEMANI納涼祭2026)" },
+            { "id": 133, "label": "Smintheus" },
+            { "id": 134, "label": "断罪のミメシス" },
+            { "id": 135, "label": "Any%" }
+          ]
         }
       ]
     },
@@ -1194,6 +1320,24 @@
             { "id": 80, "label": "RINON Ace Style LEVEL1" },
             { "id": 81, "label": "RINON Ace Style LEVEL2" },
             { "id": 82, "label": "RINON Ace Style LEVEL3" }
+          ]
+        },
+        {
+          "label": "「BEMANI納涼祭2026」 第1弾 (2026-07-21)",
+          "options": [
+            { "id": 83, "label": "EMI (BEMANI納涼祭2026)" },
+            { "id": 84, "label": "BABY-LON (BEMANI納涼祭2026)" },
+            { "id": 85, "label": "レイシス (BEMANI納涼祭2026)" },
+            { "id": 86, "label": "タイマー (BEMANI納涼祭2026)" }
+          ]
+        },
+        {
+          "label": "「BEMANI納涼祭2026」 第2弾 (2026-07-21)",
+          "options": [
+            { "id": 87, "label": "理々奈 (BEMANI納涼祭2026)" },
+            { "id": 88, "label": "璃音 (BEMANI納涼祭2026)" },
+            { "id": 89, "label": "モード (BEMANI納涼祭2026)" },
+            { "id": 90, "label": "犬JU&えびめ&ハムCHU (BEMANI納涼祭2026)" }
           ]
         }
       ]
@@ -1386,6 +1530,24 @@
             { "id": 97, "label": "RINON Ace Style LEVEL1" },
             { "id": 98, "label": "RINON Ace Style LEVEL2" },
             { "id": 99, "label": "RINON Ace Style LEVEL3" }
+          ]
+        },
+        {
+          "label": "「BEMANI納涼祭2026」 第1弾 (2026-07-21)",
+          "options": [
+            { "id": 100, "label": "EMI (BEMANI納涼祭2026)" },
+            { "id": 101, "label": "BABY-LON (BEMANI納涼祭2026)" },
+            { "id": 102, "label": "レイシス (BEMANI納涼祭2026)" },
+            { "id": 103, "label": "タイマー (BEMANI納涼祭2026)" }
+          ]
+        },
+        {
+          "label": "「BEMANI納涼祭2026」 第2弾 (2026-07-21)",
+          "options": [
+            { "id": 104, "label": "理々奈 (BEMANI納涼祭2026)" },
+            { "id": 105, "label": "璃音 (BEMANI納涼祭2026)" },
+            { "id": 106, "label": "モード (BEMANI納涼祭2026)" },
+            { "id": 107, "label": "犬JU&えびめ&ハムCHU (BEMANI納涼祭2026)" }
           ]
         }
       ]

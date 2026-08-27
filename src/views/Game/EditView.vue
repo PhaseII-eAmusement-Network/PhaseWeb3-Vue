@@ -102,7 +102,7 @@ async function loadProfile() {
     }
 
     if (data && !versionForm.currentVersion) {
-      versionForm.currentVersion = data.versions[data.versions.length - 1];
+      versionForm.currentVersion = [...data.versions].sort().at(-1);
     }
   } catch (error) {
     console.error("Failed to fetch user profile data:", error);
