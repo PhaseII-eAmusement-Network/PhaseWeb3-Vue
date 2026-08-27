@@ -203,6 +203,33 @@
           ]
         },
         {
+          "label": "「BEMANI納涼祭2026」 第1弾 (2026-07-21)",
+          "options": [
+            { "id": 113, "label": "EMI (BEMANI納涼祭2026)" },
+            { "id": 114, "label": "BABY-LON (BEMANI納涼祭2026)" },
+            { "id": 115, "label": "レイシス (BEMANI納涼祭2026)" },
+            { "id": 116, "label": "タイマー (BEMANI納涼祭2026)" },
+            { "id": 117, "label": "BEMANI納涼祭2026" },
+            { "id": 118, "label": "Amabie" },
+            { "id": 119, "label": "Bloody Iron Maiden" },
+            { "id": 120, "label": "霖が哭く" }
+          ]
+        },
+        {
+          "label": "「BEMANI納涼祭2026」 第2弾 (2026-07-21)",
+          "options": [
+            { "id": 121, "label": "理々奈 (BEMANI納涼祭2026)" },
+            { "id": 122, "label": "璃音 (BEMANI納涼祭2026)" },
+            { "id": 123, "label": "モード (BEMANI納涼祭2026)" },
+            { "id": 124, "label": "犬JU (BEMANI納涼祭2026)" },
+            { "id": 125, "label": "えびめ (BEMANI納涼祭2026)" },
+            { "id": 126, "label": "ハムCHU (BEMANI納涼祭2026)" },
+            { "id": 127, "label": "Smintheus" },
+            { "id": 128, "label": "断罪のミメシス" },
+            { "id": 129, "label": "Any%" }
+          ]
+        },
+        {
           "label": "BPL Team Banner",
           "options": [
             { "id": 100001, "label": "APINA VRAMeS" },
