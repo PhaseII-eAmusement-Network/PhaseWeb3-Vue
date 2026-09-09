@@ -1,6 +1,7 @@
 <script setup>
 import CardBox from "@/components/CardBox.vue";
 import BaseButton from "@/components/BaseButton.vue";
+import BaseImage from "@/components/BaseImage.vue";
 import LayoutGuest from "@/layouts/LayoutGuest.vue";
 </script>
 
@@ -14,7 +15,7 @@ import LayoutGuest from "@/layouts/LayoutGuest.vue";
       >
         <div class="p-4 flex flex-col w-full space-y-2">
           <div class="flex flex-col items-center text-wrap h-full">
-            <img src="/favicon.png" class="rounded-full shadow-lg mb-2" />
+            <BaseImage url="/favicon.png" class="rounded-full shadow-lg mb-2" />
             <h1 class="text-xl"><samp>PhaseII</samp></h1>
             <p class="text-sm text-gray-700 dark:text-white/75">
               Broken since 2021

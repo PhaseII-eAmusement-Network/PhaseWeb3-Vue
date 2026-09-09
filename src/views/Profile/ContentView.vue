@@ -7,6 +7,7 @@ import GameIcon from "@/components/GameIcon.vue";
 import UserCard from "@/components/UserCard.vue";
 import LayoutAuthenticated from "@/layouts/LayoutAuthenticated.vue";
 import SectionTitleLine from "@/components/SectionTitleLine.vue";
+import BaseImage from "@/components/BaseImage.vue";
 import { getGameInfo } from "@/constants";
 import { formatSortableDate } from "@/constants/date";
 
@@ -168,9 +169,9 @@ onUnmounted(() => {
                       );
                     "
                   />
-                  <img
+                  <BaseImage
                     class="w-50 shadow-xl"
-                    :src="`https://cdn.phaseii.network/file/PhaseII/${image.b2_path}`"
+                    :url="`https://cdn.phaseii.network/file/PhaseII/${image.b2_path}`"
                   />
                 </a>
               </div>

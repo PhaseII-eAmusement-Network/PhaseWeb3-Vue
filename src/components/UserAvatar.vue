@@ -1,5 +1,6 @@
 <script setup>
 import { computed } from "vue";
+import BaseImage from "@/components/BaseImage.vue";
 
 const ASSET_PATH = import.meta.env.VITE_ASSET_PATH;
 
@@ -28,16 +29,15 @@ const username = computed(() => props.username);
 <template>
   <div>
     <div class="relative inline-block">
-      <img
-        :src="avatar"
+      <BaseImage
+        :url="avatar"
         :alt="username"
-        width="200"
-        height="200"
+        :size="200"
         class="w-full h-auto bg-gray-100 dark:bg-slate-800 rounded-full overflow-hidden drop-shadow-lg"
       />
-      <img
+      <BaseImage
         v-if="border"
-        :src="`${ASSET_PATH}/border/${border}.webp`"
+        :url="`${ASSET_PATH}/border/${border}.webp`"
         alt="border"
         class="absolute inset-0 w-full h-full overflow-hidden scale-[1.02]"
         style="object-fit: fill"

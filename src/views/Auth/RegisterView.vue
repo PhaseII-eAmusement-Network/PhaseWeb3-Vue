@@ -15,6 +15,7 @@ import FormControl from "@/components/FormControl.vue";
 import BaseButton from "@/components/BaseButton.vue";
 import BaseIcon from "@/components/BaseIcon.vue";
 import LayoutGuest from "@/layouts/LayoutGuest.vue";
+import BaseImage from "@/components/BaseImage.vue";
 
 import { APIRegisterUser } from "@/stores/api/account";
 
@@ -74,7 +75,7 @@ async function registerProfile() {
           class="p-4 flex flex-col md:flex-row w-full space-y-2 md:space-y-0 md:space-x-4"
         >
           <div class="flex flex-col items-center text-wrap h-full md:mt-5">
-            <img src="/favicon.png" class="rounded-full shadow-lg mb-2" />
+            <BaseImage url="/favicon.png" class="rounded-full shadow-lg mb-2" />
             <h1 class="text-xl"><samp>PhaseII</samp></h1>
             <p class="text-sm text-gray-700 dark:text-white/75">
               Spinnin' since 2021

@@ -5,6 +5,7 @@ import { dashCode } from "@/constants/userData";
 import { GameConstants, getGameInfo, VersionConstants } from "@/constants";
 import UserEmblem from "@/components/UserEmblem.vue";
 import UserQpro from "@/components/UserQpro.vue";
+import BaseImage from "@/components/BaseImage.vue";
 import { getGitadoraColor, getJubilityColor } from "@/constants/skillColor.js";
 import { getFlareLevel } from "@/helpers/flare";
 const GAME_ASSET_PATH = import.meta.env.VITE_GAME_ASSET_PATH;
@@ -112,10 +113,9 @@ onMounted(async () => {
         "
         class="place-self-center w-20"
       >
-        <img
-          :src="`${GAME_ASSET_PATH}/chara/popn/${profile.chara}.png`"
-          width="80"
-          height="80"
+        <BaseImage
+          :url="`${GAME_ASSET_PATH}/chara/popn/${profile.chara}.png`"
+          :size="80"
         />
       </div>
       <div class="drop-shadow-2xl">

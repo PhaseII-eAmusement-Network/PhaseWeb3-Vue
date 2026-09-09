@@ -1,6 +1,7 @@
 <script setup>
 import { PhDownload, PhCaretLeft, PhCaretRight } from "@phosphor-icons/vue";
 import BaseButton from "@/components/BaseButton.vue";
+import BaseImage from "@/components/BaseImage.vue";
 import UserAvatar from "@/components/UserAvatar.vue";
 import { useRoute } from "vue-router";
 import { exportJSON } from "@/helpers/contentExport";
@@ -55,10 +56,10 @@ function downloadJSON() {
   >
     <template #loading>
       <div class="text-center align-center grid">
-        <img
+        <BaseImage
           class="rounded-full place-self-center"
-          src="/icon.gif"
-          width="60"
+          url="/icon.gif"
+          :size="60"
         />
         <h1 class="text-lg text-gray-100">Loading</h1>
       </div>
@@ -117,9 +118,9 @@ function downloadJSON() {
 
     <template #item-chara="{ chara }">
       <div class="chara-wrapper w-6.25">
-        <img
-          :src="`${GAME_ASSET_PATH}/chara/popn/${chara ? chara : 1}.png`"
-          width="80"
+        <BaseImage
+          :url="`${GAME_ASSET_PATH}/chara/popn/${chara ? chara : 1}.png`"
+          :size="80"
         />
       </div>
     </template>

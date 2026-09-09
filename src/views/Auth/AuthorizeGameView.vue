@@ -4,6 +4,7 @@ import { useRoute } from "vue-router";
 import CardBox from "@/components/CardBox.vue";
 import BaseButton from "@/components/BaseButton.vue";
 import LayoutGuest from "@/layouts/LayoutGuest.vue";
+import BaseImage from "@/components/BaseImage.vue";
 import { APIGetContactless, APIPostContactless } from "@/stores/api/account.js";
 
 const route = useRoute();
@@ -48,7 +49,10 @@ async function submit() {
         >
           <div class="flex flex-col items-center text-wrap h-full md:mt-5">
             <div class="flex flex-col items-center text-wrap">
-              <img src="/favicon.png" class="rounded-full shadow-lg mb-2" />
+              <BaseImage
+                url="/favicon.png"
+                class="rounded-full shadow-lg mb-2"
+              />
               <h1 class="text-xl"><samp>PhaseII</samp></h1>
               <button class="text-sm text-gray-700 dark:text-white/75">
                 Spinnin' since 2021

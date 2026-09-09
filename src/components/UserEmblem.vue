@@ -1,5 +1,6 @@
 <script setup>
 import { computed, watch, ref } from "vue";
+import BaseImage from "@/components/BaseImage.vue";
 
 const props = defineProps({
   profile: {
@@ -73,8 +74,8 @@ function formatEmblem(emblem) {
         :key="index"
         style="position: absolute"
       >
-        <img
-          :src="src"
+        <BaseImage
+          :url="src"
           :style="`width: ${size}px; height: ${size}px`"
           class="drop-shadow-lg"
         />

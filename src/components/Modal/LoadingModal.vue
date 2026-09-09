@@ -4,6 +4,7 @@ import CardBox from "@/components/CardBox.vue";
 import BaseIcon from "@/components/BaseIcon.vue";
 import BaseButton from "@/components/BaseButton.vue";
 import BaseButtons from "@/components/BaseButtons.vue";
+import BaseImage from "@/components/BaseImage.vue";
 import { useMainStore } from "@/stores/main";
 import { PhCloudCheck, PhCloudX, PhShrimp } from "@phosphor-icons/vue";
 
@@ -56,10 +57,10 @@ function closeModal() {
       class="grid text-center justify-center grid-cols-1 gap-3"
     >
       <template v-if="!mainStore.userCustomize.shrimpLinks">
-        <img
+        <BaseImage
           class="rounded-full place-self-center"
-          src="/icon.gif"
-          width="70"
+          url="/icon.gif"
+          :size="70"
         />
       </template>
       <template v-else>

@@ -4,6 +4,7 @@ import { computed } from "vue";
 import { useStyleStore } from "@/stores/style.js";
 import AsideMenuList from "@/components/Menus/AsideMenuList.vue";
 import AsideMenuItem from "@/components/Menus/AsideMenuItem.vue";
+import BaseImage from "@/components/BaseImage.vue";
 
 defineProps({
   menu: {
@@ -50,7 +51,7 @@ const asideLgCloseClick = (event) => {
     >
       <div class="dark:bg-slate-900 flex flex-col gap-4 my-2 pb-4 border-b-2">
         <div class="flex items-center gap-3 mx-2">
-          <img class="rounded-full shadow-xl" src="/favicon.png" />
+          <BaseImage class="rounded-full shadow-xl" url="/favicon.png" />
           <h2 class="text-md">
             <samp class="tracking-tighter">PhaseII</samp> eAmusement Network
           </h2>

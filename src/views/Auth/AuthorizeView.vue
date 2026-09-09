@@ -7,6 +7,7 @@ import LayoutGuest from "@/layouts/LayoutGuest.vue";
 import { APIGetAuthClient, APIPostAuthClient } from "@/stores/api/account.js";
 import { getIntentById } from "@/constants/developer";
 import { InternalApps } from "@/constants/developer/apps.js";
+import BaseImage from "@/components/BaseImage.vue";
 
 const CDN_URL = import.meta.env.VITE_CDN_URL;
 const route = useRoute();
@@ -66,7 +67,10 @@ const submit = async () => {
         >
           <div class="flex flex-col items-center text-wrap h-full md:mt-5">
             <div class="flex flex-col items-center text-wrap">
-              <img src="/favicon.png" class="rounded-full shadow-lg mb-2" />
+              <BaseImage
+                url="/favicon.png"
+                class="rounded-full shadow-lg mb-2"
+              />
               <h1 class="text-xl"><samp>PhaseII</samp></h1>
               <button class="text-sm text-gray-700 dark:text-white/75">
                 Spinnin' since 2021
@@ -90,8 +94,8 @@ const submit = async () => {
                   <span class="font-bold">{{ clientData?.name }}</span>
                 </h1>
               </template>
-              <img
-                :src="clientData.image ?? `${CDN_URL}/${clientData?.data?.img}`"
+              <BaseImage
+                :url="clientData.image ?? `${CDN_URL}/${clientData?.data?.img}`"
                 width="75"
                 class="rounded-full shadow-lg mb-2"
               />

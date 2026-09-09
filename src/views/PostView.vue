@@ -7,6 +7,7 @@ import LayoutAuthenticated from "@/layouts/LayoutAuthenticated.vue";
 import CardBox from "@/components/CardBox.vue";
 import BaseButtons from "@/components/BaseButtons.vue";
 import BaseButton from "@/components/BaseButton.vue";
+import BaseImage from "@/components/BaseImage.vue";
 import { APIGetNewsPost } from "@/stores/api/news";
 import { APIUserReadNews } from "@/stores/api/account";
 
@@ -44,8 +45,8 @@ function goBack() {
       <transition>
         <CardBox v-if="thisNews != {}" has-table>
           <div class="flex flex-col items-center">
-            <img
-              :src="thisNews.data.img"
+            <BaseImage
+              :url="thisNews.data.img"
               class="rounded-t-2xl md:rounded-2xl md:w-1/2 md:m-4"
             />
           </div>

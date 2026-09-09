@@ -1,6 +1,6 @@
 <script setup>
 import AccordionItem from "@/components/AccordionItem.vue";
-import BaseImage from "@/components/BaseImage.vue";
+import ReactiveImage from "@/components/ReactiveImage.vue";
 const ASSET_PATH = import.meta.env.VITE_ASSET_PATH;
 
 defineProps({
@@ -25,7 +25,7 @@ defineProps({
       class="grid"
     >
       <p v-for="p of item.body">{{ p }}</p>
-      <BaseImage
+      <ReactiveImage
         :url="`${ASSET_PATH}/${imagePath}/${item.image}.webp`"
         class="mt-2"
       />

@@ -1,5 +1,6 @@
 <script setup>
 import { computed } from "vue";
+import BaseImage from "@/components/BaseImage.vue";
 
 const props = defineProps({
   path: {
@@ -23,7 +24,7 @@ const spanClass = computed(
 
 <template>
   <span :class="spanClass">
-    <img :src="path" class="rounded-full" :class="`${w}`" />
+    <BaseImage :url="path" class="rounded-full" :class="`${w}`" />
     <slot />
   </span>
 </template>

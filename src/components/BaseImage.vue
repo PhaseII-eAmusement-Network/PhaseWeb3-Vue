@@ -1,7 +1,7 @@
 <script setup>
-import { ref } from "vue";
+import { ref, onMounted, onBeforeUnmount } from "vue";
 
-defineProps({
+const props = defineProps({
   url: {
     type: String,
     required: true,
@@ -10,86 +10,49 @@ defineProps({
     type: Number,
     default: 200,
   },
+  alt: {
+    type: String,
+    default: "",
+  },
 });
 
-const cardRef = ref(null);
-const shineRef = ref(null);
+const imgRef = ref(null);
+const loaded = ref(false);
+var observer;
 
-function handleMouseMove(event) {
-  const card = cardRef.value;
-  const shine = shineRef.value;
-  if (!card || !shine) return;
+onMounted(() => {
+  observer = new IntersectionObserver(
+    ([entry]) => {
+      if (entry.isIntersecting) {
+        imgRef.value.src = props.url;
+        loaded.value = true;
 
-  const rect = card.getBoundingClientRect();
+        observer.disconnect();
+      }
+    },
+    {
+      rootMargin: "200px",
+      threshold: 0.01,
+    },
+  );
 
-  const x = event.clientX - rect.left;
-  const y = event.clientY - rect.top;
+  observer.observe(imgRef.value);
+});
 
-  const centerX = rect.width / 2;
-  const centerY = rect.height / 2;
-
-  const dx = (x - centerX) / centerX;
-  const dy = (y - centerY) / centerY;
-
-  const aspect = rect.width / rect.height;
-  const maxTilt = 10;
-
-  const rotateX = dy * -maxTilt * Math.min(1, aspect);
-  const rotateY = dx * maxTilt * Math.min(1, 1 / aspect);
-
-  card.style.transform = `
-    rotateX(${rotateX}deg)
-    rotateY(${rotateY}deg)
-    scale(1.05)
-  `;
-
-  shine.style.opacity = "1";
-  shine.style.background = `
-    radial-gradient(
-      circle at ${x}px ${y}px,
-      rgba(255,255,255,0.6),
-      rgba(255,255,255,0.2),
-      transparent 65%
-    )
-  `;
-}
-
-function resetTransform() {
-  if (cardRef.value) {
-    cardRef.value.style.transform = "rotateX(0deg) rotateY(0deg) scale(1)";
-  }
-  if (shineRef.value) {
-    shineRef.value.style.opacity = "0";
-  }
-}
+onBeforeUnmount(() => {
+  observer?.disconnect();
+});
 </script>
 
 <template>
-  <div
-    class="relative inline-block perspective-[900px]"
-    @mousemove="handleMouseMove"
-    @mouseleave="resetTransform"
-  >
-    <a :href="url" target="_blank" rel="noopener noreferrer">
-      <div
-        ref="cardRef"
-        class="relative will-change-transform transition-transform duration-200 ease-out transform-3d"
-      >
-        <div
-          ref="shineRef"
-          class="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-200 mix-blend-overlay rounded-lg"
-        />
-
-        <img
-          :src="url"
-          class="block rounded-lg shadow-xl"
-          :style="{
-            width: `${size}px`,
-            height: 'auto',
-          }"
-          draggable="false"
-        />
-      </div>
-    </a>
-  </div>
+  <figure class="image__wrapper">
+    <img
+      ref="imgRef"
+      class="image__item"
+      :alt="alt"
+      :width="size"
+      draggable="false"
+      :class="{ loaded }"
+    />
+  </figure>
 </template>
