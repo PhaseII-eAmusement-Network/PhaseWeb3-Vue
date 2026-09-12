@@ -35,7 +35,11 @@ import { getIIDXDan } from "@/constants/danClass.js";
 import { getGitadoraColor, getJubilityColor } from "@/constants/skillColor";
 import { formatSortableDate } from "@/constants/date";
 import { getFlareLevel } from "@/helpers/flare";
-const ASSET_PATH = import.meta.env.VITE_ASSET_PATH;
+import {
+  getCardStyle,
+  getVideoSource,
+  getCustomizeVideoSource,
+} from "@/constants/sources";
 
 const mainStore = useMainStore();
 const $route = useRoute();
@@ -183,38 +187,6 @@ var loadStats = [
     key: "double_dj_points",
   },
 ];
-
-function getSources() {
-  if (!versionForm.currentVersion) {
-    return thisGame.cardBG;
-  } else {
-    return `${ASSET_PATH}/games/${thisGame.id}/card/${versionForm.currentVersion}.webp`;
-  }
-}
-
-function getVideoSource() {
-  if (
-    versionForm.currentVersion &&
-    thisGame.videoTable?.includes(versionForm.currentVersion)
-  ) {
-    const ASSET_PATH = import.meta.env.VITE_GAME_ASSET_PATH;
-    return `${ASSET_PATH}/video/${thisGame.id}/${versionForm.currentVersion}.mp4`;
-  } else {
-    return null;
-  }
-}
-
-function getCardStyle() {
-  if (thisGame.videoTable?.includes(versionForm.currentVersion)) {
-    return null;
-  } else {
-    return `
-      background-image: url('${getSources()}');
-      background-size: cover;
-      background-repeat: no-repeat;
-    `;
-  }
-}
 
 function colorText(stat, profile) {
   if (profile) {
@@ -445,6 +417,21 @@ const groupedTimeline = computed(() => {
 
   return groups.reverse();
 });
+
+const videoSource = computed(() => {
+  const custom = myProfile.value?.customize?.["3_1"] ?? null;
+
+  if (custom != null) {
+    return getCustomizeVideoSource(
+      thisGame,
+      versionForm.currentVersion,
+      "background",
+      custom,
+    );
+  }
+
+  return getVideoSource(thisGame, versionForm.currentVersion);
+});
 </script>
 
 <template>
@@ -468,7 +455,7 @@ const groupedTimeline = computed(() => {
         </SectionTitleLine>
         <div
           v-if="versionForm.currentVersion && myProfile"
-          :style="getCardStyle()"
+          :style="getCardStyle(thisGame, versionForm.currentVersion)"
           class="rounded-2xl mb-6 card-container"
         >
           <video
@@ -476,7 +463,7 @@ const groupedTimeline = computed(() => {
             muted
             loop
             playsinline
-            :src="getVideoSource()"
+            :src="videoSource"
             class="background-video"
           ></video>
           <div
@@ -490,12 +477,12 @@ const groupedTimeline = computed(() => {
               >
                 <div
                   v-if="!thisGame.noScores"
-                  class="md:w-1/3 grid grid-cols-1 md:grid-cols-2 gap-3 mt-4"
+                  class="md:w-1/3 grid grid-cols-1 md:grid-cols-3 gap-3 mt-4"
                 >
                   <template v-if="mainStore?.userAdmin">
                     <BaseButton
                       :to="`/profiles/${myProfile.userId}`"
-                      :icon="PhMedal"
+                      :icon="PhUser"
                       class="w-full md:w-auto"
                       color="success"
                       label="User Profile"

@@ -304,7 +304,13 @@ function formatHitchart(data) {
 <template>
   <LayoutAuthenticated>
     <SectionMain>
-      <GameHeader :game="thisGame" :version="versionForm.currentVersion">
+      <GameHeader
+        :game="thisGame"
+        :version="versionForm.currentVersion"
+        :custom-file-id="
+          myProfile?.customize ? myProfile?.customize['3_1'] : null
+        "
+      >
         <div
           v-if="thisGame.versions && myProfile"
           class="w-full md:flex md:-mt-18.75 mb-4 place-content-end"

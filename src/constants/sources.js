@@ -16,6 +16,15 @@ export function getVideoSource(game, version) {
   }
 }
 
+export function getCustomizeVideoSource(game, version, type, file) {
+  if (version && game.videoTable?.includes(version)) {
+    const ASSET_PATH = import.meta.env.VITE_GAME_ASSET_PATH;
+    return `${ASSET_PATH}/customizations/${game.id}/${version}/${type}/${file}.mp4`;
+  } else {
+    return null;
+  }
+}
+
 export function getCardStyle(game, version) {
   if (game.videoTable?.includes(version)) {
     return null;

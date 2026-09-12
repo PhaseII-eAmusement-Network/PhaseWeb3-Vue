@@ -1,5 +1,5 @@
 <script setup>
-import { ref, watch } from "vue";
+import { computed, ref, watch } from "vue";
 import { useRoute } from "vue-router";
 import {
   PhHouse,
@@ -11,7 +11,11 @@ import {
 } from "@phosphor-icons/vue";
 import BaseButton from "@/components/BaseButton.vue";
 import GameTitleLine from "@/components/GameTitleLine.vue";
-import { getVideoSource, getCardStyle } from "@/constants/sources";
+import {
+  getCardStyle,
+  getVideoSource,
+  getCustomizeVideoSource,
+} from "@/constants/sources";
 
 import { useMainStore } from "@/stores/main";
 const mainStore = useMainStore();
@@ -30,6 +34,10 @@ const props = defineProps({
     required: true,
   },
   version: {
+    type: Number,
+    default: null,
+  },
+  customFileId: {
     type: Number,
     default: null,
   },
@@ -112,6 +120,19 @@ function loadRoutes() {
 
   return navigationData;
 }
+
+const videoSource = computed(() => {
+  if (props.customFileId != null) {
+    return getCustomizeVideoSource(
+      props.game,
+      props.version,
+      "background",
+      props.customFileId,
+    );
+  }
+
+  return getVideoSource(props.game, props.version);
+});
 </script>
 
 <template>
@@ -125,7 +146,7 @@ function loadRoutes() {
       muted
       loop
       playsinline
-      :src="getVideoSource(game, version)"
+      :src="videoSource"
       class="background-video"
     ></video>
     <div class="bg-white dark:bg-slate-900/90 rounded-2xl card-content">
