@@ -1,6 +1,7 @@
 <script setup>
 import { ref, computed, onMounted } from "vue";
 import {
+  PhCaretRight,
   PhFilmReel,
   PhPlay,
   PhUploadSimple,
@@ -204,55 +205,51 @@ const copyToClipboard = (text) => {
 <template>
   <LayoutAuthenticated>
     <SectionMain>
-      <UserCard class="mb-6" use-small even-smaller />
+      <UserCard class="mb-4 sm:mb-6" use-small even-smaller />
 
       <template v-if="newestVideo">
         <SectionTitleLine :icon="PhVideo" title="Video Player" main />
 
-        <CardBox class="mb-6">
+        <CardBox class="mb-4 sm:mb-6">
           <div
             v-if="selectedVideo?.data?.status === 'uploaded'"
-            class="grid grid-cols-1 gap-6 xl:grid-cols-[minmax(0,2fr)_minmax(320px,1fr)]"
+            class="grid grid-cols-1 gap-4 xl:grid-cols-[minmax(0,2fr)_minmax(300px,1fr)] xl:gap-5"
           >
-            <div>
-              <video
-                :key="selectedVideo?.data?.url"
-                controls
-                autoplay
-                class="aspect-video w-full rounded-xl bg-black object-contain"
-              >
-                <source :src="selectedVideo?.data?.url" type="video/mp4" />
-                Your browser does not support the video tag.
-              </video>
-            </div>
-
-            <div
-              class="grid grid-cols-1 content-start gap-6 text-center xl:text-left"
+            <video
+              :key="selectedVideo?.data?.url"
+              controls
+              autoplay
+              class="aspect-video w-full rounded-lg bg-black object-contain sm:rounded-xl"
             >
-              <div class="space-y-2">
-                <div>
-                  <h1 class="text-2xl font-bold xl:text-4xl">
-                    {{ selectedVideo?.name }}
-                  </h1>
+              <source :src="selectedVideo?.data?.url" type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
 
-                  <h2 class="text-xl font-semibold xl:text-3xl">
-                    {{ selectedVideo?.artist }}
-                  </h2>
-                </div>
+            <div class="flex flex-col justify-center text-center xl:text-left">
+              <div class="space-y-1">
+                <h1 class="truncate text-xl font-bold sm:text-2xl">
+                  {{ selectedVideo?.name }}
+                </h1>
+
+                <h2
+                  class="truncate text-base font-semibold text-slate-400 sm:text-xl"
+                >
+                  {{ selectedVideo?.artist }}
+                </h2>
 
                 <BaseDivider class="mx-1" />
 
-                <h3 class="text-xl font-light xl:text-2xl">
+                <p class="text-sm text-slate-400">
                   {{ selectedVideo?.game }}
                   {{ selectedVideo?.version }}
-                </h3>
+                </p>
 
-                <p>
+                <p class="text-xs text-slate-500">
                   {{ selectedVideo?.timestamp }}
                 </p>
               </div>
 
-              <div class="flex justify-center gap-2 xl:justify-start">
+              <div class="mt-4 flex justify-center xl:justify-start">
                 <BaseButton
                   color="info"
                   label="Share"
@@ -262,163 +259,207 @@ const copyToClipboard = (text) => {
             </div>
           </div>
 
-          <div v-else>
-            <div class="space-y-1 text-center">
-              <h1 class="text-2xl font-bold xl:text-4xl">
-                Your video is still uploading!
-              </h1>
+          <div v-else class="py-4 text-center sm:py-8">
+            <h1 class="text-xl font-bold sm:text-2xl">
+              Your video is still uploading!
+            </h1>
 
-              <h2 class="text-xl font-light xl:text-2xl">
-                Please wait for the upload to complete.
-              </h2>
+            <p class="mt-1 text-sm text-slate-400 sm:text-base">
+              Please wait for the upload to complete.
+            </p>
 
-              <h2 class="text-xl">
-                Upload started at {{ selectedVideo?.timestamp }}
-              </h2>
-            </div>
+            <p class="mt-2 text-xs text-slate-500 sm:text-sm">
+              Upload started at {{ selectedVideo?.timestamp }}
+            </p>
           </div>
         </CardBox>
       </template>
 
-      <div class="flex items-center justify-between">
+      <div class="mb-2 flex items-center justify-between gap-3">
         <SectionTitleLine :icon="PhFilmReel" title="Video Library" main />
         <div
-          class="-mt-4 flex items-center rounded-2xl bg-slate-900 p-3.5 drop-shadow-2xl"
+          class="-mt-3 flex shrink-0 items-center rounded-xl bg-slate-900 px-3 py-2 text-xs font-medium text-slate-300 drop-shadow-xl sm:-mt-4 sm:px-3.5 sm:py-2.5 sm:text-sm"
         >
-          <span>{{ videoData.length }} videos</span>
+          {{ videoData.length }} videos
         </div>
       </div>
 
       <CardBox>
-        <div class="space-y-10">
-          <div
-            v-for="dateGroup in groupedVideos"
+        <div class="space-y-2">
+          <details
+            v-for="(dateGroup, dateIndex) in groupedVideos"
             :key="dateGroup.key"
-            class="space-y-5"
+            :open="dateIndex === 0"
+            class="group"
           >
-            <div class="flex items-center gap-4">
-              <div class="h-px flex-1 bg-slate-800" />
-              <h2 class="text-sm font-semibold tracking-wider text-slate-400">
-                {{ dateGroup.label }}
-              </h2>
-              <div class="h-px flex-1 bg-slate-800" />
-            </div>
-
-            <div
-              v-for="gameGroup in dateGroup.games"
-              :key="gameGroup.key"
-              class="space-y-3"
+            <summary
+              class="flex cursor-pointer list-none items-center gap-2 rounded-lg px-2 py-2.5 transition-colors hover:bg-slate-800/60 [&::-webkit-details-marker]:hidden"
             >
-              <div class="flex items-center gap-2">
-                <h3
-                  class="text-base font-semibold text-slate-700 dark:text-slate-200"
-                >
-                  {{ gameGroup.name }}
-                </h3>
-                <span
-                  class="rounded-full bg-slate-100 px-2 py-0.5 text-xs font-medium text-slate-500 dark:bg-slate-800 dark:text-slate-400"
-                >
-                  {{ gameGroup.videos.length }}
-                </span>
+              <div
+                class="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-slate-800 text-slate-400 transition-transform group-open:rotate-90"
+              >
+                <BaseIcon :icon="PhCaretRight" :size="15" />
               </div>
 
-              <div
-                class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
+              <span
+                class="min-w-0 flex-1 truncate text-sm font-semibold text-slate-300"
               >
-                <button
-                  v-for="video in gameGroup.videos"
-                  :key="video.id"
-                  type="button"
-                  class="group overflow-hidden rounded-xl border text-left transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-info"
-                  :class="
-                    selectedVideo?.id === video.id
-                      ? 'border-blue-400 bg-slate-800 ring-2 ring-blue-400'
-                      : 'border-slate-800 hover:border-info/60 hover:shadow-md'
-                  "
-                  @click="selectVideo(video)"
+                {{ dateGroup.label }}
+              </span>
+
+              <span
+                class="shrink-0 rounded-full bg-slate-800 px-2 py-0.5 text-[10px] font-medium text-slate-500 sm:text-xs"
+              >
+                {{
+                  dateGroup.games.reduce(
+                    (total, game) => total + game.videos.length,
+                    0,
+                  )
+                }}
+              </span>
+            </summary>
+
+            <div class="ml-2 border-l border-slate-800 pl-2 sm:ml-3 sm:pl-3">
+              <div class="space-y-1">
+                <details
+                  v-for="(gameGroup, gameIndex) in dateGroup.games"
+                  :key="gameGroup.key"
+                  :open="dateIndex === 0 && gameIndex === 0"
+                  class="group"
                 >
-                  <div
-                    class="relative aspect-video overflow-hidden bg-slate-900"
+                  <summary
+                    class="flex cursor-pointer list-none items-center gap-2 rounded-md px-2 py-2 transition-colors hover:bg-slate-800/40 [&::-webkit-details-marker]:hidden"
                   >
-                    <video
-                      v-if="video?.data?.status === 'uploaded'"
-                      :src="video?.data?.url"
-                      preload="metadata"
-                      muted
-                      playsinline
-                      class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
-                    />
-
                     <div
-                      v-if="video?.data?.status === 'uploaded'"
-                      class="absolute inset-0 flex items-center justify-center bg-black/10 transition-colors group-hover:bg-black/30"
+                      class="flex h-4 w-4 shrink-0 items-center justify-center text-slate-500 transition-transform group-open:rotate-90"
                     >
-                      <div
-                        class="flex h-12 w-12 items-center justify-center rounded-full bg-slate-200/90 text-slate-800/90 shadow-lg transition-transform group-hover:scale-110"
+                      <BaseIcon :icon="PhCaretRight" :size="10" />
+                    </div>
+
+                    <span
+                      class="min-w-0 flex-1 truncate text-xs font-semibold text-slate-400 sm:text-sm"
+                    >
+                      {{ gameGroup.name }}
+                    </span>
+
+                    <span
+                      class="shrink-0 text-[10px] tabular-nums text-slate-600 sm:text-xs"
+                    >
+                      {{ gameGroup.videos.length }}
+                    </span>
+                  </summary>
+
+                  <div class="pb-3 pl-2 pt-1 sm:pl-3">
+                    <div
+                      class="grid grid-cols-2 gap-2 sm:grid-cols-3 sm:gap-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6"
+                    >
+                      <button
+                        v-for="video in gameGroup.videos"
+                        :key="video.id"
+                        type="button"
+                        class="group/card overflow-hidden rounded-lg border text-left transition-all duration-150 focus:outline-none focus:ring-2 focus:ring-info"
+                        :class="
+                          selectedVideo?.id === video.id
+                            ? 'border-blue-400 bg-slate-800 ring-1 ring-blue-400'
+                            : 'border-slate-800 bg-slate-900/40 hover:border-slate-700 hover:bg-slate-800/60'
+                        "
+                        @click="selectVideo(video)"
                       >
-                        <template v-if="selectedVideo?.id === video.id">
-                          <BaseIcon
-                            :icon="PhPlay"
-                            :size="24"
-                            class="animate-pulse text-emerald-700"
+                        <div
+                          class="relative aspect-video overflow-hidden bg-slate-950"
+                        >
+                          <video
+                            v-if="video?.data?.status === 'uploaded'"
+                            :src="video?.data?.url"
+                            preload="none"
+                            muted
+                            playsinline
+                            class="h-full w-full object-cover transition-transform duration-200 group-hover/card:scale-105"
                           />
-                        </template>
-                        <template v-else>
-                          <BaseIcon :icon="PhPlay" :size="24" />
-                        </template>
-                      </div>
-                    </div>
 
-                    <div
-                      v-else
-                      class="absolute inset-0 flex flex-col items-center justify-center bg-slate-900"
-                    >
-                      <BaseIcon :icon="PhUploadSimple" :size="20" />
-                      <span class="text-sm font-medium"> Uploading </span>
-                    </div>
-                    <div
-                      v-if="selectedVideo?.id === video.id"
-                      class="absolute right-2 top-2 rounded-full bg-info px-2 py-1 text-xs font-semibold text-slate-100 drop-shadow-2xl"
-                    >
-                      <span>Selected</span>
+                          <div
+                            v-if="video?.data?.status === 'uploaded'"
+                            class="absolute inset-0 flex items-center justify-center bg-black/0 transition-colors group-hover/card:bg-black/20"
+                          >
+                            <div
+                              class="flex h-8 w-8 items-center justify-center rounded-full bg-slate-200/90 text-slate-800 shadow-lg sm:h-9 sm:w-9"
+                            >
+                              <BaseIcon
+                                :icon="PhPlay"
+                                :size="16"
+                                :class="
+                                  selectedVideo?.id === video.id
+                                    ? 'text-emerald-700'
+                                    : ''
+                                "
+                              />
+                            </div>
+                          </div>
+
+                          <div
+                            v-else
+                            class="absolute inset-0 flex flex-col items-center justify-center bg-slate-900"
+                          >
+                            <BaseIcon :icon="PhUploadSimple" :size="16" />
+                            <span
+                              class="mt-1 text-[10px] font-medium text-slate-400"
+                            >
+                              Uploading
+                            </span>
+                          </div>
+
+                          <div
+                            v-if="selectedVideo?.id === video.id"
+                            class="absolute left-1.5 top-1.5 h-2 w-2 rounded-full bg-emerald-400 shadow-lg shadow-emerald-400/50"
+                          />
+                        </div>
+
+                        <div class="min-w-0 px-2 py-1.5">
+                          <h3
+                            class="truncate text-xs font-semibold text-slate-200 sm:text-sm"
+                            :title="video?.name"
+                          >
+                            {{ video?.name }}
+                          </h3>
+
+                          <p
+                            class="truncate text-[10px] text-slate-500 sm:text-xs"
+                            :title="video?.artist"
+                          >
+                            {{ video?.artist }}
+                          </p>
+
+                          <div
+                            class="mt-0.5 hidden items-center justify-between gap-1 text-[10px] text-slate-600 sm:flex"
+                          >
+                            <span class="truncate">
+                              {{ video?.version }}
+                            </span>
+
+                            <span class="shrink-0">
+                              {{ video?.timestamp }}
+                            </span>
+                          </div>
+                        </div>
+                      </button>
                     </div>
                   </div>
-
-                  <div class="space-y-1 p-4">
-                    <h3 class="truncate font-semibold" :title="video?.name">
-                      {{ video?.name }}
-                    </h3>
-                    <p
-                      class="truncate text-sm text-slate-500 dark:text-slate-400"
-                    >
-                      {{ video?.artist }}
-                    </p>
-                    <div
-                      class="flex items-center justify-between gap-2 pt-2 text-xs text-slate-400"
-                    >
-                      <span class="truncate">
-                        {{ video?.version }}
-                      </span>
-                      <span class="shrink-0">
-                        {{ video?.timestamp }}
-                      </span>
-                    </div>
-                  </div>
-                </button>
+                </details>
               </div>
             </div>
-          </div>
+          </details>
 
           <div
             v-if="!videoData.length"
-            class="py-12 text-center text-slate-500 dark:text-slate-400"
+            class="py-8 text-center text-slate-500 sm:py-12"
           >
-            <h3
-              class="text-lg font-semibold text-slate-700 dark:text-slate-200"
-            >
+            <h3 class="text-base font-semibold text-slate-300 sm:text-lg">
               No videos yet
             </h3>
-            <p class="mt-1">Your uploaded videos will appear here.</p>
+
+            <p class="mt-1 text-xs sm:text-sm">
+              Your uploaded videos will appear here.
+            </p>
           </div>
         </div>
       </CardBox>
