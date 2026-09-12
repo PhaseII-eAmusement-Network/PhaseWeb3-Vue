@@ -14,18 +14,24 @@ export async function APIGetMusicData(
       version,
     });
 
+    const headers = {
+      game,
+      version,
+    };
+
     if (oneChart) {
       params.append("oneChart", "true");
     }
 
     if (songIds?.length) {
-      params.append("songIds", songIds.join(","));
+      headers.songIds = songIds.join(",");
     }
 
     const data = await mainStore.callApi(
       `/music?${params.toString()}`,
       "GET",
       null,
+      headers,
     );
 
     return data.data;
