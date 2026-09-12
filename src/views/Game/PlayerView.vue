@@ -26,6 +26,7 @@ import JubilityTable from "@/components/Tables/JubilityTable.vue";
 import UserSticker from "@/components/UserSticker.vue";
 import UserNotesRadar from "@/components/Charts/UserNotesRadar.vue";
 
+import { useMainStore } from "@/stores/main";
 import { APIGetProfile } from "@/stores/api/profile";
 import { APIGetArcade } from "@/stores/api/arcade";
 import { APIGetMusicData } from "@/stores/api/music";
@@ -36,6 +37,7 @@ import { formatSortableDate } from "@/constants/date";
 import { getFlareLevel } from "@/helpers/flare";
 const ASSET_PATH = import.meta.env.VITE_ASSET_PATH;
 
+const mainStore = useMainStore();
 const $route = useRoute();
 const $router = useRouter();
 var gameID = null;
@@ -490,6 +492,16 @@ const groupedTimeline = computed(() => {
                   v-if="!thisGame.noScores"
                   class="md:w-1/3 grid grid-cols-1 md:grid-cols-2 gap-3 mt-4"
                 >
+                  <template v-if="mainStore?.userAdmin">
+                    <BaseButton
+                      :to="`/profiles/${myProfile.userId}`"
+                      :icon="PhMedal"
+                      class="w-full md:w-auto"
+                      color="success"
+                      label="User Profile"
+                    />
+                  </template>
+
                   <BaseButton
                     :to="`/games/${gameID}/scores/${myProfile.userId}`"
                     :icon="PhMedal"
