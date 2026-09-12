@@ -17,23 +17,8 @@ import BaseDivider from "@/components/BaseDivider.vue";
 
 const videoData = ref([]);
 const loading = ref(false);
-
-/*
- * Music data is stored by game/version:
- *
- * {
- *   iidx: {
- *     30: {
- *       123: { id: 123, name: "...", artist: "..." },
- *       456: { id: 456, name: "...", artist: "..." },
- *     },
- *     31: {
- *       ...
- *     }
- *   }
- * }
- */
 const musicData = ref({});
+const newestVideo = ref(null);
 
 const headers = [
   {
@@ -139,6 +124,7 @@ async function loadVideos() {
         artist: song?.artist || "Unknown Artist",
       };
     });
+    newestVideo.value = videoData.value[0];
   } catch (error) {
     console.error("Failed to fetch video data:", error);
   } finally {
@@ -196,15 +182,15 @@ function openInNewTab(url) {
     <SectionMain>
       <UserCard class="mb-6" use-small even-smaller />
 
-      <template v-if="videoData[0]">
+      <template v-if="newestVideo">
         <SectionTitleLine :icon="PhVideo" title="Your Latest Video" main />
         <CardBox class="mb-6">
           <div
-            v-if="videoData[0]?.data?.status == 'uploaded'"
+            v-if="newestVideo?.data?.status == 'uploaded'"
             class="grid grid-cols-1 md:grid-cols-2 gap-4"
           >
             <video controls class="mt-3 rounded-xl w-160 xl:w-7xl">
-              <source :src="videoData[0]?.data?.url" type="video/mp4" />
+              <source :src="newestVideo?.data?.url" type="video/mp4" />
               Your browser does not support the video tag.
             </video>
 
@@ -214,26 +200,26 @@ function openInNewTab(url) {
               <div class="space-y-2">
                 <div>
                   <h1 class="text-2xl xl:text-4xl font-bold">
-                    {{ videoData[0]?.name }}
+                    {{ newestVideo?.name }}
                   </h1>
                   <h1 class="text-xl xl:text-3xl font-semibold">
-                    {{ videoData[0]?.artist }}
+                    {{ newestVideo?.artist }}
                   </h1>
                 </div>
 
                 <BaseDivider class="mx-1" />
 
                 <h2 class="text-xl xl:text-2xl font-light">
-                  {{ videoData[0]?.game }} {{ videoData[0]?.version }}
+                  {{ newestVideo?.game }} {{ newestVideo?.version }}
                 </h2>
-                <p>{{ videoData[0]?.timestamp }}</p>
+                <p>{{ newestVideo?.timestamp }}</p>
               </div>
 
               <div>
                 <BaseButton
                   color="info"
                   label="Share"
-                  @click="copyToClipboard(videoData[0]?.data?.url)"
+                  @click="copyToClipboard(newestVideo?.data?.url)"
                 />
               </div>
             </div>
@@ -247,7 +233,7 @@ function openInNewTab(url) {
                 Please wait for the upload to complete.
               </h2>
               <h2 class="text-xl xl:text-xl">
-                Upload started at {{ videoData[0].timestamp }}
+                Upload started at {{ newestVideo.timestamp }}
               </h2>
             </div>
           </div>
