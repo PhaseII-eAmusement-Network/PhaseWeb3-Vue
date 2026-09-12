@@ -38,9 +38,7 @@ const props = defineProps({
 function loadRoutes() {
   const navigationData = [
     {
-      label: `${
-        props.game.shortName ? props.game.shortName : props.game.name
-      } Home`,
+      label: "Game TOP",
       icon: PhHouse,
       path: `/games/${props.game.id}/`,
       route: "game_page",

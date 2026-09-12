@@ -28,7 +28,7 @@ var gameID = null;
 var thisGame = null;
 
 const myProfile = ref(null);
-const myVersions = ref(null);
+const myVersions = ref([]);
 const profiles = ref([]);
 const hitchartData = ref(null);
 const timeSensitiveData = ref([]);
@@ -43,8 +43,8 @@ const versionForm = reactive({
 watch(
   () => versionForm.currentVersion,
   () => {
-    loadGame(versionForm.currentVersion, profiles.length != 0);
     loadProfile();
+    loadGame(versionForm.currentVersion, profiles.length != 0);
     musicIds.value = [];
   },
 );
@@ -99,7 +99,7 @@ async function loadProfile() {
     myVersions.value = data.versions;
 
     if (data && !versionForm.currentVersion) {
-      versionForm.currentVersion = [...data.versions].sort().at(-1);
+      versionForm.currentVersion = Math.max(...data.versions);
     }
   } catch (error) {
     console.error("Failed to fetch user profile data:", error);

@@ -103,7 +103,7 @@ async function loadProfile() {
     myStats.value.timeline = baseTimeline;
 
     if (data && !versionForm.currentVersion) {
-      versionForm.currentVersion = [...data.versions].sort().at(-1);
+      versionForm.currentVersion = Math.max(...data.versions);
     }
 
     if (data.hitChart?.length) {

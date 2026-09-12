@@ -76,7 +76,7 @@ async function loadProfile() {
     myVersions.value = data.versions;
 
     if (data && !versionForm.currentVersion) {
-      versionForm.currentVersion = [...data.versions].sort().at(-1);
+      versionForm.currentVersion = Math.max(...data.versions);
     }
 
     if (thisGame.useActiveRival) {
@@ -242,7 +242,7 @@ async function deleteRival(otherUserId, type) {
 
 async function setActive(type) {
   var lastObject = myProfile.value?.last ?? {};
-  var rivalPosition = null;
+  var rivalPosition;
   if (type.startsWith("friend_")) {
     rivalPosition = parseInt(type.replace("friend_", ""), 10);
   } else {
@@ -275,7 +275,7 @@ async function setActive(type) {
 
 async function setInactive(type) {
   var lastObject = myProfile.value?.last ?? {};
-  var rivalPosition = null;
+  var rivalPosition;
 
   if (type.startsWith("friend_")) {
     rivalPosition = parseInt(type.replace("friend_", ""), 10);
