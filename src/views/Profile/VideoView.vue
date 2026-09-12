@@ -1,6 +1,7 @@
 <script setup>
-import { ref, computed, onMounted } from "vue";
+import { ref, computed, onMounted, nextTick } from "vue";
 import {
+  PhArrowUp,
   PhCaretRight,
   PhFilmReel,
   PhPlay,
@@ -14,18 +15,18 @@ import BaseIcon from "@/components/BaseIcon.vue";
 import UserCard from "@/components/UserCard.vue";
 import LayoutAuthenticated from "@/layouts/LayoutAuthenticated.vue";
 import SectionTitleLine from "@/components/SectionTitleLine.vue";
+import BaseDivider from "@/components/BaseDivider.vue";
 import { getGameInfo } from "@/constants";
 import { formatSortableDate } from "@/constants/date";
-
 import { APIGetPlayVideos } from "@/stores/api/account";
 import { APIGetMusicData } from "@/stores/api/music";
-import BaseDivider from "@/components/BaseDivider.vue";
 
 const videoData = ref([]);
 const loading = ref(false);
 const musicData = ref({});
 const newestVideo = ref(null);
-const selectedVideo = ref(newestVideo);
+const selectedVideo = ref(null);
+const selectedVideoElement = ref(null);
 
 const groupedVideos = computed(() => {
   const groups = [];
@@ -39,7 +40,6 @@ const groupedVideos = computed(() => {
         label: video.dateLabel,
         games: [],
       };
-
       groups.push(dateGroup);
     }
 
@@ -51,7 +51,6 @@ const groupedVideos = computed(() => {
         name: video.game,
         videos: [],
       };
-
       dateGroup.games.push(gameGroup);
     }
 
@@ -61,8 +60,15 @@ const groupedVideos = computed(() => {
   return groups;
 });
 
-const selectVideo = (video) => {
+const selectVideo = async (video) => {
   selectedVideo.value = video;
+  await nextTick();
+  selectedVideoElement.value?.load();
+  selectedVideoElement.value?.play().catch(() => {});
+};
+
+const scrollToTop = () => {
+  window.scrollTo({ top: 0, behavior: "smooth" });
 };
 
 async function loadVideos() {
@@ -77,38 +83,27 @@ async function loadVideos() {
       const game = video.gameId;
       const version = video.versionId;
 
-      if (!musicIdsByGameVersion[game]) {
-        musicIdsByGameVersion[game] = {};
-      }
-
-      if (!musicIdsByGameVersion[game][version]) {
-        musicIdsByGameVersion[game][version] = new Set();
-      }
-
+      musicIdsByGameVersion[game] ??= {};
+      musicIdsByGameVersion[game][version] ??= new Set();
       musicIdsByGameVersion[game][version].add(video.musicid);
     }
 
-    const musicRequests = [];
-
-    for (const [game, versions] of Object.entries(musicIdsByGameVersion)) {
-      for (const [version, musicIds] of Object.entries(versions)) {
-        musicRequests.push(
+    const musicRequests = Object.entries(musicIdsByGameVersion).flatMap(
+      ([game, versions]) =>
+        Object.entries(versions).map(([version, musicIds]) =>
           APIGetMusicData(game, version, [...musicIds], true).then((songs) => ({
             game,
             version,
             songs,
           })),
-        );
-      }
-    }
+        ),
+    );
 
     const musicResults = await Promise.all(musicRequests);
     const sortedMusicData = {};
 
     for (const { game, version, songs } of musicResults) {
-      if (!sortedMusicData[game]) {
-        sortedMusicData[game] = {};
-      }
+      sortedMusicData[game] ??= {};
 
       const songMap = Object.fromEntries(songs.map((song) => [song.id, song]));
 
@@ -141,6 +136,9 @@ async function loadVideos() {
 
     newestVideo.value = videoData.value[0] ?? null;
     selectedVideo.value = newestVideo.value;
+
+    await nextTick();
+    selectedVideoElement.value?.play().catch(() => {});
   } catch (error) {
     console.error("Failed to fetch video data:", error);
   } finally {
@@ -148,9 +146,7 @@ async function loadVideos() {
   }
 }
 
-onMounted(async () => {
-  await loadVideos();
-});
+onMounted(loadVideos);
 
 function filterVideos(playVideos) {
   playVideos.sort((x, y) => y.timestamp - x.timestamp);
@@ -187,18 +183,12 @@ function filterVideos(playVideos) {
 }
 
 const copyToClipboard = (text) => {
-  if (text.data?.url) {
-    text = text.data.url;
-  }
+  if (text?.data?.url) text = text.data.url;
 
   navigator.clipboard
     .writeText(text)
-    .then(() => {
-      alert("Copied URL to clipboard!");
-    })
-    .catch(() => {
-      alert("Failed to copy to clipboard!");
-    });
+    .then(() => alert("Copied URL to clipboard!"))
+    .catch(() => alert("Failed to copy to clipboard!"));
 };
 </script>
 
@@ -216,12 +206,17 @@ const copyToClipboard = (text) => {
             class="grid grid-cols-1 gap-4 xl:grid-cols-[minmax(0,2fr)_minmax(300px,1fr)] xl:gap-5"
           >
             <video
+              ref="selectedVideoElement"
               :key="selectedVideo?.data?.url"
+              :src="selectedVideo?.data?.url"
               controls
               autoplay
+              muted
+              playsinline
+              preload="auto"
               class="aspect-video w-full rounded-lg bg-black object-contain sm:rounded-xl"
+              @loadeddata="selectedVideoElement?.play().catch(() => {})"
             >
-              <source :src="selectedVideo?.data?.url" type="video/mp4" />
               Your browser does not support the video tag.
             </video>
 
@@ -277,6 +272,7 @@ const copyToClipboard = (text) => {
 
       <div class="mb-2 flex items-center justify-between gap-3">
         <SectionTitleLine :icon="PhFilmReel" title="Video Library" main />
+
         <div
           class="-mt-3 flex shrink-0 items-center rounded-xl bg-slate-900 px-3 py-2 text-xs font-medium text-slate-300 drop-shadow-xl sm:-mt-4 sm:px-3.5 sm:py-2.5 sm:text-sm"
         >
@@ -371,7 +367,7 @@ const copyToClipboard = (text) => {
                           <video
                             v-if="video?.data?.status === 'uploaded'"
                             :src="video?.data?.url"
-                            preload="none"
+                            preload="metadata"
                             muted
                             playsinline
                             class="h-full w-full object-cover transition-transform duration-200 group-hover/card:scale-105"
@@ -463,6 +459,15 @@ const copyToClipboard = (text) => {
           </div>
         </div>
       </CardBox>
+
+      <button
+        type="button"
+        aria-label="Go to top"
+        class="fixed bottom-5 right-5 z-50 flex h-10 w-10 items-center justify-center rounded-full bg-slate-800 text-slate-300 shadow-xl ring-1 ring-slate-700 transition-all hover:bg-slate-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-info sm:bottom-6 sm:right-6"
+        @click="scrollToTop"
+      >
+        <BaseIcon :icon="PhArrowUp" :size="19" />
+      </button>
     </SectionMain>
   </LayoutAuthenticated>
 </template>
