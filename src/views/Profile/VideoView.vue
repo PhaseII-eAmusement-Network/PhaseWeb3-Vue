@@ -18,6 +18,23 @@ import BaseDivider from "@/components/BaseDivider.vue";
 const videoData = ref([]);
 const loading = ref(false);
 
+/*
+ * Music data is stored by game/version:
+ *
+ * {
+ *   iidx: {
+ *     30: {
+ *       123: { id: 123, name: "...", artist: "..." },
+ *       456: { id: 456, name: "...", artist: "..." },
+ *     },
+ *     31: {
+ *       ...
+ *     }
+ *   }
+ * }
+ */
+const musicData = ref({});
+
 const headers = [
   {
     text: "Timestamp",
@@ -58,37 +75,75 @@ const headers = [
 ];
 
 async function loadVideos() {
+  loading.value = true;
+
   try {
     const data = await APIGetPlayVideos();
-    videoData.value = filterVideos(JSON.parse(JSON.stringify(data)));
-
-    const uniqueMusicIds = [
-      ...new Set(videoData.value.map((video) => video.musicid)),
-    ];
-
-    if (uniqueMusicIds.length > 0) {
-      const songData = await APIGetMusicData(
-        "iidx",
-        data[0].version,
-        uniqueMusicIds,
-        true,
-      );
-
-      const songMap = Object.fromEntries(
-        songData.map((song) => [song.id, song]),
-      );
-
-      videoData.value = videoData.value.map((video) => ({
-        ...video,
-        name: songMap[video.musicid]?.name || "Unknown Song",
-        artist: songMap[video.musicid]?.artist || "Unknown Artist",
-      }));
+    const videos = filterVideos(JSON.parse(JSON.stringify(data)));
+    const musicIdsByGameVersion = {};
+    for (const video of videos) {
+      const game = video.gameId;
+      const version = video.versionId;
+      if (!musicIdsByGameVersion[game]) {
+        musicIdsByGameVersion[game] = {};
+      }
+      if (!musicIdsByGameVersion[game][version]) {
+        musicIdsByGameVersion[game][version] = new Set();
+      }
+      musicIdsByGameVersion[game][version].add(video.musicid);
     }
+
+    const musicRequests = [];
+    for (const [game, versions] of Object.entries(musicIdsByGameVersion)) {
+      for (const [version, musicIds] of Object.entries(versions)) {
+        musicRequests.push(
+          APIGetMusicData(game, version, [...musicIds], true).then((songs) => ({
+            game,
+            version,
+            songs,
+          })),
+        );
+      }
+    }
+
+    const musicResults = await Promise.all(musicRequests);
+    const sortedMusicData = {};
+    for (const { game, version, songs } of musicResults) {
+      if (!sortedMusicData[game]) {
+        sortedMusicData[game] = {};
+      }
+      const songMap = Object.fromEntries(songs.map((song) => [song.id, song]));
+      sortedMusicData[game][version] = Object.fromEntries(
+        Object.entries(songMap).sort(([a], [b]) => Number(a) - Number(b)),
+      );
+    }
+
+    musicData.value = Object.fromEntries(
+      Object.entries(sortedMusicData)
+        .sort(([a], [b]) => a.localeCompare(b))
+        .map(([game, versions]) => [
+          game,
+          Object.fromEntries(
+            Object.entries(versions).sort(([a], [b]) => Number(a) - Number(b)),
+          ),
+        ]),
+    );
+
+    videoData.value = videos.map((video) => {
+      const song =
+        musicData.value[video.gameId]?.[video.versionId]?.[video.musicid];
+
+      return {
+        ...video,
+        name: song?.name || "Unknown Song",
+        artist: song?.artist || "Unknown Artist",
+      };
+    });
   } catch (error) {
     console.error("Failed to fetch video data:", error);
+  } finally {
+    loading.value = false;
   }
-
-  loading.value = false;
 }
 
 onMounted(async () => {
@@ -96,14 +151,17 @@ onMounted(async () => {
 });
 
 function filterVideos(playVideos) {
-  playVideos.sort(function (x, y) {
-    return y.timestamp - x.timestamp;
-  });
+  playVideos.sort((x, y) => y.timestamp - x.timestamp);
 
   for (const video of playVideos) {
+    video.gameId = video.game;
+    video.versionId = video.version;
+
     const game = getGameInfo(video.game);
+
     video.game = game.name;
-    video.version = game.versions.find((x) => x.id == video.version).label ?? 0;
+    video.version =
+      game.versions.find((x) => x.id == video.versionId)?.label ?? 0;
 
     if (video.timestamp) {
       video.timestamp = formatSortableDate(video.timestamp);
@@ -115,7 +173,7 @@ function filterVideos(playVideos) {
 
 const copyToClipboard = (text) => {
   if (text.data?.url) {
-    text = text.data?.url;
+    text = text.data.url;
   }
 
   navigator.clipboard
