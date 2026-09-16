@@ -231,7 +231,11 @@ async function updateProfile() {
                 type="switch"
                 @update:model-value="
                   (value) =>
-                    setNestedValue(optionForm, setting.id, Number(value) ?? 0)
+                    setNestedValue(
+                      optionForm,
+                      setting.id,
+                      value === 1 || value === 0 ? value : Boolean(value),
+                    )
                 "
               />
             </FormField>
