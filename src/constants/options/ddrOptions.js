@@ -413,6 +413,12 @@ export const DDROptions = {
   ],
   20: [
     {
+      id: "is_disp_weight",
+      name: "Enable Workout Mode",
+      help: "Uses set weight and enables workout/calorie tracking.",
+      type: "Boolean",
+    },
+    {
       id: "weight",
       name: "Weight (kg)",
       help: "Set your weight for in-game calorie counting",
