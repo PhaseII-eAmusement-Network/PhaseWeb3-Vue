@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router";
 import { useMainStore } from "@/stores/main";
+import { RoleConstants } from "@/constants/discordRoles";
 import Home from "@/views/HomeView.vue";
 
 const routes = [
@@ -197,7 +198,7 @@ const routes = [
   {
     meta: {
       requiresAuth: true,
-      requiresAdmin: true,
+      requiresDev: true,
       title: "Profile Rerun",
     },
     path: "/profile/rerun",
@@ -538,7 +539,10 @@ router.beforeEach(async (to) => {
   if (to.meta.requiresDev) {
     const validSession = await mainStore.loadUser();
 
-    if (!validSession || !mainStore.userAdmin) {
+    if (
+      !validSession ||
+      !mainStore.discordRoles?.includes(RoleConstants.DEVELOPER)
+    ) {
       console.log("You're not a dev!");
       window.alert("You're not a dev!");
       return {
