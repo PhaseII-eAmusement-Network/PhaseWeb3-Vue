@@ -1,4 +1,74 @@
 export const DDROptions = {
+  11: [
+    {
+      id: "early_late",
+      name: "Fast/Slow Display",
+      help: "Enable or disable displaying of Fast/Slow",
+      type: "Boolean",
+    },
+    {
+      id: "combo",
+      name: "Combo Position",
+      help: "Change order of the combo and notes",
+      type: "Boolean",
+    },
+  ],
+  12: [
+    {
+      id: "early_late",
+      name: "Fast/Slow Display",
+      help: "Enable or disable displaying of Fast/Slow",
+      type: "Boolean",
+    },
+    {
+      id: "combo",
+      name: "Combo Position",
+      help: "Change order of the combo and notes",
+      type: "Boolean",
+    },
+  ],
+  13: [
+    {
+      id: "early_late",
+      name: "Fast/Slow Display",
+      help: "Enable or disable displaying of Fast/Slow",
+      type: "Boolean",
+    },
+    {
+      id: "combo",
+      name: "Combo Position",
+      help: "Change order of the combo and notes",
+      type: "Boolean",
+    },
+  ],
+  14: [
+    {
+      id: "early_late",
+      name: "Fast/Slow Display",
+      help: "Enable or disable displaying of Fast/Slow",
+      type: "Boolean",
+    },
+    {
+      id: "combo",
+      name: "Combo Position",
+      help: "Change order of the combo and notes",
+      type: "Boolean",
+    },
+  ],
+  15: [
+    {
+      id: "early_late",
+      name: "Fast/Slow Display",
+      help: "Enable or disable displaying of Fast/Slow",
+      type: "Boolean",
+    },
+    {
+      id: "combo",
+      name: "Combo Position",
+      help: "Change order of the combo and notes",
+      type: "Boolean",
+    },
+  ],
   16: [
     {
       id: "early_late",
