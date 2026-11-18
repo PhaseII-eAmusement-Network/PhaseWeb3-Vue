@@ -234,7 +234,9 @@ async function updateProfile() {
                     setNestedValue(
                       optionForm,
                       setting.id,
-                      value === 1 || value === 0 ? value : Boolean(value),
+                      typeof getNestedValue(optionForm, setting.id) == 'number'
+                        ? Number(value)
+                        : Boolean(value),
                     )
                 "
               />
